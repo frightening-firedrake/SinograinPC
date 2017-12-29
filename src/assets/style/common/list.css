@@ -1,0 +1,340 @@
+.listpagewrap{
+	position:relative;
+	height: 100%;
+}
+/*加载遮罩*/
+.el-loading-mask{
+	top:0.52rem;
+}
+/*复选框*/
+.el-checkbox__input{
+	width:0.2rem;
+	height:0.2rem;
+	border-radius: 0.04rem;
+}
+.el-checkbox__inner{
+	width:0.2rem;
+	height:0.2rem;
+	border-radius: 0.04rem;
+}
+.el-checkbox__inner::after{
+    height: 0.11rem;
+    left: 0.065rem;
+    top: 0.015rem;
+    width: 0.038rem;
+}
+/*空数据容器*/
+.el-table__empty-block{
+	width:100%!important;
+}
+
+.el-main{
+    /*padding: 0px 0.45rem;*/
+    background-color:white;
+}
+.el-main .list{
+    background: rgb(255, 255, 255);
+    /*padding: 0px 0.45rem;*/
+    border-color:rgba(215, 215, 215, 1);
+}
+.el-main .list::before{
+    background-color:rgba(215, 215, 215, 1)
+}
+.el-main .list .el-table__body-wrapper table tr{
+    color: rgb(51, 51, 51);
+    font-size: 0.18rem;
+    font-weight:normal;
+}
+.el-main .list .el-table__body-wrapper table tr td{
+    border:none;
+}
+/*.el-main .list .el-table__body-wrapper table colgroup col:nth-child(1){
+    width:0.68rem;
+    min-width: 70px;
+}
+.el-main .list .el-table__body-wrapper table colgroup col:nth-last-child(4),col:nth-last-child(3),col:nth-last-child(2){
+    width:0.37rem;
+}
+.el-main .list .el-table__body-wrapper table colgroup col:nth-last-child(1){
+    width:0.68rem;
+}*/
+.el-main .list .el-table__body-wrapper td.el-table-column--selection{
+    width:0.8rem;
+}
+.el-main .list .el-table__body-wrapper td.el-table-column--selection .cell{
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0px;
+    padding: 0px;
+}
+.el-main .list .el-table__body-wrapper td.el-table-column--selection .cell label{
+    width:100%;
+    height:100%;
+}
+.el-main .list .el-table__body-wrapper td.el-table-column--selection .cell label .el-checkbox__input{
+    width:100%;
+    height:100%;
+    vertical-align: top;
+}
+.el-main .list .el-table__body-wrapper td.el-table-column--selection .cell label .el-checkbox__input .el-checkbox__inner{
+    width:100%;
+    height:100%;
+    border-radius: 4px;
+}
+.el-main .list .el-table__body-wrapper td.el-table-column--selection .cell label .el-checkbox__input .el-checkbox__inner::after{
+    left:38%;
+    top:12%;
+    border-width:2px;
+    height:10px;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+    background-color:#3498DB;
+}
+.el-main .list .el-table__body-wrapper td .cell i{
+    font-size: 0.32rem;
+    cursor: pointer;
+    vertical-align: -0.05rem;
+}
+.el-main .list .el-table__body-wrapper td .cell button{
+    font-size: inherit;
+    padding:0;
+}
+.el-main .list .el-table__header-wrapper table tr{
+    background-color:rgb(222, 233, 247);
+    color: rgb(51, 51, 51);
+    font-size: 0.18rem;
+}
+/*.el-main .list .el-table__header-wrapper table colgroup col:nth-child(1){
+    width:0.68rem;
+    min-width: 70px;
+}
+.el-main .list .el-table__header-wrapper table colgroup col:nth-last-child(5),col:nth-last-child(4),col:nth-last-child(3){
+    width:0.37rem;
+}
+.el-main .list .el-table__header-wrapper table colgroup col:nth-last-child(2){
+    width:0.68rem;
+}*/
+.el-main .list .el-table__header-wrapper th{
+    font-weight:normal;
+    border:none;
+}
+.el-main .list .el-table__header-wrapper th.el-table-column--selection{
+    width:0.8rem;
+}
+.el-main .list .el-table__header-wrapper th.el-table-column--selection .cell{
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0px;
+    padding: 0px;
+}
+.el-main .list .el-table__header-wrapper th.el-table-column--selection .cell label{
+    width:100%;
+    height:100%;
+}
+.el-main .list .el-table__header-wrapper th.el-table-column--selection .cell label .el-checkbox__input{
+    width:100%;
+    height:100%;
+    vertical-align: top;
+}
+.el-main .list .el-table__header-wrapper th.el-table-column--selection .cell label .el-checkbox__input .el-checkbox__inner{
+    width:100%;
+    height:100%;
+    border-radius: 4px;
+}
+.el-main .list .el-table__header-wrapper th.el-table-column--selection .cell label .el-checkbox__input .el-checkbox__inner::after{
+    left:38%;
+    top:12%;
+    border-width:2px;
+    height:10px;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+    background-color:#3498DB;
+}
+.listpagewrap,.list_databa{
+	padding:0 0.41rem;
+}
+.list{	
+	margin-top:0.15rem;
+}
+.list table{
+	border-collapse: collapse;
+}
+.list .el-table__body, .list .el-table__footer, .list .el-table__header{
+	width:100%!important;
+}
+.list .el-table::before{
+	display: none;
+}
+.list .el-table__body-wrapper{
+	width:100%!important;
+	padding:1px;
+}
+.list .el-table__body tr{
+	width:100%!important;
+}
+.list .el-table__row:hover{
+	outline: 1px solid #378ef8;
+}
+.el-table--striped .el-table__body tr.el-table__row--striped td{
+	background-color:rgb(250,250,250)!important;
+}
+.list.el-table--enable-row-hover .el-table__body tr:hover>td{
+	background:rgba(255,255,255,0);
+}
+/*去掉padding用line-height设置行高*/
+.list td, .list th{
+	padding:0!important;
+}
+.list div.cell{
+    line-height:0.52rem;
+    padding:0;
+    white-space: nowrap;
+}
+/*上下箭头*/
+.el-table .sort-caret.ascending{
+	top:50%;
+	margin-top:-11px;
+}
+.el-table .sort-caret.descending{
+	top:50%;
+	margin-top:-4px;
+}
+.el-table--border::after, .el-table--group::after, .el-table::before{
+	display: none;
+}
+.list tr >th:nth-last-child(2) div.cell{
+	padding-right:0.3rem;
+}
+.list tr td:nth-last-child(1) div.cell{
+	padding-right:0.3rem;
+	margin-right:-1px;
+}
+.el-table--striped .el-table__body tr.el-table__row--striped td{	
+	background:rgba(250,250,250,0)!important;
+}
+.el-table--striped .el-table__body tr.el-table__row--striped{
+	background:rgba(250,250,250,1)!important;
+}
+.el-table--border, .el-table--group{
+	border-top:1px solid rgba(215, 215, 215, 1);
+	border-right:1px solid rgba(215, 215, 215, 1);
+	border-left:1px solid rgba(215, 215, 215, 1);
+	border-bottom:none;
+}
+/*角色列表宽度匹配*/
+/*设定表头宽度*/
+.el-main .rolelist .el-table__header-wrapper table colgroup col:nth-child(1){
+    width:0.68rem;
+    min-width: 70px;
+}
+.el-main .rolelist .el-table__header-wrapper table colgroup col:nth-last-child(5),.el-main .rolelist .el-table__header-wrapper table colgroup col:nth-last-child(4),.el-main .rolelist .el-table__header-wrapper table colgroup col:nth-last-child(3){
+    width:0.37rem;
+}
+.el-main .rolelist .el-table__header-wrapper table colgroup col:nth-last-child(2){
+    width:0.68rem;
+}
+/*设定表身宽度*/
+.el-main .rolelist .el-table__body-wrapper table colgroup col:nth-child(1){
+    width:0.68rem;
+    min-width: 70px;
+}
+.el-main .rolelist .el-table__body-wrapper table colgroup col:nth-last-child(4),.el-main .rolelist .el-table__body-wrapper table colgroup col:nth-last-child(3),.el-main .rolelist .el-table__body-wrapper table colgroup col:nth-last-child(2){
+    width:0.37rem;
+}
+.el-main .rolelist .el-table__body-wrapper table colgroup col:nth-last-child(1){
+    width:0.68rem;
+}
+
+
+/*用户列表宽度匹配*/
+/*设定表头宽度*/
+.el-main .userlist .el-table__header-wrapper table colgroup col:nth-child(1){
+    width:0.68rem;
+    min-width: 70px;
+}
+.el-main .userlist .el-table__header-wrapper table colgroup col:nth-last-child(5),.el-main .userlist .el-table__header-wrapper table colgroup col:nth-last-child(4),.el-main .userlist .el-table__header-wrapper table colgroup col:nth-last-child(3){
+    width:0.37rem;
+}
+.el-main .userlist .el-table__header-wrapper table colgroup col:nth-last-child(2){
+    width:0.68rem;
+}
+/*设定表身宽度*/
+.el-main .userlist .el-table__body-wrapper table colgroup col:nth-child(1){
+    width:0.68rem;
+    min-width: 70px;
+}
+.el-main .userlist .el-table__body-wrapper table colgroup col:nth-last-child(4),.el-main .userlist .el-table__body-wrapper table colgroup col:nth-last-child(3),.el-main .userlist .el-table__body-wrapper table colgroup col:nth-last-child(2){
+    width:0.37rem;
+}
+.el-main .userlist .el-table__body-wrapper table colgroup col:nth-last-child(1){
+    width:0.68rem;
+}
+
+
+/*资源列表宽度匹配*/
+/*设定表头宽度*/
+.el-main .resourcelist .el-table__header-wrapper table colgroup col:nth-child(1){
+    width:0.68rem;
+    min-width: 70px;
+}
+.el-main .resourcelist .el-table__header-wrapper table colgroup col:nth-last-child(4),.el-main .resourcelist .el-table__header-wrapper table colgroup col:nth-last-child(3){
+    width:0.37rem;
+}
+.el-main .resourcelist .el-table__header-wrapper table colgroup col:nth-last-child(2){
+    width:0.68rem;
+}
+/*设定表身宽度*/
+.el-main .resourcelist .el-table__body-wrapper table colgroup col:nth-child(1){
+    width:0.68rem;
+    min-width: 70px;
+}
+.el-main .resourcelist .el-table__body-wrapper table colgroup col:nth-last-child(3),.el-main .resourcelist .el-table__body-wrapper table colgroup col:nth-last-child(2){
+    width:0.37rem;
+}
+.el-main .resourcelist .el-table__body-wrapper table colgroup col:nth-last-child(1){
+    width:0.68rem;
+}
+
+
+/*数据库列表宽度匹配*/
+/*设定表头宽度*/
+.el-main .datebaselist .el-table__header-wrapper table colgroup col:nth-last-child(3){
+    width:0.37rem;
+}
+.el-main .datebaselist .el-table__header-wrapper table colgroup col:nth-last-child(2){
+    width:0.68rem;
+}
+/*设定表身宽度*/
+.el-main .datebaselist .el-table__body-wrapper table colgroup col:nth-last-child(3){
+    /*width:0.37rem;*/
+}
+.el-main .datebaselist .el-table__body-wrapper table colgroup col:nth-last-child(2){
+    width:0.37rem;
+}
+.el-main .datebaselist .el-table__body-wrapper table colgroup col:nth-last-child(1){
+    width:0.68rem;
+}
+
+.el-main .datebaselist .el-table__body-wrapper table tr .icon-signin{
+    color:rgb(55,142,248);
+}
+.el-main .datebaselist .el-table__body-wrapper table tr .remarks{
+    color:rgb(55,142,248);
+}
+
+
+/*日志列表宽度匹配*/
+/*设定表头宽度*/
+.el-main .loglist .el-table__header-wrapper table colgroup col:nth-last-child(2){
+    width:0.68rem;
+}
+/*设定表身宽度*/
+.el-main .loglist .el-table__body-wrapper table colgroup col:nth-last-child(1){
+    width:0.68rem;
+}

@@ -1,0 +1,168 @@
+.el-header{
+    height:0.6rem !important;
+    line-height:0.6rem;
+    padding:0 !important;
+}
+.el-header .el-row{
+    box-shadow:rgba(172, 172, 172, 0.6) 0.01rem 0rem 0.03rem 0;
+}
+.el-row{
+    height:100% !important;
+}
+.el-row .el-col{
+    height:100%;
+}
+.el-row .el-col .grid-content{
+    height:100%;
+}
+.el-row .lemon_logo{
+    height: 100%;
+    position: relative;
+    padding: 0;
+    width:3.1rem;
+}
+.el-row .lemon_logo .lemon_logo_img{
+    width: 100%;
+    height: 100%;
+    padding-top: 0.15rem;
+    background-color: #378ef8;
+    border-top-right-radius: 0.15rem;
+    border-bottom-right-radius: 0.15rem;
+}
+.el-row .lemon_logo .lemon_logo_img img{
+    width: 37%;
+    display: block;
+    margin: 0 auto;
+}
+.el-row .lemon_logo .navbar_header_logo_home{
+    position: absolute;
+    right: -6%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 0.38rem;
+    height: 0.38rem;
+    border-radius: 50%;
+    padding: 0.09rem 0.08rem 0.09rem 0.09rem;
+    background-color: #e4effc;
+    box-shadow: 0px 0.06rem 0.1rem 0px rgba(156, 155, 155, 0.59);
+    border: solid 1px #f4f4f4
+}
+.el-row .lemon_logo .navbar_header_logo_home i{
+   display: inline-block;
+    font-size: 0.2rem;
+    color: #055fcd;
+    height:auto;
+    vertical-align: top;
+}
+.el-row .lemon_title{
+    margin-left: 0.6rem;
+    padding-left: 0;
+    padding-right: 0;
+}
+.el-row .lemon_title h4{
+    margin: 0;
+    padding: 0;
+    line-height: 0.6rem;
+    color: #2c69d0;
+    display: inline-block;
+    font-size: 0.24rem;
+}
+.el-row .lemon_search{
+   
+    line-height:0;
+}
+.el-row .lemon_search .el-input{
+    background-color: #fafafa;
+    border: 1px solid #F0F0F0;
+    border-radius: 0.2rem;
+    height: 0.38rem;
+     margin-top: 0.13rem;
+    min-width: 0.38rem;
+    padding: 0;
+}
+.el-row .lemon_search .el-input input{
+        height: 0.38rem;
+    padding-top: 0;
+    font-size: 0.2rem;
+    background-color: transparent;
+    border: none;
+    border-radius: 0.2rem;
+    outline: none;
+    padding-left: 0.2rem;
+}
+.el-row .lemon_search .el-input .el-input__prefix{
+    right:0;
+    left:80%;
+}
+.el-row .lemon_search .el-input .el-input__prefix i{
+    text-align:right;
+        font-size: 0.2rem;
+    padding: 0;
+    line-height: 0.38rem;
+    color: #055fcd;
+    font-weight:bold;
+}
+.el-row .el-col .lemon_admin{
+    float:right;
+    padding-top: 0.05rem;
+}
+.el-row .el-col .admin_fun_icon{
+    display:flex;
+    justify-content: space-around;
+}
+.el-row .el-col .lemon_admin .admin_fun_icon .admin_fun_icon_text{
+    width: 0.38rem;
+    height: 0.38rem;
+    background-color: #aaccf7;
+    box-shadow: 0px 1px 0.1rem 0px rgba(27, 107, 218, 0.3);
+    border: solid 1px #f4f4f4;
+    border-radius: 50%;
+    margin-top: 0.06rem;
+    text-align:center;
+    padding: 0;
+    position: relative;
+}
+.el-row .el-col .lemon_admin .admin_fun_icon .admin_fun_icon_text .el-badge.mark{
+    position:absolute;
+    top:-20%;
+}
+.el-row .el-col .lemon_admin .admin_fun_icon .admin_fun_icon_text i{
+    color: white;
+    line-height: 0.35rem;
+    font-size: 0.2rem;
+    vertical-align: top;
+}
+.el-row .el-col .lemon_admin_image .lemon_admin_image_content{
+    width: 0.5rem;
+    height: 0.5rem;
+    display:inline-block;
+    box-shadow: 0px 0.06rem 0.05rem 0px rgba(156, 155, 155, 0.59);
+    border: solid 1px #f4f4f4;
+    border-radius: 50%;
+    cursor: pointer;
+    /*background-image: url(../../images/index/user/user1.jpg);*/
+    background-size: cover;
+    /* overflow: hidden; */
+    position: relative;
+    margin-left: 0.2rem;
+}
+.el-row .el-col .lemon_admin_image .lemon_admin_image_font{
+    font-size: 0.14rem;
+    text-align: center;
+    line-height: 0.5rem;
+    margin: 0 0.1rem;
+    display:inline-block;
+    vertical-align: top;
+}
+.el-row .el-col .lemon_admin_output{
+    padding-top:0.05rem;
+}
+.el-row .el-col .lemon_admin_output img{
+    width:75%;
+}
+@media only screen and (min-width: 768px){
+    .lemon_search{
+        margin-left:0.7rem;
+    }
+}
