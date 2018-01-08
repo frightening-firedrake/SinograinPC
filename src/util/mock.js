@@ -13,7 +13,7 @@ Mock.Random.extend({
         return this.pick(varietiees)
     },
     status: function(date) {
-        var statuses = ['未扦样', '已入库']
+        var statuses = ['未扦样', '已扦样']
         return this.pick(statuses)
     },
     producing_area: function(date) {
@@ -129,7 +129,7 @@ var problem1=Mock.mock('/liquid/role5/data', {
 //工作底稿
 var manuscript1=Mock.mock('/liquid/role6/data', {
             formdatas: {
-      	title:'安全报告',
+      	title:'中央储备粮实物检查工作底稿（轮换验收）',
       	form:{
           checkregion: '山西',//被检查企业
           checktime: '2017.09',//被查时点
@@ -193,7 +193,7 @@ var manuscript1=Mock.mock('/liquid/role6/data', {
 });
 var manuscript1=Mock.mock('/liquid/role7/data', {
             formdatas: {
-      	title:'安全报告',
+      	title:'中央储备粮实物检查工作底稿（轮换验收）',
       	form:{
           checkregion: '山西',//被检查企业
           checktime: '2017.09',//被查时点

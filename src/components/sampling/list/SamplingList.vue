@@ -7,7 +7,7 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-list class="list" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading"> 
+      <sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading"> 
       </sinograin-list>
       <!--分页-->
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
@@ -41,6 +41,16 @@ export default {
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
 	...mapGetters(["modal_id"]),
+	tabledatasFilter(){
+
+		if(this.filterStatus=="全部"){
+			return this.tabledatas;
+		}else{
+			return this.tabledatas.filter((value,index)=>{
+				return value.status==this.filterStatus
+			})
+		}
+	}
   },
   created(){
   	console.log(this.$route.query)
@@ -76,7 +86,8 @@ export default {
 		console.log(data);
 	},
 	statusChange(data){
-		console.log(data)
+//		console.log(data)
+		this.filterStatus=data
 	},
 	createSampling(){
 //		console.log('createSampling');
@@ -190,6 +201,7 @@ export default {
       	searching:'',
       },
       loading:true,
+      filterStatus:'全部',
 //    分页数据
       page: {
         size: 10,

@@ -195,7 +195,22 @@ export default {
 	    },
 //	    问题加一
 		addproblem(){
-			this.$emit('addproblem');
+//			formdatas.form.problems.'+index+'.problem
+			var flag=true;
+			this.formdatas.form.problems.forEach(function(value,index){
+				if(!value.problem){
+					flag=false;
+				}
+			})
+			if(flag){
+				this.$emit('addproblem');				
+			}else{
+				 this.$message('请完善问题详情！！！');
+			}
+//			if(){
+//				
+//			}else{				
+//			}
 		}
     }
 

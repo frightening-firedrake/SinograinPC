@@ -105,14 +105,14 @@ export default {
 					pid: 0,
 					lid: 1
 				},
-				{
-					icon: 'icon-xinjian1',
-					title: '新建扦样',
-					linkto: '',
-					level: 2,
-					pid: 1,
-					lid: 2
-				},
+//				{
+//					icon: 'icon-xinjian1',
+//					title: '新建扦样',
+//					linkto: '',
+//					level: 2,
+//					pid: 1,
+//					lid: 2
+//				},
 				{
 					icon: 'icon-iconfontcolor69',
 					title: '扦样列表',
@@ -121,22 +121,22 @@ export default {
 					pid: 1,
 					lid: 3
 				},
-				{
-					icon: 'icon-gongzuo2',
-					title: '工作底稿',
-					linkto: '',
-					level: 2,
-					pid: 1,
-					lid: 4
-				},
-				{
-					icon: 'icon-anquanbaogao',
-					title: '安全报告',
-					linkto: '',
-					level: 2,
-					pid: 1,
-					lid: 5
-				},
+//				{
+//					icon: 'icon-gongzuo2',
+//					title: '工作底稿',
+//					linkto: '',
+//					level: 2,
+//					pid: 1,
+//					lid: 4
+//				},
+//				{
+//					icon: 'icon-anquanbaogao',
+//					title: '安全报告',
+//					linkto: '',
+//					level: 2,
+//					pid: 1,
+//					lid: 5
+//				},
 
 //				{
 //					icon: 'icon-yonghuguanli',

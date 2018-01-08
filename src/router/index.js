@@ -35,7 +35,14 @@ export default new Router({
           {
             path:"home",
             name: '首页',
-            component:Home
+            component:Home,
+            redirect: 'sampling/libraryList',
+          },
+          {
+            path:"sampling",
+            name: '扦样流程',
+            component:LibraryList,
+            redirect: 'sampling/libraryList',
           },
           {
             path:"sampling/libraryList",

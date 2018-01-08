@@ -119,7 +119,7 @@ export default {
         type: 'info'
       }],
       formdatas: {
-      	title:'安全报告',
+      	title:'中央储备粮实物检查工作底稿（轮换验收）',
       	form:{
           checkregion: '',//被检查企业
           checktime: '',//被查时点
