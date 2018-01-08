@@ -1,5 +1,6 @@
 <template>
-	<el-menu default-active="/index/sampling/libraryList" class="el-menu-vertical-demo" :router=true @open="handleOpen" @select="handleSelect" @close="handleClose" :collapse="this.isCollapse" :background-color="backgroundColor" :unique-opened=true>
+	<!--<el-menu default-active="/index/sampling/libraryList" class="el-menu-vertical-demo" :router=true @open="handleOpen" @select="handleSelect" @close="handleClose" :collapse="this.isCollapse" :background-color="backgroundColor" :unique-opened=true>-->
+	<el-menu default-active="/index/sampling/libraryList" class="el-menu-vertical-demo" :router=true @open="handleOpen" @select="handleSelect" @close="handleClose" :collapse="this.isCollapse" :background-color="backgroundColor">
 		<!--用户信息-->
 		<div class="user">
 			<div class="photo">
@@ -138,27 +139,27 @@ export default {
 //					lid: 5
 //				},
 
+				{
+					icon: 'icon-cangkuguanli-xian',
+					title: '样品管理',
+					linkto: '',
+					level: 2,
+					pid: 0,
+					lid: 6
+				},
+				{
+					icon: 'icon-ruku',
+					title: '样品入库',
+					linkto: '/index/sampleManagement/sampleIn',
+					level: 2,
+					pid: 6,
+					lid: 7
+				},
 //				{
-//					icon: 'icon-yonghuguanli',
-//					title: '用户管理',
-//					linkto: '',
-//					level: 3,
-//					pid: 1,
-//					lid: 6
-//				},
-//				{
-//					icon: 'icon-yonghuliebiao',
-//					title: '用户列表',
-//					linkto: '/index/authority/userList',
-//					level: 3,
-//					pid: 6,
-//					lid: 7
-//				},
-//				{
-//					icon: 'icon-tianjiaxinyonghu',
-//					title: '添加用户',
+//					icon: 'icon-chuku',
+//					title: '样品出库',
 //					linkto: '/index/authority/userAdd',
-//					level: 3,
+//					level: 2,
 //					pid: 6,
 //					lid: 8
 //				},

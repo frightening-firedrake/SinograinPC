@@ -11,6 +11,11 @@ import ManuscriptCreate from '@/components/sampling/list/manuscript/ManuscriptCr
 import ManuscriptEdit from '@/components/sampling/list/manuscript/ManuscriptEdit.vue'
 import SafetyReportCreate from '@/components/sampling/list/safetyReport/SafetyReportCreate.vue'
 import SafetyReportEdit from '@/components/sampling/list/safetyReport/SafetyReportEdit.vue'
+import SampleInList from '@/components/sampleManagement/sampleIn/SampleInList.vue'
+import SampleInEdit from '@/components/sampleManagement/sampleIn/SampleInEdit.vue'
+import SampleInCreate from '@/components/sampleManagement/sampleIn/SampleInCreate.vue'
+
+
 
 Vue.use(Router)
 
@@ -83,7 +88,23 @@ export default new Router({
             path:"sampling/samplingList/safetyReportEdit",
             name:"扦样流程/扦样列表/被查库典列表/查看安全报告",
             component:SafetyReportEdit
-          }
+          },
+          {
+            path:"sampleManagement/sampleIn",
+            name:"样品管理/样品入库",
+            component:SampleInList
+          },
+          {
+            path:"sampleManagement/sampleIn/sampleInEdit",
+            name:"样品管理/样品入库/查看样品",
+            component:SampleInEdit
+          },
+          {
+            path:"sampleManagement/sampleIn/sampleInCreate",
+            name:"样品管理/样品入库/新建样品",
+            component:SampleInCreate
+          },
+           
       ]
     },
     

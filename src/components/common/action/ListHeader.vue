@@ -40,6 +40,14 @@
 				<div class="create" @click="createSampling" style="background-image:url('static/images/sys/create.png');">
 					新建扦样
 				</div>
+			</template>   		
+			<template v-if="listHeader.scanCode">				
+				<div class="scanCode" @click="createSample">
+					<span>
+						<i class="iconfont icon-ccgl-yundanpicisaomiao-4-copy"></i>
+						扫描条形码
+					</span>					
+				</div>
 			</template>
 		</div>
 	</div>
@@ -156,6 +164,31 @@
 	div.listHeader .el-date-editor .el-range-separator{
 		padding:0;
 	}
+	/*扫码按钮*/
+	div.listHeader div.btns .scanCode{
+		float:left;
+		height:0.4rem;
+		line-height: 0.33rem;
+		margin-left:0.3rem;
+		font-size: 0.24rem;
+		cursor: pointer;
+		background-color: #58b481;
+		border-radius: 0.05rem;
+		box-sizing: border-box;
+		padding:0.04rem;
+		color:#ffffff;
+		margin-top:-0.04rem;
+	}
+	div.listHeader div.btns .scanCode span{
+		border:1px solid #FFFFFF;
+		border-radius:0.04rem;
+		padding:0 0.1rem;
+		font-weight: 500;
+	}
+	div.listHeader div.btns .scanCode i{
+		color:#ffffff;
+		font-size:0.24rem;
+	}
 </style>
 <script>
 //import SinograinModal from '@/components/common/action/Modal.vue';
@@ -220,6 +253,9 @@ export default {
 //  		console.log('createlib');
     		this.$emit('createlib');
     	},
+    	createSample(){
+    		this.$emit('createSample');
+    	}
     },
     computed: {
 	    

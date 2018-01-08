@@ -19,6 +19,10 @@ Mock.Random.extend({
     producing_area: function(date) {
         var producing_areas = ['河南', '陕西']
         return this.pick(producing_areas)
+    },
+    sampleInSign: function(date) {
+        var sampleInSigns = ['历销', '传大势','陶亚南']
+        return this.pick(sampleInSigns)
     }
 })
 //库列表数据
@@ -252,6 +256,71 @@ var manuscript1=Mock.mock('/liquid/role7/data', {
           checker:'陶亚南',//检查人：
           keeper:'陶亚南',//保管责任人：
           responsible_person:'陶亚南',//被检查企业负责人：    
+      	}
+	  }
+});
+//样品管理入库列表数据
+var SampleInList=Mock.mock('/liquid/role8/data', {
+      'rows|3-12':[
+        {
+          'id|+1': 1,
+          sampling_number:"襄垣-玉米-110",
+          varieties:'@varieties',
+          position:"TG-1-2",
+          status:'@status',
+          sampleInTime: "@date('yyyy.MM.dd')",
+          sampleInSign: "@sampleInSign",
+          rowType:"yangpin信息",//删除用
+          row_class_name:'@row_class_name',        
+        }
+      ],
+      	total:56,
+});
+//新建样品
+var Sample=Mock.mock('/liquid/role9/data', {
+      formdatas: {
+      	title:'中央储备粮襄垣直属库',
+      	form:{
+          ctime: '2017-12-12',//创建时间
+          status: '未扦样',//状态
+          nid: '襄垣-玉米-110',//迁样编号
+          checkregion: '沁县库区',//被查库点
+          pnumber: '漫水-1',//货位号
+          varieties: '玉米',//品种
+          quality: 'ZC',//性质
+          weight: '220.000',//代表数量
+          region: '山西',//产地
+          harvestdate: '2017',//收货年度
+          samplingdate: '2017.9.27',//扦样日期
+          remarks: '秋季普查',//备注
+          status:'@status',
+          sampleInTime: "@date('yyyy.MM.dd')",
+          position:"",
+          sampleInSign: "",
+      	}
+	  }
+});
+//查看编辑样品
+var Sampleedit=Mock.mock('/liquid/role10/data', {
+      formdatas: {
+      	title:'中央储备粮襄垣直属库',
+      	form:{
+          ctime: '2017-12-12',//创建时间
+          status: '未扦样',//状态
+          nid: '襄垣-玉米-110',//迁样编号
+          checkregion: '沁县库区',//被查库点
+          pnumber: '漫水-1',//货位号
+          varieties: '玉米',//品种
+          quality: 'ZC',//性质
+          weight: '220.000',//代表数量
+          region: '山西',//产地
+          harvestdate: '2017',//收货年度
+          samplingdate: '2017.9.27',//扦样日期
+          remarks: '秋季普查',//备注
+          status:'@status',
+          position:"TG-1-2",
+          sampleInTime: "@date('yyyy.MM.dd')",
+          sampleInSign: "@sampleInSign",
       	}
 	  }
 });
