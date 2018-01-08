@@ -1,13 +1,13 @@
 <template>
   <el-table 
   	ref="multipleTable" 
-  	stripe 
   	tooltip-effect="dark" 
   	style="width: 100%" 
-  	border :data="tabledata" 
+  	:data="tabledata" 
   	@selection-change="handleSelectionChange" 
   	:default-sort = "{prop: 'id', order: 'ascending'}" 
   	v-loading="loading"
+  	:row-class-name="row_class_name"
     element-loading-customClass="table_loading"
     element-loading-text="loading..."
     element-loading-spinner="el-icon-loading"
@@ -23,52 +23,55 @@
       <!--循环数据-->
 	    <el-table-column v-for="item in items" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
 	    </el-table-column>
+	    
+		  <!--是否包含工作底稿-->
+      <template v-if="actions.manuscript">
+			    <el-table-column :resizable="resizable" align="center" label="工作底稿" class-name="tableAction">
+		          <template slot-scope="scope">
+		      <!--已完成工作底稿-->
+		      				<template v-if="scope.row.manuscript">
+		            			<button class="viewManuscript" @click="handleViewManuscript(scope.$index, scope.row)">中央储备粮实物检查工作底稿</button>
+		      				</template>
+		      <!--未完成工作底稿-->
+						      <template v-else>
+						          <button class="createManuscript" @click="handleCreateManuscript(scope.$index, scope.row)">+新建工作底稿</button>
+						      </template> 
+		          </template>
+		      </el-table-column>
+      </template>
+	    
+	    <!--是否包含安全报告-->
+      <template v-if="actions.safetyReport">
+			    <el-table-column :resizable="resizable" align="center" label="安全报告" class-name="tableAction">
+		          <template slot-scope="scope">
+		      <!--已完成安全报告-->
+		      				<template v-if="scope.row.safetyReport">
+		            			<button class="viewSafetyReport" @click="handleViewSafetyReport(scope.$index, scope.row)">安全报告</button>
+		      				</template>
+		      <!--未完成安全报告-->
+						      <template v-else>
+						          <button class="createSafetyReport" @click="handleCreateSafetyReport(scope.$index, scope.row)">+新建安全报告</button>
+						      </template> 
+		          </template>
+		      </el-table-column>
+      </template>
+	    
+      <el-table-column :resizable="resizable" align="center" label="操作" class-name="tableAction">
       <!--是否包含查看操作-->
-      <template v-if="actions.view">
-        <el-table-column :resizable="resizable" align="center" label="查看" class-name="tableAction">
           <template slot-scope="scope">
-            <i class="icon-eye-open" @click="handleView(scope.$index, scope.row)"></i>
-          </template>
-        </el-table-column>
-      </template>
+      				<template v-if="actions.view">
+            			<button class="view" @click="handleView(scope.$index, scope.row)">查看</button>
+      				</template>
       <!--是否包含编辑操作-->
-      <template v-if="actions.edit">
-        <el-table-column :resizable="resizable" align="center" label="编辑" class-name="tableAction">
-          <template slot-scope="scope">
-            <i class="icon-pencil" @click="handleEdit(scope.$index, scope.row)"></i>
-          </template>
-        </el-table-column>
-      </template>
-       <!--是否包含导入操作-->
-      <template v-if="actions.import">
-      	<el-table-column  :resizable="resizable" align="center" label="备注" class-name="tableAction">
-          <template slot-scope="scope">
-            <el-button @click="handleLookremarks(scope.$index, scope.row)" type="text" size="small">查看备注</el-button>
-          </template>
-        </el-table-column>
-        <el-table-column  :resizable="resizable" align="center" label="导入" class-name="tableAction">
-          <template slot-scope="scope">
-            <!--<i class="icon-signin" @click="handleimport(scope.$index, scope.row)" v-loading.fullscreen.lock="importLoading"></i>-->
-            <i class="icon-signin" @click="handleimport(scope.$index, scope.row)"></i>
-          </template>
-        </el-table-column>
-      </template>  
+				      <template v-if="actions.edit">
+				          <button class="edit" @click="handleEdit(scope.$index, scope.row)">编辑</button>
+				      </template> 
       <!--是否包含删除操作-->
-      <template v-if="actions.dele">
-        <el-table-column :resizable="resizable" align="center" label="删除" class-name="tableAction">
-          <template slot-scope="scope">
-            <i class="icon-trash" @click="handleDele(scope.$index, scope.row)"></i>
+				      <template v-if="actions.dele">
+				          <button class="dele" @click="handleDele(scope.$index, scope.row)">删除</button>
+				      </template>
           </template>
-        </el-table-column>
-      </template>
-      <!--是否包含授权操作-->
-      <template v-if="actions.ault">
-        <el-table-column :resizable="resizable" align="center" label="授权" class-name="tableAction">
-          <template slot-scope="scope">
-            <i class="icon-key" @click="handleAult(scope.$index, scope.row)"></i>
-          </template>
-        </el-table-column>
-      </template>
+      </el-table-column>
   </el-table>	
 </template>
 <script>
@@ -83,7 +86,7 @@ export default {
   },
   mounted: function() {
 //		this.openloading()
-			console.log(this.loading)
+//			console.log(this.loading)
   },
   methods: {
     handleSelectionChange(val) {
@@ -93,23 +96,35 @@ export default {
       })
 			this.$emit('getchecked',checkedId)
     },
-    formatter(row, column) {
-      return row.address;
+//  设置行类名
+    row_class_name(scope){
+    	return scope.row.row_class_name
+    },
+//  工作底稿
+    handleViewManuscript(index, row){
+    	this.$router.push({path: '/index/sampling/samplingList/manuscriptEdit'})
+    },
+    handleCreateManuscript(index, row){
+    	console.log(this.$router)
+    	this.$router.push({path: '/index/sampling/samplingList/manuscriptCreate'})
+    },
+//  安全报告
+    handleViewSafetyReport(index, row){
+    	this.$router.push({path: '/index/sampling/samplingList/safetyReportEdit'})
+    },
+    handleCreateSafetyReport(index, row){
+    	this.$router.push({path: '/index/sampling/samplingList/safetyReportCreate'})
     },
     handleView(index, row) {
-//	  	console.log(index,row,this.list);
-	    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
-	    //openmodal打开模态框方法有mession组件监控
+//	  	console.log(index,row);
+//		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
+		    this.$root.eventHub.$emit('viewlistitem',row.id)
 		},
 		handleEdit(index, row) {
 //	  	console.log(index,row,this.list);
-		    this.$root.eventHub.$emit('openmodal',row.id,'edit',this.list)
+		    this.$root.eventHub.$emit('editlistitem',row.id)
 		},
 	
-		handleAult(index, row) {
-//	  	console.log(index,row,this.list);
-		    this.$root.eventHub.$emit('openmodal',row.id,'ault',this.list)
-		},
 	  handleDele(index, row) {
 	    this.$confirm('此操作将永久删除该'+row.rowType+', 是否继续?', '提示', {
 	      confirmButtonText: '确定',
@@ -128,24 +143,6 @@ export default {
 	      });          
 	    });
 	  },
-	  handleLookremarks(index,row){
-//	  	console.log(index,row,this.list);
-	  	  this.$alert(row.remarks, '查看数据库备注信息', {
-//        confirmButtonText: '确定',
-          showConfirmButton:false,
-          customClass:'Lookremarks',
-          callback: action => {
-            
-          }
-        });
-	  },
-	  handleimport(index,row){
-//	  	console.log(index,row,this.list);
-//				事件传递到了database/list
-	    	this.$root.eventHub.$emit('showimport',row.id,this.list);
-				
-	  },
-		  
 	}
 }
 

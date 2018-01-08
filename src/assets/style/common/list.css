@@ -2,10 +2,6 @@
 	position:relative;
 	height: 100%;
 }
-/*加载遮罩*/
-.el-loading-mask{
-	top:0.52rem;
-}
 /*复选框*/
 .el-checkbox__input{
 	width:0.2rem;
@@ -27,39 +23,37 @@
 .el-table__empty-block{
 	width:100%!important;
 }
-
 .el-main{
     /*padding: 0px 0.45rem;*/
-    background-color:white;
+    /*background-color:white;*/
+	background:rgba(241, 241, 241, 1);
 }
 .el-main .list{
     background: rgb(255, 255, 255);
     /*padding: 0px 0.45rem;*/
     border-color:rgba(215, 215, 215, 1);
 }
-.el-main .list::before{
-    background-color:rgba(215, 215, 215, 1)
-}
+/*列表行文字*/
 .el-main .list .el-table__body-wrapper table tr{
-    color: rgb(51, 51, 51);
-    font-size: 0.18rem;
+    color: #666666;
+    font-size: 0.16rem;
     font-weight:normal;
 }
-.el-main .list .el-table__body-wrapper table tr td{
-    border:none;
+/*表格左右边颜色*/
+.el-main .list .el-table__body-wrapper,.el-main .list .el-table__header-wrapper{
+	border-left:1px solid #e6e7e7;
+	border-right:1px solid #e6e7e7;
 }
-/*.el-main .list .el-table__body-wrapper table colgroup col:nth-child(1){
-    width:0.68rem;
-    min-width: 70px;
-}
-.el-main .list .el-table__body-wrapper table colgroup col:nth-last-child(4),col:nth-last-child(3),col:nth-last-child(2){
-    width:0.37rem;
-}
-.el-main .list .el-table__body-wrapper table colgroup col:nth-last-child(1){
-    width:0.68rem;
-}*/
-.el-main .list .el-table__body-wrapper td.el-table-column--selection{
+/*多选框宽度*/
+.el-main .list .el-table__body-wrapper .el-table-column--selection{
     width:0.8rem;
+}
+/*多选框颜色*/
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+    background-color:rgb(88, 180, 129);
+}
+.el-checkbox__input.is-focus .el-checkbox__inner, .el-checkbox__inner:hover{
+	border-color:rgb(88, 180, 129);
 }
 .el-main .list .el-table__body-wrapper td.el-table-column--selection .cell{
     display: inline-block;
@@ -83,6 +77,7 @@
     width:100%;
     height:100%;
     border-radius: 4px;
+/*    border-color:#58b481;*/
 }
 .el-main .list .el-table__body-wrapper td.el-table-column--selection .cell label .el-checkbox__input .el-checkbox__inner::after{
     left:38%;
@@ -90,251 +85,207 @@
     border-width:2px;
     height:10px;
 }
-.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
-    background-color:#3498DB;
-}
+/*列表图标*/
 .el-main .list .el-table__body-wrapper td .cell i{
     font-size: 0.32rem;
     cursor: pointer;
     vertical-align: -0.05rem;
 }
 .el-main .list .el-table__body-wrapper td .cell button{
-    font-size: inherit;
+    font-size: 0.16rem;
     padding:0;
+    border:none;
+    background:rgba(0,0,0,0);
+    margin:0 0.13rem;
+    cursor:pointer;
+    outline:none;
 }
-.el-main .list .el-table__header-wrapper table tr{
-    background-color:rgb(222, 233, 247);
+.el-main .list .el-table__body-wrapper td .cell button.view{
+    color: #58b481;
+}
+.el-main .list .el-table__body-wrapper td .cell button.edit{
+    
+}
+.el-main .list .el-table__body-wrapper td .cell button.dele{
+    color:#e87373;
+}
+/*表头*/
+.el-main .list .el-table__header-wrapper table tr,.el-main .list .el-table__header-wrapper table tr th{
+    background-color:#ffe7b8;
     color: rgb(51, 51, 51);
     font-size: 0.18rem;
+    color:#000000;
+    height:0.68rem;
+    /*line-height:0.68rem;*/
 }
-/*.el-main .list .el-table__header-wrapper table colgroup col:nth-child(1){
-    width:0.68rem;
-    min-width: 70px;
+/*表格颜色*/
+.el-main .list .el-table__body-wrapper table tr,.el-main .list .el-table__body-wrapper table tr th{
+    background-color:#f6f9fa;
 }
-.el-main .list .el-table__header-wrapper table colgroup col:nth-last-child(5),col:nth-last-child(4),col:nth-last-child(3){
-    width:0.37rem;
+/*列表补边*/
+.listpagewrap{
+	box-sizing: border-box;
+	padding:0 0.19rem;
+	background:#ffffff;
+	border-left:0.41rem solid rgba(241, 241, 241, 1);
+	border-right:0.41rem solid rgba(241, 241, 241, 1);
+	height:auto;
 }
-.el-main .list .el-table__header-wrapper table colgroup col:nth-last-child(2){
-    width:0.68rem;
-}*/
-.el-main .list .el-table__header-wrapper th{
-    font-weight:normal;
-    border:none;
+/*表格行线*/
+.el-table td, .el-table th.is-leaf{
+	border-bottom:1px dashed #dfdfdf;
 }
-.el-main .list .el-table__header-wrapper th.el-table-column--selection{
-    width:0.8rem;
-}
-.el-main .list .el-table__header-wrapper th.el-table-column--selection .cell{
-    display: inline-block;
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    margin: 0px;
-    padding: 0px;
-}
-.el-main .list .el-table__header-wrapper th.el-table-column--selection .cell label{
-    width:100%;
-    height:100%;
-}
-.el-main .list .el-table__header-wrapper th.el-table-column--selection .cell label .el-checkbox__input{
-    width:100%;
-    height:100%;
-    vertical-align: top;
-}
-.el-main .list .el-table__header-wrapper th.el-table-column--selection .cell label .el-checkbox__input .el-checkbox__inner{
-    width:100%;
-    height:100%;
-    border-radius: 4px;
-}
-.el-main .list .el-table__header-wrapper th.el-table-column--selection .cell label .el-checkbox__input .el-checkbox__inner::after{
-    left:38%;
-    top:12%;
-    border-width:2px;
-    height:10px;
-}
-.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
-    background-color:#3498DB;
-}
-.listpagewrap,.list_databa{
-	padding:0 0.41rem;
-}
-.list{	
-	margin-top:0.15rem;
-}
-.list table{
-	border-collapse: collapse;
-}
-.list .el-table__body, .list .el-table__footer, .list .el-table__header{
+.list .el-table__footer, .list .el-table__header{
 	width:100%!important;
+	margin:0 -1px;
 }
-.list .el-table::before{
+.list .el-table__body{
+	width:100%!important;
+	margin:0 -1px;
+}
+/*.list .el-table::before{
 	display: none;
-}
+}*/
 .list .el-table__body-wrapper{
 	width:100%!important;
-	padding:1px;
+	/*padding:1px;*/
 }
 .list .el-table__body tr{
 	width:100%!important;
 }
-.list .el-table__row:hover{
+/*.list .el-table__row:hover{
 	outline: 1px solid #378ef8;
-}
-.el-table--striped .el-table__body tr.el-table__row--striped td{
+}*/
+/*.el-table--striped .el-table__body tr.el-table__row--striped td{
 	background-color:rgb(250,250,250)!important;
-}
+}*/
+/*悬停颜色*/
 .list.el-table--enable-row-hover .el-table__body tr:hover>td{
-	background:rgba(255,255,255,0);
+	background:#deede8;
 }
 /*去掉padding用line-height设置行高*/
 .list td, .list th{
 	padding:0!important;
 }
 .list div.cell{
-    line-height:0.52rem;
+    line-height:0.5rem;
     padding:0;
     white-space: nowrap;
+}
+/*加载中*/
+.list .el-icon-loading{
+	color:#1bb45f;
+}
+.list .el-loading-text{
+	color:#1bb45f;
 }
 /*上下箭头*/
 .el-table .sort-caret.ascending{
 	top:50%;
-	margin-top:-11px;
+	/*margin-top:-11px;*/
+	margin-top:-12px;
 }
 .el-table .sort-caret.descending{
 	top:50%;
-	margin-top:-4px;
+	/*margin-top:-4px;*/
+	margin-top:-1px;
+}
+.el-table .descending .sort-caret.descending{
+	border-top-color: #1bb45f;
+}
+.el-table .ascending .sort-caret.ascending{
+	border-bottom-color: #1bb45f;
 }
 .el-table--border::after, .el-table--group::after, .el-table::before{
-	display: none;
+	/*display: none;*/
 }
+/*表头文字对齐*/
 .list tr >th:nth-last-child(2) div.cell{
-	padding-right:0.3rem;
+	/*padding-right:0.3rem;*/
 }
 .list tr td:nth-last-child(1) div.cell{
-	padding-right:0.3rem;
-	margin-right:-1px;
+	/*padding-right:0.3rem;*/
+	/*margin-right:-1px;*/
 }
-.el-table--striped .el-table__body tr.el-table__row--striped td{	
+/*.el-table--striped .el-table__body tr.el-table__row--striped td{	
 	background:rgba(250,250,250,0)!important;
 }
 .el-table--striped .el-table__body tr.el-table__row--striped{
 	background:rgba(250,250,250,1)!important;
-}
-.el-table--border, .el-table--group{
+}*/
+/*.el-table--border, .el-table--group{
 	border-top:1px solid rgba(215, 215, 215, 1);
 	border-right:1px solid rgba(215, 215, 215, 1);
 	border-left:1px solid rgba(215, 215, 215, 1);
 	border-bottom:none;
-}
-/*角色列表宽度匹配*/
+}*/
+/*库典列表宽度匹配*/
 /*设定表头宽度*/
-.el-main .rolelist .el-table__header-wrapper table colgroup col:nth-child(1){
+.el-main .liblist .el-table__header-wrapper table colgroup col:nth-child(1){
     width:0.68rem;
     min-width: 70px;
 }
-.el-main .rolelist .el-table__header-wrapper table colgroup col:nth-last-child(5),.el-main .rolelist .el-table__header-wrapper table colgroup col:nth-last-child(4),.el-main .rolelist .el-table__header-wrapper table colgroup col:nth-last-child(3){
-    width:0.37rem;
-}
-.el-main .rolelist .el-table__header-wrapper table colgroup col:nth-last-child(2){
-    width:0.68rem;
-}
-/*设定表身宽度*/
-.el-main .rolelist .el-table__body-wrapper table colgroup col:nth-child(1){
-    width:0.68rem;
-    min-width: 70px;
-}
-.el-main .rolelist .el-table__body-wrapper table colgroup col:nth-last-child(4),.el-main .rolelist .el-table__body-wrapper table colgroup col:nth-last-child(3),.el-main .rolelist .el-table__body-wrapper table colgroup col:nth-last-child(2){
-    width:0.37rem;
-}
-.el-main .rolelist .el-table__body-wrapper table colgroup col:nth-last-child(1){
-    width:0.68rem;
-}
-
-
-/*用户列表宽度匹配*/
-/*设定表头宽度*/
-.el-main .userlist .el-table__header-wrapper table colgroup col:nth-child(1){
-    width:0.68rem;
-    min-width: 70px;
-}
-.el-main .userlist .el-table__header-wrapper table colgroup col:nth-last-child(5),.el-main .userlist .el-table__header-wrapper table colgroup col:nth-last-child(4),.el-main .userlist .el-table__header-wrapper table colgroup col:nth-last-child(3){
-    width:0.37rem;
-}
-.el-main .userlist .el-table__header-wrapper table colgroup col:nth-last-child(2){
-    width:0.68rem;
-}
-/*设定表身宽度*/
-.el-main .userlist .el-table__body-wrapper table colgroup col:nth-child(1){
-    width:0.68rem;
-    min-width: 70px;
-}
-.el-main .userlist .el-table__body-wrapper table colgroup col:nth-last-child(4),.el-main .userlist .el-table__body-wrapper table colgroup col:nth-last-child(3),.el-main .userlist .el-table__body-wrapper table colgroup col:nth-last-child(2){
-    width:0.37rem;
-}
-.el-main .userlist .el-table__body-wrapper table colgroup col:nth-last-child(1){
-    width:0.68rem;
-}
-
-
-/*资源列表宽度匹配*/
-/*设定表头宽度*/
-.el-main .resourcelist .el-table__header-wrapper table colgroup col:nth-child(1){
-    width:0.68rem;
-    min-width: 70px;
-}
-.el-main .resourcelist .el-table__header-wrapper table colgroup col:nth-last-child(4),.el-main .resourcelist .el-table__header-wrapper table colgroup col:nth-last-child(3){
-    width:0.37rem;
-}
-.el-main .resourcelist .el-table__header-wrapper table colgroup col:nth-last-child(2){
-    width:0.68rem;
-}
-/*设定表身宽度*/
-.el-main .resourcelist .el-table__body-wrapper table colgroup col:nth-child(1){
-    width:0.68rem;
-    min-width: 70px;
-}
-.el-main .resourcelist .el-table__body-wrapper table colgroup col:nth-last-child(3),.el-main .resourcelist .el-table__body-wrapper table colgroup col:nth-last-child(2){
-    width:0.37rem;
-}
-.el-main .resourcelist .el-table__body-wrapper table colgroup col:nth-last-child(1){
-    width:0.68rem;
-}
-
-
-/*数据库列表宽度匹配*/
-/*设定表头宽度*/
-.el-main .datebaselist .el-table__header-wrapper table colgroup col:nth-last-child(3){
-    width:0.37rem;
-}
-.el-main .datebaselist .el-table__header-wrapper table colgroup col:nth-last-child(2){
-    width:0.68rem;
-}
-/*设定表身宽度*/
-.el-main .datebaselist .el-table__body-wrapper table colgroup col:nth-last-child(3){
+.el-main .liblist .el-table__header-wrapper table colgroup col:nth-last-child(5),.el-main .liblist .el-table__header-wrapper table colgroup col:nth-last-child(4),.el-main .liblist .el-table__header-wrapper table colgroup col:nth-last-child(3){
     /*width:0.37rem;*/
 }
-.el-main .datebaselist .el-table__body-wrapper table colgroup col:nth-last-child(2){
-    width:0.37rem;
-}
-.el-main .datebaselist .el-table__body-wrapper table colgroup col:nth-last-child(1){
-    width:0.68rem;
-}
-
-.el-main .datebaselist .el-table__body-wrapper table tr .icon-signin{
-    color:rgb(55,142,248);
-}
-.el-main .datebaselist .el-table__body-wrapper table tr .remarks{
-    color:rgb(55,142,248);
-}
-
-
-/*日志列表宽度匹配*/
-/*设定表头宽度*/
-.el-main .loglist .el-table__header-wrapper table colgroup col:nth-last-child(2){
-    width:0.68rem;
+.el-main .liblist .el-table__header-wrapper table colgroup col:nth-last-child(2){
+    /*width:0.68rem;*/
 }
 /*设定表身宽度*/
-.el-main .loglist .el-table__body-wrapper table colgroup col:nth-last-child(1){
+.el-main .liblist .el-table__body-wrapper table colgroup col:nth-child(1){
     width:0.68rem;
+    min-width: 70px;
+}
+.el-main .liblist .el-table__body-wrapper table colgroup col:nth-last-child(4),.el-main .liblist .el-table__body-wrapper table colgroup col:nth-last-child(3),.el-main .liblist .el-table__body-wrapper table colgroup col:nth-last-child(2){
+    /*width:0.37rem;*/
+}
+.el-main .liblist .el-table__body-wrapper table colgroup col:nth-last-child(1){
+    /*width:0.68rem;*/
+}
+/*工作底稿与安全报告*/
+.viewManuscript:hover{
+	color:#2d5bb8;
+	text-decoration: underline;
+}
+.createManuscript{
+	color:#58b481;
+}
+.createManuscript:hover{
+	color:#58b481;
+	text-decoration: underline;
+}
+.viewSafetyReport:hover{
+	color:#2d5bb8;
+	text-decoration: underline;
+}
+.createSafetyReport{
+	color:#2dd2ff;
+}
+.createSafetyReport:hover{
+	color:#2dd2ff;
+	text-decoration: underline;
+}
+/*以下根据列表设计而定非通用*/
+/*扦样列表宽度匹配*/
+/*设定表头宽度*/
+.el-main .Samplinglist .el-table__header-wrapper table colgroup col:nth-child(1){
+    width:0.68rem;
+    min-width: 70px;
+}
+.el-main .Samplinglist .el-table__header-wrapper table colgroup col:nth-last-child(5),.el-main .Samplinglist .el-table__header-wrapper table colgroup col:nth-last-child(4),.el-main .Samplinglist .el-table__header-wrapper table colgroup col:nth-last-child(3){
+    /*width:0.37rem;*/
+}
+.el-main .Samplinglist .el-table__header-wrapper table colgroup col:nth-last-child(2){
+    /*width:0.68rem;*/
+}
+/*设定表身宽度*/
+.el-main .Samplinglist .el-table__body-wrapper table colgroup col:nth-child(1){
+    width:0.68rem;
+    min-width: 70px;
+}
+.el-main .Samplinglist .el-table__body-wrapper table colgroup col:nth-last-child(4),.el-main .Samplinglist .el-table__body-wrapper table colgroup col:nth-last-child(3),.el-main .Samplinglist .el-table__body-wrapper table colgroup col:nth-last-child(2){
+    /*width:0.37rem;*/
+}
+.el-main .Samplinglist .el-table__body-wrapper table colgroup col:nth-last-child(1){
+    /*width:0.68rem;*/
 }

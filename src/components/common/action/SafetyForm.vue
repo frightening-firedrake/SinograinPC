@@ -3,17 +3,9 @@
         <template>
             <p>{{formdatas.title}}</p>
         </template>      
-        <el-form-item label="创建时间：" prop="ctime" v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.ctime" :disabled="disabled"></el-input>
-		</el-form-item>
-		<el-form-item label="状态：" prop="status" v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.status" :disabled="disabled"></el-input>
-		</el-form-item>
-		<el-form-item label="迁样编号：" prop="nid">
-		    <el-input v-model="formdatas.form.nid"></el-input>
-		</el-form-item>
-		<el-form-item label="被查库点：" prop="checkregion">
-		    <el-select v-model="formdatas.form.checkregion" placeholder="选择库点">
+       
+		<el-form-item label="被查库点：" prop="checkregion"  v-bind:class="{disabled:disabled}">
+		    <el-select v-model="formdatas.form.checkregion" placeholder="选择库点" :disabled="disabled">
 		        <el-option label="山西" value="1"></el-option>
 		        <el-option label="河南" value="henan"></el-option>
 		        <el-option label="山东" value="shandong"></el-option>
@@ -21,42 +13,44 @@
 		        <el-option label="东北" value="dongbei"></el-option>
 		    </el-select>
 		</el-form-item>
-		<el-form-item label="货位号：" prop="pnumber" >
-		    <el-input v-model="formdatas.form.pnumber"></el-input>
+		<el-form-item label="货位号：" prop="pnumber"  v-bind:class="{disabled:disabled}">
+		    <el-input v-model="formdatas.form.pnumber" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="品种：" prop="varieties" >
-		    <el-input v-model="formdatas.form.varieties"></el-input>
-		</el-form-item>
-		<el-form-item label="性质：" prop="quality" >
-		    <el-input v-model="formdatas.form.quality"></el-input>
-		</el-form-item>
-		<el-form-item label="代表数量(吨)：" prop="weight" >
-		    <el-input v-model="formdatas.form.weight"></el-input>
-		</el-form-item>
-		<el-form-item label="产地：" prop="region" >
-		    <el-select v-model="formdatas.form.region" placeholder="请选择产地">
-		        <el-option label="山西" value="1"></el-option>
-		        <el-option label="河南" value="henan"></el-option>
-		        <el-option label="山东" value="shandong"></el-option>
-		        <el-option label="陕西" value="shanxi2"></el-option>
-		        <el-option label="东北" value="dongbei"></el-option>
-		    </el-select>
-		</el-form-item>
-		<el-form-item label="收货年度：" >
-		    <el-form-item prop="harvestdate">
-		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
-		        <el-date-picker type="year" placeholder="选择年度" v-model="formdatas.form.harvestdate"></el-date-picker>
-		    </el-form-item>
-		</el-form-item>
-		<el-form-item label="扦样日期：" prop="samplingdate" >
-		    <el-input v-model="formdatas.form.samplingdate"></el-input>
-		</el-form-item>
-		<el-form-item label="备注：" prop="remarks" >
-		    <el-input v-model="formdatas.form.remarks"></el-input>
-		</el-form-item>
+		<!--问题组-->
+		
+		
+		<template v-for="(item, index) in formdatas.form.problems">
+			<el-form-item 
+				:label="'问题' + (index+1)+'：'" 
+				:prop="'problems.'+index+'.problem'" 
+				class="problem" 
+				:rules="{
+			      required: true, message: '请填写问题详情', trigger: 'blur'
+			    }">
+			    <el-input type="textarea" v-model="item.problem"></el-input>
+			</el-form-item>
+			<el-form-item label="图片：" prop="images" class="images">
+			    <el-upload
+				  action="/liquid/images"
+				  list-type="picture-card"
+				  :on-preview="handlePictureCardPreview"
+				  name="images1"
+				  :file-list="item.images"
+				  :on-remove="handleRemove">
+				  <i class="el-icon-plus"></i>
+				</el-upload>
+				<el-dialog :visible.sync="dialogVisible" size="tiny">
+				  <img width="100%" :src="dialogImageUrl" alt="">
+				</el-dialog>
+			</el-form-item>			
+		</template>
+		
 
         
         <div class="btns">
+			<div class="addproblem" @click="addproblem">
+				问题加一
+			</div>
             <el-button class="yes" type="primary" @click="onSubmit('form')">确认</el-button>
             <el-button class="no" @click="cancel('form')">取消</el-button>
         </div>
@@ -123,7 +117,8 @@ export default {
             }
         return {
 //      dyear:new Date(2017),
-        
+        dialogImageUrl: '',
+        dialogVisible: false,
         labelWidth:'2rem',
         errorinline:false,
         disabled:true,
@@ -172,11 +167,12 @@ export default {
     },
     methods: {  
         onSubmit(formname) {
+        	console.log(this.formdatas.form.images1)
             this.$refs[formname].validate((valid) => {
                 if (valid) {
                     alert('submit!');
 //                  this.$emit('btn_close')
-					window.history.go(-1)
+//					window.history.go(-1)
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -189,7 +185,18 @@ export default {
 //          this.$emit('btn_close')
 			window.history.go(-1)
         },
-        
+//      图片上传查看与删除
+	    handleRemove(file, fileList) {
+	        console.log(file, fileList);
+	    },
+	    handlePictureCardPreview(file, fileList) {
+	        this.dialogImageUrl = file.url;
+	        this.dialogVisible = true;
+	    },
+//	    问题加一
+		addproblem(){
+			this.$emit('addproblem');
+		}
     }
 
 }

@@ -3,20 +3,19 @@
 		<el-breadcrumb separator-class="el-icon-arrow-right">
 			<template v-if="breadcrumb.undefinedpath">
 			    <el-breadcrumb-item>
-			    	<span @click='backhome'>
-			    		
-			    	<i class="icon-home"></i>
-			    	首页
+			    	<span @click='backhome'>	
+				    	<!--<i class="icon-home"></i>-->
+				    	首页
 			    	</span>
 			    </el-breadcrumb-item>
 			    <el-breadcrumb-item v-for="item in breadcrumbListsCache" :key="item.index" >{{item.name}}</el-breadcrumb-item>
 				<el-breadcrumb-item >
 			    	{{breadcrumb.undefinedpath}}
-			   </el-breadcrumb-item>				
+			    </el-breadcrumb-item>				
 			</template>
 			<template v-else>
 				<el-breadcrumb-item to="/index/home">
-			    	<i class="icon-home"></i>
+			    	<!--<i class="icon-home"></i>-->
 			    	首页
 			    </el-breadcrumb-item>
 			    <!--<el-breadcrumb-item v-for="item in breadcrumbList" :key="item.index" :to="item.path">{{item.name}}</el-breadcrumb-item>-->
@@ -25,16 +24,10 @@
 		</el-breadcrumb>
 		
 		<div class="bread_search" v-if="breadcrumb.search">
-		    <el-input placeholder="搜索你想找到的..." v-model="searching" class="input-with-select">
-			    <!--<el-select v-model="select" slot="prepend" placeholder="请选择">
-			        <el-option label="餐厅名" value="1"></el-option>
-			        <el-option label="订单号" value="2"></el-option>
-			        <el-option label="用户电话" value="3"></el-option>
-			    </el-select>-->
-			    <!--<el-button slot="append" icon="el-icon-search">-->
-			    <el-button slot="append" @click="searchingfor">
-			    	<img src="static/images/sys/iconsearch.png" alt="" />
-			    </el-button>
+			<el-input
+		    placeholder="请输入被查库点进行搜索"
+		    v-model="searching">
+			    <button slot="suffix" class="el-input__icon el-icon-search" @click="searchingfor"></button>
 			</el-input>
 		</div>
 	</div>
@@ -136,21 +129,21 @@ import {mapMutations} from 'vuex';
 <style>
 	/*面包屑导航*/
 	.breadcrumbwrap{
-		margin:0 -0.41rem;
+		margin:0 -0.6rem;
 		padding:0 0.41rem;
-		height:0.6rem;
-		line-height: 0.6rem;
+		height:0.77rem;
+		line-height: 0.77rem;
 		background-color: rgba(241, 241, 241, 1);
 		position:relative;
 		overflow: hidden;
 	}
 	.breadcrumbwrap .el-breadcrumb{
-		height:0.6rem;
-		line-height: 0.6rem;
+		height:0.77rem;
+		line-height: 0.77rem;
 	}
 	.breadcrumbwrap .el-breadcrumb__inner, .breadcrumbwrap .el-breadcrumb__inner a{
 		font-size: 0.18rem;
-		color:rgb(51,51,51);
+		color:#333333;
 		font-weight:400;
 	}
 	.breadcrumbwrap .el-breadcrumb__inner a:hover, .breadcrumbwrap .el-breadcrumb__inner:hover{
@@ -169,90 +162,49 @@ import {mapMutations} from 'vuex';
 	}
 	.breadcrumbwrap .el-breadcrumb__item:last-child .el-breadcrumb__inner,.breadcrumbwrap .el-breadcrumb__item:last-child .el-breadcrumb__inner a,.breadcrumbwrap .el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover, .breadcrumbwrap .el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
 	    font-weight: 400;
-	    color:rgb(55,142,248);
+	    /*color:rgb(55,142,248);*/
+	    color:#007c36;
 	    cursor: text;
 	}
 	/*搜索*/
-	.bread_search{
+	div.bread_search{
 		position:absolute;
-		width:3.25rem;
-		height:0.4rem;
-		line-height: 0.4rem;
-		/*border: solid 0.01rem rgba(153, 153, 153, 1);*/
-		/*border-radius: 0.04rem;*/
-		top:0.09rem;
+		width:3.13rem;
+		height:0.34rem;
+		line-height: 0.34rem;
+		top:0.21rem;
 		right:0.41rem;
 	}
-	.bread_search .el-input__inner{
-		height:0.4rem;
-		border: solid 0.01rem rgba(153, 153, 153, 1);
-		/*box-sizing: content-box;*/
-		color:rgb(85,85,85);
-		/*width:2.8rem;*/
-		position:relative;
-		/*right:-0.2rem;*/
+	div.bread_search .el-input{
+		height:100%;
+		width:100%;
+		padding:0;
+		display: block;
+		line-height:0.34rem;
 	}
-	.el-input-group__append{
-		background:rgba(0,0,0,0);
+	div.bread_search .el-input input{
+		height:100%;
+		width:100%;
+		background-color: #ffffff;
+		border-radius: 0.16rem;
+		border: solid 1px #bfbfbf;
+		font-size:0.16rem;
+		line-height:0.34rem;
+	}
+	div.bread_search .el-input__suffix{
+		width:0.3rem;
+	}
+	div.bread_search .el-input--suffix .el-input__inner{
+		padding-right:0.3rem;
+	}
+	div.bread_search .el-input__suffix .el-input__icon{
+		line-height:0.34rem;
+		font-size:0.2rem;
+		color:#9eb0c3;
 		border:none;
-		height:0.4rem;
+		background:rgba(0,0,0,0);
+		outline:none;
 		padding:0;
-		position: relative;
-	    right: 0.2rem;
-	    top: 0.12rem;
+		cursor:pointer;
 	}
-	.el-input-group__append .el-button{
-		height:0.4rem;
-		padding:0;
-	}
-	.el-input-group__append .el-button span{
-		display: block;
-		height:100%;
-
-	}
-	.el-input-group__append .el-button span img{
-		display: block;
-		/*width:0.5rem;
-		height:0.4rem;*/
-		height:100%;
-	}
-
-
-div.nav-search input[type=text]{
-	border:none;
-	height:0.4rem;
-	outline: none;
-	box-shadow: none;
-	border-radius: 0.04rem;
-	border: solid 0.01rem rgba(153, 153, 153, 1);
-	border-right: none;
-}
-div.nav-search .input-group-btn .btn{
-	width:0.4rem;
-	height:0.4rem;
-	float:left;
-	padding:0;
-	border:none;
-}
-div.nav-search .input-group-btn{
-	z-index: 66;
-}
-div.nav-search .input-group-btn:hover .btn{
-	background:rgba(255,255,255,0);
-	border:none;
-	box-shadow: none;
-}
-div.nav-search .input-group-btn .btn img{
-	margin-left:-0.11rem;
-	width:0.5rem;
-	height:0.4rem;
-	display: block;
-}
-div.nav-search .input-group .btn-default:focus,
-div.nav-search .input-group .btn-default.focus {
-    outline: none;  
-    background-color: rgba(0,0,0,0);
-    border-color:  rgba(0,0,0,0);
-	border:none;
-}
 </style>

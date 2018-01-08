@@ -1,281 +1,437 @@
-.el-form{
+div.clear{
+	clear:both;
+}
+form.sampling{
     width:100%;
     height:auto;
     background: rgb(251,251,251);
+    margin-top:0.2rem;
+	/*border-bottom:solid 1px #dfdfdf;*/
+	border-left:solid 1px #dfdfdf;
+	/*border-right:solid 1px #dfdfdf;*/
+	border-top:solid 1px #dfdfdf;
+	border-radius: 0.1rem 0.1rem 0 0;
 }
-.el-form p{
-    border-top: 1px solid rgb(221, 221, 221);
-    border-left: 1px solid rgb(221, 221, 221);
-    border-right: 1px solid rgb(221, 221, 221);
+form.sampling p{
+	border-radius: 0.1rem 0.1rem 0 0;
+	border-right:solid 1px #dfdfdf;
     height: 0.6rem;
     line-height: 0.6rem;
     color: rgb(0,0,0);
-    font-size: 0.24rem;
+    font-size: 0.2rem;
     background-color: rgba(242, 242, 242, 1);
     padding-left: 0.4rem;
-}
-.el-form .el-form-item{
-    margin: 0;
-    height: 0.6rem;
-    width: 100%;
-    line-height: 0.6rem;
-    border-top: 1px dashed rgb(221, 221, 221);
-}
-.el-form .el-form-item.textarea{
-    height:1.8rem;
-}
-.el-form .el-form-item.textarea .el-form-item__content .el-textarea textarea{
-    padding: 0.1rem 0.24rem;
-    font-size: 0.16rem;
-    color: rgb(51,51,51);
-    height: 1.6rem;
-    line-height: 0.25rem;
-    outline: none;
-    box-shadow: none;
-    background: rgb(255,255,255);
-    border-radius: 0.06rem;
-    width: 100%;
-    border: 1px solid rgb(191,191,191);
-    resize: none;
-}
-.el-form .el-form-item .el-form-item__label{
-    padding:0;
-    padding-left: 0.7rem;
-    margin: 0;
-    font-size: 0.18rem;
-    color: rgb(51,51,51);
-    text-align:left;
-    position: relative;
-    line-height: 0.6rem;
-    width: 2.5rem;
-    float: left;
-    height: 100%;
-    border-left: 1px solid rgb(221, 221, 221);
-}
-.el-form .el-form-item .el-form-item__label::before{
-    position: absolute;
-    content: '';
-    top: 0.3rem;
-    left: 0.4rem;
-    width: 0.06rem;
-    height: 0.06rem;
-    margin-top: -0.03rem;
-    border-radius: 50%;
-    background: rgba(55, 142, 248, 1);
-}
-.el-form .el-form-item .el-form-item__content{
-    border-left: 1px dashed rgb(221, 221, 221);
-    border-right: 1px solid rgb(221, 221, 221);
-    background: rgb(255,255,255);
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-    padding: 0.1rem 0.5rem;
-    line-height:0.4rem;
-}
-.el-form .el-form-item .el-form-item__content .maxnum .el-input{
-    text-align:center;
-}
-.el-form .el-form-item .el-form-item__content .maxnum{
-        line-height: 0.24rem;
-}
-.el-form .el-form-item .el-form-item__content .maxnum >span{
-        margin-top:-1px;
-}
-.el-form .el-form-item .el-form-item__content .maxnum .el-input-number__decrease,.el-form .el-form-item .el-form-item__content .maxnum .el-input-number__increase{
-    width: 0.24rem;
-    height: 100%;
-    border:none;
-    background-color: #2576d8;
-    color:white;
-    border-radius: 0;
-}
-.el-form .el-form-item .el-form-item__content .maxnum input{
-    box-sizing: border-box;
-    background-color: white;
-    color:black;
-    padding:0;
-    border: 1px solid #d5d5d5 !important;
-    width:34%;
-    border-radius: 0;
-    height: 0.24rem;
-}
-.el-form .el-form-item .el-form-item__content .maxnum .el-input-number__decrease.is-disabled{
-    background-color:#b7b7b7;
-}
-.el-form .el-form-item .el-form-item__content .maxnum .el-input-number__increase.is-disabled{
-    background-color:#b7b7b7;
-}
-.el-form .el-form-item .el-form-item__content .maxnum input{
-    border:none;
-}
-.el-form .el-form-item .el-form-item__content .roleinput{
-    width:73%;
-}
-.el-form .el-form-item .el-form-item__content .roleinput input{
-    max-width: 7rem;
-    height:0.4rem;
-}
-.el-form .el-form-item .el-form-item__content .select{
-    height:100%;
-}
-.el-form .el-form-item .el-form-item__content .select .el-input{
-    width:73%;
-    height:100%;
-}
-.el-form .el-form-item .el-form-item__content .select .el-input input{
-    height:100%!important;
-}
-.el-form .el-form-item .el-form-item__content input{
-    padding: 0 0.24rem;
-    font-size: 0.16rem;
-    color: rgb(51,51,51);
-    line-height: 0.4rem;
-    box-shadow: none;
-    vertical-align: top;
-    background: rgb(255,255,255);
-    border-radius: 0.06rem;
-}
-.el-form .btns{
-    padding: 0.66rem 0 0.56rem;
-    border-top: 1px dashed rgb(221, 221, 221);
     text-align: center;
 }
-.el-form .btns .btn{
-    font-size: 0.22rem;
-    color: rgb(255,255,255);
-    padding: 0.15rem 0.45rem;
-    line-height: 0.22rem;
-    background-color: rgba(111, 179, 224, 1);
-    border-radius: 0.05rem 0.05rem 0.05rem 0.05rem;
-    border: 1px solid rgba(111, 179, 224, 1);
-    outline: none;
+form.sampling .el-form-item{
+	border-top:solid 1px #dfdfdf;
+	margin:0;
+	width:50%;
+	float:left;
+	height:0.5rem;
+	line-height:0.5rem;
+	color:#333333;
+	background:#ffffff;
+	overflow: hidden;
 }
-.el-form .btns .btn_cancel{
-    color: rgba(111, 179, 224, 1);
-    background: rgb(255,255,255);
-    margin-left: 0.47rem;
+form.sampling .el-form-item.disabled{
+	color:#999999;
 }
-/*添加资源中独立的一块*/
-.resource_add .options .el-form-item .el-form-item__label::before{
-    background-color:transparent;
+form.sampling .el-form-item.full{
+	margin:0;
+	width:100%;
+	float:left;
 }
-.resource_add .options{
-    position:relative;
+form.sampling .el-form-item.problem{
+	height:1rem;
+	line-height:1rem;
+	margin:0;
+	width:100%;
+	float:left;
 }
-.resource_add .options .el-form-item .el-form-item__label{
-    padding-left:1rem;
+form.sampling .el-form-item.images{
+	height:1.5rem;
+	line-height:1.5rem;
+	margin:0;
+	width:100%;
+	float:left;
 }
-.resource_add .options .el-form-item{
-    position:relative;
+form.sampling .el-form-item.problem .el-form-item__content{
+	height:1rem;
+	line-height:0.98rem;
 }
-.resource_add .options .options_btn{
-    width:4rem;
-    height:0.6rem;
-    position:absolute;
-    right:0;
-    top:23%;
-    z-index: 111;
+form.sampling .el-form-item.images .el-form-item__content{
+	height:1.5rem;
+	line-height:1.48rem;
+	padding-left:0.24rem;
+	padding-top:0.2rem;
 }
-.resource_add .options .options_btn .option_cancel{
-        background-color: rgb(232,75,74);
-        margin-left:0.2rem;
+form.sampling .el-form-item.images .el-form-item__content .el-upload-list__item{
+	height:1.1rem;
+	width:1.5rem;
 }
-.resource_add .options .options_btn button:focus{
-    outline: none;
+form.sampling .el-form-item.images .el-form-item__content .el-upload--picture-card{
+	line-height:1.2rem;
+	height:1.1rem;
+	width:1.5rem;
 }
-.resource_add .options .options_btn button{
-    text-align: center;
-    border:none;
-    cursor: pointer;
-    padding: 0;
-    width: 0.3rem;
-    height: 0.3rem;
-    line-height: 0.24rem;
-    color: #fff;
-    display:inline-block;
-    font-size: 0.35rem;
-    background-color: #6fb3e0;
+form.sampling .el-form-item.images .i{
+	font-size:0.2rem;
 }
-.resource_add .options:after{
-    content:"操作";
-    height:99%;
-    background: rgb(251,251,251);
-    position: absolute;
-    padding-top: 0.38rem;
-    letter-spacing: 2em;
-    font-size: 0.18rem;
-    line-height: 0.5rem;
-    left: 1px;
-    padding-left:0.2rem;
-    box-sizing:border-box;
-    top: 1px;
-    text-align: center;
-    width: 0.6rem;
-    z-index: 666;
-    border-right: 1px dashed rgb(221, 221, 221);
+form.sampling .el-form-item .el-form-item__content{
+	border-left:solid 1px #dfdfdf;
+	border-right:solid 1px #dfdfdf;
+	height:0.5rem;
+	line-height:0.48rem;
+}
+form.sampling .el-form-item .el-form-item__label{
+	line-height: inherit;
+	background-color: #fbfbfb;
+	font-size:0.16rem;
+}
+/*文本框*/
+form.sampling .el-form-item .el-form-item__content>.el-input input{
+	height:0.46rem;
+	line-height:0.46rem;
+	border:none;
+	padding-right:7em;
+	font-size:0.16rem;
+}
+/*文本域*/
+form.sampling .el-form-item .el-form-item__content>.el-textarea{
+	height:100%;
+	border:none;
+	padding:0;
+	vertical-align:middle;
+}
+form.sampling .el-form-item .el-form-item__content>.el-textarea textarea{
+	height:100%!important;
+	line-height:0.3rem;
+	border:none;
+	padding-right:7em;
+	font-size:0.16rem;
+	resize: none;
 }
 
-/*模态框编辑资源中*/
-.el-dialog__body .options .el-form-item .el-form-item__label::before{
-    background-color:transparent;
+/*验证*/
+form.sampling .el-form-item .el-form-item__content .el-form-item__error{
+	top:50%;
+	padding:0;
+	right:0.2rem;
+	left:auto;
+	margin-top:-7px;
 }
-.el-dialog__body .options{
-    position:relative;
+/*下拉*/
+form.sampling .el-form-item .el-form-item__content .el-select{
+	padding-left:0.2rem;
 }
-.el-dialog__body .options .el-form-item .el-form-item__label{
-    padding-left:1rem;
+form.sampling .el-form-item .el-form-item__content .el-select .el-input input{
+	height:0.36rem;
+	width:2.75rem;
+	line-height:0.34rem;
+	border:solid  0.01rem #dfdfdf;
+	font-size:0.16rem;
+	background:#f2f2f2;
+	border-radius:0;
 }
-.el-dialog__body .options .el-form-item{
-    position:relative;
+/*时间*/
+form.sampling .el-form-item .el-form-item__content .el-form-item{
+	border:none;
+	margin:0;
+	width:auto;
+	float:none;
+	height:0.5rem;
+	line-height:0.5rem;
+	color:#333333;
 }
-.el-dialog__body .options .options_btn{
-    width:4rem;
-    height:0.6rem;
-    position:absolute;
-    right:0;
-    top:23%;
-    z-index: 111;
-    left:75%;
+form.sampling .el-form-item .el-form-item__content .el-form-item .el-form-item__content{
+	border:none;
+	height:0.5rem;
+	line-height:0.48rem;
+	padding-right:7em;
+	padding-left:0.2rem;
 }
-.lg .el-dialog__body .options .options_btn{
-    left:auto;
+form.sampling .el-form-item .el-form-item__content .el-form-item .el-form-item__content .el-date-editor{
+	width:2rem!important;
 }
-.el-dialog__body .options .options_btn .option_cancel{
-    background-color: rgb(232,75,74);
-    margin-left:0.2rem;
+form.sampling .el-form-item .el-form-item__content .el-form-item .el-form-item__content .el-date-editor input{
+	height:0.36rem;
+	width:2rem;
+	line-height:0.34rem;
+	border:solid 0.01rem #dfdfdf;
+	font-size:0.16rem;
+	background:#f2f2f2;
+	padding:0;
+	border-radius:0;
+	padding-left:0.5rem;
 }
-.el-dialog__body .options .options_btn button:focus{
-    outline: none;
+form.sampling .el-form-item .el-form-item__content .el-form-item .el-form-item__content .el-date-editor .el-icon-date{
+	line-height:0.5rem;
+	color:#2dc0e8;
 }
-.el-dialog__body .options .options_btn button{
-    text-align: center;
-    border:none;
-    cursor: pointer;
-    padding: 0;
-    width: 0.3rem;
-    height: 0.3rem;
-    line-height: 0.24rem;
-    color: #fff;
-    display:inline-block;
-    font-size: 0.35rem;
-    background-color: #6fb3e0;
+/*开关*/
+form.sampling .el-form-item .el-form-item__content .el-switch{
+	margin-left:0.2rem;
 }
-.el-dialog__body .options:after{
-    content:"操作";
-    height:99%;
-    background: rgb(251,251,251);
-    position: absolute;
-    padding-top: 0.38rem;
-    letter-spacing: 2em;
+/*单选*/
+form.sampling .el-form-item .el-form-item__content .el-radio-group{
+	margin-left:1.1rem;
+}
+/*单选颜色*/
+.el-radio__input.is-checked .el-radio__inner, .el-radio__input.is-indeterminate .el-radio__inner{
+    background-color:rgb(88, 180, 129);
+}
+.el-radio__input.is-focus .el-radio__inner, .el-radio__inner:hover{
+	border-color:rgb(88, 180, 129);
+}
+.el-radio__input.is-checked+.el-radio__label{
+	color:rgb(88, 180, 129);
+}
+.el-radio__label{
+	font-size:0.16rem;
+}
+/*提交与取消*/
+form.sampling .btns{
+	clear:both;
+	padding:0.6rem 0;
+	text-align: center;
+	border-top:solid 1px #dfdfdf;
+	position:relative;
+	z-index: 2;
+	left:-1px;
+	background:#ffffff;
+}
+
+form.sampling .btns button {
     font-size: 0.18rem;
+    padding: 0rem;
     line-height: 0.5rem;
-    left: 1px;
-    padding-left:0.2rem;
-    box-sizing:border-box;
-    top: 1px;
+    border-radius: 0.1rem;
+    width:1.3rem;
+    height:0.5rem;
     text-align: center;
-    width: 0.6rem;
-    z-index: 666;
-    border-right: 1px dashed rgb(221, 221, 221);
+}
+form.sampling .btns .el-button+.el-button{
+	margin-left:0.57rem;
+}
+form.sampling .btns button.yes {
+	background-color: rgb(88,180,129);
+	border-color:rgb(88,180,129);
+}
+form.sampling .btns button.yes:hover {
+	background-color: rgba(88,180,129,0.8);
+	border-color:#58b481;
+}
+form.sampling .btns button.no {
+	color: #58b481;
+	border-color:#58b481;
+}
+form.sampling .btns button.no:hover {
+	background:rgba(88,180,129,0.1);
+}
+/*问题加一按钮*/
+form.sampling .btns .addproblem{
+	position:absolute;
+	right:0;
+	top:0;
+	width: 1.14rem;
+	height: 0.35rem;
+	line-height:0.35rem;
+	text-align:center;
+	border-radius:0 0 0.1rem 0.1rem;
+	background-color: #ffffff;
+	border: solid 1px #58b481;
+	color: #58b481;
+	font-size:0.16rem;
+	cursor:pointer;
+}
+/*颜色继承*/
+form.sampling .el-form-item__label,form.sampling input{
+	color:inherit;
+}
+form.sampling .el-input.is-disabled .el-input__inner{
+	background:rgba(0,0,0,0);
+	color:inherit;
+}
+
+/*工作底稿*/
+form.sampling .el-form-item.three{
+	width:33.33333%;
+}
+form.sampling .el-form-item.three2{
+	width:66.66666%;
+}
+form.sampling .el-form-item.three .el-form-item__content>.el-input input{
+	padding-right:0;
+}
+form.sampling .el-form-item.three2 .el-form-item__content>.el-input input{
+	padding-right:0;
+}
+form.sampling .left{
+	width:33.3333%;
+	float:left;
+}
+form.sampling .right{
+	width:66.6666%;
+	float:left;
+}
+form.sampling .left>div{
+	margin-right:-2rem;
+}
+form.sampling .right>div{
+	/*margin-left:2rem;*/
+}
+form.sampling .right>div.padding{
+	margin-left:2rem;
+}
+form.sampling .merge_title_3{
+	width:2rem;
+	float:left;
+	line-height: 1.44rem;
+    background-color: #fbfbfb;
+    font-size: 0.16rem;
+    text-align: right;
+    vertical-align: middle;
+  	color:inherit;  
+    /*box-sizing: border-box;*/
+    padding: 0 12px 0 0;
+    /*border-right:solid 1px #dfdfdf;*/
+    border-top:solid 1px #dfdfdf;
+}
+
+form.sampling .merge_title_2{
+	width:3.1rem;
+	float:left;
+	line-height: 1rem;
+    background-color: #fbfbfb;
+    font-size: 0.16rem;
+    text-align: right;
+    vertical-align: middle;
+  	color:inherit;  
+    /*box-sizing: border-box;*/
+    padding: 0 12px 0 0;
+    /*border-right:solid 1px #dfdfdf;*/
+    border-top:solid 1px #dfdfdf;
+}
+form.sampling .right .merge_title_3,form.sampling .right .merge_title_2{
+    border-left:solid 1px #dfdfdf;
+    width:100%;
+}
+form.sampling .el-form-item.leftborder{
+	/*overflow: hidden;*/
+    border-left:solid 1px #dfdfdf;
+    width:auto;
+    float:none;
+    /*margin-left:2rem;*/
+    position: relative;
+}
+form.sampling .left .el-form-item{
+	/*overflow: hidden;*/
+    /*border-left:solid 1px #dfdfdf;*/
+    width:auto;
+    float:none;
+    /*margin-left:2rem;*/
+    position: relative;
+}
+/*form.sampling .left .el-form-item.leftborder .el-form-item__content{
+	border-right:none;
+	margin-right:1px;
+	float:right;
+	width:2rem;
+
+	position:absolute;
+	right:0;
+	top:0;
+}
+form.sampling .left .el-form-item.leftborder .el-form-item__label{
+	float:none;
+	width:auto!important;
+	display: block;
+	margin-right:2rem;
+	overflow: hidden;
+}*/
+form.sampling .left .el-form-item .el-form-item__content{
+	border-right:none;
+	margin-right:1px;
+	float:right;
+	width:2rem;
+
+	position:absolute;
+	right:0;
+	top:0;
+}
+form.sampling .left .el-form-item .el-form-item__label{
+	float:none;
+	width:auto!important;
+	display: block;
+	margin-right:2rem;
+	overflow: hidden;
+}
+form.sampling .el-form-item.leftborder .el-form-item__content input{
+	padding-right:12px;
+}
+.merge_title_right{
+    width:50%;
+	float:left;
+	padding-left:2rem;
+}
+.fromrow{
+	height: 0.5rem;
+	line-height: 0.48rem;
+	background-color: #ffffff;
+	border-top: solid 1px #dfdfdf;
+	text-align: center;
+	color: #333333;
+	font-weight:700;
+	font-size:0.16rem;
+}
+.right .fromrow{
+	border-right: solid 1px #dfdfdf;
+	border-left: solid 1px #dfdfdf;
+}
+.right .imgbox{
+	height:4.5rem;
+	border-left: solid 1px #dfdfdf;
+	border-top: solid 1px #dfdfdf;
+	border-right: solid 1px #dfdfdf;
+	background-color:#ffffff;
+	background-size:cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image:url('~static/images/sys/box.jpg');
+}
+form.sampling .el-form-item.small{
+	/*border-left: solid 1px #dfdfdf;*/
+	width:33.3333%;
+}
+form.sampling .el-form-item.small .el-form-item__label{
+	width:1.4rem!important;
+}
+form.sampling .el-form-item.small .el-form-item__content{
+	margin-left:1.4rem!important;
+}
+form.sampling .el-form-item.small .el-form-item__content input{
+	padding:0 12px;
+}
+.cover_left{
+	width:50%;
+	float:left;
+	padding-left:2rem;
+	height:0.5rem;
+}
+.cover_left>div{
+	height:0.5rem;
+	border-left: solid 1px #dfdfdf;
+	border-top: solid 1px #dfdfdf;
+}
+/*说明*/
+form.sampling .Explain{
+	margin-left:-1px;
+	background:#ffffff;
+}
+form.sampling .Explain pre{
+	margin:0;
+	color:#333333; 
+	font-size:0.16rem; 
+	line-height:0.25rem;
 }

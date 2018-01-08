@@ -37,7 +37,7 @@ import LemonModal from '@/components/common/action/Modal.vue';
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-// import data from '@/util/mock';
+import data from '@/util/mock';
 
 
 
