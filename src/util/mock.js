@@ -16,6 +16,19 @@ Mock.Random.extend({
         var statuses = ['未扦样', '已扦样']
         return this.pick(statuses)
     },
+    test: function(data){
+        var tests = []
+        var test = ['水分,','不完善粒,','生霉粒指,','质量,','品质全项目指标,']
+        var testnum = this.integer(1,test.length)
+        for(var i = 0;i<testnum;i++){
+            tests.push(test[i])
+        }
+        return tests
+    },
+    connect:function(data){
+        var connect = ["玉米样品领取交接单","小麦样品领取交接单"]
+        return this.pick(connect)
+    },
 //  status: function(date) {
 //      var statuses = ['未扦样', '已扦样']
 //      return this.pick(statuses)
@@ -331,6 +344,20 @@ var Sampleedit=Mock.mock('/liquid/role10/data', {
           sampleInSign: "@sampleInSign",
       	}
 	  }
+});
+//样品领取交接单
+var Sampleedit=Mock.mock('/liquid/role11/data', {
+      'rows|3-12': [ 
+          {
+          'id|+1': 1,
+          name:"山西中储粮粮油质监中心",
+          connect:'@connect',
+          test:"@test",
+          data:"@date('yyyy.MM.dd')",       
+        }
+      ]
+      	
+	  
 });
 export default {
 //	LibraryList:LibraryList,

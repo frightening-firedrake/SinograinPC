@@ -36,6 +36,11 @@
 					新建库
 				</div>
 			</template>
+			<template v-if="listHeader.connect">				
+				<div class="create" @click="connect" style="background-image:url('static/images/sys/create.png');">
+					新建样品领取交接单
+				</div>
+			</template>
 			<template v-if="listHeader.createSampling">				
 				<div class="create" @click="createSampling" style="background-image:url('static/images/sys/create.png');">
 					新建扦样
@@ -255,7 +260,10 @@ export default {
     	},
     	createSample(){
     		this.$emit('createSample');
-    	}
+    	},
+		connect(){
+			this.$emit("connect")
+		}
     },
     computed: {
 	    
