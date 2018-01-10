@@ -5,7 +5,7 @@
 			<span>导出excel表</span>		
 		</p>
 
-   		<p v-if='page.tfootbtns.connect' class='leading_out' @click="leading_out_checked">
+   		<p v-if='page.tfootbtns.connect' class='leading_out' @click="handoverPrint">
       		<span>打印样品领取交接单</span>
     	</p>
 

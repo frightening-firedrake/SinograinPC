@@ -353,9 +353,11 @@ var Sampleedit=Mock.mock('/liquid/role11/data', {
           name:"山西中储粮粮油质监中心",
           connect:'@connect',
           test:"@test",
-          data:"@date('yyyy.MM.dd')",       
+          data:"@date('yyyy.MM.dd')",      
+          rowType:"样品交接单",//删除用
         }
-      ]
+      ],
+      	total:56,
       	
 	  
 });

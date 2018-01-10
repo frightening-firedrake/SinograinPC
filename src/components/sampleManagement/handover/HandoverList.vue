@@ -12,7 +12,7 @@
 		<!--分页-->
 		<sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
 		<!--新建库典弹框-->
-		<sinograin-modal v-if="createlibVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
+		<sinograin-modal v-if="modalVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
 	</div>
 </template>
 
@@ -53,12 +53,13 @@ export default {
 		}
 	},
 	created() {
-		console.log(this.$route.query)
+//		console.log(this.$route.query)
 		//  获取列表数据（第一页）
 		this.getlistdata(1)
 		//	移除监听事件
 		this.$root.eventHub.$off('delelistitem')
 		this.$root.eventHub.$off("viewlistitem")
+		this.$root.eventHub.$off("editlistitem")
 		//	监听列表删除事件
 		this.$root.eventHub.$on('delelistitem', function(rowid, list) {
 			this.tabledatas = this.tabledatas.filter(function(item) {
@@ -70,17 +71,19 @@ export default {
 		//	监听列表点击查看事件
 		this.$root.eventHub.$on("viewlistitem", function(id) {
 			//		console.log(id)
-			this.$router.push({ path: '/index/sampleManagement/sampleIn/sampleInEdit', query: { libid: id } })
+			this.$router.push({ path: '/index/sampleManagement/handover/handoverListView', query: { libid: id } })
 
 		}.bind(this));
 		//监听列表点击编辑事件
 		this.$root.eventHub.$on('editlistitem',function(id){
-			console.log(id)
-		})
+//			console.log(id)
+			this.$router.push({ path: '/index/sampleManagement/handover/handoverListEdit', query: { libid: id } })
+		}.bind(this));
 	},
 	destroy() {
 		this.$root.eventHub.$off("viewlistitem")
 		this.$root.eventHub.$off('delelistitem')
+		this.$root.eventHub.$off("editlistitem")
 	},
 	methods: {
 		...mapMutations(['create_modal_id', 'is_mask', 'create_modal', 'close_modal']),
@@ -102,11 +105,11 @@ export default {
 		},
 		//	打开新建弹框
 		createlib() {
-			this.createlibVisible = true;
+			this.modalVisible = true;
 		},
-		//	扫码新建样品
+		//	扫码新建样品交接单
 		connect() {
-			this.$router.push({ path: '/index/sampleManagement/sampleIn/sampleInCreate' })
+			this.$router.push({ path: '/index/sampleManagement/handover/handoverListCreate' })
 		},
 		//	填入新建数据
 		createlibitem(unit, lib) {
@@ -114,7 +117,7 @@ export default {
 		},
 		//	关闭新建弹框
 		dialogClose() {
-			this.createlibVisible = false;
+			this.modalVisible = false;
 		},
 		//	获取搜索数据
 		searchingfor(searching) {
@@ -187,8 +190,12 @@ export default {
 		//	映射分页触发的事件
 		paginationEvent(actiontype) {
 			if (actiontype == 'leading_out') {
+//				导出扦样表事件已触发
 				console.log('leading_out')
-			} else if (actiontype == 'refresh') {
+			}else if (actiontype == 'handoverPrint') {
+//				打印样品领取交接单触发
+				console.log('handoverPrint')
+			}else if (actiontype == 'refresh') {
 				// 获取列表数据（第一页）
 				this.getlistdata(1)
 			}
@@ -206,7 +213,21 @@ export default {
 			deleteURL: '/liquid/role2/data/delete',
 			checkedId: [],
 			list: "samplinglist",
-			createlibVisible: false,
+			modalVisible: false,
+			modal:{
+		  	title:'新建库点',
+				formdatas:[
+			  		{
+			  			label:"单位名称",
+			  			model:"unit",
+			  		},
+			  		{
+			  			label:"库点名称",
+			  			model:"lib",
+			  		},
+			  	],
+			  	submitText:'确定',
+		    },
 			breadcrumb: {
 				search: true,
 				searching: '',
@@ -238,7 +259,7 @@ export default {
 				createSampling: false,
 				status: false,
 				scanCode: false,
-				connect: true
+				connect: true,
 			},
 			tabledatas: [],
 			items: [
