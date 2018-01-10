@@ -71,14 +71,15 @@ export default {
 		//	监听列表点击查看事件
 		this.$root.eventHub.$on("viewlistitem", function(id) {
 			//		console.log(id)
-			this.$router.push({ path: '/index/sampleManagement/sampleIn/sampleInEdit', query: { libid: id } })
+			this.$router.push({ path: '/index/sampleManagement/handover/handoverListView', query: { libid: id } })
 
 		}.bind(this));
 		//监听列表点击编辑事件
 		this.$root.eventHub.$on('editlistitem',function(id){
-//		console.log(id)
-			this.$router.push({path:"/index/sampleManagement/handover/handoverListEdit",query: {connect:id}})
-		}.bind(this))
+
+//			console.log(id)
+			this.$router.push({ path: '/index/sampleManagement/handover/handoverListEdit', query: { libid: id } })
+		}.bind(this));
 	},
 	destroy() {
 		this.$root.eventHub.$off("viewlistitem")
@@ -259,7 +260,7 @@ export default {
 				createSampling: false,
 				status: false,
 				scanCode: false,
-				connect: true
+				connect: true,
 			},
 			tabledatas: [],
 			items: [
