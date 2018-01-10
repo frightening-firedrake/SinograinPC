@@ -76,7 +76,6 @@ export default {
 		}.bind(this));
 		//监听列表点击编辑事件
 		this.$root.eventHub.$on('editlistitem',function(id){
-
 //			console.log(id)
 			this.$router.push({ path: '/index/sampleManagement/handover/handoverListEdit', query: { libid: id } })
 		}.bind(this));
@@ -84,7 +83,7 @@ export default {
 	destroy() {
 		this.$root.eventHub.$off("viewlistitem")
 		this.$root.eventHub.$off('delelistitem')
-		this.$root.eventHub.$off('editlistitem')
+		this.$root.eventHub.$off("editlistitem")
 	},
 	methods: {
 		...mapMutations(['create_modal_id', 'is_mask', 'create_modal', 'close_modal']),
