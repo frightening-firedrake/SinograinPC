@@ -4,10 +4,8 @@
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
   	  <!--标题-->
   	  <sinograin-option-title></sinograin-option-title>		
-      <!--提示-->
-      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
-      <sample-form :formdatas="formdatas"></sample-form> 
+      <handover-list-connect :formdatas="formdatas"></handover-list-connect> 
     </div>
 </template>
 
@@ -19,7 +17,7 @@
 
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
-import SampleForm  from "@/components/common/action/SampleForm"
+import HandoverListConnect  from "@/components/common/action/HandoverListConnect"
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 
 
@@ -32,7 +30,7 @@ import data from '@/util/mock';
 
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SampleForm
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,HandoverListConnect
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -97,7 +95,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role9/data',
+      datalistURL:'/liquid/role11/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -106,13 +104,8 @@ export default {
       	search:false,   
       	searching:'',
       },
-//    弹窗数据
-      alerts: [{
-        title: '温馨提示：此页面灰色字为不可编辑状态!',
-        type: 'info'
-      }],
       formdatas: {
-      	title:'中央储备粮襄垣直属库',
+      	title:'样品领取交接单名称',
       	form:{
           ctime: '2017-12-12',//创建时间
           status: '未扦样',//状态
