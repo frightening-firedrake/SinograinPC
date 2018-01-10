@@ -36,16 +36,16 @@
 					新建库
 				</div>
 			</template>
+			<template v-if="listHeader.connect">				
+				<div class="create" @click="connect" style="background-image:url('static/images/sys/create.png');">
+					新建样品领取交接单
+				</div>
+			</template>
 			<template v-if="listHeader.createSampling">				
 				<div class="create" @click="createSampling" style="background-image:url('static/images/sys/create.png');">
 					新建扦样
 				</div>
 			</template>
-			<template v-if="listHeader.createHandover">				
-				<div class="create" @click="createHandover" style="background-image:url('static/images/sys/create.png');">
-					新建样品领取交接单
-				</div>
-			</template> 
 			<template v-if="listHeader.scanCode">				
 				<div class="scanCode" @click="createSample">
 					<span>
@@ -261,9 +261,9 @@ export default {
     	createSample(){
     		this.$emit('createSample');
     	},
-    	createHandover(){
-    		this.$emit('createHandover');
-    	}
+		connect(){
+			this.$emit("connect")
+		}
     },
     computed: {
 	    
