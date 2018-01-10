@@ -14,6 +14,14 @@ import SafetyReportEdit from '@/components/sampling/list/safetyReport/SafetyRepo
 import SampleInList from '@/components/sampleManagement/sampleIn/SampleInList.vue'
 import SampleInEdit from '@/components/sampleManagement/sampleIn/SampleInEdit.vue'
 import SampleInCreate from '@/components/sampleManagement/sampleIn/SampleInCreate.vue'
+import HandoverList from '@/components/sampleManagement/handover/HandoverList.vue'
+import HandoverListCreate from '@/components/sampleManagement/handover/HandoverListCreate.vue'
+import HandoverListCreateSelect from '@/components/sampleManagement/handover/HandoverListCreateSelect.vue'
+import HandoverListView from '@/components/sampleManagement/handover/HandoverListView.vue'
+import HandoverListEdit from '@/components/sampleManagement/handover/HandoverListEdit.vue'
+import HandoverListEditSelect from '@/components/sampleManagement/handover/HandoverListEditSelect.vue'
+
+
 
 
 
@@ -43,6 +51,7 @@ export default new Router({
             component:Home,
             redirect: 'sampling/libraryList',
           },
+//        扦样流程
           {
             path:"sampling",
             name: '扦样流程',
@@ -55,39 +64,46 @@ export default new Router({
             component:LibraryList
           },
           {
-            path:"sampling/samplingList",
+            path:"sampling/libraryList/samplingList",
             name:"扦样流程/扦样列表/被查库典列表",
             component:SamplingList
           },
 		    	{
-            path:"sampling/samplingList/samplingListCreate",
+            path:"sampling/libraryList/samplingList/samplingListCreate",
             name:"扦样流程/扦样列表/被查库典列表/新建扦样",
             component:SamplingListCreate
           },
           {
-            path:"sampling/samplingList/samplingListEdit",
+            path:"sampling/libraryList/samplingList/samplingListEdit",
             name:"扦样流程/扦样列表/被查库典列表/查看扦样",
             component:SamplingListEdit
           },
           {
-            path:"sampling/samplingList/manuscriptCreate",
+            path:"sampling/libraryList/samplingList/manuscriptCreate",
             name:"扦样流程/扦样列表/被查库典列表/新建工作底稿",
             component:ManuscriptCreate
           },
           {
-            path:"sampling/samplingList/manuscriptEdit",
+            path:"sampling/libraryList/samplingList/manuscriptEdit",
             name:"扦样流程/扦样列表/被查库典列表/查看工作底稿",
             component:ManuscriptEdit
           },
           {
-            path:"sampling/samplingList/safetyReportCreate",
+            path:"sampling/libraryList/samplingList/safetyReportCreate",
             name:"扦样流程/扦样列表/被查库典列表/新建安全报告",
             component:SafetyReportCreate
           },
           {
-            path:"sampling/samplingList/safetyReportEdit",
+            path:"sampling/libraryList/samplingList/safetyReportEdit",
             name:"扦样流程/扦样列表/被查库典列表/查看安全报告",
             component:SafetyReportEdit
+          },
+//        样品管理
+ 					{
+            path:"sampleManagement",
+            name: '样品管理',
+            component:SampleInList,
+            redirect: 'sampleManagement/sampleIn',
           },
           {
             path:"sampleManagement/sampleIn",
@@ -103,6 +119,47 @@ export default new Router({
             path:"sampleManagement/sampleIn/sampleInCreate",
             name:"样品管理/样品入库/新建样品",
             component:SampleInCreate
+          },
+          
+          {
+            path:"sampleManagement/handover",
+            name:"样品管理/样品领取交接单",
+            component:HandoverList
+          },
+          {
+            path:"sampleManagement/handover/handoverListCreate",
+            name:"样品管理/样品领取交接单/新建样品领取交接单",
+            component:HandoverListCreate
+          },
+          {
+            path:"sampleManagement/handover/handoverListCreate/handoverListCreateSelect",
+            name:"样品管理/样品领取交接单/新建样品领取交接单/选择样品编号",
+            component:HandoverListCreateSelect
+          },
+          {
+            path:"sampleManagement/handover/handoverListCreate/handoverListPrint",
+            name:"样品管理/样品领取交接单/新建样品领取交接单/打印样品领取交接单",
+            component:HandoverListView
+          },
+          {
+            path:"sampleManagement/handover/handoverListView",
+            name:"样品管理/样品领取交接单/查看样品领取交接单",
+            component:HandoverListView
+          },
+          {
+            path:"sampleManagement/handover/handoverListEdit/handoverListPrint",
+            name:"样品管理/样品领取交接单/编辑样品领取交接单/打印样品领取交接单",
+            component:HandoverListView
+          },
+          {
+            path:"sampleManagement/handover/handoverListEdit",
+            name:"样品管理/样品领取交接单/编辑样品领取交接单",
+            component:HandoverListEdit
+          },
+          {
+            path:"sampleManagement/handover/handoverListEdit/handoverListEditSelect",
+            name:"样品管理/样品领取交接单/编辑样品领取交接单/选择样品编号",
+            component:HandoverListEditSelect
           },
            
       ]

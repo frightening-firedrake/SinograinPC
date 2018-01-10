@@ -37,6 +37,7 @@ var LibraryList=Mock.mock('/liquid/role/data', {
         }
       ],
       	total:56,
+
 });
 //扦样列表数据
 var Sampling=Mock.mock('/liquid/role2/data', {
@@ -56,6 +57,8 @@ var Sampling=Mock.mock('/liquid/role2/data', {
         }
       ],
       	total:56,
+
+      	
 });
 //查看编辑扦样
 var Sampling=Mock.mock('/liquid/role3/data', {
@@ -135,7 +138,7 @@ var manuscript1=Mock.mock('/liquid/role6/data', {
             formdatas: {
       	title:'中央储备粮实物检查工作底稿（轮换验收）',
       	form:{
-          checkregion: '山西',//被检查企业
+          checkcompany: '山西',//被检查企业
           checktime: '2017.09',//被查时点
           realchecktime: '2017.09',//实际查库日
           pnumber: '漫水-1',//货位号
@@ -196,10 +199,10 @@ var manuscript1=Mock.mock('/liquid/role6/data', {
 	  }
 });
 var manuscript1=Mock.mock('/liquid/role7/data', {
-            formdatas: {
+      formdatas: {
       	title:'中央储备粮实物检查工作底稿（轮换验收）',
       	form:{
-          checkregion: '山西',//被检查企业
+          checkcompany: '山西',//被检查企业
           checktime: '2017.09',//被查时点
           realchecktime: '2017.09',//实际查库日
           pnumber: '漫水-1',//货位号
@@ -275,6 +278,7 @@ var SampleInList=Mock.mock('/liquid/role8/data', {
         }
       ],
       	total:56,
+      	
 });
 //新建样品
 var Sample=Mock.mock('/liquid/role9/data', {
@@ -293,7 +297,7 @@ var Sample=Mock.mock('/liquid/role9/data', {
           harvestdate: '2017',//收货年度
           samplingdate: '2017.9.27',//扦样日期
           remarks: '秋季普查',//备注
-          status:'@status',
+          storageStatus:'已入库',
           sampleInTime: "@date('yyyy.MM.dd')",
           position:"",
           sampleInSign: "",
@@ -317,7 +321,7 @@ var Sampleedit=Mock.mock('/liquid/role10/data', {
           harvestdate: '2017',//收货年度
           samplingdate: '2017.9.27',//扦样日期
           remarks: '秋季普查',//备注
-          status:'@status',
+          storageStatus:'已入库',
           position:"TG-1-2",
           sampleInTime: "@date('yyyy.MM.dd')",
           sampleInSign: "@sampleInSign",

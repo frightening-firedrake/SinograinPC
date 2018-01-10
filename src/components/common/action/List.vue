@@ -72,6 +72,12 @@
 				      </template>
           </template>
       </el-table-column>
+      
+      <template slot="empty"> 
+      		<i class="iconfont icon-xinjian" @click=emptyCreate></i>
+      		<br />
+      		页面空空如也 快去新建吧！     		
+      </template>
   </el-table>	
 </template>
 <script>
@@ -102,18 +108,18 @@ export default {
     },
 //  工作底稿
     handleViewManuscript(index, row){
-    	this.$router.push({path: '/index/sampling/samplingList/manuscriptEdit'})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/manuscriptEdit'})
     },
     handleCreateManuscript(index, row){
     	console.log(this.$router)
-    	this.$router.push({path: '/index/sampling/samplingList/manuscriptCreate'})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/manuscriptCreate'})
     },
 //  安全报告
     handleViewSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/samplingList/safetyReportEdit'})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/safetyReportEdit'})
     },
     handleCreateSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/samplingList/safetyReportCreate'})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/safetyReportCreate'})
     },
     handleView(index, row) {
 //	  	console.log(index,row);
@@ -143,6 +149,9 @@ export default {
 	      });          
 	    });
 	  },
+	  emptyCreate(){
+	  	this.$emit('emptyCreate');
+	  }
 	}
 }
 

@@ -7,12 +7,12 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:createSample="createSample" ></list-header>
       <!--表格-->
-      <sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
+      <sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading"  v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
       <!--分页-->
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
       <!--新建库典弹框-->
-      <sinograin-modal v-if="modalVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
+      <sinograin-modal v-if="createlibVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
     </div>
 </template>
 
@@ -94,11 +94,11 @@ export default {
 		this.$router.push({path: '/index/sampling/samplingList/samplingListCreate'})
 	},
 	emptyCreate(){
-		this.createSample();
+//		this.createlib();
 	},
 //	打开新建弹框
 	createlib(){
-		this.modalVisible=true;
+		this.createlibVisible=true;
 	},
 //	扫码新建样品
 	createSample(){
@@ -110,7 +110,7 @@ export default {
 	},
 //	关闭新建弹框
 	dialogClose(){
-		this.modalVisible=false;
+		this.createlibVisible=false;
 	},
 //	获取搜索数据
   	searchingfor(searching){
@@ -202,7 +202,7 @@ export default {
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
       list:"samplinglist",
-	  modalVisible:false,
+	  createlibVisible:false,
       breadcrumb:{
       	search:true,   
       	searching:'',

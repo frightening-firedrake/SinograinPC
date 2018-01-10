@@ -1,6 +1,6 @@
 <template>
 	<!--<el-menu default-active="/index/sampling/libraryList" class="el-menu-vertical-demo" :router=true @open="handleOpen" @select="handleSelect" @close="handleClose" :collapse="this.isCollapse" :background-color="backgroundColor" :unique-opened=true>-->
-	<el-menu default-active="/index/sampling/libraryList" class="el-menu-vertical-demo" :router=true @open="handleOpen" @select="handleSelect" @close="handleClose" :collapse="this.isCollapse" :background-color="backgroundColor">
+	<el-menu :default-active="activePath" class="el-menu-vertical-demo" :router=true @open="handleOpen" @select="handleSelect" @close="handleClose" :collapse="this.isCollapse" :background-color="backgroundColor">
 		<!--用户信息-->
 		<div class="user">
 			<div class="photo">
@@ -86,8 +86,17 @@ export default {
 	computed:{
 		...mapState(["isCollapse"]),
 		...mapGetters(["modal_id"]),
-  	},
+		activePath(){
 
+			var path=this.$route.path.split('/')
+			var zpath=path[0]+'/'+path[1]+'/'+path[2]+'/'+path[3]
+			return zpath;
+		}
+  	},
+	mounted(){
+
+		
+	},
 	data() {
 		return {
 //			isCollapse: false,
@@ -155,14 +164,14 @@ export default {
 					pid: 6,
 					lid: 7
 				},
-//				{
-//					icon: 'icon-chuku',
-//					title: '样品出库',
-//					linkto: '/index/authority/userAdd',
-//					level: 2,
-//					pid: 6,
-//					lid: 8
-//				},
+				{
+					icon: 'icon-chuku',
+					title: '样品领取交接单',
+					linkto: '/index/sampleManagement/handover',
+					level: 2,
+					pid: 6,
+					lid: 8
+				},
 //				{
 //					icon: 'icon-tianjiaduoyonghu',
 //					title: '批量添加用户',

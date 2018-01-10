@@ -265,6 +265,31 @@
 	color:#2dd2ff;
 	text-decoration: underline;
 }
+/*当类表数据为空时的新建按钮*/
+.el-table__empty-block{
+	height:5rem;
+	/*line-height:5rem;*/
+}
+.el-table__empty-text{
+	font-size:0.2rem;
+	color: #333333;
+	line-height:0.3rem;
+}
+.el-table__empty-text i{
+	font-size:0.65rem;
+	color: #ffffff;
+	width:1.24rem;
+	height:1.24rem;
+	line-height:1.24rem;
+	text-align: center;
+	display: block;
+	margin:auto;
+	background-color: rgba(88, 180, 129, 0.9);
+	box-shadow: 0 0 0.1rem 0 
+		rgba(35, 24, 21, 0.27);
+	border-radius:50%;
+	cursor:pointer;
+}
 /*以下根据列表设计而定非通用*/
 /*扦样列表宽度匹配*/
 /*设定表头宽度*/

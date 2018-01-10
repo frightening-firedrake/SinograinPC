@@ -7,12 +7,12 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading"> 
+      <sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
       </sinograin-list>
       <!--分页-->
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
       <!--新建库典弹框-->
-      <sinograin-modal v-if="createlibVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
+      <sinograin-modal v-if="modalVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
     </div>
 </template>
 
@@ -70,7 +70,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/samplingList/samplingListEdit',query:{libid:id}})
+		this.$router.push({path: '/index/sampling/libraryList/samplingList/samplingListEdit',query:{libid:id}})
 		
   	}.bind(this));
   },
@@ -91,11 +91,14 @@ export default {
 	},
 	createSampling(){
 //		console.log('createSampling');
-		this.$router.push({path: '/index/sampling/samplingList/samplingListCreate'})
+		this.$router.push({path: '/index/sampling/libraryList/samplingList/samplingListCreate'})
+	},
+	emptyCreate(){
+		this.createSampling();
 	},
 //	打开新建弹框
 	createlib(){
-		this.createlibVisible=true;
+		this.modalVisible=true;
 	},
 //	填入新建数据
 	createlibitem(unit,lib){
@@ -103,7 +106,7 @@ export default {
 	},
 //	关闭新建弹框
 	dialogClose(){
-		this.createlibVisible=false;
+		this.modalVisible=false;
 	},
 //	获取搜索数据
   	searchingfor(searching){
@@ -195,7 +198,7 @@ export default {
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
       list:"samplinglist",
-	  createlibVisible:false,
+	  modalVisible:false,
       breadcrumb:{
       	search:true,   
       	searching:'',

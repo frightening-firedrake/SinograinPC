@@ -126,7 +126,7 @@ export default {
           harvestdate: '2017',//收货年度
           samplingdate: '',//扦样日期
           remarks: '',//备注
-          status:'',
+          storageStatus:'',
           sampleInTime: "",
           position:"",
           sampleInSign: "",

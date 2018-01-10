@@ -3,8 +3,8 @@
         <template>
             <p>{{formdatas.title}}</p>
         </template>      
-		<el-form-item label="被检查企业" prop="checkregion" class="three">
-		    <el-select v-model="formdatas.form.checkregion" placeholder="选择库点">
+		<el-form-item label="被检查企业" prop="checkcompany" class="three">
+		    <el-select v-model="formdatas.form.checkcompany" placeholder="选择库点">
 		        <el-option label="山西" value="1"></el-option>
 		        <el-option label="河南" value="henan"></el-option>
 		        <el-option label="山东" value="shandong"></el-option>

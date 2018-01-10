@@ -71,7 +71,7 @@
 			</el-form-item>
         
         <div class="btns">
-            <el-button class="yes" type="primary" @click="onSubmit('form')">确认</el-button>
+            <el-button class="yes" type="primary" @click="onSubmit('form')">入库</el-button>
             <el-button class="no" @click="cancel('form')">取消</el-button>
         </div>
         
