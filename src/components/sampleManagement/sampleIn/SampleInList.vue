@@ -256,8 +256,8 @@ export default {
       },
       {
         id: 4,
-        prop:'status',
-        label:"状态",
+        prop:'storageStatus',
+        label:"存放状态",
         sort:true,
       },
       {

@@ -57,8 +57,8 @@
 		
 		<div class="line">
 		</div>
-			<el-form-item label="存放状态：" prop="status"  v-bind:class="{disabled:disabled}">
-			    <el-input v-model="formdatas.form.status" :disabled="disabled"></el-input>
+			<el-form-item label="存放状态：" prop="storageStatus"  v-bind:class="{disabled:disabled}">
+			    <el-input v-model="formdatas.form.storageStatus" :disabled="disabled"></el-input>
 			</el-form-item>
 			<el-form-item label="入库时间：" prop="sampleInTime"  v-bind:class="{disabled:disabled}">
 			    <el-input v-model="formdatas.form.sampleInTime" :disabled="disabled"></el-input>
@@ -142,44 +142,14 @@ export default {
         errorinline:false,
         disabled:true,
             rules: {
-                text: [
+                
+                position:[
                     {validator:validateText,trigger:'blur'}
                 ],
-                select:[
-                    {validator:validateSelect,trigger:'blur'}
-                ],
-                ctime:[
+	            sampleInSign: [
                     {validator:validateText,trigger:'blur'}
                 ],
-	            status: [
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            nid: [
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            checkregion:[
-                    {validator:validateSelect,trigger:'blur'}
-                ],
-	            pnumber:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            varieties:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            quality:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            weight:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            region:[
-                    {validator:validateSelect,trigger:'blur'}
-                ],
-//	            harvestdate: '2017',//收货年度
-	            samplingdate:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-//	            remarks: '',//备注
+	            
                 
             }
         }

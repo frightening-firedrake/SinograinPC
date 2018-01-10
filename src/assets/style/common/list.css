@@ -184,17 +184,24 @@
 	top:50%;
 	/*margin-top:-11px;*/
 	margin-top:-12px;
+	border-bottom-color: #999;
+	
 }
 .el-table .sort-caret.descending{
 	top:50%;
 	/*margin-top:-4px;*/
 	margin-top:-1px;
+	border-top-color: #999;
+
+	
 }
 .el-table .descending .sort-caret.descending{
-	border-top-color: #1bb45f;
+	border-top-color: #333;
+	/*border-top-color: #1bb45f;*/
 }
 .el-table .ascending .sort-caret.ascending{
-	border-bottom-color: #1bb45f;
+	border-bottom-color: #333;
+	/*border-bottom-color: #1bb45f;*/
 }
 .el-table--border::after, .el-table--group::after, .el-table::before{
 	/*display: none;*/

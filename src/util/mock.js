@@ -16,6 +16,10 @@ Mock.Random.extend({
         var statuses = ['未扦样', '已扦样']
         return this.pick(statuses)
     },
+//  status: function(date) {
+//      var statuses = ['未扦样', '已扦样']
+//      return this.pick(statuses)
+//  },
     producing_area: function(date) {
         var producing_areas = ['河南', '陕西']
         return this.pick(producing_areas)
@@ -270,7 +274,7 @@ var SampleInList=Mock.mock('/liquid/role8/data', {
           sampling_number:"襄垣-玉米-110",
           varieties:'@varieties',
           position:"TG-1-2",
-          status:'@status',
+          storageStatus:'已入库',
           sampleInTime: "@date('yyyy.MM.dd')",
           sampleInSign: "@sampleInSign",
           rowType:"yangpin信息",//删除用
