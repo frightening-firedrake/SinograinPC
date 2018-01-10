@@ -1,4 +1,4 @@
-<template>
+<template> 
 	<div class='listpagewrap'>
 		<!--面包屑-->
 		<sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
