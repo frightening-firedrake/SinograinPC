@@ -1,12 +1,20 @@
 <template>
-	<el-dialog title="新建库点" :visible.sync="createlibVisible" custom-class="createlib" :width="dialogWidth" @close="dialogClose">
-	  	<el-form :model="createlib">
+	<el-dialog :title="modal.title" :visible.sync="modalVisible" custom-class="createlib" :width="dialogWidth" @close="dialogClose">
+	  	<el-form :model="form" ref="modalform">
+	  		<template v-for="(item, index) in modal.formdatas">
+	  			<el-form-item :label="item.label" :label-width="formLabelWidth">
+			        <el-input v-model="form[item.model]" auto-complete="off"></el-input>
+			    </el-form-item>
+	  		</template>
+	  		
+	  	<!--<el-form :model="createlib" ref="modalform">
 		    <el-form-item label="单位名称:" :label-width="formLabelWidth">
 		        <el-input v-model="createlib.unit" auto-complete="off"></el-input>
 		    </el-form-item>
 		    <el-form-item label="库点名称:" :label-width="formLabelWidth">
 		        <el-input v-model="createlib.lib" auto-complete="off"></el-input>
-		    </el-form-item>
+		    </el-form-item>-->
+		    
 		    <!--<el-form-item label="库点名称" :label-width="formLabelWidth">
 		        <el-select v-model="createlib.region" placeholder="请选择活动区域">
 			        <el-option label="区域一" value="shanghai"></el-option>
@@ -15,8 +23,8 @@
 		    </el-form-item>-->
 		</el-form>
 		<div slot="footer" class="dialog-footer center">
-		    <el-button class="yes" type="primary" @click="createlibitem">确 定</el-button>
-		    <el-button class="no" @click="createlibVisible = false">取 消</el-button>
+		    <el-button class="yes" type="primary" @click="createlibitem">{{modal.submitText?modal.submitText:'确 定'}}</el-button>
+		    <el-button class="no" @click="modalVisible = false">取 消</el-button>
 	    </div>
 	</el-dialog>
 </template>
@@ -26,26 +34,21 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
 export default {
     components:{ },
-//  props: ['modalVisible'],
+    props: ['modal'],
     computed:{
 		...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask","isCollapse"]),
 		...mapGetters(["modal_id"]),
 	},
+	created(){
+
+	},
     data() {
         return {
         	dialogWidth:'6.2rem',
-        	createlibVisible: true,
-	        createlib: {
-	          unit: '',
-	          lib: '',
-//	          region: '',
-//	          date1: '',
-//	          date2: '',
-//	          delivery: false,
-//	          type: [],
-//	          resource: '',
-//	          desc: ''
-	        },
+        	modalVisible: true,
+		    form:{
+		       	
+		    },
 	        formLabelWidth: '1.4rem'
         }
     },
@@ -53,10 +56,13 @@ export default {
     	...mapMutations(['create_modal_id','is_mask','close_modal','hid_modal']),
   		...mapActions(['addAction']),
     	createlibitem(){
-    		this.createlibVisible = false;
-    		this.$emit('createlibitem',this.createlib.unit,this.createlib.lib)
+//  		this.modalVisible = false;
+    		this.$emit('createlibitem',this.form);
+    		this.$emit('dialogClose')
+//  		this.$refs['modalform'].resetFields();
     	},
     	dialogClose(){
+//  		this.$refs['modalform'].resetFields();
     		this.$emit('dialogClose')
     	}
     },

@@ -11,8 +11,8 @@
       </sinograin-list>
       <!--分页-->
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
-      <!--弹框-->
-      <sinograin-modal v-if="modalVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
+      <!--输入弹框-->
+      <sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
     </div>
 </template>
 
@@ -88,8 +88,8 @@ export default {
 		this.modalVisible=true;
 	},
 //	填入新建数据
-	createlibitem(unit,lib){
-		console.log(unit,lib);
+	createlibitem(data){
+		console.log(data);
 	},
 //	关闭新建弹框
 	dialogClose(){
@@ -186,6 +186,20 @@ export default {
       checkedId:[],
       list:"librarylist",
 	  modalVisible:false,
+	  modal:{
+	  	title:'新建库点',
+		formdatas:[
+	  		{
+	  			label:"单位名称",
+	  			model:"unit",
+	  		},
+	  		{
+	  			label:"库点名称",
+	  			model:"lib",
+	  		},
+	  	],
+	  	submitText:'确定',
+	  },
       breadcrumb:{
       	search:true,   
       	searching:'',
