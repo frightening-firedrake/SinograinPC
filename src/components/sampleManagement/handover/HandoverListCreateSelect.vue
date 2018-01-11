@@ -5,9 +5,11 @@
   	  <!--标题-->
   	  <sinograin-option-title></sinograin-option-title>		
       <!--提示-->
-      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
+
+      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
-      <sample-form :formdatas="formdatas"></sample-form> 
+      <select-checklist :formdatas="formdatas"></select-checklist> 
+
     </div>
 </template>
 
@@ -19,7 +21,9 @@
 
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
-import SampleForm  from "@/components/common/action/SampleForm"
+
+import SelectChecklist  from "@/components/common/action/SelectChecklist"
+
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 
 
@@ -32,7 +36,8 @@ import data from '@/util/mock';
 
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SampleForm
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SelectChecklist
+
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
