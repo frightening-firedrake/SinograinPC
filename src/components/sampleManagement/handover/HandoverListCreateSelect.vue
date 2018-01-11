@@ -8,7 +8,7 @@
 
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
-      <select-checklist :formdatas="formdatas"></select-checklist> 
+      <select-checklist :selectdatas="selectdatas"></select-checklist> 
 
     </div>
 </template>
@@ -112,11 +112,11 @@ export default {
       	searching:'',
       },
 //    弹窗数据
-      alerts: [{
-        title: '温馨提示：此页面灰色字为不可编辑状态!',
-        type: 'info'
-      }],
-      formdatas: {
+//    alerts: [{
+//      title: '温馨提示：此页面灰色字为不可编辑状态!',
+//      type: 'info'
+//    }],
+      selectdatas: {
       	title:'中央储备粮襄垣直属库',
       	form:{
           ctime: '2017-12-12',//创建时间

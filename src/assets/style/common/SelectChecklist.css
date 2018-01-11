@@ -21,8 +21,8 @@
 }
 .SelectChecklist .el-form-item .el-form-item__content{
 	border-left:solid 1px #dfdfdf;
-	height:0.5rem;
-	line-height:0.5rem;
+	/*height:0.5rem;*/
+	line-height:0.48rem;
 }
 .SelectChecklist .el-form-item .el-form-item__content .el-select{
 	padding-left:0.2rem;
@@ -60,13 +60,28 @@
 	clear:both;
 }
 .SelectChecklist .checkboxwrap{
-	min-height:2rem;
+	min-height:0.5rem;
 	border-left:1px solid #dfdfdf ;
 	border-top:1px solid #dfdfdf ;
 	position:relative;
 }
 .SelectChecklist .checkboxwrap:after{
-	
+	content:"";
+	background:#dfdfdf;
+	position:absolute;
+	right:0;
+	width:1px;
+	top:0;
+	bottom:0;
+	z-index: 3;
+}
+/*为空时显示*/
+.SelectChecklist .checkboxwrap .checklistemit{
+	min-height:2rem;
+	font-size:0.18rem;
+	line-height:2rem;
+	text-align:center;
+	color:#007c36;
 }
 .SelectChecklist .checkboxwrap .el-checkbox{
     background-color: #fbfbfb;
@@ -112,11 +127,12 @@
 		width:3rem;
 		height:0.32rem;
 		/*line-height:0.32rem;*/
-		border-radius:0.05rem;
+		border-radius:0;
 		border:1px solid #58b481;
 		color: #58b481;
 		font-size:0.2rem;
 		padding:0 0.15rem;
+		margin-left:0.2rem;
 	}
 	.SelectChecklist .el-range-editor.is-active, .SelectChecklist .el-range-editor.is-active:hover{
 		border-color:#58b481;
@@ -124,3 +140,44 @@
 	.SelectChecklist .el-date-editor .el-range-separator{
 		padding:0;
 	}
+	
+/*提交与取消*/
+.SelectChecklist .btns{
+	clear:both;
+	padding:0.6rem 0;
+	text-align: center;
+	border-top:solid 1px #dfdfdf;
+	position:relative;
+	z-index: 2;
+	left:-1px;
+	top:-1px;
+	background:#ffffff;
+}
+
+.SelectChecklist .btns button {
+    font-size: 0.18rem;
+    padding: 0rem;
+    line-height: 0.5rem;
+    border-radius: 0.1rem;
+    width:1.3rem;
+    height:0.5rem;
+    text-align: center;
+}
+.SelectChecklist .btns .el-button+.el-button{
+	margin-left:0.57rem;
+}
+.SelectChecklist .btns button.yes {
+	background-color: rgb(88,180,129);
+	border-color:rgb(88,180,129);
+}
+.SelectChecklist .btns button.yes:hover {
+	background-color: rgba(88,180,129,0.8);
+	border-color:#58b481;
+}
+.SelectChecklist .btns button.no {
+	color: #58b481;
+	border-color:#58b481;
+}
+.SelectChecklist .btns button.no:hover {
+	background:rgba(88,180,129,0.1);
+}

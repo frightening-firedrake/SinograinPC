@@ -361,6 +361,76 @@ var Sampleedit=Mock.mock('/liquid/role11/data', {
       	
 	  
 });
+//下拉选择样品数据库
+var selectlist=Mock.mock('selectlist1', {
+		selectlist: [{
+          value: '选项1',
+          label: '长南',
+          url:'checklist1',
+        }, {
+          value: '选项2',
+          label: '山西',
+          url:'checklist2',
+        }, {
+          value: '选项3',
+          label: '运城',
+          url:'checklist3',
+        }],
+    	libselect:'',
+});
+//下拉后更新多选框
+var checklist1=Mock.mock('checklist1', {
+
+    checkList:[
+		'监20170071',
+		'监20170072',
+		'监20170073',
+		'监20170074',
+		'监20170075',
+		'监20170076',
+	],
+	checkedList:[
+		'监20170076',
+	],
+});
+var checklist2=Mock.mock('checklist2', {
+
+    checkList:[
+		'监20170071',
+		'监20170072',
+		'监20170073',
+		'监20170074',
+		'监20170075',
+		'监20170076',
+		'监20170077',
+		'监20170078',
+		'监20170079',
+		'监20170080',
+		'监20170081',
+		'监20170082',
+		'监20170083',
+		'监20170084',
+		'监20170085',
+		'监20170086',
+	],
+	checkedList:[
+//		'复选框 A',
+	],
+});
+var checklist3=Mock.mock('checklist3', {
+
+    checkList:[
+		'监20170099',
+		'监20170012',
+		'监20170023',
+		'监20170064',
+		'监20170005',
+		'监20170116',
+	],
+	checkedList:[
+//		'复选框 A',
+	],
+});
 export default {
 //	LibraryList:LibraryList,
 }
