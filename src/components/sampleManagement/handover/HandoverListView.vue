@@ -210,6 +210,7 @@ export default {
       let newContent = subOutputRankPrint.innerHTML;
       let oldContent = document.body.innerHTML;
       document.body.innerHTML = newContent;
+      print.portrait   =  false  
       window.print();
       window.location.reload();
       document.body.innerHTML = oldContent;

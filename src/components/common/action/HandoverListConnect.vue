@@ -2,7 +2,7 @@
     <!--<el-form ref="form" :inline-message="errorinline"  :rules="rules" :model="formdatas.form" :label-width="labelWidth">-->
     <div>
         <!--新建库典弹框-->
-		<sinograin-modal :modal="modal" v-if="modalVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
+        <sinograin-modal :modal="modal" v-if="modalVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
 
         <el-form class="connect_form">
             <template>
@@ -11,30 +11,41 @@
             <el-row class="connect">
                 <el-col :span="24" class="connect_fath">
                     <el-col :span="12">
-                        <el-col :span="7" class="connect_font connect_font_title">
+                        <!--<el-col :span="7" class="connect_font connect_font_title">
                             <span>样品领取交接单名称:</span>
                         </el-col>
                         <el-col :span="17" class=" connect_font connect_font_content">
-                            <span>玉米</span>
-                        </el-col>
+                            <el-form-item label="" prop="pnumber"  class="three">
+                                <el-input v-model="formdatas.form.pnumber" :disabled="disabled"></el-input>
+                            </el-form-item>
+                        </el-col>-->
+                        <el-form-item label="样品领取交接单名称:" prop="pnumber"  class=" connect_font connect_font_title">
+                                <el-input></el-input>
+                            </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-col :span="7" class=" connect_font connect_font_title">
+                        <!--<el-col :span="7" class=" connect_font connect_font_title">
                             <span>样品管理员:</span>
                         </el-col>
                         <el-col :span="17" class="connect_font connect_font_content">
                             <span>张海新</span>
-                        </el-col>
+                        </el-col>-->
+                        <el-form-item label="样品管理员:" prop="pnumber"  class=" connect_font connect_font_title">
+                                <el-input></el-input>
+                            </el-form-item>
                     </el-col>
                 </el-col>
                 <el-col :span="24" class=" connect_fath">
                     <el-col :span="12">
-                        <el-col :span="7" class="connect_font connect_font_title">
+                        <el-form-item label="备注:" prop="pnumber"  class=" connect_font connect_font_title">
+                                <el-input></el-input>
+                            </el-form-item>
+                        <!--<el-col :span="7" class="connect_font connect_font_title">
                             <span>备注:</span>
                         </el-col>
                         <el-col :span="17" class="connect_font connect_font_content">
                             <span>分两份不完善粒平行小样，其他按国标法分样。</span>
-                        </el-col>
+                        </el-col>-->
                     </el-col>
                 </el-col>
             </el-row>
@@ -121,7 +132,7 @@
                             </el-col>
                         </el-col>
                     </el-col>
-                     <el-col :span="12" class="classify_hao">
+                    <el-col :span="12" class="classify_hao">
                         <el-col :span="4">
                             <span>01</span>
                         </el-col>
@@ -134,7 +145,7 @@
                             </el-col>
                         </el-col>
                     </el-col>
-                     <el-col :span="12" class="classify_hao">
+                    <el-col :span="12" class="classify_hao">
                         <el-col :span="4">
                             <span>01</span>
                         </el-col>
@@ -147,7 +158,7 @@
                             </el-col>
                         </el-col>
                     </el-col>
-                     <el-col :span="12" class="classify_hao">
+                    <el-col :span="12" class="classify_hao">
                         <el-col :span="4">
                             <span>01</span>
                         </el-col>
@@ -161,84 +172,84 @@
                         </el-col>
                     </el-col>
                     <!--<el-col :span="2" class="classify_font">
-                        <el-col :span="24">
-                            <span>01</span>
-                        </el-col>
-                        <el-col :span="24">
-                            <span>01</span>
-                        </el-col>
-                        <el-col :span="24">
-                            <span>01</span>
-                        </el-col>
-                    </el-col>
-                    <el-col :span="10">
-                        <el-col :span="16" class="classify_font">
                             <el-col :span="24">
-                                <span>监20170094</span>
+                                <span>01</span>
                             </el-col>
                             <el-col :span="24">
-                                <span>监20170094</span>
+                                <span>01</span>
                             </el-col>
                             <el-col :span="24">
-                                <span>监20170094</span>
+                                <span>01</span>
                             </el-col>
                         </el-col>
-                        <el-col :span="8" class="classify_font operation">
-                            <el-col :span="24">
-                                <span>删除</span>
+                        <el-col :span="10">
+                            <el-col :span="16" class="classify_font">
+                                <el-col :span="24">
+                                    <span>监20170094</span>
+                                </el-col>
+                                <el-col :span="24">
+                                    <span>监20170094</span>
+                                </el-col>
+                                <el-col :span="24">
+                                    <span>监20170094</span>
+                                </el-col>
                             </el-col>
-                            <el-col :span="24">
-                                <span>删除</span>
-                            </el-col>
-                            <el-col :span="24">
-                                <span>删除</span>
-                            </el-col>
+                            <el-col :span="8" class="classify_font operation">
+                                <el-col :span="24">
+                                    <span>删除</span>
+                                </el-col>
+                                <el-col :span="24">
+                                    <span>删除</span>
+                                </el-col>
+                                <el-col :span="24">
+                                    <span>删除</span>
+                                </el-col>
 
+                            </el-col>
                         </el-col>
-                    </el-col>
-                    <el-col :span="2" class="classify_font">
-                        <el-col :span="24">
-                            <span>02</span>
-                        </el-col>
-                        <el-col :span="24">
-                            <span>02</span>
-                        </el-col>
-                        <el-col :span="24">
-                            <span>02</span>
-                        </el-col>
-                    </el-col>
-                    <el-col :span="10">
-                        <el-col :span="16" class="classify_font">
+                        <el-col :span="2" class="classify_font">
                             <el-col :span="24">
-                                <span>咸阳-玉米-199</span>
+                                <span>02</span>
                             </el-col>
                             <el-col :span="24">
-                                <span>咸阳-玉米-199</span>
+                                <span>02</span>
                             </el-col>
-                            <el-col :span="24" class="new_sample">
-                                <span  @click="new_sample()">+新建样品</span>
+                            <el-col :span="24">
+                                <span>02</span>
                             </el-col>
+                        </el-col>
+                        <el-col :span="10">
+                            <el-col :span="16" class="classify_font">
+                                <el-col :span="24">
+                                    <span>咸阳-玉米-199</span>
+                                </el-col>
+                                <el-col :span="24">
+                                    <span>咸阳-玉米-199</span>
+                                </el-col>
+                                <el-col :span="24" class="new_sample">
+                                    <span  @click="new_sample()">+新建样品</span>
+                                </el-col>
 
-                        </el-col>
-                        <el-col :span="8" class="classify_font operation">
-                            <el-col :span="24">
-                                <span>删除</span>
                             </el-col>
-                            <el-col :span="24">
-                                <span>删除</span>
+                            <el-col :span="8" class="classify_font operation">
+                                <el-col :span="24">
+                                    <span>删除</span>
+                                </el-col>
+                                <el-col :span="24">
+                                    <span>删除</span>
+                                </el-col>
+                                <el-col :span="24">
+                                    <span>&nbsp;</span>
+                                </el-col>
                             </el-col>
-                            <el-col :span="24">
-                                <span>&nbsp;</span>
-                            </el-col>
-                        </el-col>
-                    </el-col>-->
+                        </el-col>-->
                 </el-col>
             </el-row>
             <div class="leading_out" v-on:click="createlib">
                 <span>生成样品领取交接单</span>
             </div>
         </el-form>
-        
+
     </div>
 </template>
 <script>
@@ -246,39 +257,39 @@ import "@/assets/style/common/HandoverConnect.css"
 import SinograinModal from '@/components/common/action/Modal.vue';
 
 export default {
-    components:{SinograinModal},
+    components: { SinograinModal },
     props: ["formdatas"],
-    methods:{
+    methods: {
         //新建样品
-        new_sample(){
+        new_sample() {
             this.$router.push({ path: '/index/sampleManagement/handover/handoverListCreate/handoverListCreateSelect' })
         },
-    //	打开新建弹框
-    createlib() {
-        this.modalVisible = true;
+        //	打开新建弹框
+        createlib() {
+            this.modalVisible = true;
+        },
+        //	填入新建数据
+        createlibitem(unit, lib) {
+            console.log(unit, lib);
+        },
+        //	关闭新建弹框
+        dialogClose() {
+            this.modalVisible = false;
+        },
     },
-    //	填入新建数据
-    createlibitem(unit, lib) {
-        console.log(unit, lib);
-    },
-    //	关闭新建弹框
-    dialogClose() {
-        this.modalVisible = false;
-    },
-    },
-    data(){
-        return{
+    data() {
+        return {
             modalVisible: false,
-			modal:{
-		  	title:'新建库点',
-				formdatas:[
-			  		{
-			  			label:"领取人",
-			  			model:"unit",
-			  		},
-			  	],
-			  	submitText:'提交',
-		    },
+            modal: {
+                title: '新建库点',
+                formdatas: [
+                    {
+                        label: "领取人",
+                        model: "unit",
+                    },
+                ],
+                submitText: '提交',
+            },
         }
     }
 }

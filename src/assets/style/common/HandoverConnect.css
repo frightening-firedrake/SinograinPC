@@ -55,6 +55,36 @@
     font-size:0.16rem;
     border-bottom:1px solid #dfdfdf;
 }
+.connect_form .connect .connect_fath .el-col-12{
+    height:100%;
+}
+
+.connect_form .connect .connect_fath .el-col-12 .el-form-item{
+    height:100%;
+    
+    margin:0;
+}
+.connect_form .connect .connect_fath .el-col-12 .el-form-item .el-form-item__label{
+    width:2.06rem;
+    font-size:0.16rem;
+    height:100%;
+    line-height:0.6rem;
+    color:#333333;
+}
+.connect_form .connect .connect_fath .el-col-12 .el-form-item .el-form-item__content{
+    width:5rem;
+    height:100%;
+    border-left:1px solid #dfdfdf;
+    float:left;
+    line-height:0.6rem;
+    padding-left:0.3rem;
+}
+.connect_form .connect .connect_fath .el-col-12 .el-form-item .el-form-item__content .el-input input{
+    border:none;
+}
+
+
+
 .connect_form .connect .connect_fath .connect_font{
     border-left:1px solid #dfdfdf
 }
@@ -73,8 +103,8 @@
     /*border-bottom:1px solid #dfdfdf;*/
     background-color:#eeeeee;
     overflow: hidden;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    /*border-top-right-radius: 10px;*/
+    /*border-top-left-radius: 10px;*/
       border-left:1px solid #dfdfdf;
     border-right:1px solid #dfdfdf;
 }
