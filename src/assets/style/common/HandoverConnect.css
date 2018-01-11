@@ -89,8 +89,16 @@
 .connect_form .project .classify_num{
     font-size:0.16rem;
     text-align:center;
+    overflow: hidden
 }
-
+.connect_form .project_details .classify_num .classify_hao{
+    border-bottom:1px solid #dfdfdf;
+    overflow: hidden;
+    height:0.5rem;
+}
+.connect_form .project_details .classify_num .classify_hao:last-child{
+    border-right:1px solid #dfdfdf;
+}
 .connect_form .project_details{
     /*height:0.5rem;*/
     border:1px solid #dfdfdf;

@@ -7,7 +7,7 @@
     <div id="print">
     <div class="handover_view">
         <div class="hand_view_title">
-          <span>山西中储粮粮食质检中心</span>
+          <span >山西中储粮粮食质检中心</span>
         </div>
         <div class="hand_view_tab">
           <div class="hand_view_tab_title">
@@ -168,7 +168,7 @@ import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 
 import "static/jqprint/jquery.jqprint.js"
-// import "@/assets/style/common/handoverView.css"
+import "@/assets/style/common/handoverView.css"
 import "@/assets/style/common/list.css"
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 //本地测试要用下面import代码
@@ -197,13 +197,16 @@ export default {
     ...mapMutations(['create_modal_id', 'is_mask', 'create_modal', 'close_modal']),
     ...mapActions(['addAction']),
     print() {
-      console.log(jQuery)
-      $("#print").jqprint({
-					 debug: false, 
-					 importCSS: true, 
-					 printContainer: true, 
-					 operaSupport: false
-					 });
+      // alert(0)
+     let subOutputRankPrint = document.getElementById('print');  
+              //  console.log(subOutputRankPrint.innerHTML);  
+               let newContent =subOutputRankPrint.innerHTML;  
+               let oldContent = document.body.innerHTML;  
+               document.body.innerHTML = newContent;  
+               window.print();  
+              //  window.location.reload();  
+               document.body.innerHTML = oldContent;  
+               return false;  
     },
     //	获取列表数据方法
     getlistdata(page) {

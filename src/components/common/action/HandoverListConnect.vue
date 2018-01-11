@@ -108,7 +108,59 @@
                     </el-col>
                 </el-col>
                 <el-col :span="15" class="classify_num">
-                    <el-col :span="2" class="classify_font">
+                    <el-col :span="12" class="classify_hao">
+                        <el-col :span="4">
+                            <span>01</span>
+                        </el-col>
+                        <el-col :span="20">
+                            <el-col :span="16" class="classify_font">
+                                <span>监20170094</span>
+                            </el-col>
+                            <el-col :span="8" class="operation">
+                                <span>删除</span>
+                            </el-col>
+                        </el-col>
+                    </el-col>
+                     <el-col :span="12" class="classify_hao">
+                        <el-col :span="4">
+                            <span>01</span>
+                        </el-col>
+                        <el-col :span="20">
+                            <el-col :span="16" class="classify_font">
+                                <span>监20170094</span>
+                            </el-col>
+                            <el-col :span="8" class="operation">
+                                <span>删除</span>
+                            </el-col>
+                        </el-col>
+                    </el-col>
+                     <el-col :span="12" class="classify_hao">
+                        <el-col :span="4">
+                            <span>01</span>
+                        </el-col>
+                        <el-col :span="20">
+                            <el-col :span="16" class="classify_font">
+                                <span>监20170094</span>
+                            </el-col>
+                            <el-col :span="8" class="operation">
+                                <span>删除</span>
+                            </el-col>
+                        </el-col>
+                    </el-col>
+                     <el-col :span="12" class="classify_hao">
+                        <el-col :span="4">
+                            <span>01</span>
+                        </el-col>
+                        <el-col :span="20">
+                            <el-col :span="16" class="classify_font ">
+                                <span @click="new_sample()" class="new_sample">+新建样品</span>
+                            </el-col>
+                            <el-col :span="8" class="operation">
+                                <span>&nbsp;</span>
+                            </el-col>
+                        </el-col>
+                    </el-col>
+                    <!--<el-col :span="2" class="classify_font">
                         <el-col :span="24">
                             <span>01</span>
                         </el-col>
@@ -118,7 +170,6 @@
                         <el-col :span="24">
                             <span>01</span>
                         </el-col>
-
                     </el-col>
                     <el-col :span="10">
                         <el-col :span="16" class="classify_font">
@@ -180,7 +231,7 @@
                                 <span>&nbsp;</span>
                             </el-col>
                         </el-col>
-                    </el-col>
+                    </el-col>-->
                 </el-col>
             </el-row>
             <div class="leading_out" v-on:click="createlib">
