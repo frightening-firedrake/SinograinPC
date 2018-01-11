@@ -6,6 +6,7 @@
   	  <sinograin-option-title></sinograin-option-title>		
       <!--表单-->
       <handover-list-connect :formdatas="formdatas"></handover-list-connect> 
+
     </div>
 </template>
 
@@ -39,7 +40,7 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
-	this.getlistdata(1)
+	// this.getlistdata(1)
 
   },
   destroy(){
@@ -60,7 +61,7 @@ export default {
 //
 //			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
+		  	this.formdatas=response.data.formdatas;		  
 //		  	this.tabledatas=response.data.rows;
 //	  		this.page.total=response.data.total;
 		  	
@@ -104,6 +105,8 @@ export default {
       	search:false,   
       	searching:'',
       },
+
+	  
       formdatas: {
       	title:'样品领取交接单名称',
       	form:{

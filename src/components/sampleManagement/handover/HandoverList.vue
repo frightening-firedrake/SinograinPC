@@ -109,7 +109,7 @@ export default {
 		},
 		//	扫码新建样品交接单
 		connect() {
-			this.$router.push({ path: '/index/sampleManagement/handover/handoverListCreate' })
+			this.$router.push({ path: '/index/sampleManagement/handover/handoverListEdit' })
 		},
 		//	填入新建数据
 		createlibitem(unit, lib) {
