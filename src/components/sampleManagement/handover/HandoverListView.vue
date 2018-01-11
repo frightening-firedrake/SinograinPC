@@ -5,9 +5,9 @@
     <!--标题-->
     <sinograin-option-title></sinograin-option-title>
     <div id="print">
-    <div class="handover_view">
+      <div class="handover_view">
         <div class="hand_view_title">
-          <span >山西中储粮粮食质检中心</span>
+          <span>山西中储粮粮食质检中心</span>
         </div>
         <div class="hand_view_tab">
           <div class="hand_view_tab_title">
@@ -149,11 +149,12 @@
             </el-col>
           </el-row>
         </div>
-      <div class="leading_out" @click="print()">
+      </div>
+      </div>
+     <div class="leading_out" @click="print()">
         <span>打印样品领取交接单</span>
       </div>
-    </div>
-    </div>
+    
   </div>
 </template>
 
@@ -197,16 +198,22 @@ export default {
     ...mapMutations(['create_modal_id', 'is_mask', 'create_modal', 'close_modal']),
     ...mapActions(['addAction']),
     print() {
+      // $("#print").jqprint({
+      // 		 debug: false, 
+      // 		 importCSS: true, 
+      // 		 printContainer: true, 
+      // 		 operaSupport: false
+      // 		 });
       // alert(0)
-     let subOutputRankPrint = document.getElementById('print');  
-              //  console.log(subOutputRankPrint.innerHTML);  
-               let newContent =subOutputRankPrint.innerHTML;  
-               let oldContent = document.body.innerHTML;  
-               document.body.innerHTML = newContent;  
-               window.print();  
-              //  window.location.reload();  
-               document.body.innerHTML = oldContent;  
-               return false;  
+      let subOutputRankPrint = document.getElementById('print');
+      console.log(subOutputRankPrint.innerHTML);
+      let newContent = subOutputRankPrint.innerHTML;
+      let oldContent = document.body.innerHTML;
+      document.body.innerHTML = newContent;
+      window.print();
+      window.location.reload();
+      document.body.innerHTML = oldContent;
+      return false;
     },
     //	获取列表数据方法
     getlistdata(page) {

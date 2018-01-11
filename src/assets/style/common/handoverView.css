@@ -1,8 +1,8 @@
 .handover_view{
     width:100%;
-    border-right:1px solid #dfdfdf;
-    border-bottom:1px solid #dfdfdf; 
-    padding-bottom:0.2rem;
+    /*border-right:1px solid #dfdfdf;*/
+    /*border-bottom:1px solid #dfdfdf; */
+    /*padding-bottom:0.2rem;*/
 }
 .handover_view .hand_view_title{
     width:100%;
@@ -25,6 +25,7 @@
     text-align:center;
     border-right:none;
     line-height:0.62rem;
+    border-right:1px solid #dfdfdf;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
@@ -38,6 +39,7 @@
     border-top:1px solid #dfdfdf;
     border-left:1px solid #dfdfdf;
     text-align:right;
+    border-right:1px solid #dfdfdf;
     padding-right:1rem;
 }
 .handover_view .hand_view_tab .hand_view_tab_num p{
@@ -45,6 +47,8 @@
 }
 .handover_view .hand_view_tab .hand_view_tab_content{
     width:100%;
+    border-right:1px solid #dfdfdf;
+    
 }
 .handover_view .hand_view_tab .hand_view_tab_content .hand_view_tab_content_font{
     width:100%;
@@ -79,6 +83,8 @@
     line-height:0.6rem;
     border-top:1px solid #dfdfdf;
     overflow: hidden;
+    border-right:1px solid #dfdfdf;
+    
 }
 .handover_view .hand_view_tab .hand_view_tabbody .el-col-8,.el-col-4{
     text-align:center;
@@ -91,6 +97,7 @@
 .handover_view .hand_view_tab .hand_view_tabbody .el-col-16,.handover_view .hand_view_tab .hand_view_tabbody .el-col-20{
     border-left:1px solid #dfdfdf;
     text-align:center;
+    background-color:white;
 }
 .handover_view .hand_view_tab .hand_view_tabbody.date .el-col-4{
     background-color:transparent;
@@ -100,7 +107,8 @@
     border:none;
 }
 
-.handover_view .leading_out{
+ .leading_out{
+     margin-bottom:0.2rem;
     /*float: left;*/
     height: 0.4rem;
     line-height: 0.33rem;
@@ -117,7 +125,7 @@
     padding: 0.04rem;
     color: #ffffff;
 }
-.handover_view .leading_out span{
+ .leading_out span{
    border: 1px solid #FFFFFF;
     border-radius: 0.04rem;
     padding: 0 0.2rem;
