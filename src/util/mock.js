@@ -290,7 +290,7 @@ var SampleInList=Mock.mock('/liquid/role8/data', {
           storageStatus:'已入库',
           sampleInTime: "@date('yyyy.MM.dd')",
           sampleInSign: "@sampleInSign",
-          rowType:"yangpin信息",//删除用
+          rowType:"样品信息",//删除用
           row_class_name:'@row_class_name',        
         }
       ],
@@ -430,6 +430,22 @@ var checklist3=Mock.mock('checklist3', {
 	checkedList:[
 //		'复选框 A',
 	],
+});
+//分装小样列表数据
+var packingList=Mock.mock('/liquid/role12/data', {
+      'rows|3-12':[
+        {
+          'id|+1': 1,
+          smallSampleNumber:"襄监20170094",
+          test:'@test',
+          printTimes:'@natural(1, 100)',
+          printDate: "@date('yyyy.MM.dd')",
+          rowType:"小样信息",//删除用
+          row_class_name:'@row_class_name',        
+        }
+      ],
+      	total:56,
+      	
 });
 export default {
 //	LibraryList:LibraryList,

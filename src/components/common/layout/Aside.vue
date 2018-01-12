@@ -172,23 +172,23 @@ export default {
 					pid: 6,
 					lid: 8
 				},
-//				{
-//					icon: 'icon-tianjiaduoyonghu',
-//					title: '批量添加用户',
-//					linkto: '/index/authority/userAdds',
-//					level: 3,
-//					pid: 6,
-//					lid: 9
-//				},
-//
-//				{
-//					icon: 'icon-ziyuanguanli',
-//					title: '资源管理',
-//					linkto: '',
-//					level: 2,
-//					pid: 1,
-//					lid: 10
-//				},
+				{
+					icon: 'icon-shiyan',
+					title: '样品检测',
+					linkto: '',
+					level: 2,
+					pid: 0,
+					lid: 9
+				},
+
+				{
+					icon: 'icon-subcontractor',
+					title: '分装小样管理',
+					linkto: '/index/sampleDetection/packingList',
+					level: 2,
+					pid: 9,
+					lid: 10
+				},
 //				{
 //					icon: 'icon-ziyuanguanli2',
 //					title: '资源列表',

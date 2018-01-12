@@ -20,6 +20,11 @@ import HandoverListCreateSelect from '@/components/sampleManagement/handover/Han
 import HandoverListView from '@/components/sampleManagement/handover/HandoverListView.vue'
 import HandoverListEdit from '@/components/sampleManagement/handover/HandoverListEdit.vue'
 import HandoverListEditSelect from '@/components/sampleManagement/handover/HandoverListEditSelect.vue'
+import PackingList from '@/components/sampleDetection/packing/PackingList.vue'
+import PackingView from '@/components/sampleDetection/packing/PackingView.vue'
+import PackingPrint from '@/components/sampleDetection/packing/PackingPrint.vue'
+
+
 
 
 
@@ -161,7 +166,28 @@ export default new Router({
             name:"样品管理/样品领取交接单/编辑样品领取交接单/选择样品编号",
             component:HandoverListEditSelect
           },
-           
+//         样品检测
+ 					{
+            path:"sampleDetection",
+            name: '样品检测',
+            component:PackingList,
+            redirect: 'sampleDetection/packingList',
+          },
+          {
+            path:"sampleDetection/packingList",
+            name:"样品检测/分装小样管理",
+            component:PackingList
+          },
+          {
+            path:"sampleDetection/packingList/packingView",
+            name:"样品检测/分装小样管理/查看小样",
+            component:PackingView
+          },
+          {
+            path:"sampleDetection/packingList/packingPrint",
+            name:"样品检测/分装小样管理/打印条码",
+            component:PackingPrint
+          },
       ]
     },
     

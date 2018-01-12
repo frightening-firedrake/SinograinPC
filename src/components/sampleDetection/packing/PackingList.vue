@@ -70,7 +70,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInEdit',query:{libid:id}})
+		this.$router.push({path: '/index/sampleDetection/packingList/packingView',query:{libid:id}})
 		
   	}.bind(this));
   },
@@ -91,10 +91,10 @@ export default {
 	},
 	createSampling(){
 //		console.log('createSampling');
-		this.$router.push({path: '/index/sampling/samplingList/samplingListCreate'})
+//		this.$router.push({path: '/index/sampling/samplingList/samplingListCreate'})
 	},
 	emptyCreate(){
-		this.createSample();
+//		this.createSample();
 	},
 //	打开新建弹框
 	createlib(){
@@ -102,11 +102,11 @@ export default {
 	},
 //	扫码新建样品
 	createSample(){
-		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInCreate'})
+		this.$router.push({path: '/index/sampleDetection/packingList/packingPrint'})
 	},
 //	填入新建数据
-	createlibitem(unit,lib){
-		console.log(unit,lib);
+	createlibitem(form){
+		console.log(form);
 	},
 //	关闭新建弹框
 	dialogClose(){
@@ -197,7 +197,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role8/data',
+      datalistURL:'/liquid/role12/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -252,38 +252,26 @@ export default {
       items: [
       {
         id: 1,
-        prop:'sampling_number',
-        label: "扦样编号",
+        prop:'smallSampleNumber',
+        label: "样品编号",
         sort:true
       },
       {
         id: 2,
-        prop:'varieties',
-        label:"品种",
+        prop:'test',
+        label:"检验项目",
         sort:true,
       },
       {
         id: 3,
-        prop:'position',
-        label: "存放位置",
+        prop:'printTimes',
+        label: "打印条码数",
         sort:true,
       },
       {
         id: 4,
-        prop:'storageStatus',
-        label:"存放状态",
-        sort:true,
-      },
-      {
-        id: 5,
-        prop:'sampleInTime',
-        label:"入库时间",
-        sort:true,
-      },
-      {
-        id: 6,
-        prop:'sampleInSign',
-        label:"入库签名",
+        prop:'printDate',
+        label:"打印时间",
         sort:true,
       },
       ],
@@ -292,7 +280,7 @@ export default {
       	number:false,
       	view:true,
       	edit:false,
-      	dele:true,
+      	dele:false,
       	manuscript:false,
       	safetyReport:false,
       }
