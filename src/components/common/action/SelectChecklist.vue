@@ -49,7 +49,7 @@
 			<template>
 			  <el-checkbox-group v-model="checkedList">
 
-			  	<el-checkbox :label="item" v-for="(item,index) in checkList"></el-checkbox>
+			  	<el-checkbox :label="item" v-for="(item,index) in checkList" :key="item"></el-checkbox>
 
 			  		
 			    

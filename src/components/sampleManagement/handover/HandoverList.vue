@@ -102,7 +102,7 @@ export default {
 			this.$router.push({ path: '/index/sampling/samplingList/samplingListCreate' })
 		},
 		emptyCreate() {
-			//		this.createlib();
+			this.connect();
 		},
 		//	打开新建弹框
 		createlib() {
@@ -110,7 +110,7 @@ export default {
 		},
 		//	扫码新建样品交接单
 		connect() {
-			this.$router.push({ path: '/index/sampleManagement/handover/handoverListEdit' })
+			this.$router.push({ path: '/index/sampleManagement/handover/handoverListCreate' })
 		},
 		//	填入新建数据
 		createlibitem(unit, lib) {

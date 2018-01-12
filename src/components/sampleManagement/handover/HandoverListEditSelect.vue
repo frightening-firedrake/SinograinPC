@@ -5,9 +5,11 @@
   	  <!--标题-->
   	  <sinograin-option-title></sinograin-option-title>		
       <!--提示-->
-      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
+
+      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
-      <sample-form :formdatas="formdatas"></sample-form> 
+      <select-checklist :selectdatas="selectdatas"></select-checklist> 
+
     </div>
 </template>
 
@@ -19,7 +21,9 @@
 
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
-import SampleForm  from "@/components/common/action/SampleForm"
+
+import SelectChecklist  from "@/components/common/action/SelectChecklist"
+
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 
 
@@ -32,7 +36,8 @@ import data from '@/util/mock';
 
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SampleForm
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SelectChecklist
+
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -41,7 +46,7 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
-	this.getlistdata(1)
+//	this.getlistdata(1)
 
   },
   destroy(){
@@ -62,7 +67,7 @@ export default {
 //
 //			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
+
 //		  	this.tabledatas=response.data.rows;
 //	  		this.page.total=response.data.total;
 		  	
@@ -107,30 +112,12 @@ export default {
       	searching:'',
       },
 //    弹窗数据
-      alerts: [{
-        title: '温馨提示：此页面灰色字为不可编辑状态!',
-        type: 'info'
-      }],
-      formdatas: {
-      	title:'中央储备粮襄垣直属库',
-      	form:{
-          ctime: '2017-12-12',//创建时间
-          status: '未扦样',//状态
-          nid: '',//迁样编号
-          checkregion: '山西',//被查库点
-          pnumber: '',//货位号
-          varieties: '',//品种
-          quality: '',//性质
-          weight: '',//代表数量
-          region: '山西',//产地
-          harvestdate: '2017',//收货年度
-          samplingdate: '',//扦样日期
-          remarks: '',//备注
-          storageStatus:'',
-          sampleInTime: "",
-          position:"",
-          sampleInSign: "",
-      	}
+//    alerts: [{
+//      title: '温馨提示：此页面灰色字为不可编辑状态!',
+//      type: 'info'
+//    }],
+      selectdatas: {
+      	
 	  }
     }
   }
