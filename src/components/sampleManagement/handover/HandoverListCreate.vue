@@ -5,7 +5,7 @@
   	  <!--标题-->
   	  <sinograin-option-title></sinograin-option-title>		
       <!--表单-->
-      <handover-list-connect :formdatas="formdatas"></handover-list-connect> 
+      <handover-list-connect :formdatas="formdatas" :viewPath="viewPath"></handover-list-connect> 
 
     </div>
 </template>
@@ -105,7 +105,7 @@ export default {
       	search:false,   
       	searching:'',
       },
-
+	  viewPath:'/index/sampleManagement/handover/handoverListCreate/handoverListPrint',
 	  
       formdatas: {
       	title:'样品领取交接单名称',

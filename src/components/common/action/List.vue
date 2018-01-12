@@ -60,7 +60,7 @@
       <!--是否包含查看操作-->
           <template slot-scope="scope">
       				<template v-if="actions.view">
-            			<button class="view" @click="handleView(scope.$index, scope.row)">查看</button>
+            			<button class="view" @click="handleView(scope.$index, scope.row,scope)">查看</button>
       				</template>
       <!--是否包含编辑操作-->
 				      <template v-if="actions.edit">
@@ -121,10 +121,11 @@ export default {
     handleCreateSafetyReport(index, row){
     	this.$router.push({path: '/index/sampling/libraryList/samplingList/safetyReportCreate'})
     },
-    handleView(index, row) {
+    handleView(index, row,scope) {
 //	  	console.log(index,row);
 //		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
-		    this.$root.eventHub.$emit('viewlistitem',row.id)
+//		    this.$root.eventHub.$emit('viewlistitem',row.id)
+console.log(scope)
 		},
 		handleEdit(index, row) {
 //	  	console.log(index,row,this.list);

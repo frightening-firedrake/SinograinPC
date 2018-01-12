@@ -258,7 +258,7 @@ import SinograinModal from '@/components/common/action/Modal.vue';
 
 export default {
     components: { SinograinModal },
-    props: ["formdatas"],
+    props: ["formdatas","viewPath"],
     methods: {
         //新建样品
         new_sample() {
@@ -268,9 +268,10 @@ export default {
         createlib() {
             this.modalVisible = true;
         },
-        //	填入新建数据
-        createlibitem(unit, lib) {
-            console.log(unit, lib);
+        //	获取填入的新建数据
+        createlibitem(form) {
+//          console.log(form);
+            this.$router.push({ path: this.viewPath })
         },
         //	关闭新建弹框
         dialogClose() {
@@ -285,7 +286,7 @@ export default {
                 formdatas: [
                     {
                         label: "领取人",
-                        model: "unit",
+                        model: "receiptor",
                     },
                 ],
                 submitText: '提交',

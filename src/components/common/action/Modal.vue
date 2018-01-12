@@ -57,9 +57,16 @@ export default {
   		...mapActions(['addAction']),
     	createlibitem(){
 //  		this.modalVisible = false;
-    		this.$emit('createlibitem',this.form);
-    		this.$emit('dialogClose')
-//  		this.$refs['modalform'].resetFields();
+			//这里缺一个表单验证
+			var values=Object.values(this.form);
+
+			if(values.length){
+				this.$emit('createlibitem',this.form);
+				this.$emit('dialogClose')
+//				this.$refs['modalform'].resetFields();				
+			}else{
+				return
+			}
     	},
     	dialogClose(){
 //  		this.$refs['modalform'].resetFields();

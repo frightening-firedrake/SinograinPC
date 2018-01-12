@@ -148,10 +148,12 @@
 }*/
 .list .el-table__body-wrapper{
 	width:100%!important;
+	overflow:hidden;
 	/*padding:1px;*/
 }
 .list .el-table__body tr{
 	width:100%!important;
+	
 }
 /*.list .el-table__row:hover{
 	outline: 1px solid #378ef8;
