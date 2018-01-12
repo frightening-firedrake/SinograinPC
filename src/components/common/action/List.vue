@@ -124,8 +124,7 @@ export default {
     handleView(index, row,scope) {
 //	  	console.log(index,row);
 //		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
-//		    this.$root.eventHub.$emit('viewlistitem',row.id)
-console.log(scope)
+		    this.$root.eventHub.$emit('viewlistitem',row.id)
 		},
 		handleEdit(index, row) {
 //	  	console.log(index,row,this.list);

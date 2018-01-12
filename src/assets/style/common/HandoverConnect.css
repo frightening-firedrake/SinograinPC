@@ -14,6 +14,7 @@
 }
 .connect_form .leading_out{
     /*float: left;*/
+    display: block;
     height: 0.4rem;
     line-height: 0.33rem;
     margin-left: 0.3rem;
@@ -169,9 +170,11 @@
 .connect_form .project_details  .classify_num .operation{
     color:#e87373;
     border-left:none;
+    cursor:pointer;
 }
 .connect_form .classify_font .new_sample{
     color:#58b481;
+    cursor:pointer;
 }
 .connect_form .classify_font .new_sample span{
     cursor: pointer;
