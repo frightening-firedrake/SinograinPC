@@ -18,11 +18,12 @@ Mock.Random.extend({
     },
     test: function(data){
         var tests = []
-        var test = ['水分,','不完善粒,','生霉粒指,','质量,','品质全项目指标,']
+        var test = ['水分','不完善粒','生霉粒指','质量','品质全项目指标']
         var testnum = this.integer(1,test.length)
         for(var i = 0;i<testnum;i++){
             tests.push(test[i])
         }
+        tests=tests.join(',')
         return tests
     },
     connect:function(data){
@@ -318,7 +319,8 @@ var Sample=Mock.mock('/liquid/role9/data', {
           sampleInTime: "@date('yyyy.MM.dd')",
           position:"",
           sampleInSign: "",
-      	}
+      	},
+      	submitText:'入库',
 	  }
 });
 //查看编辑样品
@@ -342,7 +344,8 @@ var Sampleedit=Mock.mock('/liquid/role10/data', {
           position:"TG-1-2",
           sampleInTime: "@date('yyyy.MM.dd')",
           sampleInSign: "@sampleInSign",
-      	}
+      	},
+      	submitText:'确定',
 	  }
 });
 //样品领取交接单

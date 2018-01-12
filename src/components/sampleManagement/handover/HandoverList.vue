@@ -242,11 +242,11 @@ export default {
 				currentPage: 1,
 				show: true,
 				tfootbtns: {
-					btns: true,//是否添加按钮组
+					btns: false,//是否添加按钮组
 					leading_out: false,//导出按钮
 					refresh: false,//刷新按钮
 					delete: false, //删除按钮 
-					connect: true//打印样品交接单            	
+					connect: false//打印样品交接单            	
 				}
 			},
 			//    弹窗数据

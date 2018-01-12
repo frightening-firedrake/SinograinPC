@@ -130,7 +130,8 @@ export default {
           sampleInTime: "",
           position:"",
           sampleInSign: "",
-      	}
+      	},
+      	submitText:'确定',
 	  }
     }
   }
