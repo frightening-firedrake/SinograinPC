@@ -1,0 +1,86 @@
+ .login{
+    width:100%;
+    height:100%;
+    background-size:cover;
+    background-position:top center;
+    background-repeat:no-repeat;
+    overflow: hidden;
+ }
+ .login .login_box{
+     width:12rem;
+     height:6rem;
+     margin:0 auto;
+     margin-top:2.47rem;
+     position:relative;
+     /*background-size:cover;*/
+ }
+  .login .login_box .login_form{
+      width:5.02rem;
+      height:100%;
+      top:0;
+      position:absolute;
+      right:0;
+      padding:0 0.8rem;
+      padding-top:2.47rem;
+  }
+  .login .login_box .login_form  .el-form-item{
+      width:3.4rem;
+      height:0.48rem;
+    margin-bottom:0.15rem;
+      border:1px solid #e2e2e2;
+      border-radius:10px;
+  }
+  .login .login_box .login_form  .el-form-item.code{
+      width:2.1rem;
+      display:inline-block;
+  }
+    .login .login_box .login_form .code_img{
+        width:1.21rem;
+        height:0.48rem;
+        vertical-align: top;
+    }
+  .login .login_box .login_form  .el-form-item.code .el-form-item__content .el-input{
+      width:1.48rem;
+  }
+  .login .login_box .login_form  .el-form-item .el-form-item__content{
+padding:0.05rem 0 0.05rem 0;
+font-size:0;
+height:100%;
+  }
+   .login .login_box .login_form  .el-form-item .el-form-item__content .el-input{
+        width:2.7rem;
+        height:100%;
+   }
+   .login .login_box .login_form  .el-form-item .el-form-item__content .el-input input{
+       height:100%;
+       border-color:transparent;
+           vertical-align: top;
+   }
+   .login .login_box .login_form  .el-form-item .el-form-item__content .el-input input:focus{
+       
+   }
+    .login .login_box .login_form  .el-form-item .el-form-item__content .iconfont{
+        color:#257e44;
+        font-size:0.2rem;
+        width:0.6rem;
+        height:100%;
+        text-align:center;
+        display:inline-block;
+        background-image:url("~static/images/login/fen1.jpg");
+        background-repeat: no-repeat;
+        background-size:4% 100%;
+        background-position:top right;
+            vertical-align: top;
+            line-height:0.36rem;
+    }
+      .login .login_box .login_form .login_submit{
+          width:3.40rem;
+          height:0.48rem;
+          text-align:center;
+          /*line-height:0.48rem;*/
+          font-size:0.18rem;
+          color:white;
+          border-radius:10px;
+          margin-top:0.35rem;
+          background: linear-gradient(to bottom, #57b380, #3f805c);
+      }
