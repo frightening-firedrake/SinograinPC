@@ -9,6 +9,15 @@
 	background-color: #fbfbfb;
 	box-sizing:content-box;
 }
+.printListWrap .printDate{
+	height:0.5rem;
+	line-height:0.5rem;
+	border:1px solid #dfdfdf;
+	border-top:none;
+	position:relative;
+	background-color: #fbfbfb;
+	box-sizing:content-box;
+}
 .printListWrap .printBody{
 	min-height:0.5rem;
 	border-left:1px solid #dfdfdf;
@@ -54,6 +63,11 @@
 	height:0.5rem;
 	background:#ffffff;
 }
+.printListWrap .printDate .listRow{
+	overflow: hidden;
+	height:0.5rem;
+	background:#ffffff;
+}
 .printListWrap .printBody .listRow{
 	overflow: hidden;
 	background:#ffffff;
@@ -61,7 +75,32 @@
 .printListWrap .printHeader .listRow .rowItem{
 	width:100%;
 	float:left;
-	border-bottom:1px solid #dfdfdf;
+	/*border-bottom:1px solid #dfdfdf;*/
+	position:relative;
+}
+.printListWrap .printHeader .listRow .rowItem.sub{
+	width:50%;
+	float:left;
+	/*border-bottom:1px solid #dfdfdf;*/
+	position:relative;
+}
+.printListWrap .listRow .subtitle{
+	height:0.5rem;
+	line-height:0.5rem;
+	border-right:1px solid #dfdfdf;
+	width:1.6rem;
+	text-align:center;
+	font-size:0.18rem;
+	color:#333333;
+	float:left;
+	text-align:center;
+	background-color: #fbfbfb;
+	border-left:1px solid #dfdfdf;
+}
+.printListWrap .printDate .listRow .rowItem{
+	width:100%;
+	float:left;
+	/*border-bottom:1px solid #dfdfdf;*/
 	position:relative;
 }
 .printListWrap .printBody .listRow .rowItem{
@@ -110,7 +149,7 @@
 	border: solid 0.01rem #58b481;
 }
 .printListWrap .printBody .label{
-	height:2rem;
+	/*height:2rem;*/
 	position:relative;
 }
 .printListWrap .printBody .label span{

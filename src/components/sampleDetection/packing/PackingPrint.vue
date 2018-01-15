@@ -4,7 +4,12 @@
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
   	  <!--标题-->
   	  <sinograin-option-title></sinograin-option-title>		
-      <PackingCommon></PackingCommon>
+      <!--提示-->
+      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
+      <!--表单-->
+      <sample-print-list :listdatas="listdatas" v-on:print="print"></sample-print-list> 
+      <!--通知弹框-->
+      <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
     </div>
 </template>
 
@@ -13,11 +18,15 @@
 </style>
 
 <script>
-import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
-import SinograinOptionTitle from "@/components/common/action/OptionTitle"
-import PackingCommon from '@/components/common/action/packingCommon'
 
-import "@/assets/style/common/list.css"
+import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
+import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
+import SamplePrintList  from "@/components/common/action/SamplePrintList.vue"
+import SinograinOptionTitle from "@/components/common/action/OptionTitle"
+import SinograinMessage from "@/components/common/action/Message"
+
+
+import "@/assets/style/common/SamplePrintList.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
 import data from '@/util/mock';
@@ -26,7 +35,7 @@ import data from '@/util/mock';
 
 export default {
   components: {
-    SinograinBreadcrumb,SinograinOptionTitle,PackingCommon
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SamplePrintList,SinograinMessage
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -56,7 +65,7 @@ export default {
 //
 //			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
+//		  	this.formdatas=response.data.formdatas;
 //		  	this.tabledatas=response.data.rows;
 //	  		this.page.total=response.data.total;
 		  	
@@ -87,14 +96,29 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-
+  	print(number){
+  		console.log('打印'+number+'检测条码')
+  		this.messageShow=true;
+  		this.messages.type="loading";
+  		setTimeout(()=>{
+  			this.messages.type="success";
+  		},2000)
+  	},
+	messageclick(type){
+  		if(type=="success"){
+  			console.log(type)
+  		}else if(type=="error"){
+  			console.log(type)  			
+  		}
+  	},
+  	messageClose(){
+  		this.messageShow=false;
+  	}
   },
   data() {
     return {
       datalistURL:'/liquid/role9/data',
       searchURL:'/liquid/role2/data/search',
-      deleteURL:'/liquid/role2/data/delete',
-      checkedId:[],
 	  createlibVisible:false,
       breadcrumb:{
       	search:false,   
@@ -105,29 +129,71 @@ export default {
 //      title: '温馨提示：此页面灰色字为不可编辑状态!',
 //      type: 'info'
 //    }],
-      formdatas: {
-      	title:'中央储备粮襄垣直属库',
-      	form:{
-          ctime: '2017-12-12',//创建时间
-          status: '未扦样',//状态
-          nid: '',//迁样编号
-          checkregion: '山西',//被查库点
-          pnumber: '',//货位号
-          varieties: '',//品种
-          quality: '',//性质
-          weight: '',//代表数量
-          region: '山西',//产地
-          harvestdate: '2017',//收货年度
-          samplingdate: '',//扦样日期
-          remarks: '',//备注
-          storageStatus:'',
-          sampleInTime: "",
-          position:"",
-          sampleInSign: "",
-      	}
-	  }
+	listdatas:{
+		titleLabel:'样品编号',
+		title:'监20170078',
+		label:'检验项目',
+		listdata:[
+			{
+				number:'01',
+				content:'水分',
+				buttonText:'打印',
+			},
+			{
+				number:'02',
+				content:'水分',
+				buttonText:'打印',
+			},
+			{
+				number:'03',
+				content:'不完善粒',
+				buttonText:'打印',
+			},
+			{
+				number:'04',
+				content:'不完善粒',
+				buttonText:'打印',
+			},
+			{
+				number:'05',
+				content:'生霉粒指标',
+				buttonText:'打印',
+			},
+			{
+				number:'06',
+				content:'生霉粒指标',
+				buttonText:'打印',
+			},
+			{
+				number:'07',
+				content:'质量、品质全项目指标',
+				buttonText:'打印',
+			},
+		]
+	},
+	  messageShow:false,
+	  messages:{
+	  	type:'error',
+	  	success:{
+	  		icon:'el-icon-success',
+	  		messageTittle:'打印完成',
+	  		messageText:'请收好您的条形码并注意及时粘贴',
+	  		buttonText:'完成',
+	  	},
+	  	error:{
+	  		icon:'el-icon-error',
+	  		messageTittle:'打印失败',
+	  		messageText:'可能由于网络的原因，请检查您的网络',
+	  		buttonText:'重新打印',
+	  	},
+	  	loading:{
+	  		icon:'el-icon-printer',
+	  		messageTittle:'正在打印中...',
+	  		messageText:'请您耐心等待，正在打印中...',
+	  	},
+	  },
     }
-  }
+  },
 }
 </script>
 

@@ -5,12 +5,33 @@
 				{{listdatas.titleLabel}}
 			</div>
 			<div class="listRow">
-				<div class="rowItem">
+				<div class="rowItem" :class="{sub:listdatas.subtitle}">
 					<div class="number">
 						{{listdatas.titleNumber}}					
 					</div>
 					<div class="content">
 						{{listdatas.title}}	
+					</div>
+				</div>
+				<div class="rowItem" v-if="listdatas.subtitle" :class="{sub:listdatas.subtitle}">
+					<div class="subtitle">
+						{{listdatas.subtitleLabel}}					
+					</div>
+					<div class="content">
+						{{listdatas.subtitle}}	
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="printDate" v-if="listdatas.printDate">
+			<div class="label">
+				打印时间
+			</div>
+			<div class="listRow">
+				<div class="rowItem">
+					<div class="content">
+						{{listdatas.printDate}}	
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -31,7 +52,7 @@
 						<div class="content">
 							{{item.content}}					
 						</div>							
-						<div class="button" @click="buttonClick(item.number)">{{item.buttonText}}</div>
+						<div v-if="item.buttonText" class="button" @click="buttonClick(item.number)">{{item.buttonText}}</div>
 					</div>					
 				</template>
 				<div class="clear"></div>
@@ -53,7 +74,7 @@ import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 import data from '@/util/mock';
 
 export default {
-//	props:['listdatas',],
+	props:['listdatas',],
 	components: {
 //		SinograinModal
 	},
@@ -61,7 +82,15 @@ export default {
 		...mapState(["modal_id_number", "viewdata", "editdata", "aultdata", "messions", "mask"]),
 		...mapGetters(["modal_id"]),
 		bodyheight(){
-			var height=Math.ceil(this.listdatas.listdata.length/2)*0.5
+			var height;
+			if(this.listdatas.listdata){				
+				height=Math.ceil(this.listdatas.listdata.length/2)*0.5;
+				if(!height){
+					height=0.5;
+				}
+			}else{
+				height=0.5;				
+			}
 			return height;
 		}
 	},
@@ -70,49 +99,52 @@ export default {
 	},
 	data(){
 		return {
-			listdatas:{
-				titleLabel:'样品编号',
-				title:'监20170078',
-				titleNumber:'12',
-				label:'检验项目',
-				listdata:[
-					{
-						number:'01',
-						content:'水分',
-						buttonText:'打印',
-					},
-					{
-						number:'02',
-						content:'水分',
-						buttonText:'打印',
-					},
-					{
-						number:'03',
-						content:'不完善粒',
-						buttonText:'打印',
-					},
-					{
-						number:'04',
-						content:'不完善粒',
-						buttonText:'打印',
-					},
-					{
-						number:'05',
-						content:'生霉粒指标',
-						buttonText:'打印',
-					},
-					{
-						number:'06',
-						content:'生霉粒指标',
-						buttonText:'打印',
-					},
-					{
-						number:'07',
-						content:'质量、品质全项目指标',
-						buttonText:'打印',
-					},
-				]
-			}
+//			listdatas:{
+//				titleLabel:'样品编号',
+//				title:'监20170078',
+//				titleNumber:'12',
+//				subtitleLabel:'打印条数',
+//				subtitle:'8',
+//				printDate:'2018.01.25',
+//				label:'检验项目',
+//				listdata:[
+//					{
+//						number:'01',
+//						content:'水分',
+//						buttonText:'打印',
+//					},
+//					{
+//						number:'02',
+//						content:'水分',
+//						buttonText:'打印',
+//					},
+//					{
+//						number:'03',
+//						content:'不完善粒',
+//						buttonText:'打印',
+//					},
+//					{
+//						number:'04',
+//						content:'不完善粒',
+//						buttonText:'打印',
+//					},
+//					{
+//						number:'05',
+//						content:'生霉粒指标',
+//						buttonText:'打印',
+//					},
+//					{
+//						number:'06',
+//						content:'生霉粒指标',
+//						buttonText:'打印',
+//					},
+//					{
+//						number:'07',
+//						content:'质量、品质全项目指标',
+//						buttonText:'打印',
+//					},
+//				]
+//			}
 		}
 	},
 	methods:{
