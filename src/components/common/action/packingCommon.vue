@@ -54,7 +54,7 @@
                         <span>水分</span>
                     </el-col>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="12" class="broder_last">
                     <el-col :span="2" class="packing_num">
                         <span>01</span>
                     </el-col>
