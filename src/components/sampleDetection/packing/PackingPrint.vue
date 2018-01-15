@@ -4,10 +4,7 @@
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
   	  <!--标题-->
   	  <sinograin-option-title></sinograin-option-title>		
-      <!--提示-->
-      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
-      <!--表单-->
-      <sample-form :formdatas="formdatas"></sample-form> 
+      <PackingCommon></PackingCommon>
     </div>
 </template>
 
@@ -16,12 +13,9 @@
 </style>
 
 <script>
-
-import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
-import SampleForm  from "@/components/common/action/SampleForm"
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
-
+import PackingCommon from '@/components/common/action/packingCommon'
 
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
@@ -32,7 +26,7 @@ import data from '@/util/mock';
 
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SampleForm
+    SinograinBreadcrumb,SinograinOptionTitle,PackingCommon
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
