@@ -23,7 +23,8 @@ import HandoverListEditSelect from '@/components/sampleManagement/handover/Hando
 import PackingList from '@/components/sampleDetection/packing/PackingList.vue'
 import PackingView from '@/components/sampleDetection/packing/PackingView.vue'
 import PackingPrint from '@/components/sampleDetection/packing/PackingPrint.vue'
-
+import CheckList from '@/components/sampleDetection/check/CheckList.vue'
+import CheckEdit from '@/components/sampleDetection/check/CheckListEdit.vue'
 
 
 
@@ -36,8 +37,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-//    redirect: '/login',
-      redirect: '/index',//暂时屏蔽掉了登录与首页直接列表页开始
+      redirect: '/login',
+//    redirect: '/index',//暂时屏蔽掉了登录与首页直接列表页开始
       name: '',
     },
      {
@@ -187,6 +188,27 @@ export default new Router({
             path:"sampleDetection/packingList/packingPrint",
             name:"样品检测/分装小样管理/打印条码",
             component:PackingPrint
+          },
+          
+          {
+            path:"sampleDetection/checkList",
+            name:"样品检测/样品检验单",
+            component:CheckList
+          },
+          {
+            path:"sampleDetection/checkList/checkEdit",
+            name:"样品检测/样品检验单/样品检验单编辑",
+            component:CheckEdit
+          },
+          {
+            path:"sampleDetection/checkList/checkInput",
+            name:"样品检测/样品检验单/样品检验单录入",
+            component:CheckEdit
+          },
+          {
+            path:"sampleDetection/checkList/checkView",
+            name:"样品检测/样品检验单/样品检验单详情",
+            component:CheckEdit
           },
       ]
     },

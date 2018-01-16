@@ -57,8 +57,12 @@
       </template>
 	    
       <el-table-column :resizable="resizable" align="center" label="操作" class-name="tableAction">
-      <!--是否包含查看操作-->
           <template slot-scope="scope">
+      <!--是否包含查看操作-->
+      				<template v-if="actions.input">
+            			<button class="input" @click="handleInput(scope.$index, scope.row,scope)">录入</button>
+      				</template>
+      <!--是否包含查看操作-->
       				<template v-if="actions.view">
             			<button class="view" @click="handleView(scope.$index, scope.row,scope)">查看</button>
       				</template>
@@ -121,6 +125,11 @@ export default {
     handleCreateSafetyReport(index, row){
     	this.$router.push({path: '/index/sampling/libraryList/samplingList/safetyReportCreate'})
     },
+    handleInput(index, row,scope) {
+//	  	console.log(index,row);
+//		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
+		    this.$root.eventHub.$emit('inputlistitem',row.id)
+		},
     handleView(index, row,scope) {
 //	  	console.log(index,row);
 //		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)

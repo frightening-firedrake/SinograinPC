@@ -450,6 +450,23 @@ var packingList=Mock.mock('/liquid/role12/data', {
       	total:56,
       	
 });
+//扦样列表数据
+var Sampling=Mock.mock('/liquid/role13/data', {
+      'rows|3-12':[
+        {
+          'id|+1': 1,
+          sampling_number:"襄监20170094",
+          testItem:"脂肪酸值测定记录",
+          testName:'@varieties',
+          date: "@date('yyyy.MM.dd')",
+          rowType:"样品检验单",//删除用
+          row_class_name:'@row_class_name',        
+        }
+      ],
+      	total:56,
+
+      	
+});
 export default {
 //	LibraryList:LibraryList,
 }

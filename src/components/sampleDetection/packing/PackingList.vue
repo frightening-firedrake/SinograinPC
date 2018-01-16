@@ -5,7 +5,7 @@
       <!--alert-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:createSample="createSample" ></list-header>
+      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" ></list-header>
       <!--表格-->
       <sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
@@ -94,14 +94,14 @@ export default {
 //		this.$router.push({path: '/index/sampling/samplingList/samplingListCreate'})
 	},
 	emptyCreate(){
-//		this.createSample();
+//		this.scanCode();
 	},
 //	打开新建弹框
 	createlib(){
 		this.modalVisible=true;
 	},
 //	扫码新建样品
-	createSample(){
+	scanCode(){
 		this.$router.push({path: '/index/sampleDetection/packingList/packingPrint'})
 	},
 //	填入新建数据

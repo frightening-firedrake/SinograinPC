@@ -18,7 +18,7 @@ div.tfoot .tfoot_btns p.leading_out{
 	float:left;
 	height:0.4rem;
 	line-height: 0.33rem;
-	margin-left:0.3rem;
+	margin:0 0 0 0.3rem;
 	font-size: 0.24rem;
 	cursor: pointer;
 	background-color: #58b481;

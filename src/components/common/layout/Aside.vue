@@ -189,14 +189,14 @@ export default {
 					pid: 9,
 					lid: 10
 				},
-//				{
-//					icon: 'icon-ziyuanguanli2',
-//					title: '资源列表',
-//					linkto: '/index/authority/resourceList',
-//					level: 2,
-//					pid: 10,
-//					lid: 11
-//				},
+				{
+					icon: 'icon-jianyandan',
+					title: '样品检验单',
+					linkto: '/index/sampleDetection/checkList',
+					level: 2,
+					pid: 9,
+					lid: 11
+				},
 //				{
 //					icon: 'icon-tianjiaziyuan-q',
 //					title: '添加资源',

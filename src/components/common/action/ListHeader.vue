@@ -47,7 +47,7 @@
 				</div>
 			</template>
 			<template v-if="listHeader.scanCode">				
-				<div class="scanCode" @click="createSample">
+				<div class="scanCode" @click="scanCode">
 					<span>
 						<i class="iconfont icon-ccgl-yundanpicisaomiao-4-copy"></i>
 						扫描条形码
@@ -258,8 +258,8 @@ export default {
 //  		console.log('createlib');
     		this.$emit('createlib');
     	},
-    	createSample(){
-    		this.$emit('createSample');
+    	scanCode(){
+    		this.$emit('scanCode');
     	},
 		connect(){
 			this.$emit("connect")
