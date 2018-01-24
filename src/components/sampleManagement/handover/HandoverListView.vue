@@ -3,7 +3,7 @@
     <!--面包屑-->
     <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
     <!--标题-->
-    <sinograin-option-title></sinograin-option-title>
+    <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>
     <div id="print">
       <div class="handover_view">
         <div class="hand_view_title">
@@ -259,7 +259,9 @@ export default {
         console.log(error);
       }.bind(this));
     },
-
+	titleEvent(){
+  		console.log('titleEvent');
+  	},
   },
   data() {
     return {
@@ -271,6 +273,10 @@ export default {
       breadcrumb: {
         search: false,
         searching: '',
+      },
+      subtitle:{
+      	btn:false,
+      	btntext:'',
       },
       //    弹窗数据
       alerts: [{

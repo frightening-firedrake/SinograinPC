@@ -25,3 +25,23 @@
 .option_title .option_title_name p{
     font-size: 0.18rem;
 }
+.option_title div.titlebtn{
+	float:right;
+	margin-top:0.07rem;
+	height:0.4rem;
+	line-height: 0.33rem;
+	/*margin:0 0 0 0.3rem;*/
+	font-size: 0.24rem;
+	cursor: pointer;
+	background-color: #58b481;
+	border-radius: 0.05rem;
+	box-sizing: border-box;
+	padding:0.04rem;
+	color:#ffffff;
+}
+.option_title div.titlebtn span{
+	border:1px solid #FFFFFF;
+	border-radius:0.04rem;
+	padding:0 0.2rem;
+	font-weight: 500;
+}

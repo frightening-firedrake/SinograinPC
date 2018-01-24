@@ -81,7 +81,7 @@ export default {
 		this.$router.push({path: '/index/sampling/libraryList/samplingList/samplingListCreate'})
 	},
 	emptyCreate(){
-		this.createlib();
+//		this.createlib();
 	},
 //	打开新建弹框
 	createlib(){
@@ -210,7 +210,7 @@ export default {
         size: 10,
         total: 0,
         currentPage: 1,
-        show:false,
+        show:true,
         tfootbtns:{
         	btns:false,//是否添加按钮组
         	leading_out:true,//导出按钮
@@ -225,22 +225,23 @@ export default {
       }],
 //    表格数据
       listHeader:{
-      	createlib:true,
+      	createlib:false,
       	createSampling:false,
       	status:false,
+      	date:true,
       },
       tabledatas:[],
       items: [
-      {
-        id: 1,
-        prop:'unitName',
-        label: "单位名称",
-//      sort:true
-      },
+//    {
+//      id: 1,
+//      prop:'unitName',
+//      label: "单位名称",
+////      sort:true
+//    },
       {
         id: 2,
         prop:'checkLib',
-        label: "被查库典",
+        label: "被查库点",
 //      sort:true,
       },
       {
@@ -255,7 +256,7 @@ export default {
       	number:false,
       	view:true,
       	edit:false,
-      	dele:true,
+      	dele:false,
       }
     }
   }

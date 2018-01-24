@@ -3,7 +3,7 @@
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
   	  <!--标题-->
-  	  <sinograin-option-title></sinograin-option-title>		
+  	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
@@ -39,10 +39,14 @@ export default {
 	...mapGetters(["modal_id"]),
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.params)
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 
+  },
+  mounted(){
+
+  	
   },
   destroy(){
 
@@ -62,7 +66,12 @@ export default {
 //
 //			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
+		  	this.formdatas=response.data.formdatas;		
+//		  	取出路由参数
+		  	if(this.$route.params){	  		
+		  		this.formdatas.form.position=this.$route.params.position;
+		  		this.formdatas.form.sampleInSign=this.$route.params.sampleInSign;
+		  	}
 //		  	this.tabledatas=response.data.rows;
 //	  		this.page.total=response.data.total;
 		  	
@@ -93,7 +102,9 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-
+	titleEvent(){
+  		console.log('titleEvent');
+  	},
   },
   data() {
     return {
@@ -105,6 +116,10 @@ export default {
       breadcrumb:{
       	search:false,   
       	searching:'',
+      },
+      subtitle:{
+      	btn:false,
+      	btntext:'',
       },
 //    弹窗数据
       alerts: [{
@@ -130,6 +145,7 @@ export default {
           sampleInTime: "",
           position:"",
           sampleInSign: "",
+          code:''
       	},
       	submitText:'入库',
 	  }

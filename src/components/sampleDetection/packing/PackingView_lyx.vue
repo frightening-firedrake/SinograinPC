@@ -3,7 +3,7 @@
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" ></sinograin-breadcrumb>
   	  <!--标题-->
-  	  <sinograin-option-title></sinograin-option-title>		
+  	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <PackingCommon></PackingCommon>
       <!--表单
       <sample-form :formdatas="formdatas"></sample-form> -->
@@ -91,7 +91,9 @@ export default {
 // 		    console.log(error);
 // 		}.bind(this));
 //   	},
-
+	titleEvent(){
+  		console.log('titleEvent');
+  	},
   },
   data() {
     return {
@@ -103,6 +105,10 @@ export default {
       breadcrumb:{
       	search:false,   
       	searching:'',
+      },
+      subtitle:{
+      	btn:false,
+      	btntext:'',
       },
     //   formdatas: {
     //   	title:'中央储备粮襄垣直属库',

@@ -31,7 +31,11 @@
 					<div class="rightborder"></div>
 					<div class="rightarrow"></div>
 					<i class="iconfont firstlevel" :class="item.icon"></i>
-					<span slot="title">{{item.title}}</span>
+					
+					<el-badge slot="title" v-if="item.badge" :value="item.badge" class="navbadge">						
+						<span>{{item.title}}</span>
+					</el-badge>
+					<span v-else slot="title">{{item.title}}</span>
 				</template>
 
 				<template v-if="item.level==3">
@@ -40,7 +44,11 @@
 						<el-submenu :index="item2.lid.toString()">
 							<template slot="title">
 								<i class="iconfont secondlevel" :class="item2.icon"></i>
-								<span slot="title">{{item2.title}}</span>
+								<!--<span slot="title">{{item2.title}}</span>-->
+								<el-badge slot="title" v-if="item2.badge" :value="item2.badge" class="navbadge">						
+									<span>{{item2.title}}</span>
+								</el-badge>
+								<span v-else slot="title">{{item2.title}}</span>
 							</template>
 
 							<template v-for="item3 in navlist" v-if="item3.pid==item2.lid">
@@ -48,8 +56,11 @@
 								<!--<el-menu-item :index="item3.linkto" key="item3.lid">-->
 									<div class="leftline"></div>
 									<i class="iconfont thirdlevel" :class="item3.icon"></i>
-									<span>{{item3.title}}</span>
-									
+									<!--<span>{{item3.title}}</span>-->
+									<el-badge slot="title" v-if="item3.badge" :value="item3.badge" class="navbadge">						
+										<span>{{item3.title}}</span>
+									</el-badge>
+									<span v-else slot="title">{{item3.title}}</span>
 								</el-menu-item>
 							</template>
 
@@ -63,7 +74,11 @@
 						<el-menu-item :index="item4.linkto">
 						<!--<el-menu-item :index="item4.linkto" key="item4.lid">-->
 							<i class="iconfont secondlevel" :class="item4.icon"></i>
-							<span>{{item4.title}}</span>
+							<!--<span>{{item4.title}}</span>-->
+							<el-badge slot="title" v-if="item4.badge" :value="item4.badge" class="navbadge">						
+								<span>{{item4.title}}</span>
+							</el-badge>
+							<span v-else slot="title">{{item4.title}}</span>
 						</el-menu-item>
 					</template>
 
@@ -108,24 +123,51 @@ export default {
 			},
 			navlist: [
 				{
+					icon: 'icon-wheat__easyic',
+					title: '粮库管理',
+					linkto: '',
+					level: 2,
+					pid: 0,
+					lid: 12
+				},
+
+				{
+					icon: 'icon-xinjian',
+					title: '新建扦样登记表',
+					linkto: '/index/grainDepot/createSampleReglc',
+					level: 2,
+					pid: 12,
+					lid: 13
+				},
+				{
+					icon: 'icon-shenqingshenpi',
+					title: '扦样登记列表',
+					linkto: '/index/grainDepot/sampleRegListlc',
+					level: 2,
+					pid: 12,
+					lid: 14
+				},
+				{
 					icon: 'icon-liuchengdingyi',
 					title: '扦样流程',
 					linkto: '',
 					level: 2,
 					pid: 0,
-					lid: 1
+					lid: 1,
+					badge:8,
 				},
-//				{
-//					icon: 'icon-xinjian1',
-//					title: '新建扦样',
-//					linkto: '',
-//					level: 2,
-//					pid: 1,
-//					lid: 2
-//				},
+				{
+					icon: 'icon-xinshenqing',
+					title: '审批扦样列表',
+					linkto: '/index/sampling/examinationLibraryList',
+					level: 2,
+					pid: 1,
+					lid: 2,
+					badge:8,
+				},
 				{
 					icon: 'icon-iconfontcolor69',
-					title: '扦样列表',
+					title: '扦样库典列表',
 					linkto: '/index/sampling/libraryList',
 					level: 2,
 					pid: 1,
@@ -158,7 +200,7 @@ export default {
 				},
 				{
 					icon: 'icon-ruku',
-					title: '样品入库',
+					title: '样品入库列表',
 					linkto: '/index/sampleManagement/sampleIn',
 					level: 2,
 					pid: 6,
@@ -197,31 +239,7 @@ export default {
 					pid: 9,
 					lid: 11
 				},
-//				{
-//					icon: 'icon-tianjiaziyuan-q',
-//					title: '添加资源',
-//					linkto: '/index/authority/resourceAdd',
-//					level: 2,
-//					pid: 10,
-//					lid: 12
-//				},
-//
-//				{
-//					icon: 'icon-gerenzhongxin',
-//					title: '个人中心',
-//					linkto: '',
-//					level: 3,
-//					pid: 0,
-//					lid: 13
-//				},
-//				{
-//					icon: 'icon-wodedenglu_shezhi',
-//					title: '我的设置',
-//					linkto: '',
-//					level: 3,
-//					pid: 0,
-//					lid: 14
-//				},
+//				
 //				{
 //					icon: 'icon-shujukuguanli',
 //					title: '数据库管理',

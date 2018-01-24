@@ -2,8 +2,8 @@
 	<el-dialog :title="modal.title" :visible.sync="modalVisible" custom-class="createlib" :width="dialogWidth" @close="dialogClose">
 	  	<el-form :model="form" ref="modalform">
 	  		<template v-for="(item, index) in modal.formdatas">
-	  			<el-form-item :label="item.label" :label-width="formLabelWidth">
-			        <el-input v-model="form[item.model]" auto-complete="off"></el-input>
+	  			<el-form-item :label="item.label" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '内容不能为空'}]">
+			        <el-input v-model="form[item.model]" auto-complete="off" :disabled="item.disabled"></el-input>
 			    </el-form-item>
 	  		</template>
 	  		
@@ -23,7 +23,7 @@
 		    </el-form-item>-->
 		</el-form>
 		<div slot="footer" class="dialog-footer center">
-		    <el-button class="yes" type="primary" @click="createlibitem">{{modal.submitText?modal.submitText:'确 定'}}</el-button>
+		    <el-button class="yes" type="primary" @click="createlibitem('modalform')">{{modal.submitText?modal.submitText:'确 定'}}</el-button>
 		    <el-button class="no" @click="modalVisible = false">取 消</el-button>
 	    </div>
 	</el-dialog>
@@ -40,7 +40,9 @@ export default {
 		...mapGetters(["modal_id"]),
 	},
 	created(){
-
+		this.modal.formdatas.forEach((item,index)=>{
+			this.form[item.model]=item.value
+		})
 	},
     data() {
         return {
@@ -55,18 +57,28 @@ export default {
     methods:{
     	...mapMutations(['create_modal_id','is_mask','close_modal','hid_modal']),
   		...mapActions(['addAction']),
-    	createlibitem(){
+    	createlibitem(formname){
 //  		this.modalVisible = false;
 			//这里缺一个表单验证
-			var values=Object.values(this.form);
-
-			if(values.length){
-				this.$emit('createlibitem',this.form);
-				this.$emit('dialogClose')
-//				this.$refs['modalform'].resetFields();				
-			}else{
-				return
-			}
+//			var values=Object.values(this.form);
+//			console.log(values)
+//			if(values.length){
+//				this.$emit('createlibitem',this.form);
+//				this.$emit('dialogClose')
+////				this.$refs['modalform'].resetFields();				
+//			}else{
+//				return
+//			}
+			this.$refs[formname].validate((valid) => {
+                if (valid) {
+					this.$emit('createlibitem',this.form);
+					this.$emit('dialogClose')
+					this.$refs['modalform'].resetFields();				
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
     	},
     	dialogClose(){
 //  		this.$refs['modalform'].resetFields();
@@ -138,6 +150,12 @@ export default {
 	font-size:0.18rem;
 	color:#333333;
 }
+.createlib .el-dialog__body .el-form-item__label:before{
+	display: none;
+}
+.createlib .el-dialog__body .el-form-item.disabled .el-form-item__label{
+	color:#999999;
+}
 .createlib .el-dialog__body .el-form-item__content{
 	line-height: 0.5rem;
 	
@@ -148,6 +166,10 @@ export default {
 	font-size:0.18rem;
 	color:#333333;
 	height:auto;
+}
+.createlib .el-dialog__body .el-form-item.disabled .el-input input{
+	background:#ffffff;
+	color:#999999;
 }
 /*底部*/
 .createlib .el-dialog__footer{
@@ -182,5 +204,12 @@ export default {
 }
 .createlib .dialog-footer button.no:hover {
 	background:rgba(88,180,129,0.1);
+}
+/*验证*/
+.createlib .el-form-item__error{
+	left:auto;
+	right:0.1rem;
+	top:50%;
+	margin-top:-9px;
 }
 </style>

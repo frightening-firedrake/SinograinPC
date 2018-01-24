@@ -3,7 +3,7 @@
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
   	  <!--标题-->
-  	  <sinograin-option-title></sinograin-option-title>		
+  	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
@@ -99,7 +99,10 @@ export default {
           		images: [],//图片
             };
 		this.formdatas.form.problems.push(item);
-	}
+	},
+	titleEvent(){
+  		console.log('titleEvent');
+  	},
   },
   data() {
     return {
@@ -111,6 +114,10 @@ export default {
       breadcrumb:{
       	search:false,   
       	searching:'',
+      },
+      subtitle:{
+      	btn:false,
+      	btntext:'',
       },
 //    弹窗数据
       alerts: [{

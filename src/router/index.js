@@ -3,7 +3,14 @@ import Router from 'vue-router'
 import Login from '@/components/login/Login.vue'
 import Layout from '@/components/common/layout/Layout.vue'
 import Home from '@/components/home/Home.vue'
+import ExaminationLibraryList from "@/components/sampling/examination/ExaminationLibraryList.vue"
+import SampleRegListlc from "@/components/grainDepot/SampleRegListlc.vue"
+import SampleReglc from "@/components/grainDepot/SampleReglc.vue"
+import CreateSampleReglc from "@/components/grainDepot/CreateSampleReglc.vue"
+import SampleRegList from "@/components/sampling/examination/SampleRegList.vue"
+import SampleReg from "@/components/sampling/examination/SampleReg.vue"
 import LibraryList from "@/components/sampling/list/LibraryList.vue"
+import SampleShowList from "@/components/sampling/list/SampleShowList.vue"
 import SamplingList from '@/components/sampling/list/SamplingList.vue'
 import SamplingListCreate from '@/components/sampling/list/samplingShow/SamplingListCreate.vue'
 import SamplingListEdit from '@/components/sampling/list/samplingShow/SamplingListEdit.vue'
@@ -57,6 +64,33 @@ export default new Router({
             component:Home,
             redirect: 'sampling/libraryList',
           },
+//        粮库管理
+					{
+            path:"grainDepot",
+            name: '粮库管理',
+            component:CreateSampleReglc,
+            redirect: 'grainDepot/createSampleReglc',
+          },
+          {
+            path:"grainDepot/createSampleReglc",
+            name:"粮库管理/新建扦样登记表",
+            component:CreateSampleReglc
+          },
+          {
+            path:"grainDepot/createSampleReglc/sampleReglc",
+            name:"粮库管理/新建扦样登记表/扦样登记表",
+            component:SampleReglc
+          },
+          {
+            path:"grainDepot/sampleRegListlc",
+            name:"粮库管理/扦样登记列表",
+            component:SampleRegListlc
+          },
+          {
+            path:"grainDepot/sampleRegListlc/sampleReglc",
+            name:"粮库管理/扦样登记列表/扦样登记表",
+            component:SampleReglc
+          },
 //        扦样流程
           {
             path:"sampling",
@@ -65,43 +99,65 @@ export default new Router({
             redirect: 'sampling/libraryList',
           },
           {
+            path:"sampling/examinationLibraryList",
+            name:"扦样流程/审批扦样列表",
+            component:ExaminationLibraryList
+          },
+          {
+            path:"sampling/examinationLibraryList/sampleRegList",
+            name:"扦样流程/审批扦样列表/扦样登记列表",
+            component:SampleRegList
+          },
+          
+          {
+            path:"sampling/examinationLibraryList/sampleRegList/sampleReg",
+            name:"扦样流程/审批扦样列表/扦样登记列表/扦样登记表",
+            component:SampleReg
+          },       
+          {
             path:"sampling/libraryList",
-            name:"扦样流程/扦样列表",
+            name:"扦样流程/扦样库点列表",
             component:LibraryList
           },
           {
             path:"sampling/libraryList/samplingList",
-            name:"扦样流程/扦样列表/被查库典列表",
+            name:"扦样流程/扦样库点列表/扦样登记列表",
             component:SamplingList
           },
+          
+          {
+            path:"sampling/libraryList/samplingList/sampleShowList",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表",
+            component:SampleShowList
+          },
 		    	{
-            path:"sampling/libraryList/samplingList/samplingListCreate",
-            name:"扦样流程/扦样列表/被查库典列表/新建扦样",
+            path:"sampling/libraryList/samplingList/sampleShowList/samplingListCreate",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表/新建扦样",
             component:SamplingListCreate
           },
           {
-            path:"sampling/libraryList/samplingList/samplingListEdit",
-            name:"扦样流程/扦样列表/被查库典列表/查看扦样",
+            path:"sampling/libraryList/samplingList/sampleShowList/samplingListEdit",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表/查看扦样",
             component:SamplingListEdit
           },
           {
-            path:"sampling/libraryList/samplingList/manuscriptCreate",
-            name:"扦样流程/扦样列表/被查库典列表/新建工作底稿",
+            path:"sampling/libraryList/samplingList/sampleShowList/manuscriptCreate",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表/新建工作底稿",
             component:ManuscriptCreate
           },
           {
-            path:"sampling/libraryList/samplingList/manuscriptEdit",
-            name:"扦样流程/扦样列表/被查库典列表/查看工作底稿",
+            path:"sampling/libraryList/samplingList/sampleShowList/manuscriptEdit",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表/查看工作底稿",
             component:ManuscriptEdit
           },
           {
-            path:"sampling/libraryList/samplingList/safetyReportCreate",
-            name:"扦样流程/扦样列表/被查库典列表/新建安全报告",
+            path:"sampling/libraryList/samplingList/sampleShowList/safetyReportCreate",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表/新建安全报告",
             component:SafetyReportCreate
           },
           {
-            path:"sampling/libraryList/samplingList/safetyReportEdit",
-            name:"扦样流程/扦样列表/被查库典列表/查看安全报告",
+            path:"sampling/libraryList/samplingList/sampleShowList/safetyReportEdit",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表/查看安全报告",
             component:SafetyReportEdit
           },
 //        样品管理
@@ -113,17 +169,17 @@ export default new Router({
           },
           {
             path:"sampleManagement/sampleIn",
-            name:"样品管理/样品入库",
+            name:"样品管理/样品入库列表",
             component:SampleInList
           },
           {
             path:"sampleManagement/sampleIn/sampleInEdit",
-            name:"样品管理/样品入库/查看样品",
+            name:"样品管理/样品入库列表/查看样品",
             component:SampleInEdit
           },
           {
             path:"sampleManagement/sampleIn/sampleInCreate",
-            name:"样品管理/样品入库/新建样品",
+            name:"样品管理/样品入库列表/新建样品",
             component:SampleInCreate
           },
           

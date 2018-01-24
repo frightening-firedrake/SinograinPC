@@ -7,7 +7,7 @@
 		<!--表格上的时间选框以及 创建-->
 		<list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:connect="connect"></list-header>
 		<!--表格-->
-		<sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate">
+		<sinograin-list class="list" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate">
 		</sinograin-list>
 		<!--分页-->
 		<sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
@@ -259,17 +259,18 @@ export default {
 				createlib: false,
 				createSampling: false,
 				status: false,
+				date:true,
 				scanCode: false,
 				connect: true,
 			},
 			tabledatas: [],
 			items: [
-				{
-					id: 1,
-					prop: 'name',
-					label: "单位名称",
-					sort: true
-				},
+//				{
+//					id: 1,
+//					prop: 'name',
+//					label: "单位名称",
+//					sort: true
+//				},
 				{
 					id: 2,
 					prop: 'connect',
@@ -294,7 +295,7 @@ export default {
 				number: false,
 				view: true,
 				edit: true,
-				dele: true,
+				dele: false,
 				manuscript: false,
 				safetyReport: false,
 			}

@@ -18,12 +18,47 @@
         </el-table-column>
       </template>
       <!--是否添加编号-->
-      <el-table-column type="index" :index="1" align="center" label="编号" v-if="actions.number"></el-table-column>
+      <el-table-column type="index" :index="1" align="center" label="序号" v-if="actions.number"></el-table-column>
       <!--<el-table-column type="index" :index="indexMethod" v-if="actions.number"></el-table-column>-->
       <!--循环数据-->
-	    <el-table-column v-for="item in items" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
-	    </el-table-column>
+   		<template v-for="item in items">
+      
+	    		<el-table-column show-overflow-tooltip v-if="!item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
+	    		</el-table-column>
+	    		
+	    		<el-table-column show-overflow-tooltip v-if="item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
+	    				<template slot-scope="scope">
+		      				<template v-if="scope.row[item.prop]==0">
+		            			<span style="color:#fc6500;">待审核</span>
+		      				</template>
+						    	<template v-if="scope.row[item.prop]==1">
+		            			<span style="color:#999999;">未同意</span>
+		      				</template>
+		      				<template v-if="scope.row[item.prop]==2">
+		            			<span style="color:#666666;">已同意</span>
+		      				</template>
+		      				<template v-if="scope.row[item.prop]==3">
+		            			<span style="color:#58b481;">草稿</span>
+		      				</template>
+		          </template>
+	    		</el-table-column>
+   		</template>
 	    
+	    <!--是否包含通知信息-->
+      <template v-if="actions.message">
+			    <el-table-column :resizable="resizable" align="center" label="新消息通知" class-name="tableAction">
+		          <template slot-scope="scope">
+		      <!--有新通知-->
+		      				<template v-if="scope.row.message">
+		            			您有<span style="color:#f22054;">{{scope.row.message}}</span>条新申请通知
+		      				</template>
+		      <!--没有新通知-->
+						      <template v-else>
+						                  本库暂无通知
+						      </template> 
+		          </template>
+		      </el-table-column>
+      </template>
 		  <!--是否包含工作底稿-->
       <template v-if="actions.manuscript">
 			    <el-table-column :resizable="resizable" align="center" label="工作底稿" class-name="tableAction">
@@ -95,10 +130,24 @@ export default {
     }
   },
   mounted: function() {
+  	
 //		this.openloading()
 //			console.log(this.loading)
   },
   methods: {
+//	formatter(row, column, cellValue){
+//		if(column.className=='status'){
+//			if(cellValue==0){
+//				return '待审核';
+//			}else if(cellValue==1){
+//				return '未同意'; 				
+//			}else if(cellValue==2){
+//				return '已同意'; 				
+//			}
+//		}else{
+//			return cellValue;
+//		}
+//	},
     handleSelectionChange(val) {
       this.multipleSelection = val;
       var checkedId=val.map(function(item){
@@ -112,18 +161,18 @@ export default {
     },
 //  工作底稿
     handleViewManuscript(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/manuscriptEdit'})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptEdit'})
     },
     handleCreateManuscript(index, row){
     	console.log(this.$router)
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/manuscriptCreate'})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptCreate'})
     },
 //  安全报告
     handleViewSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/safetyReportEdit'})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportEdit'})
     },
     handleCreateSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/safetyReportCreate'})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate'})
     },
     handleInput(index, row,scope) {
 //	  	console.log(index,row);

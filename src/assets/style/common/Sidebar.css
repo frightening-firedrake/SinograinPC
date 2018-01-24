@@ -86,22 +86,30 @@
   	margin-right:0.1rem;
   	font-size: 0.2rem;
   }
-  i.firstlevel+span{
+  i.firstlevel+span,i.firstlevel+.navbadge>span{
   	font-size: 0.2rem;
     /*color: rgb(102,102,102)*/
   }
-  i.secondlevel+span{
+  i.firstlevel+.navbadge>.el-badge__content.is-fixed{
+  	right:-6px;
+  	top:50%;
+  }
+  i.secondlevel+span,i.secondlevel+.navbadge>span{
   	font-size: 0.16rem;
     /*color: rgb(102,102,102)*/
   }
-  i.thirdlevel+span{
+  i.secondlevel+.navbadge>.el-badge__content.is-fixed{
+  	right:-1px;
+  	top:50%;
+  }
+  i.thirdlevel+span,i.thirdlevel+.navbadge>span{
   	font-size: 0.16rem;
     color: rgb(102,102,102)
   }
-  i.firstlevel+span+i{
+  i.firstlevel+span+i,i.firstlevel+.navbadge+i{
   	font-size:0.2rem;
   }
-  i.secondlevel+span+i{
+  i.secondlevel+span+i,i.secondlevel+.navbadge+i{
   	font-size:0.16rem;
   }
   li.is-opened >div.el-submenu__title{
@@ -419,4 +427,7 @@ ul.btns >.mission >ol >li:hover >.del{
 }
 .icon-yonghuliebiao:before{
 	font-weight:600;
+}
+.el-badge__content{
+	box-sizing: content-box;
 }

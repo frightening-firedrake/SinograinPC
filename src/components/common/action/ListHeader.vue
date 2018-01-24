@@ -4,13 +4,15 @@
 			<p>状态:</p>
 			<div>
 			    <el-radio-group v-model="radio_status" text-color="white" fill="#ff4c78" @change="statusChange">
-				    <el-radio-button label="全部"></el-radio-button>
+				    <!--<el-radio-button label="全部"></el-radio-button>
 				    <el-radio-button label="未扦样"></el-radio-button>
-				    <el-radio-button label="已扦样"></el-radio-button>
+				    <el-radio-button label="已扦样"></el-radio-button>-->
+				    <el-radio-button v-for="item in listHeader.statusitems" :key="item.label" :label="item.label">{{item.text}}</el-radio-button>
+				    
 			    </el-radio-group>
 			</div>
 		</div>
-		<div class="dataSelete">			
+		<div class="dataSelete" v-if="listHeader.date">			
 			<p>创建时间:</p>
 			<div>
 			    <el-date-picker
@@ -54,6 +56,12 @@
 					</span>					
 				</div>
 			</template>
+		</div>
+		<div class="dataSelete" v-if="listHeader.subtitle">
+			<p>{{subtitle}}</p>
+		</div>
+		<div class="tableName" v-if="listHeader.tableNameShow">
+			<input type="text" v-model="listHeader.tableName" />
 		</div>
 	</div>
 </template>
@@ -112,7 +120,7 @@
 	/*状态选择*/
 	div.listHeader div.status{
 		float:left;
-		width:4rem;
+		/*width:4rem;*/
 	}
 	div.listHeader div.status >p:before{
 		background:#ff4c78;
@@ -194,6 +202,24 @@
 		color:#ffffff;
 		font-size:0.24rem;
 	}
+	/*表单标题*/
+	div.listHeader div.tableName{
+		width:100%;
+		height:100%;
+		background:#eeeeee;
+		text-align: center;
+	}
+	div.listHeader div.tableName input{
+		/*width:100%;
+		height:100%;*/
+		background:rgba(0,0,0,0);
+		color:#333333;
+		text-align: center;
+		border:none;
+		outline: none;
+		font-size:0.2rem;
+		width:4rem;
+	}
 </style>
 <script>
 //import SinograinModal from '@/components/common/action/Modal.vue';
@@ -248,6 +274,7 @@ export default {
     	},
     	statusChange(){
 //  		console.log(this.radio_status)
+
     		this.$emit('statusChange',this.radio_status);
     	},
     	createSampling(){
@@ -266,7 +293,11 @@ export default {
 		}
     },
     computed: {
-	    
+	    subtitle(){
+	    	return this.listHeader.subtitle;
+//          const route = this.$route.name.split("/")
+//          return route[route.length-1]
+        }
 	},
     mounted:function(){
  

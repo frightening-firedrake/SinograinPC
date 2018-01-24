@@ -38,6 +38,21 @@ form.sampling .el-form-item{
 form.sampling .el-form-item.disabled{
 	color:#999999;
 }
+form.sampling .el-form-item.code{
+	float:right;
+	height:1.5rem;
+	line-height:0.5rem;
+}
+form.sampling .el-form-item.code .el-form-item__label{
+	height:inherit;
+}
+form.sampling .el-form-item.code .el-form-item__content{
+	height:inherit;
+}
+form.sampling .el-form-item.code .el-form-item__content img{
+	height:1.2rem;
+	margin:0.12rem 0 0 0.2rem;
+}
 form.sampling .el-form-item.full{
 	margin:0;
 	width:100%;

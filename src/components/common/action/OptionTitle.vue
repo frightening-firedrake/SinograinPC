@@ -3,22 +3,32 @@
         <div class="option_title_name">
             <p>{{Route}}</p>
         </div>
+        <div class="titlebtn" v-if="title.btn" @click="titlebtn">
+			<span>
+				{{title.btntext}}
+			</span>					
+		</div>
     </div>
 </template>
 <script>
 import "@/assets/style/common/Option_title.css"
 export default {
-//	props:['actions'],
+	props:['title'],
 	data() {
 	    return {
 	      
 	    }
 	},
 	methods:{
-		
+		titlebtn(){
+			this.$emit('titleEvent');
+		}
 	},
     computed:{
         Route:function(){
+        	if(this.title.title){
+        		return this.title.title;
+        	}
 //      	if(this.actions.undefinedpath){
 //      		return this.actions.undefinedpath;
 //      	}

@@ -80,7 +80,7 @@
  }
  
  .login .el-input.is-active .el-input__inner,
- .el-input__inner:focus {
+ .login .el-input__inner:focus {
  	border-color: #438a63;
  	background-image: url("~static/images/login/fen.jpg");
  }

@@ -7,7 +7,7 @@
 		<!--表格上的时间选框以及 创建-->
 		<list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:connect="connect" v-on:scanCode="scanCode" ></list-header>
 		<!--表格-->
-		<sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate">
+		<sinograin-list class="list" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate">
 		</sinograin-list>
 		<!--分页-->
 		<sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
@@ -209,6 +209,9 @@ export default {
 			}else if (actiontype == 'handoverPrint') {
 //				打印样品领取交接单触发
 				console.log('handoverPrint')
+			}else if (actiontype == 'PrintCheck') {
+//				打印样品检验单触发
+				console.log('PrintCheck')
 			}else if (actiontype == 'refresh') {
 				// 获取列表数据（第一页）
 				this.getlistdata(1)
@@ -259,7 +262,8 @@ export default {
 					leading_out: false,//导出按钮
 					refresh: false,//刷新按钮
 					delete: false, //删除按钮 
-					connect: true//打印样品交接单            	
+					connect: false,//打印样品交接单            	
+					checkPrint: true,//打印样品检验单            	
 				}
 			},
 			//    弹窗数据
@@ -272,6 +276,7 @@ export default {
 				createlib: false,
 				createSampling: false,
 				status: false,
+				date:true,
 				scanCode: true,
 				connect: false,
 			},
@@ -307,8 +312,8 @@ export default {
 				number: false,
 				view: true,
 				edit: true,
-				dele: true,
-				input: true,
+				dele: false,
+				input: false,
 				manuscript: false,
 				safetyReport: false,
 			}

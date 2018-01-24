@@ -16,6 +16,18 @@ Mock.Random.extend({
         var statuses = ['未扦样', '已扦样']
         return this.pick(statuses)
     },
+    examinationStatus: function(date) {
+        var statuses = [0, 1,2]
+        return this.pick(statuses)
+    },
+    applyStatus: function(date) {
+        var statuses = [0, 1,2,3]
+        return this.pick(statuses)
+    },
+    tableName: function(date) {
+        var tableNames = ['春季扦样登记表', '秋季扦样登记表','抽查扦样登记表']
+        return this.pick(tableNames)
+    },
     test: function(data){
         var tests = []
         var test = ['水分','不完善粒','生霉粒指','质量','品质全项目指标']
@@ -95,7 +107,7 @@ var Sampling=Mock.mock('/liquid/role3/data', {
           harvestdate: '2017',//收货年度
           samplingdate: '2017.9.27',//扦样日期
           remarks: '秋季普查',//备注
-          
+
       	}
 	  }
 });
@@ -285,7 +297,7 @@ var SampleInList=Mock.mock('/liquid/role8/data', {
       'rows|3-12':[
         {
           'id|+1': 1,
-          sampling_number:"襄垣-玉米-110",
+          sampling_number:"8789 6469 451",
           varieties:'@varieties',
           position:"TG-1-2",
           storageStatus:'已入库',
@@ -319,6 +331,8 @@ var Sample=Mock.mock('/liquid/role9/data', {
           sampleInTime: "@date('yyyy.MM.dd')",
           position:"",
           sampleInSign: "",
+          code:'static/images/test/linecode.png',//二维码地址
+          
       	},
       	submitText:'入库',
 	  }
@@ -344,6 +358,8 @@ var Sampleedit=Mock.mock('/liquid/role10/data', {
           position:"TG-1-2",
           sampleInTime: "@date('yyyy.MM.dd')",
           sampleInSign: "@sampleInSign",
+          code:'static/images/test/linecode.png',//二维码地址
+          
       	},
       	submitText:'确定',
 	  }
@@ -439,7 +455,7 @@ var packingList=Mock.mock('/liquid/role12/data', {
       'rows|3-12':[
         {
           'id|+1': 1,
-          smallSampleNumber:"襄监20170094",
+          smallSampleNumber:"8789 6469 451",
           test:'@test',
           printTimes:'@natural(1, 100)',
           printDate: "@date('yyyy.MM.dd')",
@@ -466,6 +482,85 @@ var Sampling=Mock.mock('/liquid/role13/data', {
       	total:56,
 
       	
+});
+//扦样列表详情数据
+var sampleShowList=Mock.mock('/liquid/role14/data', {
+      'rows|3-12':[
+        {
+          'id|+1': 1,
+          tableName:"@tableName",
+          sampleStatus:'已通过',
+          createTime: "@date('yyyy.MM.dd')",
+          rowType:"表信息",//删除用
+        }
+      ],
+      	total:56,
+
+});
+//审批库典数据
+var spkd=Mock.mock('/liquid/role15/data', {
+      'rows|3-12':[
+        {
+          'id|+1': 1,
+          tableName:"@tableName",
+		  checkLib:"@checkLib",
+		  message:"@natural(0, 10)",	  
+          rowType:"库典信息",//删除用
+        }
+      ],
+      	total:56,
+
+});
+//审批库典数据
+var spkd=Mock.mock('/liquid/role16/data', {
+      'rows|3-12':[
+        {
+          'id|+1': 1,
+          tableName:"@tableName",
+          examinationStatus:'@examinationStatus',
+          createTime: "@date('yyyy.MM.dd')",
+          rowType:"表信息",//删除用
+        }
+      ],
+      	total:56,
+
+});
+//样品管理入库列表数据
+var qydj=Mock.mock('/liquid/role17/data', {
+      'rows|3-12':[
+        {
+          'id|+1': 1,
+          sampling_number:"襄垣-玉米-110",
+          checkregion: '沁县库区',//被查库点
+          pnumber: '漫水-1',//货位号
+          varieties: '玉米',//品种
+          quality: 'ZC',//性质
+          weight: '220.000',//代表数量
+          producing_area: '山西',//产地
+          harvestdate: '2017',//收货年度
+          sampleInTime: "@date('yyyy.MM.dd')",
+          samplingSign: "",
+          sampleInSignWidth: "",
+          samplingdate: '2017.9.27',//扦样日期
+          remarks: '秋季普查',//备注
+          rowType:"扦样信息",//删除用
+        }
+      ],
+      	total:56,      	
+});
+//粮库申请列表
+var spkd=Mock.mock('/liquid/role18/data', {
+      'rows|3-12':[
+        {
+          'id|+1': 1,
+          tableName:"@tableName",
+          applyStatus:'@applyStatus',
+          createTime: "@date('yyyy.MM.dd')",
+          rowType:"表信息",//删除用
+        }
+      ],
+      	total:56,
+
 });
 export default {
 //	LibraryList:LibraryList,

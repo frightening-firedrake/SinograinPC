@@ -5,14 +5,14 @@
       <!--alert-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" ></list-header>
+      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-list class="list le" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
+      <sinograin-list class="list" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
       <!--分页-->
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
-      <!--新建库典弹框-->
-      <sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
+      <!--输入弹框-->
+      <sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
     </div>
 </template>
 
@@ -41,25 +41,13 @@ export default {
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
 	...mapGetters(["modal_id"]),
-	tabledatasFilter(){
-
-		if(this.filterStatus=="全部"){
-			return this.tabledatas;
-		}else{
-			return this.tabledatas.filter((value,index)=>{
-				return value.status==this.filterStatus
-			})
-		}
-	}
   },
   created(){
-  	console.log(this.$route.query)
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
-    this.$root.eventHub.$off("editlistitem")
 //	监听列表删除事件
     this.$root.eventHub.$on('delelistitem',function(rowid,list){
     	this.tabledatas=this.tabledatas.filter(function(item){
@@ -71,14 +59,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInEdit',query:{libid:id}})
-		
-  	}.bind(this));
-  	//	监听列表点击编辑事件
-  	this.$root.eventHub.$on("editlistitem",function(id){  
-//		console.log(id)
-		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInEdit',query:{libid:id}})
-		
+		this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList',query:{libid:id}})
   	}.bind(this));
   },
   destroy(){
@@ -93,29 +74,22 @@ export default {
 		console.log(data);
 	},
 	statusChange(data){
-//		console.log(data)
-		this.filterStatus=data
+		console.log(data)
 	},
 	createSampling(){
 //		console.log('createSampling');
-		this.$router.push({path: '/index/sampling/samplingList/samplingListCreate'})
+		this.$router.push({path: '/index/sampling/libraryList/samplingList/samplingListCreate'})
 	},
 	emptyCreate(){
-		this.scanCode();
+//		this.createlib();
 	},
 //	打开新建弹框
 	createlib(){
 		this.modalVisible=true;
 	},
-//	扫码新建样品
-	scanCode(){
-		this.createlib()
-	},
 //	填入新建数据
-	createlibitem(form){
-		console.log(form);
-//		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInCreate', params: {'position': form.position,'sampleInName': form.sampleInName} })
-		this.$router.push({name: "样品管理/样品入库列表/新建样品", params: {'position': form.position,'sampleInSign': form.sampleInSign} })
+	createlibitem(data){
+		console.log(data);
 	},
 //	关闭新建弹框
 	dialogClose(){
@@ -202,67 +176,46 @@ export default {
   	getchecked(checkedId){
   		this.checkedId=checkedId;
   	},
-	titleEvent(){
-  		console.log('titleEvent');
-  	},
+
   },
   data() {
     return {
-      datalistURL:'/liquid/role8/data',
-      searchURL:'/liquid/role2/data/search',
-      deleteURL:'/liquid/role2/data/delete',
+      datalistURL:'/liquid/role15/data',
+      searchURL:'/liquid/role/data/search',
+      deleteURL:'/liquid/role/data/delete',
       checkedId:[],
-      list:"samplinglist",
+      list:"librarylist",
 	  modalVisible:false,
 	  modal:{
-	  	title:'入库',
+	  	title:'新建库点',
 		formdatas:[
-			{
-	  			label:"存放状态:",
-	  			model:"storageStatus",
-	  			disabled:true,
-	  			value:'入库',
+	  		{
+	  			label:"单位名称",
+	  			model:"unit",
 	  		},
 	  		{
-	  			label:"入库时间:",
-	  			model:"sampleInTime",
-	  			disabled:true,
-	  			value:'2017.09.09',
-	  		},
-	  		{
-	  			label:"存放位置:",
-	  			model:"position",
-//	  			value:'朔水-9号仓-1号柜',
-	  		},
-	  		{
-	  			label:"入库签名:",
-	  			model:"sampleInSign",
-//	  			value:'陶亚南',
+	  			label:"库点名称",
+	  			model:"lib",
 	  		},
 	  	],
 	  	submitText:'确定',
 	  },
       breadcrumb:{
-      	search:true,   
+      	search:false,   
       	searching:'',
       },
-      subtitle:{
-      	btn:false,
-      	btntext:'',
-      },
       loading:true,
-      filterStatus:'全部',
 //    分页数据
       page: {
         size: 10,
         total: 0,
         currentPage: 1,
-        show:true,       
+        show:true,
         tfootbtns:{
         	btns:false,//是否添加按钮组
-        	leading_out:false,//导出按钮
-        	refresh:false,//刷新按钮
-        	delete:false, //删除按钮            	
+        	leading_out:true,//导出按钮
+        	refresh:true,//刷新按钮
+        	delete:true, //删除按钮            	
         }
       },
 //    弹窗数据
@@ -275,59 +228,39 @@ export default {
       	createlib:false,
       	createSampling:false,
       	status:false,
-      	date:true,
-      	scanCode:true,
+      	date:false,
+      	subtitle:'库点审批列表',     
       },
       tabledatas:[],
       items: [
       {
         id: 1,
-        prop:'sampling_number',
-        label: "扦样编号",
-        sort:true
+        prop:'tableName',
+        label: "表格名称",
+//      sort:true
       },
       {
         id: 2,
-        prop:'varieties',
-        label:"品种",
-        sort:true,
+        prop:'checkLib',
+        label: "被查库点",
+//      sort:true,
       },
-      {
-        id: 3,
-        prop:'position',
-        label: "存放位置",
-        sort:true,
-      },
-      {
-        id: 4,
-        prop:'storageStatus',
-        label:"存放状态",
-        sort:true,
-      },
-      {
-        id: 5,
-        prop:'sampleInTime',
-        label:"入库时间",
-        sort:true,
-      },
-      {
-        id: 6,
-        prop:'sampleInSign',
-        label:"入库签名",
-        sort:true,
-      },
+//    {
+//      id: 3,
+//      prop:'message',
+//      label:"新消息通知",
+//      sort:true,
+//    },
       ],
       actions:{
       	selection:false,
       	number:false,
-      	view:false,
-      	edit:true,
+      	message:true,
+      	view:true,
+      	edit:false,
       	dele:false,
-      	manuscript:false,
-      	safetyReport:false,
       }
     }
   }
 }
 </script>
-

@@ -1,4 +1,4 @@
-.listpagewrap{
+.tablelistpagewrap{
 	position:relative;
 	height: 100%;
 }
@@ -28,24 +28,32 @@
     /*background-color:white;*/
 	background:rgba(241, 241, 241, 1);
 }
-.el-main .list{
+/*边框*/
+.el-main .tablelist{
     background: rgb(255, 255, 255);
     /*padding: 0px 0.45rem;*/
-    border-color:rgba(215, 215, 215, 1);
+    /*border: 1px solid #e6e7e7;*/
+    border-color: #e6e7e7;
+}
+.tablelist.el-table--border td,.tablelist.el-table--border th{
+	border-right:1px solid #e6e7e7;
+}
+.tablelist.el-table td, .tablelist.el-table th.is-leaf{
+	border-bottom:1px solid #e6e7e7;
 }
 /*列表行文字*/
-.el-main .list .el-table__body-wrapper table tr{
+.el-main .tablelist .el-table__body-wrapper table tr{
     color: #666666;
     font-size: 0.16rem;
     font-weight:normal;
 }
 /*表格左右边颜色*/
-.el-main .list .el-table__body-wrapper,.el-main .list .el-table__header-wrapper{
-	border-left:1px solid #e6e7e7;
-	border-right:1px solid #e6e7e7;
+.el-main .tablelist .el-table__body-wrapper,.el-main .tablelist .el-table__header-wrapper{
+	/*border-left:1px solid #e6e7e7;
+	border-right:1px solid #e6e7e7;*/
 }
 /*多选框宽度*/
-.el-main .list .el-table__body-wrapper .el-table-column--selection{
+.el-main .tablelist .el-table__body-wrapper .el-table-column--selection{
     width:0.8rem;
 }
 /*多选框颜色*/
@@ -55,7 +63,7 @@
 .el-checkbox__input.is-focus .el-checkbox__inner, .el-checkbox__inner:hover{
 	border-color:rgb(88, 180, 129);
 }
-.el-main .list .el-table__body-wrapper td.el-table-column--selection .cell{
+.el-main .tablelist .el-table__body-wrapper td.el-table-column--selection .cell{
     display: inline-block;
     vertical-align: middle;
     width: 20px;
@@ -64,34 +72,34 @@
     margin: 0px;
     padding: 0px;
 }
-.el-main .list .el-table__body-wrapper td.el-table-column--selection .cell label{
+.el-main .tablelist .el-table__body-wrapper td.el-table-column--selection .cell label{
     width:100%;
     height:100%;
 }
-.el-main .list .el-table__body-wrapper td.el-table-column--selection .cell label .el-checkbox__input{
+.el-main .tablelist .el-table__body-wrapper td.el-table-column--selection .cell label .el-checkbox__input{
     width:100%;
     height:100%;
     vertical-align: top;
 }
-.el-main .list .el-table__body-wrapper td.el-table-column--selection .cell label .el-checkbox__input .el-checkbox__inner{
+.el-main .tablelist .el-table__body-wrapper td.el-table-column--selection .cell label .el-checkbox__input .el-checkbox__inner{
     width:100%;
     height:100%;
     border-radius: 4px;
 /*    border-color:#58b481;*/
 }
-.el-main .list .el-table__body-wrapper td.el-table-column--selection .cell label .el-checkbox__input .el-checkbox__inner::after{
+.el-main .tablelist .el-table__body-wrapper td.el-table-column--selection .cell label .el-checkbox__input .el-checkbox__inner::after{
     left:38%;
     top:12%;
     border-width:2px;
     height:10px;
 }
 /*列表图标*/
-.el-main .list .el-table__body-wrapper td .cell i{
+.el-main .tablelist .el-table__body-wrapper td .cell i{
     font-size: 0.32rem;
     cursor: pointer;
     vertical-align: -0.05rem;
 }
-.el-main .list .el-table__body-wrapper td .cell button{
+.el-main .tablelist .el-table__body-wrapper td .cell button{
     font-size: 0.16rem;
     padding:0;
     border:none;
@@ -100,23 +108,23 @@
     cursor:pointer;
     outline:none;
 }
-.el-main .list .el-table__body-wrapper td .cell button.input{
+.el-main .tablelist .el-table__body-wrapper td .cell button.input{
     color:#e37f1d;
 }
-.el-main .list .el-table__body-wrapper td .cell button.view{
+.el-main .tablelist .el-table__body-wrapper td .cell button.view{
     color: #58b481;
 }
-.el-main .list .el-table__body-wrapper td .cell button.edit{
+.el-main .tablelist .el-table__body-wrapper td .cell button.edit{
     color:#1adced;
 }
-.el-main .list.le .el-table__body-wrapper td .cell button.edit{
+.el-main .tablelist.le .el-table__body-wrapper td .cell button.edit{
     color:#58b481;
 }
-.el-main .list .el-table__body-wrapper td .cell button.dele{
+.el-main .tablelist .el-table__body-wrapper td .cell button.dele{
     color:#e87373;
 }
 /*表头*/
-.el-main .list .el-table__header-wrapper table tr,.el-main .list .el-table__header-wrapper table tr th{
+.el-main .tablelist .el-table__header-wrapper table tr,.el-main .tablelist .el-table__header-wrapper table tr th{
     background-color:#ffe7b8;
     color: rgb(51, 51, 51);
     font-size: 0.18rem;
@@ -125,11 +133,11 @@
     /*line-height:0.68rem;*/
 }
 /*表格颜色*/
-.el-main .list .el-table__body-wrapper table tr,.el-main .list .el-table__body-wrapper table tr th{
-    background-color:#f6f9fa;
+.el-main .tablelist .el-table__body-wrapper table tr,.el-main .tablelist .el-table__body-wrapper table tr th{
+    background-color:#ffffff;
 }
 /*列表补边*/
-.listpagewrap{
+.tablelistpagewrap{
 	box-sizing: border-box;
 	padding:0 0.19rem;
 	background:#ffffff;
@@ -139,52 +147,53 @@
 }
 /*表格行线*/
 .el-table td, .el-table th.is-leaf{
-	border-bottom:1px dashed #dfdfdf;
+	/*border-bottom:1px dashed #dfdfdf;*/
 }
-.list .el-table__footer, .list .el-table__header{
+.tablelist .el-table__footer, .tablelist .el-table__header{
 	width:100%!important;
 	margin:0 -1px;
 }
-.list .el-table__body{
+.tablelist .el-table__body{
 	width:100%!important;
 	margin:0 -1px;
 }
-/*.list .el-table::before{
+/*.tablelist .el-table::before{
 	display: none;
 }*/
-.list .el-table__body-wrapper{
+.tablelist .el-table__body-wrapper{
 	width:100%!important;
-	overflow:hidden;
+	overflow-x: hidden;
+	/*overflow:hidden;*/
 	/*padding:1px;*/
 }
-.list .el-table__body tr{
+.tablelist .el-table__body tr,.tablelist .el-table__body tbody{
 	width:100%!important;
 	
 }
-/*.list .el-table__row:hover{
+/*.tablelist .el-table__row:hover{
 	outline: 1px solid #378ef8;
 }*/
 /*.el-table--striped .el-table__body tr.el-table__row--striped td{
 	background-color:rgb(250,250,250)!important;
 }*/
 /*悬停颜色*/
-.list.el-table--enable-row-hover .el-table__body tr:hover>td{
+.tablelist.el-table--enable-row-hover .el-table__body tr:hover>td{
 	background:#deede8;
 }
 /*去掉padding用line-height设置行高*/
-.list td, .list th{
+.tablelist td, .tablelist th{
 	padding:0!important;
 }
-.list div.cell{
+.tablelist div.cell{
     line-height:0.5rem;
     padding:0;
     white-space: nowrap;
 }
 /*加载中*/
-.list .el-icon-loading{
+.tablelist .el-icon-loading{
 	color:#1bb45f;
 }
-.list .el-loading-text{
+.tablelist .el-loading-text{
 	color:#1bb45f;
 }
 /*上下箭头*/
@@ -215,10 +224,10 @@
 	/*display: none;*/
 }
 /*表头文字对齐*/
-.list tr >th:nth-last-child(2) div.cell{
+.tablelist tr >th:nth-last-child(2) div.cell{
 	/*padding-right:0.3rem;*/
 }
-.list tr td:nth-last-child(1) div.cell{
+.tablelist tr td:nth-last-child(1) div.cell{
 	/*padding-right:0.3rem;*/
 	/*margin-right:-1px;*/
 }
@@ -328,4 +337,15 @@
 }
 .el-main .Samplinglist .el-table__body-wrapper table colgroup col:nth-last-child(1){
     /*width:0.68rem;*/
+}
+.el-table .cell, .el-table th div, .el-table--border td:first-child .cell, .el-table--border th:first-child .cell{
+	padding-left:0;
+}
+.el-main .tablelist .el-table__body-wrapper td .editModelInput{
+	width:100%;
+	height:100%;
+	border:none;
+	outline:none;
+	text-align: center;
+	background:rgba(0,0,0,0);
 }

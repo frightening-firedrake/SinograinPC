@@ -3,24 +3,33 @@
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
   	  <!--标题-->
-  	  <sinograin-option-title></sinograin-option-title>		
+  	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--提示-->
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
-      <!--<sampling-form :formdatas="formdatas"></sampling-form>--> 
+      <dscd-check-from :formdatas="formdatas.dscd"></dscd-check-from> 
+      <hr>
+      <ympcpf-check-from :formdatas="formdatas.ympcpf"></ympcpf-check-from>    
+      <hr>
+      <zfsz-check-from :formdatas="formdatas.zfsz"></zfsz-check-from>      
+      <hr>
+      <sfcd-check-from :formdatas="formdatas.sfcd"></sfcd-check-from> 
+      <hr>
+      
     </div>
 </template>
 
 <style>
-	
 </style>
-
 <script>
 
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
-//import SamplingForm  from "@/components/common/action/SamplingForm"
+import DscdCheckFrom  from "@/components/checklist/DscdCheckFrom"
+import YmpcpfCheckFrom  from "@/components/checklist/YmpcpfCheckFrom"
+import ZfszCheckFrom  from "@/components/checklist/ZfszCheckFrom"
+import SfcdCheckFrom  from "@/components/checklist/SfcdCheckFrom"
 
 
 import "@/assets/style/common/list.css"
@@ -32,7 +41,7 @@ import data from '@/util/mock';
 
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,DscdCheckFrom,YmpcpfCheckFrom,ZfszCheckFrom,SfcdCheckFrom
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -92,6 +101,9 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+  	titleEvent(){
+  		console.log('titleEvent');
+  	},
 
   },
   data() {
@@ -104,6 +116,10 @@ export default {
       breadcrumb:{
       	search:false,   
       	searching:'',
+      },
+      subtitle:{
+      	btn:true,
+      	btntext:'打印样品检验单',
       },
 //    弹窗数据
 //    alerts: [{
