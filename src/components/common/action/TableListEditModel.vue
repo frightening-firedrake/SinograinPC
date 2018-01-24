@@ -63,7 +63,7 @@ export default {
   props: ['items', 'tabledata','actions','list','loading'],
   computed:{
   	maxHeight(){
-  		return 400;
+  		return 320;
   	},
   },
   data() {

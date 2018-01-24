@@ -1,5 +1,13 @@
 <template>
-	<div class="tfootbtns">
+	<div class="tfootbtns" :class="{editModel:tfbtns.editModel}">
+		<!--editModel表格添加一行按钮-->
+		<div v-if="tfbtns.editModel" class="editModelWrap">
+			<div class="tableAdd"  @click="tableAdd">
+				<p style="background-image:url('static/images/sys/create.png');">					
+					新增一行表格
+				</p>
+			</div>
+		</div>
 		<!--基础双按钮-->
 		<div class="btn-center" v-if="tfbtns.btnCenter">
 		    <el-button class="lbtn" :class="{no:tfbtns.btnCenter.doubleColor}" type="primary" @click="btnCenterNo">{{tfbtns.btnCenter.btnTextL?tfbtns.btnCenter.btnTextL:'不同意'}}</el-button>
@@ -32,6 +40,15 @@
 	background:#ffffff;
 	position:relative;
 	text-align: center;
+}
+.tfootbtns.editModel{
+	height:2rem;
+}
+.editModel .editModelWrap{
+	height:1.25rem;
+	position:relative;
+	border:1px solid #e6e7e7;
+	border-top:none;
 }
 .btn-center{
 	text-align: center;
@@ -113,6 +130,28 @@
 	margin-top:0.125rem;
 	position: static;
 }
+.editModel .editModelWrap .tableAdd {
+    position: absolute;
+    right: 0;
+    top: 0;
+    /*width: 1.14rem;*/
+   	padding:0 0.07rem;
+    height: 0.35rem;
+    line-height: 0.35rem;
+    text-align: center;
+    border-radius: 0 0 0.1rem 0.1rem;
+    background-color: #ffffff;
+    border: solid 1px #58b481;
+    color: #58b481;
+    font-size: 0.16rem;
+    cursor: pointer;
+}
+.editModel .editModelWrap .tableAdd p{
+    padding-left:0.35rem;
+    background-repeat:no-repeat;
+    background-position:left center;
+    background-size:0.3rem 0.3rem;
+}
 </style>
 <script>
 export default {
@@ -158,6 +197,9 @@ export default {
 		},
 		btnOne(){
 			this.$emit("tfootEvent",'btnOne');
+		},
+		tableAdd(){
+			this.$emit("tfootEvent",'tableAdd');
 		},
     },
     mounted:function(){

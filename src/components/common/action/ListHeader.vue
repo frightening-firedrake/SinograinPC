@@ -61,7 +61,15 @@
 			<p>{{subtitle}}</p>
 		</div>
 		<div class="tableName" v-if="listHeader.tableNameShow">
-			<input type="text" v-model="listHeader.tableName" />
+			<template v-if="listHeader.editModel">
+				<label for="">
+					扦样登记表名称：
+					<input type="text" v-model="listHeader.tableName" />
+				</label>
+			</template>
+			<template v-else>
+				{{listHeader.tableName}}
+			</template>
 		</div>
 	</div>
 </template>
@@ -208,17 +216,21 @@
 		height:100%;
 		background:#eeeeee;
 		text-align: center;
+		color:#333333;
+		font-size:0.2rem;
+	}
+	div.listHeader div.tableName label{
+		color:#333333;
+		font-size:0.2rem;
 	}
 	div.listHeader div.tableName input{
-		/*width:100%;
-		height:100%;*/
-		background:rgba(0,0,0,0);
+		font-size:0.2rem;
 		color:#333333;
+		outline: none;
+		/*background:rgba(0,0,0,0);
 		text-align: center;
 		border:none;
-		outline: none;
-		font-size:0.2rem;
-		width:4rem;
+		width:4rem;*/
 	}
 </style>
 <script>

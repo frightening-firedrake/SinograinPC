@@ -211,6 +211,24 @@ export default {
 
 		}else if(date=='btnOne'){			
 			this.$router.push({path: '/index/grainDepot/createSampleReglc/sampleReglc'})
+		}else if(date=='tableAdd'){	
+			var newdata={
+		        sampling_number:"",
+		        checkregion: '沁县库区',//被查库点
+		        pnumber: '',//货位号
+		        varieties: '',//品种
+		        quality: 'ZC',//性质
+		        weight: '',//代表数量
+		        producing_area: '',//产地
+		        harvestdate: '',//收货年度
+		        sampleInTime: "",
+		        samplingSign: "",
+		        sampleInSignWidth: "",
+		        samplingdate: '',//扦样日期
+		        remarks: '',//备注
+		        rowType:"扦样信息",//删除用
+	        }
+			this.tabledatas.push(newdata);
 		}
 	},
   },
@@ -272,7 +290,8 @@ export default {
       	status:false,
       	date:false,
       	tableNameShow:true,
-      	tableName:'春季扦样登记表',
+      	tableName:'',
+      	editModel:true,
       },
       tabledatas:[],
       items: [
@@ -378,6 +397,7 @@ export default {
 		btnOne:{
 			btnText:'生成扦样登记表',
 		},     	
+		editModel:true,
       },
     }
   }
