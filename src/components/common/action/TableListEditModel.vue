@@ -5,6 +5,8 @@
   	style="width: 100%" 
   	:data="tabledata" 
   	border
+  	highlight-current-row
+  	@current-change="currentChange"
   	:max-height="maxHeight"
   	@selection-change="handleSelectionChange" 
   	:default-sort = "{prop: 'id', order: 'ascending'}" 
@@ -103,26 +105,7 @@ export default {
     row_class_name(scope){
     	return scope.row.row_class_name
     },
-//  工作底稿
-    handleViewManuscript(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptEdit'})
-    },
-    handleCreateManuscript(index, row){
-    	console.log(this.$router)
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptCreate'})
-    },
-//  安全报告
-    handleViewSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportEdit'})
-    },
-    handleCreateSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate'})
-    },
-    handleInput(index, row,scope) {
-//	  	console.log(index,row);
-//		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
-		    this.$root.eventHub.$emit('inputlistitem',row.id)
-		},
+
     handleView(index, row,scope) {
 //	  	console.log(index,row);
 //		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
@@ -132,7 +115,7 @@ export default {
 //	  	console.log(index,row,this.list);
 		    this.$root.eventHub.$emit('editlistitem',row.id)
 		},
-	
+		
 	  handleDele(index, row) {
 	    this.$confirm('此操作将永久删除该'+row.rowType+', 是否继续?', '提示', {
 	      confirmButtonText: '确定',
@@ -150,6 +133,9 @@ export default {
 	        message: '已取消删除'
 	      });          
 	    });
+	  },
+	  currentChange(currentRow, oldCurrentRow){
+	  	this.$emit("currentRow",currentRow)
 	  },
 	  emptyCreate(){
 	  	this.$emit('emptyCreate');

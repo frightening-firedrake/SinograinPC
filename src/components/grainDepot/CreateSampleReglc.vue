@@ -9,7 +9,7 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-table-list-edit-model class="tablelist" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
+      <sinograin-table-list-edit-model class="tablelist" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" @currentRow="currentRowFun"> 
       </sinograin-table-list-edit-model>
       <!--分页-->
       <!--<sinograin-pagination style="border:none;" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
@@ -161,6 +161,28 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+//	删除行
+	deleteRow(row) {
+	    this.$confirm('此操作将永久删除该'+"扦样信息"+', 是否继续?', '提示', {
+	      confirmButtonText: '确定',
+	      cancelButtonText: '取消',
+	      type: 'warning'
+	    }).then(() => {
+	    	this.tabledatas=this.tabledatas.filter(function(item){
+	    		return item.id!==row.id;
+	    	})
+	    	this.sendDeleteId(row.id);
+	      this.$message({
+	        type: 'success',
+	        message: '删除成功!'
+	      });
+	    }).catch(() => {
+	      this.$message({
+	        type: 'info',
+	        message: '已取消删除'
+	      });          
+	    });
+	},
   	//	发送删除id
   	sendDeleteId(id){
 		this.$http({
@@ -211,8 +233,10 @@ export default {
 
 		}else if(date=='btnOne'){			
 			this.$router.push({path: '/index/grainDepot/createSampleReglc/sampleReglc'})
-		}else if(date=='tableAdd'){	
+		}else if(date=='tableAdd'){
+			this.rowid++;
 			var newdata={
+				id:this.rowid,
 		        sampling_number:"",
 		        checkregion: '沁县库区',//被查库点
 		        pnumber: '',//货位号
@@ -229,11 +253,20 @@ export default {
 		        rowType:"扦样信息",//删除用
 	        }
 			this.tabledatas.push(newdata);
+		}else if(date=="tableDel"){
+			if(this.currentRow){
+				this.deleteRow(this.currentRow)
+
+			}
 		}
 	},
+	currentRowFun(currentRow){
+		this.currentRow=currentRow;
+	}
   },
   data() {
     return {
+      rowid:999,//临时id
       datalistURL:'/liquid/role17/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
@@ -399,6 +432,7 @@ export default {
 		},     	
 		editModel:true,
       },
+      currentRow:null,
     }
   }
 }

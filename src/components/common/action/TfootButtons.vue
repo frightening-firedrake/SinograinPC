@@ -7,6 +7,11 @@
 					新增一行表格
 				</p>
 			</div>
+			<div class="tableDel"  @click="tableDel">
+				<p style="background-image:url('static/images/sys/icons2.png');">					
+					删除表格当前行
+				</p>
+			</div>
 		</div>
 		<!--基础双按钮-->
 		<div class="btn-center" v-if="tfbtns.btnCenter">
@@ -131,10 +136,11 @@
 	position: static;
 }
 .editModel .editModelWrap .tableAdd {
-    position: absolute;
+    /*position: absolute;
     right: 0;
-    top: 0;
+    top: 0;*/
     /*width: 1.14rem;*/
+    float:right;
    	padding:0 0.07rem;
     height: 0.35rem;
     line-height: 0.35rem;
@@ -151,6 +157,30 @@
     background-repeat:no-repeat;
     background-position:left center;
     background-size:0.3rem 0.3rem;
+}
+.editModel .editModelWrap .tableDel {
+    /*position: absolute;
+    right: 0;
+    top: 0;*/
+    /*width: 1.14rem;*/
+    float:right;
+   	padding:0 0.07rem;
+    height: 0.35rem;
+    line-height: 0.35rem;
+    text-align: center;
+    border-radius: 0 0 0.1rem 0.1rem;
+    background-color: #ffffff;
+    border: solid 1px #E95858;
+    color: #E95858;
+    font-size: 0.16rem;
+    cursor: pointer;
+    margin-right:0.1rem;
+}
+.editModel .editModelWrap .tableDel p{
+    padding-left:0.35rem;
+    background-repeat:no-repeat;
+    background-position:left center;
+    background-size:0.3rem 0.6rem;
 }
 </style>
 <script>
@@ -200,6 +230,9 @@ export default {
 		},
 		tableAdd(){
 			this.$emit("tfootEvent",'tableAdd');
+		},
+		tableDel(){
+			this.$emit("tfootEvent",'tableDel');
 		},
     },
     mounted:function(){

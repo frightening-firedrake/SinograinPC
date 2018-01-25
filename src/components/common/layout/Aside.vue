@@ -167,7 +167,7 @@ export default {
 				},
 				{
 					icon: 'icon-iconfontcolor69',
-					title: '扦样库典列表',
+					title: '扦样库点列表',
 					linkto: '/index/sampling/libraryList',
 					level: 2,
 					pid: 1,
