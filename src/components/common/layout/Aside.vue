@@ -238,24 +238,23 @@ export default {
 					level: 2,
 					pid: 9,
 					lid: 11
+				},				
+				{
+					icon: 'icon-baobiaoguanli',
+					title: '检测报表管理',
+					linkto: '',
+					level: 2,
+					pid: 0,
+					lid: 15
 				},
-//				
-//				{
-//					icon: 'icon-shujukuguanli',
-//					title: '数据库管理',
-//					linkto: '',
-//					level: 2,
-//					pid: 0,
-//					lid: 15
-//				},
-//				{
-//					icon: 'icon-beifenshujuku',
-//					title: '备份数据库',
-//					linkto: '/index/database/databaseups',
-//					level: 2,
-//					pid: 15,
-//					lid: 16
-//				},
+				{
+					icon: 'icon-baobiao',
+					title: '样品检测报告',
+					linkto: '/index/TestReportManagement/TestReportMaker',
+					level: 2,
+					pid: 15,
+					lid: 16
+				},
 //				{
 //					icon: 'icon-shuju-yihuifu',
 //					title: '恢复数据库',

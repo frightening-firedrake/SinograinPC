@@ -3,15 +3,15 @@
 		<img class="code" :src="codeUrl" alt="" />
 		<div class="zw-page" style="margin-left: 113.4px; margin-right: 113.4px; column-count: 1; column-gap: 0px;">
 			<div class="zw-header">
-				<p style="margin: 0px; line-height: 1.2; font-family: Calibri; font-size: 11pt;"><input class="check" type="text"  /></p>
+				<p style="margin: 0px; line-height: 1.2; font-family: Calibri; font-size: 11pt;"><br></p>
 			</div>
 			<div class="zw-contentpane">
 				<p style="margin: 0px; line-height: 2.16667; text-align: center; font-family: 黑体; font-size: 18pt; color: rgb(0, 0, 0); padding-bottom: 0px; border-bottom: 0px;"><span style="font-family: 黑体; font-size: 18pt;">山西中储粮粮油质监中心</span></p>
 				<p style="margin: 0px; line-height: 2.16667; text-align: center; font-family: 黑体; font-size: 18pt; color: rgb(0, 0, 0); padding-bottom: 10.4px; padding-top: 0px; border-top: 0px;"><span style="font-family: 黑体; font-size: 18pt;">玉米品尝评分记录表</span></p>
 				<div class="zw-header">
-					<p style="margin: 0px 0.291667in 0px 0px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">时间：</span><input class="check" type="text"  /></p>
-					<p style="margin: 0px 0.291667in 0px 0px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"> 品评员：</span><input class="check" type="text"  /></p>
-					<p style="margin: 0px 0.291667in 0px 0px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">SXZCZJ/JL009-2015</span></p>		
+					<p style="margin: 0px 0 0px 0px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">时间：</span><input class="check" type="text"  /></p>
+					<p style="margin: 0px 0 0px 0px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"> 品评员：</span><input class="check" type="text"  /></p>
+					<p style="margin: 0px 0px 0px 35px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">SXZCZJ/JL009-2015</span></p>		
 				</div>
 				<table class="zw-table" data-node-id="node_02280918380844279" style=" direction: ltr; width: 6.40278in; border-collapse: collapse;">
 					<colgroup>
@@ -383,10 +383,10 @@
 						</tr>
 					</tbody>
 				</table>
-				<p style="margin: 0px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
+				<p style="margin: 0px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><br></p>
 			</div>
 			<div class="zw-footer">
-				<p style="margin: 0px; line-height: 1.2; font-family: Calibri; font-size: 11pt;"><input class="check" type="text"  /></p>
+<!--				<p style="margin: 0px; line-height: 1.2; font-family: Calibri; font-size: 11pt;"><input class="check" type="text"  /></p>-->
 			</div>
 			<div></div>
 			<div></div>
@@ -395,54 +395,7 @@
 </template>
 
 <style>
-.check {
-	width:100%;
-	height:100%;
-	line-height:inherit;
-	color:inherit;
-	font-size:inherit;
-	border:none;
-	outline: none;
-	text-align: center;
-}
-.check_checkbox{
-	margin:0 3px 0 0;
-	vertical-align: -2px;
-}
-.zw-footer .check {
-	width:100px;
-	height:100%;
-	line-height:inherit;
-	color:inherit;
-	font-size:inherit;
-	border:none;
-	outline: none;
-	text-align: left;
-	padding-left:2em;
-}
-.ui-body-bg{
-	width:840px;
-	margin:auto;
-	padding-bottom:20px;
-	position:relative;
-}
-.code{
-	width:150px;
-	/*height:130px;*/
-	position:absolute;
-	top:26px;
-	left:116px;
-}
-.zw-header p{
-	display: inline-block;
-	width:180px;
-}
-.zw-header p input{
-	width:100px;
-}
-.zw-header p:last-of-type{
-	width:150px;
-}
+
 </style>
 <script>
 

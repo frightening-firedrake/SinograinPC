@@ -67,8 +67,8 @@
 					<input type="text" v-model="listHeader.tableName" />
 				</label>
 			</template>
-			<template v-else>
-				{{listHeader.tableName}}
+			<template v-else >
+				<span v-html="listHeader.tableName"></span>
 			</template>
 		</div>
 	</div>

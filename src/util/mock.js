@@ -562,6 +562,28 @@ var spkd=Mock.mock('/liquid/role18/data', {
       	total:56,
 
 });
+//扦样报表数据
+var spkd=Mock.mock('/liquid/role19/data', {
+      librarydatas:[
+      	{
+  			lib:'本库',
+  			'samples|0-13':[
+  				{'id|+1': 1,sampleNumber:'监20170094'},
+  			],
+  	    },
+  	    {
+  			lib:'山西晋城国家粮食储备库',
+  			'samples|0-13':[
+  				{'id|+1': 1,sampleNumber:'监20170094'},
+  			],
+  	    },
+       
+      ],
+      formdatas:{
+	      tableName:'',
+	      remarks:'',
+      },
+});
 export default {
 //	LibraryList:LibraryList,
 }

@@ -3,7 +3,7 @@
 		<img class="code" :src="codeUrl" alt="" />
 		<div class="zw-page" style="margin-left: 113.4px; margin-right: 113.4px; column-count: 1; column-gap: 0px;">
 			<div class="zw-header">
-				<p style="margin: 0px; line-height: 1.2; font-family: Calibri; font-size: 11pt;"><input class="check" type="text"  /></p>
+				<p style="margin: 0px; line-height: 1.2; font-family: Calibri; font-size: 11pt;"><br></p>
 			</div>
 			<div class="zw-contentpane">
 				<p style="margin: 0px; line-height: 2.16667; text-align: center; font-family: 黑体; font-size: 18pt; color: rgb(0, 0, 0); padding-bottom: 0px; border-bottom: 0px;"><span style="font-family: 黑体; font-size: 18pt;">山西中储粮粮油质监中心</span></p>
@@ -1344,44 +1344,7 @@
 </template>
 
 <style>
-.check {
-	width:100%;
-	height:100%;
-	line-height:inherit;
-	color:inherit;
-	font-size:inherit;
-	border:none;
-	outline: none;
-	text-align: center;
-}
-.check_checkbox{
-	margin:0 3px 0 0;
-	vertical-align: -2px;
-}
-.zw-footer .check {
-	width:100px;
-	height:100%;
-	line-height:inherit;
-	color:inherit;
-	font-size:inherit;
-	border:none;
-	outline: none;
-	text-align: left;
-	padding-left:2em;
-}
-.ui-body-bg{
-	width:840px;
-	margin:auto;
-	padding-bottom:20px;
-	position:relative;
-}
-.code{
-	width:150px;
-	/*height:130px;*/
-	position:absolute;
-	top:26px;
-	left:116px;
-}
+
 </style>
 <script>
 

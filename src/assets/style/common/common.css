@@ -46,7 +46,9 @@ a {
 html{
 	font-size:100px;
 }
-
+label{
+	box-shadow: none!important;
+}
 @media screen and (max-width:1367px){
 	html{
 		font-size:71.1458px;

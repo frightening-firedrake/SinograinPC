@@ -33,6 +33,11 @@ import PackingPrint from '@/components/sampleDetection/packing/PackingPrint.vue'
 import CheckList from '@/components/sampleDetection/check/CheckList.vue'
 import CheckEdit from '@/components/sampleDetection/check/CheckListEdit.vue'
 
+import TestReportMaker from '@/components/TestReport/TestReportMaker.vue'
+import SampleSelect from '@/components/TestReport/SampleSelect.vue'
+import TestReport from '@/components/TestReport/TestReport.vue'
+
+
 
 
 
@@ -265,6 +270,28 @@ export default new Router({
             path:"sampleDetection/checkList/checkView",
             name:"样品检测/样品检验单/样品检验单详情",
             component:CheckEdit
+          },
+//        样品检验报告TestReportManagement
+					{
+            path:"TestReportManagement",
+            name: '检测报表管理',
+            component:TestReportMaker,
+            redirect: 'TestReportManagement/TestReportMaker',
+          },
+          {
+            path:"TestReportManagement/TestReportMaker",
+            name:"检测报表管理/样品检测报表制作",
+            component:TestReportMaker
+          },
+          {
+            path:"TestReportManagement/TestReportMaker/SampleSelect",
+            name:"检测报表管理/样品检测报表制作/选取样品",
+            component:SampleSelect
+          },
+          {
+            path:"TestReportManagement/TestReportMaker/TestReport",
+            name:"检测报表管理/样品检测报表制作/样品检测报表详情",
+            component:TestReport
           },
       ]
     },
