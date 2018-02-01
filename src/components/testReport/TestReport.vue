@@ -11,8 +11,14 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-table-list class="tablelist" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
-      </sinograin-table-list>
+      <sinograin-complex-list class="complex" v-show="headerindex==0" :tabledata="tabledatas" :list="list" :items="items[0]" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
+      </sinograin-complex-list>
+      <sinograin-complex-list class="complex" v-show="headerindex==1" :tabledata="tabledatas" :list="list" :items="items[1]" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
+      </sinograin-complex-list>
+      <sinograin-complex-list class="complex" v-show="headerindex==2" :tabledata="tabledatas" :list="list" :items="items[2]" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
+      </sinograin-complex-list>
+      <sinograin-complex-list class="complex" v-show="headerindex==3" :tabledata="tabledatas" :list="list" :items="items[3]" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
+      </sinograin-complex-list>
       <!--分页-->
       <!--<sinograin-pagination style="border:none;" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
       <!--弹框-->
@@ -27,7 +33,7 @@
 </style>
 
 <script>
-import SinograinTableList from '@/components/common/action/TableList.vue';
+import SinograinComplexList from '@/components/common/action/ComplexList.vue';
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SinograinPagination from '@/components/common/action/Pagination.vue';
@@ -36,7 +42,7 @@ import ListHeader from '@/components/common/action/ListHeader.vue';
 import TfootButtons from '@/components/common/action/TfootButtons.vue';
 import SinograinModal from '@/components/common/action/Modal.vue';
 import Tabselect from '@/components/common/action/Tabselect.vue';
-import "@/assets/style/common/Tablelist.css"
+import "@/assets/style/common/ComplexList.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
 import data from '@/util/mock';
@@ -45,7 +51,7 @@ import data from '@/util/mock';
 
 export default {
   components: {
-    SinograinTableList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,Tabselect,SinograinModal,ListHeader,SinograinOptionTitle,TfootButtons
+    SinograinComplexList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,Tabselect,SinograinModal,ListHeader,SinograinOptionTitle,TfootButtons
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -64,7 +70,7 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
-//	this.getlistdata(1)
+	this.getlistdata(1)
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
@@ -218,6 +224,7 @@ export default {
 	},
 //	选项卡切换
 	TabChange(currentTab){
+		this.headerindex=currentTab;
 		var Tabitem=this.Tabs.filter((item,index)=>{
 			return item.label==currentTab
 		})
@@ -230,7 +237,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role17/data',
+      datalistURL:'/liquid/role20/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -239,7 +246,7 @@ export default {
       	search:false,   
       	searching:'',
       },
-      currentTab:'基本情况',
+      currentTab:0,
       Tabs:[
       	{label:0,text:'基本情况'},
       	{label:1,text:'扦样检查情况'},
@@ -281,86 +288,313 @@ export default {
       	tableName:'2017年度轮换验收情况汇总表—<span style="color:#2d82e2;">基本情况</span>表',
       },
       tabledatas:[],
-      items: [
-      {
-        id: 1,
-        prop:'sampling_number',
-        label: "扦样编号",
-//      sort:true
-      },
-      {
-        id: 2,
-        prop:'checkregion',
-        label:"被查库点",
-//      sort:true,
-      },
-      {
-        id: 3,
-        prop:'pnumber',
-        label: "货位号",
-//      sort:true,
-      },
-      {
-        id: 4,
-        prop:'varieties',
-        label:"品种",
-//      sort:true,
-      },
-      {
-        id: 5,
-        prop:'quality',
-        label:"性质",
-//      sort:true,
-      },
-      {
-        id: 6,
-        prop:'weight',
-        label:"数量（吨）",
-//      sort:true,
-      },
-      {
-        id: 7,
-        prop:'producing_area',
-        label:"产地",
-//      sort:true,
-      },
-      {
-        id: 8,
-        prop:'harvestdate',
-        label:"收获年度",
-//      sort:true,
-      },
-      {
-        id: 9,
-        prop:'sampleInTime',
-        label:"入库时间",
-//      sort:true,
-      },
-      {
-        id: 10,
-        prop:'samplingSign',
-        label:"扦样人员签字",
-//      sort:true,
-      },
-      {
-        id: 11,
-        prop:'sampleInSignWidth',
-        label:"现场人员签字",
-//      sort:true,
-      },
-      {
-        id: 12,
-        prop:'samplingdate',
-        label:"扦样日期",
-//      sort:true,
-      },
-      {
-        id: 13,
-        prop:'remarks',
-        label:"备注",
-//      sort:true,
-      },
-      ],
+      headerindex:0,
+      items:[
+	    [
+	      {
+	        id: 1,
+	        prop:'storageVault',
+	        label: "储存库点名称",
+	        pid:0,
+	//      sort:true
+	      },
+	      {
+	        id: 2,
+	        prop:'testNumber',
+	        label:"检验编号",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 3,
+	        prop:'sampleNumber',
+	        label: "扦样编号",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 4,
+	        prop:'WarehouseNumber',
+	        label:"仓号",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 5,
+	        prop:'varieties',
+	        label:"品种",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 6,
+	        prop:'weight',
+	        label:"数量（吨）",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 7,
+	        prop:'harvestdate',
+	        label:"生产年份",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 8,
+	        prop:'sampleInTime',
+	        label:"入库时间",
+	        pid:0,
+	//      sort:true,
+	      },
+	    ],
+	    [
+	      {
+	        id: 1,
+	        prop:'applicationTime',
+	        label: "验收申请时间",
+	        pid:0,
+	//      sort:true
+	      },
+	      {
+	        id: 2,
+	        prop:'taskTime',
+	        label:"任务下达时间",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 3,
+	        prop:'sampleTime',
+	        label: "扦样时间",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 4,
+	        prop:'sampleInSign',
+	        label:"扦样人",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 5,
+	        prop:'remarkssp',
+	        label:"备注",
+	        pid:0,
+	//      sort:true,
+	      },
+	    ],
+	    [
+	      {
+	        id: 1,
+	        prop:'long',
+	        label: "长度",
+	        pid:0,
+	//      sort:true
+	      },
+	      {
+	        id: 2,
+	        prop:'width',
+	        label:"宽度",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 3,
+	        prop:'height',
+	        label: "高度",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 4,
+	        prop:'volume_q',
+	        label:"扣除体积",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 5,
+	        prop:'volume_r',
+	        label:"粮堆实际体积",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 6,
+	        prop:'volume_weigh_bz',
+	        label:"容重",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 7,
+	        prop:'correction_factor_bz',
+	        label:"修正系数",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 8,
+	        prop:'average_density_bz',
+	        label:"平均密度",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 9,
+	        prop:'weight_measure',
+	        label:"测量计算数",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 10,
+	        prop:'bgzsl',
+	        label:"保管帐数量",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 11,
+	        prop:'slip',
+	        label:"差率",
+	        pid:0,
+	//      sort:true,
+	      },
+	    ],
+	    [
+	      {
+	        id: 1,
+	        label: "质量情况",
+	        pid:0,
+	      },
+	      {
+	        id: 2,
+	        label:"储存品质情况",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 3,
+	        prop:'dj_zl',
+	        label: "等级",
+	        pid:1,
+	        width:70,
+	//      sort:true,
+	      },
+	      {
+	        id: 4,
+	        label:"质量指标",
+	        pid:1,
+	//      sort:true,
+	      },
+	      {
+	        id: 5,
+	        prop:'result_zl',
+	        label:"结果判定",
+	        pid:1,
+	        width:70,
+	//      sort:true,
+	      },
+	      {
+	        id: 6,
+	        prop:'rz_zl',
+	        label:"容重",
+	        pid:4,
+	        width:70,
+	//      sort:true,
+	      },
+	      {
+	        id: 7,
+	        prop:'sf_zl',
+	        label:"水分",
+	        pid:4,
+	        width:70,
+	//      sort:true,
+	      },
+	      {
+	        id: 8,
+	        prop:'zz_zl',
+	        label:"杂质",
+	        pid:4,
+	        width:70,
+	//      sort:true,
+	      },
+	      {
+	        id: 9,
+	        label:"不完善粒",
+	        pid:4,
+	//      sort:true,
+	      },
+	      {
+	        id: 10,
+	        prop:'szqw_zl',
+	        label:"色泽气味",
+	        pid:4,
+	//      sort:true,
+	      },
+	      {
+	        id: 11,
+	        prop:'zl_bwsl',
+	        label:"总量",
+	        pid:9,
+	//      sort:true,
+	      },
+	      {
+	        id: 12,
+	        prop:'smkl_bwsl',
+	        label:"生霉颗粒",
+	        pid:9,
+	//      sort:true,
+	      },
+	      {
+	        id: 13,
+	        label:"储存品质指标",
+	        pid:2,
+	      },
+	      {
+	        id: 14,
+	        prop:'result_pz',
+	        label:"结果判定",
+	        pid:2,
+	        width:70,
+	//      sort:true,
+	      },
+	      {
+	        id: 15,
+	        prop:'rz_pz',
+	        label:"容重",
+	        pid:13,
+	        width:70,
+	//      sort:true,
+	      },
+	      {
+	        id: 16,
+	        prop:'sf_pz',
+	        label:"水分",
+	        pid:13,
+	        width:70,
+	//      sort:true,
+	      },
+	      {
+	        id: 17,
+	        prop:'zz_pz',
+	        label:"杂质",
+	        pid:13,
+	        width:70,
+	//      sort:true,
+	      },
+	      {
+	        id: 18,
+	        prop:'remarks_pz',
+	        label:"备注",
+	        pid:0,
+	//      sort:true,
+	      },
+	    ],
+	  ],
       actions:{
       	selection:false,
       	number:true,
@@ -371,19 +605,19 @@ export default {
       	safetyReport:false,
       },
       tfbtns:{
-      	btnCenter:{
-			btnTextL:'申请扦样',
-			btnTextR:'保存',
-		},
+//    	btnCenter:{
+//			btnTextL:'申请扦样',
+//			btnTextR:'保存',
+//		},
 //		btnLeft:{
 //			btnText:'导出Excel表格',
 //		},
-		btnRight:{
-			btnText:'导出Excel表格',
-		},
-//		btnOne:{
+//		btnRight:{
 //			btnText:'导出Excel表格',
-//		},     	
+//		},
+		btnOne:{
+			btnText:'导出Excel表格',
+		},     	
       },
     }
   }

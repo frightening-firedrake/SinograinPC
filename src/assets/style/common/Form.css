@@ -459,3 +459,10 @@ div.line{
 	border-top: solid 1px #dfdfdf;
 	background:#ffffff;
 }
+/*下拉菜单*/
+.el-select-dropdown__item{
+	font-size:0.16rem;
+}
+.el-select-dropdown__item.selected{
+	color: #58b481;
+}

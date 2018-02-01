@@ -129,7 +129,7 @@
     color: rgb(51, 51, 51);
     font-size: 0.18rem;
     color:#000000;
-    height:0.68rem;
+    height:0.5rem;
     /*line-height:0.68rem;*/
 }
 /*表格颜色*/
@@ -349,3 +349,5 @@
 	text-align: center;
 	background:rgba(0,0,0,0);
 }
+/*复杂表*/
+/*.complex */

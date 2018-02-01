@@ -4,6 +4,14 @@ Mock.Random.extend({
         var checkLibs = ['山西屯留国家粮食储备库', '本库']
         return this.pick(checkLibs)
     },
+    storageVault: function(date) {
+        var checkLibs = ['太原库1', '太原库2', '太原库3', '太原库4']
+        return this.pick(checkLibs)
+    },
+    unit: function(date) {
+        var checkLibs = ['山西屯留国家粮食储备库', '太原库','襄垣库']
+        return this.pick(checkLibs)
+    },
     row_class_name: function(date) {
         var row_class_names = ['new', 'old']
         return this.pick(row_class_names)
@@ -584,9 +592,57 @@ var spkd=Mock.mock('/liquid/role19/data', {
 	      remarks:'',
       },
 });
+//粮库基本列表
+var jblb=Mock.mock('/liquid/role20/data', {
+      'rows|8-19':[
+        {
+          'id|+1': 1,
+          unit:"@unit",
+          storageVault:"@storageVault",
+          testNumber:'监20170078',
+          sampleNumber:'襄垣-玉米-110',
+          WarehouseNumber:'漫水',
+          varieties: '玉米',//品种
+          weight: '220.000',//代表数量
+          harvestdate: '2017',//收货年度
+          sampleInTime: "@date('yyyy.MM.dd')",
+          
+          applicationTime:"@date('yyyy.MM.dd')",
+          taskTime:"@date('yyyy.MM.dd')",
+          sampleTime: "@date('yyyy.MM.dd')",
+          sampleInSign: "@sampleInSign",
+          remarkssp:"@boolean()",
+          
+          long:"12",
+          width:"12",
+          height:"12",
+          volume_q:'54',
+          volume_r:'90',
+          volume_weigh_bz:'54',
+          correction_factor_bz:'54',
+          average_density_bz:'54',
+          weight_measure:'54',
+          bgzsl:'54',
+          slip:'54',
+          
+          dj_zl:'良',
+          rz_zl:'容重',
+          sf_zl:'水分',
+          zz_zl:'杂质',
+          zl_bwsl:'54',
+          smkl_bwsl:'',
+          szqw_zl:'气味',
+          result_zl:'合格',
+          rz_pz:'容重',
+          sf_pz:'水分',
+          zz_pz:'杂质',
+          result_pz:'合格',
+          remarks_pz:'备注',
+        }
+      ],
+      	total:56,
+
+});
 export default {
 //	LibraryList:LibraryList,
 }
-
-
-
