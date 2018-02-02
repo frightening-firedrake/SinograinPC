@@ -10,7 +10,6 @@
 	  	:data='tabledatasFilter'
 	  	show-summary
 	  	:summary-method="headerGetSummaries"
-	  	@selection-change="handleSelectionChange" 
 	  	:default-sort = "{prop: 'unit', order: 'ascending'}" 
 	  	v-loading="loading"
 	  	:row-class-name="row_class_name"
@@ -42,7 +41,11 @@
 			   		</template>
 	    		</el-table-column>
 	   		</template>
-	   		
+	   		<template slot="empty"> 
+	      		<i class="iconfont icon-xinjian" @click=emptyCreate></i>
+	      		<br />
+	      		页面空空如也 快去新建吧！     		
+	      	</template>
 	  </el-table>	
 	  
 	  	<div class="selectlib">
@@ -68,7 +71,6 @@
 			  	:span-method="arraySpanMethod"
 			  	show-summary
 			  	:summary-method="getSummaries"
-			  	@selection-change="handleSelectionChange" 
 			  	:default-sort = "{prop: 'WarehouseNumber', order: 'ascending'}" 
 			  	v-loading="loading"
 			  	:row-class-name="row_class_name"
@@ -143,9 +145,13 @@ export default {
     return {
     	unitfilter:'全部库',
 //  	importLoading: false,
-      multipleSelection: [],
-      resizable:false,
+      	multipleSelection: [],
+      	resizable:false,
     }
+  },
+  created(){
+	console.log(this.loading)
+  	
   },
   mounted: function() {
 //	console.log(this.tabledatasFilter)
@@ -258,65 +264,11 @@ export default {
 //			return cellValue;
 //		}
 //	},
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
-      var checkedId=val.map(function(item){
-      	return item.id;
-      })
-			this.$emit('getchecked',checkedId)
-    },
 //  设置行类名
     row_class_name(scope){
     	return scope.row.row_class_name
     },
-//  工作底稿
-    handleViewManuscript(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptEdit'})
-    },
-    handleCreateManuscript(index, row){
-    	console.log(this.$router)
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptCreate'})
-    },
-//  安全报告
-    handleViewSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportEdit'})
-    },
-    handleCreateSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate'})
-    },
-    handleInput(index, row,scope) {
-//	  	console.log(index,row);
-//		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
-		    this.$root.eventHub.$emit('inputlistitem',row.id)
-		},
-    handleView(index, row,scope) {
-//	  	console.log(index,row);
-//		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
-		    this.$root.eventHub.$emit('viewlistitem',row.id)
-		},
-		handleEdit(index, row) {
-//	  	console.log(index,row,this.list);
-		    this.$root.eventHub.$emit('editlistitem',row.id)
-		},
-	
-	  handleDele(index, row) {
-	    this.$confirm('此操作将永久删除该'+row.rowType+', 是否继续?', '提示', {
-	      confirmButtonText: '确定',
-	      cancelButtonText: '取消',
-	      type: 'warning'
-	    }).then(() => {
-	    	this.$root.eventHub.$emit('delelistitem',row.id,this.list);
-	      this.$message({
-	        type: 'success',
-	        message: '删除成功!'
-	      });
-	    }).catch(() => {
-	      this.$message({
-	        type: 'info',
-	        message: '已取消删除'
-	      });          
-	    });
-	  },
+
 	  emptyCreate(){
 //	  	this.$emit('emptyCreate');
 	  }

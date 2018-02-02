@@ -5,7 +5,7 @@
 	            <p>{{formtitle}}</p>
 	        </template>      
 	        <el-form-item label="表单名称：" prop="tableName">
-			    <el-input v-model="formdatas.tableName"></el-input>
+			    <el-input v-model="formdatas.tableName" placeholder="请输入表单名称"></el-input>
 			</el-form-item>
 			<el-form-item label="备注：">
 			    <el-input v-model="formdatas.remarks"></el-input>
