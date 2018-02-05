@@ -9,7 +9,7 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-table-list-edit-model class="tablelist" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" @currentRow="currentRowFun"> 
+      <sinograin-table-list-edit-model class="tablelist editmodel" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" @currentRow="currentRowFun"> 
       </sinograin-table-list-edit-model>
       <!--分页-->
       <!--<sinograin-pagination style="border:none;" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
@@ -36,7 +36,8 @@ import SinograinModal from '@/components/common/action/Modal.vue';
 import "@/assets/style/common/Tablelist.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+// import data from '@/util/mock';
+
 
 
 
@@ -61,7 +62,7 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
-	this.getlistdata(1)
+	// this.getlistdata(1)
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
@@ -220,6 +221,21 @@ export default {
 	titleEvent(){
   		console.log('titleEvent');
   	},
+	savedata(){
+  		// 提交扦样列表
+		this.$http({
+		    method: 'post',
+			url: this.saveURL,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				formName: this.listHeader.tableName
+			},
+	    }).then(function (response) {
+		  
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
 //	表单底部触发事件btnCenterNo btnCenterYes btnLeft btnRight btnOne
 	tfootEvent(date){
 		console.log(date);
@@ -231,8 +247,9 @@ export default {
 
 		}else if(date=='btnRight'){
 
-		}else if(date=='btnOne'){			
-			this.$router.push({path: '/index/grainDepot/createSampleReglc/sampleReglc'})
+		}else if(date=='btnOne'){		
+			this.savedata()	
+			// this.$router.push({path: '/index/grainDepot/createSampleReglc/sampleReglc'})
 		}else if(date=='tableAdd'){
 			this.rowid++;
 			var newdata={
@@ -267,7 +284,7 @@ export default {
   data() {
     return {
       rowid:999,//临时id
-      datalistURL:'/liquid/role17/data',
+      saveURL:'api/grain/request/save',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -296,7 +313,7 @@ export default {
       	btn:false,
 //    	btntext:'打印样品检验单',
       },
-      loading:true,
+      loading:false,
       filterStatus:'全部',
 //    分页数据
       page: {
@@ -328,12 +345,12 @@ export default {
       },
       tabledatas:[],
       items: [
-      {
-        id: 1,
-        prop:'sampling_number',
-        label: "扦样编号",
-//      sort:true
-      },
+//       {
+//         id: 1,
+//         prop:'sampling_number',
+//         label: "扦样编号",
+// //      sort:true
+//       },
       {
         id: 2,
         prop:'checkregion',

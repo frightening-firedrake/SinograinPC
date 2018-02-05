@@ -453,9 +453,9 @@ export default {
   data() {
     return {
     //   datalistURL:'/liquid/role/data',
-      searchURL:'/liquid/role/search',
-      deleteURL:'/liquid/role/delete',
-      pagetotalURL:'/liquid/role/data',
+      searchURL:'api/grain/role/search',
+      deleteURL:'/api/grain/role/delete',
+      pagetotalURL:'api/grain/role/data',
       checkedId:[],
       list:"rolelist",
       breadcrumb:{

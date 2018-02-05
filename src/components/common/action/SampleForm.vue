@@ -3,14 +3,14 @@
         <template>
             <p>{{formdatas.title}}</p>
         </template>      
-        <el-form-item label="创建时间：" prop="ctime" v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.ctime" :disabled="disabled"></el-input>
+        <el-form-item label="创建时间：" prop="createTime" v-bind:class="{disabled:disabled}">
+		    <el-input v-model="formdatas.form.createTime" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="样品条形码：" class="code" prop="code" v-bind:class="{disabled:disabled}">
 			<img class="codeimg" :src="formdatas.form.code" alt="" />
 		</el-form-item>
-		<el-form-item label="迁样编号：" prop="nid" v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.nid" :disabled="disabled"></el-input>
+		<el-form-item label="迁样编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">
+		    <el-input v-model="formdatas.form.sampleNo" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="货位号：" prop="pnumber" v-bind:class="{disabled:disabled}" >
 		    <el-input v-model="formdatas.form.pnumber" :disabled="disabled"></el-input>
@@ -18,8 +18,8 @@
 		<el-form-item label="性质：" prop="quality"  v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.quality" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="状态：" prop="status" v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.status" :disabled="disabled"></el-input>
+		<el-form-item label="状态：" prop="state" v-bind:class="{disabled:disabled}">
+		    <el-input v-model="formdatas.form.state" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="产地：" prop="region"  v-bind:class="{disabled:disabled}">
 		    <el-select v-model="formdatas.form.region" placeholder="请选择产地" :disabled="disabled">

@@ -202,7 +202,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role2/data',
+      datalistURL:'api/grain/sample/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -262,37 +262,37 @@ export default {
       items: [
       {
         id: 1,
-        prop:'sampling_number',
+        prop:'sampleNo',
         label: "扦样编号",
         sort:true
       },
       {
         id: 2,
-        prop:'position_number',
+        prop:'position',
         label: "货位号",
         sort:true,
       },
       {
         id: 3,
-        prop:'varieties',
+        prop:'sort',
         label:"品种",
         sort:true,
       },
       {
         id: 4,
-        prop:'status',
+        prop:'state',
         label:"状态",
         sort:true,
       },
       {
         id: 5,
-        prop:'producing_area',
+        prop:'originPlace',
         label:"产地",
         sort:true,
       },
       {
         id: 6,
-        prop:'createTime',
+        prop:'gainTime',
         label:"收获年度",
         sort:true,
       },

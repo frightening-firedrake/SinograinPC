@@ -26,7 +26,7 @@ import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+// import data from '@/util/mock';
 
 
 
@@ -62,7 +62,8 @@ export default {
 				id:this.$route.query
 			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
+		  	this.formdatas.form=response.data.rows[0];
+				console.log(response.data.rows[0])
 //	  		this.page.total=response.data.total;
 		  	
 	  		setTimeout(()=>{			  		
@@ -98,7 +99,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role3/data',
+      datalistURL:'api/grain/sample/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -119,19 +120,19 @@ export default {
       formdatas: {
       	title:'中央储备粮襄垣直属库',
       	form:{
-          ctime: '2017-12-12',//创建时间
-          status: '未扦样',//状态
-          nid: '',//迁样编号
-          checkregion: '山西',//被查库点
-          pnumber: '',//货位号
-          varieties: '',//品种
-          quality: '',//性质
-          weight: '',//代表数量
-          region: '山西',//产地
-          harvestdate: '2017',//收货年度
-          samplingdate: '',//扦样日期
-          remarks: '',//备注
-          code:''
+          // createTime: '2017-12-12',//创建时间
+          // state: '未扦样',//状态
+          // sampleNo: '',//迁样编号
+          // checkregion: '山西',//被查库点
+          // pnumber: '',//货位号
+          // varieties: '',//品种
+          // quality: '',//性质
+          // weight: '',//代表数量
+          // region: '山西',//产地
+          // harvestdate: '2017',//收货年度
+          // samplingdate: '',//扦样日期
+          // remarks: '',//备注
+          // code:''
       	}
 	  }
     }

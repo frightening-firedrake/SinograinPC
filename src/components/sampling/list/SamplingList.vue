@@ -143,21 +143,21 @@ export default {
 		}.bind(this));
   	},
   	//	发送删除id
-  	sendDeleteId(id){
-		this.$http({
-		    method: 'post',
-			url: this.deleteURL,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-			    listName: this.list,
-			    id:id,
-			}
-	    }).then(function (response) {
+  	// sendDeleteId(id){
+	// 	this.$http({
+	// 	    method: 'post',
+	// 		url: this.deleteURL,
+	// 		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+	// 		data: {
+	// 		    listName: this.list,
+	// 		    id:id,
+	// 		}
+	//     }).then(function (response) {
 		  	
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
-  	},
+	// 	}.bind(this)).catch(function (error) {
+	// 	    console.log(error);
+	// 	}.bind(this));
+  	// },
 //	获取分页点击事件中及当前页码
     getCurrentPage(currentPage){
 //		console.log(currentPage)
@@ -180,9 +180,9 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role14/data',
-      searchURL:'/liquid/role/data/search',
-      deleteURL:'/liquid/role/data/delete',
+      datalistURL:'api/grain/request/data',
+      searchURL:'api/grain/request/data/search',
+    //   deleteURL:'api/grain/request/data/delete',
       checkedId:[],
       list:"librarylist",
 	  modalVisible:false,
@@ -234,13 +234,13 @@ export default {
       items: [
       {
         id: 1,
-        prop:'tableName',
+        prop:'formName',
         label: "表格名称",
 //      sort:true
       },
       {
         id: 2,
-        prop:'sampleStatus',
+        prop:'state',
         label: "状态",
 //      sort:true,
       },

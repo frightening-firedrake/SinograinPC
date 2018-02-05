@@ -50,16 +50,13 @@
 		          </template>
 	    		</el-table-column>
    		</template>
-	    
-	   
-      
-      <template slot="empty"> 
-      		<i class="iconfont icon-xinjian" @click=emptyCreate></i>
-      		<br />
-      		页面空空如也 快去新建吧！     		
-      </template>
   </el-table>	
 </template>
+<style>
+.editmodel .el-table__empty-block{
+	height:auto;
+}
+</style>
 <script>
 export default {
   props: ['items', 'tabledata','actions','list','loading'],

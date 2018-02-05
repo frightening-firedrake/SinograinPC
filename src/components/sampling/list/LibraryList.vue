@@ -30,7 +30,7 @@ import SinograinModal from '@/components/common/action/Modal.vue';
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+// import data from '@/util/mock';
 
 
 
@@ -180,9 +180,9 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role/data',
-      searchURL:'/liquid/role/data/search',
-      deleteURL:'/liquid/role/data/delete',
+      datalistURL:'api/grain/request/data',
+      searchURL:'api/grain/',
+      deleteURL:'api/grain/',
       checkedId:[],
       list:"librarylist",
 	  modalVisible:false,
@@ -240,7 +240,7 @@ export default {
 //    },
       {
         id: 2,
-        prop:'checkLib',
+        prop:'formName',
         label: "被查库点",
 //      sort:true,
       },
