@@ -180,8 +180,8 @@ export default {
   },
   data() {
     return {
-      datalistURL:'api/grain/request/data',
-      searchURL:'api/grain/',
+      datalistURL:'api/grain/register/data',
+      searchURL:'api/grain/register/data/search',
       deleteURL:'api/grain/',
       checkedId:[],
       list:"librarylist",

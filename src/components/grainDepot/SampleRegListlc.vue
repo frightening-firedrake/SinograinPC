@@ -30,7 +30,7 @@ import SinograinModal from '@/components/common/action/Modal.vue';
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+// import data from '@/util/mock';
 
 
 
@@ -136,11 +136,19 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 			    listName: this.list,
 			    page:page,
-			    pageSize:this.page.size,
+			    rows:this.page.size,
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
@@ -191,11 +199,11 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role18/data',
+      datalistURL:'api/grain/register/data',
       searchURL:'/liquid/role/data/search',
       deleteURL:'/liquid/role/data/delete',
       checkedId:[],
-      list:"librarylist",
+	  list:"librarylist",
 	  modalVisible:false,
 	  modal:{
 	  	title:'新建库点',
@@ -219,7 +227,7 @@ export default {
       filterStatus:'all',
 //    分页数据
       page: {
-        size: 10,
+        size: 5,
         total: 0,
         currentPage: 1,
         show:true,
@@ -253,13 +261,13 @@ export default {
       items: [
       {
         id: 1,
-        prop:'tableName',
+        prop:'formName',
         label: "表格名称",
 //      sort:true
       },
       {
         id: 2,
-        prop:'applyStatus',
+        prop:'state',
         label: "状态",
         status:true,
 //      sort:true,
