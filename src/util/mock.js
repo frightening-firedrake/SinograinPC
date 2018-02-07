@@ -12,6 +12,10 @@ Mock.Random.extend({
         var checkLibs = ['山西屯留国家粮食储备库', '太原库','襄垣库']
         return this.pick(checkLibs)
     },
+    roleName: function(date) {
+        var checkLibs = ['扦样人员', '样品管理员','检测员']
+        return this.pick(checkLibs)
+    },
     row_class_name: function(date) {
         var row_class_names = ['new', 'old']
         return this.pick(row_class_names)
@@ -115,7 +119,7 @@ var Sampling=Mock.mock('/liquid/role3/data', {
           harvestdate: '2017',//收货年度
           samplingdate: '2017.9.27',//扦样日期
           remarks: '秋季普查',//备注
-
+          code:'static/images/test/linecode.png',//二维码地址
       	}
 	  }
 });
@@ -642,6 +646,65 @@ var jblb=Mock.mock('/liquid/role20/data', {
       ],
       	total:56,
 
+});
+//扦样报表数据
+var spkd=Mock.mock('/liquid/role21/data', {
+      informations:[
+      	{
+  			title:'库点',
+  			'items|4-13':[
+  				{'id|+1': 1,sampleNumber:'长子库'},
+  			],
+  	    },
+  	    {
+  			title:'品种',
+  			'items|3-13':[
+  				{'id|+1': 1,sampleNumber:'玉米'},
+  			],
+  	    },
+       
+      ],
+});
+//角色授权数据
+var jssq=Mock.mock('/liquid/role22/data', {
+      'rows|3-12':[
+        {
+          'id|+1': 1,
+          roleName:"@roleName",
+          maxMember:'@natural(0, 10)',
+          remarks: "备注信息",
+          rowType:"角色信息",//删除用
+        }
+      ],
+      	total:56,
+});
+//用户授权数据
+var yhsq=Mock.mock('/liquid/role23/data', {
+      'rows|3-12':[
+        {
+          'id|+1': 1,
+          userName:"李佳",
+          assignRole:'管理员',
+          phone: "15940324325",
+          email: "23474@qq.com",
+          rowType:"用户信息",//删除用
+        }
+      ],
+      	total:56,
+});
+//资源列表数据
+var zysq=Mock.mock('/liquid/role24/data', {
+      'rows|3-12':[
+        {
+          'id|+1': 1,
+          resourceType:"菜单",
+          resourceName:"扦样登记列表",
+          resourcePName:"权限管理",
+          action:"查看、删除、新建",
+          rowType: '资源'
+        }
+      ],
+      	total:56,
 });
 export default {
 //	LibraryList:LibraryList,

@@ -32,10 +32,21 @@ import PackingView from '@/components/sampleDetection/packing/PackingView.vue'
 import PackingPrint from '@/components/sampleDetection/packing/PackingPrint.vue'
 import CheckList from '@/components/sampleDetection/check/CheckList.vue'
 import CheckEdit from '@/components/sampleDetection/check/CheckListEdit.vue'
-
 import TestReportMaker from '@/components/TestReport/TestReportMaker.vue'
 import SampleSelect from '@/components/TestReport/SampleSelect.vue'
 import TestReport from '@/components/TestReport/TestReport.vue'
+import RoleList from '@/components/authorityManagement/role/RoleList.vue'
+import RoleEdit from '@/components/authorityManagement/role/RoleEdit.vue'
+import RoleAdd from '@/components/authorityManagement/role/RoleAdd.vue'
+import RoleAut from '@/components/authorityManagement/role/RoleAut.vue'
+import UserList from '@/components/authorityManagement/user/UserList.vue'
+import UserEdit from '@/components/authorityManagement/user/UserEdit.vue'
+import UserAdd from '@/components/authorityManagement/user/UserAdd.vue'
+import UserAut from '@/components/authorityManagement/user/UserAut.vue'
+import ResourcesEdit from '@/components/authorityManagement/resources/ResourcesEdit.vue'
+import ResourcesAdd from '@/components/authorityManagement/resources/ResourcesAdd.vue'
+import ResourcesList from '@/components/authorityManagement/resources/ResourcesList.vue'
+import InformationAdd from '@/components/informationManagement/InformationAdd.vue'
 
 
 
@@ -292,6 +303,80 @@ export default new Router({
             path:"TestReportManagement/TestReportMaker/TestReport",
             name:"检测报表管理/样品检测报表制作/样品检测报表详情",
             component:TestReport
+          },
+//        权限管理AuthorityManagement
+					{
+            path:"AuthorityManagement",
+            name: '权限管理',
+            component:RoleList,
+            redirect: 'AuthorityManagement/RoleList',
+          },
+          {
+            path:"AuthorityManagement/RoleList",
+            name:"权限管理/角色管理",
+            component:RoleList
+          },
+          {
+            path:"AuthorityManagement/RoleList/RoleEdit",
+            name:"权限管理/角色管理/编辑角色",
+            component:RoleEdit
+          },
+          {
+            path:"AuthorityManagement/RoleList/RoleAdd",
+            name:"权限管理/角色管理/新建角色",
+            component:RoleAdd
+          },
+          {
+            path:"AuthorityManagement/RoleList/RoleAut",
+            name:"权限管理/角色管理/角色授权",
+            component:RoleAut
+          },        
+          {
+            path:"AuthorityManagement/UserList",
+            name:"权限管理/用户管理",
+            component:UserList
+          },
+          {
+            path:"AuthorityManagement/UserList/UserEdit",
+            name:"权限管理/用户管理/编辑用户",
+            component:UserEdit
+          },
+          {
+            path:"AuthorityManagement/UserList/UserAdd",
+            name:"权限管理/用户管理/新建用户",
+            component:UserAdd
+          },
+          {
+            path:"AuthorityManagement/UserList/UserAut",
+            name:"权限管理/用户管理/用户授权",
+            component:UserAut
+          },
+           {
+            path:"AuthorityManagement/ResourcesList",
+            name:"权限管理/资源管理",
+            component:ResourcesList
+          },
+          {
+            path:"AuthorityManagement/ResourcesList/ResourcesEdit",
+            name:"权限管理/资源管理/编辑资源",
+            component:ResourcesEdit
+          },
+          {
+            path:"AuthorityManagement/ResourcesList/ResourcesAdd",
+            name:"权限管理/资源管理/新建资源",
+            component:ResourcesAdd
+          },
+//     		信息管理InformationManagement
+					{
+            path:"InformationManagement",
+            name: '信息管理',
+            component:InformationAdd,
+            redirect: 'InformationManagement/InformationAdd',
+          },
+          {
+            path:"InformationManagement/InformationAdd",
+            name:"信息管理/添加信息",
+            component:InformationAdd
           },
       ]
     },

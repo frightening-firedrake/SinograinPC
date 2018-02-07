@@ -48,6 +48,11 @@
 					新建扦样
 				</div>
 			</template>
+			<template v-if="listHeader.autH">				
+				<div class="create" @click="createAut" style="background-image:url('static/images/sys/create.png');">
+					{{listHeader.autH}}
+				</div>
+			</template>
 			<template v-if="listHeader.scanCode">				
 				<div class="scanCode" @click="scanCode">
 					<span>
@@ -292,6 +297,10 @@ export default {
     	createSampling(){
 //  		console.log('createSampling');
     		this.$emit('createSampling');
+    	},
+    	createAut(){
+//  		console.log('createSampling');
+    		this.$emit('createAut');
     	},
     	createlib(){
 //  		console.log('createlib');

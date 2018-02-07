@@ -51,6 +51,7 @@
 /*多选框颜色*/
 .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
     background-color:rgb(88, 180, 129);
+    border-color:rgb(88, 180, 129);
 }
 .el-checkbox__input.is-focus .el-checkbox__inner, .el-checkbox__inner:hover{
 	border-color:rgb(88, 180, 129);
@@ -115,6 +116,9 @@
 .el-main .list .el-table__body-wrapper td .cell button.dele{
     color:#e87373;
 }
+.el-main .list .el-table__body-wrapper td .cell button.auth{
+    color:#e17f00;
+}
 /*表头*/
 .el-main .list .el-table__header-wrapper table tr,.el-main .list .el-table__header-wrapper table tr th{
     background-color:#ffe7b8;
@@ -135,7 +139,8 @@
 	background:#ffffff;
 	border-left:0.41rem solid rgba(241, 241, 241, 1);
 	border-right:0.41rem solid rgba(241, 241, 241, 1);
-	height:auto;
+	/*height:auto;*/
+	min-height:100%;
 }
 /*表格行线*/
 .el-table td, .el-table th.is-leaf{
@@ -331,3 +336,6 @@
 }
 /*复杂表*/
 /*.complex */
+.el-checkbox__input.is-checked+.el-checkbox__label{
+	color:rgb(88, 180, 129);
+}

@@ -1,5 +1,5 @@
 <template>
-    <el-form ref="form" :inline-message="errorinline" class="sampling" :rules="rules" :model="formdatas.form" :label-width="labelWidth">
+    <el-form ref="form" :inline-message="errorinline" class="sampling Manuscript" :rules="rules" :model="formdatas.form" :label-width="labelWidth">
         <template>
             <p>{{formdatas.title}}</p>
         </template>      

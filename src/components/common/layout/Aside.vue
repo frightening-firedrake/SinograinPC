@@ -255,46 +255,54 @@ export default {
 					pid: 15,
 					lid: 16
 				},
-//				{
-//					icon: 'icon-shuju-yihuifu',
-//					title: '恢复数据库',
-//					linkto: '/index/database/list',
-//					level: 2,
-//					pid: 15,
-//					lid: 17
-//				},
-//				{
-//					icon: 'icon-Group',
-//					title: '优化数据库',
-//					linkto: '',
-//					level: 2,
-//					pid: 15,
-//					lid: 18
-//				},
-//				{
-//					icon: 'icon-rizhiguanli',
-//					title: '日志管理',
-//					linkto: '',
-//					level: 2,
-//					pid: 0,
-//					lid: 19
-//				},
-//				{
-//					icon: 'icon-rizhitongji',
-//					title: '日志列表',
-//					linkto: '',
-//					level: 2,
-//					pid: 19,
-//					lid: 20
-//				},
-//				{
-//					icon: 'icon-rizhiliebiao',
-//					linkto: '',
-//					title: '日志统计',
-//					level: 2,
-//					pid: 19,
-//					lid: 21
-//				},
+				{
+					icon: 'icon-quanxianguanli',
+					title: '权限管理',
+					linkto: '',
+					level: 2,
+					pid: 0,
+					lid: 17
+				},
+				{
+					icon: 'icon-jiaoseguanli',
+					title: '角色管理',
+					linkto: '/index/AuthorityManagement/RoleList',
+					level: 2,
+					pid: 17,
+					lid: 18
+				},
+				{
+					icon: 'icon-yonghuguanli',
+					title: '用户管理',
+					linkto: '/index/AuthorityManagement/UserList',
+					level: 2,
+					pid: 17,
+					lid: 19
+				},
+				{
+					icon: 'icon-ziyuanguanli',
+					title: '资源管理',
+					linkto: '/index/AuthorityManagement/ResourcesList',
+					level: 2,
+					pid: 17,
+					lid: 20
+				},
+				{
+					icon: 'icon-pingtaixinxiguanli',
+					linkto: '',
+					title: '信息管理',
+					level: 2,
+					pid: 0,
+					lid: 21
+				},
+				{
+					icon: 'icon-xinjian2',
+					linkto: '/index/InformationManagement/InformationAdd',
+					title: '添加信息',
+					level: 2,
+					pid: 21,
+					lid: 22
+				},
 
 			]
 

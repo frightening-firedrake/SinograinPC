@@ -109,6 +109,10 @@
 				      <template v-if="actions.dele">
 				          <button class="dele" @click="handleDele(scope.$index, scope.row)">删除</button>
 				      </template>
+			<!--是否包含授权操作-->
+				      <template v-if="actions.auth">
+				          <button class="auth" @click="handleAuth(scope.$index, scope.row)">授权</button>
+				      </template>
           </template>
       </el-table-column>
       
@@ -207,6 +211,10 @@ export default {
 	      });          
 	    });
 	  },
+	  handleAuth(index, row) {
+//	  	console.log(index,row,this.list);
+		    this.$root.eventHub.$emit('authlistitem',row.id)
+		},
 	  emptyCreate(){
 	  	this.$emit('emptyCreate');
 	  }
