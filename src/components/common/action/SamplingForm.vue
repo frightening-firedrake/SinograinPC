@@ -19,7 +19,7 @@
 		    <el-input v-model="formdatas.form.quality"></el-input>
 		</el-form-item>
 		<el-form-item label="状态：" prop="state" v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.state" :disabled="disabled"></el-input>
+		    <el-input v-model="samplestate" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="产地：" prop="originPlace" >
 		    <el-select v-model="formdatas.form.originPlace" placeholder="请选择产地">
@@ -79,7 +79,15 @@ export default {
 //		console.log(this.formdatas)
     },
     computed:{
-    	
+    	samplestate(){
+    		if(this.formdatas.form.state==-1){
+    			return "未扦样";
+    		}else if(this.formdatas.form.state==1){
+    			return "已扦样";
+    		}else if(this.formdatas.form.state==2){
+    			return "已入库";
+    		}
+    	}
     },
     data() {
 
