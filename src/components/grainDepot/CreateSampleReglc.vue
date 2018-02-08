@@ -192,22 +192,6 @@ export default {
 	      });          
 	    });
 	},
-  	//	发送删除id
-  	sendDeleteId(id){
-		this.$http({
-		    method: 'post',
-			url: this.deleteURL,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-			    listName: this.list,
-			    id:id,
-			}
-	    }).then(function (response) {
-		  	
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
-  	},
 //	获取分页点击事件中及当前页码
     getCurrentPage(currentPage){
 //		console.log(currentPage)
@@ -233,7 +217,6 @@ export default {
 		var sample =[];
 		this.tabledatas.forEach(function(value,index){
 			var item={};
-			item.position= value.position;
 			item.sort= value.sort;
 			item.quality= value.quality;
 			item.amount= value.amount;
@@ -244,7 +227,9 @@ export default {
 			item.remark= value.remark;
 			sample.push(item);
 		})
-
+		if(sample.length==0) {
+			return
+		}
   		// 提交扦样列表
 		this.$http({
 		    method: 'post',
@@ -264,7 +249,7 @@ export default {
 
 			},
 	    }).then(function (response) {
-		  
+		  this.$router.push({path: '/index/grainDepot/sampleRegListlc'})
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -282,13 +267,12 @@ export default {
 
 		}else if(date=='btnOne'){		
 			this.savedata()	
-			// this.$router.push({path: '/index/grainDepot/createSampleReglc/sampleReglc'})
+			
 		}else if(date=='tableAdd'){
 			this.rowid++;
 			var newdata={
 				id:this.rowid,
 		        libraryName: '沁县库区',//被查库点
-		        position: '',//货位号
 		        sort: '',//品种
 		        quality: 'ZC',//性质
 		        amount: '',//代表数量
@@ -318,7 +302,6 @@ export default {
       rowid:999,//临时id
       saveURL:'api/grain/sample/saveAll',
       searchURL:'/liquid/role2/data/search',
-      deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
       list:"samplinglist",
 	  modalVisible:false,
@@ -387,12 +370,6 @@ export default {
         id: 2,
         prop:'libraryName',
         label:"被查库点",
-//      sort:true,
-      },
-      {
-        id: 3,
-        prop:'position',
-        label: "货位号",
 //      sort:true,
       },
       {
