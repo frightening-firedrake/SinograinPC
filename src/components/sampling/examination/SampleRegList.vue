@@ -53,6 +53,7 @@ export default {
 	}
   },
   created(){
+
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 //	移除监听事件

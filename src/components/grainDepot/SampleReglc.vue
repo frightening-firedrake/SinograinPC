@@ -60,6 +60,17 @@ export default {
   },
   created(){
   	console.log(this.$route.query)
+  	if(this.$route.query.state==3){
+  		this.tfbtns={
+	      	btnCenter:{
+				btnTextL:'申请扦样',
+				btnTextR:'保存',
+			},
+			btnRight:{
+				btnText:'导出Excel表格',
+			},   	
+	    }
+  	}
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 //	移除监听事件
@@ -391,10 +402,10 @@ export default {
       	safetyReport:false,
       },
       tfbtns:{
-      	btnCenter:{
-			btnTextL:'申请扦样',
-			btnTextR:'保存',
-		},
+//    	btnCenter:{
+//			btnTextL:'申请扦样',
+//			btnTextR:'保存',
+//		},
 //		btnLeft:{
 //			btnText:'导出Excel表格',
 //		},

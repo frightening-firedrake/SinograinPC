@@ -213,10 +213,18 @@ export default {
 	titleEvent(){
   		console.log('titleEvent');
   	},
+  	uncomplate(msg){
+  		 this.$alert(msg,'提示信息',{});
+  	},
 	savedata(){
+		if(!this.listHeader.tableName) {
+			var msg="请先填写表名，再尝试提交！"
+			this.uncomplate(msg)
+			return
+		}
 		var sample =[];
-		this.tabledatas.forEach(function(value,index){
-			var item={};
+		this.tabledatas.forEach((value,index)=>{
+			var item={};		
 			item.sort= value.sort;
 			item.quality= value.quality;
 			item.amount= value.amount;
@@ -226,10 +234,26 @@ export default {
 			item.sampleTime= value.samplingdate;
 			item.remark= value.remark;
 			sample.push(item);
+			for(var key in item){
+				if(!item[key]){
+					this.isEmpty=true;
+					break
+				}else{
+					this.isEmpty=false;
+				}
+			}
 		})
 		if(sample.length==0) {
+			var msg="请填写表信息，再尝试提交！"
+			this.uncomplate(msg)
 			return
 		}
+		if(this.isEmpty){
+			var msg="请完善表内空信息，再尝试提交！"
+			this.uncomplate(msg)
+			return
+		}
+
   		// 提交扦样列表
 		this.$http({
 		    method: 'post',
@@ -299,6 +323,7 @@ export default {
   },
   data() {
     return {
+      isEmpty:false,
       rowid:999,//临时id
       saveURL:'api/grain/sample/saveAll',
       searchURL:'/liquid/role2/data/search',

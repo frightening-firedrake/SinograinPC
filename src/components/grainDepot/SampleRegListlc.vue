@@ -30,7 +30,7 @@ import SinograinModal from '@/components/common/action/Modal.vue';
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-// import data from '@/util/mock';
+   import data from '@/util/mock';
 
 
 
@@ -67,9 +67,9 @@ export default {
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击查看事件
-  	this.$root.eventHub.$on("viewlistitem",function(id){  
+  	this.$root.eventHub.$on("viewlistitem",function(id,state){  
 //		console.log(id)
-		this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleReglc',query:{pId:id}})
+		this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleReglc',query:{pId:id,state:state}})
   	}.bind(this));
   },
   destroy(){

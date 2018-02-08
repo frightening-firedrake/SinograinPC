@@ -60,6 +60,19 @@ export default {
   },
   created(){
   	console.log(this.$route.query)
+  	if(this.$route.query.status==-1){
+  		this.tfbtns={
+	      	btnCenter:{
+				btnTextL:'不同意',
+				btnTextR:'同意',
+				doubleColor:true,
+			},
+			btnRight:{
+				btnText:'导出Excel表格',
+			},	
+	    }
+  	}
+  	
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 //	移除监听事件
@@ -357,11 +370,11 @@ export default {
       	safetyReport:false,
       },
       tfbtns:{
-      	btnCenter:{
-			btnTextL:'不同意',
-			btnTextR:'同意',
-			doubleColor:true,
-		},
+//    	btnCenter:{
+//			btnTextL:'不同意',
+//			btnTextR:'同意',
+//			doubleColor:true,
+//		},
 //		btnLeft:{
 //			btnText:'导出Excel表格',
 //		},
