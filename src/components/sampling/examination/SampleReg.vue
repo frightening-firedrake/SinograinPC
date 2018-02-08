@@ -165,6 +165,44 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+	agree() {
+		this.$http({
+			method: 'post',
+			url: this.agreeURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				id: JSON.stringify(this.$route.query.pId),
+				state: 2
+			}
+		})
+	},
+	disagree() {
+		this.$http({
+			method: 'post',
+			url: this.disagreeURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				id: JSON.stringify(this.$route.query.pId),
+				state: 1 
+			}
+		})
+	},
   	//	发送删除id
   	sendDeleteId(id){
 		this.$http({
@@ -206,8 +244,10 @@ export default {
 	tfootEvent(date){
 		console.log(date);
 		if(date=='btnCenterL'){
+			this.disagree()
 			window.history.go(-1)
 		}else if(date=='btnCenterR'){
+			this.agree()
 			window.history.go(-1)
 		}else if(date=='btnLeft'){
 
@@ -221,6 +261,8 @@ export default {
   data() {
     return {
       datalistURL:'api/grain/sample/data',
+	  agreeURL:'api/grain/register/edit',
+	  disagreeURL:'api/grain/register/edit',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
