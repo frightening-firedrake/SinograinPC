@@ -59,7 +59,7 @@ export default {
 			url: this.datalistURL,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				id:this.$route.query
+				sampleId:this.$route.query
 			}
 	    }).then(function (response) {
 		  	this.formdatas=response.data.formdatas;
@@ -107,7 +107,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role4/data',
+      datalistURL:'api/grain/safetyReport/save',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -133,7 +133,7 @@ export default {
           problems:[
           	{
           		problem: '',//问题
-          		images: [
+          		image: [
 
           		],//图片
           	}

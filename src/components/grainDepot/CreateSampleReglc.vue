@@ -142,6 +142,8 @@ export default {
   	},
 //	获取列表数据方法
   	getlistdata(page){
+		 var params = {}
+		 params.pId = this.$route.query.pId
   		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -157,9 +159,7 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-//			    sample: this.list,
-//			    page:page,
-//			    rows:this.page.size,
+				params: JSON.stringify(params)
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
@@ -218,7 +218,7 @@ export default {
   	uncomplate(msg){
   		 this.$alert(msg,'提示信息',{});
   	},
-	savedata(saveURL){
+	savedata(tablestate){
 		if(!this.listHeader.tableName) {
 			var msg="请先填写表名，再尝试提交！"
 			this.uncomplate(msg)
@@ -232,8 +232,8 @@ export default {
 			item.amount= value.amount;
 			item.originPlace= value.originPlace;
 			item.gainTime= value.gainTime;
-			item.updateTime= value.updateTime;
-			item.sampleTime= value.samplingdate;
+			// item.updateTime= value.updateTime;
+			// item.sampleTime= value.samplingdate;
 			item.remark= value.remark;
 			sample.push(item);
 			for(var key in item){
@@ -259,7 +259,7 @@ export default {
   		// 提交扦样列表
 		this.$http({
 		    method: 'post',
-			url: saveURL,
+			url: this.saveURL,
 			transformRequest: [function (data) {
 				// Do whatever you want to transform the data
 				let ret = ''
@@ -271,7 +271,8 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 				formName: this.listHeader.tableName,
-				sample: JSON.stringify(sample)
+				sample: JSON.stringify(sample),
+				state: tablestate
 
 			},
 	    }).then(function (response) {
@@ -284,9 +285,10 @@ export default {
 	tfootEvent(date){
 		console.log(date);
 		if(date=='btnCenterL'){
-			this.savedata(this.sampleURL)	
+			
+			this.savedata(-1)	
 		}else if(date=='btnCenterR'){
-			this.savedata(this.saveURL)	
+			this.savedata(3)	
 		}else if(date=='btnLeft'){
 
 		}else if(date=='btnRight'){
@@ -304,10 +306,10 @@ export default {
 		        amount: '',//代表数量
 		        originPlace: '',//产地
 		        gainTime: '',//收货年度
-		        updateTime: "",
+		        // updateTime: "",
 		        samplingSign: "",
 		        sampleInSignWidth: "",
-		        samplingdate: '',//扦样日期
+		        // samplingdate: '',//扦样日期
 		        remark: '',//备注
 		        rowType:"扦样信息",//删除用
 	        }
@@ -327,9 +329,9 @@ export default {
     return {
       isEmpty:false,
       rowid:999,//临时id
-      datalistURL:'',//获取草稿地址
+      datalistURL:'api/grain/sample/data',//获取草稿地址
       saveURL:'api/grain/sample/saveAll',//草稿保存地址
-      sampleURL:'api/grain/sample/saveAll',//申请扦样地址
+      sampleURL:'api/grain/register/edit',//申请扦样地址
       searchURL:'/liquid/role2/data/search',
       checkedId:[],
       list:"samplinglist",
@@ -431,12 +433,12 @@ export default {
         label:"收获年度",
 //      sort:true,
       },
-      {
-        id: 9,
-        prop:'updateTime',
-        label:"入库时间",
-//      sort:true,
-      },
+//       {
+//         id: 9,
+//         prop:'updateTime',
+//         label:"入库时间",
+// //      sort:true,
+//       },
       {
         id: 10,
         prop:'samplingSign',
@@ -449,12 +451,12 @@ export default {
         label:"现场人员签字",
 //      sort:true,
       },
-      {
-        id: 12,
-        prop:'samplingdate',
-        label:"扦样日期",
-//      sort:true,
-      },
+//       {
+//         id: 12,
+//         prop:'samplingdate',
+//         label:"扦样日期",
+// //      sort:true,
+//       },
       {
         id: 13,
         prop:'remark',
