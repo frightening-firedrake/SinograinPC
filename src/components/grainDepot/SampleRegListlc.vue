@@ -69,7 +69,11 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id,state){  
 //		console.log(id)
-		this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleReglc',query:{pId:id,state:state}})
+		if(state==3){			
+			this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleDraft',query:{pId:id,state:state}})
+		}else{
+			this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleReglc',query:{pId:id,state:state}})
+		}
   	}.bind(this));
   },
   destroy(){

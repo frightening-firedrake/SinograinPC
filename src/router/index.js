@@ -107,6 +107,11 @@ export default new Router({
             name:"粮库管理/扦样登记列表/扦样登记表",
             component:SampleReglc
           },
+          {
+            path:"grainDepot/sampleRegListlc/sampleDraft",
+            name:"粮库管理/扦样登记列表/扦样登记草稿",
+            component:CreateSampleReglc
+          },
 //        扦样流程
           {
             path:"sampling",

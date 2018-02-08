@@ -68,9 +68,13 @@ export default {
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击查看事件
-  	this.$root.eventHub.$on("viewlistitem",function(id){  
+  	this.$root.eventHub.$on("viewlistitem",function(id,state){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList/sampleReg',query:{pId:id}})
+		if(state=='3'){
+//			this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleDraft',query:{pId:id}})			
+		}else{
+			this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList/sampleReg',query:{pId:id}})			
+		}
   	}.bind(this));
   },
   destroy(){

@@ -62,7 +62,9 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
-	// this.getlistdata(1)
+	if(this.$route.query.state==3){
+		 this.getlistdata(1)
+	}
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
@@ -155,13 +157,13 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    sample: this.list,
-			    page:page,
-			    rows:this.page.size,
+//			    sample: this.list,
+//			    page:page,
+//			    rows:this.page.size,
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
-	  		this.page.total=response.data.total;
+//	  		this.page.total=response.data.total;
 		  	
 	  		setTimeout(()=>{			  		
 		  		this.loading=false;
@@ -216,7 +218,7 @@ export default {
   	uncomplate(msg){
   		 this.$alert(msg,'提示信息',{});
   	},
-	savedata(){
+	savedata(saveURL){
 		if(!this.listHeader.tableName) {
 			var msg="请先填写表名，再尝试提交！"
 			this.uncomplate(msg)
@@ -257,7 +259,7 @@ export default {
   		// 提交扦样列表
 		this.$http({
 		    method: 'post',
-			url: this.saveURL,
+			url: saveURL,
 			transformRequest: [function (data) {
 				// Do whatever you want to transform the data
 				let ret = ''
@@ -282,9 +284,9 @@ export default {
 	tfootEvent(date){
 		console.log(date);
 		if(date=='btnCenterL'){
-			window.history.go(-1)
+			this.savedata(this.sampleURL)	
 		}else if(date=='btnCenterR'){
-			window.history.go(-1)
+			this.savedata(this.saveURL)	
 		}else if(date=='btnLeft'){
 
 		}else if(date=='btnRight'){
@@ -325,7 +327,9 @@ export default {
     return {
       isEmpty:false,
       rowid:999,//临时id
-      saveURL:'api/grain/sample/saveAll',
+      datalistURL:'',//获取草稿地址
+      saveURL:'api/grain/sample/saveAll',//草稿保存地址
+      sampleURL:'api/grain/sample/saveAll',//申请扦样地址
       searchURL:'/liquid/role2/data/search',
       checkedId:[],
       list:"samplinglist",
@@ -468,19 +472,19 @@ export default {
       	safetyReport:false,
       },
       tfbtns:{
-//    	btnCenter:{
-//			btnTextL:'申请扦样',
-//			btnTextR:'保存',
-//		},
+      	btnCenter:{
+			btnTextL:'申请扦样',
+			btnTextR:'保存',
+		},
 //		btnLeft:{
 //			btnText:'导出Excel表格',
 //		},
 //		btnRight:{
 //			btnText:'导出Excel表格',
 //		},
-		btnOne:{
-			btnText:'生成扦样登记表',
-		},     	
+//		btnOne:{
+//			btnText:'生成扦样登记表',
+//		},     	
 		editModel:true,
       },
       currentRow:null,
