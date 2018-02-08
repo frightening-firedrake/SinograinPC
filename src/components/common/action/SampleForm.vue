@@ -12,8 +12,8 @@
 		<el-form-item label="迁样编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.sampleNo" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="货位号：" prop="pnumber" v-bind:class="{disabled:disabled}" >
-		    <el-input v-model="formdatas.form.pnumber" :disabled="disabled"></el-input>
+		<el-form-item label="货位号：" prop="position" v-bind:class="{disabled:disabled}" >
+		    <el-input v-model="formdatas.form.position" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="性质：" prop="quality"  v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.quality" :disabled="disabled"></el-input>
@@ -21,8 +21,8 @@
 		<el-form-item label="状态：" prop="state" v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.state" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="产地：" prop="region"  v-bind:class="{disabled:disabled}">
-		    <el-select v-model="formdatas.form.region" placeholder="请选择产地" :disabled="disabled">
+		<el-form-item label="产地：" prop="originPlace"  v-bind:class="{disabled:disabled}">
+		    <el-select v-model="formdatas.form.originPlace" placeholder="请选择产地" :disabled="disabled">
 		        <el-option label="山西" value="1"></el-option>
 		        <el-option label="河南" value="henan"></el-option>
 		        <el-option label="山东" value="shandong"></el-option>
@@ -30,8 +30,8 @@
 		        <el-option label="东北" value="dongbei"></el-option>
 		    </el-select>
 		</el-form-item>
-		<el-form-item label="被查库点：" prop="checkregion" v-bind:class="{disabled:disabled}">
-		    <el-select v-model="formdatas.form.checkregion" placeholder="选择库点" :disabled="disabled">
+		<el-form-item label="被查库点：" prop="libraryName" v-bind:class="{disabled:disabled}">
+		    <el-select v-model="formdatas.form.libraryName" placeholder="选择库点" :disabled="disabled">
 		        <el-option label="山西" value="1"></el-option>
 		        <el-option label="河南" value="henan"></el-option>
 		        <el-option label="山东" value="shandong"></el-option>
@@ -39,23 +39,23 @@
 		        <el-option label="东北" value="dongbei"></el-option>
 		    </el-select>
 		</el-form-item>
-		<el-form-item label="品种：" prop="varieties" v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.varieties" :disabled="disabled"></el-input>
+		<el-form-item label="品种：" prop="sort" v-bind:class="{disabled:disabled}">
+		    <el-input v-model="formdatas.form.sort" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="代表数量(吨)：" prop="weight"  v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.weight" :disabled="disabled"></el-input>
+		<el-form-item label="代表数量(吨)：" prop="amount"  v-bind:class="{disabled:disabled}">
+		    <el-input v-model="formdatas.form.amount" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="收货年度："  v-bind:class="{disabled:disabled}" prop="harvestdate">
+		<el-form-item label="收货年度："  v-bind:class="{disabled:disabled}" prop="gainTime">
 		    <el-form-item>
 		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
 		        <el-date-picker type="year" placeholder="选择年度" v-model="formdatas.form.harvestdate" :disabled="disabled"></el-date-picker>
 		    </el-form-item>
 		</el-form-item>
-		<el-form-item label="扦样日期：" prop="samplingdate"  v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.samplingdate" :disabled="disabled"></el-input>
+		<el-form-item label="扦样日期：" prop="sampleTime"  v-bind:class="{disabled:disabled}">
+		    <el-input v-model="formdatas.form.sampleTime" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="备注：" class="full" prop="remarks" v-bind:class="{disabled:disabled}" >
-		    <el-input v-model="formdatas.form.remarks" :disabled="disabled"></el-input>
+		<el-form-item label="备注：" class="full" prop="remark" v-bind:class="{disabled:disabled}" >
+		    <el-input v-model="formdatas.form.remark" :disabled="disabled"></el-input>
 		</el-form-item>
 		
 		<div class="line">

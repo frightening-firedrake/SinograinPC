@@ -55,11 +55,19 @@ export default {
   		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
-		    method: 'post',
+		  method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				id:this.$route.query
+				params:JSON.stringify(this.$route.query)
 			}
 	    }).then(function (response) {
 		  	this.formdatas.form=response.data.rows[0];
