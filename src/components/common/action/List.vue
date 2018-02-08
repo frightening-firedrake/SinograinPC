@@ -38,7 +38,7 @@
 		            			<span style="color:#666666;">已同意</span>
 		      				</template>
 		      				<template v-if="scope.row[item.prop]==3">
-		            			<span style="color:#58b481;">草稿</span>
+		            			<span style="color:blue;">草稿</span>
 		      				</template>
 		          </template>
 	    		</el-table-column>
@@ -186,7 +186,11 @@ export default {
     handleView(index, row,scope) {
 //	  	console.log(index,row);
 //		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
-		    this.$root.eventHub.$emit('viewlistitem',row.id)
+				if(row.state){
+					this.$root.eventHub.$emit('viewlistitem',row.id,row.state)										
+				}else{
+					this.$root.eventHub.$emit('viewlistitem',row.id)					
+				}
 		},
 		handleEdit(index, row) {
 //	  	console.log(index,row,this.list);

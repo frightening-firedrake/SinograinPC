@@ -27,28 +27,13 @@
       <!--循环数据-->
    		<template v-for="item in items">
       
-	    		<el-table-column show-overflow-tooltip v-if="!item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
-	    				<template slot-scope="scope">
+	    		<el-table-column show-overflow-tooltip v-if="!item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class" >
+	    				<template slot-scope="scope" class='test'>
 	    						<input class="editModelInput" type="text" v-model="scope.row[item.prop]" />
 	    				</template>
 	    		</el-table-column>
 	    		
-	    		<el-table-column show-overflow-tooltip v-if="item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
-	    				<template slot-scope="scope">
-		      				<template v-if="scope.row[item.prop]==0">
-		            			<span style="color:#fc6500;">待审核</span>
-		      				</template>
-						    	<template v-if="scope.row[item.prop]==1">
-		            			<span style="color:#999999;">未同意</span>
-		      				</template>
-		      				<template v-if="scope.row[item.prop]==2">
-		            			<span style="color:#666666;">已同意</span>
-		      				</template>
-		      				<template v-if="scope.row[item.prop]==3">
-		            			<span style="color:#58b481;">草稿</span>
-		      				</template>
-		          </template>
-	    		</el-table-column>
+	    		
    		</template>
   </el-table>	
 </template>
