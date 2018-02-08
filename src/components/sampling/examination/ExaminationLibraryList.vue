@@ -59,7 +59,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList',query:{libid:id}})
+		this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList',query:{libraryId:id,states: 3}})
   	}.bind(this));
   },
   destroy(){
@@ -111,9 +111,7 @@ export default {
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+	  		this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -125,19 +123,24 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 			    listName: this.list,
 			    page:page,
-			    pageSize:this.page.size,
+			    rows:this.page.size,
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+		  	this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -180,7 +183,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role15/data',
+      datalistURL:'api/grain/library/data',
       searchURL:'/liquid/role/data/search',
       deleteURL:'/liquid/role/data/delete',
       checkedId:[],
@@ -235,13 +238,7 @@ export default {
       items: [
       {
         id: 1,
-        prop:'tableName',
-        label: "表格名称",
-//      sort:true
-      },
-      {
-        id: 2,
-        prop:'checkLib',
+        prop:'libraryName',
         label: "被查库点",
 //      sort:true,
       },

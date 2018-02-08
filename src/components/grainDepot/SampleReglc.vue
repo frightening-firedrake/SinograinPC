@@ -130,9 +130,7 @@ export default {
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+	  		this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -148,15 +146,13 @@ export default {
 			data: {
 			    listName: this.list,
 			    page:page,
-			    pageSize:this.page.size,
+			    rows:this.page.size,
+				params:JSON.stringify(this.$route.query),
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+		  	this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -216,7 +212,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role17/data',
+      datalistURL:'api/grain/sample/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -278,25 +274,25 @@ export default {
       items: [
       {
         id: 1,
-        prop:'sampling_number',
+        prop:'sampleNo',
         label: "扦样编号",
 //      sort:true
       },
       {
         id: 2,
-        prop:'checkregion',
+        prop:'libraryName',
         label:"被查库点",
 //      sort:true,
       },
       {
         id: 3,
-        prop:'pnumber',
+        prop:'position',
         label: "货位号",
 //      sort:true,
       },
       {
         id: 4,
-        prop:'varieties',
+        prop:'sort',
         label:"品种",
 //      sort:true,
       },
@@ -308,25 +304,25 @@ export default {
       },
       {
         id: 6,
-        prop:'weight',
+        prop:'amount',
         label:"数量（吨）",
 //      sort:true,
       },
       {
         id: 7,
-        prop:'producing_area',
+        prop:'originPlace',
         label:"产地",
 //      sort:true,
       },
       {
         id: 8,
-        prop:'harvestdate',
+        prop:'gainTime',
         label:"收获年度",
 //      sort:true,
       },
       {
         id: 9,
-        prop:'sampleInTime',
+        prop:'updateTime',
         label:"入库时间",
 //      sort:true,
       },
@@ -350,7 +346,7 @@ export default {
       },
       {
         id: 13,
-        prop:'remarks',
+        prop:'remark',
         label:"备注",
 //      sort:true,
       },

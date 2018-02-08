@@ -69,7 +69,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList/sampleReg',query:{libid:id}})
+		this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList/sampleReg',query:{pId:id}})
   	}.bind(this));
   },
   destroy(){
@@ -119,12 +119,11 @@ export default {
 			    page:1,
 			    pageSize:this.page.size,
 			    name_like:searching,
+				params:JSON.stringify(this.$route.query)
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+	  		this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -136,19 +135,25 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 			    listName: this.list,
 			    page:page,
-			    pageSize:this.page.size,
+			    rows:this.page.size,
+				params:JSON.stringify(this.$route.query),
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+		  	this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -191,7 +196,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role16/data',
+      datalistURL:'api/grain/register/data',
       searchURL:'/liquid/role/data/search',
       deleteURL:'/liquid/role/data/delete',
       checkedId:[],
@@ -252,13 +257,13 @@ export default {
       items: [
       {
         id: 1,
-        prop:'tableName',
+        prop:'formName',
         label: "表格名称",
 //      sort:true
       },
       {
         id: 2,
-        prop:'examinationStatus',
+        prop:'state',
         label: "状态",
         status:true,
 //      sort:true,

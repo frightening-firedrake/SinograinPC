@@ -43,6 +43,7 @@ export default {
 	...mapGetters(["modal_id"]),
   },
   created(){
+	  console.log(this.$route.query)
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 //	移除监听事件
@@ -59,7 +60,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList',query:{libid:id}})
+		this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList',query:{pid:id}})
   	}.bind(this));
   },
   destroy(){
@@ -111,9 +112,7 @@ export default {
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+	  		this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -125,19 +124,25 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 			    listName: this.list,
 			    page:page,
-			    pageSize:this.page.size,
+			    rows:this.page.size,
+				params:JSON.stringify(this.$route.query),
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+			this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

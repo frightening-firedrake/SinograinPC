@@ -145,11 +145,19 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
+			    sample: this.list,
 			    page:page,
-			    pageSize:this.page.size,
+			    rows:this.page.size,
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
@@ -222,13 +230,38 @@ export default {
   		console.log('titleEvent');
   	},
 	savedata(){
+		var sample =[];
+		this.tabledatas.forEach(function(value,index){
+			var item={};
+			item.position= value.position;
+			item.sort= value.sort;
+			item.quality= value.quality;
+			item.amount= value.amount;
+			item.originPlace= value.originPlace;
+			item.gainTime= value.gainTime;
+			item.updateTime= value.updateTime;
+			item.sampleTime= value.samplingdate;
+			item.remark= value.remark;
+			sample.push(item);
+		})
+
   		// 提交扦样列表
 		this.$http({
 		    method: 'post',
 			url: this.saveURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				formName: this.listHeader.tableName
+				formName: this.listHeader.tableName,
+				sample: JSON.stringify(sample)
+
 			},
 	    }).then(function (response) {
 		  
@@ -254,19 +287,18 @@ export default {
 			this.rowid++;
 			var newdata={
 				id:this.rowid,
-		        sampling_number:"",
-		        checkregion: '沁县库区',//被查库点
-		        pnumber: '',//货位号
-		        varieties: '',//品种
+		        libraryName: '沁县库区',//被查库点
+		        position: '',//货位号
+		        sort: '',//品种
 		        quality: 'ZC',//性质
-		        weight: '',//代表数量
-		        producing_area: '',//产地
-		        harvestdate: '',//收货年度
-		        sampleInTime: "",
+		        amount: '',//代表数量
+		        originPlace: '',//产地
+		        gainTime: '',//收货年度
+		        updateTime: "",
 		        samplingSign: "",
 		        sampleInSignWidth: "",
 		        samplingdate: '',//扦样日期
-		        remarks: '',//备注
+		        remark: '',//备注
 		        rowType:"扦样信息",//删除用
 	        }
 			this.tabledatas.push(newdata);
@@ -284,7 +316,7 @@ export default {
   data() {
     return {
       rowid:999,//临时id
-      saveURL:'api/grain/request/save',
+      saveURL:'api/grain/sample/saveAll',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -353,19 +385,19 @@ export default {
 //       },
       {
         id: 2,
-        prop:'checkregion',
+        prop:'libraryName',
         label:"被查库点",
 //      sort:true,
       },
       {
         id: 3,
-        prop:'pnumber',
+        prop:'position',
         label: "货位号",
 //      sort:true,
       },
       {
         id: 4,
-        prop:'varieties',
+        prop:'sort',
         label:"品种",
 //      sort:true,
       },
@@ -377,25 +409,25 @@ export default {
       },
       {
         id: 6,
-        prop:'weight',
+        prop:'amount',
         label:"数量（吨）",
 //      sort:true,
       },
       {
         id: 7,
-        prop:'producing_area',
+        prop:'originPlace',
         label:"产地",
 //      sort:true,
       },
       {
         id: 8,
-        prop:'harvestdate',
+        prop:'gainTime',
         label:"收获年度",
 //      sort:true,
       },
       {
         id: 9,
-        prop:'sampleInTime',
+        prop:'updateTime',
         label:"入库时间",
 //      sort:true,
       },
@@ -419,7 +451,7 @@ export default {
       },
       {
         id: 13,
-        prop:'remarks',
+        prop:'remark',
         label:"备注",
 //      sort:true,
       },

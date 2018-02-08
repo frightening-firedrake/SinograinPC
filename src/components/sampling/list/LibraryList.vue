@@ -59,7 +59,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/libraryList/samplingList',query:{libid:id}})
+		this.$router.push({path: '/index/sampling/libraryList/samplingList',query:{libraryId:id,state:2}})
   	}.bind(this));
   },
   destroy(){
@@ -110,10 +110,8 @@ export default {
 			    name_like:searching,
 			}
 	    }).then(function (response) {
-		  	this.tabledatas=response.data.rows;
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+		  	this.tabledatas=response.data.rows;		  		
+		  	this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -125,19 +123,24 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 			    listName: this.list,
 			    page:page,
-			    pageSize:this.page.size,
+			    rows:this.page.size,
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
-	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+	  		this.page.total=response.data.total;		  		
+		  	this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -180,8 +183,8 @@ export default {
   },
   data() {
     return {
-      datalistURL:'api/grain/register/data',
-      searchURL:'api/grain/register/data/search',
+      datalistURL:'api/grain/library/data',
+      searchURL:'api/grain/library/data/search',
       deleteURL:'api/grain/',
       checkedId:[],
       list:"librarylist",
@@ -240,7 +243,7 @@ export default {
 //    },
       {
         id: 2,
-        prop:'formName',
+        prop:'libraryName',
         label: "被查库点",
 //      sort:true,
       },

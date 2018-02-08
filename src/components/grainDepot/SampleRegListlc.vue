@@ -69,7 +69,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleReglc',query:{libid:id}})
+		this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleReglc',query:{pId:id}})
   	}.bind(this));
   },
   destroy(){
@@ -122,9 +122,7 @@ export default {
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+	  		this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -153,10 +151,7 @@ export default {
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+		  	this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -227,7 +222,7 @@ export default {
       filterStatus:'all',
 //    分页数据
       page: {
-        size: 5,
+        size: 10,
         total: 0,
         currentPage: 1,
         show:true,
