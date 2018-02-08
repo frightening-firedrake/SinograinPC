@@ -28,7 +28,7 @@
 	    		
 	    		<el-table-column show-overflow-tooltip v-if="item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
 	    				<template slot-scope="scope">
-		      				<template v-if="scope.row[item.prop]==0">
+		      				<template v-if="scope.row[item.prop]==-1">
 		            			<span style="color:#fc6500;">待审核</span>
 		      				</template>
 						    	<template v-if="scope.row[item.prop]==1">
