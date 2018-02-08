@@ -145,11 +145,20 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 			    listName: this.list,
 			    page:page,
-			    pageSize:this.page.size,
+			    rows:this.page.size,
+					params:JSON.stringify(this.$route.query),
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
@@ -249,7 +258,7 @@ export default {
       	status:true,
       	statusitems:[
       		{label:'all',text:'全部'},
-      		{label:0,text:'未扦样'},
+      		{label:-1,text:'未扦样'},
       		{label:1,text:'已扦样'},
       	],
       },
@@ -260,12 +269,6 @@ export default {
         prop:'sampleNo',
         label: "扦样编号",
         sort:true
-      },
-      {
-        id: 2,
-        prop:'position',
-        label: "货位号",
-        sort:true,
       },
       {
         id: 3,

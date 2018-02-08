@@ -143,7 +143,7 @@ export default {
           //stored_way:['人工入仓'],//入仓方式
           stored_way:'',//入仓方式
           //粮食入库质量
-          volume_weigh_i:'',//容重（g/l）  
+          capacity:'',//容重（g/l）  
           water_content_i:'',//水分（%）
           impurity_i:'',//杂质（%）  
           //实测粮食质量
@@ -151,18 +151,18 @@ export default {
           water_content_r:'',//水分（%）
           impurity_r:'',//杂质（%） 
           //粮堆形状及基本尺寸
-          long:'',//长（m）：
-          width:'',//宽（m）：
-          height:'',//高（m）：
+          length:'',//长（m）：
+          wide:'',//宽（m）：
+          high:'',//高（m）：
           //1.计算粮堆体积
           volume_c:'',//粮堆测量体积(m3)	
-          volume_q:'',//需要扣除体积(m3)	
-          volume_r:'',//粮堆实际体积(m3)	
+          deductVolume:'',//需要扣除体积(m3)	
+          grainQuality:'',//粮堆实际体积(m3)	
           //2.计算粮堆平均密度	
 //          标准容重器法
           volume_weigh_bz:'',//粮食容重（g/l）
           correction_factor_bz:'',//校正后修正系数
-          average_density_bz:'',//粮堆平均密度（kg/m³）
+          verageDensity:'',//粮堆平均密度（kg/m³）
 //          特制大容器法
           unit_volume_weight_tz:'',//单位体积粮食重量（kg/m³）
           correction_factor_tz:'',//校正后修正系数
@@ -173,7 +173,7 @@ export default {
           weight_humidity:'',//水分减量
           weight_natural:'',//保管自然损耗
           weight_total:'',//合计
-          weight_calculation:'',//检查计算数（kg）	
+          unQuality:'',//检查计算数（kg）	
           //4.认定粮食实际数量	
 //          检查计算数与保管账数量比较
           difference:'',//差数（kg）
@@ -181,10 +181,10 @@ export default {
           is_same:'',//账实是否相符
           weight_r:'',//粮食实际数量（kg）
           difference_r:'',//账实不符原因   
-          remarks: '无',//备注
-          checker:'',//检查人：
-          keeper:'',//保管责任人：
-          responsible_person:'',//被检查企业负责人：    
+          remark: '无',//备注
+          rummager:'',//检查人：
+          custodian:'',//保管责任人：
+          leader:'',//被检查企业负责人：    
       	}
 	  }
     }

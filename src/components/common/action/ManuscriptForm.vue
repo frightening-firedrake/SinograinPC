@@ -123,8 +123,8 @@
 				<el-form-item label="粮堆测量体积(m3)" prop="volume_c" >
 				    <el-input v-model="formdatas.form.volume_c"></el-input>
 				</el-form-item>
-				<el-form-item label="需要扣除体积(m3)" prop="volume_q" >
-				    <el-input v-model="formdatas.form.volume_q"></el-input>
+				<el-form-item label="需要扣除体积(m3)" prop="deductVolume" >
+				    <el-input v-model="formdatas.form.deductVolume"></el-input>
 				</el-form-item>
 				<el-form-item label="粮堆实际体积(m3)" prop="volume_r" >
 				    <el-input v-model="formdatas.form.volume_r"></el-input>
@@ -142,8 +142,8 @@
 					<el-form-item label="校正后修正系数" prop="correction_factor_bz"  class='leftborder'>
 					    <el-input v-model="formdatas.form.correction_factor_bz"></el-input>
 					</el-form-item>
-					<el-form-item label="粮堆平均密度（kg/m³）" prop="average_density_bz"  class='leftborder'>
-					    <el-input v-model="formdatas.form.average_density_bz"></el-input>
+					<el-form-item label="粮堆平均密度（kg/m³）" prop="verageDensity"  class='leftborder'>
+					    <el-input v-model="formdatas.form.verageDensity"></el-input>
 					</el-form-item>
 					<div class="clear"></div>
 				</div>
@@ -174,14 +174,14 @@
 				<div class="imgbox">
 					
 				</div>
-				<el-form-item label="长（m）：" prop="long" class="small" style="border-left: solid 1px #dfdfdf;">
-				    <el-input v-model="formdatas.form.long"></el-input>
+				<el-form-item label="长（m）：" prop="length" class="small" style="border-left: solid 1px #dfdfdf;">
+				    <el-input v-model="formdatas.form.length"></el-input>
 				</el-form-item>
-				<el-form-item label="宽（m）：" prop="width" class="small">
-				    <el-input v-model="formdatas.form.width"></el-input>
+				<el-form-item label="宽（m）：" prop="wide" class="small">
+				    <el-input v-model="formdatas.form.wide"></el-input>
 				</el-form-item>
-				<el-form-item label="高（m）：" prop="height" class="small">
-				    <el-input v-model="formdatas.form.height"></el-input>
+				<el-form-item label="高（m）：" prop="high" class="small">
+				    <el-input v-model="formdatas.form.high"></el-input>
 				</el-form-item>	
 				<div class="clear"></div>
 				
@@ -194,8 +194,8 @@
 				<div class="fromrow">
 					3.计算粮食数量
 				</div>
-				<el-form-item label="测量计算数（kg）" prop="weight_measure" >
-				    <el-input v-model="formdatas.form.weight_measure"></el-input>
+				<el-form-item label="测量计算数（kg）" prop="unQuality" >
+				    <el-input v-model="formdatas.form.unQuality"></el-input>
 				</el-form-item>
 				<div class="box">				
 					<div class="merge_title_3">
@@ -263,17 +263,17 @@
 
 		</div>
 		
-		<el-form-item label="备注" prop="remarks"  class="full">
-		    <el-input v-model="formdatas.form.remarks"></el-input>
+		<el-form-item label="备注" prop="remark"  class="full">
+		    <el-input v-model="formdatas.form.remark"></el-input>
 		</el-form-item>
-		<el-form-item label="检查人" prop="checker"  class="three">
-		    <el-input v-model="formdatas.form.checker"></el-input>
+		<el-form-item label="检查人" prop="rummager"  class="three">
+		    <el-input v-model="formdatas.form.rummager"></el-input>
 		</el-form-item>
-		<el-form-item label="保管责任人" prop="keeper"  class="three">
-		    <el-input v-model="formdatas.form.keeper"></el-input>
+		<el-form-item label="保管责任人" prop="custodian"  class="three">
+		    <el-input v-model="formdatas.form.custodian"></el-input>
 		</el-form-item>
-		<el-form-item label="被检查企业负责人" prop="responsible_person"  class="three">
-		    <el-input v-model="formdatas.form.responsible_person"></el-input>
+		<el-form-item label="被检查企业负责人" prop="leader"  class="three">
+		    <el-input v-model="formdatas.form.leader"></el-input>
 		</el-form-item>
 
         
