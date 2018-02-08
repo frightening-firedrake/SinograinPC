@@ -281,21 +281,9 @@ export default {
       tabledatas:[],
       items: [
       {
-        id: 1,
-        prop:'sampleNo',
-        label: "扦样编号",
-//      sort:true
-      },
-      {
         id: 2,
         prop:'libraryName',
         label:"被查库点",
-//      sort:true,
-      },
-      {
-        id: 3,
-        prop:'position',
-        label: "货位号",
 //      sort:true,
       },
       {
