@@ -60,7 +60,7 @@ export default {
   },
   created(){
   	console.log(this.$route.query)
-  	if(this.$route.query.status==-1){
+  	if(this.$route.query.state==-1){
   		this.tfbtns={
 	      	btnCenter:{
 				btnTextL:'不同意',
