@@ -7,7 +7,7 @@
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
-      <safety-form :formdatas="formdatas" v-on:addproblem="addproblem"></safety-form> 
+      <safety-form :formdatas="formdatas" v-on:addproblem="addproblem" @submit="submit"></safety-form> 
     </div>
 </template>
 
@@ -41,7 +41,7 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
-	this.getlistdata(1)
+//	this.getlistdata(1)
 
   },
   destroy(){
@@ -103,6 +103,9 @@ export default {
 	},
 	titleEvent(){
   		console.log('titleEvent');
+  	},
+  	submit(){
+  		console.log(this.formdatas.form.problems);
   	},
   },
   data() {
