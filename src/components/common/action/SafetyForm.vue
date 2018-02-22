@@ -170,9 +170,9 @@ export default {
         	console.log(this.formdatas.form.images1)
             this.$refs[formname].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
-//                  this.$emit('btn_close')
-//					window.history.go(-1)
+//                  alert('submit!');
+                    this.$emit('submit')
+					window.history.go(-1)
                 } else {
                     console.log('error submit!!');
                     return false;
