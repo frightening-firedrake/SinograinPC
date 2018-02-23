@@ -339,3 +339,6 @@
 .el-checkbox__input.is-checked+.el-checkbox__label{
 	color:rgb(88, 180, 129);
 }
+.el-table .caret-wrapper{
+	width:6px!important;
+}

@@ -106,8 +106,9 @@
     overflow: hidden;
     /*border-top-right-radius: 10px;*/
     /*border-top-left-radius: 10px;*/
-      border-left:1px solid #dfdfdf;
+    border-left:1px solid #dfdfdf;
     border-right:1px solid #dfdfdf;
+    padding-right:10px;
 }
 .connect_form .project .classify{
     padding-left:1.02rem;
@@ -124,25 +125,45 @@
 }
 .connect_form .project_details .classify_num .classify_hao{
     border-bottom:1px solid #dfdfdf;
-    overflow: hidden;
+    /*overflow-y: hidden;
+    overflow-x: visible;*/
     height:0.5rem;
 }
-.connect_form .project_details .classify_num .classify_hao:last-child{
-    border-right:1px solid #dfdfdf;
+.connect_form .project_details .classify_num .classify_hao:nth-last-child(2){
+    position:relative;
 }
+.connect_form .project_details .classify_num .classify_hao:nth-last-child(2):after{
+    content:"";
+	position:absolute;
+	width:1px;
+	height:100%;
+	background-color:#dfdfdf;
+	left:100%;
+	top:0;
+	z-index: 2;
+}
+/*.connect_form .project_details .classify_num .classify_hao:last-child .classify_font{
+    border-left:none;
+}*/
 .connect_form .project_details{
     /*height:0.5rem;*/
     border:1px solid #dfdfdf;
-    line-height:0.5rem;
+    line-height:0.48rem;
 
 }
 .connect_form .project_details  .classify{
    height:4.9rem;
    overflow-y:scroll; 
 }
+.connect_form .project_details  .classify .el-checkbox-group{
+   padding:0; 
+}
 .connect_form .project_details  .classify .classify_col{
+	/*width:100%;*/
+	display: block;
     border-bottom:1px solid #dfdfdf;
-     padding-left:0.81rem;
+    padding-left:0.81rem;
+    margin:0;
 }
 .connect_form .project_details  .classify .el-checkbox__label{
     padding-left:0.32rem;
@@ -178,4 +199,27 @@
 }
 .connect_form .classify_font .new_sample span{
     cursor: pointer;
+}
+.connect_form .wrapbox{
+	position:relative;
+}
+.connect_form .wrapbox:after{
+	content:"";
+	position:absolute;
+	width:100%;
+	height:1px;
+	background-color:#dfdfdf;
+	left:0;
+	bottom:0;
+	z-index: 2;
+}
+.connect_form .wrapbox:before{
+	content:"";
+	position:absolute;
+	width:1px;
+	height:100%;
+	background-color:#dfdfdf;
+	right:0;
+	top:0;
+	z-index: 2;
 }

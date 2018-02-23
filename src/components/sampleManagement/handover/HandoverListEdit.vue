@@ -116,23 +116,14 @@ export default {
       formdatas: {
       	title:'样品领取交接单名称',
       	form:{
-          ctime: '2017-12-12',//创建时间
-          status: '未扦样',//状态
-          nid: '',//迁样编号
-          checkregion: '山西',//被查库点
-          pnumber: '',//货位号
-          varieties: '',//品种
-          quality: '',//性质
-          weight: '',//代表数量
-          region: '山西',//产地
-          harvestdate: '2017',//收货年度
-          samplingdate: '',//扦样日期
-          remarks: '',//备注
-          storageStatus:'',
-          sampleInTime: "",
-          position:"",
-          sampleInSign: "",
-      	}
+          name: '',//创建时间
+          manager: '',//状态
+          remarks: '',//迁样编号
+      	},
+      	checkList:[],
+      	items:[
+			      	
+      	],
 	  }
     }
   }

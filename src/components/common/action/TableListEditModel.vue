@@ -27,9 +27,47 @@
       <!--循环数据-->
    		<template v-for="item in items">
       
-	    		<el-table-column show-overflow-tooltip v-if="!item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class" >
+	    		<el-table-column show-overflow-tooltip v-if="!item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class" :show-overflow-tooltip="false">
 	    				<template slot-scope="scope" class='test'>
-	    						<input class="editModelInput" type="text" v-model="scope.row[item.prop]" />
+	    						<template v-if="item.prop=='libraryName'">
+		    							<el-select v-model="scope.row[item.prop]" placeholder="选择库点">
+									        <el-option label="本库" value="本库"></el-option>
+									        <el-option label="山西屯留国家粮食储备库" value="山西屯留国家粮食储备库"></el-option>
+									        <el-option label="山西长治国家粮食储备库" value="山西长治国家粮食储备库"></el-option>
+									        <el-option label="山西晋城国家粮食储备库" value="山西晋城国家粮食储备库"></el-option>
+									        <el-option label="长子分库" value="长子分库"></el-option>
+									        <el-option label="黎城分库" value="黎城分库"></el-option>
+									        <el-option label="沁县分库" value="沁县分库"></el-option>									        
+									    </el-select>
+	    						</template>
+	    						<template v-else-if="item.prop=='sort'">
+		    							<el-select v-model="scope.row[item.prop]" placeholder="选择品种">
+									        <el-option label="小麦" value="小麦"></el-option>
+									        <el-option label="玉米" value="玉米"></el-option>
+									        <el-option label="食用油" value="食用油"></el-option>
+									    </el-select>
+	    						</template>
+	    						<template v-else-if="item.prop=='quality'">
+		    							<el-select v-model="scope.row[item.prop]" placeholder="选择性质">
+									        <el-option label="ZC" value="ZC"></el-option>
+									        <el-option label="ZD" value="ZD"></el-option>
+									        <el-option label="LC" value="LC"></el-option>
+									        <el-option label="SP" value="SP"></el-option>
+									        <el-option label="TD" value="TD"></el-option>
+									    </el-select>
+	    						</template>
+	    						<template v-else-if="item.prop=='remark'">
+		    							<el-select v-model="scope.row[item.prop]" placeholder="选择备注">
+									        <el-option label="春季普查" value="春季普查"></el-option>
+									        <el-option label="秋季普查" value="秋季普查"></el-option>
+									        <el-option label="2017-2018轮换年度" value="2017-2018轮换年度"></el-option>
+									        <el-option label="收购寻查" value="收购寻查"></el-option>
+									        <el-option label="其他" value="其他"></el-option>
+									    </el-select>
+	    						</template>
+	    						<template v-else>
+		    							<input class="editModelInput" type="text" v-model="scope.row[item.prop]" />
+	    						</template>
 	    				</template>
 	    		</el-table-column>
 	    		
@@ -52,6 +90,8 @@ export default {
   },
   data() {
     return {
+    	true:true,
+    	false:false,
 //  	importLoading: false,
       multipleSelection: [],
       resizable:false,

@@ -47,7 +47,7 @@ export default {
 			return this.tabledatas;
 		}else{
 			return this.tabledatas.filter((value,index)=>{
-				return value.examinationStatus==this.filterStatus
+				return value.state==this.filterStatus
 			})
 		}
 	}
@@ -251,7 +251,7 @@ export default {
       	date:true,
       	statusitems:[
       		{label:'all',text:'全部'},
-      		{label:0,text:'待审核'},
+      		{label:-1,text:'待审核'},
       		{label:1,text:'未同意'},
       		{label:2,text:'已同意'},
       	],

@@ -2,8 +2,19 @@
 	<el-dialog :title="modal.title" :visible.sync="modalVisible" custom-class="createlib" :width="dialogWidth" @close="dialogClose">
 	  	<el-form :model="form" ref="modalform">
 	  		<template v-for="(item, index) in modal.formdatas">
-	  			<el-form-item :label="item.label" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '内容不能为空'}]">
+	  			<el-form-item v-if="!item.position" :label="item.label" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '内容不能为空'}]">
 			        <el-input v-model="form[item.model]" auto-complete="off" :disabled="item.disabled"></el-input>
+			    </el-form-item>
+			    <el-form-item class="position" v-if="item.position" :label="item.label" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '内容不能为空'}]">
+			        <el-select v-model="form[item.modelselect]" placeholder="选择样品室" :disabled="item.disabled">
+				        <el-option label="样品1室" value="样品1室"></el-option>
+				        <el-option label="样品2室" value="样品2室"></el-option>
+				        <el-option label="样品3室" value="样品3室"></el-option>       
+				    </el-select>
+				    <el-input v-model="form[item.modelinput]" placeholder="请填写几号柜" :disabled="item.disabled"></el-input>
+				    <div class="el-form-item__error" v-if="position_error">
+			        	{{position_error_message}}
+			        </div>
 			    </el-form-item>
 	  		</template>
 	  		
@@ -46,6 +57,8 @@ export default {
 	},
     data() {
         return {
+        	position_error:false,
+        	position_error_message:'',
         	dialogWidth:'6.2rem',
         	modalVisible: true,
 		    form:{
@@ -69,6 +82,17 @@ export default {
 //			}else{
 //				return
 //			}
+			if(!this.form.yangpinshi){
+        		this.position_error=true;
+        		this.position_error_message="请选择样品室";
+        		return
+        	}
+        	if(!this.form.gui){
+        		this.position_error=true;
+        		this.position_error_message="请填写几号柜";
+        		return
+        	}
+        	this.position_error=false;
 			this.$refs[formname].validate((valid) => {
                 if (valid) {
 					this.$emit('createlibitem',this.form);
@@ -210,6 +234,32 @@ export default {
 	left:auto;
 	right:0.1rem;
 	top:50%;
-	margin-top:-9px;
+	margin-top:-11px;
+}
+/*存放位置下拉*/
+.createlib .el-dialog__body .el-form-item.position .el-form-item__content .el-select{
+	padding-left:0.2rem;
+}
+.createlib .el-dialog__body .el-form-item.position .el-form-item__content .el-select .el-input input{
+	height:0.36rem;
+	width:1.5rem;
+	line-height:0.34rem;
+	border:solid  0.01rem #dfdfdf;
+	font-size:0.16rem;
+	background:#f2f2f2;
+	border-radius:0;
+}
+/*存放位置文本框*/
+.createlib .el-dialog__body .el-form-item.position .el-form-item__content>.el-input{
+	width:1.25rem;
+}
+.createlib .el-dialog__body .el-form-item.position .el-form-item__content>.el-input input{
+	height:0.46rem;
+	line-height:0.46rem;
+	border:none;
+	/*padding-right:7em;*/
+	padding-right:0;
+	padding-left:0;
+	font-size:0.16rem;
 }
 </style>

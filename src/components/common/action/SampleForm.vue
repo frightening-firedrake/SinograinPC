@@ -9,7 +9,8 @@
 		<el-form-item label="样品条形码：" class="code" prop="code" v-bind:class="{disabled:disabled}">
 			<img class="codeimg" :src="formdatas.form.code" alt="" />
 		</el-form-item>
-		<el-form-item label="迁样编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">
+		<!--<el-form-item label="迁样编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">-->
+		<el-form-item label="检验编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.sampleNo" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="货位号：" prop="pnumber" v-bind:class="{disabled:disabled}" >
@@ -32,11 +33,13 @@
 		</el-form-item>
 		<el-form-item label="被查库点：" prop="checkregion" v-bind:class="{disabled:disabled}">
 		    <el-select v-model="formdatas.form.checkregion" placeholder="选择库点" :disabled="disabled">
-		        <el-option label="山西" value="1"></el-option>
-		        <el-option label="河南" value="henan"></el-option>
-		        <el-option label="山东" value="shandong"></el-option>
-		        <el-option label="陕西" value="shanxi2"></el-option>
-		        <el-option label="东北" value="dongbei"></el-option>
+		        <el-option label="本库" value="本库"></el-option>
+		        <el-option label="山西屯留国家粮食储备库" value="山西屯留国家粮食储备库"></el-option>
+		        <el-option label="山西长治国家粮食储备库" value="山西长治国家粮食储备库"></el-option>
+		        <el-option label="山西晋城国家粮食储备库" value="山西晋城国家粮食储备库"></el-option>
+		        <el-option label="长子分库" value="长子分库"></el-option>
+		        <el-option label="黎城分库" value="黎城分库"></el-option>
+		        <el-option label="沁县分库" value="沁县分库"></el-option>		
 		    </el-select>
 		</el-form-item>
 		<el-form-item label="品种：" prop="varieties" v-bind:class="{disabled:disabled}">
@@ -63,11 +66,21 @@
 			<el-form-item label="存放状态：" prop="storageStatus"  v-bind:class="{disabled:disabled}">
 			    <el-input v-model="formdatas.form.storageStatus" :disabled="disabled"></el-input>
 			</el-form-item>
-			<el-form-item label="入库时间：" prop="sampleInTime"  v-bind:class="{disabled:disabled}">
-			    <el-input v-model="formdatas.form.sampleInTime" :disabled="disabled"></el-input>
+			<el-form-item label="入库时间：" prop="sampleInTime" >
+		    	<el-form-item>
+		        	<el-date-picker type="date" placeholder="选择年度" v-model="formdatas.form.sampleInTime"></el-date-picker>
+		    	</el-form-item>
 			</el-form-item>
-			<el-form-item label="存放位置：" prop="position" >
-			    <el-input v-model="formdatas.form.position"></el-input>
+			<el-form-item label="存放位置："  class="position">
+				<el-select v-model="formdatas.form.yangpinshi" placeholder="选择样品室">
+			        <el-option label="样品1室" value="样品1室"></el-option>
+			        <el-option label="样品2室" value="样品2室"></el-option>
+			        <el-option label="样品3室" value="样品3室"></el-option>       
+			    </el-select>
+			    <el-input v-model="formdatas.form.gui" placeholder="请填写几号柜"></el-input>
+			    <div class="el-form-item__error" v-if="position_error">
+		        	{{position_error_message}}
+		        </div>
 			</el-form-item>
 			<el-form-item label="入库签名：" prop="sampleInSign" >
 			    <el-input v-model="formdatas.form.sampleInSign"></el-input>
@@ -148,7 +161,8 @@ export default {
             }
         return {
 //      dyear:new Date(2017),
-        
+        position_error:false,
+        position_error_message:'',
         labelWidth:'2rem',
         errorinline:false,
         disabled:true,
@@ -167,6 +181,17 @@ export default {
     },
     methods: {  
         onSubmit(formname) {
+        	if(!this.formdatas.form.yangpinshi){
+        		this.position_error=true;
+        		this.position_error_message="请选择样品室";
+        		return
+        	}
+        	if(!this.formdatas.form.gui){
+        		this.position_error=true;
+        		this.position_error_message="请填写几号柜";
+        		return
+        	}
+        	this.position_error=false;
             this.$refs[formname].validate((valid) => {
                 if (valid) {
                     alert('submit!');
@@ -180,6 +205,7 @@ export default {
         },
         cancel(formname) {
             console.log('取消!');
+        	this.position_error=false;
 			this.$refs[formname].resetFields();
 //          this.$emit('btn_close')
 			window.history.go(-1)

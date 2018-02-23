@@ -6,18 +6,12 @@
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--标题-->
       <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>
-      <!--选项卡切换-->
-      <tabselect :Tabs="Tabs" :currentTab="currentTab" @TabChange="TabChange"></tabselect>  
+      <!--合格筛选--> 
+      <tabselect :hege="hege" :currentTab="currentTab" @hegeChange="hegeChange"></tabselect> 
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-complex-list class="complex" v-show="headerindex==0" :tabledata="tabledatas" :list="list" :items="items[0]" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
-      </sinograin-complex-list>
-      <sinograin-complex-list class="complex" v-show="headerindex==1" :tabledata="tabledatas" :list="list" :items="items[1]" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
-      </sinograin-complex-list>
-      <sinograin-complex-list class="complex" v-show="headerindex==2" :tabledata="tabledatas" :list="list" :items="items[2]" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
-      </sinograin-complex-list>
-      <sinograin-complex-list class="complex" v-show="headerindex==3" :tabledata="tabledatas" :list="list" :items="items[3]" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
+      <sinograin-complex-list class="complex" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
       </sinograin-complex-list>
       <!--分页-->
       <!--<sinograin-pagination style="border:none;" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
@@ -233,7 +227,11 @@ export default {
 		this.listHeader.tableName='2017年度轮换验收情况汇总表—<span style="color:#2d82e2;">'+this.currentTab+'</span>表';
 
 		
-	}
+	},
+//质量合格否
+	hegeChange(currentTab){
+		console.log(currentTab)
+	},
   },
   data() {
     return {
@@ -252,6 +250,11 @@ export default {
       	{label:1,text:'扦样检查情况'},
       	{label:2,text:'数量验收情况'},
       	{label:3,text:'质量验收情况'},
+      ],
+      hege:[
+      	{label:0,text:'全部'},
+      	{label:1,text:'合格'},
+      	{label:2,text:'不合格'},
       ],
       subtitle:{
 		title:"基本情况",
@@ -285,12 +288,12 @@ export default {
       	status:false,
       	date:false,
       	tableNameShow:true,
-      	tableName:'2017年度轮换验收情况汇总表—<span style="color:#2d82e2;">基本情况</span>表',
+      	tableName:'2017年度轮换验收情况汇总表',
       },
       tabledatas:[],
       headerindex:0,
       items:[
-	    [
+
 	      {
 	        id: 1,
 	        prop:'storageVault',
@@ -347,253 +350,248 @@ export default {
 	        pid:0,
 	//      sort:true,
 	      },
-	    ],
-	    [
+
 	      {
-	        id: 1,
+	        id: 9,
 	        prop:'applicationTime',
 	        label: "验收申请时间",
 	        pid:0,
 	//      sort:true
 	      },
 	      {
-	        id: 2,
+	        id: 10,
 	        prop:'taskTime',
 	        label:"任务下达时间",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
-	        id: 3,
+	        id: 11,
 	        prop:'sampleTime',
 	        label: "扦样时间",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
-	        id: 4,
+	        id: 12,
 	        prop:'sampleInSign',
 	        label:"扦样人",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
-	        id: 5,
+	        id: 13,
 	        prop:'remarkssp',
 	        label:"备注",
 	        pid:0,
 	//      sort:true,
 	      },
-	    ],
-	    [
 	      {
-	        id: 1,
+	        id: 14,
 	        prop:'long',
 	        label: "长度",
 	        pid:0,
 	//      sort:true
 	      },
 	      {
-	        id: 2,
+	        id: 15,
 	        prop:'width',
 	        label:"宽度",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
-	        id: 3,
+	        id: 16,
 	        prop:'height',
 	        label: "高度",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
-	        id: 4,
+	        id: 17,
 	        prop:'volume_q',
 	        label:"扣除体积",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
-	        id: 5,
+	        id: 18,
 	        prop:'volume_r',
 	        label:"粮堆实际体积",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
-	        id: 6,
+	        id: 19,
 	        prop:'volume_weigh_bz',
 	        label:"容重",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
-	        id: 7,
+	        id: 20,
 	        prop:'correction_factor_bz',
 	        label:"修正系数",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
-	        id: 8,
+	        id: 21,
 	        prop:'average_density_bz',
 	        label:"平均密度",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
-	        id: 9,
+	        id: 22,
 	        prop:'weight_measure',
 	        label:"测量计算数",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
-	        id: 10,
+	        id: 23,
 	        prop:'bgzsl',
 	        label:"保管帐数量",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
-	        id: 11,
+	        id: 24,
 	        prop:'slip',
 	        label:"差率",
 	        pid:0,
 	//      sort:true,
 	      },
-	    ],
-	    [
 	      {
-	        id: 1,
+	        id: 25,
 	        label: "质量情况",
 	        pid:0,
 	      },
 	      {
-	        id: 2,
+	        id: 26,
 	        label:"储存品质情况",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
-	        id: 3,
+	        id: 27,
 	        prop:'dj_zl',
 	        label: "等级",
-	        pid:1,
+	        pid:25,
 	        width:70,
 	//      sort:true,
 	      },
 	      {
-	        id: 4,
+	        id: 28,
 	        label:"质量指标",
-	        pid:1,
+	        pid:25,
 	//      sort:true,
 	      },
 	      {
-	        id: 5,
+	        id: 29,
 	        prop:'result_zl',
 	        label:"结果判定",
-	        pid:1,
+	        pid:25,
 	        width:70,
 	//      sort:true,
 	      },
 	      {
-	        id: 6,
+	        id: 30,
 	        prop:'rz_zl',
 	        label:"容重",
-	        pid:4,
+	        pid:28,
 	        width:70,
 	//      sort:true,
 	      },
 	      {
-	        id: 7,
+	        id: 31,
 	        prop:'sf_zl',
 	        label:"水分",
-	        pid:4,
+	        pid:28,
 	        width:70,
 	//      sort:true,
 	      },
 	      {
-	        id: 8,
+	        id: 32,
 	        prop:'zz_zl',
 	        label:"杂质",
-	        pid:4,
+	        pid:28,
 	        width:70,
 	//      sort:true,
 	      },
 	      {
-	        id: 9,
+	        id: 33,
 	        label:"不完善粒",
-	        pid:4,
+	        pid:28,
 	//      sort:true,
 	      },
 	      {
-	        id: 10,
+	        id: 34,
 	        prop:'szqw_zl',
 	        label:"色泽气味",
-	        pid:4,
+	        pid:28,
 	//      sort:true,
 	      },
 	      {
-	        id: 11,
+	        id: 35,
 	        prop:'zl_bwsl',
 	        label:"总量",
-	        pid:9,
+	        pid:33,
 	//      sort:true,
 	      },
 	      {
-	        id: 12,
+	        id: 36,
 	        prop:'smkl_bwsl',
 	        label:"生霉颗粒",
-	        pid:9,
+	        pid:33,
 	//      sort:true,
 	      },
 	      {
-	        id: 13,
+	        id: 37,
 	        label:"储存品质指标",
-	        pid:2,
+	        pid:26,
 	      },
 	      {
-	        id: 14,
+	        id: 38,
 	        prop:'result_pz',
 	        label:"结果判定",
-	        pid:2,
+	        pid:26,
 	        width:70,
 	//      sort:true,
 	      },
 	      {
-	        id: 15,
+	        id: 39,
 	        prop:'rz_pz',
 	        label:"容重",
-	        pid:13,
+	        pid:37,
 	        width:70,
 	//      sort:true,
 	      },
 	      {
-	        id: 16,
+	        id: 40,
 	        prop:'sf_pz',
 	        label:"水分",
-	        pid:13,
+	        pid:37,
 	        width:70,
 	//      sort:true,
 	      },
 	      {
-	        id: 17,
+	        id: 41,
 	        prop:'zz_pz',
 	        label:"杂质",
-	        pid:13,
+	        pid:37,
 	        width:70,
 	//      sort:true,
 	      },
 	      {
-	        id: 18,
+	        id: 42,
 	        prop:'remarks_pz',
 	        label:"备注",
 	        pid:0,
 	//      sort:true,
 	      },
-	    ],
+
 	  ],
       actions:{
       	selection:false,

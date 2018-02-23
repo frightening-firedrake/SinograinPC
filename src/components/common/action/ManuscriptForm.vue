@@ -244,6 +244,12 @@
 					<div></div>
 				</div>	
 					<el-form-item label="账实是否相符" prop="is_same" >
+
+					    <el-select v-model="formdatas.form.is_same" placeholder="选择是否相符">
+					        <el-option label="相符" value="相符"></el-option>
+					        <el-option label="不相符" value="不相符"></el-option>
+					    </el-select>
+
 					    <el-input v-model="formdatas.form.is_same"></el-input>
 					</el-form-item>
 				<div class="cover_left">

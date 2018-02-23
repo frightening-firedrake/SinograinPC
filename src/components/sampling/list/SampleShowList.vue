@@ -87,10 +87,12 @@ export default {
 	},
 	statusChange(data){
 		if(data==0){
-			this.filterStatus='未扦样';
+//			this.filterStatus='未扦样';
+			this.filterStatus=-1;
 			
 		}else if(data==1){
-			this.filterStatus='已扦样';
+//			this.filterStatus='已扦样';
+			this.filterStatus=1;
 			
 		}else if(data=="all"){
 			this.filterStatus=data;
@@ -280,6 +282,7 @@ export default {
         id: 4,
         prop:'state',
         label:"状态",
+        status:true,
         sort:true,
       },
       {

@@ -34,6 +34,8 @@
     /*padding: 0px 0.45rem;*/
     border: 1px solid #e6e7e7;
     border-color: #e6e7e7;
+    /*height:5rem;*/
+    overflow: auto;
 }
 .complex.el-table--border td,.complex.el-table--border th{
 	border-right:1px solid #e6e7e7;
@@ -49,8 +51,7 @@
 }
 /*表格左右边颜色*/
 .el-main .complex .el-table__body-wrapper,.el-main .complex .el-table__header-wrapper{
-	/*border-left:1px solid #e6e7e7;
-	border-right:1px solid #e6e7e7;*/
+	overflow: visible;
 }
 /*多选框宽度*/
 .el-main .complex .el-table__body-wrapper .el-table-column--selection{
@@ -404,4 +405,17 @@
 }
 .el-table--border .has-gutter td:nth-last-of-type(2), .el-table--border .has-gutter th:nth-last-of-type(2){
 	border-right:1px solid #ebeef5;
+}
+
+.complex .el-table{
+	overflow: visible;
+}
+.complex .el-table:after{
+	display: none;
+}
+.complex .el-table__footer-wrapper,.complex  .el-table__header-wrapper{
+	overflow: visible;
+}
+.complex .el-table__footer td{
+	border-right:none;
 }

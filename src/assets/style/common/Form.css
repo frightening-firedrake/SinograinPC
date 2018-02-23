@@ -531,9 +531,7 @@ div.line{
 .el-checkbox__label{
 	font-size:0.16rem;
 }
-{
-	
-}
+
 form.sampling .el-form-item.treelabel{
 	margin:0;
 	width:100%;
@@ -543,4 +541,31 @@ form.sampling .el-form-item.treelabel{
 form.sampling .el-form-item.treelabel .el-form-item__content{
 	position:relative;
 	height:100%;	
+}
+
+/*存放位置下拉*/
+form.sampling .el-form-item.position .el-form-item__content .el-select{
+	padding-left:0.2rem;
+}
+form.sampling .el-form-item.position .el-form-item__content .el-select .el-input input{
+	height:0.36rem;
+	width:1.5rem;
+	line-height:0.34rem;
+	border:solid  0.01rem #dfdfdf;
+	font-size:0.16rem;
+	background:#f2f2f2;
+	border-radius:0;
+}
+/*存放位置文本框*/
+form.sampling .el-form-item.position .el-form-item__content>.el-input{
+	width:1.25rem;
+}
+form.sampling .el-form-item.position .el-form-item__content>.el-input input{
+	height:0.46rem;
+	line-height:0.46rem;
+	border:none;
+	/*padding-right:7em;*/
+	padding-right:0;
+	padding-left:0;
+	font-size:0.16rem;
 }
