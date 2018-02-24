@@ -31,15 +31,6 @@
 		        <el-option label="东北" value="dongbei"></el-option>
 		    </el-select>
 		</el-form-item>
-<<<<<<< HEAD
-		<el-form-item label="被查库点：" prop="libraryName" v-bind:class="{disabled:disabled}">
-		    <el-select v-model="formdatas.form.libraryName" placeholder="选择库点" :disabled="disabled">
-		        <el-option label="山西" value="1"></el-option>
-		        <el-option label="河南" value="henan"></el-option>
-		        <el-option label="山东" value="shandong"></el-option>
-		        <el-option label="陕西" value="shanxi2"></el-option>
-		        <el-option label="东北" value="dongbei"></el-option>
-=======
 		<el-form-item label="被查库点：" prop="checkregion" v-bind:class="{disabled:disabled}">
 		    <el-select v-model="formdatas.form.checkregion" placeholder="选择库点" :disabled="disabled">
 		        <el-option label="本库" value="本库"></el-option>
@@ -49,7 +40,6 @@
 		        <el-option label="长子分库" value="长子分库"></el-option>
 		        <el-option label="黎城分库" value="黎城分库"></el-option>
 		        <el-option label="沁县分库" value="沁县分库"></el-option>		
->>>>>>> 5eb28cc8baf3dd850c6e645ef25f1181ca6fe706
 		    </el-select>
 		</el-form-item>
 		<el-form-item label="品种：" prop="sort" v-bind:class="{disabled:disabled}">
