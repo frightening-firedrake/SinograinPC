@@ -72,13 +72,13 @@ export default new Router({
     {
       path: '/index',
       component: Layout,
-      redirect: '/index/sampling/libraryList',
+      redirect: '/index/grainDepot/createSampleReglc',
       children:[
           {
             path:"home",
             name: '首页',
             component:Home,
-            redirect: 'sampling/libraryList',
+            redirect: 'grainDepot/createSampleReglc',
           },
 //        粮库管理
 					{

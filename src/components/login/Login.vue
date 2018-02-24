@@ -84,7 +84,7 @@ export default {
 			}
 	        }).then(function (response) {
                if(response.data.success == true) {
-                   this.$router.push({ path: '/index'});
+                   this.$router.push({ path: '/index',query:{libraryId:response.data.user.libraryId,libraryName:response.data.user.libraryName}});
                }else {
                    alert("密码或账号错误")
                }

@@ -300,7 +300,7 @@ export default {
 			this.rowid++;
 			var newdata={
 				id:this.rowid,
-		        libraryName: '沁县库区',//被查库点
+		        libraryName: this.$route.query.libraryName,//被查库点
 		        sort: '',//品种
 		        quality: 'ZC',//性质
 		        amount: '',//代表数量
