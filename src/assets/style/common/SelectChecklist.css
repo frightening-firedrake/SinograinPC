@@ -65,6 +65,9 @@
 	border-top:1px solid #dfdfdf ;
 	position:relative;
 }
+.SelectChecklist .checkboxwrap .el-checkbox-group{
+	padding:0;
+}
 .SelectChecklist .checkboxwrap:after{
 	content:"";
 	background:#dfdfdf;

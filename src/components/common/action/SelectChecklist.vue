@@ -87,6 +87,7 @@ export default {
         	},
 			labelWidth:'1rem',
 			selectlistUrl:'selectlist1',
+//			格式例子
 //			selectlist: [{
 //		          value: '选项1',
 //		          label: '长南',
@@ -140,6 +141,7 @@ export default {
         }
     },
     methods: {  
+    	//下拉框改变对应库去后台获取响应检测项目
     	changelibselect(value){
 			var selectitem=this.selectlist.filter((item,index)=>{
 				return item.value==value
@@ -147,27 +149,29 @@ export default {
 			this.checkListUrl=selectitem[0].url;
 			this.getcheckList();
     	},
+//  	日期选项
         dateChange(){
     		console.log(this.date_select);
 //  		this.$emit('dateChange',this.date_select);
     	},
+//  	提交
     	onSubmit(formname) {
-
-                if (this.checkedList.length) {
+//			通过
+            if (this.checkedList.length) {
 //                  alert('submit!');
 //                  this.$emit('btn_close')
-					window.history.go(-1)
-                } else {
+				window.history.go(-1)
+//			未通过
+            } else {
 //                  console.log('error submit!!');
 //                  this.$message('请先勾选管理样品！！！');
-                    this.$notify({
-			            title: '提示信息',
-			            message: '请先勾选管理样品！！！',
-			            offset: 100
-			        });
-                    return false;
-                }
-
+                this.$notify({
+		            title: '提示信息',
+		            message: '请先勾选管理样品！！！',
+		            offset: 100
+		        });
+                return false;
+            }
         },
         cancel(formname) {
             console.log('取消!');
@@ -175,6 +179,7 @@ export default {
 //          this.$emit('btn_close')
 			window.history.go(-1)
         },
+//      获取库点选项
         getselectList(){
 //      	this.loading=true;
 			this.$http({
@@ -193,7 +198,8 @@ export default {
 			}.bind(this)).catch(function (error) {
 			    console.log(error);
 			}.bind(this));
-       },
+        },
+//      库点选中后,后台获取对应样品项目
         getcheckList(){
 //      	this.loading=true;
 			this.$http({
@@ -214,7 +220,6 @@ export default {
 			}.bind(this));
         }
     }
-
 }
 </script>
 

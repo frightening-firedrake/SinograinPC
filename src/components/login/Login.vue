@@ -2,6 +2,7 @@
     <div class="login" style="background-image:url(../../static/images/login/login_big.jpg)">
         <div class="login_box">
             <el-form ref="form"  class="login_form" :model="loginForm">
+            	<p v-if="loginError" class="loginError"><span class="el-icon-warning"></span>您输入的账号或密码不正确，请重新输入！</p>
                 <el-form-item label="" @click="addborder($event)" :class="{focus:isfocus}">
                 	<el-input
 					    placeholder="请输入您的账号"
@@ -86,7 +87,7 @@ export default {
                if(response.data.success == true) {
                    this.$router.push({ path: '/index'});
                }else {
-                   alert("密码或账号错误")
+                   this.loginError=true
                }
             }.bind(this)).catch(function (error) {
                 console.log(error);
@@ -106,6 +107,7 @@ export default {
     },
     data() {
         return {
+        	loginError:false,
             captcha:'',
         	isfocus:false,
             loginForm: {

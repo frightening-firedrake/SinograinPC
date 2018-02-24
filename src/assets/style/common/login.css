@@ -30,9 +30,22 @@
  	position: absolute;
  	right: 0;
  	padding: 0 0.8rem;
- 	padding-top: 2.47rem;
+ 	padding-top: 2.07rem;
  }
- 
+ .login .login_box .login_form .loginError{
+ 	height: 0.4rem;
+ 	line-height:0.4rem;
+ 	color:#dd0707;
+ 	font-size:0.17rem;
+ 	margin:0 -0.1rem;
+ 	text-align: center;
+ }
+ .login .login_box .login_form .loginError span{
+	vertical-align: -1px;
+ 	color:#f09800;
+ 	font-size:0.2rem;
+ 	margin-right:0.1rem;
+ }
  .login .login_box .login_form .el-form-item {
  	width: 3.4rem;
  	height: 0.48rem;
