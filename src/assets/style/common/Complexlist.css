@@ -34,7 +34,7 @@
     /*padding: 0px 0.45rem;*/
     border: 1px solid #e6e7e7;
     border-color: #e6e7e7;
-    /*height:5rem;*/
+    max-height:8rem;
     overflow: auto;
 }
 .complex.el-table--border td,.complex.el-table--border th{

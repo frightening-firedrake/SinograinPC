@@ -7,7 +7,7 @@
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
-      <safety-form :formdatas="formdatas" v-on:addproblem="addproblem" @submit="submit"></safety-form> 
+      <safety-form :formdatas="formdatas" v-on:addproblem="addproblem" @submit="submit" @delproblem="delproblem"></safety-form> 
     </div>
 </template>
 
@@ -101,6 +101,11 @@ export default {
             };
 		this.formdatas.form.problems.push(item);
 	},
+//问题减一
+	delproblem(){
+		this.formdatas.form.problems.pop();
+	},
+	
 	titleEvent(){
   		console.log('titleEvent');
   	},
@@ -142,7 +147,6 @@ export default {
           	}
           
           ],
-          
       	}
 	  }
     }

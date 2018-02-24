@@ -319,6 +319,22 @@ form.sampling .btns .addproblem{
 	font-size:0.16rem;
 	cursor:pointer;
 }
+/*问题减一按钮*/
+form.sampling .btns .delproblem{
+	position:absolute;
+	right:1.24rem;
+	top:0;
+	width: 1.14rem;
+	height: 0.35rem;
+	line-height:0.35rem;
+	text-align:center;
+	border-radius:0 0 0.1rem 0.1rem;
+	background-color: #ffffff;
+	border: solid 1px #E95858;
+	color: #E95858;
+	font-size:0.16rem;
+	cursor:pointer;
+}
 /*颜色继承*/
 form.sampling .el-form-item__label,form.sampling input{
 	color:inherit;

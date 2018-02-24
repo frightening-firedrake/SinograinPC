@@ -47,7 +47,7 @@ export default {
 			return this.tabledatas;
 		}else{
 			return this.tabledatas.filter((value,index)=>{
-				return value.status==this.filterStatus
+				return value.sampleStatus==this.filterStatus
 			})
 		}
 	}
