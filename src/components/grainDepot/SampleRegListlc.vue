@@ -47,7 +47,7 @@ export default {
 			return this.tabledatas;
 		}else{
 			return this.tabledatas.filter((value,index)=>{
-				return value.state==this.filterStatus
+				return value.regState==this.filterStatus
 			})
 		}
 	}
@@ -265,7 +265,7 @@ export default {
       },
       {
         id: 2,
-        prop:'state',
+        prop:'regState',
         label: "状态",
         status:true,
 //      sort:true,

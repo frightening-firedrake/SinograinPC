@@ -28,17 +28,30 @@
 	    		
 	    		<el-table-column show-overflow-tooltip v-if="item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
 	    				<template slot-scope="scope">
-		      				<template v-if="scope.row[item.prop]==-1">
-		            			<span style="color:#fc6500;">待审核</span>
+		      				<template v-if="item.label=='regState'">
+				      				<template v-if="scope.row[item.prop]==-1">
+				            			<span style="color:#fc6500;">待审核</span>
+				      				</template>
+								    	<template v-if="scope.row[item.prop]==1">
+				            			<span style="color:#999999;">未同意</span>
+				      				</template>
+				      				<template v-if="scope.row[item.prop]==2">
+				            			<span style="color:#666666;">已同意</span>
+				      				</template>
+				      				<template v-if="scope.row[item.prop]==3">
+				            			<span style="color:blue;">草稿</span>
+				      				</template>
 		      				</template>
-						    	<template v-if="scope.row[item.prop]==1">
-		            			<span style="color:#999999;">未同意</span>
-		      				</template>
-		      				<template v-if="scope.row[item.prop]==2">
-		            			<span style="color:#666666;">已同意</span>
-		      				</template>
-		      				<template v-if="scope.row[item.prop]==3">
-		            			<span style="color:blue;">草稿</span>
+		      				<template v-if="item.label=='sampleState'">
+				      				<template v-if="scope.row[item.prop]==-1">
+				            			<span style="color:#fc6500;">未扦样</span>
+				      				</template>
+								    	<template v-if="scope.row[item.prop]==1">
+				            			<span style="color:#999999;">已扦样</span>
+				      				</template>
+				      				<template v-if="scope.row[item.prop]==2">
+				            			<span style="color:#666666;">已入库</span>
+				      				</template>
 		      				</template>
 		          </template>
 	    		</el-table-column>

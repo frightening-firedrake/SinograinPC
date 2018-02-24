@@ -2,12 +2,6 @@
     <div class="SelectChecklist">
     	<el-form ref="form" :model="form" :label-width="labelWidth" label-position="left">
 	    	<el-form-item label="选择库点">
-			    <!--<el-select v-model="libselect" placeholder="选择库点">
-			    	<tempalte v-for="(item,index) in selectlist">			    		
-			    		<el-option label="长南" value="1"></el-option>
-			    		<el-option label="永济" value="2"></el-option>
-			    	</tempalte>
-			    </el-select>-->
 			    <template>
 				    <el-select v-model="libselect" placeholder="选择库点" @change="changelibselect">
 				    	<el-option
@@ -21,7 +15,18 @@
 				</template>
 
 			</el-form-item>
-	    	<el-form-item label="选择时间" style="border-left:none;">
+			
+			<el-form-item label="选择备注" style="border-left:none;">
+			    <el-select v-model="remSelect" placeholder="选择备注">
+		    		<el-option label="春季普查" value="春季普查"></el-option>
+			        <el-option label="秋季普查" value="秋季普查"></el-option>
+			        <el-option label="2017-2018轮换年度" value="2017-2018轮换年度"></el-option>
+			        <el-option label="收购寻查" value="收购寻查"></el-option>
+			        <el-option label="其他" value="其他"></el-option>		    			    		
+			    </el-select>
+			</el-form-item>
+			
+	    	<el-form-item label="选择时间" style="border-top:none;width:100%;">
 	    		<el-date-picker
 	    		size='mini'
 	    		:clearable='false'
@@ -41,7 +46,11 @@
 			
 			
 		</el-form>
-		<p>样品管理</p>
+		<!--全选中处理-->
+		<p>
+			样品管理
+			<el-checkbox v-model="checkAll" @change="handleCheckAllChange" :disabled="disabledCheckAll" style="margin-left:0.35rem;">全部选中</el-checkbox>
+		</p>
 		<div class="checkboxwrap">
 			<div v-if="!checkList.length" class="checklistemit">
 				请先选择库点！！！
@@ -77,15 +86,26 @@ export default {
 //		console.log(this.formdatas)
     },
     computed:{
-    	
+    	disabledCheckAll(){
+    		if(this.checkList.length){
+    			return false
+    		}else{
+    			return true
+    		}
+    	}
+    
     },
     data() {
 
         return {
+//      	全部选中按钮
+        	checkAll:false,
+//      	表单数据
         	form:{
         		
         	},
 			labelWidth:'1rem',
+//			获取下拉选项时的后台地址
 			selectlistUrl:'selectlist1',
 //			格式例子
 //			selectlist: [{
@@ -102,7 +122,10 @@ export default {
 //		          url:'checklist3',
 //		        }],
 			selectlist: [],
+//			被选中的库点
 		    libselect:'',
+		    remSelect:'',
+//		        被选中库点对应的样品地址
 		    checkListUrl:'',
 			checkList:[
 				
@@ -210,6 +233,7 @@ export default {
 	//
 	//			}
 		    }).then(function (response) {
+		    	this.checkAll=false;
 			  	this.checkList=response.data.checkList;
 			  	this.checkedList=response.data.checkedList;
 //		  		setTimeout(()=>{			  		
@@ -218,7 +242,14 @@ export default {
 			}.bind(this)).catch(function (error) {
 			    console.log(error);
 			}.bind(this));
-        }
+        },
+        handleCheckAllChange(val){
+        	if(val){
+        		this.checkedList=this.checkList        			        		
+        	}else{      		
+        		this.checkedList=[];
+        	}
+        },
     }
 }
 </script>
