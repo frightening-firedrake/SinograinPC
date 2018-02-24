@@ -136,12 +136,21 @@ export default {
           pnumber: '漫水-1',//货位号
           problems:[
           	{
-          		problem: '',//问题
+          		problem: '5465435212',//问题
           		images: [
           		{name: 'safty.jpg', url:'static/images/test/safty.jpg'},
           		{name: 'safty.jpg', url:'static/images/test/safty.jpg'},
           		],//图片
           		state:-1,
+          		createTime:'2017-9-25',
+          	},
+          	{
+          		problem: '5465435212',//问题
+          		images: [
+          		{name: 'safty.jpg', url:'static/images/test/safty.jpg'},
+          		{name: 'safty.jpg', url:'static/images/test/safty.jpg'},
+          		],//图片
+          		state:1,
           		createTime:'2017-9-25',
           	}
           
