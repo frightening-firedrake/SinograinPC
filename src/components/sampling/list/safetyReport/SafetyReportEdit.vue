@@ -136,6 +136,8 @@ export default {
           		{name: 'safty.jpg', url:'static/images/test/safty.jpg'},
           		{name: 'safty.jpg', url:'static/images/test/safty.jpg'},
           		],//图片
+          		state:-1,
+          		createTime:'2017-9-25',
           	}
           
           ],

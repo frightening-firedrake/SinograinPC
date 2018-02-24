@@ -18,6 +18,11 @@
 		<el-form-item label="货位号：" prop="pnumber"  v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.pnumber" :disabled="disabled"></el-input>
 		</el-form-item>
+		<el-form-item label="问题状态：" class="full">
+		    <el-radio-group v-model="problemStatic" text-color="white" fill="#1bb45f" @change="statusChange">
+				<el-radio-button v-for="item in formdatas.problemStatic.statusItems" :key="item.label" :label="item.label">{{item.text}}</el-radio-button>			    
+			</el-radio-group>
+		</el-form-item>
 		<!--问题组-->
 		
 		
