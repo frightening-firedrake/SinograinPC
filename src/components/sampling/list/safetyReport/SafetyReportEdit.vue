@@ -7,7 +7,7 @@
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
-      <safety-form :formdatas="formdatas" v-on:addproblem="addproblem"></safety-form> 
+      <safety-form-edit :formdatas="formdatas" v-on:addproblem="addproblem"></safety-form-edit> 
     </div>
 </template>
 
@@ -19,7 +19,7 @@
 
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
-import SafetyForm  from "@/components/common/action/SafetyForm"
+import SafetyFormEdit  from "@/components/common/action/SafetyFormEdit"
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 
 
@@ -32,7 +32,7 @@ import data from '@/util/mock';
 
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SafetyForm
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SafetyFormEdit
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -41,7 +41,7 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
-	this.getlistdata(1)
+//	this.getlistdata(1)
 
   },
   destroy(){
@@ -126,6 +126,11 @@ export default {
       }],
       formdatas: {
       	title:'安全报告',
+      	statusItems:[
+      		{label:'all',text:'全部'},
+      		{label:-1,text:'待解决'},
+      		{label:1,text:'已解决'},
+      	],
       	form:{
           checkregion: '沁县库区',//被查库点
           pnumber: '漫水-1',//货位号

@@ -35,6 +35,9 @@ form.sampling .el-form-item{
 	background:#ffffff;
 	overflow: hidden;
 }
+form.sampling .el-form-item.full{
+	width:100%;
+}
 form.sampling .el-form-item.disabled{
 	color:#999999;
 }

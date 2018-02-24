@@ -1,5 +1,5 @@
 <template>
-    <el-form ref="form" :inline-message="errorinline" class="sampling" :rules="rules" :model="formdatas.form" :label-width="labelWidth">
+    <el-form ref="form" :inline-message="errorinline" class="sampling"  :model="formdatas.form" :label-width="labelWidth">
         <template>
             <p>{{formdatas.title}}</p>
         </template>      
@@ -19,14 +19,17 @@
 		    <el-input v-model="formdatas.form.pnumber" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="问题状态：" class="full">
-		    <el-radio-group v-model="problemStatic" text-color="white" fill="#1bb45f" @change="statusChange">
-				<el-radio-button v-for="item in formdatas.problemStatic.statusItems" :key="item.label" :label="item.label">{{item.text}}</el-radio-button>			    
+		    <el-radio-group v-model="problemStatic" text-color="white" fill="#1bb45f" @change="problemStatusChange">
+				<el-radio-button v-for="item in formdatas.statusItems" :key="item.label" :label="item.label">{{item.text}}</el-radio-button>			    
 			</el-radio-group>
 		</el-form-item>
 		<!--问题组-->
 		
 		
 		<template v-for="(item, index) in formdatas.form.problems">
+			<el-form-item label="创建时间：" class="full">
+				<p>{{item.createTime}}</p>		    	
+		    </el-form-item>
 			<el-form-item 
 				:label="'问题' + (index+1)+'：'" 
 				:prop="'problems.'+index+'.problem'" 
@@ -49,22 +52,11 @@
 				<el-dialog :visible.sync="dialogVisible" size="tiny">
 				  <img width="100%" :src="dialogImageUrl" alt="">
 				</el-dialog>
-			</el-form-item>			
+			</el-form-item>	
+			<el-form-item label="" class="full">
+		    	<el-button class="yes" type="primary" @click="st('form')">待解决</el-button>
+		    </el-form-item>
 		</template>
-		
-
-        
-        <div class="btns">
-			<div class="addproblem" @click="addproblem">
-				问题加一
-			</div>
-			<div v-if="delebtn" class="delproblem" @click="delproblem">
-				问题减一
-			</div>
-            <el-button class="yes" type="primary" @click="onSubmit('form')">确认</el-button>
-            <el-button class="no" @click="cancel('form')">取消</el-button>
-        </div>
-        
         <div class="clear"></div>
     </el-form>
 </template>
@@ -74,133 +66,28 @@ import "@/assets/style/common/Form.css";
 export default {
     props: ["formdatas"],
     created(){
-    	
+    	console.log(this.formdatas)
     },
     mounted: function() {
 //		console.log(this.formdatas)
     },
     computed:{
-    	delebtn(){
-			if(this.formdatas.form.problems.length>1){
-				return true;
-			}else{
-				return false;
-			}
-		},
+ 
     },
     data() {
-
-    		// 普通文本的验证
-            var validateText = ( rule, value, callback ) => {
-                var str =/^[^'"#$%&\^*》>,."<《？，。！@#￥%……’”：/；]+$/;
-                if(!value){
-                     return callback(new Error("请输入内容"));
-                }else if(!str.test(value)){
-                    return callback(new Error("请不要输入特殊的字符"))
-                }else{
-                    callback()
-                }
-            }
-            // 下拉框
-            var validateSelect = ( rule, value, callback ) => {
-                if(!value){
-                    return callback(new Error("必须选择"))
-                }else{
-                    callback()
-                }
-            }
-            // 电话
-            var validatePhone = ( rule, value, callback ) => {
-                var str = /^1[3|4|5|8][0-9]\d{4,8}$/
-                if(!value){
-                    return callback(new Error("手机号不能为空"))
-                }else if(!str.test(value)){
-                    return callback(new Error("手机号不对"))
-                }else{
-                    callback()
-                }
-            }
-            // 邮箱
-            var validateEmily = ( rule, value, callback ) => {
-                var str = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ 
-                if(!value){
-                    return callback(new Error("邮箱不能为空"))
-                }else if(str.test(value)){
-                    return callback(new Error("邮箱不正确"))
-                }else{
-                    return callback()
-                }
-            }
         return {
-//      dyear:new Date(2017),
-        dialogImageUrl: '',
-        dialogVisible: false,
-        labelWidth:'2rem',
-        errorinline:false,
-        disabled:true,
-            rules: {
-                text: [
-                    {validator:validateText,trigger:'blur'}
-                ],
-                select:[
-                    {validator:validateSelect,trigger:'blur'}
-                ],
-                ctime:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            status: [
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            nid: [
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            checkregion:[
-                    {validator:validateSelect,trigger:'blur'}
-                ],
-	            pnumber:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            varieties:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            quality:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            weight:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            region:[
-                    {validator:validateSelect,trigger:'blur'}
-                ],
-//	            harvestdate: '2017',//收货年度
-	            samplingdate:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-//	            remarks: '',//备注
-                
-            }
+			problemStatic:'全部',
+	        dialogImageUrl: '',
+	        dialogVisible: false,
+	        labelWidth:'2rem',
+	        errorinline:false,
+	        disabled:true,           
         }
     },
     methods: {  
-        onSubmit(formname) {
-        	console.log(this.formdatas.form.images1)
-            this.$refs[formname].validate((valid) => {
-                if (valid) {
-//                  alert('submit!');
-                    this.$emit('submit')
-					window.history.go(-1)
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-        },
-        cancel(formname) {
-            console.log('取消!');
-			this.$refs[formname].resetFields();
-//          this.$emit('btn_close')
-			window.history.go(-1)
-        },
+        problemStatusChange(){
+    		this.$emit('problemStatusChange',this.problemStatic);
+    	},
 //      图片上传查看与删除
 	    handleRemove(file, fileList) {
 	        console.log(file, fileList);
@@ -209,29 +96,7 @@ export default {
 	        this.dialogImageUrl = file.url;
 	        this.dialogVisible = true;
 	    },
-//	       问题加一
-		addproblem(){
-//			formdatas.form.problems.'+index+'.problem
-			var flag=true;
-			this.formdatas.form.problems.forEach(function(value,index){
-				if(!value.problem){
-					flag=false;
-				}
-			})
-			if(flag){
-				this.$emit('addproblem');				
-			}else{
-				 this.$message('请完善问题详情！！！');
-			}
-//			if(){
-//				
-//			}else{				
-//			}
-		},
-//		问题减一
-		delproblem(){
-			this.$emit('delproblem');
-		}
+
     }
 
 }
