@@ -135,6 +135,8 @@ export default {
           storageStatus:'',
           sampleInTime: "",
           position:"",
+          yangpinshi:"",
+          gui:"",
           sampleInSign: "",
           code:""
       	},

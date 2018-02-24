@@ -29,7 +29,7 @@
                     <!--<i class="iconfont icon-yanzhengma"></i>
                     <el-input   placeholder="请输入验证码" v-model="loginForm.number"></el-input>-->
                 </el-form-item>
-                <img class="code_img" src="~static/images/login/6078.jpg" alt="">
+                <img class="code_img" :src="captcha" @click="change()" alt="">
                 <el-button class="login_submit" @click="submitForm()">登录</el-button>
             </el-form>
         </div>
@@ -38,9 +38,59 @@
 <script>
 import "@/assets/style/common/login.css";
 export default {
+    created() {
+        this.$http({
+		    method: 'post',
+			url: 'api/grain/captcha',
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+                
+			}
+	        }).then(function (response) {
+               this.captcha = 'http://localhost:8080/api/grain/captcha'
+            }.bind(this)).catch(function (error) {
+                console.log(error);
+            }.bind(this));
+    },
     methods: {
+        change() {
+            this.captcha = 'http://localhost:8080/api/grain/captcha?d='+new Date().getTime()
+        },
         submitForm() {
-            this.$router.push({ path: '/index' });
+            this.$http({
+		    method: 'post',
+			url: 'api/grain/login',
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+			    userName: this.loginForm.name,
+                userPass: this.loginForm.password,
+                verityCode: this.loginForm.number
+			}
+	        }).then(function (response) {
+               if(response.data.success == true) {
+                   this.$router.push({ path: '/index'});
+               }else {
+                   alert("密码或账号错误")
+               }
+            }.bind(this)).catch(function (error) {
+                console.log(error);
+            }.bind(this));
         },
         addborder(e){
             alert(1)
@@ -56,6 +106,7 @@ export default {
     },
     data() {
         return {
+            captcha:'',
         	isfocus:false,
             loginForm: {
                 name:""

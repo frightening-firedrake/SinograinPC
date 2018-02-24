@@ -94,7 +94,7 @@
     height:10px;
 }
 /*列表图标*/
-.el-main .tablelist .el-table__body-wrapper td .cell i{
+.el-main .tablelist .el-table__body-wrapper td .cell >i{
     font-size: 0.32rem;
     cursor: pointer;
     vertical-align: -0.05rem;
@@ -349,5 +349,31 @@
 	text-align: center;
 	background:rgba(0,0,0,0);
 }
+/*.el-main .editmodel .el-table__header-wrapper table colgroup col:nth-last-child(2){
+    width:1rem!important;
+}
+.el-main .editmodel .el-table__body-wrapper table colgroup col:nth-last-child(1){
+    width:1rem!important;
+}*/
 /*复杂表*/
 /*.complex */
+/*下拉*/
+.el-main .tablelist .el-table__body-wrapper td  .el-select{
+	margin:0 0.1rem;
+}
+.el-main .tablelist .el-table__body-wrapper td  .el-select .el-input input{
+	height:0.36rem;
+	width:100%;
+	line-height:0.34rem;
+	border:solid  0.01rem #dfdfdf;
+	font-size:0.16rem;
+	background:#f2f2f2;
+	border-radius:0;
+	text-align: center;
+}
+.el-main .tablelist .el-table__body-wrapper td  .el-select .el-input .el-input__inner{
+	color:rgb(0,0,0);
+}
+.el-popper[x-placement^=bottom] .popper__arrow{
+	left:60px!important;
+}

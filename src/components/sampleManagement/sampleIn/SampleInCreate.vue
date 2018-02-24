@@ -69,8 +69,10 @@ export default {
 		  	this.formdatas=response.data.formdatas;		
 //		  	取出路由参数
 		  	if(this.$route.params){	  		
-		  		this.formdatas.form.position=this.$route.params.position;
+//		  		this.formdatas.form.position=this.$route.params.position;
 		  		this.formdatas.form.sampleInSign=this.$route.params.sampleInSign;
+		  		this.formdatas.form.yangpinshi=this.$route.params.yangpinshi;
+    			this.formdatas.form.gui=this.$route.params.gui;
 		  	}
 //		  	this.tabledatas=response.data.rows;
 //	  		this.page.total=response.data.total;

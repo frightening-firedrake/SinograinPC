@@ -1,9 +1,16 @@
 <template>
 	<div class="tabs">
 		<div class="status">
-			<div>
+			<!--<div>
 			    <el-radio-group v-model="currentTab" text-color="white" fill="#2d82e2" @change="TabChange">
 				    <el-radio-button v-for="item in Tabs" :key="item.label" :label="item.label">{{item.text}}</el-radio-button>			    
+			    </el-radio-group>
+			</div>
+		</div>
+		<div class="status" style='margin-left:20px;'>-->
+			<div>
+			    <el-radio-group v-model="currenthege" text-color="white" fill="rgb(255, 76, 120)" @change="hegeChange">
+				    <el-radio-button v-for="item in hege" :key="item.label" :label="item.label">{{item.text}}</el-radio-button>			    
 			    </el-radio-group>
 			</div>
 		</div>
@@ -51,10 +58,11 @@ div.tabs div.status .el-radio-button__inner{
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
 export default {
-    props: ['Tabs'],
+    props: ['Tabs','hege'],
     data() {
         return {
 	        currentTab:0,
+	        currenthege:0,
         };
     },
     created(){
@@ -63,6 +71,9 @@ export default {
     methods:{
     	TabChange(){
     		this.$emit('TabChange',this.currentTab);
+    	},
+    	hegeChange(){
+    		this.$emit('hegeChange',this.currenthege);
     	},
     },
     computed: {

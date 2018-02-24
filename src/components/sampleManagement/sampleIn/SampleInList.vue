@@ -115,7 +115,7 @@ export default {
 	createlibitem(form){
 		console.log(form);
 //		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInCreate', params: {'position': form.position,'sampleInName': form.sampleInName} })
-		this.$router.push({name: "样品管理/样品入库列表/新建样品", params: {'position': form.position,'sampleInSign': form.sampleInSign} })
+		this.$router.push({name: "样品管理/样品入库列表/新建样品", params: {'yangpinshi': form.yangpinshi,'gui': form.gui,'sampleInSign': form.sampleInSign} })
 	},
 //	关闭新建弹框
 	dialogClose(){
@@ -231,7 +231,10 @@ export default {
 	  		},
 	  		{
 	  			label:"存放位置:",
-	  			model:"position",
+	  			position:true,
+//	  			model:"position",
+	  			modelselect:"yangpinshi",
+	  			modelinput:"gui",
 //	  			value:'朔水-9号仓-1号柜',
 	  		},
 	  		{
@@ -283,7 +286,7 @@ export default {
       {
         id: 1,
         prop:'sampling_number',
-        label: "扦样编号",
+        label: "检验编号",
         sort:true
       },
       {

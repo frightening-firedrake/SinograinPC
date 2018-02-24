@@ -47,7 +47,7 @@ export default {
 			return this.tabledatas;
 		}else{
 			return this.tabledatas.filter((value,index)=>{
-				return value.applyStatus==this.filterStatus
+				return value.state==this.filterStatus
 			})
 		}
 	}
@@ -87,8 +87,7 @@ export default {
 	dateChange(data){
 		console.log(data);
 	},
-	statusChange(data){
-//		console.log(data)
+	statusChange(data){		
 		this.filterStatus=data;
 	},
 	createSampling(){
