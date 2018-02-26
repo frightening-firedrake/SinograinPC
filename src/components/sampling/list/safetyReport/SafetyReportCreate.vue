@@ -40,6 +40,8 @@ export default {
   },
   created(){
   	console.log(this.$route.query)
+	this.formdatas.form.libraryName = this.$route.query.libraryName
+	this.formdatas.form.position = this.$route.query.position
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
 
@@ -136,8 +138,8 @@ export default {
       formdatas: {
       	title:'安全报告',
       	form:{
-          checkregion: '沁县库区',//被查库点
-          pnumber: '漫水-1',//货位号
+          libraryName: '沁县库区',//被查库点
+          position: '漫水-1',//货位号
           problems:[
           	{
           		problem: '',//问题

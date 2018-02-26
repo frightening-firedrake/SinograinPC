@@ -45,7 +45,7 @@ export default {
     SinograinTableList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader,SinograinOptionTitle,TfootButtons
   },
   computed:{
-	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
+	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask","libraryName"]),
 	...mapGetters(["modal_id"]),
 	tabledatasFilter(){
 
@@ -223,7 +223,9 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 				id: JSON.stringify(this.$route.query.pId),
-				regState: 2
+				regState: 2,
+				libraryName: this.libraryName,
+
 			}
 		})
 	},

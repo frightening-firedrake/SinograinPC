@@ -189,7 +189,7 @@ export default {
     	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportEdit'})
     },
     handleCreateSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate'})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate',query:{libraryName:row.libraryName,position:row.position}})
     },
     handleInput(index, row,scope) {
 //	  	console.log(index,row);

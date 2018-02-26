@@ -4,8 +4,8 @@
             <p>{{formdatas.title}}</p>
         </template>      
        
-		<el-form-item label="被查库点：" prop="checkregion"  v-bind:class="{disabled:disabled}">
-		    <el-select v-model="formdatas.form.checkregion" placeholder="选择库点" :disabled="disabled">
+		<el-form-item label="被查库点：" prop="libraryName"  v-bind:class="{disabled:disabled}">
+		    <el-select v-model="formdatas.form.libraryName" placeholder="选择库点" :disabled="disabled">
 		        <el-option label="本库" value="本库"></el-option>
 		        <el-option label="山西屯留国家粮食储备库" value="山西屯留国家粮食储备库"></el-option>
 		        <el-option label="山西长治国家粮食储备库" value="山西长治国家粮食储备库"></el-option>
@@ -15,8 +15,8 @@
 		        <el-option label="沁县分库" value="沁县分库"></el-option>	
 		    </el-select>
 		</el-form-item>
-		<el-form-item label="货位号：" prop="pnumber"  v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.pnumber" :disabled="disabled"></el-input>
+		<el-form-item label="货位号：" prop="position"  v-bind:class="{disabled:disabled}">
+		    <el-input v-model="formdatas.form.position" :disabled="disabled"></el-input>
 		</el-form-item>
 		<!--问题组-->
 		
