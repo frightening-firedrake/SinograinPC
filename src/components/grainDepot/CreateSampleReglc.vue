@@ -272,7 +272,8 @@ export default {
 			data: {
 				formName: this.listHeader.tableName,
 				sample: JSON.stringify(sample),
-				state: tablestate
+				regState: tablestate,
+				libraryId: this.libraryId
 
 			},
 	    }).then(function (response) {
