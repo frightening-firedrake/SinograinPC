@@ -163,6 +163,7 @@ export default {
 					params:JSON.stringify(this.$route.query),
 			}
 	    }).then(function (response) {
+			console.log(response)
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
 		  	this.loading=false;
@@ -280,7 +281,7 @@ export default {
       },
       {
         id: 4,
-        prop:'state',
+        prop:'sampleState',
         label:"状态",
         status:true,
         sort:true,

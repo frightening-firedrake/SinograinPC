@@ -245,7 +245,7 @@ export default {
       },
       {
         id: 2,
-        prop:'state',
+        prop:'regState',
         label: "状态",
 //      sort:true,
       },

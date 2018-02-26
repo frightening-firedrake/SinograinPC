@@ -18,7 +18,7 @@
 		<el-form-item label="性质：" prop="quality" >
 		    <el-input v-model="formdatas.form.quality"></el-input>
 		</el-form-item>
-		<el-form-item label="状态：" prop="state" v-bind:class="{disabled:disabled}">
+		<el-form-item label="状态：" prop="sampleState" v-bind:class="{disabled:disabled}">
 		    <el-input v-model="samplestate" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="产地：" prop="originPlace" >
@@ -30,8 +30,8 @@
 		        <el-option label="东北" value="dongbei"></el-option>
 		    </el-select>
 		</el-form-item>
-		<el-form-item label="被查库点：" prop="source">
-		    <el-select v-model="formdatas.form.source" placeholder="选择库点">
+		<el-form-item label="被查库点：" prop="libraryName">
+		    <el-select v-model="formdatas.form.libraryName" placeholder="选择库点">
 		        <el-option label="山西" value="1"></el-option>
 		        <el-option label="河南" value="henan"></el-option>
 		        <el-option label="山东" value="shandong"></el-option>

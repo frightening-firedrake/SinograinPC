@@ -193,7 +193,7 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 				id: JSON.stringify(this.$route.query.pId),
-				state: 2
+				regState: 2
 			}
 		})
 	},
@@ -212,7 +212,7 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 				id: JSON.stringify(this.$route.query.pId),
-				state: 1 
+				regState: 1 
 			}
 		})
 	},

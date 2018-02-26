@@ -31,7 +31,7 @@
 		        <el-option label="东北" value="dongbei"></el-option>
 		    </el-select>
 		</el-form-item>
-		<el-form-item label="被查库点：" prop="checkregion" v-bind:class="{disabled:disabled}">
+		<el-form-item label="被查库点：" prop="libraryName" v-bind:class="{disabled:disabled}">
 		    <el-select v-model="formdatas.form.checkregion" placeholder="选择库点" :disabled="disabled">
 		        <el-option label="本库" value="本库"></el-option>
 		        <el-option label="山西屯留国家粮食储备库" value="山西屯留国家粮食储备库"></el-option>

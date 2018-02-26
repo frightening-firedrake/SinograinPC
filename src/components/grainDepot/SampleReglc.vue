@@ -172,6 +172,7 @@ export default {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
 		  	this.loading=false;
+			this.listHeader.tableName=response.data.rows[0].formName;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -192,7 +193,8 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 				id:JSON.stringify(this.$route.query.pId),
-				state: -1
+				state: -1,
+				libraryId: this.$route.query.libraryId
 			}
 		})
 	},
