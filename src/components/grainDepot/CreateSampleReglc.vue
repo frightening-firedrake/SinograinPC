@@ -305,6 +305,7 @@ export default {
 		        sort: '',//品种
 		        quality: 'ZC',//性质
 		        amount: '',//代表数量
+		        position:'',
 		        originPlace: '',//产地
 		        gainTime: '',//收货年度
 		        // updateTime: "",
@@ -402,7 +403,13 @@ export default {
         id: 2,
         prop:'libraryName',
         label:"被查库点",
-        width:220,
+        width:150,
+//      sort:true,
+      },
+      {
+        id: 3,
+        prop:'position',
+        label:"货位号",
 //      sort:true,
       },
       {
