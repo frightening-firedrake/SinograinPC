@@ -1,5 +1,5 @@
 <template>
-    <div class="login" style="background-image:url(../../static/images/login/login_big.jpg)">
+    <div class="login" style="background-image:url(static/images/login/login_big.jpg)">
         <div class="login_box">
             <el-form ref="form"  class="login_form" :model="loginForm">
             	<p v-if="loginError" class="loginError"><span class="el-icon-warning"></span>您输入的账号或密码不正确，请重新输入！</p>
@@ -38,7 +38,12 @@
 </template>
 <script>
 import "@/assets/style/common/login.css";
+import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
+	computed:{
+		...mapState(["libraryId","libraryName"]),
+		...mapGetters([]),
+  	},
     created() {
         this.$http({
 		    method: 'post',
@@ -62,6 +67,8 @@ export default {
             }.bind(this));
     },
     methods: {
+    	...mapMutations(['setUserInfo']),
+  		...mapActions([]),
         change() {
             this.captcha = 'http://localhost:8080/api/grain/captcha?d='+new Date().getTime()
         },
@@ -85,7 +92,11 @@ export default {
 			}
 	        }).then(function (response) {
                if(response.data.success == true) {
-                   this.$router.push({ path: '/index',query:{libraryId:response.data.user.libraryId,libraryName:response.data.user.libraryName}});
+               		var payload={};
+               		payload.libraryId=response.data.user.libraryId;
+               		payload.libraryName=response.data.user.libraryName;
+               		this.setUserInfo(payload)
+                   	this.$router.push({ path: '/index'});
                }else {
                    this.loginError=true
                }

@@ -46,7 +46,7 @@ export default {
     SinograinTableListEditModel,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader,SinograinOptionTitle,TfootButtons
   },
   computed:{
-	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask","libraryName"]),
+	...mapState(["libraryName","libraryId"]),
 	...mapGetters(["modal_id"]),
 	tabledatasFilter(){
 
@@ -300,7 +300,7 @@ export default {
 			this.rowid++;
 			var newdata={
 				id:this.rowid,
-		        libraryName: this.$route.query.libraryName,//被查库点
+		        libraryName: this.libraryName,//被查库点
 		        sort: '',//品种
 		        quality: 'ZC',//性质
 		        amount: '',//代表数量

@@ -134,6 +134,18 @@ export default {
     height:0.5rem;
     text-align: center;
 }
+
+.message .dialog-footer button:active {
+    color: #000;
+    border-color: rgb(88,180,129);
+    outline: 0;
+}
+
+.message .dialog-footer button:focus, .message .dialog-footer button:hover {
+    color: #000;
+    border-color: rgb(88,180,129);
+    /*background-color: rgba(88,180,129,0.5);*/
+}
 .message .dialog-footer .el-button+.el-button{
 	margin-left:0.57rem;
 }

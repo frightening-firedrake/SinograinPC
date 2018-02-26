@@ -28,22 +28,22 @@
 		<!--问题组-->
 		
 		
-		<template v-for="(item, index) in formdatas.form.problems">
+		<template v-for="(item, index) in problemFilter">
 			<el-form-item label="创建时间：" class="full disabled">
 			    <el-input v-model="item.createTime" disabled></el-input>
 			</el-form-item>
 			<el-form-item 
 				:label="'问题' + (index+1)+'：'" 
-				:prop="'problems.'+index+'.problem'" 
-				class="problem" 
+				class="problem disabled" 
 				:rules="{
 			      required: true, message: '请填写问题详情', trigger: 'blur'
 			    }">
-			    <el-input type="textarea" v-model="item.problem"></el-input>
+			    <el-input type="textarea" v-model="item.problem" disabled></el-input>
 			</el-form-item>
-			<el-form-item label="图片：" prop="images" class="images">
+			<el-form-item label="图片：" prop="images" class="images" disabled>
 				<img v-if="item.state!==-1" src="static/images/sys/over.png" alt="" class="hege"/>
 			    <el-upload
+			      disabled
 				  action="/liquid/images"
 				  list-type="picture-card"
 				  :on-preview="handlePictureCardPreview"
@@ -58,10 +58,19 @@
 			</el-form-item>	
 			<el-form-item label="" class="full button">
 				<div class="btn">					
-					<el-button class="yes" type="primary" @click="pass" :disabled="item.state!==-1">{{item.state==-1?'待解决':'已解决'}}</el-button>
+					<el-button class="yes" type="primary" @click="pass(item.problemId)" :disabled="item.state!==-1">{{item.state==-1?'待解决':'已解决'}}</el-button>
 				</div>
 		    </el-form-item>
 		</template>
+		
+		<template v-if="!problemFilter.length">
+			<el-form-item label="" class="full empty">
+				<div class="empty">					
+					<!--佳敏说空着吧-->
+				</div>
+		    </el-form-item>
+		</template>
+		
         <div class="clear"></div>
     </el-form>
 </template>
@@ -139,13 +148,23 @@
 		background-color: #b9b9b9;
 		border-color:#cccccc;
 	}
+	form.sampling .el-form-item.empty{
+		height:2rem;
+		line-height:2rem;
+		border-bottom:1px solid #cccccc;
+	}
+	form.sampling .el-form-item.empty .el-form-item__content{
+		height:2rem;
+		line-height:2rem;
+		text-align: center;
+	}
 </style>
 <script>
 import "@/assets/style/common/Form.css";
 export default {
-    props: ["formdatas"],
+    props: ["formdatas","problemFilter"],
     created(){
-    	console.log(this.formdatas)
+//  	console.log(this.problemFilter)
     },
     mounted: function() {
 //		console.log(this.formdatas)
@@ -175,8 +194,8 @@ export default {
 	        this.dialogImageUrl = file.url;
 	        this.dialogVisible = true;
 	    },
-	    pass(){
-	    	
+	    pass(id){
+	    	this.$emit("pass",id)
 	    },
 
     }
