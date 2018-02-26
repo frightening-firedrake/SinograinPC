@@ -46,7 +46,7 @@ export default {
     SinograinTableListEditModel,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader,SinograinOptionTitle,TfootButtons
   },
   computed:{
-	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
+	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask","libraryName"]),
 	...mapGetters(["modal_id"]),
 	tabledatasFilter(){
 
@@ -88,7 +88,7 @@ export default {
   	this.$root.eventHub.$off('delelistitem')
   },
   methods: {
-  	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
+  	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal',]),
   	...mapActions(['addAction']),
 //	列表头触发的事件
 	dateChange(data){

@@ -199,8 +199,10 @@ export default {
     handleView(index, row,scope) {
 //	  	console.log(index,row);
 //		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
-				if(row.state){
-					this.$root.eventHub.$emit('viewlistitem',row.id,row.state)										
+				if(row.sampleState){
+					this.$root.eventHub.$emit('viewlistitem',row.id,row.sampleState)										
+				}else if(row.regState){
+					this.$root.eventHub.$emit('viewlistitem',row.id,row.regState)										
 				}else{
 					this.$root.eventHub.$emit('viewlistitem',row.id)					
 				}

@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
+	libraryName:'龙哥的库',
 	mask:false,//自定义的遮罩层控制选项
 	modal_id_number:1000,
     viewdata:[],//查看数据组
@@ -19,6 +20,9 @@ const getters = {
     },
 }
 const mutations = {
+	setLibraryName(state,payload){
+		state.libraryName=payload;
+	},
 	create_modal_id(state){
         state.modal_id_number+=1;
     },

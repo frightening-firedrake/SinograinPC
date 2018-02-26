@@ -71,6 +71,7 @@ form.sampling .el-form-item.images{
 	margin:0;
 	width:100%;
 	float:left;
+	position: relative;
 }
 form.sampling .el-form-item.problem .el-form-item__content{
 	height:1rem;
