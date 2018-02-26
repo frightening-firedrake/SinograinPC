@@ -7,7 +7,7 @@
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
-      <manuscript-form :formdatas="formdatas"></manuscript-form> 
+      <manuscript-form :formdatas="formdatas" @pjmdff="pjmdff"></manuscript-form> 
     </div>
 </template>
 
@@ -93,13 +93,18 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-//问题加一
-	addproblem(){
-		var item={
-          		problem: '',//问题
-          		images: [],//图片
-            };
-		this.formdatas.form.problems.push(item);
+	pjmdff(type){
+		if(type==1){
+			//          标准容重器法
+			this.formdatas.form.unit_volume_weight_tz="";
+			this.formdatas.form.correction_factor_tz="";
+			this.formdatas.form.average_density_tz="";
+		}else if(type==2){
+			//          特制大容器法
+			this.formdatas.form.volume_weigh_bz="";
+			this.formdatas.form.correction_factor_bz="";
+			this.formdatas.form.verageDensity="";			
+		}
 	},
 	titleEvent(){
   		console.log('titleEvent');

@@ -134,31 +134,31 @@
 				</div>
 				<div class="box">
 					<div class="merge_title_3">
-						<el-radio v-model="calculation_density" label="1">标准容重器法</el-radio>
+						<el-radio v-model="calculation_density" label="1" @change="pjmdff">标准容重器法</el-radio>
 					</div>
-					<el-form-item label="粮食容重（g/l）" prop="volume_weigh_bz"  class='leftborder'>
-					    <el-input v-model="formdatas.form.volume_weigh_bz"></el-input>
+					<el-form-item label="粮食容重（g/l）" prop="volume_weigh_bz"  class='leftborder' :class="{disabled:calculation_density==2}">
+					    <el-input v-model="formdatas.form.volume_weigh_bz" :disabled="calculation_density==2"></el-input>
 					</el-form-item>
-					<el-form-item label="校正后修正系数" prop="correction_factor_bz"  class='leftborder'>
-					    <el-input v-model="formdatas.form.correction_factor_bz"></el-input>
+					<el-form-item label="校正后修正系数" prop="correction_factor_bz"  class='leftborder' :class="{disabled:calculation_density==2}">
+					    <el-input v-model="formdatas.form.correction_factor_bz" :disabled="calculation_density==2"></el-input>
 					</el-form-item>
-					<el-form-item label="粮堆平均密度（kg/m³）" prop="verageDensity"  class='leftborder'>
-					    <el-input v-model="formdatas.form.verageDensity"></el-input>
+					<el-form-item label="粮堆平均密度（kg/m³）" prop="verageDensity"  class='leftborder' :class="{disabled:calculation_density==2}">
+					    <el-input v-model="formdatas.form.verageDensity" :disabled="calculation_density==2"></el-input>
 					</el-form-item>
 					<div class="clear"></div>
 				</div>
 				<div class="box">				
 					<div class="merge_title_3">
-						<el-radio v-model="calculation_density" label="2">特制大容器法</el-radio>
+						<el-radio v-model="calculation_density" label="2" @change="pjmdff">特制大容器法</el-radio>
 					</div>
-					<el-form-item label="单位体积粮食重量（kg/m³）" prop="unit_volume_weight_tz"  class='leftborder'>
-					    <el-input v-model="formdatas.form.unit_volume_weight_tz"></el-input>
+					<el-form-item label="单位体积粮食重量（kg/m³）" prop="unit_volume_weight_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
+					    <el-input v-model="formdatas.form.unit_volume_weight_tz" :disabled="calculation_density==1"></el-input>
 					</el-form-item>
-					<el-form-item label="校正后修正系数" prop="correction_factor_tz"  class='leftborder'>
-					    <el-input v-model="formdatas.form.correction_factor_tz"></el-input>
+					<el-form-item label="校正后修正系数" prop="correction_factor_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
+					    <el-input v-model="formdatas.form.correction_factor_tz" :disabled="calculation_density==1"></el-input>
 					</el-form-item>
-					<el-form-item label="粮堆平均密度（kg/m³）" prop="average_density_tz"  class='leftborder'>
-					    <el-input v-model="formdatas.form.average_density_tz"></el-input>
+					<el-form-item label="粮堆平均密度（kg/m³）" prop="average_density_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
+					    <el-input v-model="formdatas.form.average_density_tz" :disabled="calculation_density==1"></el-input>
 					</el-form-item>
 					<div class="clear"></div>
 				</div>
@@ -322,7 +322,7 @@ export default {
 //		console.log(this.formdatas)
     },
     computed:{
-    	
+
     },
     data() {
 
@@ -434,6 +434,10 @@ export default {
 			this.$refs[formname].resetFields();
 //          this.$emit('btn_close')
 			window.history.go(-1)
+        },
+        pjmdff(){
+//      	console.log(this.calculation_density)
+			this.$emit('pjmdff',this.calculation_density)
         },
         
     }
