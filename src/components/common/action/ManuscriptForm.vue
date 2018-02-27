@@ -24,38 +24,38 @@
 		        <el-date-picker type="date" placeholder="选择实际查库日" v-model="formdatas.form.realchecktime"></el-date-picker>
 		    </el-form-item>
 		</el-form-item>
-		<el-form-item label="货位号" prop="pnumber"  v-bind:class="{disabled:disabled}" class="three">
-		    <el-input v-model="formdatas.form.pnumber" :disabled="disabled"></el-input>
+		<el-form-item label="货位号" prop="position"  v-bind:class="{disabled:disabled}" class="three">
+		    <el-input v-model="formdatas.form.position" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="品种" prop="varieties"  v-bind:class="{disabled:disabled}" class="three">
-		    <el-input v-model="formdatas.form.varieties" :disabled="disabled"></el-input>
+		<el-form-item label="品种" prop="sort"  v-bind:class="{disabled:disabled}" class="three">
+		    <el-input v-model="formdatas.form.sort" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="性质" prop="quality"  v-bind:class="{disabled:disabled}" class="three">
 		    <el-input v-model="formdatas.form.quality" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="所在库区" prop="reservoir_area"  v-bind:class="{disabled:disabled}" class="three2">
-		    <el-input v-model="formdatas.form.reservoir_area" :disabled="disabled"></el-input>
+		<el-form-item label="所在库区" prop="libraryName"  v-bind:class="{disabled:disabled}" class="three2">
+		    <el-input v-model="formdatas.form.libraryName" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="仓房类型" prop="warehouse_type"  class="three">
 		    <el-input v-model="formdatas.form.warehouse_type"></el-input>
 		</el-form-item>
 		<el-form-item label="收货年度"  v-bind:class="{disabled:disabled}" class="three">
-		    <el-form-item prop="harvestdate">
+		    <el-form-item prop="gainTime">
 		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
-		        <el-date-picker type="year" placeholder="选择年度" v-model="formdatas.form.harvestdate"  :disabled="disabled"></el-date-picker>
+		        <el-date-picker type="year" placeholder="选择年度" v-model="formdatas.form.gainTime"  :disabled="disabled"></el-date-picker>
 		    </el-form-item>
 		</el-form-item>
 		<el-form-item label="储存形式"  class="three">
-		    <el-select v-model="formdatas.form.storage_from" placeholder="选择储存形式">
+		    <el-select v-model="formdatas.form.storge" placeholder="选择储存形式">
 		        <el-option label="常规" value="1"></el-option>
 		        <el-option label="非常规" value="2"></el-option>
 		    </el-select>
 		</el-form-item>
-		<el-form-item label="保管帐数量（kg）" prop="bgzsl" class="three">
-		    <el-input v-model="formdatas.form.bgzsl"></el-input>
+		<el-form-item label="保管帐数量（kg）" prop="grainQuality" class="three">
+		    <el-input v-model="formdatas.form.grainQuality"></el-input>
 		</el-form-item>
 		<el-form-item label="质量等级"  class="three">
-		    <el-select v-model="formdatas.form.quality" placeholder="选择质量等级">
+		    <el-select v-model="formdatas.form.qualityGrade" placeholder="选择质量等级">
 		        <el-option label="上等" value="1"></el-option>
 		        <el-option label="中等" value="2"></el-option>
 		        <el-option label="下等" value="3"></el-option>
@@ -67,8 +67,8 @@
 		        <el-checkbox label="机械入仓" name="type"></el-checkbox>
 		    </el-checkbox-group>
 		</el-form-item>-->
-		<el-form-item label="入仓方式" prop="stored_way" class="three2">
-	    	<el-radio-group v-model="formdatas.form.stored_way">
+		<el-form-item label="入仓方式" prop="putWay" class="three2">
+	    	<el-radio-group v-model="formdatas.form.putWay">
 		        <el-radio label="1">人工入仓</el-radio>
 		        <el-radio label="2">机械入仓</el-radio>
 		    </el-radio-group>
@@ -80,14 +80,14 @@
 				<div class="merge_title_3">
 					粮食入库质量
 				</div>
-				<el-form-item label="容重（g/l）" prop="volume_weigh_i" class='leftborder'>
-				    <el-input v-model="formdatas.form.volume_weigh_i"></el-input>
+				<el-form-item label="容重（g/l）" prop="storageCapacity" class='leftborder'>
+				    <el-input v-model="formdatas.form.storageCapacity"></el-input>
 				</el-form-item>
-				<el-form-item label="水分（%）" prop="water_content_i" class='leftborder'>
-				    <el-input v-model="formdatas.form.water_content_i"></el-input>
+				<el-form-item label="水分（%）" prop="storageWater" class='leftborder'>
+				    <el-input v-model="formdatas.form.storageWater"></el-input>
 				</el-form-item>
-				<el-form-item label="杂质（%）" prop="impurity_i" class='leftborder'>
-				    <el-input v-model="formdatas.form.impurity_i"></el-input>
+				<el-form-item label="杂质（%）" prop="storageImpurity" class='leftborder'>
+				    <el-input v-model="formdatas.form.storageImpurity"></el-input>
 				</el-form-item>
 				<div class="clear"></div>
 			</div>
@@ -100,14 +100,14 @@
 						实测粮食质量
 					</div>
 				</div>
-				<el-form-item label="容重（g/l）" prop="volume_weigh_r" class='leftborder'>
-				    <el-input v-model="formdatas.form.volume_weigh_r"></el-input>
+				<el-form-item label="容重（g/l）" prop="realCapacity" class='leftborder'>
+				    <el-input v-model="formdatas.form.realCapacity"></el-input>
 				</el-form-item>
-				<el-form-item label="水分（%）" prop="water_content_r" class='leftborder'>
-				    <el-input v-model="formdatas.form.water_content_r"></el-input>
+				<el-form-item label="水分（%）" prop="realWater" class='leftborder'>
+				    <el-input v-model="formdatas.form.realWater"></el-input>
 				</el-form-item>
-				<el-form-item label="杂质（%）" prop="impurity_r" class='leftborder'>
-				    <el-input v-model="formdatas.form.impurity_r"></el-input>
+				<el-form-item label="杂质（%）" prop="realImpurity" class='leftborder'>
+				    <el-input v-model="formdatas.form.realImpurity"></el-input>
 				</el-form-item>		
 				<div class="clear"></div>
 				
@@ -154,8 +154,8 @@
 					<el-form-item label="单位体积粮食重量（kg/m³）" prop="unit_volume_weight_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
 					    <el-input v-model="formdatas.form.unit_volume_weight_tz" :disabled="calculation_density==1"></el-input>
 					</el-form-item>
-					<el-form-item label="校正后修正系数" prop="correction_factor_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
-					    <el-input v-model="formdatas.form.correction_factor_tz" :disabled="calculation_density==1"></el-input>
+					<el-form-item label="校正后修正系数" prop="correctioFactor"  class='leftborder' :class="{disabled:calculation_density==1}">
+					    <el-input v-model="formdatas.form.correctioFactor" :disabled="calculation_density==1"></el-input>
 					</el-form-item>
 					<el-form-item label="粮堆平均密度（kg/m³）" prop="average_density_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
 					    <el-input v-model="formdatas.form.average_density_tz" :disabled="calculation_density==1"></el-input>

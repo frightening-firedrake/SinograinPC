@@ -71,7 +71,8 @@ export default {
 			}
 	    }).then(function (response) {
         this.formdatas.form = response.data,
-        this.formdatas.form.libraryName = this.$route.query.libraryName
+        this.formdatas.form.libraryName = this.$route.query.libraryName,
+        console.log(this.formdatas.form)
 		  	
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
