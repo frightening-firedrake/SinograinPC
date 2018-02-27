@@ -110,7 +110,23 @@ export default {
 //	问题监视
 	changeProblems(problems){
 		this.formdatas.form.problems=problems;
-		console.log(this.formdatas.form.problems)
+//		console.log(this.formdatas.form.problems)
+//		console.log(this.problems())
+//		console.log(this.problems()[0].images[0].name)
+	},
+	problems(){
+		var problems=[];
+		this.formdatas.form.problems.forEach((value,index)=>{
+			var obj={};
+			obj.problem=value.problem;
+			obj.images=[]
+			value.images.forEach((item,index)=>{
+				var img=item.raw;
+			 	obj.images.push(img)
+			});
+			problems.push(obj)
+		})
+		return problems;
 	},
 	titleEvent(){
   		console.log('titleEvent');
