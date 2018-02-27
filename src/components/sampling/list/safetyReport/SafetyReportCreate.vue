@@ -53,7 +53,7 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
 //	保存安全报告
-  	savedata(page){
+  	savedata(){
   		this.loading=true;
 		this.$http({
 		    method: 'post',
@@ -68,7 +68,8 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				sampleId:this.$route.query,
+				sampleId:this.$route.query.id,
+				problems:JSON.stringify(this.problems())
 			}
 	    }).then(function (response) {
 		  	this.formdatas=response.data.formdatas;
@@ -139,7 +140,8 @@ export default {
   		console.log('titleEvent');
   	},
   	submit(){
-  		console.log(this.formdatas.form.problems);
+  		// console.log(this.formdatas.form.problems);
+		this.savedata();
   	},
   },
   data() {
