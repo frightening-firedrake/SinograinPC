@@ -55,20 +55,24 @@ export default {
   		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
-		    method: 'post',
+		  method: 'post',
 			url: this.datalistURL,
+      transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				id:this.$route.query
+				id:this.$route.query.id
 			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
-//		  	this.tabledatas=response.data.rows;
-//	  		this.page.total=response.data.total;
+        this.formdatas.form = response.data,
+        this.formdatas.form.libraryName = this.$route.query.libraryName
 		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -112,7 +116,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role6/data',
+      datalistURL:'api/grain/sample/get',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -136,25 +140,25 @@ export default {
           checkregion: '',//被检查企业
           checktime: '',//被查时点
           realchecktime: '',//实际查库日
-          pnumber: '',//货位号
-          varieties: '',//品种
+          position: '',//货位号
+          sort: '',//品种
           quality: '',//性质
-          reservoir_area:'',//所在库区
+          libraryName:'',//所在库区
           warehouse_type:'',//仓房类型
-          harvestdate: '',//收货年度
-          storage_from:'',//储存形式
+          gainTime: '',//收货年度
+          storge:'',//储存形式
           bgzsl:'',//保管帐数量（kg）
-          quality:'',//质量等级
+          qualityGrade:'',//质量等级
           //stored_way:['人工入仓'],//入仓方式
-          stored_way:'',//入仓方式
+          putWay:'',//入仓方式
           //粮食入库质量
-          capacity:'',//容重（g/l）  
-          water_content_i:'',//水分（%）
-          impurity_i:'',//杂质（%）  
+          storageCapacity:'',//容重（g/l）  
+          storageWater:'',//水分（%）
+          storageImpurity:'',//杂质（%）  
           //实测粮食质量
-          volume_weigh_r:'',//容重（g/l）  
-          water_content_r:'',//水分（%）
-          impurity_r:'',//杂质（%） 
+          realCapacity:'',//容重（g/l）  
+          realWater:'',//水分（%）
+          realImpurity:'',//杂质（%） 
           //粮堆形状及基本尺寸
           length:'',//长（m）：
           wide:'',//宽（m）：
@@ -166,14 +170,14 @@ export default {
           //2.计算粮堆平均密度	
 //          标准容重器法
           volume_weigh_bz:'',//粮食容重（g/l）
-          correction_factor_bz:'',//校正后修正系数
+          correctioFactor:'',//校正后修正系数
           verageDensity:'',//粮堆平均密度（kg/m³）
 //          特制大容器法
           unit_volume_weight_tz:'',//单位体积粮食重量（kg/m³）
           correction_factor_tz:'',//校正后修正系数
           average_density_tz:'',//粮堆平均密度（kg/m³）
           //3.计算粮食数量
-          weight_measure:'',//测量计算数（kg）	
+          unQuality:'',//测量计算数（kg）	
 //          应记粮食损耗(kg)	
           weight_humidity:'',//水分减量
           weight_natural:'',//保管自然损耗

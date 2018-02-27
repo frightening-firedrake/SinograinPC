@@ -52,16 +52,23 @@ export default {
   methods: {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
-//	获取列表数据方法
-  	getlistdata(page){
+//	保存安全报告
+  	savedata(page){
   		this.loading=true;
-  		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
-			url: this.datalistURL,
+			url: this.saveURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				sampleId:this.$route.query
+				sampleId:this.$route.query,
 			}
 	    }).then(function (response) {
 		  	this.formdatas=response.data.formdatas;
@@ -117,7 +124,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'api/grain/safetyReport/save',
+      saveURL:'api/grain/safetyReport/save',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],

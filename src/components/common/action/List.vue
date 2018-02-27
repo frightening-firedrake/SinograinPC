@@ -182,7 +182,7 @@ export default {
     },
     handleCreateManuscript(index, row){
     	console.log(this.$router)
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptCreate'})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptCreate',query:{id:row.id,libraryName:row.libraryName}})
     },
 //  安全报告
     handleViewSafetyReport(index, row){
