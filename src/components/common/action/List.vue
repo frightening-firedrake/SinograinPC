@@ -62,8 +62,8 @@
 			    <el-table-column :resizable="resizable" align="center" label="新消息通知" class-name="tableAction">
 		          <template slot-scope="scope">
 		      <!--有新通知-->
-		      				<template v-if="scope.row.message">
-		            			您有<span style="color:#f22054;">{{scope.row.message}}</span>条新申请通知
+		      				<template v-if="scope.row.count">
+		            			您有<span style="color:#f22054;">{{scope.row.count}}</span>条新申请通知
 		      				</template>
 		      <!--没有新通知-->
 						      <template v-else>
@@ -189,7 +189,7 @@ export default {
     	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportEdit'})
     },
     handleCreateSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate',query:{libraryName:row.libraryName,position:row.position}})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
     },
     handleInput(index, row,scope) {
 //	  	console.log(index,row);
