@@ -120,14 +120,14 @@
 				<div class="fromrow">
 					1.计算粮堆体积
 				</div>
-				<el-form-item label="粮堆测量体积(m3)" prop="volume_c" >
+				<el-form-item label="粮堆测量体积(m3)" prop="measuredVolume" >
 				    <el-input v-model="ldcltj" disabled></el-input>
 				</el-form-item>
 				<el-form-item label="需要扣除体积(m3)" prop="deductVolume" >
 				    <el-input v-model="formdatas.form.deductVolume"></el-input>
 				</el-form-item>
-				<el-form-item label="粮堆实际体积(m3)" prop="volume_r" >
-				    <el-input v-model="formdatas.form.volume_r"></el-input>
+				<el-form-item label="粮堆实际体积(m3)" prop="realVolume" >
+				    <el-input v-model="ldsjtj" disabled></el-input>
 				</el-form-item>
 				<div class="fromrow">
 					2.计算粮堆平均密度
@@ -136,14 +136,14 @@
 					<div class="merge_title_3">
 						<el-radio v-model="calculation_density" label="1" @change="pjmdff">标准容重器法</el-radio>
 					</div>
-					<el-form-item label="粮食容重（g/l）" prop="volume_weigh_bz"  class='leftborder' :class="{disabled:calculation_density==2}">
-					    <el-input v-model="formdatas.form.volume_weigh_bz" :disabled="calculation_density==2"></el-input>
+					<el-form-item label="粮食容重（g/l）" prop="realCapacity"  class='leftborder' :class="{disabled:calculation_density==2}">
+					    <el-input v-model="formdatas.form.realCapacity" :disabled="calculation_density==2" disabled></el-input>
 					</el-form-item>
-					<el-form-item label="校正后修正系数" prop="correction_factor_bz"  class='leftborder' :class="{disabled:calculation_density==2}">
-					    <el-input v-model="formdatas.form.correction_factor_bz" :disabled="calculation_density==2"></el-input>
+					<el-form-item label="校正后修正系数" prop="correctioFactor"  class='leftborder' :class="{disabled:calculation_density==2}">
+					    <el-input v-model="formdatas.form.correctioFactor" :disabled="calculation_density==2"></el-input>
 					</el-form-item>
-					<el-form-item label="粮堆平均密度（kg/m³）" prop="verageDensity"  class='leftborder' :class="{disabled:calculation_density==2}">
-					    <el-input v-model="formdatas.form.verageDensity" :disabled="calculation_density==2"></el-input>
+					<el-form-item label="粮堆平均密度（kg/m³）" prop="aveDensity"  class='leftborder' :class="{disabled:calculation_density==2}">
+					    <el-input v-model="bzldpjmd" :disabled="calculation_density==2" disabled></el-input>
 					</el-form-item>
 					<div class="clear"></div>
 				</div>
@@ -154,11 +154,11 @@
 					<el-form-item label="单位体积粮食重量（kg/m³）" prop="unit_volume_weight_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
 					    <el-input v-model="formdatas.form.unit_volume_weight_tz" :disabled="calculation_density==1"></el-input>
 					</el-form-item>
-					<el-form-item label="校正后修正系数" prop="correctioFactor"  class='leftborder' :class="{disabled:calculation_density==1}">
-					    <el-input v-model="formdatas.form.correctioFactor" :disabled="calculation_density==1"></el-input>
+					<el-form-item label="校正后修正系数" prop="correction_factor_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
+					    <el-input v-model="formdatas.form.correction_factor_tz" :disabled="calculation_density==1"></el-input>
 					</el-form-item>
 					<el-form-item label="粮堆平均密度（kg/m³）" prop="average_density_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
-					    <el-input v-model="formdatas.form.average_density_tz" :disabled="calculation_density==1"></el-input>
+					    <el-input v-model="tzldpjmd" :disabled="calculation_density==1" disabled></el-input>
 					</el-form-item>
 					<div class="clear"></div>
 				</div>
@@ -195,26 +195,26 @@
 					3.计算粮食数量
 				</div>
 				<el-form-item label="测量计算数（kg）" prop="unQuality" >
-				    <el-input v-model="formdatas.form.unQuality"></el-input>
+				    <el-input v-model="cljss" disabled></el-input>
 				</el-form-item>
 				<div class="box">				
 					<div class="merge_title_3">
 						应记粮食损耗(kg)	
 					</div>
 					<el-form-item label="水分减量" prop="weight_humidity"  class='leftborder'>
-					    <el-input v-model="formdatas.form.weight_humidity"></el-input>
+					    <el-input v-model="sfjl" disabled></el-input>
 					</el-form-item>
 					<el-form-item label="保管自然损耗" prop="weight_natural"  class='leftborder'>
-					    <el-input v-model="formdatas.form.weight_natural"></el-input>
+					    <el-input v-model="bgzrsh" disabled></el-input>
 					</el-form-item>
 					<el-form-item label="合计" prop="weight_total"  class='leftborder'>
-					    <el-input v-model="formdatas.form.weight_total"></el-input>
+					    <el-input v-model="sum" disabled></el-input>
 					</el-form-item>
 					
 					<div class="clear"></div>
 				</div>
 				<el-form-item label="检查计算数（kg）" prop="weight_calculation" >
-				    <el-input v-model="formdatas.form.weight_calculation"></el-input>
+				    <el-input v-model="jcjss"></el-input>
 				</el-form-item>
 				<div class="clear"></div>
 				
@@ -234,10 +234,10 @@
 					</div>
 				</div>
 					<el-form-item label="差数（kg）" prop="difference"  class='leftborder'>
-					    <el-input v-model="formdatas.form.difference"></el-input>
+					    <el-input v-model="difference" disabled></el-input>
 					</el-form-item>
 					<el-form-item label="差率（％）" prop="slip"  class='leftborder'>
-					    <el-input v-model="formdatas.form.slip"></el-input>
+					    <el-input v-model="slip" disabled></el-input>
 					</el-form-item>
 				<div class="clear"></div>
 				<div class="cover_left">
@@ -245,9 +245,9 @@
 				</div>	
 					<el-form-item label="账实是否相符" prop="is_same" >
 
-					    <el-select v-model="formdatas.form.is_same" placeholder="选择是否相符">
-					        <el-option label="相符" value="相符"></el-option>
-					        <el-option label="不相符" value="不相符"></el-option>
+					    <el-select v-model="zssfxf" placeholder="选择是否相符">
+					        <el-option label="相符" value="1"></el-option>
+					        <el-option label="不相符" value="2"></el-option>
 					    </el-select>
 
 					    <el-input v-model="formdatas.form.is_same"></el-input>
@@ -322,12 +322,94 @@ export default {
 //		console.log(this.formdatas)
     },
     computed:{
-		ldcltj() {
+		ldcltj() {//粮堆测量体积
 			var length = this.formdatas.form.length;
 			var high = this.formdatas.form.high;
 			var wide = this.formdatas.form.wide;
-			return (length*high*wide).toFixed(2)
+			return this.jsdjg.measuredVolume = (length*high*wide).toFixed(2)
+		},
+		ldsjtj() { //粮堆实际体积
+			var length = this.formdatas.form.length;
+			var high = this.formdatas.form.high;
+			var wide = this.formdatas.form.wide;
+			return this.jsdjg.realVolume = (length*high*wide - this.formdatas.form.deductVolume).toFixed(2)
+		},
+		bzldpjmd() { // 标准粮堆平均密度
+			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor).toFixed(2)
+		},
+		tzldpjmd() { //特制粮堆平均密度
+			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz).toFixed(2)
+		},
+		cljss() { //测量计算数（kg）
+			var length = this.formdatas.form.length;
+			var high = this.formdatas.form.high;
+			var wide = this.formdatas.form.wide;
+			if(this.calculation_density == 1) {
+				return this.jsdjg.unQuality = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor).toFixed(2)
+			} else if(this.calculation_density == 2) { 
+				return this.jsdjg.unQuality = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz).toFixed(2)
+			}
+		},
+		sfjl() { //水分减量
+			return this.jsdjg.lossWater = (this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater)).toFixed(2)
+		},
+		bgzrsh() { //保管自然损耗
+			var date = new Date();
+			var year = date.getFullYear();
+			return this.jsdjg.lossNature = (this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime)).toFixed(2);
+		},
+		sum() { //合计
+			var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
+			var date = new Date();
+			var year = date.getFullYear();
+			var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
+			return this.jsdjg.loss = (sfjl + bgzrsh).toFixed(2);
+		},
+		jcjss() { //检查计算数（kg）
+			var length = this.formdatas.form.length;
+			var high = this.formdatas.form.high;
+			var wide = this.formdatas.form.wide;
+			if(this.calculation_density == 1) {
+				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)
+			} else if(this.calculation_density == 2) { 
+				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz)
+			}
+			var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
+			var date = new Date();
+			var year = date.getFullYear();
+			var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
+			var sum = sfjl + bgzrsh;
+			return this.jsdjg.checkNum = (cljss + sum).toFixed(2);
+		},
+		difference() { //差数
+			var length = this.formdatas.form.length;
+			var high = this.formdatas.form.high;
+			var wide = this.formdatas.form.wide;
+			if(this.calculation_density == 1) {
+				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)
+			} else if(this.calculation_density == 2) { 
+				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz)
+			}
+			var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
+			var date = new Date();
+			var year = date.getFullYear();
+			var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
+			var sum = sfjl + bgzrsh;
+			var jcjss = cljss -sum;
+			return this.jsdjg.difference = (this.formdatas.form.grainQuality - jcjss).toFixed(2);
+		},
+		slip() { //差率
+			var slip = (this.difference-0)/(this.formdatas.form.grainQuality-0) * 100;
+			return this.jsdjg.slip = slip.toFixed(2);
+		},
+		zssfxf() {
+			if(this.slip > -3 && this.slip < 3) {
+				return "相符";
+			} else {
+				return "不相符";
+			}
 		}
+
     },
     data() {
 
@@ -373,6 +455,10 @@ export default {
                 }
             }
         return {
+		jsdjg:{//计算的结果
+
+		},
+
 //      dyear:new Date(2017),
         calculation_density:"1",//计算密度方法
         labelWidth:'2rem',
@@ -425,9 +511,8 @@ export default {
         onSubmit(formname) {
             this.$refs[formname].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
-//                  this.$emit('btn_close')
-					window.history.go(-1)
+                 this.$emit('submit',this.jsdjg)
+					// window.history.go(-1)
                 } else {
                     console.log('error submit!!');
                     return false;

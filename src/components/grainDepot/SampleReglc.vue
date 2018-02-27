@@ -125,6 +125,35 @@ export default {
 	dialogClose(){
 		this.modalVisible=false;
 	},
+	//导出Excel表格
+	exportExcel(pId){
+		console.log(pId)
+		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.exportExcelURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+			    pId: pId,
+			}
+	    }).then(function (response) {
+		  	if(response.data.success) {
+				  alert("导出Excel成功")
+			  } else {
+				  alert("导出Excel失败")
+			  }
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+	},
 //	获取搜索数据
   	searchingfor(searching){
   		console.log(searching);
@@ -246,7 +275,7 @@ export default {
 		}else if(date=='btnLeft'){
 
 		}else if(date=='btnRight'){
-
+			this.exportExcel(this.$route.query.pId)
 		}else if(date=='btnOne'){
 
 		}
@@ -256,6 +285,7 @@ export default {
     return {
       datalistURL:'api/grain/sample/data',
 	  applyURL:'api/grain/register/edit',
+	  exportExcelURL:'api/grain/register/exportExcel',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],

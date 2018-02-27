@@ -7,7 +7,7 @@
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
-      <manuscript-form :formdatas="formdatas" @pjmdff="pjmdff"></manuscript-form> 
+      <manuscript-form :formdatas="formdatas" @pjmdff="pjmdff" @submit="submit"></manuscript-form> 
     </div>
 </template>
 
@@ -50,6 +50,60 @@ export default {
   methods: {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
+    submit(jsdjg){
+  		this.loading=true;
+      //保存数据
+      this.$http({
+        method: 'post',
+        url: this.saveURL,
+        transformRequest: [function (data) {
+          // Do whatever you want to transform the data
+          let ret = ''
+          for (let it in data) {
+          ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+          }
+          return ret
+        }],
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: {
+          storge: this.formdatas.form.storge,//存储形式
+          grainQuality: this.formdatas.form.bgzsl,//保管账数量
+          qualityGrade: this.formdatas.form.qualityGrade,//质量等级
+          putWay: this.formdatas.form.putWay,//入仓方式
+          storageCapacity: this.formdatas.form.storageCapacity,//入库容重
+          storageWater: this.formdatas.form.storageWater,//入库水分
+          storageImpurity: this.formdatas.form.storageImpurity,//入库杂质
+          realCapacity: this.formdatas.form.realCapacity,//实测容重
+          realWater: this.formdatas.form.realWater,//实测水分
+          realImpurity: this.formdatas.form.realImpurity,//实测杂质
+          measuredVolume: jsdjg.measuredVolume,//粮堆测量体积
+          deductVolume: this.formdatas.form.deductVolume,//扣除体积
+          realVolume: jsdjg.realVolume,//粮堆实际体积
+          correctioFactor: this.formdatas.form.correctioFactor,//校正后修正系数
+          aveDensity: jsdjg.aveDensity,//粮堆平均密度
+          length: this.formdatas.form.length,//长
+          wide: this.formdatas.form.wide,//宽
+          high: this.formdatas.form.high,//高
+          unQuality: jsdjg.unQuality,//测量计算数
+          lossWater: jsdjg.lossWater,//水分减量
+          lossNature: jsdjg.lossNature,//自然损耗
+          loss: jsdjg.loss,//合计
+          checkNum: jsdjg.checkNum,//检查计算数
+          difference: jsdjg.difference,//差数
+          slip: jsdjg.slip,//差率
+          result: this.formdatas.form.result,//不符原因
+          remark: this.formdatas.form.remark,//备注
+          rummager: this.formdatas.form.rummager,//检查人
+          custodian: this.formdatas.form.custodian,//保管责任人
+          leader: this.formdatas.form.leader,//被检查企业负责人
+
+        }
+        }).then(function (response) {
+		  	
+        }.bind(this)).catch(function (error) {
+            console.log(error);
+        }.bind(this));
+  	},
 //	获取列表数据方法
   	getlistdata(page){
   		this.loading=true;
@@ -120,6 +174,7 @@ export default {
   data() {
     return {
       datalistURL:'api/grain/sample/get',
+      saveURL: 'api/grain/manuscript/saveMan',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -167,32 +222,32 @@ export default {
           wide:'0',//宽（m）：
           high:'0',//高（m）：
           //1.计算粮堆体积
-          volume_c:'',//粮堆测量体积(m3)	
+          measuredVolume:'',//粮堆测量体积(m3)	
           deductVolume:'',//需要扣除体积(m3)	
-          grainQuality:'',//粮堆实际体积(m3)	
+          realVolume:'',//粮堆实际体积(m3)	
           //2.计算粮堆平均密度	
 //          标准容重器法
-          volume_weigh_bz:'',//粮食容重（g/l）
-          correctioFactor:'',//校正后修正系数
-          verageDensity:'',//粮堆平均密度（kg/m³）
+          // volume_weigh_bz:'',//粮食容重（g/l）
+          correctioFactor:'1',//校正后修正系数
+          aveDensity:'',//粮堆平均密度（kg/m³）
 //          特制大容器法
-          unit_volume_weight_tz:'',//单位体积粮食重量（kg/m³）
-          correction_factor_tz:'',//校正后修正系数
-          average_density_tz:'',//粮堆平均密度（kg/m³）
+          // unit_volume_weight_tz:'',//单位体积粮食重量（kg/m³）
+          correction_factor_tz:'1',//校正后修正系数
+          // average_density_tz:'',//粮堆平均密度（kg/m³）
           //3.计算粮食数量
-          unQuality:'',//测量计算数（kg）	
+            unQuality:'',//测量计算数（kg）	
 //          应记粮食损耗(kg)	
-          weight_humidity:'',//水分减量
-          weight_natural:'',//保管自然损耗
-          weight_total:'',//合计
-          unQuality:'',//检查计算数（kg）	
+          lossWater:'',//水分减量
+          lossNature:'',//保管自然损耗
+          loss:'',//合计
+          checkNum:'',//检查计算数（kg）	
           //4.认定粮食实际数量	
 //          检查计算数与保管账数量比较
           difference:'',//差数（kg）
           slip:'',//差率（％）
-          is_same:'',//账实是否相符
-          weight_r:'',//粮食实际数量（kg）
-          difference_r:'',//账实不符原因   
+          // is_same:'',//账实是否相符
+          // weight_r:'',//粮食实际数量（kg）
+          result:'',//账实不符原因   
           remark: '无',//备注
           rummager:'',//检查人：
           custodian:'',//保管责任人：
