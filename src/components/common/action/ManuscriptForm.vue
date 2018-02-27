@@ -121,7 +121,7 @@
 					1.计算粮堆体积
 				</div>
 				<el-form-item label="粮堆测量体积(m3)" prop="volume_c" >
-				    <el-input v-model="formdatas.form.volume_c"></el-input>
+				    <el-input v-model="ldcltj" disabled></el-input>
 				</el-form-item>
 				<el-form-item label="需要扣除体积(m3)" prop="deductVolume" >
 				    <el-input v-model="formdatas.form.deductVolume"></el-input>
@@ -255,8 +255,8 @@
 				<div class="cover_left">
 					<div></div>
 				</div>	
-				<el-form-item label="粮食实际数量（kg）" prop="weight_r" >
-				    <el-input v-model="formdatas.form.weight_r"></el-input>
+				<el-form-item label="粮食实际数量（kg）" prop="grainQuality" >
+				    <el-input v-model="formdatas.form.grainQuality" disabled></el-input>
 				</el-form-item>
 				<div class="cover_left">
 					<div></div>
@@ -322,7 +322,12 @@ export default {
 //		console.log(this.formdatas)
     },
     computed:{
-
+		ldcltj() {
+			var length = this.formdatas.form.length;
+			var high = this.formdatas.form.high;
+			var wide = this.formdatas.form.wide;
+			return (length*high*wide).toFixed(2)
+		}
     },
     data() {
 

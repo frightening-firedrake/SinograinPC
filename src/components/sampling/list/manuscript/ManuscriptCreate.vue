@@ -161,9 +161,9 @@ export default {
           realWater:'',//水分（%）
           realImpurity:'',//杂质（%） 
           //粮堆形状及基本尺寸
-          length:'',//长（m）：
-          wide:'',//宽（m）：
-          high:'',//高（m）：
+          length:'0',//长（m）：
+          wide:'0',//宽（m）：
+          high:'0',//高（m）：
           //1.计算粮堆体积
           volume_c:'',//粮堆测量体积(m3)	
           deductVolume:'',//需要扣除体积(m3)	
