@@ -154,7 +154,8 @@ export default {
 					level: 2,
 					pid: 0,
 					lid: 1,
-					badge:8,
+//					提示新信息
+//					badge:8,
 				},
 				{
 					icon: 'icon-xinshenqing',
@@ -163,7 +164,8 @@ export default {
 					level: 2,
 					pid: 1,
 					lid: 2,
-					badge:8,
+//					提示新信息
+//					badge:8,
 				},
 				{
 					icon: 'icon-iconfontcolor69',

@@ -70,7 +70,9 @@ export default {
 				id:this.$route.query.id
 			}
 	    }).then(function (response) {
-        this.formdatas.form = response.data,
+	    	for (var key in response.data){
+	    		this.formdatas.form[key]=response.data[key];
+	    	}
         this.formdatas.form.libraryName = this.$route.query.libraryName,
         console.log(this.formdatas.form)
 		  	

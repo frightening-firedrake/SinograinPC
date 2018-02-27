@@ -290,10 +290,11 @@ export default {
 		console.log(date);
 		if(date=='btnCenterL'){
 			this.disagree()
-			window.history.go(-1)
+			this.$router.go(-1)
 		}else if(date=='btnCenterR'){
 			this.agree()
-			window.history.go(-1)
+			this.$router.go(-1)
+//			window.history.go(-1)
 		}else if(date=='btnLeft'){
 
 		}else if(date=='btnRight'){
