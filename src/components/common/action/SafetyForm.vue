@@ -35,8 +35,11 @@
 			    <el-upload
 				  action="/liquid/images"
 				  list-type="picture-card"
+				  ref='upload'
+				  :data={problem:item.problem}
 				  :on-preview="handlePictureCardPreview"
-				  name="images1"
+				  :auto-upload=false
+				  :on-change="imageChange"
 				  :file-list="item.images"
 				  :on-remove="handleRemove">
 				  <i class="el-icon-plus"></i>
@@ -82,6 +85,16 @@ export default {
 				return false;
 			}
 		},
+		problems(){
+			var problems=[];
+			this.$refs.upload.forEach((value,index)=>{
+				var obj={};
+				obj.problem=value.data.problem;
+				obj.images=value.uploadFiles;
+				problems.push(obj)
+			})
+			return problems;
+		}
     },
     data() {
 
@@ -128,6 +141,7 @@ export default {
             }
         return {
 //      dyear:new Date(2017),
+		false:false,
         dialogImageUrl: '',
         dialogVisible: false,
         labelWidth:'2rem',
@@ -178,12 +192,12 @@ export default {
     },
     methods: {  
         onSubmit(formname) {
-        	console.log(this.formdatas.form.images1)
+        	console.log(this.formdatas.form)
             this.$refs[formname].validate((valid) => {
                 if (valid) {
 //                  alert('submit!');
                     this.$emit('submit')
-					window.history.go(-1)
+//					window.history.go(-1)
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -198,12 +212,21 @@ export default {
         },
 //      图片上传查看与删除
 	    handleRemove(file, fileList) {
-	        console.log(file, fileList);
+//	        console.log(file, fileList);
+			this.$emit('changeProblems',this.problems);
 	    },
 	    handlePictureCardPreview(file, fileList) {
 	        this.dialogImageUrl = file.url;
 	        this.dialogVisible = true;
 	    },
+	    imageChange(file, fileList){
+			this.$emit('changeProblems',this.problems);
+//	    	console.log(file, fileList);
+//	    	console.log(this.$refs.upload[0].data.problem)
+//			console.log(this.problems)
+//	    	console.log(this.formdatas.form.problems[0].images)
+	    },
+
 //	       问题加一
 		addproblem(){
 //			formdatas.form.problems.'+index+'.problem
