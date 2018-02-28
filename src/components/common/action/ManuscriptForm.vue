@@ -149,7 +149,7 @@
 				</div>
 				<div class="box">				
 					<div class="merge_title_3">
-						<el-radio v-model="calculation_density" label="2" @change="pjmdff">特制大容器法</el-radio>
+						<el-radio v-model="calculation_density" label="2" @change="pjmdff" disabled>特制大容器法</el-radio>
 					</div>
 					<el-form-item label="单位体积粮食重量（kg/m³）" prop="unit_volume_weight_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
 					    <el-input v-model="formdatas.form.unit_volume_weight_tz" :disabled="calculation_density==1"></el-input>
@@ -338,7 +338,7 @@ export default {
 			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor).toFixed(2)
 		},
 		tzldpjmd() { //特制粮堆平均密度
-			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz).toFixed(2)
+//			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz).toFixed(2)
 		},
 		cljss() { //测量计算数（kg）
 			var length = this.formdatas.form.length;
@@ -527,6 +527,10 @@ export default {
 		            { type: 'number', message: '请输数字', trigger: 'blur' },
 		        ],
 		        high: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+		        correctioFactor: [
 		            { required: true, message: '请输入', trigger: 'blur' },
 		            { type: 'number', message: '请输数字', trigger: 'blur' },
 		        ],
