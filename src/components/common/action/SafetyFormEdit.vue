@@ -43,7 +43,9 @@
 			<el-form-item label="图片：" prop="images" class="images">
 				<img v-if="item.state!==-1" src="static/images/sys/over.png" alt="" class="hege"/>
 			    <el-upload
-
+				  :data={problem:item.problem}
+				  ref='upload'
+				  :limit='limit'
 				  action="/liquid/images"
 				  list-type="picture-card"
 				  :on-preview="handlePictureCardPreview"
@@ -242,6 +244,7 @@ export default {
                 }
             }
         return {
+        	limit:5,
 			problemStatic:'all',
 	        dialogImageUrl: '',
 	        dialogVisible: false,

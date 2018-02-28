@@ -36,6 +36,7 @@
 				  action="/liquid/images"
 				  list-type="picture-card"
 				  ref='upload'
+				  :limit='limit'
 				  :data={problem:item.problem}
 				  :on-preview="handlePictureCardPreview"
 				  :auto-upload=false
@@ -140,6 +141,7 @@ export default {
                 }
             }
         return {
+        limit:5,	
 //      dyear:new Date(2017),
 		false:false,
         dialogImageUrl: '',
