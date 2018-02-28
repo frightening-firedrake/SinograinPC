@@ -186,7 +186,7 @@ export default {
     },
 //  安全报告
     handleViewSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportEdit'})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportEdit',query:{id:row.id,libraryName:row.libraryName}})
     },
     handleCreateSafetyReport(index, row){
     	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate',query:{id:row.id,libraryName:row.libraryName,position:row.position}})

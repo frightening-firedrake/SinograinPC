@@ -53,7 +53,7 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
-//	this.getlistdata(1)
+	this.getdata()
 
   },
   destroy(){
@@ -63,23 +63,26 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
 //	获取列表数据方法
-  	getlistdata(page){
-  		this.loading=true;
+  	getdata(){
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
-			url: this.datalistURL,
+			url: this.dataURL,
+			transformRequest: [function (data) {
+			// Do whatever you want to transform the data
+			let ret = ''
+			for (let it in data) {
+			ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+			}
+			return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				id:this.$route.query
+				id:this.$route.query.id
 			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
-//	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+		  	this.formdatas.form.libraryName = this.$route.query.libraryName;
+			this.formdatas.form.position = response.position
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -166,7 +169,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role5/data',
+      dataURL:'api/grain/sample/get',
       searchURL:'/liquid/role2/data/search',
       passURL:'/liquid/role2/data/delete',
       problemStatus:'all',
@@ -205,8 +208,8 @@ export default {
       		{label:1,text:'已解决'},
       	],
       	form:{
-          checkregion: '沁县库区',//被查库点
-          pnumber: '漫水-1',//货位号          
+          libraryName: '沁县库区',//被查库点
+          position: '漫水-1',//货位号          
       	},
       	problems:[
       		{
