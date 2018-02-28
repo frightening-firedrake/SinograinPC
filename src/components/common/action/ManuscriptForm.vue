@@ -560,12 +560,10 @@ export default {
         onSubmit(formname) {
             this.$refs[formname].validate((valid) => {
                 if (valid) {
-                	alert('123333')
-//               this.$emit('submit',this.jsdjg)
+                 this.$emit('submit',this.jsdjg)
 					// window.history.go(-1)
                 } else {
-                	alert('00000000')
-                    console.log('error submit!!');
+//                  console.log('error submit!!');
                     return false;
                 }
             });
