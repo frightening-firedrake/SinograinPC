@@ -148,7 +148,8 @@ export default {
 			}
 	    }).then(function (response) {
 		  	if(response.data.success) {
-				  alert("导出Excel成功")
+//				  alert("导出Excel成功")
+				  window.open(this.exportExcelURL+'?pId='+pId,"_blank");				  
 			  } else {
 				  alert("导出Excel失败")
 			  }

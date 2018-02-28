@@ -7,7 +7,7 @@
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
-      <safety-form-edit :formdatas="formdatas" :problemFilter="problemFilter" @problemStatusChange="problemStatusChange" @pass="pass"></safety-form-edit> 
+      <safety-form-edit :formdatas="formdatas" :problemFilter="problemFilter" @problemStatusChange="problemStatusChange" @pass="pass" v-on:addproblem="addproblem" @submit="submit" @delproblem="delproblem"  @changeProblems="changeProblems"></safety-form-edit> 
       <!--通知弹框-->
       <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
     </div>
@@ -147,14 +147,6 @@ export default {
   	messageClose(){
   		this.messageShow=false;
   	},
-//问题加一
-	addproblem(){
-		var item={
-          		problem: '',//问题
-          		images: [],//图片
-            };
-		this.formdatas.form.problems.push(item);
-	},
 	titleEvent(){
   		console.log('titleEvent');
   	},
@@ -165,6 +157,45 @@ export default {
   	pass(id){
   		this.messageShow=true;
   		this.passProblemId=id;
+  	},
+//问题加一
+	addproblem(){
+		var item={
+          		problem: '',//问题
+          		images: [],//图片
+          		state:-1,
+            };
+		this.formdatas.problems.push(item);
+	},
+//问题减一
+	delproblem(){
+		this.formdatas.problems.pop();
+	},
+//	问题监视
+	changeProblems(problems){
+		this.formdatas.problems=problems;
+//		console.log(this.formdatas.form.problems)
+//		console.log(this.problems())
+//		console.log(this.problems()[0].images[0].name)
+	},
+	problems(){
+		var problems=[];
+		this.formdatas.problems.forEach((value,index)=>{
+			var obj={};
+			obj.problem=value.problem;
+			obj.images=[]
+			value.images.forEach((item,index)=>{
+				var img=item.raw;
+			 	obj.images.push(img)
+			});
+			problems.push(obj)
+		})
+		return problems;
+	},
+	submit(){
+  		// console.log(this.formdatas.form.problems);
+//		this.savedata();
+//		console.log(this.problems())
   	},
   },
   data() {
