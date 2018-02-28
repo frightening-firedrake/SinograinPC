@@ -192,7 +192,7 @@ export default {
     },
     methods: {  
         onSubmit(formname) {
-        	console.log(this.formdatas.form)
+//      	console.log(this.formdatas.form)
             this.$refs[formname].validate((valid) => {
                 if (valid) {
 //                  alert('submit!');
