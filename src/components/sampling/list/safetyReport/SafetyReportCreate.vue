@@ -54,6 +54,9 @@ export default {
   	...mapActions(['addAction']),
 //	保存安全报告
   	savedata(){
+  		var problems=this.problems();
+  		console.log(problems)
+  		console.log(JSON.stringify(problems))
   		this.loading=true;
 		this.$http({
 		    method: 'post',
@@ -69,10 +72,10 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 				sampleId:this.$route.query.id,
-				problems:JSON.stringify(this.problems())
+				problems:problems
 			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
+//		  	this.formdatas=response.data.formdatas;
 //		  	this.tabledatas=response.data.rows;
 //	  		this.page.total=response.data.total;
 		  	
@@ -142,6 +145,7 @@ export default {
   	submit(){
   		// console.log(this.formdatas.form.problems);
 		this.savedata();
+//		console.log(this.problems())
   	},
   },
   data() {
