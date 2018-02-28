@@ -77,7 +77,7 @@
 			    <el-table-column :resizable="resizable" align="center" label="工作底稿" class-name="tableAction">
 		          <template slot-scope="scope">
 		      <!--已完成工作底稿-->
-		      				<template v-if="scope.row.manuscript">
+		      				<template v-if="scope.row.mId">
 		            			<button class="viewManuscript" @click="handleViewManuscript(scope.$index, scope.row)">中央储备粮实物检查工作底稿</button>
 		      				</template>
 		      <!--未完成工作底稿-->
@@ -93,7 +93,7 @@
 			    <el-table-column :resizable="resizable" align="center" label="安全报告" class-name="tableAction">
 		          <template slot-scope="scope">
 		      <!--已完成安全报告-->
-		      				<template v-if="scope.row.safetyReport">
+		      				<template v-if="scope.row.srId">
 		            			<button class="viewSafetyReport" @click="handleViewSafetyReport(scope.$index, scope.row)">安全报告</button>
 		      				</template>
 		      <!--未完成安全报告-->
