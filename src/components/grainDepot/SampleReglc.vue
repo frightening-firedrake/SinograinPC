@@ -127,32 +127,35 @@ export default {
 	},
 	//导出Excel表格
 	exportExcel(pId){
-		console.log(pId)
-		// 获取列表数据（第？页）
-		this.$http({
-		    method: 'post',
-			url: this.exportExcelURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-			    pId: pId,
-			}
-	    }).then(function (response) {
-		  	if(response.data.success) {
-				  alert("导出Excel成功")
-			  } else {
-				  alert("导出Excel失败")
-			  }
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
+		window.open(this.exportExcelURL+'?pId='+pId,"_blank");
+		
+//		console.log(pId)
+//		// 获取列表数据（第？页）
+//		this.$http({
+//		    method: 'post',
+//			url: this.exportExcelURL,
+//			transformRequest: [function (data) {
+//				// Do whatever you want to transform the data
+//				let ret = ''
+//				for (let it in data) {
+//				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+//				}
+//				return ret
+//			}],
+//			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+//			data: {
+//			    pId: pId,
+//			}
+//	    }).then(function (response) {
+//		  	if(response.data.success) {
+//				  alert("导出Excel成功")
+//
+//			  } else {
+//				  alert("导出Excel失败")
+//			  }
+//		}.bind(this)).catch(function (error) {
+//		    console.log(error);
+//		}.bind(this));
 	},
 //	获取搜索数据
   	searchingfor(searching){
@@ -248,7 +251,7 @@ export default {
 //		console.log(currentPage)
 		this.getlistdata(currentPage)
 	},
-//	映射分页触发的事件
+//	映射分页左下角触发的事件
   	paginationEvent(actiontype){
   		if(actiontype=='leading_out'){
   			console.log('leading_out')
