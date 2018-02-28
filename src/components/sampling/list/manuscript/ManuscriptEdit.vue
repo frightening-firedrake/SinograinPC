@@ -128,63 +128,63 @@ export default {
       formdatas: {
       	title:'中央储备粮实物检查工作底稿（轮换验收）',
       	form:{
-          checkregion: '',//被检查企业
+        checkregion: '',//被检查企业
           checktime: '',//被查时点
           realchecktime: '',//实际查库日
-          pnumber: '',//货位号
-          varieties: '',//品种
+          position: '',//货位号
+          sort: '',//品种
           quality: '',//性质
-          reservoir_area:'',//所在库区
+          libraryName:'',//所在库区
           warehouse_type:'',//仓房类型
-          harvestdate: '',//收货年度
-          storage_from:'',//储存形式
+          gainTime: '',//收货年度
+          storge:'',//储存形式
           bgzsl:'',//保管帐数量（kg）
-          quality:'',//质量等级
+          qualityGrade:'',//质量等级
           //stored_way:['人工入仓'],//入仓方式
-          stored_way:'',//入仓方式
+          putWay:'',//入仓方式
           //粮食入库质量
-          volume_weigh_i:'',//容重（g/l）  
-          water_content_i:'',//水分（%）
-          impurity_i:'',//杂质（%）  
+          storageCapacity:'',//容重（g/l）  
+          storageWater:'',//水分（%）
+          storageImpurity:'',//杂质（%）  
           //实测粮食质量
-          volume_weigh_r:'',//容重（g/l）  
-          water_content_r:'',//水分（%）
-          impurity_r:'',//杂质（%） 
+          realCapacity:'',//容重（g/l）  
+          realWater:'',//水分（%）
+          realImpurity:'',//杂质（%） 
           //粮堆形状及基本尺寸
-          long:'',//长（m）：
-          width:'',//宽（m）：
-          height:'',//高（m）：
+          length:'0',//长（m）：
+          wide:'0',//宽（m）：
+          high:'0',//高（m）：
           //1.计算粮堆体积
-          volume_c:'',//粮堆测量体积(m3)	
-          volume_q:'',//需要扣除体积(m3)	
-          volume_r:'',//粮堆实际体积(m3)	
+          measuredVolume:'',//粮堆测量体积(m3)	
+          deductVolume:'',//需要扣除体积(m3)	
+          realVolume:'',//粮堆实际体积(m3)	
           //2.计算粮堆平均密度	
 //          标准容重器法
-          volume_weigh_bz:'',//粮食容重（g/l）
-          correction_factor_bz:'',//校正后修正系数
-          average_density_bz:'',//粮堆平均密度（kg/m³）
+          // volume_weigh_bz:'',//粮食容重（g/l）
+          correctioFactor:'1',//校正后修正系数
+          aveDensity:'',//粮堆平均密度（kg/m³）
 //          特制大容器法
-          unit_volume_weight_tz:'',//单位体积粮食重量（kg/m³）
-          correction_factor_tz:'',//校正后修正系数
-          average_density_tz:'',//粮堆平均密度（kg/m³）
+          // unit_volume_weight_tz:'',//单位体积粮食重量（kg/m³）
+          correction_factor_tz:'1',//校正后修正系数
+          // average_density_tz:'',//粮堆平均密度（kg/m³）
           //3.计算粮食数量
-          weight_measure:'',//测量计算数（kg）	
+            unQuality:'',//测量计算数（kg）	
 //          应记粮食损耗(kg)	
-          weight_humidity:'',//水分减量
-          weight_natural:'',//保管自然损耗
-          weight_total:'',//合计
-          weight_calculation:'',//检查计算数（kg）	
+          lossWater:'',//水分减量
+          lossNature:'',//保管自然损耗
+          loss:'',//合计
+          checkNum:'',//检查计算数（kg）	
           //4.认定粮食实际数量	
 //          检查计算数与保管账数量比较
           difference:'',//差数（kg）
           slip:'',//差率（％）
-          is_same:'',//账实是否相符
-          weight_r:'',//粮食实际数量（kg）
-          difference_r:'',//账实不符原因   
-          remarks: '无',//备注
-          checker:'',//检查人：
-          keeper:'',//保管责任人：
-          responsible_person:'',//被检查企业负责人：    
+          // is_same:'',//账实是否相符
+          // weight_r:'',//粮食实际数量（kg）
+          result:'',//账实不符原因   
+          remark: '无',//备注
+          rummager:'',//检查人：
+          custodian:'',//保管责任人：
+          leader:'',//被检查企业负责人：    
       	}
 	  }
     }

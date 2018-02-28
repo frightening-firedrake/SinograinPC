@@ -51,6 +51,39 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
     submit(jsdjg){
+       var params = {
+            sampleId: this.$route.query.id,//样品id
+            storge: this.formdatas.form.storge,//存储形式
+            grainQuality: this.formdatas.form.bgzsl,//保管账数量
+            qualityGrade: this.formdatas.form.qualityGrade,//质量等级
+            putWay: this.formdatas.form.putWay,//入仓方式
+            storageCapacity: this.formdatas.form.storageCapacity,//入库容重
+            storageWater: this.formdatas.form.storageWater,//入库水分
+            storageImpurity: this.formdatas.form.storageImpurity,//入库杂质
+            realCapacity: this.formdatas.form.realCapacity,//实测容重
+            realWater: this.formdatas.form.realWater,//实测水分
+            realImpurity: this.formdatas.form.realImpurity,//实测杂质
+            measuredVolume: jsdjg.measuredVolume,//粮堆测量体积
+            deductVolume: this.formdatas.form.deductVolume,//扣除体积
+            realVolume: jsdjg.realVolume,//粮堆实际体积
+            correctioFactor: this.formdatas.form.correctioFactor,//校正后修正系数
+            aveDensity: jsdjg.aveDensity,//粮堆平均密度
+            length: this.formdatas.form.length,//长
+            wide: this.formdatas.form.wide,//宽
+            high: this.formdatas.form.high,//高
+            unQuality: jsdjg.unQuality,//测量计算数
+            lossWater: jsdjg.lossWater,//水分减量
+            lossNature: jsdjg.lossNature,//自然损耗
+            loss: jsdjg.loss,//合计
+            checkNum: jsdjg.checkNum,//检查计算数
+            difference: jsdjg.difference,//差数
+            slip: jsdjg.slip,//差率
+            result: this.formdatas.form.result,//不符原因
+            remark: this.formdatas.form.remark,//备注
+            rummager: this.formdatas.form.rummager,//检查人
+            custodian: this.formdatas.form.custodian,//保管责任人
+            leader: this.formdatas.form.leader,//被检查企业负责人
+          }
   		this.loading=true;
       //保存数据
       this.$http({
@@ -66,40 +99,11 @@ export default {
         }],
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         data: {
-          storge: this.formdatas.form.storge,//存储形式
-          grainQuality: this.formdatas.form.bgzsl,//保管账数量
-          qualityGrade: this.formdatas.form.qualityGrade,//质量等级
-          putWay: this.formdatas.form.putWay,//入仓方式
-          storageCapacity: this.formdatas.form.storageCapacity,//入库容重
-          storageWater: this.formdatas.form.storageWater,//入库水分
-          storageImpurity: this.formdatas.form.storageImpurity,//入库杂质
-          realCapacity: this.formdatas.form.realCapacity,//实测容重
-          realWater: this.formdatas.form.realWater,//实测水分
-          realImpurity: this.formdatas.form.realImpurity,//实测杂质
-          measuredVolume: jsdjg.measuredVolume,//粮堆测量体积
-          deductVolume: this.formdatas.form.deductVolume,//扣除体积
-          realVolume: jsdjg.realVolume,//粮堆实际体积
-          correctioFactor: this.formdatas.form.correctioFactor,//校正后修正系数
-          aveDensity: jsdjg.aveDensity,//粮堆平均密度
-          length: this.formdatas.form.length,//长
-          wide: this.formdatas.form.wide,//宽
-          high: this.formdatas.form.high,//高
-          unQuality: jsdjg.unQuality,//测量计算数
-          lossWater: jsdjg.lossWater,//水分减量
-          lossNature: jsdjg.lossNature,//自然损耗
-          loss: jsdjg.loss,//合计
-          checkNum: jsdjg.checkNum,//检查计算数
-          difference: jsdjg.difference,//差数
-          slip: jsdjg.slip,//差率
-          result: this.formdatas.form.result,//不符原因
-          remark: this.formdatas.form.remark,//备注
-          rummager: this.formdatas.form.rummager,//检查人
-          custodian: this.formdatas.form.custodian,//保管责任人
-          leader: this.formdatas.form.leader,//被检查企业负责人
+         params: JSON.stringify(params)
 
         }
         }).then(function (response) {
-		  	
+          this.$router.go(-1)
         }.bind(this)).catch(function (error) {
             console.log(error);
         }.bind(this));
@@ -193,7 +197,7 @@ export default {
         type: 'info'
       }],
       formdatas: {
-      	title:'中央储备粮实物检查工作底稿（轮换验收）',
+      	title:'中央储备粮实物检查工作底稿',
       	form:{
           checkregion: '',//被检查企业
           checktime: '',//被查时点
