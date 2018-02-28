@@ -36,8 +36,8 @@
 		<el-form-item label="所在库区" prop="libraryName"  v-bind:class="{disabled:disabled}" class="three2">
 		    <el-input v-model="formdatas.form.libraryName" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="仓房类型" prop="warehouse_type"  class="three">
-		    <el-input v-model="formdatas.form.warehouse_type"></el-input>
+		<el-form-item label="仓房类型" prop="barnType"  class="three">
+		    <el-input v-model="formdatas.form.barnType"></el-input>
 		</el-form-item>
 		<el-form-item label="收货年度"  v-bind:class="{disabled:disabled}" class="three">
 		    <el-form-item prop="gainTime">
@@ -45,16 +45,16 @@
 		        <el-date-picker type="year" placeholder="选择年度" v-model="formdatas.form.gainTime"  :disabled="disabled"></el-date-picker>
 		    </el-form-item>
 		</el-form-item>
-		<el-form-item label="储存形式"  class="three">
+		<el-form-item label="储存形式" prop="storge" class="three">
 		    <el-select v-model="formdatas.form.storge" placeholder="选择储存形式">
 		        <el-option label="常规" value="1"></el-option>
 		        <el-option label="非常规" value="2"></el-option>
 		    </el-select>
 		</el-form-item>
 		<el-form-item label="保管帐数量（kg）" prop="grainQuality" class="three">
-		    <el-input v-model="formdatas.form.grainQuality"></el-input>
+		    <el-input v-model.number="formdatas.form.grainQuality"></el-input>
 		</el-form-item>
-		<el-form-item label="质量等级"  class="three">
+		<el-form-item label="质量等级" prop="qualityGrade" class="three">
 		    <el-select v-model="formdatas.form.qualityGrade" placeholder="选择质量等级">
 		        <el-option label="上等" value="1"></el-option>
 		        <el-option label="中等" value="2"></el-option>
@@ -81,13 +81,13 @@
 					粮食入库质量
 				</div>
 				<el-form-item label="容重（g/l）" prop="storageCapacity" class='leftborder'>
-				    <el-input v-model="formdatas.form.storageCapacity"></el-input>
+				    <el-input v-model.number="formdatas.form.storageCapacity"></el-input>
 				</el-form-item>
 				<el-form-item label="水分（%）" prop="storageWater" class='leftborder'>
-				    <el-input v-model="formdatas.form.storageWater"></el-input>
+				    <el-input v-model.number="formdatas.form.storageWater"></el-input>
 				</el-form-item>
 				<el-form-item label="杂质（%）" prop="storageImpurity" class='leftborder'>
-				    <el-input v-model="formdatas.form.storageImpurity"></el-input>
+				    <el-input v-model.number="formdatas.form.storageImpurity"></el-input>
 				</el-form-item>
 				<div class="clear"></div>
 			</div>
@@ -101,13 +101,13 @@
 					</div>
 				</div>
 				<el-form-item label="容重（g/l）" prop="realCapacity" class='leftborder'>
-				    <el-input v-model="formdatas.form.realCapacity"></el-input>
+				    <el-input v-model.number="formdatas.form.realCapacity"></el-input>
 				</el-form-item>
 				<el-form-item label="水分（%）" prop="realWater" class='leftborder'>
-				    <el-input v-model="formdatas.form.realWater"></el-input>
+				    <el-input v-model.number="formdatas.form.realWater"></el-input>
 				</el-form-item>
 				<el-form-item label="杂质（%）" prop="realImpurity" class='leftborder'>
-				    <el-input v-model="formdatas.form.realImpurity"></el-input>
+				    <el-input v-model.number="formdatas.form.realImpurity"></el-input>
 				</el-form-item>		
 				<div class="clear"></div>
 				
@@ -124,7 +124,7 @@
 				    <el-input v-model="ldcltj" disabled></el-input>
 				</el-form-item>
 				<el-form-item label="需要扣除体积(m3)" prop="deductVolume" >
-				    <el-input v-model="formdatas.form.deductVolume"></el-input>
+				    <el-input v-model.number="formdatas.form.deductVolume"></el-input>
 				</el-form-item>
 				<el-form-item label="粮堆实际体积(m3)" prop="realVolume" >
 				    <el-input v-model="ldsjtj" disabled></el-input>
@@ -136,7 +136,7 @@
 					<div class="merge_title_3">
 						<el-radio v-model="calculation_density" label="1" @change="pjmdff">标准容重器法</el-radio>
 					</div>
-					<el-form-item label="粮食容重（g/l）" prop="realCapacity"  class='leftborder' :class="{disabled:calculation_density==2}">
+					<el-form-item label="粮食容重（g/l）" prop="realCapacity1"  class='leftborder' :class="{disabled:calculation_density==2}">
 					    <el-input v-model="formdatas.form.realCapacity" :disabled="calculation_density==2" disabled></el-input>
 					</el-form-item>
 					<el-form-item label="校正后修正系数" prop="correctioFactor"  class='leftborder' :class="{disabled:calculation_density==2}">
@@ -149,7 +149,7 @@
 				</div>
 				<div class="box">				
 					<div class="merge_title_3">
-						<el-radio v-model="calculation_density" label="2" @change="pjmdff">特制大容器法</el-radio>
+						<el-radio v-model="calculation_density" label="2" @change="pjmdff" disabled>特制大容器法</el-radio>
 					</div>
 					<el-form-item label="单位体积粮食重量（kg/m³）" prop="unit_volume_weight_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
 					    <el-input v-model="formdatas.form.unit_volume_weight_tz" :disabled="calculation_density==1"></el-input>
@@ -175,13 +175,13 @@
 					
 				</div>
 				<el-form-item label="长（m）：" prop="length" class="small" style="border-left: solid 1px #dfdfdf;">
-				    <el-input v-model="formdatas.form.length"></el-input>
+				    <el-input v-model.number="formdatas.form.length"></el-input>
 				</el-form-item>
 				<el-form-item label="宽（m）：" prop="wide" class="small">
-				    <el-input v-model="formdatas.form.wide"></el-input>
+				    <el-input v-model.number="formdatas.form.wide"></el-input>
 				</el-form-item>
 				<el-form-item label="高（m）：" prop="high" class="small">
-				    <el-input v-model="formdatas.form.high"></el-input>
+				    <el-input v-model.number="formdatas.form.high"></el-input>
 				</el-form-item>	
 				<div class="clear"></div>
 				
@@ -250,12 +250,12 @@
 					        <el-option label="不相符" value="2"></el-option>
 					    </el-select>
 
-					    <el-input v-model="formdatas.form.is_same"></el-input>
+					    <!--<el-input v-model="formdatas.form.is_same"></el-input>-->
 					</el-form-item>
 				<div class="cover_left">
 					<div></div>
 				</div>	
-				<el-form-item label="粮食实际数量（kg）" prop="grainQuality" >
+				<el-form-item label="粮食实际数量（kg）" prop="grainQuality2" >
 				    <el-input v-model="formdatas.form.grainQuality" disabled></el-input>
 				</el-form-item>
 				<div class="cover_left">
@@ -338,7 +338,7 @@ export default {
 			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor).toFixed(2)
 		},
 		tzldpjmd() { //特制粮堆平均密度
-			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz).toFixed(2)
+//			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz).toFixed(2)
 		},
 		cljss() { //测量计算数（kg）
 			var length = this.formdatas.form.length;
@@ -464,47 +464,100 @@ export default {
         labelWidth:'2rem',
         errorinline:false,
         disabled:true,
-            rules: {
-                text: [
-                    {validator:validateText,trigger:'blur'}
-                ],
-                select:[
-                    {validator:validateSelect,trigger:'blur'}
-                ],
-                ctime:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            status: [
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            nid: [
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            checkregion:[
-                    {validator:validateSelect,trigger:'blur'}
-                ],
-	            pnumber:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            varieties:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            quality:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            weight:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            region:[
-                    {validator:validateSelect,trigger:'blur'}
-                ],
-//	            harvestdate: '2017',//收货年度
-	            samplingdate:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-//	            remarks: '',//备注
-                
-            }
+            rules: {           
+//          必填类型
+                barnType: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		        ],
+		        difference_r: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		        ],
+		        remark: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		        ],
+		        rummager: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		        ],
+		        custodian: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		        ],
+		        leader: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		        ],
+//		        数字输入类型
+		        grainQuality: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+		        storageCapacity: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+		        storageWater: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+		        storageImpurity: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+		        realCapacity: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+		        realWater: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+		        realImpurity: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+		        
+		        deductVolume: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+		        length: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+		        wide: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+		        high: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+		        correctioFactor: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+//		        下拉框类型
+		        checkcompany: [
+		            { required: true, message: '请选择', trigger: 'change' }
+		        ],
+		        storge: [
+		            { required: true, message: '请选择', trigger: 'change' }
+		        ],
+		        qualityGrade: [
+		            { required: true, message: '请选择', trigger: 'change' }
+		        ],
+		        
+//		        日期类型
+		        checktime: [
+		            { type: 'date', required: true, message: '请选日期', trigger: 'change' }
+		        ],
+		        realchecktime: [
+		            { type: 'date', required: true, message: '请选日期', trigger: 'change' }
+		        ],
+
+//		        单选类型
+		        putWay: [
+		            { required: true, message: '请选择入仓方式', trigger: 'change' }
+		        ],
+		    },
         }
     },
     methods: {  
@@ -514,7 +567,7 @@ export default {
                  this.$emit('submit',this.jsdjg)
 					// window.history.go(-1)
                 } else {
-                    console.log('error submit!!');
+//                  console.log('error submit!!');
                     return false;
                 }
             });
