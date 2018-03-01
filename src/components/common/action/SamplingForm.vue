@@ -7,7 +7,7 @@
 		    <el-input v-model="formdatas.form.createTime" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="样品条形码：" class="code" prop="code" v-bind:class="{disabled:disabled}">
-			<img class="codeimg" :src="formdatas.form.samplePic" alt="" />
+			<img class="codeimg" :src="code" alt="" />
 		</el-form-item>
 		<el-form-item label="迁样编号：" prop="sampleNo">
 		    <el-input v-model="formdatas.form.sampleNo"></el-input>
@@ -87,7 +87,10 @@ export default {
     		}else if(this.formdatas.form.sampleState==2){
     			return "已入库";
     		}
-    	}
+    	},
+    	code(){
+    		return 'upload/barcode/'+this.formdatas.form.samplePic;
+    	},
     },
     data() {
 
