@@ -4,8 +4,13 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-	libraryName:'',
-	libraryId:'',
+	libraryName:'',//库点名
+	libraryId:'',//库点id
+	libraryNames:[],//库点组
+	qualitys:['ZC','ZD','LC','SP','TD'],//性质组
+	sorts:['小麦','玉米','食用油'],//品种组
+	remarkses:['春季普查','秋季普查','2017-2018轮换年度','收购寻查','其他'],//备注组
+	tests:['水分','容重','杂质','不完善颗粒','硬质','品尝评分','卫生指标','加工品质','(玉米)生霉粒','(玉米)脂肪酸值','(小麦)矿物含量','(小麦)面筋吸水量'],//质检组
 	mask:false,//自定义的遮罩层控制选项
 	modal_id_number:1000,
     viewdata:[],//查看数据组
@@ -33,6 +38,46 @@ const getters = {
     		return localStorage.getItem("libraryId");
     	}
     },
+    libraryNames:function(state){
+    	if(state.libraryNames.length){
+    		return state.libraryNames;    		
+    	}else{
+    		var basemsg=JSON.parse(localStorage.getItem("basemsg"))
+    		return basemsg.libraryNames;
+    	}
+    },
+    qualitys:function(state){
+    	if(state.qualitys.length){
+    		return state.qualitys;    		
+    	}else{
+    		var basemsg=JSON.parse(localStorage.getItem("basemsg"))
+    		return basemsg.qualitys;
+    	}
+    },
+    sorts:function(state){
+    	if(state.sorts.length){
+    		return state.sorts;    		
+    	}else{
+    		var basemsg=JSON.parse(localStorage.getItem("basemsg"))
+    		return basemsg.sorts;
+    	}
+    },
+    remarkses:function(state){
+    	if(state.remarkses.length){
+    		return state.remarkses;    		
+    	}else{
+    		var basemsg=JSON.parse(localStorage.getItem("basemsg"))
+    		return basemsg.remarkses;
+    	}
+    },
+    tests:function(state){
+    	if(state.tests.length){
+    		return state.tests;    		
+    	}else{
+    		var basemsg=JSON.parse(localStorage.getItem("basemsg"))
+    		return basemsg.tests;
+    	}
+    },
 }
 const mutations = {
 	setUserInfo(state,payload){
@@ -40,6 +85,15 @@ const mutations = {
 		state.libraryId=payload.libraryId;
 		localStorage.setItem('libraryId', payload.libraryId);
 		localStorage.setItem('libraryName', payload.libraryName);
+	},
+	setBaseMsg(state,payload){
+		state.libraryNames=payload.libraryNames;
+		state.qualitys=payload.qualitys;
+		state.sorts=payload.sorts;
+		state.remarkses=payload.remarkses;
+		state.tests=payload.tests;
+		var basemsg=payload;
+		localStorage.setItem('basemsg', JSON.stringify(basemsg));
 	},
 	create_modal_id(state){
         state.modal_id_number+=1;

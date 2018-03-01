@@ -7,7 +7,7 @@
 		    <el-input v-model="formdatas.form.createTime" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="样品条形码：" class="code" prop="code" v-bind:class="{disabled:disabled}">
-			<img class="codeimg" :src="formdatas.form.code" alt="" />
+			<img class="codeimg" :src="formdatas.form.samplePic" alt="" />
 		</el-form-item>
 		<el-form-item label="迁样编号：" prop="sampleNo">
 		    <el-input v-model="formdatas.form.sampleNo"></el-input>
