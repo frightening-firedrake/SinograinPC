@@ -80,11 +80,11 @@ export default {
     },
     computed:{
     	samplestate(){
-    		if(this.formdatas.form.state==-1){
+    		if(this.formdatas.form.sampleState==-1){
     			return "未扦样";
-    		}else if(this.formdatas.form.state==1){
+    		}else if(this.formdatas.form.sampleState==1){
     			return "已扦样";
-    		}else if(this.formdatas.form.state==2){
+    		}else if(this.formdatas.form.sampleState==2){
     			return "已入库";
     		}
     	}

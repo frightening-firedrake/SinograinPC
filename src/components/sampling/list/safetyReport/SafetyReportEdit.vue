@@ -88,7 +88,8 @@ export default {
 				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-//		  	console.log(response)
+		  	console.log(response)
+			
 			var res0=response.data.rows
 
 			var res=response.data.rows
@@ -105,34 +106,30 @@ export default {
 				res0[index1].images=images
 			})
 			this.formdatas.problems = res0
-		    
+		    this.formdatas.form.libraryName = this.$route.query.libraryName
+			this.formdatas.form.position = this.$route.query.position
 		    console.log(res)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
   	},
 //	获取样品数据
-  	getdata(){
+  	// getdata(){
 
-  		// 获取列表数据（第？页）
-		this.$http({
-		    method: 'post',
-			url: this.datalistURL,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-				id:this.$route.query
-			}
-	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
-//	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
-  	},
+  	// 	// 获取列表数据（第？页）
+	// 	this.$http({
+	// 	    method: 'post',
+	// 		url: this.dataURL,
+	// 		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+	// 		data: {
+	// 			id:this.$route.query
+	// 		}
+	//     }).then(function (response) {
+	// 	  	this.formdatas.form=response.data.formdatas;
+	// 	}.bind(this)).catch(function (error) {
+	// 	    console.log(error);
+	// 	}.bind(this));
+  	// },
 //	获取搜索数据
   	searchingfor(searching){
   		console.log(searching);
@@ -167,10 +164,18 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    problemId: id,
+			    id:id,
+				isDeal:1
 			}
 	    }).then(function (response) {
-		  	
+		  	console.log(response)
+			  if(response.data.success) {
+				this.formdatas.problems.forEach((value)=>{
+					if(value.id==id){
+						value.isDeal=1;
+					}
+				})
+			  }
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -178,14 +183,10 @@ export default {
   	messageclick(type){
   		if(type=="confirm"){
 
-//			this.passProblem(id)
 			var id=this.passProblemId;
+			this.passProblem(id)
 			console.log(id)
-	  		this.formdatas.problems.forEach((value)=>{
-	  			if(value.problemId==id){
-	  				value.state=1;
-	  			}
-	  		})
+	  		
   		}else if(type=="error"){
 //			console.log(type)  			
   		}
@@ -202,7 +203,9 @@ export default {
   	},
 //	问题通过处理事件
   	pass(id){
+		// console.log(id)
   		this.messageShow=true;
+		
   		this.passProblemId=id;
   	},
 
@@ -218,7 +221,7 @@ export default {
 	  dataSafetyURL: 'api/grain/safetyReport/data',
 	  editURL: 'api/grain/safetyReport/edit',
       searchURL:'/liquid/role2/data/search',
-      passURL:'/liquid/role2/data/delete',
+      passURL:'api/grain/safetyReport/edit',
       problemStatus:'all',
       passProblemId:'',
       checkedId:[],

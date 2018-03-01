@@ -67,7 +67,7 @@
 			</el-form-item>	
 			<el-form-item label="" class="full button">
 				<div class="btn">					
-					<el-button class="yes" type="primary" @click="pass(item.problemId)" :disabled="item.isDeal!==-1">{{item.isDeal==-1?'待解决':'已解决'}}</el-button>
+					<el-button class="yes" type="primary" @click="pass(item.id)" :disabled="item.isDeal!==-1">{{item.isDeal==-1?'待解决':'已解决'}}</el-button>
 				</div>
 		    </el-form-item>
 		</template>
