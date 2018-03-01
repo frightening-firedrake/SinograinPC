@@ -7,7 +7,7 @@
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
-      <safety-form :formdatas="formdatas" v-on:addproblem="addproblem" @submit="submit" @delproblem="delproblem" @changeProblems="changeProblems"></safety-form> 
+      <safety-form :uploadPicURL="uploadPicURL" :formdatas="formdatas" v-on:addproblem="addproblem" @submit="submit" @delproblem="delproblem" ></safety-form> 
     </div>
 </template>
 
@@ -54,9 +54,14 @@ export default {
   	...mapActions(['addAction']),
 //	保存安全报告
   	savedata(){
-  		var problems=this.problems();
-  		console.log(problems)
-  		console.log(JSON.stringify(problems))
+  		var problems=this.formdatas.form.problems;
+  		problems.forEach((value,index)=>{
+  			value.images=this.imgbox[index].images
+  		})
+		console.log(problems)
+		var str= JSON.stringify(problems)
+			console.log(str)
+		
   		this.loading=true;
 		this.$http({
 		    method: 'post',
@@ -70,10 +75,11 @@ export default {
 				return ret
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
+			data:{
 				sampleId:this.$route.query.id,
-				problems:problems
-			}
+				problems:str
+			},
+			
 	    }).then(function (response) {
 //		  	this.formdatas=response.data.formdatas;
 //		  	this.tabledatas=response.data.rows;
@@ -86,6 +92,7 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+
 //	获取搜索数据
   	searchingfor(searching){
   		console.log(searching);
@@ -118,43 +125,26 @@ export default {
 	delproblem(){
 		this.formdatas.form.problems.pop();
 	},
-//	问题监视
-	changeProblems(problems){
-		this.formdatas.form.problems=problems;
-//		console.log(this.formdatas.form.problems)
-//		console.log(this.problems())
-//		console.log(this.problems()[0].images[0].name)
-	},
-	problems(){
-		var problems=[];
-		this.formdatas.form.problems.forEach((value,index)=>{
-			var obj={};
-			obj.problem=value.problem;
-			obj.images=[]
-			value.images.forEach((item,index)=>{
-				var img=item.raw;
-			 	obj.images.push(img)
-			});
-			problems.push(obj)
-		})
-		return problems;
-	},
+
 	titleEvent(){
   		console.log('titleEvent');
   	},
-  	submit(){
-  		// console.log(this.formdatas.form.problems);
+  	submit(imgbox){
+  		this.imgbox=imgbox;
+//		console.log(this.imgbox)
 		this.savedata();
-//		console.log(this.problems())
+
   	},
   },
   data() {
     return {
+      uploadPicURL:'api/grain/safetyReport/uploadPic',
       saveURL:'api/grain/safetyReport/save',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
 	  createlibVisible:false,
+	  imgbox:[],
       breadcrumb:{
       	search:false,   
       	searching:'',

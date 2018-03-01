@@ -33,16 +33,16 @@
 			</el-form-item>
 			<el-form-item label="图片：" prop="images" class="images">
 			    <el-upload
-				  action="/liquid/images"
+				  :action="uploadPicURL"
 				  list-type="picture-card"
 				  ref='upload'
 				  :limit='limit'
-				  :data={problem:item.problem}
 				  :on-preview="handlePictureCardPreview"
-				  :auto-upload=false
-				  :on-change="imageChange"
+				  name="pictureFile"
+				  :on-success="(response,file,fileList)=>{return imageUploadSuccess(response,file,fileList,index)}"
+				  :on-error="imageUploadError"
 				  :file-list="item.images"
-				  :on-remove="handleRemove">
+				  :before-remove="(file,fileList)=>{return handleRemove(file,fileList,index)}">
 				  <i class="el-icon-plus"></i>
 				</el-upload>
 				<el-dialog :visible.sync="dialogVisible" size="tiny">
@@ -71,9 +71,9 @@
 <script>
 import "@/assets/style/common/Form.css";
 export default {
-    props: ["formdatas"],
+    props: ["formdatas","uploadPicURL"],
     created(){
-    	
+    	this.createimgbox()
     },
     mounted: function() {
 //		console.log(this.formdatas)
@@ -86,16 +86,16 @@ export default {
 				return false;
 			}
 		},
-		problems(){
-			var problems=[];
-			this.$refs.upload.forEach((value,index)=>{
-				var obj={};
-				obj.problem=value.data.problem;
-				obj.images=value.uploadFiles;
-				problems.push(obj)
-			})
-			return problems;
-		}
+//		problems(){
+//			var problems=[];
+//			this.$refs.upload.forEach((value,index)=>{
+//				var obj={};
+//				obj.problem=value.data.problem;
+//				obj.images=value.uploadFiles;
+//				problems.push(obj)
+//			})
+//			return problems;
+//		}
     },
     data() {
 
@@ -149,6 +149,9 @@ export default {
         labelWidth:'2rem',
         errorinline:false,
         disabled:true,
+        imgbox:[
+//      	{images:[]},
+        ],
             rules: {
                 text: [
                     {validator:validateText,trigger:'blur'}
@@ -198,7 +201,7 @@ export default {
             this.$refs[formname].validate((valid) => {
                 if (valid) {
 //                  alert('submit!');
-                    this.$emit('submit')
+                    this.$emit('submit',this.imgbox)
 //					window.history.go(-1)
                 } else {
                     console.log('error submit!!');
@@ -213,22 +216,46 @@ export default {
 			window.history.go(-1)
         },
 //      图片上传查看与删除
-	    handleRemove(file, fileList) {
-//	        console.log(file, fileList);
-			this.$emit('changeProblems',this.problems);
+	    handleRemove(file,fileList,index) {
+	        console.log(file, fileList,index);
+	        var index2;
+	    	fileList.forEach((value,listindex)=>{
+//	    		console.log(value.uid,file.uid)
+	    		if(value.uid==file.uid){
+	    			index2=listindex
+	    		}	    		
+	    	})
+	    	this.imgbox[index].images.splice(index2,1);
+	    	
+//			this.$emit('changeProblems',this.problems);
 	    },
 	    handlePictureCardPreview(file, fileList) {
 	        this.dialogImageUrl = file.url;
 	        this.dialogVisible = true;
 	    },
-	    imageChange(file, fileList){
-			this.$emit('changeProblems',this.problems);
-//	    	console.log(file, fileList);
-//	    	console.log(this.$refs.upload[0].data.problem)
-//			console.log(this.problems)
-//	    	console.log(this.formdatas.form.problems[0].images)
+//	       回收图片地址
+	    imageUploadSuccess(response, file, fileList, index){
+//	    	console.log(response, file, fileList,index)
+	    	var index2;
+	    	fileList.forEach((value,listindex)=>{
+//	    		console.log(value.uid,file.uid)
+	    		if(value.uid==file.uid){
+	    			index2=listindex
+	    		}	    		
+	    	})
+			if(response.success){
+				var url=response.msg;
+				var index1=index;
+				console.log(url,index1,index2)
+				this.imgbox[index1].images[index2]=url
+//				this.$emit('changeProblems',this.problems);
+			}else{
+				alert(response.msg)				
+			}
 	    },
-
+		imageUploadError(err, file, fileList){
+			alert('上传失败！！！')
+		},
 //	       问题加一
 		addproblem(){
 //			formdatas.form.problems.'+index+'.problem
@@ -239,18 +266,24 @@ export default {
 				}
 			})
 			if(flag){
+				this.imgbox.push({images:[]})
+				console.log(this.imgbox)
 				this.$emit('addproblem');				
 			}else{
 				 this.$message('请完善问题详情！！！');
 			}
-//			if(){
-//				
-//			}else{				
-//			}
 		},
 //		问题减一
 		delproblem(){
+			this.imgbox.pop()
 			this.$emit('delproblem');
+		},
+//		初始imgbox
+		createimgbox(){
+			this.imgbox=[],
+			this.formdatas.form.problems.forEach((value)=>{
+				this.imgbox.push({images:[]})
+			})
 		}
     }
 

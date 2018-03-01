@@ -1,9 +1,16 @@
 <template>
-    <el-form ref="form" :inline-message="errorinline" class="sampling"  :model="formdatas.form" :label-width="labelWidth">
+    <el-form ref="form" :inline-message="errorinline" class="sampling"  :model="formdatas.form" :label-width="labelWidth" style="position:relative;">
         <template>
-            <p>{{formdatas.title}}</p>
+            <p class="tableName">
+            	{{formdatas.title}}
+            </p>
+        	<div class="newbtns">							
+				<div class="create" @click="addsafety" style="background-image:url('static/images/sys/create.png');">
+					新增安全问题报告
+				</div>
+			</div>
         </template>      
-       
+       	
 		<el-form-item label="被查库点：" prop="checkregion"  v-bind:class="{disabled:disabled}">
 		    <el-select v-model="formdatas.form.libraryName" placeholder="选择库点" :disabled="disabled">
 		        <el-option label="本库" value="本库"></el-option>
@@ -38,18 +45,18 @@
 				:rules="{
 			      required: true, message: '请填写问题详情', trigger: 'blur'
 			    }">
-			    <el-input type="textarea" v-model="item.problem"></el-input>
+			    <el-input type="textarea" v-model="item.problem" disabled></el-input>
 			</el-form-item>
-			<el-form-item label="图片：" prop="images" class="images">
+			<el-form-item label="图片：" prop="images" class="images uploadedit">
 				<img v-if="item.state!==-1" src="static/images/sys/over.png" alt="" class="hege"/>
 			    <el-upload
-				  :data={problem:item.problem}
+				  disabled
 				  ref='upload'
 				  :limit='limit'
 				  action="/liquid/images"
 				  list-type="picture-card"
 				  :on-preview="handlePictureCardPreview"
-				  :on-change="imageChange"
+				  
 				  :file-list="item.images"
 				  :on-remove="handleRemove">
 				  <i class="el-icon-plus"></i>
@@ -73,17 +80,7 @@
 		    </el-form-item>
 		</template>
 		 
-		<div class="btns">
-			<div class="addproblem" @click="addproblem">
-				问题加一
-			</div>
-			<div v-if="delebtn" class="delproblem" @click="delproblem">
-				问题减一
-			</div>
-            <el-button class="yes" type="primary" @click="onSubmit('form')">确认</el-button>
-            <el-button class="no" @click="cancel('form')">取消</el-button>
-        </div>
-		
+
         <div class="clear"></div>
     </el-form>
 </template>
@@ -171,6 +168,32 @@
 		line-height:2rem;
 		text-align: center;
 	}
+	form.sampling .el-form-item.uploadedit .el-form-item__content .el-upload--picture-card{
+		display:none;
+	}
+	/*按钮*/
+	div.newbtns{
+		position:absolute;
+		right:0.1rem;
+		top:0.14rem;
+	}
+	div.newbtns div.create{
+		height:0.32rem;
+		line-height:0.3rem;
+		/*width:1.07rem;*/
+		padding-left:0.34rem;
+		box-sizing: border-box;
+		border-radius:0.05rem;
+		border:1px solid #58b481;
+		color: #58b481;
+		font-size:0.2rem;
+		text-align:right;
+		background-repeat: no-repeat;
+		background-position:0.04rem center;
+		background-size:0.3rem 0.3rem;
+		padding-right:0.07rem;
+		cursor:pointer;
+	}
 </style>
 <script>
 import "@/assets/style/common/Form.css";
@@ -183,66 +206,10 @@ export default {
 //		console.log(this.formdatas)
     },
     computed:{
- 		delebtn(){
-			if(this.formdatas.problems.length>1){
-				return true;
-			}else{
-				return false;
-			}
-		},
-		problems(){
-			var problems=[];
-			this.$refs.upload.forEach((value,index)=>{
-				var obj={};
-				obj.problem=value.data.problem;
-				obj.images=value.uploadFiles;
-				problems.push(obj)
-			})
-			return problems;
-		}
+ 
     },
     data() {
-    	// 普通文本的验证
-            var validateText = ( rule, value, callback ) => {
-                var str =/^[^'"#$%&\^*》>,."<《？，。！@#￥%……’”：/；]+$/;
-                if(!value){
-                     return callback(new Error("请输入内容"));
-                }else if(!str.test(value)){
-                    return callback(new Error("请不要输入特殊的字符"))
-                }else{
-                    callback()
-                }
-            }
-            // 下拉框
-            var validateSelect = ( rule, value, callback ) => {
-                if(!value){
-                    return callback(new Error("必须选择"))
-                }else{
-                    callback()
-                }
-            }
-            // 电话
-            var validatePhone = ( rule, value, callback ) => {
-                var str = /^1[3|4|5|8][0-9]\d{4,8}$/
-                if(!value){
-                    return callback(new Error("手机号不能为空"))
-                }else if(!str.test(value)){
-                    return callback(new Error("手机号不对"))
-                }else{
-                    callback()
-                }
-            }
-            // 邮箱
-            var validateEmily = ( rule, value, callback ) => {
-                var str = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ 
-                if(!value){
-                    return callback(new Error("邮箱不能为空"))
-                }else if(str.test(value)){
-                    return callback(new Error("邮箱不正确"))
-                }else{
-                    return callback()
-                }
-            }
+    	
         return {
         	limit:5,
 			problemStatic:'all',
@@ -251,47 +218,7 @@ export default {
 	        labelWidth:'2rem',
 	        errorinline:false,
 	        disabled:true,    
-	        rules: {
-                text: [
-                    {validator:validateText,trigger:'blur'}
-                ],
-                select:[
-                    {validator:validateSelect,trigger:'blur'}
-                ],
-                ctime:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            status: [
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            nid: [
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            checkregion:[
-                    {validator:validateSelect,trigger:'blur'}
-                ],
-	            pnumber:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            varieties:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            quality:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            weight:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            region:[
-                    {validator:validateSelect,trigger:'blur'}
-                ],
-//	            harvestdate: '2017',//收货年度
-	            samplingdate:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-//	            remarks: '',//备注
-                
-            }
+	        
         }
     },
     methods: {  
@@ -309,55 +236,9 @@ export default {
 	    pass(id){
 	    	this.$emit("pass",id)
 	    },
-		onSubmit(formname) {
-//      	console.log(this.formdatas.form)
-            this.$refs[formname].validate((valid) => {
-                if (valid) {
-//                  alert('submit!');
-                    this.$emit('submit')
-//					window.history.go(-1)
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-        },
-        cancel(formname) {
-            console.log('取消!');
-			this.$refs[formname].resetFields();
-//          this.$emit('btn_close')
-			window.history.go(-1)
-        },
-//	       问题加一
-		addproblem(){
-//			formdatas.form.problems.'+index+'.problem
-			var flag=true;
-			this.formdatas.problems.forEach(function(value,index){
-				if(!value.problem){
-					flag=false;
-				}
-			})
-			if(flag){
-				this.$emit('addproblem');				
-			}else{
-				 this.$message('请完善问题详情！！！');
-			}
-//			if(){
-//				
-//			}else{				
-//			}
-		},
-//		问题减一
-		delproblem(){
-			this.$emit('delproblem');
-		},
-		imageChange(file, fileList){
-			this.$emit('changeProblems',this.problems);
-//	    	console.log(file, fileList);
-//	    	console.log(this.$refs.upload[0].data.problem)
-//			console.log(this.problems)
-//	    	console.log(this.formdatas.form.problems[0].images)
-	    },
+		addsafety(){
+	    	this.$emit("addsafety")		
+		}
     }
 
 }

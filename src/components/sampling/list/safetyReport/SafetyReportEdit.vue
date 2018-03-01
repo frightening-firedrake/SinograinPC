@@ -7,7 +7,7 @@
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
-      <safety-form-edit :formdatas="formdatas" :problemFilter="problemFilter" @problemStatusChange="problemStatusChange" @pass="pass" v-on:addproblem="addproblem" @submit="submit" @delproblem="delproblem"  @changeProblems="changeProblems"></safety-form-edit> 
+      <safety-form-edit :formdatas="formdatas" :problemFilter="problemFilter" @problemStatusChange="problemStatusChange" @pass="pass" @addsafety="addsafety"></safety-form-edit> 
       <!--通知弹框-->
       <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
     </div>
@@ -53,7 +53,7 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
-	this.getdata()
+//	this.getlistdata(1)
 
   },
   destroy(){
@@ -63,26 +63,23 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
 //	获取列表数据方法
-  	getdata(){
+  	getlistdata(page){
+  		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
-			url: this.dataURL,
-			transformRequest: [function (data) {
-			// Do whatever you want to transform the data
-			let ret = ''
-			for (let it in data) {
-			ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-			}
-			return ret
-			}],
+			url: this.datalistURL,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				id:this.$route.query.id
+				id:this.$route.query
 			}
 	    }).then(function (response) {
-		  	this.formdatas.form.libraryName = this.$route.query.libraryName;
-			this.formdatas.form.position = response.position
+		  	this.formdatas=response.data.formdatas;
+//	  		this.page.total=response.data.total;
+		  	
+	  		setTimeout(()=>{			  		
+		  		this.loading=false;
+		  	},1000)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -147,6 +144,14 @@ export default {
   	messageClose(){
   		this.messageShow=false;
   	},
+//问题加一
+	addproblem(){
+		var item={
+          		problem: '',//问题
+          		images: [],//图片
+            };
+		this.formdatas.form.problems.push(item);
+	},
 	titleEvent(){
   		console.log('titleEvent');
   	},
@@ -158,49 +163,14 @@ export default {
   		this.messageShow=true;
   		this.passProblemId=id;
   	},
-//问题加一
-	addproblem(){
-		var item={
-          		problem: '',//问题
-          		images: [],//图片
-          		state:-1,
-            };
-		this.formdatas.problems.push(item);
-	},
-//问题减一
-	delproblem(){
-		this.formdatas.problems.pop();
-	},
-//	问题监视
-	changeProblems(problems){
-		this.formdatas.problems=problems;
-//		console.log(this.formdatas.form.problems)
-//		console.log(this.problems())
-//		console.log(this.problems()[0].images[0].name)
-	},
-	problems(){
-		var problems=[];
-		this.formdatas.problems.forEach((value,index)=>{
-			var obj={};
-			obj.problem=value.problem;
-			obj.images=[]
-			value.images.forEach((item,index)=>{
-				var img=item.raw;
-			 	obj.images.push(img)
-			});
-			problems.push(obj)
-		})
-		return problems;
-	},
-	submit(){
-  		// console.log(this.formdatas.form.problems);
-//		this.savedata();
-//		console.log(this.problems())
-  	},
+//	新建安全报告
+  	addsafety(){
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate',query:{id:this.$route.query.id,libraryName:this.$route.query.libraryName,position:this.$route.query.position}})
+  	}
   },
   data() {
     return {
-      dataURL:'api/grain/sample/get',
+      datalistURL:'/liquid/role5/data',
       searchURL:'/liquid/role2/data/search',
       passURL:'/liquid/role2/data/delete',
       problemStatus:'all',
@@ -239,8 +209,8 @@ export default {
       		{label:1,text:'已解决'},
       	],
       	form:{
-          libraryName: '沁县库区',//被查库点
-          position: '漫水-1',//货位号          
+          checkregion: '沁县库区',//被查库点
+          pnumber: '漫水-1',//货位号          
       	},
       	problems:[
       		{
