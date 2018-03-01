@@ -53,7 +53,10 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
-//	this.getlistdata(1)
+
+	this.getdata()
+	this.getSafetyData()
+
 
   },
   destroy(){
@@ -62,9 +65,38 @@ export default {
   methods: {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
-//	获取列表数据方法
-  	getlistdata(page){
-  		this.loading=true;
+
+
+ //	获取安全报告数据
+  	getSafetyData(){
+		  var params = {}
+		  params.sampleId = this.$route.query.id
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.dataSafetyURL,
+			transformRequest: [function (data) {
+			// Do whatever you want to transform the data
+			let ret = ''
+			for (let it in data) {
+			ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+			}
+			return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				params:JSON.stringify(params)
+			}
+	    }).then(function (response) {
+		  console.log(response)
+		  this.formdatas.problems = response.data.rows
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+//	获取样品数据
+  	getdata(){
+
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -163,14 +195,18 @@ export default {
   		this.messageShow=true;
   		this.passProblemId=id;
   	},
+
 //	新建安全报告
   	addsafety(){
     	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate',query:{id:this.$route.query.id,libraryName:this.$route.query.libraryName,position:this.$route.query.position}})
   	}
   },
+
   data() {
     return {
-      datalistURL:'/liquid/role5/data',
+      dataURL:'api/grain/sample/get',
+	  dataSafetyURL: 'api/grain/safetyReport/data',
+	  editURL: 'api/grain/safetyReport/edit',
       searchURL:'/liquid/role2/data/search',
       passURL:'/liquid/role2/data/delete',
       problemStatus:'all',
