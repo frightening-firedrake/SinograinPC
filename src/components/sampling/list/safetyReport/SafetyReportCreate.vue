@@ -58,10 +58,13 @@ export default {
   		problems.forEach((value,index)=>{
   			value.images=this.imgbox[index].images
   		})
-		console.log(problems)
+//		console.log(problems)
 		var str= JSON.stringify(problems)
 			console.log(str)
-		
+		var params = {}
+		  	params.sampleId = this.$route.query.id;
+			params.problems=str;
+		  	
   		this.loading=true;
 		this.$http({
 		    method: 'post',
@@ -76,8 +79,7 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data:{
-				sampleId:this.$route.query.id,
-				problems:str
+				params:JSON.stringify(params)
 			},
 			
 	    }).then(function (response) {
