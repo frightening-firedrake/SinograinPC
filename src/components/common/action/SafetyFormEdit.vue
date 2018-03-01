@@ -48,7 +48,7 @@
 			    <el-input type="textarea" v-model="item.problem" disabled></el-input>
 			</el-form-item>
 			<el-form-item label="图片：" prop="images" class="images uploadedit">
-				<img v-if="item.state!==-1" src="static/images/sys/over.png" alt="" class="hege"/>
+				<img v-if="item.isDeal!==-1" src="static/images/sys/over.png" alt="" class="hege"/>
 			    <el-upload
 				  disabled
 				  ref='upload'
@@ -67,7 +67,7 @@
 			</el-form-item>	
 			<el-form-item label="" class="full button">
 				<div class="btn">					
-					<el-button class="yes" type="primary" @click="pass(item.problemId)" :disabled="item.state!==-1">{{item.state==-1?'待解决':'已解决'}}</el-button>
+					<el-button class="yes" type="primary" @click="pass(item.problemId)" :disabled="item.isDeal!==-1">{{item.isDeal==-1?'待解决':'已解决'}}</el-button>
 				</div>
 		    </el-form-item>
 		</template>

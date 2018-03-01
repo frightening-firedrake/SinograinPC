@@ -46,8 +46,8 @@ export default {
     SinograinTableListEditModel,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader,SinograinOptionTitle,TfootButtons
   },
   computed:{
-	...mapState(["libraryName","libraryId"]),
-	...mapGetters(["modal_id"]),
+	...mapState([]),
+	...mapGetters(["modal_id","libraryName","libraryId"]),
 	tabledatasFilter(){
 
 		if(this.filterStatus=="全部"){

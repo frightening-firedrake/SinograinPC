@@ -56,15 +56,15 @@ export default {
   	savedata(){
   		var problems=this.formdatas.form.problems;
   		problems.forEach((value,index)=>{
-  			value.images=this.imgbox[index].images
+  			value.images=this.imgbox[index].images.join(',')
+  			value.sampleId = this.$route.query.id;
   		})
 //		console.log(problems)
-		var str= JSON.stringify(problems)
-			console.log(str)
-		var params = {}
-		  	params.sampleId = this.$route.query.id;
-			params.problems=str;
-		  	
+//		var str= JSON.stringify(problems)
+//			console.log(str)
+//		var params = {}
+//			params.problems=problems;
+		var params = problems;  	
   		this.loading=true;
 		this.$http({
 		    method: 'post',
@@ -86,7 +86,8 @@ export default {
 //		  	this.formdatas=response.data.formdatas;
 //		  	this.tabledatas=response.data.rows;
 //	  		this.page.total=response.data.total;
-		  	
+		  	this.$router.go(-1)
+
 	  		setTimeout(()=>{			  		
 		  		this.loading=false;
 		  	},1000)

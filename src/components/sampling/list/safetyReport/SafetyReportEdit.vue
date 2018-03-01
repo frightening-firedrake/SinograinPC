@@ -45,7 +45,7 @@ export default {
 			return this.formdatas.problems
 		}else{			
 			return this.formdatas.problems.filter((item)=>{
-				return item.state==this.problemStatus;
+				return item.isDeal==this.problemStatus;
 			})
 		}
 	}
@@ -54,7 +54,7 @@ export default {
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
 
-	this.getdata()
+//	this.getdata()
 	this.getSafetyData()
 
 
@@ -88,8 +88,25 @@ export default {
 				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-		  console.log(response)
-		  this.formdatas.problems = response.data.rows
+//		  	console.log(response)
+			var res0=response.data.rows
+
+			var res=response.data.rows
+//			循环问题
+			res.forEach((value1,index1)=>{
+				var images=[]
+				var imagesbox=value1.images.split(',');
+				imagesbox.forEach((value2,index2)=>{
+					var obj={};
+					obj.url="/upload/picture/"+value2;
+					images.push(obj);
+				})
+	
+				res0[index1].images=images
+			})
+			this.formdatas.problems = res0
+		    
+		    console.log(res)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -176,14 +193,7 @@ export default {
   	messageClose(){
   		this.messageShow=false;
   	},
-//问题加一
-	addproblem(){
-		var item={
-          		problem: '',//问题
-          		images: [],//图片
-            };
-		this.formdatas.form.problems.push(item);
-	},
+
 	titleEvent(){
   		console.log('titleEvent');
   	},
@@ -250,26 +260,11 @@ export default {
       	},
       	problems:[
       		{
-      			problem: '5465435212',//问题
-      			images: [
-      			{name: 'safty.jpg', url:'static/images/test/safty.jpg'},
-      			{name: 'safty.jpg', url:'static/images/test/safty.jpg'},
-      			],//图片
-      			state:-1,
-      			createTime:'2017-9-25',
-      			problemId:'01',
+      			problem: '',//问题
+      			images: [],//图片
+      			isDeal:-1,
+      			createTime:'',
       		},
-      		{
-      			problem: '5465435212',//问题
-      			images: [
-      			{name: 'safty.jpg', url:'static/images/test/safty.jpg'},
-      			{name: 'safty.jpg', url:'static/images/test/safty.jpg'},
-      			],//图片
-      			state:1,
-      			createTime:'2017-9-25',
-      			problemId:'02',
-      		}
-          
       	],
 	  }
     }

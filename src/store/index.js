@@ -19,11 +19,27 @@ const getters = {
     modal_id:function(state){
         return 'Modal'+state.modal_id_number;
     },
+    libraryName:function(state){
+    	if(state.libraryName){
+    		return state.libraryName;    		
+    	}else{
+    		return localStorage.getItem("libraryName");
+    	}
+    },
+    libraryId:function(state){
+    	if(state.libraryId){
+    		return state.libraryId;    		
+    	}else{
+    		return localStorage.getItem("libraryId");
+    	}
+    },
 }
 const mutations = {
 	setUserInfo(state,payload){
 		state.libraryName=payload.libraryName;
 		state.libraryId=payload.libraryId;
+		localStorage.setItem('libraryId', payload.libraryId);
+		localStorage.setItem('libraryName', payload.libraryName);
 	},
 	create_modal_id(state){
         state.modal_id_number+=1;
