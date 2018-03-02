@@ -228,7 +228,11 @@ export default {
 				libraryName: this.libraryName,
 
 			}
-		})
+		}).then(function (response) {
+			this.$router.go(-1)
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
 	},
 	disagree() {
 		this.$http({
@@ -247,7 +251,11 @@ export default {
 				id: JSON.stringify(this.$route.query.pId),
 				regState: 1 
 			}
-		})
+		}).then(function (response) {
+			this.$router.go(-1)
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
 	},
   	//	发送删除id
   	sendDeleteId(id){
@@ -291,10 +299,10 @@ export default {
 		console.log(date);
 		if(date=='btnCenterL'){
 			this.disagree()
-			this.$router.go(-1)
+//			this.$router.go(-1)
 		}else if(date=='btnCenterR'){
 			this.agree()
-			this.$router.go(-1)
+//			this.$router.go(-1)
 //			window.history.go(-1)
 		}else if(date=='btnLeft'){
 

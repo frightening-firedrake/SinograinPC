@@ -287,7 +287,11 @@ export default {
 //  	...mapMutations(['route_click']),
     	dateChange(){
 //  		console.log(this.date_select);
-    		this.$emit('dateChange',this.date_select);
+			var datearr=[];
+			    datearr[0]=Date.parse(this.date_select[0]);
+			    datearr[1]=Date.parse(this.date_select[1]);
+			console.log(datearr)
+//  		this.$emit('dateChange',this.date_select);
     	},
     	statusChange(){
 //  		console.log(this.radio_status)

@@ -4,13 +4,7 @@
             <p>{{formdatas.title}}</p>
         </template>      
 		<el-form-item label="被检查企业" prop="checkcompany" class="three">
-		    <el-select v-model="formdatas.form.checkcompany" placeholder="选择库点">
-		        <el-option label="山西" value="1"></el-option>
-		        <el-option label="河南" value="henan"></el-option>
-		        <el-option label="山东" value="shandong"></el-option>
-		        <el-option label="陕西" value="shanxi2"></el-option>
-		        <el-option label="东北" value="dongbei"></el-option>
-		    </el-select>
+		    <el-input v-model="formdatas.form.checkcompany"></el-input>
 		</el-form-item>
 		<el-form-item label="被查时点"  class="three">
 		    <el-form-item prop="checktime">
@@ -47,8 +41,8 @@
 		</el-form-item>
 		<el-form-item label="储存形式" prop="storge" class="three">
 		    <el-select v-model="formdatas.form.storge" placeholder="选择储存形式">
-		        <el-option label="常规" value="1"></el-option>
-		        <el-option label="非常规" value="2"></el-option>
+		        <el-option label="常规" :value="1"></el-option>
+		        <el-option label="非常规" :value="2"></el-option>
 		    </el-select>
 		</el-form-item>
 		<el-form-item label="保管帐数量（kg）" prop="grainQuality" class="three">
@@ -56,9 +50,9 @@
 		</el-form-item>
 		<el-form-item label="质量等级" prop="qualityGrade" class="three">
 		    <el-select v-model="formdatas.form.qualityGrade" placeholder="选择质量等级">
-		        <el-option label="上等" value="1"></el-option>
-		        <el-option label="中等" value="2"></el-option>
-		        <el-option label="下等" value="3"></el-option>
+		        <el-option label="上等" :value="1"></el-option>
+		        <el-option label="中等" :value="2"></el-option>
+		        <el-option label="下等" :value="3"></el-option>
 		    </el-select>
 		</el-form-item>
 		<!--<el-form-item label="入仓方式" prop="stored_way" class="three2">
@@ -69,8 +63,8 @@
 		</el-form-item>-->
 		<el-form-item label="入仓方式" prop="putWay" class="three2">
 	    	<el-radio-group v-model="formdatas.form.putWay">
-		        <el-radio label="1">人工入仓</el-radio>
-		        <el-radio label="2">机械入仓</el-radio>
+		        <el-radio :label="1">人工入仓</el-radio>
+		        <el-radio :label="2">机械入仓</el-radio>
 		    </el-radio-group>
 		</el-form-item>
 		
@@ -255,8 +249,8 @@
 				<div class="cover_left">
 					<div></div>
 				</div>	
-				<el-form-item label="粮食实际数量（kg）" prop="grainQuality2" >
-				    <el-input v-model="formdatas.form.grainQuality" disabled></el-input>
+				<el-form-item label="粮食实际数量（kg）" prop="grainQuality" >
+				    <el-input v-model.number="formdatas.form.grainQuality" disabled></el-input>
 				</el-form-item>
 				<div class="cover_left">
 					<div></div>
@@ -356,6 +350,7 @@ export default {
 		bgzrsh() { //保管自然损耗
 			var date = new Date();
 			var year = date.getFullYear();
+			return this.formdatas.form.gainTime;
 			return this.jsdjg.lossNature = (this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime)).toFixed(2);
 		},
 		sum() { //合计
@@ -408,8 +403,11 @@ export default {
 			} else {
 				return "不相符";
 			}
-		}
-
+		},
+//		lssjsl(){
+//			return this.formdatas.form.grainQuality;
+//		},
+		
     },
     data() {
 
