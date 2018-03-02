@@ -132,7 +132,7 @@ export default {
 			    name_like:searching,
 			}
 	    }).then(function (response) {
-		  	this.tabledatas=response.data.rows;
+		  	this.items=response.data.rows;
 	  		setTimeout(()=>{			  		
 		  		this.loading=false;
 		  	},1000)
@@ -144,7 +144,7 @@ export default {
   	getlistdata(page){
 		 var params = {}
 		 params.pId = this.$route.query.pId
-  		this.loading=true;
+  		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -163,11 +163,7 @@ export default {
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
-//	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+			this.listHeader.tableName=response.data.rows[0].formName
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -218,6 +214,73 @@ export default {
   	uncomplate(msg){
   		 this.$alert(msg,'提示信息',{});
   	},
+// 编辑扦样
+	editdata(regState) {
+		if(!this.listHeader.tableName) {
+			var msg="请先填写表名，再尝试提交！"
+			this.uncomplate(msg)
+			return
+		}
+		var sample =[];
+		this.tabledatas.forEach((value,index)=>{
+			var item={};		
+			item.id= value.id;
+			item.sort= value.sort;
+			item.quality= value.quality;
+			item.amount= value.amount;
+			item.originPlace= value.originPlace;
+			item.gainTime= value.gainTime;
+			item.position= value.position;
+			// item.updateTime= value.updateTime;
+			// item.sampleTime= value.samplingdate;
+			item.remark= value.remark;
+			sample.push(item);
+			for(var key in item){
+				if(item[key] !== 0 && !item[key]){
+					this.isEmpty=true;
+					break
+				}else{
+					this.isEmpty=false;
+				}
+			}
+		})
+		if(sample.length==0) {
+			var msg="请填写表信息，再尝试提交！"
+			this.uncomplate(msg)
+			return
+		}
+		if(this.isEmpty){
+			var msg="请完善表内空信息，再尝试提交！"
+			this.uncomplate(msg)
+			return
+		}
+  		// 提交扦样列表
+		this.$http({
+		    method: 'post',
+			url: this.editURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				id: this.$route.query.pId,
+				formName: this.listHeader.tableName,
+				sample: JSON.stringify(sample),
+				regState: regState,
+				libraryId: this.libraryId
+
+			},
+	    }).then(function (response) {
+		  this.$router.push({path: '/index/grainDepot/sampleRegListlc'})
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+	},
 	savedata(regState){
 		if(!this.listHeader.tableName) {
 			var msg="请先填写表名，再尝试提交！"
@@ -286,10 +349,17 @@ export default {
 	tfootEvent(date){
 		console.log(date);
 		if(date=='btnCenterL'){
-			
-			this.savedata(-1)	
+			if(this.$route.query.state==3){
+		 		this.editdata(-1)
+			}else {
+				this.savedata(-1)	
+			}
 		}else if(date=='btnCenterR'){
-			this.savedata(3)	
+			if(this.$route.query.state==3){
+				this.editdata(3)
+			}else {
+				this.savedata(3)	
+			}
 		}else if(date=='btnLeft'){
 
 		}else if(date=='btnRight'){
@@ -300,7 +370,7 @@ export default {
 		}else if(date=='tableAdd'){
 			this.rowid++;
 			var newdata={
-				id:this.rowid,
+				id:0,
 		        libraryName: this.libraryName,//被查库点
 		        sort: '',//品种
 		        quality: 'ZC',//性质
@@ -334,6 +404,7 @@ export default {
       datalistURL:'api/grain/sample/data',//获取草稿地址
       saveURL:'api/grain/sample/saveAll',//草稿保存地址
       sampleURL:'api/grain/register/edit',//申请扦样地址
+	  editURL: 'api/grain/sample/saveOrEditAll',
       searchURL:'/liquid/role2/data/search',
       checkedId:[],
       list:"samplinglist",

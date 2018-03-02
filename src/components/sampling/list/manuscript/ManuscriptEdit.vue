@@ -41,7 +41,8 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
-	this.getlistdata(1)
+  this.getSample();
+	this.getManuscript()
 
   },
   destroy(){
@@ -51,24 +52,59 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
 //	获取列表数据方法
-  	getlistdata(page){
-  		this.loading=true;
-  		// 获取列表数据（第？页）
+  	getManuscript(){
+  		this.loading=false;
+       var params = {
+            sampleId: this.$route.query.id,//样品id
+       }
 		this.$http({
-		    method: 'post',
-			url: this.datalistURL,
+      method: 'post',
+      url: this.datalistURL,
+       transformRequest: [function (data) {
+          // Do whatever you want to transform the data
+          let ret = ''
+          for (let it in data) {
+          ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+          }
+          return ret
+        }],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				id:this.$route.query
+        params: JSON.stringify(params)
 			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
-//		  	this.tabledatas=response.data.rows;
-//	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+        for (var key in response.data.rows[0]){
+	    		this.formdatas.form[key]=response.data.rows[0][key];
+	    	}
+        this.formdatas.form.libraryName = this.$route.query.libraryName
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+    //	获取样品
+  	getSample(){
+  		this.loading=false;
+		this.$http({
+      method: 'post',
+      url: this.sampleURL,
+       transformRequest: [function (data) {
+          // Do whatever you want to transform the data
+          let ret = ''
+          for (let it in data) {
+          ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+          }
+          return ret
+        }],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+        // params: JSON.stringify(params)
+        id:this.$route.query.id
+			}
+	    }).then(function (response) {
+       for (var key in response.data){
+	    		this.formdatas.form[key]=response.data[key];
+	    	}
+        this.formdatas.form.libraryName = this.$route.query.libraryName
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -107,7 +143,8 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role7/data',
+      datalistURL:'api/grain/manuscript/data',
+      sampleURL:'api/grain/sample/get',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -126,19 +163,19 @@ export default {
         type: 'info'
       }],
       formdatas: {
-      	title:'中央储备粮实物检查工作底稿（轮换验收）',
+      	title:'中央储备粮实物检查工作底稿',
       	form:{
-        checkregion: '',//被检查企业
+          checkregion: '',//被检查企业
           checktime: '',//被查时点
           realchecktime: '',//实际查库日
           position: '',//货位号
           sort: '',//品种
           quality: '',//性质
           libraryName:'',//所在库区
-          warehouse_type:'',//仓房类型
+          barnType:'',//仓房类型
           gainTime: '',//收货年度
           storge:'',//储存形式
-          bgzsl:'',//保管帐数量（kg）
+          grainQuality:'',//保管帐数量（kg）
           qualityGrade:'',//质量等级
           //stored_way:['人工入仓'],//入仓方式
           putWay:'',//入仓方式
@@ -151,9 +188,9 @@ export default {
           realWater:'',//水分（%）
           realImpurity:'',//杂质（%） 
           //粮堆形状及基本尺寸
-          length:'0',//长（m）：
-          wide:'0',//宽（m）：
-          high:'0',//高（m）：
+          length:0,//长（m）：
+          wide:0,//宽（m）：
+          high:0,//高（m）：
           //1.计算粮堆体积
           measuredVolume:'',//粮堆测量体积(m3)	
           deductVolume:'',//需要扣除体积(m3)	
@@ -161,11 +198,11 @@ export default {
           //2.计算粮堆平均密度	
 //          标准容重器法
           // volume_weigh_bz:'',//粮食容重（g/l）
-          correctioFactor:'1',//校正后修正系数
+          correctioFactor:1,//校正后修正系数
           aveDensity:'',//粮堆平均密度（kg/m³）
 //          特制大容器法
           // unit_volume_weight_tz:'',//单位体积粮食重量（kg/m³）
-          correction_factor_tz:'1',//校正后修正系数
+          correction_factor_tz:1,//校正后修正系数
           // average_density_tz:'',//粮堆平均密度（kg/m³）
           //3.计算粮食数量
             unQuality:'',//测量计算数（kg）	

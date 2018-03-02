@@ -178,7 +178,7 @@ export default {
     },
 //  工作底稿
     handleViewManuscript(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptEdit'})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptEdit',query:{id:row.id,libraryName:row.libraryName}})
     },
     handleCreateManuscript(index, row){
     	console.log(this.$router)
