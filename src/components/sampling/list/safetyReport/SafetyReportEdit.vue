@@ -99,7 +99,7 @@ export default {
 				var imagesbox=value1.images.split(',');
 				imagesbox.forEach((value2,index2)=>{
 					var obj={};
-					obj.url="/upload/picture/"+value2;
+					obj.url="api/grain/upload/picture/"+value2;
 					images.push(obj);
 				})
 	
