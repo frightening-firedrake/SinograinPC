@@ -218,7 +218,7 @@ export default {
   	uncomplate(msg){
   		 this.$alert(msg,'提示信息',{});
   	},
-	savedata(tablestate){
+	savedata(regState){
 		if(!this.listHeader.tableName) {
 			var msg="请先填写表名，再尝试提交！"
 			this.uncomplate(msg)
@@ -232,6 +232,7 @@ export default {
 			item.amount= value.amount;
 			item.originPlace= value.originPlace;
 			item.gainTime= value.gainTime;
+			item.position= value.position;
 			// item.updateTime= value.updateTime;
 			// item.sampleTime= value.samplingdate;
 			item.remark= value.remark;
@@ -255,7 +256,6 @@ export default {
 			this.uncomplate(msg)
 			return
 		}
-
   		// 提交扦样列表
 		this.$http({
 		    method: 'post',
@@ -272,7 +272,7 @@ export default {
 			data: {
 				formName: this.listHeader.tableName,
 				sample: JSON.stringify(sample),
-				regState: tablestate,
+				regState: regState,
 				libraryId: this.libraryId
 
 			},
