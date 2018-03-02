@@ -53,9 +53,10 @@ export default {
   	...mapActions(['addAction']),
     submit(jsdjg){
        var params = {
+            id: this.formdatas.form.id,
             sampleId: this.$route.query.id,//样品id
             storge: this.formdatas.form.storge,//存储形式
-            grainQuality: this.formdatas.form.bgzsl,//保管账数量
+            grainQuality: this.formdatas.form.grainQuality,//保管账数量
             qualityGrade: this.formdatas.form.qualityGrade,//质量等级
             putWay: this.formdatas.form.putWay,//入仓方式
             storageCapacity: this.formdatas.form.storageCapacity,//入库容重
@@ -90,7 +91,7 @@ export default {
       //保存数据
       this.$http({
         method: 'post',
-        url: this.saveURL,
+        url: this.editURL,
         transformRequest: [function (data) {
           // Do whatever you want to transform the data
           let ret = ''
@@ -100,10 +101,8 @@ export default {
           return ret
         }],
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        data: {
-         params: JSON.stringify(params)
-
-        }
+        data:  params,
+         
         }).then(function (response) {
           this.$router.go(-1)
         }.bind(this)).catch(function (error) {
@@ -208,6 +207,7 @@ export default {
   data() {
     return {
       datalistURL:'api/grain/manuscript/data',
+      editURL: 'api/grain/manuscript/edit',
       sampleURL:'api/grain/sample/get',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
