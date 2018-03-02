@@ -41,8 +41,8 @@ import "@/assets/style/common/login.css";
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
 	computed:{
-		...mapState(["libraryId","libraryName"]),
-		...mapGetters([]),
+		...mapState([]),
+		...mapGetters(["libraryId","libraryName"]),
   	},
     created() {
         this.$http({
@@ -95,6 +95,7 @@ export default {
                		var payload={};
                		payload.libraryId=response.data.user.libraryId;
                		payload.libraryName=response.data.user.libraryName;
+               		payload.userName=response.data.user.userName;
                		this.setUserInfo(payload)
                    	this.$router.push({ path: '/index'});
                }else {

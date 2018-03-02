@@ -12,7 +12,7 @@
 			    </el-radio-group>
 			</div>
 		</div>
-		<div class="dataSelete" v-if="listHeader.date">			
+		<div class="dataSelete" v-if="listHeader.date1">			
 			<p>创建时间:</p>
 			<div>
 			    <el-date-picker
