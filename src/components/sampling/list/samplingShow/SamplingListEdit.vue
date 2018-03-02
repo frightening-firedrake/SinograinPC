@@ -67,16 +67,13 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				params:JSON.stringify(this.$route.query)
+				id:this.$route.query.id
 			}
 	    }).then(function (response) {
-		  	this.formdatas.form=response.data.rows[0];
-				console.log(response.data.rows[0])
+		  	this.formdatas.form=response.data;
+//				console.log(response.data.rows)
 //	  		this.page.total=response.data.total;
 		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -107,7 +104,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'api/grain/sample/data',
+      datalistURL:'api/grain/sample/get',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],

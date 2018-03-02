@@ -66,6 +66,9 @@
 									        <el-option label="其他" value="其他"></el-option>
 									    </el-select>
 	    						</template>
+	    						<template v-else-if="item.nosign">
+
+	    						</template>
 	    						<template v-else>
 		    							<input class="editModelInput" type="text" v-model="scope.row[item.prop]" />
 	    						</template>
