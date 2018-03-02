@@ -59,18 +59,18 @@ export default {
 	}
   },
   created(){
-  	console.log(this.$route.query)
-  	if(this.$route.query.state==3){
-  		this.tfbtns={
-	      	btnCenter:{
-				btnTextL:'申请扦样',
-				btnTextR:'保存',
-			},
-			btnRight:{
-				btnText:'导出Excel表格',
-			},   	
-	    }
-  	}
+//	console.log(this.$route.query)
+//	if(this.$route.query.state==3){
+//		this.tfbtns={
+//	      	btnCenter:{
+//				btnTextL:'申请扦样',
+//				btnTextR:'保存',
+//			},
+//			btnRight:{
+//				btnText:'导出Excel表格',
+//			},   	
+//	    }
+//	}
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 //	移除监听事件
@@ -211,7 +211,7 @@ export default {
 		}.bind(this));
   	},
 	//申请扦样
-	applySample() {
+	applySample(state) {
 		this.$http({
 			method: 'post',
 			url: this.applyURL,
@@ -226,7 +226,7 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 				id:JSON.stringify(this.$route.query.pId),
-				state: -1,
+				state: state,
 				libraryId: this.$route.query.libraryId
 			}
 		})
@@ -272,9 +272,10 @@ export default {
 	tfootEvent(date){
 		console.log(date);
 		if(date=='btnCenterL'){
-			this.applySample()
+			this.applySample(-1)
 			this.$router.push({path: '/index/grainDepot/sampleRegListlc'})
 		}else if(date=='btnCenterR'){
+			this.applySample(-3)
 			this.$router.push({path: '/index/grainDepot/sampleRegListlc'})
 		}else if(date=='btnLeft'){
 

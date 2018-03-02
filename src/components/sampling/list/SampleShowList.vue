@@ -47,7 +47,7 @@ export default {
 			return this.tabledatas;
 		}else{
 			return this.tabledatas.filter((value,index)=>{
-				return value.sampleStatus==this.filterStatus
+				return value.sampleState==this.filterStatus
 			})
 		}
 	}
@@ -86,19 +86,7 @@ export default {
 		console.log(data);
 	},
 	statusChange(data){
-		if(data==0){
-//			this.filterStatus='未扦样';
-			this.filterStatus=-1;
-			
-		}else if(data==1){
-//			this.filterStatus='已扦样';
-			this.filterStatus=1;
-			
-		}else if(data=="all"){
-			this.filterStatus=data;
-			
-		}
-		console.log(this.filterStatus)
+		this.filterStatus=data;			
 	},
 	createSampling(){
 //		console.log('createSampling');
@@ -271,26 +259,26 @@ export default {
         id: 1,
         prop:'sampleNo',
         label: "扦样编号",
-        sort:true
+//      sort:true
       },
       {
         id: 3,
         prop:'sort',
         label:"品种",
-        sort:true,
+//      sort:true,
       },
       {
         id: 4,
         prop:'sampleState',
         label:"状态",
         status:true,
-        sort:true,
+//      sort:true,
       },
       {
         id: 5,
         prop:'originPlace',
         label:"产地",
-        sort:true,
+//      sort:true,
       },
       {
         id: 6,
