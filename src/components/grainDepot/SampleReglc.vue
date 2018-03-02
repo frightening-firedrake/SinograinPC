@@ -211,7 +211,7 @@ export default {
 		}.bind(this));
   	},
 	//申请扦样
-	applySample() {
+	applySample(state) {
 		this.$http({
 			method: 'post',
 			url: this.applyURL,
@@ -226,7 +226,7 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 				id:JSON.stringify(this.$route.query.pId),
-				state: -1,
+				state: state,
 				libraryId: this.$route.query.libraryId
 			}
 		})
@@ -272,9 +272,10 @@ export default {
 	tfootEvent(date){
 		console.log(date);
 		if(date=='btnCenterL'){
-			this.applySample()
+			this.applySample(-1)
 			this.$router.push({path: '/index/grainDepot/sampleRegListlc'})
 		}else if(date=='btnCenterR'){
+			this.applySample(-3)
 			this.$router.push({path: '/index/grainDepot/sampleRegListlc'})
 		}else if(date=='btnLeft'){
 

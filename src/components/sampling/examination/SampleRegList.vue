@@ -47,7 +47,7 @@ export default {
 			return this.tabledatas;
 		}else{
 			return this.tabledatas.filter((value,index)=>{
-				return value.state==this.filterStatus
+				return value.regState==this.filterStatus
 			})
 		}
 	}

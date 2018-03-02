@@ -89,7 +89,7 @@ export default {
     		}
     	},
     	code(){
-    		return 'upload/barcode/'+this.formdatas.form.samplePic;
+    		return 'api/grain/upload/barcode/'+this.formdatas.form.samplePic;
     	},
     },
     data() {
