@@ -165,9 +165,9 @@ export default {
       formdatas: {
       	title:'中央储备粮实物检查工作底稿',
       	form:{
-          checkregion: '',//被检查企业
-          checktime: '',//被查时点
-          realchecktime: '',//实际查库日
+          enterprise: '',//被检查企业
+          sampleTime: '',//被查时点
+          sampleTime: '',//实际查库日
           position: '',//货位号
           sort: '',//品种
           quality: '',//性质

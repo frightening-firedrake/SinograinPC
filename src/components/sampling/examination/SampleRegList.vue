@@ -134,7 +134,8 @@ export default {
 //	获取列表数据方法
   	getlistdata(page){
   		this.loading=true;
-  		// 获取列表数据（第？页）
+  		var params = this.$route.query;
+		params.regStates = 3
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
@@ -151,7 +152,7 @@ export default {
 			    listName: this.list,
 			    page:page,
 			    rows:this.page.size,
-				params:JSON.stringify(this.$route.query),
+				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
