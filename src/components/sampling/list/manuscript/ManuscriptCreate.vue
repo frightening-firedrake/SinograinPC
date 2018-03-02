@@ -54,7 +54,7 @@ export default {
        var params = {
             sampleId: this.$route.query.id,//样品id
             storge: this.formdatas.form.storge,//存储形式
-            grainQuality: this.formdatas.form.bgzsl,//保管账数量
+            grainQuality: this.formdatas.form.grainQuality,//保管账数量
             qualityGrade: this.formdatas.form.qualityGrade,//质量等级
             putWay: this.formdatas.form.putWay,//入仓方式
             storageCapacity: this.formdatas.form.storageCapacity,//入库容重

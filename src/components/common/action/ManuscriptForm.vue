@@ -249,14 +249,14 @@
 				<div class="cover_left">
 					<div></div>
 				</div>	
-				<el-form-item label="粮食实际数量（kg）" prop="grainQuality" >
+				<el-form-item label="粮食实际数量（kg）" prop="grainQuality2" >
 				    <el-input v-model.number="formdatas.form.grainQuality" disabled></el-input>
 				</el-form-item>
 				<div class="cover_left">
 					<div></div>
 				</div>	
-				<el-form-item label="账实不符原因" prop="difference_r" >
-				    <el-input v-model="formdatas.form.difference_r"></el-input>
+				<el-form-item label="账实不符原因" prop="result" >
+				    <el-input v-model="formdatas.form.result"></el-input>
 				</el-form-item>	
 				<div class="clear"></div>
 				
@@ -350,7 +350,6 @@ export default {
 		bgzrsh() { //保管自然损耗
 			var date = new Date();
 			var year = date.getFullYear();
-			return this.formdatas.form.gainTime;
 			return this.jsdjg.lossNature = (this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime)).toFixed(2);
 		},
 		sum() { //合计
@@ -467,7 +466,7 @@ export default {
                 barnType: [
 		            { required: true, message: '请输入', trigger: 'blur' },
 		        ],
-		        difference_r: [
+		        result: [
 		            { required: true, message: '请输入', trigger: 'blur' },
 		        ],
 		        remark: [
