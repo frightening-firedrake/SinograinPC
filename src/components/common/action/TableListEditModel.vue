@@ -111,8 +111,8 @@ export default {
   },
   methods: {
 		libraryChange(){
-			console.log()
-		}
+			this.$emit('getLibraryId',this.libraryName2)
+		},
 //	formatter(row, column, cellValue){
 //		if(column.className=='status'){
 //			if(cellValue==0){

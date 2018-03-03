@@ -9,7 +9,7 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader"  v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-table-list-edit-model class="tablelist editmodel" :librarylist="librarylist" :libraryName2="libraryName2" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" @currentRow="currentRowFun"> 
+      <sinograin-table-list-edit-model class="tablelist editmodel" :librarylist="librarylist" @getLibraryId="getLibraryId" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" @currentRow="currentRowFun"> 
       </sinograin-table-list-edit-model>
       <!--分页-->
       <!--<sinograin-pagination style="border:none;" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
@@ -427,7 +427,10 @@ export default {
 	},
 	currentRowFun(currentRow){
 		this.currentRow=currentRow;
-	}
+	},
+	getLibraryId(id){
+		this.libraryName2=id
+	},
   },
   data() {
     return {
@@ -443,7 +446,8 @@ export default {
       checkedId:[],
       list:"samplinglist",
 	  modalVisible:false,
-	  librarylist: "",
+//	  librarylist: [{libraryName:'本库',id:'1'},{libraryName:'太原',id:'2'}],
+	  librarylist: [],
 	  modal:{
 	  	title:'新建库点',
 		formdatas:[
