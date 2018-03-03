@@ -147,12 +147,13 @@ export default {
 			    pId: pId,
 			}
 	    }).then(function (response) {
-		  	if(response.data.success) {
-//				  alert("导出Excel成功")
+	    	console.log(response)
+//		  	if(response.data.success) {
+////				  alert("导出Excel成功")
 				  window.open(this.exportExcelURL+'?pId='+pId,"_blank");				  
-			  } else {
-				  alert("导出Excel失败")
-			  }
+//			  } else {
+//				  alert("导出Excel失败")
+//			  }
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
