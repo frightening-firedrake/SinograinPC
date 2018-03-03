@@ -53,6 +53,7 @@ export default {
     submit(jsdjg){
        var params = {
             sampleId: this.$route.query.id,//样品id
+            enterprise: this.formdatas.form.enterprise,//被查企业
             storge: this.formdatas.form.storge,//存储形式
             grainQuality: this.formdatas.form.grainQuality,//保管账数量
             qualityGrade: this.formdatas.form.qualityGrade,//质量等级

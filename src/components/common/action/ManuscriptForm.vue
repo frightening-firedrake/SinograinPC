@@ -4,7 +4,7 @@
             <p>{{formdatas.title}}</p>
         </template>      
 		<el-form-item label="被检查企业" prop="checkcompany" class="three">
-		    <el-input v-model="formdatas.form.checkcompany"></el-input>
+		    <el-input v-model="formdatas.form.enterprise"></el-input>
 		</el-form-item>
 		<el-form-item label="被查时点"  class="three">
 		    <el-form-item prop="checktime">
