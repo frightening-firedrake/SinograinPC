@@ -350,6 +350,10 @@ export default {
 		bgzrsh() { //保管自然损耗
 			var date = new Date();
 			var year = date.getFullYear();
+			if(year==this.formdatas.form.gainTime){
+				return 0;
+			}
+
 			return this.jsdjg.lossNature = (this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime)).toFixed(2);
 		},
 		sum() { //合计
