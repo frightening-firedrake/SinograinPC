@@ -3,7 +3,7 @@
         <template>
             <p>{{formdatas.title}}</p>
         </template>      
-		<el-form-item label="被检查企业" prop="checkcompany" class="three">
+		<el-form-item label="被检查企业" prop="enterprise" class="three">
 		    <el-input v-model="formdatas.form.enterprise"></el-input>
 		</el-form-item>
 		<el-form-item label="被查时点"  class="three">
@@ -481,7 +481,7 @@ export default {
 		        leader: [
 		            { required: true, message: '请输入', trigger: 'blur' },
 		        ],
-				checkcompany: [
+				enterprise: [
 		            { required: true, message: '请输入', trigger: 'blur' },
 		        ],
 //		        数字输入类型
