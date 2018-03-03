@@ -9,7 +9,7 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader"  v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-table-list-edit-model class="tablelist editmodel" :libraryName2="libraryName2" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" @currentRow="currentRowFun"> 
+      <sinograin-table-list-edit-model class="tablelist editmodel" :librarylist="librarylist" :libraryName2="libraryName2" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" @currentRow="currentRowFun"> 
       </sinograin-table-list-edit-model>
       <!--分页-->
       <!--<sinograin-pagination style="border:none;" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
@@ -61,6 +61,7 @@ export default {
   },
   created(){
   	console.log(this.$route.query)
+	this.getlibrarylist()
 //  获取列表数据（第一页）
 	if(this.$route.query.state==3){
 		 this.getlistdata(1)
@@ -136,6 +137,30 @@ export default {
 	  		setTimeout(()=>{			  		
 		  		this.loading=false;
 		  	},1000)
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+//	获取库列表
+  	getlibrarylist(){
+		this.$http({
+		    method: 'post',
+			url: this.librarylistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				
+			}
+	    }).then(function (response) {
+		  	this.librarylist = response.data.rows;
+			  console.log(this.librarylist)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -278,7 +303,7 @@ export default {
 				formName: this.listHeader.tableName,
 				sample: JSON.stringify(sample),
 				regState: regState,
-				libraryId: this.libraryId
+				libraryId: this.libraryName2
 
 			},
 	    }).then(function (response) {
@@ -342,7 +367,7 @@ export default {
 				formName: this.listHeader.tableName,
 				sample: JSON.stringify(sample),
 				regState: regState,
-				libraryId: this.libraryId
+				libraryId: this.libraryName2
 
 			},
 	    }).then(function (response) {
@@ -409,6 +434,7 @@ export default {
       isEmpty:false,
       rowid:999,//临时id
       datalistURL:'api/grain/sample/data',//获取草稿地址
+	  librarylistURL:'api/grain/library/data',//获取库列表
       saveURL:'api/grain/sample/saveAll',//草稿保存地址
       sampleURL:'api/grain/register/edit',//申请扦样地址
 	  editURL: 'api/grain/sample/saveOrEditAll',
@@ -417,6 +443,7 @@ export default {
       checkedId:[],
       list:"samplinglist",
 	  modalVisible:false,
+	  librarylist: "",
 	  modal:{
 	  	title:'新建库点',
 		formdatas:[
