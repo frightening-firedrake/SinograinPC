@@ -56,6 +56,8 @@ export default {
             id: this.formdatas.form.id,
             sampleId: this.$route.query.id,//样品id
             enterprise: this.formdatas.form.enterprise,//被查企业
+            checkedTime: this.formdatas.form.checkedTime,//被查时点
+            realCheckedTime: this.formdatas.form.realCheckedTime,//实际查库日
             storge: this.formdatas.form.storge,//存储形式
             grainQuality: this.formdatas.form.grainQuality,//保管账数量
             qualityGrade: this.formdatas.form.qualityGrade,//质量等级
@@ -231,8 +233,8 @@ export default {
       	title:'中央储备粮实物检查工作底稿',
       	form:{
           enterprise: '',//被检查企业
-          sampleTime: '',//被查时点
-          sampleTime: '',//实际查库日
+          checkedTime: '',//被查时点
+          realCheckedTime: '',//实际查库日
           position: '',//货位号
           sort: '',//品种
           quality: '',//性质
