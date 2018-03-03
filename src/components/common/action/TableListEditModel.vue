@@ -30,7 +30,7 @@
 	    		<el-table-column show-overflow-tooltip v-if="!item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class" :show-overflow-tooltip="false">
 	    				<template slot-scope="scope" class='test'>
 	    						<template v-if="item.prop=='libraryName'">
-		    							<!--<el-select v-model="scope.row[item.prop]" placeholder="选择库点">
+		    							<el-select v-model="libraryName2" placeholder="选择库点">
 									        <el-option label="本库" value="本库"></el-option>
 									        <el-option label="山西屯留国家粮食储备库" value="山西屯留国家粮食储备库"></el-option>
 									        <el-option label="山西长治国家粮食储备库" value="山西长治国家粮食储备库"></el-option>
@@ -38,8 +38,8 @@
 									        <el-option label="长子分库" value="长子分库"></el-option>
 									        <el-option label="黎城分库" value="黎城分库"></el-option>
 									        <el-option label="沁县分库" value="沁县分库"></el-option>									        
-									    </el-select>-->
-									    {{scope.row[item.prop]}}
+									    </el-select>
+									    <!--{{scope.row[item.prop]}}-->
 	    						</template>
 	    						<template v-else-if="item.prop=='sort'">
 		    							<el-select v-model="scope.row[item.prop]" placeholder="选择品种">
@@ -86,7 +86,7 @@
 </style>
 <script>
 export default {
-  props: ['items', 'tabledata','actions','list','loading'],
+  props: ['items', 'tabledata','actions','list','loading','libraryName2'],
   computed:{
   	maxHeight(){
   		return 320;

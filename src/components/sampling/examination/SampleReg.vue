@@ -147,7 +147,7 @@ export default {
 			    pId: pId,
 			}
 	    }).then(function (response) {
-	    	console.log(response)
+//	    	console.log(response)
 //		  	if(response.data.success) {
 ////				  alert("导出Excel成功")
 				  window.open(this.exportExcelURL+'?pId='+pId,"_blank");				  

@@ -7,9 +7,9 @@
       <!--标题-->
       <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
+      <list-header :listHeader="listHeader"  v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-table-list-edit-model class="tablelist editmodel" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" @currentRow="currentRowFun"> 
+      <sinograin-table-list-edit-model class="tablelist editmodel" :libraryName2="libraryName2" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" @currentRow="currentRowFun"> 
       </sinograin-table-list-edit-model>
       <!--分页-->
       <!--<sinograin-pagination style="border:none;" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
@@ -73,7 +73,7 @@ export default {
     	this.tabledatas=this.tabledatas.filter(function(item){
     		return item.id!==rowid;
     	})
-    	this.sendDeleteId(rowid);
+//  	this.sendDeleteId(rowid);
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击查看事件
@@ -175,10 +175,16 @@ export default {
 	      cancelButtonText: '取消',
 	      type: 'warning'
 	    }).then(() => {
-	    	this.tabledatas=this.tabledatas.filter(function(item){
-	    		return item.id!==row.id;
-	    	})
-	    	this.sendDeleteId(row.id);
+	    	if(row.id){
+	    		this.tabledatas=this.tabledatas.filter(function(item){
+	    			return item.id!==row.id;
+	    		})	    		
+	    	}else{
+	    		this.tabledatas=this.tabledatas.filter(function(item){
+	    			return item.addId!==row.addId;
+	    		})	
+	    	}
+//	    	this.sendDeleteId(row.id);
 	      this.$message({
 	        type: 'success',
 	        message: '删除成功!'
@@ -384,12 +390,13 @@ export default {
 		        // samplingdate: '',//扦样日期
 		        remark: '',//备注
 		        rowType:"扦样信息",//删除用
+		        addId:this.rowid,//本地删除新建行时用到的标识
 	        }
 			this.tabledatas.push(newdata);
 		}else if(date=="tableDel"){
 			if(this.currentRow){
 				this.deleteRow(this.currentRow)
-
+//				console.log(this.currentRow)
 			}
 		}
 	},
@@ -406,6 +413,7 @@ export default {
       sampleURL:'api/grain/register/edit',//申请扦样地址
 	  editURL: 'api/grain/sample/saveOrEditAll',
       searchURL:'/liquid/role2/data/search',
+      libraryName2:'',
       checkedId:[],
       list:"samplinglist",
 	  modalVisible:false,
@@ -474,7 +482,7 @@ export default {
         id: 2,
         prop:'libraryName',
         label:"被查库点",
-        width:150,
+        width:210,
 //      sort:true,
       },
       {
@@ -521,18 +529,18 @@ export default {
 //         label:"入库时间",
 // //      sort:true,
 //       },
-      {
-        id: 10,
-        prop:'samplingSign',
-        label:"扦样人员签字",
-//      sort:true,
-      },
-      {
-        id: 11,
-        prop:'sampleInSignWidth',
-        label:"现场人员签字",
-//      sort:true,
-      },
+//    {
+//      id: 10,
+//      prop:'samplingSign',
+//      label:"扦样人员签字",
+////      sort:true,
+//    },
+//    {
+//      id: 11,
+//      prop:'sampleInSignWidth',
+//      label:"现场人员签字",
+////      sort:true,
+//    },
 //       {
 //         id: 12,
 //         prop:'samplingdate',
