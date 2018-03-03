@@ -8,7 +8,7 @@
 			</div>
 			<div class="userinfo">
 				<h3>扦样员
-					<span>({{user.name}})</span>
+					<span>({{this.userName}})</span>
 				</h3>
 				<p>
 					<template v-if="user.status==1">
@@ -100,7 +100,7 @@ export default {
 	},
 	computed:{
 		...mapState(["isCollapse"]),
-		...mapGetters(["modal_id"]),
+		...mapGetters(["modal_id","libraryId","libraryName","userName"]),
 		activePath(){
 
 			var path=this.$route.path.split('/')

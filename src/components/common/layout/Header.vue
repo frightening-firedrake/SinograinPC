@@ -7,11 +7,12 @@
     	  <div class="dropdown">
 				    <el-dropdown trigger="click">
 					      <span class="el-dropdown-link">
-					        	某某管理员<i class="el-icon-arrow-down el-icon--right"></i>
+					        	{{userName}}
+					        	<i class="el-icon-arrow-down el-icon--right"></i>
 					      </span>
 					      <el-dropdown-menu slot="dropdown">
-						        <el-dropdown-item>个人中心</el-dropdown-item>
-						        <el-dropdown-item>退出登录</el-dropdown-item>
+						        <!--<el-dropdown-item>个人中心</el-dropdown-item>
+						        <el-dropdown-item>退出登录</el-dropdown-item>-->
 					      </el-dropdown-menu>
 				    </el-dropdown>
 				</div>
@@ -35,11 +36,16 @@
 </template>
 <script>
 require("../../../assets/style/index/index.css")
+import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
-		data(){
-			return {
-				search_h:'',
-			}
+	computed:{
+		...mapState([]),
+		...mapGetters(["libraryId","libraryName","userName"]),
+  	},
+	data(){
+		return {
+			search_h:'',
 		}
+	}
 }
 </script>

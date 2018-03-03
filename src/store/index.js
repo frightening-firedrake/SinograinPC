@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
+	userName:'未登录',//用户名
 	libraryName:'',//库点名
 	libraryId:'',//库点id
 	libraryNames:[],//库点组
@@ -36,6 +37,13 @@ const getters = {
     		return state.libraryId;    		
     	}else{
     		return localStorage.getItem("libraryId");
+    	}
+    },
+    userName:function(state){
+    	if(state.userName){
+    		return state.userName;    		
+    	}else{
+    		return localStorage.getItem("userName");
     	}
     },
     libraryNames:function(state){
@@ -83,8 +91,10 @@ const mutations = {
 	setUserInfo(state,payload){
 		state.libraryName=payload.libraryName;
 		state.libraryId=payload.libraryId;
+		state.userName=payload.userName;
 		localStorage.setItem('libraryId', payload.libraryId);
 		localStorage.setItem('libraryName', payload.libraryName);
+		localStorage.setItem('userName', payload.userName);
 	},
 	setBaseMsg(state,payload){
 		state.libraryNames=payload.libraryNames;
