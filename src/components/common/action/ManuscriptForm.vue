@@ -481,6 +481,9 @@ export default {
 		        leader: [
 		            { required: true, message: '请输入', trigger: 'blur' },
 		        ],
+				checkcompany: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		        ],
 //		        数字输入类型
 		        grainQuality: [
 		            { required: true, message: '请输入', trigger: 'blur' },
@@ -532,9 +535,6 @@ export default {
 		            { type: 'number', message: '请输数字', trigger: 'blur' },
 		        ],
 //		        下拉框类型
-		        checkcompany: [
-		            { required: true, message: '请选择', trigger: 'change' }
-		        ],
 		        storge: [
 		            { required: true, message: '请选择', trigger: 'change' }
 		        ],
