@@ -7,15 +7,15 @@
 		    <el-input v-model="formdatas.form.enterprise"></el-input>
 		</el-form-item>
 		<el-form-item label="被查时点"  class="three">
-		    <el-form-item prop="checktime">
+		    <el-form-item prop="checkedTime">
 		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
-		        <el-date-picker type="month" placeholder="选择被查时点" v-model="formdatas.form.checktime"></el-date-picker>
+		        <el-date-picker type="month" placeholder="选择被查时点" v-model="formdatas.form.checkedTime"></el-date-picker>
 		    </el-form-item>
 		</el-form-item>
 		<el-form-item label="实际查库日"  class="three">
-		    <el-form-item prop="realchecktime">
+		    <el-form-item prop="realCheckedTime">
 		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
-		        <el-date-picker type="date" placeholder="选择实际查库日" v-model="formdatas.form.realchecktime"></el-date-picker>
+		        <el-date-picker type="date" placeholder="选择实际查库日" v-model="formdatas.form.realCheckedTime"></el-date-picker>
 		    </el-form-item>
 		</el-form-item>
 		<el-form-item label="货位号" prop="position"  v-bind:class="{disabled:disabled}" class="three">
@@ -351,10 +351,11 @@ export default {
 			var date = new Date();
 			var year = date.getFullYear();
 			if(year==this.formdatas.form.gainTime){
-				return 0;
+				return this.jsdjg.lossNature = 0;
+			} else {
+				return this.jsdjg.lossNature = (this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime)).toFixed(2);
 			}
 
-			return this.jsdjg.lossNature = (this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime)).toFixed(2);
 		},
 		sum() { //合计
 			var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
@@ -547,10 +548,10 @@ export default {
 		        ],
 		        
 //		        日期类型
-		        checktime: [
+		        checkedTime: [
 		            { type: 'date', required: true, message: '请选日期', trigger: 'change' }
 		        ],
-		        realchecktime: [
+		        realCheckedTime: [
 		            { type: 'date', required: true, message: '请选日期', trigger: 'change' }
 		        ],
 
