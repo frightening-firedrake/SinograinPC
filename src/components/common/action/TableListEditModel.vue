@@ -103,7 +103,7 @@ export default {
 //  	importLoading: false,
       multipleSelection: [],
       resizable:false,
-			libraryName2:'',
+	  libraryName2:'',
     }
   },
   mounted: function() {
@@ -113,7 +113,7 @@ export default {
   },
   methods: {
 		libraryChange(){
-			this.$emit('getLibraryId',this.libraryName2)
+			this.$emit('getLibraryId',this.tabledata[0].libraryName)
 		},
 //	formatter(row, column, cellValue){
 //		if(column.className=='status'){
