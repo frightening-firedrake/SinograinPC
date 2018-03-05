@@ -213,7 +213,7 @@ export default {
           barnType:'',//仓房类型
           gainTime: '',//收货年度
           storge:'',//储存形式
-          bgzsl:'',//保管帐数量（kg）
+          grainQuality:'',//保管帐数量（kg）
           qualityGrade:'',//质量等级
           //stored_way:['人工入仓'],//入仓方式
           putWay:'',//入仓方式

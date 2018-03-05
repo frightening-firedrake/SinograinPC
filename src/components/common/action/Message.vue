@@ -3,6 +3,8 @@
 	  	<span :class="message.icon"></span>
 	  	<h3>{{message.messageTittle}}</h3>
 	  	<p>{{message.messageText}}</p>
+	  	<input ref="scanCode2"  type="text" />
+	  	<input ref="scanCode" v-if="messages.type=='scaning'" type="text" v-model="scanCode" @keyup.enter="getScanCode" />
 		<div slot="footer" class="dialog-footer center">
 		    <el-button @click="messageclick" :class="messages.type" v-if="messages.type!=='loading'">{{message.buttonText?message.buttonText:'确 定'}}</el-button>
 		    <!--<el-button class="no" @click="messageVisible = false">取 消</el-button>-->
@@ -25,10 +27,13 @@ export default {
 		}
 	},
 	created(){
-
+		console.log(this.$refs)
+		console.log(this)
+//		this.$refs['scanCode'].
 	},
     data() {
         return {
+        	scanCode:'',
         	dialogWidth:'6.2rem',
         	messageVisible: true,		   
         }
@@ -41,7 +46,11 @@ export default {
     	},
     	messageClose(){
     		this.$emit('messageClose')
-    	}
+    	},
+    	getScanCode(){
+    		console.log(this.scanCode)
+    		this.$emit('getScanCode',this.scanCode)
+    	},
     },
 
     
