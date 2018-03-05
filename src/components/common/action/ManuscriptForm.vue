@@ -345,7 +345,7 @@ export default {
 			}
 		},
 		sfjl() { //水分减量
-			return this.jsdjg.lossWater = (this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater)).toFixed(2)
+			return this.jsdjg.lossWater = (this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(100-this.formdatas.form.realWater)).toFixed(2)
 		},
 		bgzrsh() { //保管自然损耗
 			var date = new Date();
