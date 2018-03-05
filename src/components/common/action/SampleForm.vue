@@ -64,7 +64,7 @@
 		<div class="line">
 		</div>
 			<el-form-item label="存放状态：" prop="storageStatus"  v-bind:class="{disabled:disabled}">
-			    <el-input v-model="formdatas.form.storageStatus" :disabled="disabled"></el-input>
+			    <el-input v-model="formdatas.form.sampleState" :disabled="disabled"></el-input>
 			</el-form-item>
 			<el-form-item label="入库时间：" prop="sampleInTime" >
 		    	<el-form-item>

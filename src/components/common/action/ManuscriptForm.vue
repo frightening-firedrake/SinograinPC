@@ -350,6 +350,7 @@ export default {
 		bgzrsh() { //保管自然损耗
 			var date = new Date();
 			var year = date.getFullYear();
+			
 			if(year==this.formdatas.form.gainTime){
 				return this.jsdjg.lossNature = 0;
 			} else {
