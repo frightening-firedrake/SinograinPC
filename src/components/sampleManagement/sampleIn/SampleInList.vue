@@ -13,6 +13,7 @@
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
       <!--新建库典弹框-->
       <sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
+      <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
     </div>
 </template>
 
@@ -27,6 +28,7 @@ import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SinograinPagination from '@/components/common/action/Pagination.vue';
 import ListHeader from '@/components/common/action/ListHeader.vue';
 import SinograinModal from '@/components/common/action/Modal.vue';
+import SinograinMessage from "@/components/common/action/Message"
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
@@ -36,7 +38,7 @@ import data from '@/util/mock';
 
 export default {
   components: {
-    SinograinList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader
+    SinograinList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader,SinograinMessage
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -109,7 +111,8 @@ export default {
 	},
 //	扫码新建样品
 	scanCode(){
-		this.createlib()
+		this.messageShow=true;
+//		this.createlib()
 	},
 //	填入新建数据
 	createlibitem(form){
@@ -205,6 +208,16 @@ export default {
 	titleEvent(){
   		console.log('titleEvent');
   	},
+  	messageclick(type){
+  		if(type=="success"){
+  			console.log(type)
+  		}else if(type=="error"){
+  			console.log(type)  			
+  		}
+  	},
+  	messageClose(){
+  		this.messageShow=false;
+  	},
   },
   data() {
     return {
@@ -217,6 +230,13 @@ export default {
 	  modal:{
 	  	title:'入库',
 		formdatas:[
+			{
+	  			label:"扦样编号:",
+	  			model:"sampleNumber",
+	  			disabled:true,
+	  			value:'123456789',
+	  			type:'password'
+	  		},
 			{
 	  			label:"存放状态:",
 	  			model:"storageStatus",
@@ -328,7 +348,16 @@ export default {
       	dele:false,
       	manuscript:false,
       	safetyReport:false,
-      }
+      },
+      messageShow:false,
+	  messages:{
+	  	type:'scaning',
+	  	scaning:{
+	  		icon:'iconfont icon-iconset0255',
+	  		messageTittle:'开始扫描...',
+	  		messageText:'请将扫码枪对准条形码，然后按下扫码枪按钮！！！',
+	  	},
+	  },
     }
   }
 }

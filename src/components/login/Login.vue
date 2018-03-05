@@ -7,7 +7,7 @@
                 	<el-input
 					    placeholder="请输入您的账号"
 					    v-model="loginForm.name">
-					    <i slot="prefix" class="iconfont icon-zhanghao"></i>
+					    <i slot="prefix" class="iconfont icon-icon-test"></i>
 					</el-input>
                     <!--<i class="iconfont icon-zhanghao"></i>-->
                     <!--<el-input type="text" placeholder="请输入您的账号" v-model="loginForm.name" @focus="focus" @blur="blur"></el-input>-->
