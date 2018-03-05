@@ -288,7 +288,7 @@ export default {
       },
       ],
       actions:{
-      	selection:true,
+//    	selection:true,
       	number:false,
       	view:true,
       	edit:false,

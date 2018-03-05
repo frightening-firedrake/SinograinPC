@@ -1,5 +1,7 @@
 <template>
     <div class='listpagewrap'>
+      <!--额外用来监听路由的小东西-->
+      <div style="display: none;">{{resetpage}}</div>   	
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
       <!--alert-->
@@ -56,6 +58,13 @@ export default {
 			return this.tabledatas.filter((value,index)=>{
 				return value.status==this.filterStatus
 			})
+		}
+	},
+	resetpage(){
+		if(this.$route.query.state==3){
+		}else{
+			this.tabledatas=[];
+			this.listHeader.tableName='';
 		}
 	}
   },
@@ -189,6 +198,7 @@ export default {
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
 			this.listHeader.tableName=response.data.rows[0].formName
+			this.libraryName2=response.data.rows[0].libraryId
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
