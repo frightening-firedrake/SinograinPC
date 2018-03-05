@@ -13,7 +13,7 @@
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
       <!--新建库典弹框-->
       <sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
-      <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
+      <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose" @getScanCode="getScanCode"></sinograin-message>
     </div>
 </template>
 
@@ -118,7 +118,7 @@ export default {
 	createlibitem(form){
 		console.log(form);
 //		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInCreate', params: {'position': form.position,'sampleInName': form.sampleInName} })
-		this.$router.push({name: "样品管理/样品入库列表/新建样品", params: {'yangpinshi': form.yangpinshi,'gui': form.gui,'sampleInSign': form.sampleInSign} })
+		this.$router.push({name: "样品管理/样品入库列表/新建样品", params: {'yangpinshi': form.yangpinshi,'gui': form.gui,'sampleInSign': form.sampleInSign,'sampleNumber': form.sampleNumber} })
 	},
 //	关闭新建弹框
 	dialogClose(){
@@ -218,6 +218,15 @@ export default {
   	messageClose(){
   		this.messageShow=false;
   	},
+  	getScanCode(code){
+  		if(!code){
+  			this.messageShow=false;
+  		}else{  			
+  			this.modal.formdatas[0].value=code;
+  			this.messageShow=false;
+  			this.modalVisible=true;
+  		}
+  	},
   },
   data() {
     return {
@@ -260,7 +269,7 @@ export default {
 	  		{
 	  			label:"入库签名:",
 	  			model:"sampleInSign",
-//	  			value:'陶亚南',
+	  			value:'1323',
 	  		},
 	  	],
 	  	submitText:'确定',
@@ -354,8 +363,8 @@ export default {
 	  	type:'scaning',
 	  	scaning:{
 	  		icon:'iconfont icon-iconset0255',
-	  		messageTittle:'开始扫描...',
-	  		messageText:'请将扫码枪对准条形码，然后按下扫码枪按钮！！！',
+	  		messageTittle:'开始扫描',
+	  		messageText:'不要点击键盘和鼠标请将扫码枪对准条形码，然后按下扫码枪按钮！',
 	  	},
 	  },
     }

@@ -3,10 +3,9 @@
 	  	<span :class="message.icon"></span>
 	  	<h3>{{message.messageTittle}}</h3>
 	  	<p>{{message.messageText}}</p>
-	  	<input ref="scanCode2"  type="text" />
-	  	<input ref="scanCode" v-if="messages.type=='scaning'" type="text" v-model="scanCode" @keyup.enter="getScanCode" />
+	  	<input style="width:0;height:0;opacity: 0;" ref="scanCode" v-if="messages.type=='scaning'" type="text" v-model="scanCode" @keyup.enter="getScanCode"  v-focus/>
 		<div slot="footer" class="dialog-footer center">
-		    <el-button @click="messageclick" :class="messages.type" v-if="messages.type!=='loading'">{{message.buttonText?message.buttonText:'确 定'}}</el-button>
+		    <el-button @click="messageclick" :class="messages.type" v-if="messages.type!=='loading'&&messages.type!=='scaning'">{{message.buttonText?message.buttonText:'确 定'}}</el-button>
 		    <!--<el-button class="no" @click="messageVisible = false">取 消</el-button>-->
 	    </div>
 	</el-dialog>
@@ -21,14 +20,20 @@ export default {
 //  	console.log(this.messages[this.messages.type]);
 
     },
+    directives: {
+	  focus: {
+	    // 指令的定义
+	    inserted: function (el) {
+	      el.focus()
+	    }
+	  }
+	},
     computed:{
 		message(){
 			return this.messages[this.messages.type]
 		}
 	},
 	created(){
-		console.log(this.$refs)
-		console.log(this)
 //		this.$refs['scanCode'].
 	},
     data() {
@@ -48,7 +53,6 @@ export default {
     		this.$emit('messageClose')
     	},
     	getScanCode(){
-    		console.log(this.scanCode)
     		this.$emit('getScanCode',this.scanCode)
     	},
     },
@@ -126,6 +130,16 @@ export default {
 	border-radius:50%;
 	color:#ffffff;
 	font-size:0.7rem;
+}
+.message .el-dialog__body span.icon-iconset0255{
+	width:1rem;
+	height:1rem;
+	line-height:1.5rem;
+	margin:0.15rem 0;
+	border-radius:50%;
+	color:rgba(2, 148, 65, 0.6);	
+	background-color:#ffffff;
+	font-size:1rem;
 }
 /*底部*/
 .message .el-dialog__footer{

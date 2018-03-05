@@ -52,6 +52,7 @@ export default {
 	},
 	created(){
 		this.modal.formdatas.forEach((item,index)=>{
+			console.log(item)
 			this.form[item.model]=item.value
 		})
 	},
