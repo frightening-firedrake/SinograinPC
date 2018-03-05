@@ -30,18 +30,17 @@
 	    		<el-table-column show-overflow-tooltip v-if="!item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class" :show-overflow-tooltip="false">
 	    				<template slot-scope="scope" class='test'>
 	    						<template v-if="item.prop=='libraryName'">
-		    							<el-select v-model="libraryName2" placeholder="选择库点" @change="libraryChange">
-									         <el-option v-for="item in librarylist" :label="item.libraryName" :key="item.id" :value="item.id"></el-option>
-													
-									         <!--<el-option label="本库" value="本库"></el-option>
-									        <el-option label="山西屯留国家粮食储备库" value="山西屯留国家粮食储备库"></el-option>
-									        <el-option label="山西长治国家粮食储备库" value="山西长治国家粮食储备库"></el-option>
-									        <el-option label="山西晋城国家粮食储备库" value="山西晋城国家粮食储备库"></el-option>
-									        <el-option label="长子分库" value="长子分库"></el-option>
-									        <el-option label="黎城分库" value="黎城分库"></el-option>
-									        <el-option label="沁县分库" value="沁县分库"></el-option>-->									        
+		    							<!--<el-select  v-if="!item.editLibraryName" v-model="libraryName2" placeholder="选择库点" @change="libraryChange">
+									         <el-option v-for="item2 in librarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
 									    </el-select>
-									    <!--{{scope.row[item.prop]}}-->
+
+									    <el-select v-if="item.editLibraryName" v-model="scope.row[item.prop]" placeholder="选择品种">
+									        <el-option v-for="item2 in librarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
+									    </el-select>-->
+									    <el-select  v-model="tabledata[0].libraryName" placeholder="选择库点" @change="libraryChange">
+									         <el-option v-for="item2 in librarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
+									    </el-select>
+		
 	    						</template>
 	    						<template v-else-if="item.prop=='sort'">
 		    							<el-select v-model="scope.row[item.prop]" placeholder="选择品种">
@@ -89,6 +88,9 @@
 <script>
 export default {
   props: ['items', 'tabledata','actions','list','loading','librarylist'],
+  created(){
+  	
+  },
   computed:{
   	maxHeight(){
   		return 320;
