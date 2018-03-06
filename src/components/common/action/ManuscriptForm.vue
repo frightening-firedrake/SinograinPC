@@ -46,7 +46,7 @@
 		    </el-select>
 		</el-form-item>
 		<el-form-item label="保管帐数量（kg）" prop="grainQuality" class="three">
-		    <el-input v-model.number="formdatas.form.grainQuality"></el-input>
+		    <el-input v-model.number="formdatas.form.amount*1000" disabled></el-input>
 		</el-form-item>
 		<el-form-item label="质量等级" prop="qualityGrade" class="three">
 		    <el-select v-model="formdatas.form.qualityGrade" placeholder="选择质量等级">
@@ -250,7 +250,7 @@
 					<div></div>
 				</div>	
 				<el-form-item label="粮食实际数量（kg）" prop="grainQuality2" >
-				    <el-input v-model.number="formdatas.form.grainQuality" disabled></el-input>
+				    <el-input v-model.number="formdatas.form.amount*1000" disabled></el-input>
 				</el-form-item>
 				<div class="cover_left">
 					<div></div>
