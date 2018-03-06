@@ -50,9 +50,9 @@
 		</el-form-item>
 		<el-form-item label="质量等级" prop="qualityGrade" class="three">
 		    <el-select v-model="formdatas.form.qualityGrade" placeholder="选择质量等级">
-		        <el-option label="上等" :value="1"></el-option>
-		        <el-option label="中等" :value="2"></el-option>
-		        <el-option label="下等" :value="3"></el-option>
+		        <el-option label="一等" :value="1"></el-option>
+		        <el-option label="二等" :value="2"></el-option>
+		        <el-option label="三等" :value="3"></el-option>
 		    </el-select>
 		</el-form-item>
 		<!--<el-form-item label="入仓方式" prop="stored_way" class="three2">
@@ -196,7 +196,7 @@
 						应记粮食损耗(kg)	
 					</div>
 					<el-form-item label="水分减量" prop="weight_humidity"  class='leftborder'>
-					    <el-input v-model="sfjl" disabled></el-input>
+					    <el-input v-model="sfjl"></el-input>
 					</el-form-item>
 					<el-form-item label="保管自然损耗" prop="weight_natural"  class='leftborder'>
 					    <el-input v-model="bgzrsh" disabled></el-input>
@@ -320,16 +320,16 @@ export default {
 			var length = this.formdatas.form.length;
 			var high = this.formdatas.form.high;
 			var wide = this.formdatas.form.wide;
-			return this.jsdjg.measuredVolume = (length*high*wide).toFixed(2)
+			return this.jsdjg.measuredVolume = (length*high*wide).toFixed(1)
 		},
 		ldsjtj() { //粮堆实际体积
 			var length = this.formdatas.form.length;
 			var high = this.formdatas.form.high;
 			var wide = this.formdatas.form.wide;
-			return this.jsdjg.realVolume = (length*high*wide - this.formdatas.form.deductVolume).toFixed(2)
+			return this.jsdjg.realVolume = (length*high*wide - this.formdatas.form.deductVolume).toFixed(1)
 		},
 		bzldpjmd() { // 标准粮堆平均密度
-			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor).toFixed(2)
+			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor).toFixed(1)
 		},
 		tzldpjmd() { //特制粮堆平均密度
 //			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz).toFixed(2)
@@ -339,25 +339,26 @@ export default {
 			var high = this.formdatas.form.high;
 			var wide = this.formdatas.form.wide;
 			if(this.calculation_density == 1) {
-				return this.jsdjg.unQuality = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor).toFixed(2)
+				return this.jsdjg.unQuality = parseInt((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)\
+				
 			} else if(this.calculation_density == 2) { 
-				return this.jsdjg.unQuality = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz).toFixed(2)
+				return this.jsdjg.unQuality = parseInt((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz)
 			}
 		},
-		sfjl() { //水分减量
-			return this.jsdjg.lossWater = (this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(100-this.formdatas.form.realWater)).toFixed(2)
-		},
-		bgzrsh() { //保管自然损耗
-			var date = new Date();
-			var year = date.getFullYear();
+		// sfjl() { //水分减量
+		// 	return this.jsdjg.lossWater = (this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(100-this.formdatas.form.realWater)).toFixed(2)
+		// },
+		// bgzrsh() { //保管自然损耗
+		// 	var date = new Date();
+		// 	var year = date.getFullYear();
 			
-			if(year==this.formdatas.form.gainTime){
-				return this.jsdjg.lossNature = 0;
-			} else {
-				return this.jsdjg.lossNature = (this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime)).toFixed(2);
-			}
+		// 	if(year==this.formdatas.form.gainTime){
+		// 		return this.jsdjg.lossNature = 0;
+		// 	} else {
+		// 		return this.jsdjg.lossNature = (this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime)).toFixed(2);
+		// 	}
 
-		},
+		// },
 		sum() { //合计
 			var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
 			var date = new Date();

@@ -77,8 +77,8 @@ export default {
             wide: this.formdatas.form.wide,//宽
             high: this.formdatas.form.high,//高
             unQuality: jsdjg.unQuality,//测量计算数
-            lossWater: jsdjg.lossWater,//水分减量
-            lossNature: jsdjg.lossNature,//自然损耗
+            lossWater: this.formdatas.form.lossWater,//水分减量
+            lossNature: this.formdatas.form.lossNature,//自然损耗
             loss: jsdjg.loss,//合计
             checkNum: jsdjg.checkNum,//检查计算数
             difference: jsdjg.difference,//差数
