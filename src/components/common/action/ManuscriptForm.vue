@@ -31,7 +31,13 @@
 		    <el-input v-model="formdatas.form.libraryName" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="仓房类型" prop="barnType"  class="three">
-		    <el-input v-model="formdatas.form.barnType"></el-input>
+		 	<el-select v-model="formdatas.form.barnType" placeholder="选择仓房类型">
+		        <el-option label="平房仓" :value="1"></el-option>
+		        <el-option label="高大平房仓" :value="2"></el-option>
+		        <el-option label="苏式仓" :value="3"></el-option>
+				<el-option label="窑洞仓" :value="4"></el-option>
+				<el-option label="地下仓" :value="5"></el-option>
+		    </el-select>
 		</el-form-item>
 		<el-form-item label="收货年度"  v-bind:class="{disabled:disabled}" class="three">
 		    <el-form-item prop="gainTime">
@@ -339,8 +345,8 @@ export default {
 			var high = this.formdatas.form.high;
 			var wide = this.formdatas.form.wide;
 			if(this.calculation_density == 1) {
-				return this.jsdjg.unQuality = parseInt((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)\
-				
+				return this.jsdjg.unQuality = parseInt((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)
+
 			} else if(this.calculation_density == 2) { 
 				return this.jsdjg.unQuality = parseInt((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz)
 			}
