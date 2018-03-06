@@ -12,6 +12,7 @@ import CreateSampleReglc from "@/components/grainDepot/CreateSampleReglc.vue"
 import SampleRegList from "@/components/sampling/examination/SampleRegList.vue"
 import SampleReg from "@/components/sampling/examination/SampleReg.vue"
 import LibraryList from "@/components/sampling/list/LibraryList.vue"
+import SafetyReport from "@/components/sampling/list/SafetyReport.vue"
 import SampleShowList from "@/components/sampling/list/SampleShowList.vue"
 import SamplingList from '@/components/sampling/list/SamplingList.vue'
 import SamplingListCreate from '@/components/sampling/list/samplingShow/SamplingListCreate.vue'
@@ -163,12 +164,12 @@ export default new Router({
           
           {
             path:"sampling/libraryList/samplingList/sampleShowList",
-            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表",
             component:SampleShowList
           },
 		    	{
             path:"sampling/libraryList/samplingList/sampleShowList/samplingListCreate",
-            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表/新建扦样",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建扦样",
             component:SamplingListCreate
           },
           {
@@ -178,23 +179,28 @@ export default new Router({
           },
           {
             path:"sampling/libraryList/samplingList/sampleShowList/manuscriptCreate",
-            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表/新建工作底稿",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建工作底稿",
             component:ManuscriptCreate
           },
           {
             path:"sampling/libraryList/samplingList/sampleShowList/manuscriptEdit",
-            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表/查看工作底稿",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/查看工作底稿",
             component:ManuscriptEdit
           },
           {
             path:"sampling/libraryList/samplingList/sampleShowList/safetyReportCreate",
-            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表/新建安全报告",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建安全报告",
             component:SafetyReportCreate
           },
           {
             path:"sampling/libraryList/samplingList/sampleShowList/safetyReportEdit",
-            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表/查看安全报告",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/查看安全报告",
             component:SafetyReportEdit
+          },
+          {
+            path:"sampling/SafetyReport",
+            name:"扦样流程/监督检查情况",
+            component:SafetyReport
           },
 //        样品管理
  					{

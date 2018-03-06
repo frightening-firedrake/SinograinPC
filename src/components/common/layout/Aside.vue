@@ -191,7 +191,14 @@ export default {
 //					pid: 1,
 //					lid: 5
 //				},
-
+				{
+					icon:'icon-anquanbaogao',
+					title: '监督检查情况',
+					linkto: '/index/sampling/SafetyReport',
+					level: 2,
+					pid: 1,
+					lid: 4
+				},
 				{
 					icon: 'icon-cangkuguanli-xian',
 					title: '样品管理',
