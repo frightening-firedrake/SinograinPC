@@ -62,7 +62,8 @@
 		    							<el-select v-model="scope.row[item.prop]" placeholder="选择备注">
 									        <el-option label="春季普查" value="春季普查"></el-option>
 									        <el-option label="秋季普查" value="秋季普查"></el-option>
-									        <el-option label="2017-2018轮换年度" value="2017-2018轮换年度"></el-option>
+									        <el-option label="2017轮换年度" value="2017轮换年度"></el-option>
+													<el-option label="2018轮换年度" value="2018轮换年度"></el-option>
 									        <el-option label="收购寻查" value="收购寻查"></el-option>
 									        <el-option label="其他" value="其他"></el-option>
 									    </el-select>
