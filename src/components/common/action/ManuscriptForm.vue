@@ -214,7 +214,7 @@
 					<div class="clear"></div>
 				</div>
 				<el-form-item label="检查计算数（kg）" prop="weight_calculation" >
-				    <el-input v-model="jcjss"></el-input>
+				    <el-input v-model="jcjss"  disabled></el-input>
 				</el-form-item>
 				<div class="clear"></div>
 				
@@ -270,7 +270,7 @@
 		</div>
 		
 		<el-form-item label="备注" prop="remark"  class="full">
-		    <el-input v-model="formdatas.form.remark"></el-input>
+		    <el-input v-model="formdatas.form.remark" disabled></el-input>
 		</el-form-item>
 		<el-form-item label="检查人" prop="rummager"  class="three">
 		    <el-input v-model="formdatas.form.rummager"></el-input>
@@ -479,24 +479,21 @@ export default {
                 barnType: [
 		            { required: true, message: '请输入', trigger: 'blur' },
 		        ],
-		        result: [
-		            { required: true, message: '请输入', trigger: 'blur' },
-		        ],
-		        remark: [
-		            { required: true, message: '请输入', trigger: 'blur' },
-		        ],
-		        rummager: [
-		            { required: true, message: '请输入', trigger: 'blur' },
-		        ],
-		        custodian: [
-		            { required: true, message: '请输入', trigger: 'blur' },
-		        ],
-		        leader: [
-		            { required: true, message: '请输入', trigger: 'blur' },
-		        ],
-				enterprise: [
-		            { required: true, message: '请输入', trigger: 'blur' },
-		        ],
+		        // result: [
+		        //     { required: true, message: '请输入', trigger: 'blur' },
+		        // ],
+		        // rummager: [
+		        //     { required: true, message: '请输入', trigger: 'blur' },
+		        // ],
+		        // custodian: [
+		        //     { required: true, message: '请输入', trigger: 'blur' },
+		        // ],
+		        // leader: [
+		        //     { required: true, message: '请输入', trigger: 'blur' },
+		        // ],
+				// enterprise: [
+		        //     { required: true, message: '请输入', trigger: 'blur' },
+		        // ],
 //		        数字输入类型
 		        grainQuality: [
 		            { required: true, message: '请输入', trigger: 'blur' },
