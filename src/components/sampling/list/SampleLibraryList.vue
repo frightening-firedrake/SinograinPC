@@ -59,7 +59,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/libraryList/samplingList',query:{libraryId:id,regState:2}})
+		this.$router.push({path: '/index/sampling/sampleLibraryList/libraryList',query:{libraryId:id}})
   	}.bind(this));
   },
   destroy(){
@@ -118,9 +118,9 @@ export default {
   	},
 //	获取列表数据方法
   	getlistdata(page){
-		var params = {};
-		params.pLibraryId = this.$route.query.libraryId
   		this.loading=true;
+		var params = {};
+		params.pLibraryId = -1;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -190,22 +190,8 @@ export default {
       searchURL:'api/grain/library/data/search',
       deleteURL:'api/grain/',
       checkedId:[],
-      list:"librarylist",
+      list:"safetyReport",
 	  modalVisible:false,
-	  modal:{
-	  	title:'新建库点',
-		formdatas:[
-	  		{
-	  			label:"单位名称",
-	  			model:"unit",
-	  		},
-	  		{
-	  			label:"库点名称",
-	  			model:"lib",
-	  		},
-	  	],
-	  	submitText:'确定',
-	  },
       breadcrumb:{
       	search:true,   
       	searching:'',
@@ -247,7 +233,7 @@ export default {
       {
         id: 2,
         prop:'libraryName',
-        label: "被查库点",
+        label: "被查直属库",
 //      sort:true,
       },
       {

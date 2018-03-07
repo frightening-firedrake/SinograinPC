@@ -118,6 +118,8 @@ export default {
   	},
 //	获取列表数据方法
   	getlistdata(page){
+		var params = {};
+		params.pLibraryId = this.$route.query.libraryId
   		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -136,6 +138,7 @@ export default {
 			    listName: this.list,
 			    page:page,
 			    rows:this.page.size,
+				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;

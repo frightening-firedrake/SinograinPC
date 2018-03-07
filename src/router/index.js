@@ -53,10 +53,8 @@ import ResourcesEdit from '@/components/authorityManagement/resources/ResourcesE
 import ResourcesAdd from '@/components/authorityManagement/resources/ResourcesAdd.vue'
 import ResourcesList from '@/components/authorityManagement/resources/ResourcesList.vue'
 import InformationAdd from '@/components/informationManagement/InformationAdd.vue'
-
-
-
-
+import SampleLibraryList from '@/components/sampling/list/SampleLibraryList.vue'
+import ExaminationLibrary from '@/components/sampling/list/ExaminationLibrary.vue'
 
 
 
@@ -139,8 +137,13 @@ export default new Router({
             redirect: 'sampling/libraryList',
           },
           {
-            path:"sampling/examinationLibraryList",
-            name:"扦样流程/审批扦样列表",
+            path:"sampling/examinationLibrary",
+            name:"扦样流程/审批扦样单位列表",
+            component:ExaminationLibrary
+          },
+          {
+            path:"sampling/examinationLibrary/examinationLibraryList",
+            name:"扦样流程/审批扦样库点列表",
             component:ExaminationLibraryList
           },
           {
@@ -153,9 +156,14 @@ export default new Router({
             path:"sampling/examinationLibraryList/sampleRegList/sampleReg",
             name:"扦样流程/审批扦样列表/扦样登记列表/扦样登记表",
             component:SampleReg
+          },
+          {
+            path:"sampling/sampleLibraryList",
+            name:"扦样流程/扦样单位列表",
+            component:SampleLibraryList
           },       
           {
-            path:"sampling/libraryList",
+            path:"sampling/sampleLibraryList/libraryList",
             name:"扦样流程/扦样库点列表",
             component:LibraryList
           },
