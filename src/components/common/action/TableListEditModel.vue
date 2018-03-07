@@ -134,7 +134,19 @@ export default {
 			this.$emit('getLibraryId',this.tabledata[0].libraryName)
 		},
 		PlibraryChange(){
-			this.tabledata[0].libraryName="";
+//			console.log(this.tabledata[0].pLibraryId)
+			var item=this.librarylist.filter((value)=>{
+				return value.id==this.tabledata[0].libraryName;
+			})
+			if(item.length){
+//				console.log(item[0].pLibraryId)
+				if(this.tabledata[0].pLibraryId==item[0].pLibraryId){
+
+				}else{
+						this.tabledata[0].libraryName=""
+				}
+			}
+//			this.tabledata[0].libraryName="";
 //			console.log(this.tabledata[0].pLibraryId,this.Clibrarylist)
 		},
 //	formatter(row, column, cellValue){
