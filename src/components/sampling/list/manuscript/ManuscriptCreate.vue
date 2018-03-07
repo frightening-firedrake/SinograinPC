@@ -207,7 +207,7 @@ export default {
       	form:{
           enterprise: '',//被检查企业
           checkedTime: '',//被查时点
-          realCheckedTime: '',//实际查库日
+          realCheckedTime: new Date(),//实际查库日
           position: '',//货位号
           sort: '',//品种
           quality: '',//性质
