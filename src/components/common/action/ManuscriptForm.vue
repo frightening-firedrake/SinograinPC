@@ -202,10 +202,10 @@
 						应记粮食损耗(kg)	
 					</div>
 					<el-form-item label="水分减量" prop="weight_humidity"  class='leftborder'>
-					    <el-input v-model="sfjl"></el-input>
+					    <el-input v-model="formdatas.form.lossWater"></el-input>
 					</el-form-item>
 					<el-form-item label="保管自然损耗" prop="weight_natural"  class='leftborder'>
-					    <el-input v-model="bgzrsh" disabled></el-input>
+					    <el-input v-model="formdatas.form.lossNature" disabled></el-input>
 					</el-form-item>
 					<el-form-item label="合计" prop="weight_total"  class='leftborder'>
 					    <el-input v-model="sum" disabled></el-input>
@@ -366,10 +366,12 @@ export default {
 
 		// },
 		sum() { //合计
-			var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
+		//var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
+			var sfjl = this.formdatas.form.lossWater;
 			var date = new Date();
 			var year = date.getFullYear();
-			var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
+			//var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
+			var bgzrsh = this.formdatas.form.lossNature;
 			return this.jsdjg.loss = (sfjl + bgzrsh).toFixed(2);
 		},
 		jcjss() { //检查计算数（kg）
@@ -381,10 +383,12 @@ export default {
 			} else if(this.calculation_density == 2) { 
 				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz)
 			}
-			var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
+			//var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
+			var sfjl = this.formdatas.form.lossWater;
 			var date = new Date();
 			var year = date.getFullYear();
-			var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
+			//var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
+			var bgzrsh = this.formdatas.form.lossNature;
 			var sum = sfjl + bgzrsh;
 			return this.jsdjg.checkNum = (cljss + sum).toFixed(2);
 		},
@@ -397,10 +401,12 @@ export default {
 			} else if(this.calculation_density == 2) { 
 				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz)
 			}
-			var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
+			//var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
+			var sfjl = this.formdatas.form.lossWater;
 			var date = new Date();
 			var year = date.getFullYear();
-			var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
+			//var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
+			var bgzrsh = this.formdatas.form.lossNature;
 			var sum = sfjl + bgzrsh;
 			var jcjss = cljss -sum;
 			return this.jsdjg.difference = (this.formdatas.form.grainQuality - jcjss).toFixed(2);
