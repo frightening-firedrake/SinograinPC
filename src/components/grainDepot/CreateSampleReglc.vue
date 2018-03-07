@@ -332,6 +332,7 @@ export default {
 		this.tabledatas.forEach((value,index)=>{
 			var item={};		
 			item.sort= value.sort;
+			item.rksj= value.rksj;
 			item.quality= value.quality;
 			item.amount= value.amount;
 			item.originPlace= value.originPlace;
@@ -413,6 +414,7 @@ export default {
 			var newdata={
 				id:0,
 		        libraryId: '',//被查库点
+		        rksj:'',//入库时间
 		        sort: '',//品种
 		        quality: 'ZC',//性质
 		        amount: '',//代表数量
