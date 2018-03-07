@@ -569,12 +569,14 @@ export default {
         id: 8,
         prop:'originPlace',
         label:"产地",
+        width:70,
 //      sort:true,
       },
       {
         id: 9,
         prop:'gainTime',
         label:"收获年度",
+        width:70,
 //      sort:true,
       },
 //       {

@@ -1,5 +1,5 @@
 <template>
-    <el-form ref="form" :inline-message="errorinline" class="sampling"  :model="formdatas.form" :label-width="labelWidth" style="position:relative;">
+    <el-form ref="form" :inline-message="errorinline" class="sampling problem"  :model="formdatas.form" :label-width="labelWidth" style="position:relative;">
         <template>
             <p class="tableName">
             	{{formdatas.title}}
@@ -104,6 +104,9 @@
 		border: solid 0.01rem #d5d5d5;
 		font-size:0.14rem;
 		color: #999999;
+	}
+	form.problem{
+		border-bottom:1px solid #dfdfdf;
 	}
 	form.sampling .el-form-item.select .el-form-item__content .el-radio-group{
 		margin-left:0.2rem;

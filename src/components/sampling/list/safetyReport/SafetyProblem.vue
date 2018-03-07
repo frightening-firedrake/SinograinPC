@@ -56,8 +56,6 @@ export default {
 
 //	this.getdata()
 	this.getSafetyData()
-	this.formdatas.form.libraryName = this.$route.query.libraryName
-	this.formdatas.form.position = this.$route.query.position
   },
   destroy(){
 
@@ -89,7 +87,27 @@ export default {
 				id: this.$route.query.id
 			}
 	    }).then(function (response) {
-		  this.formdatas.problems[0] = response.data		  
+		  console.log(response)
+			
+			var res0=response.data
+
+			var res=response.data
+//			循环问题
+			
+				var images=[]
+				var imagesbox=res.images.split(',');
+				imagesbox.forEach((value2,index2)=>{
+					var obj={};
+					obj.url="api/grain/upload/picture/"+value2;
+					images.push(obj);
+				})
+	
+				res0.images=images
+			
+			this.formdatas.problems[0] = res0
+		    this.formdatas.form.libraryName = this.$route.query.libraryName
+			this.formdatas.form.position = this.$route.query.position
+		    console.log(res)		  
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

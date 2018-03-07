@@ -80,8 +80,8 @@
 									      	v-model="scope.row[item.prop]"
 									     	 	:fetch-suggestions="querySearch"
 									      	placeholder="请填写备注"
-									      	@select="handleSelect"
 									    ></el-autocomplete>
+<!--									    @select="handleSelect"-->
 	    						</template>
 	    						<template v-else-if="item.nosign">
 
