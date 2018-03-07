@@ -412,7 +412,7 @@ export default {
 			this.rowid++;
 			var newdata={
 				id:0,
-		        libraryName: this.libraryName,//被查库点
+		        libraryId: '',//被查库点
 		        sort: '',//品种
 		        quality: 'ZC',//性质
 		        amount: '',//代表数量
@@ -521,45 +521,51 @@ export default {
 //       },
       {
         id: 2,
+        prop:'libraryPid',
+        label:"被查直属库",
+//      sort:true,
+      },
+      {
+        id: 3,
         prop:'libraryName',
         label:"被查库点",
         width:210,
 //      sort:true,
       },
       {
-        id: 3,
+        id: 4,
         prop:'position',
         label:"货位号",
 //      sort:true,
       },
       {
-        id: 4,
+        id: 5,
         prop:'sort',
         label:"品种",
         width:110,
 //      sort:true,
       },
       {
-        id: 5,
+        id: 6,
         prop:'quality',
         label:"性质",
         width:110,
 //      sort:true,
       },
       {
-        id: 6,
+        id: 7,
         prop:'amount',
         label:"数量（吨）",
 //      sort:true,
       },
       {
-        id: 7,
+        id: 8,
         prop:'originPlace',
         label:"产地",
 //      sort:true,
       },
       {
-        id: 8,
+        id: 9,
         prop:'gainTime',
         label:"收获年度",
 //      sort:true,

@@ -342,3 +342,6 @@
 .el-table .caret-wrapper{
 	width:6px!important;
 }
+.el-popper[x-placement^=top] .popper__arrow{
+	left:60px!important;
+}

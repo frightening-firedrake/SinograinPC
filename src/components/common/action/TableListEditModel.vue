@@ -29,7 +29,12 @@
       
 	    		<el-table-column show-overflow-tooltip v-if="!item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class" :show-overflow-tooltip="false">
 	    				<template slot-scope="scope" class='test'>
-	    						<template v-if="item.prop=='libraryName'">
+	    						<template v-if="item.prop=='libraryPid'">
+		    							<el-select  v-model="tabledata[0].pLibraryId" placeholder="直属" @change="PlibraryChange">
+									         <el-option v-for="item2 in Plibrarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
+									    </el-select>
+	    						</template>
+	    						<template v-else-if="item.prop=='libraryName'">
 		    							<!--<el-select  v-if="!item.editLibraryName" v-model="libraryName2" placeholder="选择库点" @change="libraryChange">
 									         <el-option v-for="item2 in librarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
 									    </el-select>
@@ -38,10 +43,11 @@
 									        <el-option v-for="item2 in librarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
 									    </el-select>-->
 									    <el-select  v-model="tabledata[0].libraryName" placeholder="选择库点" @change="libraryChange">
-									         <el-option v-for="item2 in librarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
+									         <el-option v-for="item2 in Clibrarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
 									    </el-select>
 		
 	    						</template>
+	    						
 	    						<template v-else-if="item.prop=='sort'">
 		    							<el-select v-model="scope.row[item.prop]" placeholder="选择品种">
 									        <el-option label="小麦" value="小麦"></el-option>
@@ -96,6 +102,16 @@ export default {
   	maxHeight(){
   		return 320;
   	},
+  	Plibrarylist(){
+  		return this.librarylist.filter((item,index)=>{
+  			return item.pLibraryId==-1;
+  		})
+  	},
+  	Clibrarylist(){
+  		return this.librarylist.filter((item,index)=>{
+  			return item.pLibraryId==this.tabledata[0].pLibraryId;
+  		})
+  	}
   },
   data() {
     return {
@@ -104,7 +120,8 @@ export default {
 //  	importLoading: false,
       multipleSelection: [],
       resizable:false,
-	  libraryName2:'',
+//    libraryPid:'',
+	    libraryName2:'',
     }
   },
   mounted: function() {
@@ -115,6 +132,10 @@ export default {
   methods: {
 		libraryChange(){
 			this.$emit('getLibraryId',this.tabledata[0].libraryName)
+		},
+		PlibraryChange(){
+			this.tabledata[0].libraryName="";
+//			console.log(this.tabledata[0].pLibraryId,this.Clibrarylist)
 		},
 //	formatter(row, column, cellValue){
 //		if(column.className=='status'){
