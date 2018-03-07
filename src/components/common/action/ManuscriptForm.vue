@@ -205,7 +205,7 @@
 					    <el-input v-model="formdatas.form.lossWater"></el-input>
 					</el-form-item>
 					<el-form-item label="保管自然损耗" prop="weight_natural"  class='leftborder'>
-					    <el-input v-model="formdatas.form.lossNature" disabled></el-input>
+					    <el-input v-model="formdatas.form.lossNature"></el-input>
 					</el-form-item>
 					<el-form-item label="合计" prop="weight_total"  class='leftborder'>
 					    <el-input v-model="sum" disabled></el-input>
@@ -367,11 +367,11 @@ export default {
 		// },
 		sum() { //合计
 		//var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
-			var sfjl = this.formdatas.form.lossWater;
+			var sfjl = this.formdatas.form.lossWater - 0;
 			var date = new Date();
 			var year = date.getFullYear();
 			//var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
-			var bgzrsh = this.formdatas.form.lossNature;
+			var bgzrsh = this.formdatas.form.lossNature - 0;
 			return this.jsdjg.loss = (sfjl + bgzrsh).toFixed(2);
 		},
 		jcjss() { //检查计算数（kg）
@@ -384,11 +384,11 @@ export default {
 				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz)
 			}
 			//var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
-			var sfjl = this.formdatas.form.lossWater;
+			var sfjl = this.formdatas.form.lossWater - 0;
 			var date = new Date();
 			var year = date.getFullYear();
 			//var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
-			var bgzrsh = this.formdatas.form.lossNature;
+			var bgzrsh = this.formdatas.form.lossNature - 0;
 			var sum = sfjl + bgzrsh;
 			return this.jsdjg.checkNum = (cljss + sum).toFixed(2);
 		},
@@ -402,17 +402,17 @@ export default {
 				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz)
 			}
 			//var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
-			var sfjl = this.formdatas.form.lossWater;
+			var sfjl = this.formdatas.form.lossWater - 0;
 			var date = new Date();
 			var year = date.getFullYear();
 			//var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
-			var bgzrsh = this.formdatas.form.lossNature;
+			var bgzrsh = this.formdatas.form.lossNature - 0;
 			var sum = sfjl + bgzrsh;
 			var jcjss = cljss -sum;
-			return this.jsdjg.difference = (this.formdatas.form.grainQuality - jcjss).toFixed(2);
+			return this.jsdjg.difference = (formdatas.form.amount*1000 - jcjss).toFixed(2);
 		},
 		slip() { //差率
-			var slip = (this.difference-0)/(this.formdatas.form.grainQuality-0) * 100;
+			var slip = (this.difference-0)/(formdatas.form.amount*1000 - 0) * 100;
 			return this.jsdjg.slip = slip.toFixed(2);
 		},
 		zssfxf() {
