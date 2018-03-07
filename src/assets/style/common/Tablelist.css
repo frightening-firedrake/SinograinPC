@@ -377,6 +377,12 @@
 .el-popper[x-placement^=bottom] .popper__arrow{
 	left:60px!important;
 }
+.el-popper[x-placement^=top] .popper__arrow{
+	left:60px!important;
+}
 .el-main .editmodel .el-select .el-input__inner{
 	padding:0 25px;
+}
+.el-main .editmodel .el-select.zhishu .el-input__inner{
+	padding:0 25px 0 5px;
 }

@@ -30,7 +30,7 @@
 	    		<el-table-column show-overflow-tooltip v-if="!item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class" :show-overflow-tooltip="false">
 	    				<template slot-scope="scope" class='test'>
 	    						<template v-if="item.prop=='libraryPid'">
-		    							<el-select  v-model="tabledata[0].pLibraryId" placeholder="直属" @change="PlibraryChange">
+		    							<el-select  v-model="tabledata[0].pLibraryId" placeholder="直属" class="zhishu" @change="PlibraryChange">
 									         <el-option v-for="item2 in Plibrarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
 									    </el-select>
 	    						</template>

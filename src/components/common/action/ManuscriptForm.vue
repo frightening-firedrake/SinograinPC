@@ -4,18 +4,24 @@
             <p>{{formdatas.title}}</p>
         </template>      
 		<el-form-item label="被检查企业" prop="enterprise" class="three">
-		    <el-input v-model="formdatas.form.enterprise"></el-input>
+		    <el-input v-model="formdatas.form.enterprise" disabled></el-input>
 		</el-form-item>
-		<el-form-item label="被查时点"  class="three">
+		<!--<el-form-item label="被查时点"  class="three">
 		    <el-form-item prop="checkedTime">
-		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
+
 		        <el-date-picker type="month" placeholder="选择被查时点" v-model="formdatas.form.checkedTime"></el-date-picker>
 		    </el-form-item>
-		</el-form-item>
+		</el-form-item>-->
 		<el-form-item label="实际查库日"  class="three">
 		    <el-form-item prop="realCheckedTime">
 		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
 		        <el-date-picker type="date" placeholder="选择实际查库日" v-model="formdatas.form.realCheckedTime"></el-date-picker>
+		    </el-form-item>
+		</el-form-item>
+		<el-form-item label="收货年度"  v-bind:class="{disabled:disabled}" class="three">
+		    <el-form-item prop="gainTime">
+		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
+		        <el-date-picker type="year" placeholder="选择年度" v-model="formdatas.form.gainTime"  :disabled="disabled"></el-date-picker>
 		    </el-form-item>
 		</el-form-item>
 		<el-form-item label="货位号" prop="position"  v-bind:class="{disabled:disabled}" class="three">
@@ -27,7 +33,7 @@
 		<el-form-item label="性质" prop="quality"  v-bind:class="{disabled:disabled}" class="three">
 		    <el-input v-model="formdatas.form.quality" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="所在库区" prop="libraryName"  v-bind:class="{disabled:disabled}" class="three2">
+		<el-form-item label="所在库区" prop="libraryName"  v-bind:class="{disabled:disabled}" class="full">
 		    <el-input v-model="formdatas.form.libraryName" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="仓房类型" prop="barnType"  class="three">
@@ -39,12 +45,7 @@
 				<el-option label="地下仓" :value="5"></el-option>
 		    </el-select>
 		</el-form-item>
-		<el-form-item label="收货年度"  v-bind:class="{disabled:disabled}" class="three">
-		    <el-form-item prop="gainTime">
-		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
-		        <el-date-picker type="year" placeholder="选择年度" v-model="formdatas.form.gainTime"  :disabled="disabled"></el-date-picker>
-		    </el-form-item>
-		</el-form-item>
+		
 		<el-form-item label="储存形式" prop="storge" class="three">
 		    <el-select v-model="formdatas.form.storge" placeholder="选择储存形式">
 		        <el-option label="常规" :value="1"></el-option>
@@ -140,7 +141,7 @@
 					    <el-input v-model="formdatas.form.realCapacity" :disabled="calculation_density==2" disabled></el-input>
 					</el-form-item>
 					<el-form-item label="校正后修正系数" prop="correctioFactor"  class='leftborder' :class="{disabled:calculation_density==2}">
-					    <el-input v-model="formdatas.form.correctioFactor" :disabled="calculation_density==2"></el-input>
+					    <el-input v-model.number="formdatas.form.correctioFactor" :disabled="calculation_density==2"></el-input>
 					</el-form-item>
 					<el-form-item label="粮堆平均密度（kg/m³）" prop="aveDensity"  class='leftborder' :class="{disabled:calculation_density==2}">
 					    <el-input v-model="bzldpjmd" :disabled="calculation_density==2" disabled></el-input>
@@ -155,7 +156,7 @@
 					    <el-input v-model="formdatas.form.unit_volume_weight_tz" :disabled="calculation_density==1"></el-input>
 					</el-form-item>
 					<el-form-item label="校正后修正系数" prop="correction_factor_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
-					    <el-input v-model="formdatas.form.correction_factor_tz" :disabled="calculation_density==1"></el-input>
+					    <el-input v-model.number="formdatas.form.correction_factor_tz" :disabled="calculation_density==1"></el-input>
 					</el-form-item>
 					<el-form-item label="粮堆平均密度（kg/m³）" prop="average_density_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
 					    <el-input v-model="tzldpjmd" :disabled="calculation_density==1" disabled></el-input>
@@ -201,11 +202,11 @@
 					<div class="merge_title_3">
 						应记粮食损耗(kg)	
 					</div>
-					<el-form-item label="水分减量" prop="weight_humidity"  class='leftborder'>
-					    <el-input v-model="formdatas.form.lossWater"></el-input>
+					<el-form-item label="水分减量" prop="lossWater"  class='leftborder'>
+					    <el-input v-model.number="formdatas.form.lossWater"></el-input>
 					</el-form-item>
-					<el-form-item label="保管自然损耗" prop="weight_natural"  class='leftborder'>
-					    <el-input v-model="formdatas.form.lossNature"></el-input>
+					<el-form-item label="保管自然损耗" prop="lossNature"  class='leftborder'>
+					    <el-input v-model.number="formdatas.form.lossNature"></el-input>
 					</el-form-item>
 					<el-form-item label="合计" prop="weight_total"  class='leftborder'>
 					    <el-input v-model="sum" disabled></el-input>
@@ -409,10 +410,10 @@ export default {
 			var bgzrsh = this.formdatas.form.lossNature - 0;
 			var sum = sfjl + bgzrsh;
 			var jcjss = cljss -sum;
-			return this.jsdjg.difference = (formdatas.form.amount*1000 - jcjss).toFixed(2);
+			return this.jsdjg.difference = (this.formdatas.form.amount*1000 - jcjss).toFixed(2);
 		},
 		slip() { //差率
-			var slip = (this.difference-0)/(formdatas.form.amount*1000 - 0) * 100;
+			var slip = (this.difference-0)/(this.formdatas.form.amount*1000 - 0) * 100;
 			return this.jsdjg.slip = slip.toFixed(2);
 		},
 		zssfxf() {
@@ -482,9 +483,9 @@ export default {
         disabled:true,
             rules: {           
 //          必填类型
-                barnType: [
-		            { required: true, message: '请输入', trigger: 'blur' },
-		        ],
+//              barnType: [
+//		            { required: true, message: '请输入', trigger: 'blur' },
+//		        ],
 		        // result: [
 		        //     { required: true, message: '请输入', trigger: 'blur' },
 		        // ],
@@ -501,7 +502,15 @@ export default {
 		        //     { required: true, message: '请输入', trigger: 'blur' },
 		        // ],
 //		        数字输入类型
-		        grainQuality: [
+//		        grainQuality: [
+//		            { required: true, message: '请输入', trigger: 'blur' },
+//		            { type: 'number', message: '请输数字', trigger: 'blur' },
+//		        ],
+				lossWater: [
+		            { required: true, message: '请输入', trigger: 'blur' },
+		            { type: 'number', message: '请输数字', trigger: 'blur' },
+		        ],
+		        lossNature: [
 		            { required: true, message: '请输入', trigger: 'blur' },
 		            { type: 'number', message: '请输数字', trigger: 'blur' },
 		        ],
@@ -557,7 +566,9 @@ export default {
 		        qualityGrade: [
 		            { required: true, message: '请选择', trigger: 'change' }
 		        ],
-		        
+		        barnType: [
+		            { required: true, message: '请选择', trigger: 'change' }
+		        ],
 //		        日期类型
 		        checkedTime: [
 		            { type: 'date', required: true, message: '请选日期', trigger: 'change' }
@@ -577,6 +588,7 @@ export default {
         onSubmit(formname) {
             this.$refs[formname].validate((valid) => {
                 if (valid) {
+//              	console.log(123)
                  this.$emit('submit',this.jsdjg)
 					// window.history.go(-1)
                 } else {
