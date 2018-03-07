@@ -194,7 +194,7 @@ export default {
 				{
 					icon:'icon-anquanbaogao',
 					title: '监督检查情况',
-					linkto: '/index/sampling/SafetyReport',
+					linkto: '/index/sampling/PLibraryList',
 					level: 2,
 					pid: 1,
 					lid: 4

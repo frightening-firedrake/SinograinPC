@@ -12,7 +12,9 @@ import CreateSampleReglc from "@/components/grainDepot/CreateSampleReglc.vue"
 import SampleRegList from "@/components/sampling/examination/SampleRegList.vue"
 import SampleReg from "@/components/sampling/examination/SampleReg.vue"
 import LibraryList from "@/components/sampling/list/LibraryList.vue"
-import SafetyReport from "@/components/sampling/list/SafetyReport.vue"
+import PLibraryList from "@/components/sampling/list/PLibraryList.vue"
+import SRLibraryList from "@/components/sampling/list/library/SRLibraryList.vue"
+import SafetyReportList from "@/components/sampling/list/safetyReport/SafetyReportList.vue"
 import SampleShowList from "@/components/sampling/list/SampleShowList.vue"
 import SamplingList from '@/components/sampling/list/SamplingList.vue'
 import SamplingListCreate from '@/components/sampling/list/samplingShow/SamplingListCreate.vue'
@@ -198,9 +200,19 @@ export default new Router({
             component:SafetyReportEdit
           },
           {
-            path:"sampling/SafetyReport",
+            path:"sampling/PLibraryList",
             name:"扦样流程/监督检查情况",
-            component:SafetyReport
+            component:PLibraryList
+          },
+          {
+            path:"sampling/PLibraryList/SRLibraryList",
+            name:"扦样流程/监督检查情况/被查库点列表",
+            component:SRLibraryList
+          },
+           {
+            path:"sampling/PLibraryList/SRLibraryList/SafetyReportList",
+            name:"扦样流程/监督检查情况/被查库点列表/监督检查列表",
+            component:SafetyReportList
           },
 //        样品管理
  					{

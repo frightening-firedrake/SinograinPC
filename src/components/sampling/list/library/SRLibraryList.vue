@@ -59,7 +59,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/libraryList/samplingList',query:{libraryId:id,regState:2}})
+		this.$router.push({path: '/index/sampling/PLibraryList/SRLibraryList/SafetyReportList',query:{libraryId:id}})
   	}.bind(this));
   },
   destroy(){
@@ -118,7 +118,9 @@ export default {
   	},
 //	获取列表数据方法
   	getlistdata(page){
-  		this.loading=true;
+		var params = {};
+		params.pLibraryId = this.$route.query.libraryId
+  		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -136,6 +138,7 @@ export default {
 			    listName: this.list,
 			    page:page,
 			    rows:this.page.size,
+				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
