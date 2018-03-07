@@ -56,8 +56,8 @@ export default {
 
 //	this.getdata()
 	this.getSafetyData()
-
-
+	this.formdatas.form.libraryName = this.$route.query.libraryName
+	this.formdatas.form.position = this.$route.query.position
   },
   destroy(){
 
@@ -70,7 +70,7 @@ export default {
  //	获取安全报告数据
   	getSafetyData(){
 		  var params = {}
-		  params.sampleId = this.$route.query.id
+		  params.id = this.$route.query.id
 
   		// 获取列表数据（第？页）
 		this.$http({
@@ -86,30 +86,10 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				params:JSON.stringify(params)
+				id: this.$route.query.id
 			}
 	    }).then(function (response) {
-		  	console.log(response)
-			
-			var res0=response.data.rows
-
-			var res=response.data.rows
-//			循环问题
-			res.forEach((value1,index1)=>{
-				var images=[]
-				var imagesbox=value1.images.split(',');
-				imagesbox.forEach((value2,index2)=>{
-					var obj={};
-					obj.url="api/grain/upload/picture/"+value2;
-					images.push(obj);
-				})
-	
-				res0[index1].images=images
-			})
-			this.formdatas.problems = res0
-		    this.formdatas.form.libraryName = this.$route.query.libraryName
-			this.formdatas.form.position = this.$route.query.position
-		    console.log(res)
+		  this.formdatas.problems[0] = response.data		  
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -219,7 +199,7 @@ export default {
   data() {
     return {
       dataURL:'api/grain/sample/get',
-	  dataSafetyURL: 'api/grain/safetyReport/data',
+	  dataSafetyURL: 'api/grain/safetyReport/get',
 	  editURL: 'api/grain/safetyReport/edit',
       searchURL:'/liquid/role2/data/search',
       passURL:'api/grain/safetyReport/edit',
@@ -252,15 +232,16 @@ export default {
 	  	},
 	  },
       formdatas: {
-      	title:'安全报告',
+      	title:'监督检查',
       	statusItems:[
       		{label:'all',text:'全部'},
       		{label:-1,text:'待解决'},
       		{label:1,text:'已解决'},
       	],
       	form:{
-          checkregion: '沁县库区',//被查库点
-          pnumber: '漫水-1',//货位号          
+          libraryName: '',//被查库点
+          position: '',//货位号  
+		  createTime: '',        
       	},
       	problems:[
       		{
