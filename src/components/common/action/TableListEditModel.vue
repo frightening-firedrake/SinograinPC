@@ -47,16 +47,18 @@
 									    </el-select>
 		
 	    						</template>
-	    						
+	    						<template v-else-if="item.prop=='rksj'">
+		        					<el-date-picker type="date" placeholder="选择入库日期" v-model="scope.row[item.prop]"></el-date-picker>		    							
+	    						</template>
 	    						<template v-else-if="item.prop=='sort'">
-		    							<el-select v-model="scope.row[item.prop]" placeholder="选择品种">
+		    							<el-select v-model="scope.row[item.prop]" placeholder="品种" class="zhishu">
 									        <el-option label="小麦" value="小麦"></el-option>
 									        <el-option label="玉米" value="玉米"></el-option>
 									        <el-option label="食用油" value="食用油"></el-option>
 									    </el-select>
 	    						</template>
 	    						<template v-else-if="item.prop=='quality'">
-		    							<el-select v-model="scope.row[item.prop]" placeholder="选择性质">
+		    							<el-select v-model="scope.row[item.prop]"  class="zhishu" placeholder="性质">
 									        <el-option label="ZC" value="ZC"></el-option>
 									        <el-option label="ZD" value="ZD"></el-option>
 									        <el-option label="LC" value="LC"></el-option>
@@ -73,6 +75,13 @@
 									        <el-option label="收购寻查" value="收购寻查"></el-option>
 									        <el-option label="其他" value="其他"></el-option>
 									    </el-select>
+									    <el-autocomplete
+									      	class="inline-input"
+									      	v-model="scope.row[item.prop]"
+									     	 	:fetch-suggestions="querySearch"
+									      	placeholder="请填写备注"
+									      	@select="handleSelect"
+									    ></el-autocomplete>
 	    						</template>
 	    						<template v-else-if="item.nosign">
 
@@ -90,6 +99,24 @@
 <style>
 .editmodel .el-table__empty-block{
 	height:auto;
+}
+.editmodel .el-date-editor{
+	width:2rem!important;
+}
+.editmodel .el-date-editor input{
+	height:0.36rem;
+	width:2rem;
+	line-height:0.34rem;
+	border:solid 0.01rem #dfdfdf;
+	font-size:0.16rem;
+	background:#f2f2f2;
+	padding:0;
+	border-radius:0;
+	padding-left:0.5rem;
+}
+.editmodel .el-date-editor .el-icon-date{
+	line-height:0.5rem;
+	color:#2dc0e8;
 }
 </style>
 <script>
@@ -122,6 +149,8 @@ export default {
       resizable:false,
 //    libraryPid:'',
 	    libraryName2:'',
+//	    备注列表
+	    restaurants: [{"value": "春季普查"},{"value": "秋季普查"},{"value": "2017轮换年度"},{"value": "2018轮换年度"},{"value": "收购寻查"}],
     }
   },
   mounted: function() {
@@ -207,7 +236,18 @@ export default {
 	  },
 	  emptyCreate(){
 	  	this.$emit('emptyCreate');
-	  }
+	  },
+	  querySearch(queryString, cb) {
+        var restaurants = this.restaurants;
+        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+        // 调用 callback 返回建议列表的数据
+        cb(results);
+	  },
+	  createFilter(queryString) {
+	    	return (restaurant) => {
+	      		return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+	    	};
+	  },
 	}
 }
 
