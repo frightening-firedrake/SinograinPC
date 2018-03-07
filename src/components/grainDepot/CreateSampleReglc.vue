@@ -332,7 +332,7 @@ export default {
 		this.tabledatas.forEach((value,index)=>{
 			var item={};		
 			item.sort= value.sort;
-			item.rksj= value.rksj;
+			item.barnTime= value.barnTime;
 			item.quality= value.quality;
 			item.amount= value.amount;
 			item.originPlace= value.originPlace;
@@ -414,7 +414,7 @@ export default {
 			var newdata={
 				id:0,
 		        libraryId: '',//被查库点
-		        rksj:'',//入库时间
+		        barnTime:'',//入库时间
 		        sort: '',//品种
 		        quality: 'ZC',//性质
 		        amount: '',//代表数量
@@ -536,8 +536,8 @@ export default {
       },
       {
         id: 100,
-        prop:'rksj',
-        label:"入库时间",
+        prop:'barnTime',
+        label:"入仓时间",
         width:150,
 //      sort:true,
       },
@@ -610,7 +610,7 @@ export default {
         prop:'remark',
         label:"备注",
         class:'remark',
-        width:150,
+        width:160,
 //      sort:true,
       },
       ],

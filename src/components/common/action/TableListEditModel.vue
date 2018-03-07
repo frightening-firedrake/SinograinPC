@@ -47,8 +47,8 @@
 									    </el-select>
 		
 	    						</template>
-	    						<template v-else-if="item.prop=='rksj'">
-		        					<el-date-picker type="date" placeholder="选择入库日期" v-model="scope.row[item.prop]"></el-date-picker>		    							
+	    						<template v-else-if="item.prop=='barnTime'">
+		        					<el-date-picker type="date" placeholder="选择入仓日期" v-model="scope.row[item.prop]"></el-date-picker>		    							
 	    						</template>
 	    						<template v-else-if="item.prop=='sort'">
 		    							<el-select v-model="scope.row[item.prop]" placeholder="品种" class="zhishu">
@@ -67,16 +67,16 @@
 									    </el-select>
 	    						</template>
 	    						<template v-else-if="item.prop=='remark'">
-		    							<el-select v-model="scope.row[item.prop]" placeholder="选择备注">
+		    							<!--<el-select v-model="scope.row[item.prop]" placeholder="选择备注">
 									        <el-option label="春季普查" value="春季普查"></el-option>
 									        <el-option label="秋季普查" value="秋季普查"></el-option>
 									        <el-option label="2017轮换年度" value="2017轮换年度"></el-option>
 													<el-option label="2018轮换年度" value="2018轮换年度"></el-option>
 									        <el-option label="收购寻查" value="收购寻查"></el-option>
 									        <el-option label="其他" value="其他"></el-option>
-									    </el-select>
+									    </el-select>-->
 									    <el-autocomplete
-									      	class="inline-input"
+									      	class="remark-input"
 									      	v-model="scope.row[item.prop]"
 									     	 	:fetch-suggestions="querySearch"
 									      	placeholder="请填写备注"
@@ -117,6 +117,27 @@
 .editmodel .el-date-editor .el-icon-date{
 	line-height:0.5rem;
 	color:#2dc0e8;
+}
+.editmodel .remark-input{
+	margin: 0 0.05rem;
+}
+.editmodel .remark-input .el-input__inner{
+		height: 0.36rem;
+    width: 2rem;
+    line-height: 0.34rem;
+    border: solid 0.01rem #dfdfdf;
+    font-size: 0.16rem;
+    background: #f2f2f2;
+    padding: 0;
+    border-radius: 0;
+    text-align: center;
+    /*padding-left: 0.5rem;*/
+}
+
+.el-autocomplete-suggestion li{
+	font-size:0.16rem;
+	height:34px;
+	line-height:34px;
 }
 </style>
 <script>
