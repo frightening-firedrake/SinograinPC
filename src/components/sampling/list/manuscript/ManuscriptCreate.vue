@@ -245,8 +245,8 @@ export default {
           //3.计算粮食数量
             unQuality:'',//测量计算数（kg）	
 //          应记粮食损耗(kg)	
-          lossWater:'',//水分减量
-          lossNature:'',//保管自然损耗
+          lossWater:0,//水分减量
+          lossNature:0,//保管自然损耗
           loss:'',//合计
           checkNum:'',//检查计算数（kg）	
           //4.认定粮食实际数量	
