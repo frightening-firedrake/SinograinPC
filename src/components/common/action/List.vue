@@ -53,6 +53,14 @@
 				            			<span style="color:#666666;">已入库</span>
 				      				</template>
 		      				</template>
+		      				<template v-if="item.prop=='isDeal'">
+				      				<template v-if="scope.row[item.prop]==-1">
+				            			<span style="color:#fc6500;">待解决</span>
+				      				</template>
+								    	<template v-if="scope.row[item.prop]==1">
+				            			<span style="color:#999999;">已解决</span>
+				      			</template>
+		      				</template>
 		          </template>
 	    		</el-table-column>
    		</template>
@@ -197,12 +205,14 @@ export default {
 		    this.$root.eventHub.$emit('inputlistitem',row.id)
 		},
     handleView(index, row,scope) {
-//	  	console.log(index,row);
+//	  	console.log(index,row);query:{id:row.id,libraryName:row.libraryName,position:row.position}}
 //		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
 				if(row.sampleState){
 					this.$root.eventHub.$emit('viewlistitem',row.id,row.sampleState)										
 				}else if(row.regState){
 					this.$root.eventHub.$emit('viewlistitem',row.id,row.regState)										
+				}else if(row.isDeal){
+					this.$root.eventHub.$emit('viewlistitem',row)										
 				}else{
 					this.$root.eventHub.$emit('viewlistitem',row.id)					
 				}

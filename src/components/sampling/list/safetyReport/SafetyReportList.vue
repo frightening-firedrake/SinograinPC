@@ -57,9 +57,9 @@ export default {
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击查看事件
-  	this.$root.eventHub.$on("viewlistitem",function(id){  
+  	this.$root.eventHub.$on("viewlistitem",function(row){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/PLibraryList/SRLibraryList/SafetyReportList',query:{libraryId:id}})
+		this.$router.push({path: '/index/sampling/PLibraryList/SRLibraryList/SafetyReportList/SafetyProblem',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
   	}.bind(this));
   },
   destroy(){
@@ -238,23 +238,30 @@ export default {
       },
       tabledatas:[],
       items: [
-//    {
-//      id: 1,
-//      prop:'unitName',
-//      label: "单位名称",
-////      sort:true
-//    },
       {
-        id: 2,
+        id: 1,
         prop:'libraryName',
         label: "被查库点",
 //      sort:true,
       },
       {
+        id: 2,
+        prop:'position',
+        label: "货位号",
+//      sort:true,
+      },
+      {
         id: 3,
-        prop:'createTime',
-        label:"创建时间",
-        sort:true,
+        prop:'isDeal',
+        label:"问题状态",
+        status:true,
+//      sort:true,
+      },
+      {
+        id: 4,
+        prop:'problem',
+        label:"问题描述",
+//      sort:true,
       },
       ],
       actions:{
