@@ -133,8 +133,8 @@ export default new Router({
           {
             path:"sampling",
             name: '扦样流程',
-            component:LibraryList,
-            redirect: 'sampling/libraryList',
+            component:ExaminationLibrary,
+            redirect: 'sampling/examinationLibrary',
           },
           {
             path:"sampling/examinationLibrary",

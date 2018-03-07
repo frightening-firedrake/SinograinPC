@@ -14,11 +14,13 @@
 			    </el-breadcrumb-item>				
 			</template>
 			<template v-else>
-				<el-breadcrumb-item to="/index/home">
+				<el-breadcrumb-item >
+				<!--<el-breadcrumb-item to="/index/home">-->
 			    	<!--<i class="icon-home"></i>-->
 			    	首页
 			    </el-breadcrumb-item>
-			    <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.index" :to="item.path">{{item.name}}</el-breadcrumb-item>
+			    <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.index" >{{item.name}}</el-breadcrumb-item>
+			    <!--<el-breadcrumb-item v-for="item in breadcrumbList" :key="item.index" :to="item.path">{{item.name}}</el-breadcrumb-item>-->
 			    <!--<el-breadcrumb-item v-for="item in breadcrumbList" :key="item.index" >{{item.name}}</el-breadcrumb-item>-->
 			</template>
 		</el-breadcrumb>
