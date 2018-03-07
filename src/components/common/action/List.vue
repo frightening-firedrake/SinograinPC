@@ -90,15 +90,15 @@
 	    
 	    <!--是否包含安全报告-->
       <template v-if="actions.safetyReport">
-			    <el-table-column :resizable="resizable" align="center" label="安全报告" class-name="tableAction">
+			    <el-table-column :resizable="resizable" align="center" label="监督检查" class-name="tableAction">
 		          <template slot-scope="scope">
 		      <!--已完成安全报告-->
 		      				<template v-if="scope.row.srId">
-		            			<button class="viewSafetyReport" @click="handleViewSafetyReport(scope.$index, scope.row)">安全报告</button>
+		            			<button class="viewSafetyReport" @click="handleViewSafetyReport(scope.$index, scope.row)">监督检查</button>
 		      				</template>
 		      <!--未完成安全报告-->
 						      <template v-else>
-						          <button class="createSafetyReport" @click="handleCreateSafetyReport(scope.$index, scope.row)">+新建安全报告</button>
+						          <button class="createSafetyReport" @click="handleCreateSafetyReport(scope.$index, scope.row)">+新建监督检查</button>
 						      </template> 
 		          </template>
 		      </el-table-column>
