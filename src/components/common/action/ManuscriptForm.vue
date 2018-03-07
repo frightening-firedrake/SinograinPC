@@ -4,7 +4,7 @@
             <p>{{formdatas.title}}</p>
         </template>      
 		<el-form-item label="被检查企业" prop="enterprise" class="three">
-		    <el-input v-model="formdatas.form.enterprise" disabled></el-input>
+		    <el-input v-model="formdatas.form.libraryName" disabled></el-input>
 		</el-form-item>
 		<!--<el-form-item label="被查时点"  class="three">
 		    <el-form-item prop="checkedTime">
@@ -244,11 +244,11 @@
 				<div class="cover_left">
 					<div></div>
 				</div>	
-					<el-form-item label="账实是否相符" prop="is_same" >
+					<el-form-item label="账实是否相符" prop="isMatch" >
 
-					    <el-select v-model="zssfxf" placeholder="选择是否相符">
-					        <el-option label="相符" value="1"></el-option>
-					        <el-option label="不相符" value="2"></el-option>
+					    <el-select v-model="formdatas.form.isMatch" placeholder="选择是否相符">
+					        <el-option label="相符" value="相符"></el-option>
+					        <el-option label="不相符" value="不相符"></el-option>
 					    </el-select>
 
 					    <!--<el-input v-model="formdatas.form.is_same"></el-input>-->
@@ -416,13 +416,13 @@ export default {
 			var slip = (this.difference-0)/(this.formdatas.form.amount*1000 - 0) * 100;
 			return this.jsdjg.slip = slip.toFixed(2);
 		},
-		zssfxf() {
-			if(this.slip > -3 && this.slip < 3) {
-				return "相符";
-			} else {
-				return "不相符";
-			}
-		},
+//		zssfxf() {
+//			if(this.slip > -3 && this.slip < 3) {
+//				return "相符";
+//			} else {
+//				return "不相符";
+//			}
+//		},
 //		lssjsl(){
 //			return this.formdatas.form.grainQuality;
 //		},
@@ -567,6 +567,9 @@ export default {
 		            { required: true, message: '请选择', trigger: 'change' }
 		        ],
 		        barnType: [
+		            { required: true, message: '请选择', trigger: 'change' }
+		        ],
+		        isMatch:[
 		            { required: true, message: '请选择', trigger: 'change' }
 		        ],
 //		        日期类型

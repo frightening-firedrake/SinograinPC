@@ -53,8 +53,9 @@ export default {
     submit(jsdjg){
        var params = {
             sampleId: this.$route.query.id,//样品id
-            enterprise: this.formdatas.form.enterprise,//被查企业
-            checkedTime: this.formdatas.form.checkedTime,//被查时点
+            libraryName: this.formdatas.form.libraryName,//被查企业
+//          enterprise: this.formdatas.form.enterprise,//被查企业
+//          checkedTime: this.formdatas.form.checkedTime,//被查时点
             realCheckedTime: this.formdatas.form.realCheckedTime,//实际查库日
             storge: this.formdatas.form.storge,//存储形式
             // grainQuality: this.formdatas.form.grainQuality,//保管账数量
@@ -81,6 +82,7 @@ export default {
             checkNum: jsdjg.checkNum,//检查计算数
             difference: jsdjg.difference,//差数
             slip: jsdjg.slip,//差率
+            isMatch: this.formdatas.form.isMatch,//是否相符
             result: this.formdatas.form.result,//不符原因
             remark: this.formdatas.form.remark,//备注
             rummager: this.formdatas.form.rummager,//检查人
@@ -253,7 +255,7 @@ export default {
 //          检查计算数与保管账数量比较
           difference:'',//差数（kg）
           slip:'',//差率（％）
-          // is_same:'',//账实是否相符
+             isMatch:'',//账实是否相符
           // weight_r:'',//粮食实际数量（kg）
           result:'',//账实不符原因   
           remark: '无',//备注
