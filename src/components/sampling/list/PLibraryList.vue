@@ -233,7 +233,7 @@ export default {
       {
         id: 2,
         prop:'libraryName',
-        label: "被查企业",
+        label: "被查直属库",
 //      sort:true,
       },
       {
