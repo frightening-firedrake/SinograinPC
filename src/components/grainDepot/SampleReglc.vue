@@ -9,7 +9,7 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-table-list class="tablelist" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
+      <sinograin-table-list class="tablelist" :librarylist="librarylist" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
       </sinograin-table-list>
       <!--分页-->
       <!--<sinograin-pagination style="border:none;" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
@@ -59,6 +59,7 @@ export default {
 	}
   },
   created(){
+  	this.getlibrarylist()
 //	console.log(this.$route.query)
 //	if(this.$route.query.state==3){
 //		this.tfbtns={
@@ -285,15 +286,41 @@ export default {
 
 		}
 	},
+	//	获取库列表
+  	getlibrarylist(){
+		this.$http({
+		    method: 'post',
+			url: this.librarylistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				
+			}
+	    }).then(function (response) {
+		  	this.librarylist = response.data.rows;
+//			  console.log(this.librarylist)
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
   },
   data() {
     return {
+	  librarylistURL:'api/grain/library/data',//获取库列表
       datalistURL:'api/grain/sample/data',
 	  applyURL:'api/grain/register/edit',
 	  exportExcelURL:'api/grain/register/exportExcel',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
+      librarylist:[],
       list:"samplinglist",
 	  modalVisible:false,
 	  modal:{
@@ -350,43 +377,76 @@ export default {
       },
       tabledatas:[],
       items: [
+//       {
+//         id: 1,
+//         prop:'sampling_number',
+//         label: "扦样编号",
+// //      sort:true
+//       },
       {
         id: 2,
+        prop:'pLibraryId',
+        label:"被查直属库",
+//      sort:true,
+        width:80,
+        status:true,
+      },
+      {
+        id: 3,
         prop:'libraryName',
         label:"被查库点",
-        width:220,
+        width:190,
+//      sort:true,
+      },
+      {
+        id: 100,
+        prop:'barnTime',
+        label:"入库时间",
+        width:150,
 //      sort:true,
       },
       {
         id: 4,
-        prop:'sort',
-        label:"品种",
-        width:110,
+        prop:'position',
+        label:"货位号",
 //      sort:true,
+        width:80,
       },
       {
         id: 5,
-        prop:'quality',
-        label:"性质",
-        width:110,
+        prop:'sort',
+        label:"品种",
+//      width:110,
 //      sort:true,
+        width:80,
       },
       {
         id: 6,
-        prop:'amount',
-        label:"数量（吨）",
+        prop:'quality',
+        label:"性质",
+//      width:110,
 //      sort:true,
+        width:80,
       },
       {
         id: 7,
-        prop:'originPlace',
-        label:"产地",
+        prop:'amount',
+        label:"数量（吨）",
 //      sort:true,
+        width:80,
       },
       {
         id: 8,
+        prop:'originPlace',
+        label:"产地",
+        width:70,
+//      sort:true,
+      },
+      {
+        id: 9,
         prop:'gainTime',
         label:"收获年度",
+        width:70,
 //      sort:true,
       },
 //       {
@@ -395,18 +455,18 @@ export default {
 //         label:"入库时间",
 // //      sort:true,
 //       },
-      {
-        id: 10,
-        prop:'samplingSign',
-        label:"扦样人员签字",
-//      sort:true,
-      },
-      {
-        id: 11,
-        prop:'sampleInSignWidth',
-        label:"现场人员签字",
-//      sort:true,
-      },
+//    {
+//      id: 10,
+//      prop:'samplingSign',
+//      label:"扦样人员签字",
+////      sort:true,
+//    },
+//    {
+//      id: 11,
+//      prop:'sampleInSignWidth',
+//      label:"现场人员签字",
+////      sort:true,
+//    },
 //       {
 //         id: 12,
 //         prop:'samplingdate',
@@ -418,7 +478,7 @@ export default {
         prop:'remark',
         label:"备注",
         class:'remark',
-        width:200,
+        width:160,
 //      sort:true,
       },
       ],
