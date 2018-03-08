@@ -147,13 +147,13 @@ export default new Router({
             component:ExaminationLibraryList
           },
           {
-            path:"sampling/examinationLibraryList/sampleRegList",
+            path:"sampling/examinationLibrary/examinationLibraryList/sampleRegList",
             name:"扦样流程/审批扦样列表/扦样登记列表",
             component:SampleRegList
           },
           
           {
-            path:"sampling/examinationLibraryList/sampleRegList/sampleReg",
+            path:"sampling/examinationLibrary/examinationLibraryList/sampleRegList/sampleReg",
             name:"扦样流程/审批扦样列表/扦样登记列表/扦样登记表",
             component:SampleReg
           },
@@ -168,43 +168,43 @@ export default new Router({
             component:LibraryList
           },
           {
-            path:"sampling/libraryList/samplingList",
+            path:"sampling/sampleLibraryList/libraryList/samplingList",
             name:"扦样流程/扦样库点列表/扦样登记列表",
             component:SamplingList
           },
           
           {
-            path:"sampling/libraryList/samplingList/sampleShowList",
+            path:"sampling/sampleLibraryList/libraryList/samplingList/sampleShowList",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表",
             component:SampleShowList
           },
 		    	{
-            path:"sampling/libraryList/samplingList/sampleShowList/samplingListCreate",
+            path:"sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/samplingListCreate",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建扦样",
             component:SamplingListCreate
           },
           {
-            path:"sampling/libraryList/samplingList/sampleShowList/samplingListEdit",
+            path:"sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/samplingListEdit",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表/查看扦样",
             component:SamplingListEdit
           },
           {
-            path:"sampling/libraryList/samplingList/sampleShowList/manuscriptCreate",
+            path:"sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/manuscriptCreate",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建工作底稿",
             component:ManuscriptCreate
           },
           {
-            path:"sampling/libraryList/samplingList/sampleShowList/manuscriptEdit",
+            path:"sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/manuscriptEdit",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/查看工作底稿",
             component:ManuscriptEdit
           },
           {
-            path:"sampling/libraryList/samplingList/sampleShowList/safetyReportCreate",
+            path:"sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/safetyReportCreate",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建安全报告",
             component:SafetyReportCreate
           },
           {
-            path:"sampling/libraryList/samplingList/sampleShowList/safetyReportEdit",
+            path:"sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/safetyReportEdit",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/查看安全报告",
             component:SafetyReportEdit
           },

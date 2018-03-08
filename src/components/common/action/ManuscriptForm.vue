@@ -4,7 +4,7 @@
             <p>{{formdatas.title}}</p>
         </template>      
 		<el-form-item label="被检查企业" prop="enterprise" class="three">
-		    <el-input v-model="formdatas.form.pLibraryId" disabled></el-input>
+		    <el-input v-model="pLibraryName" disabled></el-input>
 		</el-form-item>
 		<!--<el-form-item label="被查时点"  class="three">
 		    <el-form-item prop="checkedTime">
@@ -247,8 +247,8 @@
 					<el-form-item label="账实是否相符" prop="isMatch" >
 
 					    <el-select v-model="formdatas.form.isMatch" placeholder="选择是否相符">
-					        <el-option label="相符" value="相符"></el-option>
-					        <el-option label="不相符" value="不相符"></el-option>
+					        <el-option label="是" value="是"></el-option>
+					        <el-option label="否" value="否"></el-option>
 					    </el-select>
 
 					    <!--<el-input v-model="formdatas.form.is_same"></el-input>-->
@@ -317,7 +317,7 @@ import "@/assets/style/common/Form.css";
 export default {
     props: ["formdatas"],
     created(){
-    	
+    	this.getlibrarylist();
     },
     mounted: function() {
 //		console.log(this.formdatas)
@@ -426,6 +426,16 @@ export default {
 //		lssjsl(){
 //			return this.formdatas.form.grainQuality;
 //		},
+		pLibraryName(){
+			if(this.librarylist.length){
+			  	var pitem= this.librarylist.filter((item)=>{
+			  		return item.id==this.formdatas.form.pLibraryId
+			  	})
+			  	return pitem[0].libraryName;
+			}else{
+				return "";				
+			}
+		},
 		
     },
     data() {
@@ -475,7 +485,7 @@ export default {
 		jsdjg:{//计算的结果
 
 		},
-
+		librarylist:[],
 //      dyear:new Date(2017),
         calculation_density:"1",//计算密度方法
         labelWidth:'2rem',
@@ -588,6 +598,30 @@ export default {
         }
     },
     methods: {  
+    	//	获取库列表
+	  	getlibrarylist(){
+			this.$http({
+			    method: 'post',
+				url: 'api/grain/library/data',
+				transformRequest: [function (data) {
+					// Do whatever you want to transform the data
+					let ret = ''
+					for (let it in data) {
+					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					}
+					return ret
+				}],
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				data: {
+					
+				}
+		    }).then(function (response) {
+			  	this.librarylist = response.data.rows;
+//			  	console.log(this.librarylist)
+			}.bind(this)).catch(function (error) {
+			    console.log(error);
+			}.bind(this));
+	  	},
         onSubmit(formname) {
             this.$refs[formname].validate((valid) => {
                 if (valid) {

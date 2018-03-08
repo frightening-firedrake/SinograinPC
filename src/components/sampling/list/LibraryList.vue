@@ -59,7 +59,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/libraryList/samplingList',query:{libraryId:id,regState:2}})
+		this.$router.push({path: '/index/sampling/sampleLibraryList/libraryList/samplingList',query:{libraryId:id,regState:2}})
   	}.bind(this));
   },
   destroy(){
@@ -78,7 +78,7 @@ export default {
 	},
 	createSampling(){
 //		console.log('createSampling');
-		this.$router.push({path: '/index/sampling/libraryList/samplingList/samplingListCreate'})
+		this.$router.push({path: '/index/sampling/examinationLibrary/libraryList/samplingList/samplingListCreate'})
 	},
 	emptyCreate(){
 //		this.createlib();

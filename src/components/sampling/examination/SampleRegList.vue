@@ -71,7 +71,7 @@ export default {
   	this.$root.eventHub.$on("viewlistitem",function(id,state){  
 //		console.log(id)
 
-			this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList/sampleReg',query:{pId:id,state:state}})			
+			this.$router.push({path: '/index/sampling/examinationLibrary/examinationLibraryList/sampleRegList/sampleReg',query:{pId:id,state:state}})			
 
   	}.bind(this));
   },
@@ -92,7 +92,7 @@ export default {
 	},
 	createSampling(){
 //		console.log('createSampling');
-		this.$router.push({path: '/index/sampling/libraryList/samplingList/samplingListCreate'})
+		this.$router.push({path: '/index/sampling/examinationLibrary/examinationLibraryList/sampleRegList/sampleReg'})
 	},
 	emptyCreate(){
 //		this.createlib();

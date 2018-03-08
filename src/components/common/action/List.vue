@@ -82,7 +82,7 @@
       </template>
 		  <!--是否包含工作底稿-->
       <template v-if="actions.manuscript">
-			    <el-table-column :resizable="resizable" align="center" label="工作底稿" class-name="tableAction">
+			    <el-table-column :resizable="resizable" align="center" label="工作底稿" class-name="tableAction" width="180">
 		          <template slot-scope="scope">
 		      <!--已完成工作底稿-->
 		      				<template v-if="scope.row.mId">
@@ -186,18 +186,18 @@ export default {
     },
 //  工作底稿
     handleViewManuscript(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptEdit',query:{id:row.id,libraryName:row.libraryName}})
+    	this.$router.push({path: '/index/sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/manuscriptEdit',query:{id:row.id,libraryName:row.libraryName}})
     },
     handleCreateManuscript(index, row){
     	console.log(this.$router)
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptCreate',query:{id:row.id,libraryName:row.libraryName}})
+    	this.$router.push({path: '/index/sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/manuscriptCreate',query:{id:row.id,libraryName:row.libraryName}})
     },
 //  安全报告
     handleViewSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportEdit',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
+    	this.$router.push({path: '/index/sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/safetyReportEdit',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
     },
     handleCreateSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
+    	this.$router.push({path: '/index/sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/safetyReportCreate',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
     },
     handleInput(index, row,scope) {
 //	  	console.log(index,row);
