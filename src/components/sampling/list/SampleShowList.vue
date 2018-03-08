@@ -257,7 +257,7 @@ export default {
       items: [
       {
         id: 1,
-        prop:'sampleNo',
+        prop:'sampleWord',
         label: "扦样编号",
 //      sort:true
       },

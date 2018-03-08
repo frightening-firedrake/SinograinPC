@@ -49,7 +49,7 @@
 		
 	    						</template>
 	    						<template v-else-if="item.prop=='barnTime'">
-		        					<el-date-picker type="date" placeholder="选择入仓日期" v-model="scope.row[item.prop]"></el-date-picker>		    							
+		        					<el-date-picker type="month" placeholder="选择入库日期" v-model="scope.row[item.prop]"></el-date-picker>		    							
 	    						</template>
 	    						<template v-else-if="item.prop=='sort'">
 		    							<el-select v-model="scope.row[item.prop]" placeholder="品种" class="zhishu">
