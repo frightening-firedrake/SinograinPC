@@ -71,6 +71,7 @@ export default {
 			}
 	    }).then(function (response) {
 		  	this.formdatas.form=response.data;
+		  	this.formdatas.title=response.data.formName;
 //				console.log(response.data.rows)
 //	  		this.page.total=response.data.total;
 		  	

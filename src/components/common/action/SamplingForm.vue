@@ -10,20 +10,20 @@
 			<!--<span class="codeinfo">{{formdatas.form.sampleWord}}</span>-->
 			<img class="codeimg" :src="code" alt="" />
 		</el-form-item>
-		<el-form-item label="迁样编号：" prop="sampleNo">
-		    <el-input v-model="formdatas.form.sampleNo"></el-input>
+		<el-form-item label="迁样编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">
+		    <el-input v-model="formdatas.form.sampleNo" disabled></el-input>
 		</el-form-item>
 		<el-form-item label="货位号：" prop="position" >
-		    <el-input v-model="formdatas.form.position"></el-input>
+		    <el-input v-model="formdatas.form.position" disabled></el-input>
 		</el-form-item>
 		<el-form-item label="性质：" prop="quality" >
-		    <el-input v-model="formdatas.form.quality"></el-input>
+		    <el-input v-model="formdatas.form.quality" disabled></el-input>
 		</el-form-item>
 		<el-form-item label="状态：" prop="sampleState" v-bind:class="{disabled:disabled}">
 		    <el-input v-model="samplestate" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="产地：" prop="originPlace" >
-		    <el-select v-model="formdatas.form.originPlace" placeholder="请选择产地">
+		    <el-select v-model="formdatas.form.originPlace" placeholder="请选择产地" disabled>
 		        <el-option label="山西" value="1"></el-option>
 		        <el-option label="河南" value="henan"></el-option>
 		        <el-option label="山东" value="shandong"></el-option>
@@ -32,7 +32,7 @@
 		    </el-select>
 		</el-form-item>
 		<el-form-item label="被查库点：" prop="libraryName">
-		    <el-select v-model="formdatas.form.libraryName" placeholder="选择库点">
+		    <el-select v-model="formdatas.form.libraryName" placeholder="选择库点" disabled>
 		        <el-option label="本库" value="本库"></el-option>
 			        <el-option label="山西屯留国家粮食储备库" value="山西屯留国家粮食储备库"></el-option>
 			        <el-option label="山西长治国家粮食储备库" value="山西长治国家粮食储备库"></el-option>
@@ -42,29 +42,29 @@
 			        <el-option label="沁县分库" value="沁县分库"></el-option>		
 		    </el-select>
 		</el-form-item>
-		<el-form-item label="品种：" prop="sort" >
-		    <el-input v-model="formdatas.form.sort"></el-input>
+		<el-form-item label="品种：" prop="sort">
+		    <el-input v-model="formdatas.form.sort" disabled></el-input>
 		</el-form-item>
 		<el-form-item label="代表数量(吨)：" prop="amount" >
-		    <el-input v-model="formdatas.form.amount"></el-input>
+		    <el-input v-model="formdatas.form.amount" disabled></el-input>
 		</el-form-item>
 		<el-form-item label="收货年度：" >
 		    <el-form-item prop="gainTime">
 		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
-		        <el-date-picker type="year" placeholder="选择年度" v-model="formdatas.form.gainTime"></el-date-picker>
+		        <el-date-picker type="year" placeholder="选择年度" v-model="formdatas.form.gainTime"  disabled></el-date-picker>
 		    </el-form-item>
 		</el-form-item>
 		<el-form-item label="扦样日期：" prop="sampleTime" >
-		    <el-input v-model="formdatas.form.sampleTime"></el-input>
+		    <el-input v-model="formdatas.form.sampleTime" disabled></el-input>
 		</el-form-item>
 		<el-form-item label="备注：" class="full" prop="remark" >
-		    <el-input v-model="formdatas.form.remark"></el-input>
+		    <el-input v-model="formdatas.form.remark" disabled></el-input>
 		</el-form-item>
 
         
         <div class="btns">
-            <el-button class="yes" type="primary" @click="onSubmit('form')">确认</el-button>
-            <el-button class="no" @click="cancel('form')">取消</el-button>
+            <!--<el-button class="yes" type="primary" @click="onSubmit('form')">确认</el-button>-->
+            <el-button class="no" @click="cancel('form')">返回</el-button>
         </div>
         
         <div class="clear"></div>
