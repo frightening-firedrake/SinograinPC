@@ -228,7 +228,7 @@ export default {
 			data: {
 				id: JSON.stringify(this.$route.query.pId),
 				regState: 2,
-				libraryName: this.libraryName,
+				libraryName: this.tabledatas[0].libraryName,
 
 			}
 		}).then(function (response) {
