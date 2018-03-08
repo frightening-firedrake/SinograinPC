@@ -28,19 +28,49 @@
 	    		<el-table-column show-overflow-tooltip v-if="!item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
 	    		</el-table-column>
 	    		
+	    		<!--<el-table-column show-overflow-tooltip v-if="!item.status&&item.prop=='pLibraryId'" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
+	    				<template slot-scope="scope" class='test'>	    
+		    					{{findPLibraryName(scope.row[item.prop])}}
+	    				</template>
+	    		</el-table-column>-->
+	    		
 	    		<el-table-column show-overflow-tooltip v-if="item.status" :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
 	    				<template slot-scope="scope">
-		      				<template v-if="scope.row[item.prop]==0">
-		            			<span style="color:#fc6500;">待审核</span>
+		      				<template v-if="item.prop=='regState'">
+				      				<template v-if="scope.row[item.prop]==-1">
+				            			<span style="color:#fc6500;">待审核</span>
+				      				</template>
+								    	<template v-if="scope.row[item.prop]==1">
+				            			<span style="color:#999999;">未同意</span>
+				      				</template>
+				      				<template v-if="scope.row[item.prop]==2">
+				            			<span style="color:#666666;">已同意</span>
+				      				</template>
+				      				<template v-if="scope.row[item.prop]==3">
+				            			<span style="color:blue;">草稿</span>
+				      				</template>
 		      				</template>
-						    	<template v-if="scope.row[item.prop]==1">
-		            			<span style="color:#999999;">未同意</span>
+		      				<template v-if="item.prop=='sampleState'">
+				      				<template v-if="scope.row[item.prop]==-1">
+				            			<span style="color:#fc6500;">未扦样</span>
+				      				</template>
+								    	<template v-if="scope.row[item.prop]==1">
+				            			<span style="color:#999999;">已扦样</span>
+				      				</template>
+				      				<template v-if="scope.row[item.prop]==2">
+				            			<span style="color:#666666;">已入库</span>
+				      				</template>
 		      				</template>
-		      				<template v-if="scope.row[item.prop]==2">
-		            			<span style="color:#666666;">已同意</span>
+		      				<template v-if="item.prop=='isDeal'">
+				      				<template v-if="scope.row[item.prop]==-1">
+				            			<span style="color:#fc6500;">待解决</span>
+				      				</template>
+								    	<template v-if="scope.row[item.prop]==1">
+				            			<span style="color:#999999;">已解决</span>
+				      			</template>
 		      				</template>
-		      				<template v-if="scope.row[item.prop]==3">
-		            			<span style="color:#58b481;">草稿</span>
+		      				<template v-if="item.prop=='pLibraryId'">
+		    						{{findPLibraryName(scope.row[item.prop])}}				      				
 		      				</template>
 		          </template>
 	    		</el-table-column>
@@ -57,7 +87,7 @@
 </template>
 <script>
 export default {
-  props: ['items', 'tabledata','actions','list','loading'],
+  props: ['items', 'tabledata','actions','list','loading','librarylist'],
   computed:{
   	maxHeight(){
   		return 400;
@@ -150,7 +180,13 @@ export default {
 	  },
 	  emptyCreate(){
 	  	this.$emit('emptyCreate');
-	  }
+	  },
+	  findPLibraryName(pid){
+	  	var pitem= this.librarylist.filter((item)=>{
+	  		return item.id==pid
+	  	})
+	  	return pitem[0].libraryName;
+	  },
 	}
 }
 

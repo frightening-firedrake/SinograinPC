@@ -537,7 +537,7 @@ export default {
       {
         id: 100,
         prop:'barnTime',
-        label:"入仓时间",
+        label:"入库时间",
         width:150,
 //      sort:true,
       },

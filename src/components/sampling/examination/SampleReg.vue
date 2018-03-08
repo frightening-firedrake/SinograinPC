@@ -9,7 +9,7 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-table-list class="tablelist" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
+      <sinograin-table-list class="tablelist" :tabledata="tabledatas"  :librarylist="librarylist" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
       </sinograin-table-list>
       <!--分页-->
       <!--<sinograin-pagination style="border:none;" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
@@ -59,7 +59,8 @@ export default {
 	}
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.query)
+  	this.getlibrarylist()
   	if(this.$route.query.state==-1){
   		this.tfbtns={
 	      	btnCenter:{
@@ -206,6 +207,7 @@ export default {
 	  		this.page.total=response.data.total;
 		  	this.loading=false;	  
 			this.listHeader.tableName = response.data.rows[0].formName;
+			
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -313,9 +315,34 @@ export default {
 
 		}
 	},
+	//	获取库列表
+  	getlibrarylist(){
+		this.$http({
+		    method: 'post',
+			url: this.librarylistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				
+			}
+	    }).then(function (response) {
+		  	this.librarylist = response.data.rows;
+//			  console.log(this.librarylist)
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
   },
   data() {
     return {
+	  librarylistURL:'api/grain/library/data',//获取库列表
       datalistURL:'api/grain/sample/data',
 	  agreeURL:'api/grain/register/edit',
 	  disagreeURL:'api/grain/register/edit',
@@ -323,6 +350,7 @@ export default {
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
+      librarylist:[],
       list:"samplinglist",
 	  modalVisible:false,
 	  modal:{
@@ -380,11 +408,24 @@ export default {
       tabledatas:[],
       items: [
       {
+      	id: 1,
+      	prop:'pLibraryId',
+      	label:"被查直属库",
+      	status:true,
+      },
+      {
         id: 2,
         prop:'libraryName',
         label:"被查库点",
 //      sort:true,
       },
+//    {
+//      id: 3,
+//      prop:'barnTime',
+//      label:"入库时间",
+////      width:150,
+////      sort:true,
+//    },
       {
         id: 4,
         prop:'sort',
@@ -421,24 +462,24 @@ export default {
         label:"入库时间",
 //      sort:true,
       },
-      {
-        id: 10,
-        prop:'samplingSign',
-        label:"扦样人员签字",
-//      sort:true,
-      },
-      {
-        id: 11,
-        prop:'sampleInSignWidth',
-        label:"现场人员签字",
-//      sort:true,
-      },
-      {
-        id: 12,
-        prop:'samplingdate',
-        label:"扦样日期",
-//      sort:true,
-      },
+//    {
+//      id: 10,
+//      prop:'samplingSign',
+//      label:"扦样人员签字",
+////      sort:true,
+//    },
+//    {
+//      id: 11,
+//      prop:'sampleInSignWidth',
+//      label:"现场人员签字",
+////      sort:true,
+//    },
+//    {
+//      id: 12,
+//      prop:'samplingdate',
+//      label:"扦样日期",
+////      sort:true,
+//    },
       {
         id: 13,
         prop:'remark',
