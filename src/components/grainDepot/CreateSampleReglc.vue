@@ -526,6 +526,7 @@ export default {
         prop:'libraryPid',
         label:"被查直属库",
 //      sort:true,
+        width:80,
       },
       {
         id: 3,
@@ -546,6 +547,7 @@ export default {
         prop:'position',
         label:"货位号",
 //      sort:true,
+        width:80,
       },
       {
         id: 5,
@@ -553,6 +555,7 @@ export default {
         label:"品种",
 //      width:110,
 //      sort:true,
+        width:80,
       },
       {
         id: 6,
@@ -560,12 +563,14 @@ export default {
         label:"性质",
 //      width:110,
 //      sort:true,
+        width:80,
       },
       {
         id: 7,
         prop:'amount',
         label:"数量（吨）",
 //      sort:true,
+        width:80,
       },
       {
         id: 8,

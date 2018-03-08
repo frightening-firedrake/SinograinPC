@@ -32,6 +32,7 @@
 	    						<template v-if="item.prop=='libraryPid'">
 		    							<el-select  v-model="tabledata[0].pLibraryId" placeholder="直属" class="zhishu" @change="PlibraryChange">
 									         <el-option v-for="item2 in Plibrarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
+									         <el-option  label="无" key="-1" :value="-1"></el-option>								        
 									    </el-select>
 	    						</template>
 	    						<template v-else-if="item.prop=='libraryName'">

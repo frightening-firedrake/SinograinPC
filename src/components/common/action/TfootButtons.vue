@@ -157,6 +157,7 @@
     background-repeat:no-repeat;
     background-position:left center;
     background-size:0.3rem 0.3rem;
+    font-size:0.16rem;
 }
 .editModel .editModelWrap .tableDel {
     /*position: absolute;
@@ -175,12 +176,14 @@
     font-size: 0.16rem;
     cursor: pointer;
     margin-right:0.1rem;
+
 }
 .editModel .editModelWrap .tableDel p{
     padding-left:0.35rem;
     background-repeat:no-repeat;
     background-position:left center;
     background-size:0.3rem 0.6rem;
+    font-size:0.16rem;
 }
 </style>
 <script>
