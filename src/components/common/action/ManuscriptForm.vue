@@ -4,7 +4,7 @@
             <p>{{formdatas.title}}</p>
         </template>      
 		<el-form-item label="被检查企业" prop="enterprise" class="three">
-		    <el-input v-model="formdatas.form.libraryName" disabled></el-input>
+		    <el-input v-model="formdatas.form.pLibraryId" disabled></el-input>
 		</el-form-item>
 		<!--<el-form-item label="被查时点"  class="three">
 		    <el-form-item prop="checkedTime">

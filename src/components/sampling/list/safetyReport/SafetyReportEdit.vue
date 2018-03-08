@@ -251,7 +251,7 @@ export default {
 	  	},
 	  },
       formdatas: {
-      	title:'安全报告',
+      	title:'监督检查',
       	statusItems:[
       		{label:'all',text:'全部'},
       		{label:-1,text:'待解决'},

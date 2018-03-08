@@ -56,7 +56,7 @@ export default {
             id: this.formdatas.form.id,
             sampleId: this.$route.query.id,//样品id
 //          enterprise: this.formdatas.form.enterprise,//被查企业
-            libraryName: this.formdatas.form.libraryName,//被查企业
+            // libraryName: this.formdatas.form.libraryName,//被查企业
 //          checkedTime: this.formdatas.form.checkedTime,//被查时点
             realCheckedTime: this.formdatas.form.realCheckedTime,//实际查库日
             storge: this.formdatas.form.storge,//存储形式

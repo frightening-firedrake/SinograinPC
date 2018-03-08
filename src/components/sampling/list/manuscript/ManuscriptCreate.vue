@@ -53,7 +53,7 @@ export default {
     submit(jsdjg){
        var params = {
             sampleId: this.$route.query.id,//样品id
-            libraryName: this.formdatas.form.libraryName,//被查企业
+            // libraryName: this.formdatas.form.libraryName,//被查企业
 //          enterprise: this.formdatas.form.enterprise,//被查企业
 //          checkedTime: this.formdatas.form.checkedTime,//被查时点
             realCheckedTime: this.formdatas.form.realCheckedTime,//实际查库日
