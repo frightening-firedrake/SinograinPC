@@ -266,6 +266,7 @@ export default {
 		this.tabledatas.forEach((value,index)=>{
 			var item={};		
 			item.id= value.id;
+			item.barnTime= value.barnTime;
 			item.sort= value.sort;
 			item.quality= value.quality;
 			item.amount= value.amount;
@@ -361,7 +362,8 @@ export default {
 			this.uncomplate(msg)
 			return
 		}
-  		// 提交扦样列表
+//		console.log(sample[0].barnTime,)
+		// 提交扦样列表
 		this.$http({
 		    method: 'post',
 			url: this.saveURL,
