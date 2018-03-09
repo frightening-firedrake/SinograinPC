@@ -592,9 +592,9 @@ export default {
 		        checkedTime: [
 		            { type: 'date', required: true, message: '请选日期', trigger: 'change' }
 		        ],
-//		        realCheckedTime: [
-//		            { type: 'date', required: true, message: '请选日期', trigger: 'change' }
-//		        ],
+		        realCheckedTime: [
+		            { type: 'date', required: true, message: '请选日期', trigger: 'change' }
+		        ],
 
 //		        单选类型
 		        putWay: [

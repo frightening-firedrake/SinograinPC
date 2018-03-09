@@ -146,6 +146,7 @@ export default {
         for (var key in response.data.rows[0]){
 	    		this.formdatas.form[key]=response.data.rows[0][key];
 	    	}
+        this.formdatas.form.realCheckedTime= new Date(this.formdatas.form.realCheckedTime),//实际查库日处理
         this.formdatas.form.libraryName = this.$route.query.libraryName
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
