@@ -11,7 +11,7 @@
 			<img class="codeimg" :src="code" alt="" />
 		</el-form-item>
 		<el-form-item label="迁样编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.sampleNo" disabled></el-input>
+		    <el-input v-model="formdatas.form.sampleWord" disabled></el-input>
 		</el-form-item>
 		<el-form-item label="货位号：" prop="position" >
 		    <el-input v-model="formdatas.form.position" disabled></el-input>

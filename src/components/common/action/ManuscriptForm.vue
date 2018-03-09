@@ -38,11 +38,11 @@
 		</el-form-item>
 		<el-form-item label="仓房类型" prop="barnType"  class="three">
 		 	<el-select v-model="formdatas.form.barnType" placeholder="选择仓房类型">
-		        <el-option label="平房仓" :value="1"></el-option>
-		        <el-option label="高大平房仓" :value="2"></el-option>
-		        <el-option label="苏式仓" :value="3"></el-option>
-				<el-option label="窑洞仓" :value="4"></el-option>
-				<el-option label="地下仓" :value="5"></el-option>
+		        <el-option label="平房仓" value="平房仓"></el-option>
+		        <el-option label="高大平房仓" value="高大平房仓"></el-option>
+		        <el-option label="苏式仓" value="苏式仓"></el-option>
+				<el-option label="窑洞仓" value="窑洞仓"></el-option>
+				<el-option label="地下仓" value="地下仓"></el-option>
 		    </el-select>
 		</el-form-item>
 		
@@ -287,6 +287,11 @@
         <div class="btns">
             <el-button class="yes" type="primary" @click="onSubmit('form')">确认</el-button>
             <el-button class="no" @click="cancel('form')">取消</el-button>
+            <div class="exportexcel" v-if="formdatas.exportexcel" @click="exportexcel('form')">
+				<span>
+					导出Excel表格
+				</span>					
+			</div>
         </div>
         
         <div class="Explain">
@@ -586,9 +591,9 @@ export default {
 		        checkedTime: [
 		            { type: 'date', required: true, message: '请选日期', trigger: 'change' }
 		        ],
-		        realCheckedTime: [
-		            { type: 'date', required: true, message: '请选日期', trigger: 'change' }
-		        ],
+//		        realCheckedTime: [
+//		            { type: 'date', required: true, message: '请选日期', trigger: 'change' }
+//		        ],
 
 //		        单选类型
 		        putWay: [
@@ -644,7 +649,18 @@ export default {
 //      	console.log(this.calculation_density)
 			this.$emit('pjmdff',this.calculation_density)
         },
-        
+        exportexcel(formname) {
+            this.$refs[formname].validate((valid) => {
+                if (valid) {
+//              	console.log(123)
+                 this.$emit('exportexcel',this.jsdjg)
+					// window.history.go(-1)
+                } else {
+//                  console.log('error submit!!');
+                    return false;
+                }
+            });
+        },
     }
 
 }

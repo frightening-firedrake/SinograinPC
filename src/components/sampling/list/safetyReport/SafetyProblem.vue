@@ -41,6 +41,7 @@ export default {
 	...mapGetters(["modal_id"]),
 //	问题筛选
 	problemFilter(){
+		console.log(this.formdatas.problems)
 		if(this.problemStatus=="all"){
 			return this.formdatas.problems
 		}else{			
@@ -167,7 +168,7 @@ export default {
 				isDeal:1
 			}
 	    }).then(function (response) {
-		  	console.log(response)
+
 			  if(response.data.success) {
 				this.formdatas.problems.forEach((value)=>{
 					if(value.id==id){
@@ -184,7 +185,7 @@ export default {
 
 			var id=this.passProblemId;
 			this.passProblem(id)
-			console.log(id)
+//			console.log(id)
 	  		
   		}else if(type=="error"){
 //			console.log(type)  			

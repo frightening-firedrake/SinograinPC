@@ -211,9 +211,8 @@ export default {
 	      type: 'warning'
 	    }).then(() => {
 	    	if(row.id){
-	    		this.tabledatas=this.tabledatas.filter(function(item){
-	    			return item.id!==row.id;
-	    		})	    		
+	    		this.editDelete(id)
+	    		    		
 	    	}else{
 	    		this.tabledatas=this.tabledatas.filter(function(item){
 	    			return item.addId!==row.addId;
@@ -230,6 +229,32 @@ export default {
 	        message: '已取消删除'
 	      });          
 	    });
+	},
+//	向后台发送删除行id
+	editDelete(id){
+		this.$http({
+		    method: 'post',
+			url: this.deleteURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				
+
+			},
+	    }).then(function (response) {
+				this.tabledatas=this.tabledatas.filter(function(item){
+	    			return item.id!==row.id;
+	    		})	
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
 	},
 //	获取分页点击事件中及当前页码
     getCurrentPage(currentPage){
@@ -450,6 +475,7 @@ export default {
     return {
       isEmpty:false,
       rowid:999,//临时id
+      deleteURL:'',
       datalistURL:'api/grain/sample/data',//获取草稿地址
 	  librarylistURL:'api/grain/library/data',//获取库列表
       saveURL:'api/grain/sample/saveAll',//草稿保存地址

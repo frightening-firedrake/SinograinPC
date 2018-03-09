@@ -51,8 +51,7 @@
 				  :limit='limit'
 				  action="/liquid/images"
 				  list-type="picture-card"
-				  :on-preview="handlePictureCardPreview"
-				  
+				  :on-preview="handlePictureCardPreview"				  
 				  :file-list="item.images"
 				  :on-remove="handleRemove">
 				  <i class="el-icon-plus"></i>
@@ -233,7 +232,9 @@ export default {
 	        this.dialogVisible = true;
 	    },
 	    pass(id){
+//	    	console.log(id)
 	    	this.$emit("pass",id)
+
 	    },
 		addsafety(){
 	    	this.$emit("addsafety")		

@@ -211,7 +211,7 @@ export default {
 
 //	新建安全报告
   	addsafety(){
-    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate',query:{id:this.$route.query.id,libraryName:this.$route.query.libraryName,position:this.$route.query.position}})
+    	this.$router.push({path: '/index/sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/safetyReportCreate',query:{id:this.$route.query.id,libraryName:this.$route.query.libraryName,position:this.$route.query.position}})
   	}
   },
 
