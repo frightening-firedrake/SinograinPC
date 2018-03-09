@@ -211,8 +211,7 @@ export default {
 	      type: 'warning'
 	    }).then(() => {
 	    	if(row.id){
-	    		this.editDelete(id)
-	    		    		
+	    		this.editDelete(row.id)    		    		
 	    	}else{
 	    		this.tabledatas=this.tabledatas.filter(function(item){
 	    			return item.addId!==row.addId;
@@ -245,13 +244,16 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				
-
+				id:id
 			},
 	    }).then(function (response) {
+	    	if(response.data.success){
 				this.tabledatas=this.tabledatas.filter(function(item){
-	    			return item.id!==row.id;
-	    		})	
+	    			return item.id!==id;
+	    		})		    		
+	    	}else{
+	    		
+	    	}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -475,7 +477,7 @@ export default {
     return {
       isEmpty:false,
       rowid:999,//临时id
-      deleteURL:'',
+      deleteURL:'api/grain/sample/remove',//草稿删除
       datalistURL:'api/grain/sample/data',//获取草稿地址
 	  librarylistURL:'api/grain/library/data',//获取库列表
       saveURL:'api/grain/sample/saveAll',//草稿保存地址
