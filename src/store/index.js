@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-	userName:'未登录',//用户名
+	userName:'',//用户名
 	libraryName:'',//库点名
 	libraryId:'',//库点id
 	libraryNames:[],//库点组
@@ -42,8 +42,10 @@ const getters = {
     userName:function(state){
     	if(state.userName){
     		return state.userName;    		
-    	}else{
+    	}else if(localStorage.getItem("userName")){
     		return localStorage.getItem("userName");
+    	}else{
+    		return '未登录';
     	}
     },
     libraryNames:function(state){
