@@ -351,10 +351,10 @@ export default {
 			var high = this.formdatas.form.high;
 			var wide = this.formdatas.form.wide;
 			if(this.calculation_density == 1) {
-				return this.jsdjg.unQuality = parseInt((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)
+				return this.jsdjg.unQuality = Math.round((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)
 
 			} else if(this.calculation_density == 2) { 
-				return this.jsdjg.unQuality = parseInt((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz)
+				return this.jsdjg.unQuality = Math.round((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz)
 			}
 		},
 		// sfjl() { //水分减量

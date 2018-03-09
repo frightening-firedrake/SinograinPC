@@ -162,7 +162,7 @@ export default {
         type: 'info'
       }],
       formdatas: {
-      	title:'安全报告',
+      	title:'监督检查',
       	form:{
           libraryName: '沁县库区',//被查库点
           position: '漫水-1',//货位号
