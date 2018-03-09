@@ -414,7 +414,8 @@ export default {
 			//var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
 			var bgzrsh = this.formdatas.form.lossNature - 0;
 			var sum = sfjl + bgzrsh;
-			var jcjss = cljss -sum;
+			var jcjss = cljss +sum;
+			console.log(jcjss)
 			return this.jsdjg.difference = (this.formdatas.form.amount*1000 - jcjss).toFixed(2);
 		},
 		slip() { //差率
