@@ -56,7 +56,8 @@ export default {
             // libraryName: this.formdatas.form.libraryName,//被查企业
 //          enterprise: this.formdatas.form.enterprise,//被查企业
 //          checkedTime: this.formdatas.form.checkedTime,//被查时点
-            realCheckedTime: this.formdatas.form.realCheckedTime,//实际查库日
+//          realCheckedTime: this.formdatas.form.realCheckedTime,//实际查库日
+            realCheckedTime: new Date(this.formdatas.form.realCheckedTime),//实际查库日
             storge: this.formdatas.form.storge,//存储形式
             // grainQuality: this.formdatas.form.grainQuality,//保管账数量
             qualityGrade: this.formdatas.form.qualityGrade,//质量等级
