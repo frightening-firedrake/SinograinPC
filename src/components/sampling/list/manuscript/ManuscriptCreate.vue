@@ -50,7 +50,7 @@ export default {
   methods: {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
-    submit(jsdjg){
+    submit(jsdjg,type){
        var params = {
             sampleId: this.$route.query.id,//样品id
             // libraryName: this.formdatas.form.libraryName,//被查企业
@@ -110,7 +110,13 @@ export default {
 
         }
         }).then(function (response) {
-          this.$router.go(-1)
+        	if(response.data.success){
+        		if(type=="save"){
+        			this.$router.go(-1)        			
+        		}else if(type=="exportexcel"){
+        			this.exportExcel(response.data.id)
+        		}
+        	}
         }.bind(this)).catch(function (error) {
             console.log(error);
         }.bind(this));
@@ -181,9 +187,13 @@ export default {
 	titleEvent(){
   		console.log('titleEvent');
   	},
+  	exportExcel(id){
+		window.open(this.exportExcelURL+'?id='+id,"_blank");
+	},
   },
   data() {
     return {
+      exportExcelURL:'api/grain/manuscript/exportExcel',
       datalistURL:'api/grain/sample/get',
       saveURL: 'api/grain/manuscript/saveMan',
       searchURL:'/liquid/role2/data/search',

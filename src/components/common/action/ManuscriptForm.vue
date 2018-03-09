@@ -287,7 +287,7 @@
         <div class="btns">
             <el-button class="yes" type="primary" @click="onSubmit('form')">确认</el-button>
             <el-button class="no" @click="cancel('form')">取消</el-button>
-            <div class="exportexcel" v-if="formdatas.exportexcel" @click="exportexcel('form')">
+            <div class="exportexcel" @click="exportexcel('form')">
 				<span>
 					导出Excel表格
 				</span>					
@@ -632,7 +632,7 @@ export default {
             this.$refs[formname].validate((valid) => {
                 if (valid) {
 //              	console.log(123)
-                 this.$emit('submit',this.jsdjg)
+                 this.$emit('submit',this.jsdjg,'save')
 					// window.history.go(-1)
                 } else {
 //                  console.log('error submit!!');
@@ -654,7 +654,8 @@ export default {
             this.$refs[formname].validate((valid) => {
                 if (valid) {
 //              	console.log(123)
-                 this.$emit('exportexcel',this.jsdjg)
+//               this.$emit('exportexcel',this.jsdjg)
+                 this.$emit('submit',this.jsdjg,'exportexcel')
 					// window.history.go(-1)
                 } else {
 //                  console.log('error submit!!');

@@ -7,7 +7,7 @@
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
-      <safety-form-pass :formdatas="formdatas" :problemFilter="problemFilter" @problemStatusChange="problemStatusChange" @pass="pass" @addsafety="addsafety"></safety-form-pass> 
+      <safety-form-pass :formdatas="formdatas" :problem="formdatas.problem" @problemStatusChange="problemStatusChange" @pass="pass" @addsafety="addsafety"></safety-form-pass> 
       <!--通知弹框-->
       <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
     </div>
@@ -28,7 +28,7 @@ import SinograinMessage from "@/components/common/action/Message"
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 
 
@@ -39,17 +39,6 @@ export default {
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
 	...mapGetters(["modal_id"]),
-//	问题筛选
-	problemFilter(){
-		console.log(this.formdatas.problems)
-		if(this.problemStatus=="all"){
-			return this.formdatas.problems
-		}else{			
-			return this.formdatas.problems.filter((item)=>{
-				return item.isDeal==this.problemStatus;
-			})
-		}
-	}
   },
   created(){
   	console.log(this.$route.query)
@@ -87,28 +76,21 @@ export default {
 			data: {
 				id: this.$route.query.id
 			}
-	    }).then(function (response) {
-		  console.log(response)
-			
+	  }).then(function (response) {			
 			var res0=response.data
-
 			var res=response.data
-//			循环问题
-			
-				var images=[]
-				var imagesbox=res.images.split(',');
-				imagesbox.forEach((value2,index2)=>{
-					var obj={};
-					obj.url="api/grain/upload/picture/"+value2;
-					images.push(obj);
-				})
-	
-				res0.images=images
-			
-			this.formdatas.problems[0] = res0
+//			循环问题			
+			var images=[]
+			var imagesbox=res.images.split(',');
+			imagesbox.forEach((value2,index2)=>{
+				var obj={};
+				obj.url="api/grain/upload/picture/"+value2;
+				images.push(obj);
+			})
+			res0.images=images			
+			this.formdatas.problem= res0
 		    this.formdatas.form.libraryName = this.$route.query.libraryName
-			this.formdatas.form.position = this.$route.query.position
-		    console.log(res)		  
+			this.formdatas.form.position = this.$route.query.position  
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -167,14 +149,9 @@ export default {
 			    id:id,
 				isDeal:1
 			}
-	    }).then(function (response) {
-
+	   }).then(function (response) {
 			  if(response.data.success) {
-				this.formdatas.problems.forEach((value)=>{
-					if(value.id==id){
-						value.isDeal=1;
-					}
-				})
+				  this.formdatas.problem.isDeal=1	
 			  }
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -204,9 +181,12 @@ export default {
 //	问题通过处理事件
   	pass(id){
 		// console.log(id)
-  		this.messageShow=true;
+		this.messageShow=true;
 		
-  		this.passProblemId=id;
+		this.passProblemId=id;
+
+
+
   	},
 
 //	新建安全报告
@@ -262,14 +242,13 @@ export default {
           position: '',//货位号  
 		  createTime: '',        
       	},
-      	problems:[
-      		{
-      			problem: '',//问题
-      			images: [],//图片
-      			isDeal:-1,
-      			createTime:'',
-      		},
-      	],
+      	problem:{
+  			problem: '',//问题
+  			images: [],//图片
+  			isDeal:-1,
+  			createTime:'',
+      	},
+      	
 	  }
     }
   }

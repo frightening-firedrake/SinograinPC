@@ -31,28 +31,29 @@
 		<!--问题组-->
 		
 		
-		<template v-for="(item, index) in problemFilter">
+		<!--<template v-for="(item, index) in problemFilter">-->
 			<el-form-item label="创建时间：" class="full disabled">
-			    <el-input v-model="item.createTime" disabled></el-input>
+			    <el-input v-model="problem.createTime" disabled></el-input>
 			</el-form-item>
 			<el-form-item 
-				:label="'问题' + (index+1)+'：'" 
+				label="问题" 
 				class="problem disabled" 
 				:rules="{
 			      required: true, message: '请填写问题详情', trigger: 'blur'
 			    }">
-			    <el-input type="textarea" v-model="item.problem" disabled></el-input>
+			    <el-input type="textarea" v-model="problem.problem" disabled></el-input>
 			</el-form-item>
 			<el-form-item label="图片：" prop="images" class="images uploadedit">
-				<img v-if="item.isDeal!==-1" src="static/images/sys/over.png" alt="" class="hege"/>
+				<img v-if="problem.isDeal!==-1" src="static/images/sys/over.png" alt="" class="hege"/>
 			    <el-upload
 				  disabled
 				  ref='upload'
 				  :limit='limit'
 				  action="/liquid/images"
 				  list-type="picture-card"
-				  :on-preview="handlePictureCardPreview"				  
-				  :file-list="item.images"
+				  :on-preview="handlePictureCardPreview"
+				  
+				  :file-list="problem.images"
 				  :on-remove="handleRemove">
 				  <i class="el-icon-plus"></i>
 				</el-upload>
@@ -62,12 +63,12 @@
 			</el-form-item>	
 			<el-form-item label="" class="full button">
 				<div class="btn">					
-					<el-button class="yes" type="primary" @click="pass(item.id)" :disabled="item.isDeal!==-1">{{item.isDeal==-1?'待解决':'已解决'}}</el-button>
+					<el-button class="yes" type="primary" @click="pass(problem.id)" :key="problem.id" :disabled="problem.isDeal!==-1">{{problem.isDeal==-1?'待解决':'已解决'}}</el-button>
 				</div>
 		    </el-form-item>
-		</template>
+		<!--</template>-->
 		
-		<template v-if="!problemFilter.length">
+		<template v-if="!problem">
 			<el-form-item label="" class="full empty">
 				<div class="empty">					
 					<!--佳敏说空着吧-->
@@ -196,7 +197,7 @@
 <script>
 import "@/assets/style/common/Form.css";
 export default {
-    props: ["formdatas","problemFilter"],
+    props: ["formdatas","problem"],
     created(){
 //  	console.log(this.problemFilter)
     },
@@ -232,9 +233,7 @@ export default {
 	        this.dialogVisible = true;
 	    },
 	    pass(id){
-//	    	console.log(id)
 	    	this.$emit("pass",id)
-
 	    },
 		addsafety(){
 	    	this.$emit("addsafety")		
