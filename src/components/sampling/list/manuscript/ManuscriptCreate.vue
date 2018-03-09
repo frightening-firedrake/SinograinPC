@@ -238,11 +238,11 @@ export default {
           //2.计算粮堆平均密度	
 //          标准容重器法
           // volume_weigh_bz:'',//粮食容重（g/l）
-          correctioFactor:1,//校正后修正系数
+          correctioFactor:1.01,//校正后修正系数
           aveDensity:'',//粮堆平均密度（kg/m³）
 //          特制大容器法
           // unit_volume_weight_tz:'',//单位体积粮食重量（kg/m³）
-          correction_factor_tz:1,//校正后修正系数
+          correction_factor_tz:1.01,//校正后修正系数
           // average_density_tz:'',//粮堆平均密度（kg/m³）
           //3.计算粮食数量
             unQuality:'',//测量计算数（kg）	
