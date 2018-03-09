@@ -284,6 +284,7 @@ export default {
   	},
 // 编辑扦样
 	editdata(regState) {
+
 		if(!this.listHeader.tableName) {
 			var msg="请先填写表名，再尝试提交！"
 			this.uncomplate(msg)
@@ -293,7 +294,7 @@ export default {
 		this.tabledatas.forEach((value,index)=>{
 			var item={};		
 			item.id= value.id;
-			item.barnTime= value.barnTime;
+			item.barnTime= Date.parse(value.barnTime);
 			item.sort= value.sort;
 			item.quality= value.quality;
 			item.amount= value.amount;
@@ -323,6 +324,9 @@ export default {
 			this.uncomplate(msg)
 			return
 		}
+    				console.log(sample)
+    				console.log(JSON.stringify(sample))
+    				
   		// 提交扦样列表
 		this.$http({
 		    method: 'post',
@@ -360,7 +364,7 @@ export default {
 		this.tabledatas.forEach((value,index)=>{
 			var item={};		
 			item.sort= value.sort;
-			item.barnTime= value.barnTime;
+			item.barnTime= Date.parse(value.barnTime);
 			item.quality= value.quality;
 			item.amount= value.amount;
 			item.originPlace= value.originPlace;

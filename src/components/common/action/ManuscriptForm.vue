@@ -15,7 +15,7 @@
 		<el-form-item label="实际查库日"  class="three">
 		    <el-form-item prop="realCheckedTime">
 		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
-		        <el-date-picker type="date" placeholder="选择实际查库日" v-model="formdatas.form.realCheckedTime"></el-date-picker>
+		        <el-date-picker type="month" placeholder="选择实际查库日" v-model="formdatas.form.realCheckedTime"  @change="dateChange"></el-date-picker>
 		    </el-form-item>
 		</el-form-item>
 		<el-form-item label="收货年度"  v-bind:class="{disabled:disabled}" class="three">
@@ -662,6 +662,9 @@ export default {
                     return false;
                 }
             });
+        },
+        dateChange(){
+//      	console.log(this.formdatas.form.realCheckedTime)
         },
     }
 
