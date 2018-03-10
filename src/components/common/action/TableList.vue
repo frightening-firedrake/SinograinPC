@@ -185,7 +185,9 @@ export default {
 	  	var pitem= this.librarylist.filter((item)=>{
 	  		return item.id==pid
 	  	})
-	  	return pitem[0].libraryName;
+	  	if(pitem.length){	  		
+	  		return pitem[0].libraryName;
+	  	}
 	  },
 	}
 }

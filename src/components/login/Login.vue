@@ -3,6 +3,7 @@
         <div class="login_box">
             <el-form ref="form"  class="login_form" :model="loginForm">
             	<p v-if="loginError" class="loginError"><span class="el-icon-warning"></span>您输入的账号或密码不正确，请重新输入！</p>
+            	<p v-else class="loginError"></p>
                 <el-form-item label="" @click="addborder($event)" :class="{focus:isfocus}">
                 	<el-input
 					    placeholder="请输入您的账号"
@@ -21,16 +22,16 @@
                     <!--<i class="iconfont icon-mima"></i>
                     <el-input type="password" placeholder="请输入您的密码"   v-model="loginForm.password"></el-input>-->
                 </el-form-item>
-                <el-form-item label="" class="code" @click="addBorder()">
+                <!--<el-form-item label="" class="code" @click="addBorder()">
                 	<el-input
 					    placeholder="请输入验证码"
 					    v-model="loginForm.number">
 					    <i slot="prefix" class="iconfont icon-yanzhengma"></i>
 					</el-input>
-                    <!--<i class="iconfont icon-yanzhengma"></i>
-                    <el-input   placeholder="请输入验证码" v-model="loginForm.number"></el-input>-->
+                    <i class="iconfont icon-yanzhengma"></i>
+                    <el-input   placeholder="请输入验证码" v-model="loginForm.number"></el-input>
                 </el-form-item>
-                <img class="code_img" :src="captcha" @click="change()" alt="">
+                <img class="code_img" :src="captcha" @click="change()" alt="">-->
                 <el-button class="login_submit" @click="submitForm()">登录</el-button>
             </el-form>
         </div>
