@@ -608,7 +608,7 @@ export default {
 	  	getlibrarylist(){
 			this.$http({
 			    method: 'post',
-				url: 'api/grain/library/data',
+				url: 'http://m.ityyedu.com/grain/library/data',
 				transformRequest: [function (data) {
 					// Do whatever you want to transform the data
 					let ret = ''

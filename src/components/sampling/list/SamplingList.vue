@@ -185,9 +185,9 @@ export default {
   },
   data() {
     return {
-      datalistURL:'api/grain/register/data',
-      searchURL:'api/grain/register/data/search',
-    //   deleteURL:'api/grain/register/data/delete',
+      datalistURL:'http://m.ityyedu.com/grain/register/data',
+      searchURL:'http://m.ityyedu.com/grain/register/data/search',
+    //   deleteURL:'http://m.ityyedu.com/grain/register/data/delete',
       checkedId:[],
       list:"librarylist",
 	  modalVisible:false,

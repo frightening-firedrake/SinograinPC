@@ -141,8 +141,8 @@ export default {
   },
   data() {
     return {
-      uploadPicURL:'api/grain/safetyReport/uploadPic',
-      saveURL:'api/grain/safetyReport/save',
+      uploadPicURL:'http://m.ityyedu.com/grain/safetyReport/uploadPic',
+      saveURL:'http://m.ityyedu.com/grain/safetyReport/save',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
