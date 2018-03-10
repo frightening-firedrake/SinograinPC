@@ -398,13 +398,7 @@ export default {
 //      width:190,
 //      sort:true,
       },
-      {
-        id: 100,
-        prop:'barnTime',
-        label:"入库时间",
-//      width:150,
-//      sort:true,
-      },
+      
       {
         id: 4,
         prop:'position',
@@ -447,6 +441,13 @@ export default {
         prop:'gainTime',
         label:"收获年度",
 //      width:70,
+//      sort:true,
+      },
+      {
+        id: 100,
+        prop:'barnTime',
+        label:"入库时间",
+//      width:150,
 //      sort:true,
       },
 //       {

@@ -35,6 +35,9 @@
 									         <!--<el-option  label="无" key="-1" :value="-1"></el-option>-->								        
 									    </el-select>
 	    						</template>
+	    						<template v-if="item.prop=='amount'">
+		    							<input class="editModelInput" type="text" v-model.number="scope.row[item.prop]" @blur="fixed(scope.row)"/>
+	    						</template>
 	    						<template v-else-if="item.prop=='libraryName'">
 		    							<!--<el-select  v-if="!item.editLibraryName" v-model="libraryName2" placeholder="选择库点" @change="libraryChange">
 									         <el-option v-for="item2 in librarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
@@ -172,7 +175,7 @@ export default {
 //    libraryPid:'',
 	    libraryName2:'',
 //	    备注列表
-	    restaurants: [{"value": "春季普查"},{"value": "秋季普查"},{"value": "2017轮换年度"},{"value": "2018轮换年度"},{"value": "收购寻查"}],
+	    restaurants: [{"value": "春季抽查"},{"value": "秋季普查"},{"value": "2017年度轮换验收"},{"value": "2018年度轮换验收"},{"value": "收购巡查"}],
     }
   },
   mounted: function() {
@@ -270,6 +273,10 @@ export default {
 	      		return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
 	    	};
 	  },
+//	  两位小数
+		fixed(val){
+				val.amount=(val.amount-0).toFixed(2)
+		}
 	}
 }
 

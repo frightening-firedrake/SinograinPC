@@ -3,7 +3,7 @@
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
       <!--alert-->
-      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
+      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
@@ -273,7 +273,7 @@ export default {
       {
         id: 3,
         prop:'createTime',
-        label:"创建时间",
+        label:"最后检查日期",
         sort:true,
       },
       ],

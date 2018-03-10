@@ -134,7 +134,7 @@ export default new Router({
             path:"sampling",
             name: '扦样流程',
             component:ExaminationLibrary,
-            redirect: 'sampling/examinationLibrary',
+            redirect: 'sampling/examinationLibrary/examinationLibraryList',
           },
           {
             path:"sampling/examinationLibrary",
@@ -215,17 +215,17 @@ export default new Router({
           },
           {
             path:"sampling/PLibraryList/SRLibraryList",
-            name:"扦样流程/监督检查情况/被查库点列表",
+            name:"扦样流程/监督检查库点列表",
             component:SRLibraryList
           },
           {
             path:"sampling/PLibraryList/SRLibraryList/SafetyReportList",
-            name:"扦样流程/监督检查情况/被查库点列表/监督检查列表",
+            name:"扦样流程/监督检查库点列表/监督检查列表",
             component:SafetyReportList
           },
           {
             path:"sampling/PLibraryList/SRLibraryList/SafetyReportList/SafetyProblem",
-            name:"扦样流程/监督检查情况/被查库点列表/监督检查列表/监督检查详情",
+            name:"扦样流程/监督检查库点列表/监督检查列表/监督检查详情",
             component:SafetyProblem
           },
 //        样品管理

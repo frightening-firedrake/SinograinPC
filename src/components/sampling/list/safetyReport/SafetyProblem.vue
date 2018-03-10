@@ -5,7 +5,7 @@
   	  <!--标题-->
   	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--提示-->
-      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
+      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
       <safety-form-pass :formdatas="formdatas" :problem="formdatas.problem" @problemStatusChange="problemStatusChange" @pass="pass" @addsafety="addsafety"></safety-form-pass> 
       <!--通知弹框-->

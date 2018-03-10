@@ -252,13 +252,19 @@ export default {
       },
       {
         id: 3,
+        prop:'createTime',
+        label: "创建时间",
+//      sort:true,
+      },
+      {
+        id: 4,
         prop:'isDeal',
         label:"问题状态",
         status:true,
 //      sort:true,
       },
       {
-        id: 4,
+        id: 5,
         prop:'problem',
         label:"问题描述",
 //      sort:true,
@@ -266,7 +272,7 @@ export default {
       ],
       actions:{
       	selection:false,
-      	number:false,
+      	number:true,
       	view:true,
       	edit:false,
       	dele:false,

@@ -160,7 +160,7 @@ export default {
 				{
 					icon: 'icon-xinshenqing',
 					title: '审批扦样列表',
-					linkto: '/index/sampling/examinationLibrary',
+					linkto: '/index/sampling/examinationLibrary/examinationLibraryList',
 					level: 2,
 					pid: 1,
 					lid: 2,
@@ -170,7 +170,7 @@ export default {
 				{
 					icon: 'icon-iconfontcolor69',
 					title: '扦样库点列表',
-					linkto: '/index/sampling/sampleLibraryList',
+					linkto: '/index/sampling/sampleLibraryList/libraryList',
 					level: 2,
 					pid: 1,
 					lid: 3
@@ -194,7 +194,7 @@ export default {
 				{
 					icon:'icon-anquanbaogao',
 					title: '监督检查情况',
-					linkto: '/index/sampling/PLibraryList',
+					linkto: '/index/sampling/PLibraryList/SRLibraryList',
 					level: 2,
 					pid: 1,
 					lid: 4

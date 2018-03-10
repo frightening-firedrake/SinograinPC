@@ -5,7 +5,7 @@
   	  <!--标题-->
   	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--提示-->
-      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
+      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
       <manuscript-form :formdatas="formdatas" @pjmdff="pjmdff" @submit="submit"></manuscript-form> 
     </div>

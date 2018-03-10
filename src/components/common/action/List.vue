@@ -138,9 +138,10 @@
       </el-table-column>
       
       <template slot="empty"> 
-      		<i class="iconfont icon-xinjian" @click=emptyCreate></i>
+      		<!--<i class="iconfont icon-xinjian" @click=emptyCreate></i>
       		<br />
-      		页面空空如也 快去新建吧！     		
+      		页面空空如也 快去新建吧！     		-->
+      		页面空空如也！     		
       </template>
   </el-table>	
 </template>
