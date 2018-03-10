@@ -342,11 +342,11 @@ export default {
   },
   data() {
     return {
-	  librarylistURL:'api/grain/library/data',//获取库列表
-      datalistURL:'api/grain/sample/data',
-	  agreeURL:'api/grain/register/edit',
-	  disagreeURL:'api/grain/register/edit',
-	  exportExcelURL:'api/grain/register/exportExcel',
+	  librarylistURL:'http://m.ityyedu.com/grain/library/data',//获取库列表
+      datalistURL:'http://m.ityyedu.com/grain/sample/data',
+	  agreeURL:'http://m.ityyedu.com/grain/register/edit',
+	  disagreeURL:'http://m.ityyedu.com/grain/register/edit',
+	  exportExcelURL:'http://m.ityyedu.com/grain/register/exportExcel',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],

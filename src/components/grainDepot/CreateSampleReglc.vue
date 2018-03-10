@@ -481,12 +481,12 @@ export default {
     return {
       isEmpty:false,
       rowid:999,//临时id
-      deleteURL:'api/grain/sample/remove',//草稿删除
-      datalistURL:'api/grain/sample/data',//获取草稿地址
-	  librarylistURL:'api/grain/library/data',//获取库列表
-      saveURL:'api/grain/sample/saveAll',//草稿保存地址
-      sampleURL:'api/grain/register/edit',//申请扦样地址
-	  editURL: 'api/grain/sample/saveOrEditAll',
+      deleteURL:'http://m.ityyedu.com/grain/sample/remove',//草稿删除
+      datalistURL:'http://m.ityyedu.com/grain/sample/data',//获取草稿地址
+	  librarylistURL:'http://m.ityyedu.com/grain/library/data',//获取库列表
+      saveURL:'http://m.ityyedu.com/grain/sample/saveAll',//草稿保存地址
+      sampleURL:'http://m.ityyedu.com/grain/register/edit',//申请扦样地址
+	  editURL: 'http://m.ityyedu.com/grain/sample/saveOrEditAll',
       searchURL:'/liquid/role2/data/search',
       libraryName2:'',
       checkedId:[],

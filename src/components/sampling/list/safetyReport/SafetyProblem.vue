@@ -84,7 +84,7 @@ export default {
 			var imagesbox=res.images.split(',');
 			imagesbox.forEach((value2,index2)=>{
 				var obj={};
-				obj.url="api/grain/upload/picture/"+value2;
+				obj.url="http://m.ityyedu.com/grain/upload/picture/"+value2;
 				images.push(obj);
 			})
 			res0.images=images			
@@ -197,11 +197,11 @@ export default {
 
   data() {
     return {
-      dataURL:'api/grain/sample/get',
-	  dataSafetyURL: 'api/grain/safetyReport/get',
-	  editURL: 'api/grain/safetyReport/edit',
+      dataURL:'http://m.ityyedu.com/grain/sample/get',
+	  dataSafetyURL: 'http://m.ityyedu.com/grain/safetyReport/get',
+	  editURL: 'http://m.ityyedu.com/grain/safetyReport/edit',
       searchURL:'/liquid/role2/data/search',
-      passURL:'api/grain/safetyReport/edit',
+      passURL:'http://m.ityyedu.com/grain/safetyReport/edit',
       problemStatus:'all',
       passProblemId:'',
       checkedId:[],
