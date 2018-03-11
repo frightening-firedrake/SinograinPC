@@ -119,7 +119,7 @@ export default {
 //	获取列表数据方法
   	getlistdata(page){
 		var params = {};
-		params.pLibraryId = this.$route.query.libraryId
+		params.regState = -1
   		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -144,6 +144,31 @@ export default {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
 		  	this.loading=false;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+	getLibraryList(){
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+			    listName: this.list,
+			    page:page,
+			    rows:this.page.size,
+			}
+	    }).then(function (response) {
+
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -186,7 +211,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'http://m.ityyedu.com/grain/library/data',
+      datalistURL:'http://192.168.1.223:80/grain/library/data',
       searchURL:'/liquid/role/data/search',
       deleteURL:'/liquid/role/data/delete',
       checkedId:[],
@@ -238,11 +263,12 @@ export default {
       	subtitle:'库点审批列表',     
       },
       tabledatas:[],
+	  libraryList:[],
       items: [
       {
         id: 1,
-        prop:'libraryName',
-        label: "被查库点",
+        prop:'pLibraryName',
+        label: "被查直属库",
 //      sort:true,
       },
 //    {
