@@ -35,9 +35,9 @@
 		<div class="dataSelete" v-if="listHeader.selectlib">			
 			<p>选择库点:</p>
 			<div>
-			    <el-select v-model="selectlib"  placeholder="请选择库点" change="selectlibChange">
+			    <el-select v-model="selectlib"  placeholder="请选择库点" @change="selectlibChange">
 					<el-option  label="全部"  value="全部"></el-option>								        									        
-					<el-option v-for="item2 in listHeader.libraryList" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        									        
+					<el-option v-for="item2 in listHeader.libraryList" :label="item2.libraryName" :key="item2.id" :value="item2.libraryName"></el-option>								        									        
 				</el-select>
 			</div>
 		</div>
