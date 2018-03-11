@@ -130,35 +130,36 @@ export default {
 	},
 	//导出Excel表格
 	exportExcel(pId){
-		console.log(pId)
+//		console.log(pId)
+		window.open(this.exportExcelURL+'?pId='+pId,"_blank");				  
 		// 获取列表数据（第？页）
-		this.$http({
-		    method: 'post',
-			url: this.exportExcelURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-			    pId: pId,
-			},
-			dataType: "jsonp"
-	    }).then(function (response) {
-//	    	console.log(response)
-//		  	if(response.data.success) {
-////				  alert("导出Excel成功")
-				  window.open(this.exportExcelURL+'?pId='+pId,"_blank");				  
-//			  } else {
-//				  alert("导出Excel失败")
-//			  }
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
+//		this.$http({
+//		    method: 'post',
+//			url: this.exportExcelURL,
+//			transformRequest: [function (data) {
+//				// Do whatever you want to transform the data
+//				let ret = ''
+//				for (let it in data) {
+//				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+//				}
+//				return ret
+//			}],
+//			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+//			data: {
+//			    pId: pId,
+//			},
+//			dataType: "jsonp"
+//	    }).then(function (response) {
+////	    	console.log(response)
+////		  	if(response.data.success) {
+//////				  alert("导出Excel成功")
+//				  window.open(this.exportExcelURL+'?pId='+pId,"_blank");				  
+////			  } else {
+////				  alert("导出Excel失败")
+////			  }
+//		}.bind(this)).catch(function (error) {
+//		    console.log(error);
+//		}.bind(this));
 	},
 //	获取搜索数据
   	searchingfor(searching){

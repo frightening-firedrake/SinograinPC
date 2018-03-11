@@ -85,7 +85,7 @@
       </template>
 		  <!--是否包含工作底稿-->
       <template v-if="actions.manuscript">
-			    <el-table-column :resizable="resizable" align="center" label="工作底稿" class-name="tableAction" width="auto">
+			    <el-table-column :resizable="resizable" align="center" label="工作底稿" class-name="tableAction" width="200">
 		          <template slot-scope="scope">
 		      <!--已完成工作底稿-->
 		      				<template v-if="scope.row.mId">

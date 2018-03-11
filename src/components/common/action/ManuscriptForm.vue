@@ -48,8 +48,9 @@
 		
 		<el-form-item label="储存形式" prop="storge" class="three">
 		    <el-select v-model="formdatas.form.storge" placeholder="选择储存形式">
-		        <el-option label="常规" :value="1"></el-option>
-		        <el-option label="非常规" :value="2"></el-option>
+		        <el-option label="散存" :value="1"></el-option>
+		        <el-option label="包装" :value="2"></el-option>
+		        <el-option label="围包散存" :value="3"></el-option>
 		    </el-select>
 		</el-form-item>
 		<el-form-item label="保管帐数量（kg）" prop="grainQuality" class="three">

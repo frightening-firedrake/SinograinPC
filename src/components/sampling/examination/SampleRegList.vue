@@ -248,7 +248,7 @@ export default {
       listHeader:{
       	createlib:false,
       	createSampling:false,
-      	status:true,
+      	status:false,
       	date:true,
       	statusitems:[
       		{label:'all',text:'全部'},
