@@ -44,7 +44,7 @@ export default {
   },
   created(){
 //  获取列表数据（第一页）
-	this.getlibrarylist()
+	// this.getlibrarylist()
 	this.getlistdata(1)
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
@@ -149,30 +149,30 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-	//	获取库列表
-  	getlibrarylist(){
-		this.$http({
-		    method: 'post',
-			url: this.librarylistURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
+// 	//	获取库列表
+//   	getlibrarylist(){
+// 		this.$http({
+// 		    method: 'post',
+// 			url: this.librarylistURL,
+// 			transformRequest: [function (data) {
+// 				// Do whatever you want to transform the data
+// 				let ret = ''
+// 				for (let it in data) {
+// 				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+// 				}
+// 				return ret
+// 			}],
+// 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+// 			data: {
 				
-			}
-	    }).then(function (response) {
-		  	this.librarylist = response.data.rows;
-//			  console.log(this.librarylist)
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
-  	},
+// 			}
+// 	    }).then(function (response) {
+// 		  	this.librarylist = response.data.rows;
+// //			  console.log(this.librarylist)
+// 		}.bind(this)).catch(function (error) {
+// 		    console.log(error);
+// 		}.bind(this));
+//   	},
   	//	发送删除id
   	sendDeleteId(id){
 		this.$http({
@@ -212,7 +212,7 @@ export default {
   data() {
     return {
 	  librarylistURL:'http://m.ityyedu.com/grain/library/data',//获取库列表
-      datalistURL:'http://m.ityyedu.com/grain/library/data',
+      datalistURL:'http://192.168.1.223/grain/library/data',
       searchURL:'/liquid/role/data/search',
       deleteURL:'/liquid/role/data/delete',
       checkedId:[],
@@ -268,9 +268,9 @@ export default {
       items: [
       {
         id: 1,
-        prop:'pLibraryId',
+        prop:'pLibraryName',
         label: "被查直属库",
-        status:true,
+        // status:true,
 //      sort:true,
       },
 //    {

@@ -119,6 +119,9 @@ export default {
   	},
 //	获取列表数据方法
   	getlistdata(page){
+		var params = {}
+		params.pLibraryId = this.$route.query.libraryId;
+		params.regState = 2;
   		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -137,7 +140,7 @@ export default {
 			    listName: this.list,
 			    page:page,
 			    rows:this.page.size,
-				params:JSON.stringify(this.$route.query),
+				params:JSON.stringify(params),
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
@@ -185,7 +188,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'http://m.ityyedu.com/grain/register/data',
+      datalistURL:'http://192.168.1.223/grain/register/data',
       searchURL:'http://m.ityyedu.com/grain/register/data/search',
     //   deleteURL:'http://m.ityyedu.com/grain/register/data/delete',
       checkedId:[],

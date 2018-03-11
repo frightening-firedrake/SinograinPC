@@ -119,7 +119,7 @@ export default {
 //	获取列表数据方法
   	getlistdata(page){
 		var params = {};
-		params.libraryId = this.$route.query.libraryId
+		params.pLibraryId = this.$route.query.libraryId
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -186,9 +186,9 @@ export default {
   },
   data() {
     return {
-      datalistURL:'http://m.ityyedu.com/grain/safetyReport/data',
-      searchURL:'http://m.ityyedu.com/grain/library/data/search',
-      deleteURL:'http://m.ityyedu.com/grain/',
+      datalistURL:'http://192.168.1.223/grain/safetyReport/data',
+      searchURL:'http://192.168.1.223/grain/library/data/search',
+      deleteURL:'http://192.168.1.223/grain/',
       checkedId:[],
       list:"librarylist",
 	  modalVisible:false,
