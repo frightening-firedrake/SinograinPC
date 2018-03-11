@@ -197,7 +197,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'http://m.ityyedu.com/grain/register/data',
+      datalistURL: this.apiRoot + '/grain/register/data',
       searchURL:'/liquid/role/data/search',
       deleteURL:'/liquid/role/data/delete',
       checkedId:[],

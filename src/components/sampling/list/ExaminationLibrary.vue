@@ -211,10 +211,10 @@ export default {
   },
   data() {
     return {
-	  librarylistURL:'http://m.ityyedu.com/grain/library/data',//获取库列表
-      datalistURL:'http://m.ityyedu.com/grain/library/data',
-      searchURL:'http://m.ityyedu.com/grain/library/data/search',
-      deleteURL:'http://m.ityyedu.com/grain/',
+	  librarylistURL: this.apiRoot + '/grain/library/data',//获取库列表
+      datalistURL: this.apiRoot + '/grain/library/data',
+      searchURL: this.apiRoot + '/grain/library/data/search',
+      deleteURL: this.apiRoot + '/grain/',
       checkedId:[],
       list:"safetyReport",
 	  modalVisible:false,

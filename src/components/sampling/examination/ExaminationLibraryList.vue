@@ -211,8 +211,8 @@ export default {
   },
   data() {
     return {
-	  librarylistURL:'http://m.ityyedu.com/grain/library/data',//获取库列表
-      datalistURL:'http://192.168.1.223/grain/library/data',
+	  librarylistURL: this.apiRoot + '/grain/library/data',//获取库列表
+      datalistURL: this.apiRoot + '/grain/library/data',
       searchURL:'/liquid/role/data/search',
       deleteURL:'/liquid/role/data/delete',
       checkedId:[],

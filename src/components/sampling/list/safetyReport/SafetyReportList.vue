@@ -228,10 +228,10 @@ export default {
   },
   data() {
     return {
-      datalistURL:'http://192.168.1.223/grain/safetyReport/data',
-	  librarylistURL:'http://192.168.1.223/grain/library/data',
-	  searchURL:'http://192.168.1.223/grain/library/data/search',
-      deleteURL:'http://192.168.1.223/grain/',
+      datalistURL: this.apiRoot + '/grain/safetyReport/data',
+	  librarylistURL: this.apiRoot + '/grain/library/data',
+	  searchURL: this.apiRoot + '/grain/library/data/search',
+      deleteURL: this.apiRoot + '/grain/',
       checkedId:[],
       filterlib:'全部',
       list:"librarylist",

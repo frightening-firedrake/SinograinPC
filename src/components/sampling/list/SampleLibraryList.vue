@@ -186,9 +186,9 @@ export default {
   },
   data() {
     return {
-      datalistURL:'http://m.ityyedu.com/grain/library/data',
-      searchURL:'http://m.ityyedu.com/grain/library/data/search',
-      deleteURL:'http://m.ityyedu.com/grain/',
+      datalistURL: this.apiRoot + '/grain/library/data',
+      searchURL: this.apiRoot + '/grain/library/data/search',
+      deleteURL: this.apiRoot + '/grain/',
       checkedId:[],
       list:"safetyReport",
 	  modalVisible:false,

@@ -518,7 +518,7 @@ form.sampling .el-form-item.leftborder .el-form-item__content input{
 	background-size:cover;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-image:url('~static/images/sys/box.jpg');
+	/*background-image:url('~static/images/sys/box.jpg');*/
 }
 form.sampling .el-form-item.small{
 	/*border-left: solid 1px #dfdfdf;*/

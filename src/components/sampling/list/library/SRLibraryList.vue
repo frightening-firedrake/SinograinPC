@@ -211,10 +211,10 @@ export default {
   },
   data() {
     return {
-	  librarylistURL:'http://192.168.1.223/grain/library/data',//获取库列表
-      datalistURL:'http://192.168.1.223/grain/library/data',
-      searchURL:'http://192.168.1.223/grain/library/data/search',
-      deleteURL:'http://192.168.1.223/grain/',
+	  librarylistURL: this.apiRoot + '/grain/library/data',//获取库列表
+      datalistURL: this.apiRoot + '/grain/library/data',
+      searchURL: this.apiRoot + '/grain/library/data/search',
+      deleteURL: this.apiRoot + '/grain/',
       checkedId:[],
       list:"librarylist",
 	  modalVisible:false,

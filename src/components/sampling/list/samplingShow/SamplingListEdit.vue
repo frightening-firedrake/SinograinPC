@@ -105,7 +105,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'http://m.ityyedu.com/grain/sample/get',
+      datalistURL: this.apiRoot + '/grain/sample/get',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],

@@ -251,10 +251,10 @@ export default {
   },
   data() {
     return {
-      exportExcelURL:'http://m.ityyedu.com/grain/manuscript/exportExcel',
-      datalistURL:'http://m.ityyedu.com/grain/manuscript/data',
-      editURL: 'http://m.ityyedu.com/grain/manuscript/edit',
-      sampleURL:'http://m.ityyedu.com/grain/sample/get',
+      exportExcelURL: this.apiRoot + '/grain/manuscript/exportExcel',
+      datalistURL: this.apiRoot + '/grain/manuscript/data',
+      editURL:  this.apiRoot + '/grain/manuscript/edit',
+      sampleURL: this.apiRoot + '/grain/sample/get',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],

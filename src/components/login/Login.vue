@@ -48,7 +48,7 @@ export default {
     created() {
         this.$http({
 		    method: 'post',
-			url: 'http://m.ityyedu.com/grain/captcha',
+			url:  this.apiRoot + '/grain/captcha',
 			transformRequest: [function (data) {
 				// Do whatever you want to transform the data
 				let ret = ''
@@ -62,7 +62,7 @@ export default {
                 
 			}
 	        }).then(function (response) {
-               this.captcha = 'http://m.ityyedu.com/grain/captcha'
+               this.captcha =  this.apiRoot + '/grain/captcha'
             }.bind(this)).catch(function (error) {
                 console.log(error);
             }.bind(this));
@@ -71,12 +71,12 @@ export default {
     	...mapMutations(['setUserInfo']),
   		...mapActions([]),
         change() {
-            this.captcha = 'http://m.ityyedu.com/grain/captcha?d='+new Date().getTime()
+            this.captcha = this.apiRoot + '/grain/captcha?d='+new Date().getTime()
         },
         submitForm() {
             this.$http({
 		    method: 'post',
-			url: 'http://m.ityyedu.com/grain/login',
+			url: this.apiRoot +  '/grain/login',
 			transformRequest: [function (data) {
 				// Do whatever you want to transform the data
 				let ret = ''

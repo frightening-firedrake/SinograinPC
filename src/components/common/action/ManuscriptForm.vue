@@ -172,7 +172,7 @@
 				<div class="fromrow">
 					粮堆形状及基本尺寸
 				</div>
-				<div class="imgbox">
+				<div class="imgbox" style="background-image:url('static/images/sys/box.jpg')">
 					
 				</div>
 				<el-form-item label="长（m）：" prop="length" class="small" style="border-left: solid 1px #dfdfdf;">
@@ -608,7 +608,7 @@ export default {
 	  	getlibrarylist(){
 			this.$http({
 			    method: 'post',
-				url: 'http://m.ityyedu.com/grain/library/data',
+				url: this.apiRoot + '/grain/library/data',
 				transformRequest: [function (data) {
 					// Do whatever you want to transform the data
 					let ret = ''

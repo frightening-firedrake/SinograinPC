@@ -193,9 +193,9 @@ export default {
   },
   data() {
     return {
-      exportExcelURL:'http://m.ityyedu.com/grain/manuscript/exportExcel',
-      datalistURL:'http://m.ityyedu.com/grain/sample/get',
-      saveURL: 'http://m.ityyedu.com/grain/manuscript/saveMan',
+      exportExcelURL: this.apiRoot + '/grain/manuscript/exportExcel',
+      datalistURL: this.apiRoot + '/grain/sample/get',
+      saveURL:  this.apiRoot + '/grain/manuscript/saveMan',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],

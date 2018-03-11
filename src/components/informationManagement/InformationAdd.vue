@@ -142,9 +142,9 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role21/data',
-      searchURL:'/liquid/role2/data/search',
-      deleteURL:'/liquid/role2/data/delete',
+      datalistURL: this.apiRoot + '/liquid/role21/data',
+      searchURL: this.apiRoot + '/liquid/role2/data/search',
+      deleteURL: this.apiRoot + '/liquid/role2/data/delete',
       checkedId:[],
 	  createlibVisible:false,
 	  modalVisible:false,

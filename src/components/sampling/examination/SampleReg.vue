@@ -146,7 +146,8 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 			    pId: pId,
-			}
+			},
+			dataType: "jsonp"
 	    }).then(function (response) {
 //	    	console.log(response)
 //		  	if(response.data.success) {
@@ -342,11 +343,11 @@ export default {
   },
   data() {
     return {
-	  librarylistURL:'http://m.ityyedu.com/grain/library/data',//获取库列表
-      datalistURL:'http://m.ityyedu.com/grain/sample/data',
-	  agreeURL:'http://m.ityyedu.com/grain/register/edit',
-	  disagreeURL:'http://m.ityyedu.com/grain/register/edit',
-	  exportExcelURL:'http://m.ityyedu.com/grain/register/exportExcel',
+	  librarylistURL: this.apiRoot + '/grain/library/data',//获取库列表
+      datalistURL: this.apiRoot + '/grain/sample/data',
+	  agreeURL: this.apiRoot + '/grain/register/edit',
+	  disagreeURL: this.apiRoot + '/grain/register/edit',
+	  exportExcelURL: this.apiRoot + '/grain/register/exportExcel',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
