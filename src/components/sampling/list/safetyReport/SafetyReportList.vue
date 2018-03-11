@@ -45,6 +45,7 @@ export default {
   created(){
 //  获取列表数据（第一页）
 	this.getlistdata(1)
+	this.getlibrarylist()
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
@@ -159,6 +160,32 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+	  getlibrarylist(){
+		var params = {};
+		params.pLibraryId = this.$route.query.libraryId
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.librarylistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+			    params: JSON.stringify(params)
+			}
+	    }).then(function (response) {
+			console.log(response)
+		  	this.listHeader.libraryList = response.data.rows;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
   	//	发送删除id
   	sendDeleteId(id){
 		this.$http({
@@ -202,7 +229,8 @@ export default {
   data() {
     return {
       datalistURL:'http://192.168.1.223/grain/safetyReport/data',
-      searchURL:'http://192.168.1.223/grain/library/data/search',
+	  librarylistURL:'http://192.168.1.223/grain/library/data',
+	  searchURL:'http://192.168.1.223/grain/library/data/search',
       deleteURL:'http://192.168.1.223/grain/',
       checkedId:[],
       filterlib:'全部',
