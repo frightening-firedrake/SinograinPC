@@ -5,9 +5,9 @@
       <!--alert-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
+      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" @selectlibChange="selectlibChange"></list-header>
       <!--表格-->
-      <sinograin-list class="list" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
+      <sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
       <!--分页-->
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
@@ -65,6 +65,17 @@ export default {
   destroy(){
   	this.$root.eventHub.$off("viewlistitem")
   	this.$root.eventHub.$off('delelistitem')
+  },
+  computed:{
+  	tabledatasFilter(){
+  		if(this.filterStatus=="全部"){
+			return this.filterlib;
+		}else{
+			return this.tabledatas.filter((value,index)=>{
+				return value.id!==this.filterlib
+			})
+		}
+  	},
   },
   methods: {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
@@ -182,7 +193,11 @@ export default {
   	getchecked(checkedId){
   		this.checkedId=checkedId;
   	},
-
+//	筛选库
+	selectlibChange(lib){
+		this.filterlib=lib
+		console.log(this.filterlib)
+	},
   },
   data() {
     return {
@@ -190,6 +205,7 @@ export default {
       searchURL:'http://192.168.1.223/grain/library/data/search',
       deleteURL:'http://192.168.1.223/grain/',
       checkedId:[],
+      filterlib:'全部',
       list:"librarylist",
 	  modalVisible:false,
 	  modal:{
@@ -235,6 +251,8 @@ export default {
       	createSampling:false,
       	status:false,
       	date:true,
+      	selectlib:true,
+      	libraryList:[],
       },
       tabledatas:[],
       items: [

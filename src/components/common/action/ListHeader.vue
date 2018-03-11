@@ -31,7 +31,16 @@
 			    </el-date-picker>
 			</div>
 		</div>
-		
+		<!--下拉选择库点筛选-->
+		<div class="dataSelete" v-if="listHeader.selectlib">			
+			<p>选择库点:</p>
+			<div>
+			    <el-select v-model="selectlib"  placeholder="请选择库点" change="selectlibChange">
+					<el-option  label="全部"  value="全部"></el-option>								        									        
+					<el-option v-for="item2 in listHeader.libraryList" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        									        
+				</el-select>
+			</div>
+		</div>
 		<div class="btns">
 			<template v-if="listHeader.createlib">				
 				<div class="create" @click="createlib" style="background-image:url('static/images/sys/create.png');">
@@ -237,6 +246,18 @@
 		border:none;
 		width:4rem;*/
 	}
+	div.listHeader .el-select{
+		margin-left:0.2rem;
+	}
+	div.listHeader .el-select .el-input input{
+		height:0.36rem;
+		width:2.75rem;
+		line-height:0.34rem;
+		border:solid  0.01rem #dfdfdf;
+		font-size:0.16rem;
+		background:#f2f2f2;
+		border-radius:0;
+	}
 </style>
 <script>
 //import SinograinModal from '@/components/common/action/Modal.vue';
@@ -278,6 +299,7 @@ export default {
 	        },	
 	        date_select: '',
 	        radio_status:'全部',
+	        selectlib:'全部',
         };
     },
     created(){
@@ -292,6 +314,9 @@ export default {
 			    datearr[1]=Date.parse(this.date_select[1]);
 			console.log(datearr)
 //  		this.$emit('dateChange',this.date_select);
+    	},
+    	selectlibChange(){
+    		this.$emit('selectlibChange',this.selectlib);
     	},
     	statusChange(){
 //  		console.log(this.radio_status)

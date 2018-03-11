@@ -275,7 +275,7 @@ export default {
 	  },
 //	  两位小数
 		fixed(val){
-				val.amount=(val.amount-0).toFixed(2)
+				val.amount=(val.amount-0).toFixed(3)
 		}
 	}
 }

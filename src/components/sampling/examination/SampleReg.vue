@@ -419,13 +419,7 @@ export default {
         label:"被查库点",
 //      sort:true,
       },
-      {
-        id: 3,
-        prop:'barnTime',
-        label:"入库时间",
-//      width:150,
-//      sort:true,
-      },
+      
       {
         id: 4,
         prop:'sort',
@@ -454,6 +448,13 @@ export default {
         id: 8,
         prop:'gainTime',
         label:"收获年度",
+//      sort:true,
+      },
+      {
+        id: 3,
+        prop:'barnTimes',
+        label:"入库时间",
+//      width:150,
 //      sort:true,
       },
 //    {
