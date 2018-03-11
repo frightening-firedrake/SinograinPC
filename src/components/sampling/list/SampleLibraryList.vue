@@ -59,7 +59,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/sampleLibraryList/libraryList',query:{libraryId:id}})
+		this.$router.push({path: '/index/sampling/libraryList',query:{libraryId:id}})
   	}.bind(this));
   },
   destroy(){

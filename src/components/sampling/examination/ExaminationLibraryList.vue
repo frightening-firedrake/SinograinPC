@@ -7,7 +7,7 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-list class="list" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
+      <sinograin-list class="list" :librarylist='librarylist' :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
       <!--分页-->
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
@@ -44,6 +44,7 @@ export default {
   },
   created(){
 //  获取列表数据（第一页）
+	this.getlibrarylist()
 	this.getlistdata(1)
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
@@ -59,7 +60,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id,state){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/examinationLibrary/examinationLibraryList/sampleRegList',query:{libraryId:id,status:state}})
+		this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList',query:{libraryId:id,status:state}})
   	}.bind(this));
   },
   destroy(){
@@ -148,11 +149,11 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-	getLibraryList(){
-  		// 获取列表数据（第？页）
+	//	获取库列表
+  	getlibrarylist(){
 		this.$http({
 		    method: 'post',
-			url: this.datalistURL,
+			url: this.librarylistURL,
 			transformRequest: [function (data) {
 				// Do whatever you want to transform the data
 				let ret = ''
@@ -163,12 +164,11 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
-			    page:page,
-			    rows:this.page.size,
+				
 			}
 	    }).then(function (response) {
-
+		  	this.librarylist = response.data.rows;
+//			  console.log(this.librarylist)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -211,7 +211,8 @@ export default {
   },
   data() {
     return {
-      datalistURL:'http://192.168.1.223:80/grain/library/data',
+	  librarylistURL:'http://m.ityyedu.com/grain/library/data',//获取库列表
+      datalistURL:'http://m.ityyedu.com/grain/library/data',
       searchURL:'/liquid/role/data/search',
       deleteURL:'/liquid/role/data/delete',
       checkedId:[],
@@ -263,12 +264,13 @@ export default {
       	subtitle:'库点审批列表',     
       },
       tabledatas:[],
-	  libraryList:[],
+	  librarylist:[],
       items: [
       {
         id: 1,
-        prop:'pLibraryName',
+        prop:'pLibraryId',
         label: "被查直属库",
+        status:true,
 //      sort:true,
       },
 //    {

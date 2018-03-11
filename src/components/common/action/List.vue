@@ -61,6 +61,9 @@
 				            			<span style="color:#999999;">已解决</span>
 				      			</template>
 		      				</template>
+		      				<template v-if="item.prop=='pLibraryId'">
+		    						{{findPLibraryName(scope.row[item.prop])}}				      				
+		      				</template>
 		          </template>
 	    		</el-table-column>
    		</template>
@@ -147,7 +150,7 @@
 </template>
 <script>
 export default {
-  props: ['items', 'tabledata','actions','list','loading'],
+  props: ['items', 'tabledata','actions','list','loading','librarylist'],
   data() {
     return {
 //  	importLoading: false,
@@ -187,18 +190,18 @@ export default {
     },
 //  工作底稿
     handleViewManuscript(index, row){
-    	this.$router.push({path: '/index/sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/manuscriptEdit',query:{id:row.id,libraryName:row.libraryName}})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptEdit',query:{id:row.id,libraryName:row.libraryName}})
     },
     handleCreateManuscript(index, row){
     	console.log(this.$router)
-    	this.$router.push({path: '/index/sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/manuscriptCreate',query:{id:row.id,libraryName:row.libraryName}})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptCreate',query:{id:row.id,libraryName:row.libraryName}})
     },
 //  安全报告
     handleViewSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/safetyReportEdit',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportEdit',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
     },
     handleCreateSafetyReport(index, row){
-    	this.$router.push({path: '/index/sampling/sampleLibraryList/libraryList/samplingList/sampleShowList/safetyReportCreate',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
     },
     handleInput(index, row,scope) {
 //	  	console.log(index,row);
@@ -247,7 +250,15 @@ export default {
 		},
 	  emptyCreate(){
 	  	this.$emit('emptyCreate');
-	  }
+	  },
+	  findPLibraryName(pid){
+	  	var pitem= this.librarylist.filter((item)=>{
+	  		return item.id==pid
+	  	})
+	  	if(pitem.length){	  		
+	  		return pitem[0].libraryName;
+	  	}
+	  },
 	}
 }
 
