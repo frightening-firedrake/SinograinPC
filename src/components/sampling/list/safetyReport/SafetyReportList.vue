@@ -41,6 +41,15 @@ export default {
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
 	...mapGetters(["modal_id"]),
+	tabledatasFilter(){
+  		if(this.filterlib=="全部"){
+			return this.tabledatas;
+		}else{
+			return this.tabledatas.filter((value,index)=>{
+				return value.libraryName==this.filterlib
+			})
+		}
+  	},
   },
   created(){
 //  获取列表数据（第一页）
@@ -66,17 +75,6 @@ export default {
   destroy(){
   	this.$root.eventHub.$off("viewlistitem")
   	this.$root.eventHub.$off('delelistitem')
-  },
-  computed:{
-  	tabledatasFilter(){
-  		if(this.filterStatus=="全部"){
-			return this.filterlib;
-		}else{
-			return this.tabledatas.filter((value,index)=>{
-				return value.id!==this.filterlib
-			})
-		}
-  	},
   },
   methods: {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
