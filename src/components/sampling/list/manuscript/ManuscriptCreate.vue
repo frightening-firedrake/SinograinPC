@@ -244,7 +244,7 @@ export default {
           high:0,//高（m）：
           //1.计算粮堆体积
           measuredVolume:'',//粮堆测量体积(m3)	
-          deductVolume:'0',//需要扣除体积(m3)	
+          deductVolume:0,//需要扣除体积(m3)	
           realVolume:'',//粮堆实际体积(m3)	
           //2.计算粮堆平均密度	
 //          标准容重器法

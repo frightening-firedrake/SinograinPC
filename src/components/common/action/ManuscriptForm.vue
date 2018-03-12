@@ -397,7 +397,7 @@ export default {
 			//var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
 			var bgzrsh = this.formdatas.form.lossNature - 0;
 			var sum = sfjl + bgzrsh;
-			return this.jsdjg.checkNum = (cljss + sum).toFixed(2);
+			return this.jsdjg.checkNum = (cljss + sum).toFixed(0);
 		},
 		difference() { //差数
 			var length = this.formdatas.form.length;
@@ -416,12 +416,12 @@ export default {
 			var bgzrsh = this.formdatas.form.lossNature - 0;
 			var sum = sfjl + bgzrsh;
 			var jcjss = cljss +sum;
-			console.log(jcjss)
-			return this.jsdjg.difference = (this.formdatas.form.amount*1000 - jcjss).toFixed(2);
+//			console.log(jcjss)
+			return this.jsdjg.difference = (this.formdatas.form.amount*1000 - jcjss).toFixed(0);
 		},
 		slip() { //差率
 			var slip = (this.difference-0)/(this.formdatas.form.amount*1000 - 0) * 100;
-			return this.jsdjg.slip = slip.toFixed(2);
+			return this.jsdjg.slip = slip.toFixed(1);
 		},
 //		zssfxf() {
 //			if(this.slip > -3 && this.slip < 3) {
