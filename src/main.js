@@ -10,7 +10,7 @@ import store from './store/index'
 import axios from 'axios'
 
 Vue.use(ElementUI);
-Vue.prototype.apiRoot = 'http://192.168.1.225:8080'
+Vue.prototype.apiRoot = 'http://m.ityyedu.com'
 Vue.prototype.$http=axios;
 new Vue({
   el: '#app',
