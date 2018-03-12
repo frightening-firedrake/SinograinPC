@@ -295,6 +295,7 @@ export default {
       	dele:false,
       	manuscript:true,
       	safetyReport:true,
+      	sort:'sampleWord',
       }
     }
   }

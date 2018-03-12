@@ -5,7 +5,7 @@
   	style="width: 100%" 
   	:data="tabledata" 
   	@selection-change="handleSelectionChange" 
-  	:default-sort = "{prop: 'id', order: 'ascending'}" 
+  	:default-sort = "{prop: actions.sort, order: 'ascending'}" 
   	v-loading="loading"
   	:row-class-name="row_class_name"
     element-loading-customClass="table_loading"
