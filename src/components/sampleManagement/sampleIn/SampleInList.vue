@@ -161,6 +161,7 @@ export default {
 			    pageSize:this.page.size,
 			}
 	    }).then(function (response) {
+			console.log(response.data.rows)
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
 		  	
@@ -230,7 +231,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role8/data',
+      datalistURL: this.apiRoot + '/grain/sample/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -243,24 +244,25 @@ export default {
 	  			label:"扦样编号:",
 	  			model:"sampleNumber",
 	  			disabled:true,
-	  			value:'123456789',
+	  			value:'',
 	  			type:'password'
 	  		},
 			{
 	  			label:"存放状态:",
-	  			model:"storageStatus",
+	  			model:"sampleState",
 	  			disabled:true,
-	  			value:'入库',
+	  			value:'',
 	  		},
 	  		{
 	  			label:"入库时间:",
-	  			model:"sampleInTime",
+	  			model:"storageTime",
 	  			disabled:true,
-	  			value:'2017.09.09',
+	  			value:'',
 	  		},
 	  		{
 	  			label:"存放位置:",
 	  			position:true,
+				model: "depot",
 //	  			model:"position",
 	  			modelselect:"yangpinshi",
 	  			modelinput:"gui",
@@ -268,8 +270,8 @@ export default {
 	  		},
 	  		{
 	  			label:"入库签名:",
-	  			model:"sampleInSign",
-	  			value:'1323',
+	  			model:"autograph",
+	  			value:'',
 	  		},
 	  	],
 	  	submitText:'确定',
@@ -314,37 +316,37 @@ export default {
       items: [
       {
         id: 1,
-        prop:'sampling_number',
+        prop:'sampleNo',
         label: "检验编号",
         sort:true
       },
       {
         id: 2,
-        prop:'varieties',
+        prop:'sort',
         label:"品种",
         sort:true,
       },
       {
         id: 3,
-        prop:'position',
+        prop:'depot',
         label: "存放位置",
         sort:true,
       },
       {
         id: 4,
-        prop:'storageStatus',
+        prop:'sampleState',
         label:"存放状态",
         sort:true,
       },
       {
         id: 5,
-        prop:'sampleInTime',
+        prop:'storageTime',
         label:"入库时间",
         sort:true,
       },
       {
         id: 6,
-        prop:'sampleInSign',
+        prop:'autograph',
         label:"入库签名",
         sort:true,
       },
