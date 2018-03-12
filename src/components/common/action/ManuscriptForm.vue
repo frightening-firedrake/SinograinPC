@@ -176,11 +176,11 @@
 				<div class="imgbox" style="background-image:url('static/images/sys/box.jpg')">
 					
 				</div>
-				<el-form-item label="长（m）：" prop="length" class="small" style="border-left: solid 1px #dfdfdf;">
-				    <el-input v-model.number="formdatas.form.length"></el-input>
+				<el-form-item label="长（m）：" prop="length" class="small"  style="border-left: solid 1px #dfdfdf;">
+				    <el-input v-model.number="formdatas.form.length" ></el-input>
 				</el-form-item>
-				<el-form-item label="宽（m）：" prop="wide" class="small">
-				    <el-input v-model.number="formdatas.form.wide"></el-input>
+				<el-form-item label="宽（m）：" prop="wide" class="small" >
+				    <el-input v-model.number="formdatas.form.wide" @change="changeNum('formdatas.form.wide')"></el-input>
 				</el-form-item>
 				<el-form-item label="高（m）：" prop="high" class="small">
 				    <el-input v-model.number="formdatas.form.high"></el-input>
@@ -666,6 +666,14 @@ export default {
         },
         dateChange(){
 //      	console.log(this.formdatas.form.realCheckedTime)
+        },
+//      保留,并四舍五入
+        changeNum(field){
+//      	var path=field.split('.');
+//      	var value=this[path[0]][path[1]][path[2]]-0;
+//      	var toFixed=value.toFixed(2);
+//      	var res=parseFloat(toFixed);
+//      	this[path[0]][path[1]][path[2]]=res;       	
         },
     }
 

@@ -244,7 +244,7 @@ export default {
           high:0,//高（m）：
           //1.计算粮堆体积
           measuredVolume:'',//粮堆测量体积(m3)	
-          deductVolume:'',//需要扣除体积(m3)	
+          deductVolume:'0',//需要扣除体积(m3)	
           realVolume:'',//粮堆实际体积(m3)	
           //2.计算粮堆平均密度	
 //          标准容重器法
@@ -266,9 +266,9 @@ export default {
 //          检查计算数与保管账数量比较
           difference:'',//差数（kg）
           slip:'',//差率（％）
-             isMatch:'',//账实是否相符
+             isMatch:'是',//账实是否相符
           // weight_r:'',//粮食实际数量（kg）
-          result:'',//账实不符原因   
+          result:'无',//账实不符原因   
           remark: '无',//备注
           rummager:'',//检查人：
           custodian:'',//保管责任人：

@@ -44,7 +44,7 @@ export default {
   },
   created(){
 //  获取列表数据（第一页）
-	// this.getlibrarylist()
+	 this.getlibrarylist()
 	this.getlistdata(1)
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
@@ -142,8 +142,8 @@ export default {
 				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-		  	this.tabledatas=response.data.rows;
-	  		this.page.total=response.data.total;		  		
+		  	this.tabledatas=response.data;
+//	  		this.page.total=response.data.total;		  		
 		  	this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -242,7 +242,7 @@ export default {
         size: 10,
         total: 0,
         currentPage: 1,
-        show:true,
+        show:false,
         tfootbtns:{
         	btns:false,//是否添加按钮组
         	leading_out:true,//导出按钮
@@ -280,7 +280,7 @@ export default {
       },
       {
         id: 3,
-        prop:'createTime',
+        prop:'regCreateTime',
         label:"最后检查日期",
         sort:true,
       },
