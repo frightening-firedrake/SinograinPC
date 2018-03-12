@@ -212,7 +212,7 @@ export default {
   data() {
     return {
 	  librarylistURL: this.apiRoot + '/grain/library/data',//获取库列表
-      datalistURL: this.apiRoot + '/grain/library/data',
+      datalistURL: this.apiRoot + '/grain/library/getFirst',
       searchURL: this.apiRoot + '/grain/library/data/search',
       deleteURL: this.apiRoot + '/grain/',
       checkedId:[],
