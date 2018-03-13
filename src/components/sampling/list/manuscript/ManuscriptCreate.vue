@@ -19,7 +19,7 @@
 
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
-import ManuscriptForm  from "@/components/common/action/ManuscriptForm"
+import ManuscriptForm  from "@/components/common/action/ManuscriptForm";
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 
 
@@ -225,11 +225,11 @@ export default {
           libraryName:'',//所在库区
           barnType:'',//仓房类型
           gainTime: '',//收货年度
-          storge:'',//储存形式
+          storge:1,//储存形式
           grainQuality:'',//保管帐数量（kg）
           qualityGrade:'',//质量等级
           //stored_way:['人工入仓'],//入仓方式
-          putWay:'',//入仓方式
+          putWay:2,//入仓方式
           //粮食入库质量
           storageCapacity:'',//容重（g/l）  
           storageWater:'',//水分（%）

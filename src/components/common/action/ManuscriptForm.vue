@@ -15,7 +15,7 @@
 		<el-form-item label="实际查库日"  class="three">
 		    <el-form-item prop="realCheckedTime">
 		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
-		        <el-date-picker type="month" placeholder="选择实际查库日" v-model="formdatas.form.realCheckedTime"  @change="dateChange"></el-date-picker>
+		        <el-date-picker type="date" placeholder="选择实际查库日" v-model="formdatas.form.realCheckedTime"  @change="dateChange"></el-date-picker>
 		    </el-form-item>
 		</el-form-item>
 		<el-form-item label="收货年度"  v-bind:class="{disabled:disabled}" class="three">
@@ -71,8 +71,8 @@
 		</el-form-item>-->
 		<el-form-item label="入仓方式" prop="putWay" class="three2">
 	    	<el-radio-group v-model="formdatas.form.putWay">
-		        <el-radio :label="1">人工入仓</el-radio>
-		        <el-radio :label="2">机械入仓</el-radio>
+		        <el-radio :label="2">人工入仓</el-radio>
+		        <el-radio :label="1">机械入仓</el-radio>
 		    </el-radio-group>
 		</el-form-item>
 		
@@ -156,8 +156,8 @@
 					<el-form-item label="单位体积粮食重量（kg/m³）" prop="unit_volume_weight_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
 					    <el-input v-model="formdatas.form.unit_volume_weight_tz" :disabled="calculation_density==1"></el-input>
 					</el-form-item>
-					<el-form-item label="校正后修正系数" prop="correction_factor_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
-					    <el-input v-model.number="formdatas.form.correction_factor_tz" :disabled="calculation_density==1"></el-input>
+					<el-form-item label="校正后修正系数" prop="correction_factor_tz2"  class='leftborder' :class="{disabled:calculation_density==1}">
+					    <el-input v-model.number="formdatas.form.correction_factor_tz2" :disabled="calculation_density==1"></el-input>
 					</el-form-item>
 					<el-form-item label="粮堆平均密度（kg/m³）" prop="average_density_tz"  class='leftborder' :class="{disabled:calculation_density==1}">
 					    <el-input v-model="tzldpjmd" :disabled="calculation_density==1" disabled></el-input>
@@ -379,7 +379,7 @@ export default {
 			var year = date.getFullYear();
 			//var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
 			var bgzrsh = this.formdatas.form.lossNature - 0;
-			return this.jsdjg.loss = (sfjl + bgzrsh).toFixed(2);
+			return this.jsdjg.loss = (sfjl + bgzrsh).toFixed(0);
 		},
 		jcjss() { //检查计算数（kg）
 			var length = this.formdatas.form.length;

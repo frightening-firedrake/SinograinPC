@@ -262,6 +262,12 @@ export default {
 //      sort:true
       },
       {
+        id: 2,
+        prop:'position',
+        label:"货位号",
+//      sort:true,
+      },
+      {
         id: 3,
         prop:'sort',
         label:"品种",
@@ -274,22 +280,28 @@ export default {
         status:true,
 //      sort:true,
       },
-      {
-        id: 5,
-        prop:'originPlace',
-        label:"产地",
-//      sort:true,
-      },
+//    {
+//      id: 5,
+//      prop:'originPlace',
+//      label:"产地",
+////      sort:true,
+//    },
       {
         id: 6,
         prop:'gainTime',
         label:"收获年度",
-        sort:true,
+//      sort:true,
+      },
+      {
+        id: 7,
+        prop:'barnTimes',
+        label:"入库时间",
+//      sort:true,
       },
       ],
       actions:{
 //    	selection:true,
-      	number:false,
+      	number:true,
       	view:true,
       	edit:false,
       	dele:false,

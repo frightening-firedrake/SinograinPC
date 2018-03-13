@@ -9,7 +9,7 @@
 		<el-form-item label="样品条形码：" class="code" prop="code" v-bind:class="{disabled:disabled}">
 			<img class="codeimg" :src="formdatas.form.code" alt="" />
 		</el-form-item>
-		<!--<el-form-item label="迁样编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">-->
+		<!--<el-form-item label="扦样编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">-->
 		<el-form-item label="检验编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.sampleNo" :disabled="disabled"></el-input>
 		</el-form-item>

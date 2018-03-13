@@ -11,7 +11,7 @@ import axios from 'axios'
 
 Vue.use(ElementUI);
 //Vue.prototype.apiRoot = 'http://m.ityyedu.com'
-Vue.prototype.apiRoot = 'http://192.168.1.223'
+Vue.prototype.apiRoot = 'http://192.168.1.223:8080'
 Vue.prototype.$http=axios;
 new Vue({
   el: '#app',

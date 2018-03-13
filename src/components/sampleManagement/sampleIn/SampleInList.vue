@@ -114,11 +114,11 @@ export default {
 		this.messageShow=true;
 //		this.createlib()
 	},
-//	填入新建数据
+//	填入新建数据并点击确认
 	createlibitem(form){
 		console.log(form);
 //		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInCreate', params: {'position': form.position,'sampleInName': form.sampleInName} })
-		this.$router.push({name: "样品管理/样品入库列表/新建样品", params: {'yangpinshi': form.yangpinshi,'gui': form.gui,'sampleInSign': form.sampleInSign,'sampleNumber': form.sampleNumber} })
+//		this.$router.push({name: "样品管理/样品入库列表/新建样品", params: {'yangpinshi': form.yangpinshi,'gui': form.gui,'sampleInSign': form.sampleInSign,'sampleNumber': form.sampleNumber} })
 	},
 //	关闭新建弹框
 	dialogClose(){
@@ -274,7 +274,7 @@ export default {
 	  			value:'',
 	  		},
 	  	],
-	  	submitText:'确定',
+	  	submitText:'入库',
 	  },
       breadcrumb:{
       	search:true,   
@@ -318,37 +318,38 @@ export default {
         id: 1,
         prop:'sampleNo',
         label: "检验编号",
-        sort:true
+//      sort:true
       },
       {
         id: 2,
         prop:'sort',
         label:"品种",
-        sort:true,
+//      sort:true,
       },
       {
         id: 3,
         prop:'depot',
         label: "存放位置",
-        sort:true,
+//      sort:true,
       },
       {
         id: 4,
         prop:'sampleState',
         label:"存放状态",
-        sort:true,
+        status:true,
+//      sort:true,
       },
       {
         id: 5,
         prop:'storageTime',
         label:"入库时间",
-        sort:true,
+//      sort:true,
       },
       {
         id: 6,
         prop:'autograph',
         label:"入库签名",
-        sort:true,
+//      sort:true,
       },
       ],
       actions:{

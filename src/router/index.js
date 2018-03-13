@@ -133,14 +133,14 @@ export default new Router({
           {
             path:"sampling",
             name: '扦样流程',
-            component:ExaminationLibrary,
+            component:ExaminationLibraryList,
             redirect: 'sampling/examinationLibraryList',
           },
-          {
-            path:"sampling/examinationLibrary",
-            name:"扦样流程/审批扦样单位列表",
-            component:ExaminationLibrary
-          },
+//        {
+//          path:"sampling/examinationLibrary",
+//          name:"扦样流程/审批扦样单位列表",
+//          component:ExaminationLibrary
+//        },
           {
             path:"sampling/examinationLibraryList",
             name:"扦样流程/审批扦样库点列表",
@@ -185,7 +185,7 @@ export default new Router({
           },
           {
             path:"sampling/libraryList/samplingList/sampleShowList/samplingListEdit",
-            name:"扦样流程/扦样库点列表/扦样登记列表/被查库典列表/查看扦样",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/查看扦样",
             component:SamplingListEdit
           },
           {
