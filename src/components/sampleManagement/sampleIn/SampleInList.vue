@@ -116,9 +116,32 @@ export default {
 	},
 //	填入新建数据并点击确认
 	createlibitem(form){
-		console.log(form);
-//		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInCreate', params: {'position': form.position,'sampleInName': form.sampleInName} })
-//		this.$router.push({name: "样品管理/样品入库列表/新建样品", params: {'yangpinshi': form.yangpinshi,'gui': form.gui,'sampleInSign': form.sampleInSign,'sampleNumber': form.sampleNumber} })
+		console.log(form)
+		this.$http({
+		    method: 'post',
+			url: this.editURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+			    sampleNo: form.sampleNo,
+				storageTime: form.storageTime,
+				depot: form.yangpinshi + form.gui,
+
+			}
+	    }).then(function (response) {
+			
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+		// this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInCreate', params: {'position': form.position,'sampleInName': form.sampleInName} })
+		// this.$router.push({name: "样品管理/样品入库列表/新建样品", params: {'yangpinshi': form.yangpinshi,'gui': form.gui,'sampleInSign': form.sampleInSign,'sampleNumber': form.sampleNumber} })
 	},
 //	关闭新建弹框
 	dialogClose(){
@@ -151,25 +174,32 @@ export default {
   	},
 //	获取列表数据方法
   	getlistdata(page){
-  		this.loading=true;
+		var params = {};
+		params.sampleState = 2
+  		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 			    listName: this.list,
 			    page:page,
 			    pageSize:this.page.size,
+				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
 			console.log(response.data.rows)
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -248,17 +278,17 @@ export default {
 		formdatas:[
 			{
 	  			label:"扦样编号:",
-	  			model:"sampleNumber",
+	  			model:"sampleNo",
 	  			disabled:true,
 	  			value:'',
 	  			type:'password'
 	  		},
-//			{
-//	  			label:"存放状态:",
-//	  			model:"sampleState",
-//	  			disabled:true,
-//	  			value:'1233',
-//	  		},
+			// {
+	  		// 	label:"检验编号",
+	  		// 	model:"sampleNum",
+	  		// 	disabled:true,
+	  		// 	value:'',
+	  		// },
 	  		{
 	  			label:"入库时间:",
 	  			model:"storageTime",
@@ -277,7 +307,7 @@ export default {
 	  		{
 	  			label:"入库签名:",
 	  			model:"autograph",
-	  			value:'',
+				value: ''
 	  		},
 	  	],
 	  	submitText:'入库',
@@ -322,7 +352,7 @@ export default {
       items: [
       {
         id: 1,
-        prop:'sampleNo',
+        prop:'sampleNum',
         label: "检验编号",
 //      sort:true
       },
