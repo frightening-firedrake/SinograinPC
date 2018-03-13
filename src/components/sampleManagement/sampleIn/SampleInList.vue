@@ -251,13 +251,13 @@ export default {
 	  			label:"存放状态:",
 	  			model:"sampleState",
 	  			disabled:true,
-	  			value:'',
+	  			value:'1233',
 	  		},
 	  		{
 	  			label:"入库时间:",
 	  			model:"storageTime",
 	  			disabled:true,
-	  			value:'',
+	  			value:'323',
 	  		},
 	  		{
 	  			label:"存放位置:",
