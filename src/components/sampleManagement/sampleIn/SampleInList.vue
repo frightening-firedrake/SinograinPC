@@ -328,31 +328,37 @@ export default {
       },
       {
         id: 2,
+        prop:'sampleNo',
+        label: "扦样编号",
+//      sort:true
+      },
+      {
+        id: 3,
         prop:'sort',
         label:"品种",
 //      sort:true,
       },
       {
-        id: 3,
+        id: 4,
         prop:'depot',
         label: "存放位置",
 //      sort:true,
       },
       {
-        id: 4,
+        id: 5,
         prop:'sampleState',
         label:"存放状态",
         status:true,
 //      sort:true,
       },
       {
-        id: 5,
+        id: 6,
         prop:'storageTime',
-        label:"入库时间",
+        label:"样品入库时间",
 //      sort:true,
       },
       {
-        id: 6,
+        id: 7,
         prop:'autograph',
         label:"入库签名",
 //      sort:true,

@@ -69,7 +69,7 @@ export default {
 	}
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.query)
 	this.getlibrarylist()
 //  获取列表数据（第一页）
 	if(this.$route.query.state==3){
@@ -196,6 +196,7 @@ export default {
 				params: JSON.stringify(params)
 			}
 	    }).then(function (response) {
+		  	response.data.rows.sort((a,b)=>{return a.id-b.id})
 		  	this.tabledatas=response.data.rows;
 			this.listHeader.tableName=response.data.rows[0].formName
 			this.libraryName2=response.data.rows[0].libraryId

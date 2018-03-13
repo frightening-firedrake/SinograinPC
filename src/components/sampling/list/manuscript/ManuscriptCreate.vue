@@ -229,7 +229,7 @@ export default {
           grainQuality:'',//保管帐数量（kg）
           qualityGrade:'',//质量等级
           //stored_way:['人工入仓'],//入仓方式
-          putWay:2,//入仓方式
+          putWay:1,//入仓方式
           //粮食入库质量
           storageCapacity:'',//容重（g/l）  
           storageWater:'',//水分（%）

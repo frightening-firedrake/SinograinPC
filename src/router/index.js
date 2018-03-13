@@ -200,12 +200,12 @@ export default new Router({
           },
           {
             path:"sampling/libraryList/samplingList/sampleShowList/safetyReportCreate",
-            name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建安全报告",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建监督检查报告",
             component:SafetyReportCreate
           },
           {
             path:"sampling/libraryList/samplingList/sampleShowList/safetyReportEdit",
-            name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/查看安全报告",
+            name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/查看监督检查报告",
             component:SafetyReportEdit
           },
           {
