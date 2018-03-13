@@ -123,6 +123,8 @@ export default {
 //	关闭新建弹框
 	dialogClose(){
 		this.modalVisible=false;
+		//关闭入库框后打开扫描框
+		this.messageShow=true;
 	},
 //	获取搜索数据
   	searchingfor(searching){
@@ -228,6 +230,10 @@ export default {
   			this.modalVisible=true;
   		}
   	},
+  	getDateNow(){
+  		var date1=new Date()
+  		return date1.getFullYear()+'-'+(date1.getMonth()+1)+'-'+date1.getDate()
+  	},
   },
   data() {
     return {
@@ -247,17 +253,17 @@ export default {
 	  			value:'',
 	  			type:'password'
 	  		},
-			{
-	  			label:"存放状态:",
-	  			model:"sampleState",
-	  			disabled:true,
-	  			value:'1233',
-	  		},
+//			{
+//	  			label:"存放状态:",
+//	  			model:"sampleState",
+//	  			disabled:true,
+//	  			value:'1233',
+//	  		},
 	  		{
 	  			label:"入库时间:",
 	  			model:"storageTime",
 	  			disabled:true,
-	  			value:'323',
+	  			value:this.getDateNow(),
 	  		},
 	  		{
 	  			label:"存放位置:",
