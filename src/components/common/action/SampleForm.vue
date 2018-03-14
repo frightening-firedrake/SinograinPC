@@ -101,7 +101,7 @@ import "@/assets/style/common/Form.css";
 export default {
     props: ["formdatas"],
     created(){
-    	console.log(this.formdatas.form.sampleInSign)
+    	// console.log(this.formdatas.form.sampleInSign)
     },
     mounted: function() {
 //		console.log(this.formdatas)

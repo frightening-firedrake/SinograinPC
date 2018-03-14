@@ -69,12 +69,7 @@ export default {
           id: this.$route.query.id,
 			}
 	    }).then(function (response) {
-        console.log(response)
 		  	this.formdatas.form=response.data;
-		  	
-	  		// setTimeout(()=>{			  		
-		  	// 	this.loading=false;
-		  	// },1000)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -99,6 +94,37 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+	//提交表单
+	editsampledata() {
+		this.$http({
+		  method: 'post',
+			url: this.editURL,
+     	transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+          id: this.$route.query.id,
+					storageTime: this.formdatas.form.storageTime,
+					depot: this.formdatas.form.depot,
+					counter: this.formdatas.form.counter
+			}
+	    }).then(function (response) {
+        console.log(response)
+		  	this.formdatas.form=response.data;
+		  	
+	  		// setTimeout(()=>{			  		
+		  	// 	this.loading=false;
+		  	// },1000)
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+	},
 	titleEvent(){
   		console.log('titleEvent');
   	},
@@ -106,6 +132,7 @@ export default {
   data() {
     return {
       getdataURL:this.apiRoot + '/grain/sample/get',
+			editURL: this.apiRoot + '/grain/sample/edit',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
