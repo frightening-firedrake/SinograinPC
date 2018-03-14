@@ -5,7 +5,7 @@
 	  			<el-form-item v-if="!item.position" :label="item.label" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '内容不能为空'}]">
 			        <el-input v-model="form[item.model]" auto-complete="off" :disabled="item.disabled"></el-input>
 			    </el-form-item>
-			    <el-form-item class="position" v-if="item.position" :label="item.label" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}">
+			    <el-form-item class="position" v-if="item.position" :label="item.label"  :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}">
 			        <el-select v-model="form[item.modelselect]" placeholder="选择样品室" :disabled="item.disabled">
 				        <el-option label="样品1室" value="样品1室"></el-option>
 				        <el-option label="样品2室" value="样品2室"></el-option>
@@ -52,7 +52,6 @@ export default {
 	},
 	created(){
 		this.modal.formdatas.forEach((item,index)=>{
-			console.log(item)
 			this.form[item.model]=item.value
 		})
 	},
@@ -96,9 +95,10 @@ export default {
         	this.position_error=false;
 			this.$refs[formname].validate((valid) => {
                 if (valid) {
+
 					this.$emit('createlibitem',this.form);
 					this.$emit('dialogClose')
-					this.$refs['modalform'].resetFields();				
+//					this.$refs['modalform'].resetFields();				
                 } else {
                     console.log('error submit!!');
                     return false;

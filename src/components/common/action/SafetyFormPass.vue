@@ -32,8 +32,11 @@
 		
 		
 		<!--<template v-for="(item, index) in problemFilter">-->
-			<el-form-item label="创建时间：" class="full disabled">
+			<el-form-item label="创建时间：" class="disabled full">
 			    <el-input v-model="problem.createTime" disabled></el-input>
+			</el-form-item>
+			<el-form-item label="检查人：" class="disabled full">
+			    <el-input v-model="problem.rummager" disabled></el-input>
 			</el-form-item>
 			<el-form-item 
 				label="问题" 

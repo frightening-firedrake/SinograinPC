@@ -265,6 +265,7 @@ export default {
       		{
       			problem: '',//问题
       			images: [],//图片
+          		rummager:'',
       			isDeal:-1,
       			createTime:'',
       		},

@@ -299,6 +299,7 @@ export default {
 	  			label:"存放位置:",
 	  			position:true,
 				model: "depot",
+				value:'',
 //	  			model:"position",
 	  			modelselect:"yangpinshi",
 	  			modelinput:"gui",

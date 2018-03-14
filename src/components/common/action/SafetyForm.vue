@@ -18,6 +18,9 @@
 		<el-form-item label="货位号：" prop="position"  v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.position" :disabled="disabled"></el-input>
 		</el-form-item>
+		<el-form-item label="检查人：" prop="rummager" class="full">
+		    <el-input v-model="formdatas.form.rummager" ></el-input>
+		</el-form-item>
 		<!--问题组-->
 		
 		

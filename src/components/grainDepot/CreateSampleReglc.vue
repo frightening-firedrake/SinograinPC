@@ -325,8 +325,7 @@ export default {
 			this.uncomplate(msg)
 			return
 		}
-    				console.log(sample)
-    				console.log(JSON.stringify(sample))
+
     				
   		// 提交扦样列表
 		this.$http({

@@ -58,6 +58,7 @@ export default {
   		problems.forEach((value,index)=>{
   			value.images=this.imgbox[index].images.join(',')
   			value.sampleId = this.$route.query.id;
+  			value.rummager = this.formdatas.form.rummager;
   		})
 //		console.log(problems)
 //		var str= JSON.stringify(problems)
@@ -166,6 +167,7 @@ export default {
       	form:{
           libraryName: '沁县库区',//被查库点
           position: '漫水-1',//货位号
+          rummager:'',
           problems:[
           	{
           		problem: '',//问题
