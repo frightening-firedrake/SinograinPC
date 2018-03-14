@@ -7,7 +7,7 @@
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
-      <sample-form :formdatas="formdatas"></sample-form> 
+      <sample-form :formdatas="formdatas" @submit="submit"></sample-form> 
     </div>
 </template>
 
@@ -95,6 +95,11 @@ export default {
 		}.bind(this));
   	},
 	//提交表单
+	submit(){
+		console.log('我要提交')
+		
+		  	this.$router.go(-1);//提交完成返回上一页
+	},
 	editsampledata() {
 		this.$http({
 		  method: 'post',
@@ -153,25 +158,22 @@ export default {
       formdatas: {
       	title:'中央储备粮襄垣直属库',
       	form:{
-          createTime: '',//创建时间
-          sampleState: '',//状态
-          sampleNo: '',//迁样编号
-          libraryName: '',//被查库点
-          position: '',//货位号
-          sort: '',//品种
-          quality: '',//性质
-          amount: '',//代表数量
-          originPlace: '',//产地
-          gainTime: '',//收货年度
-          sampleTime: '',//扦样日期
-          remark: '',//备注
-          storageStatus:'',
-          sampleInTime: "",
-          position:"",
-          yangpinshi:"",
-          gui:"",
-          sampleInSign: "",
-          code:""
+//        createTime: '',//创建时间
+//        sampleState: '',//状态
+//        sampleNo: '',//迁样编号
+//        libraryName: '',//被查库点
+//        position: '',//货位号
+//        sort: '',//品种
+//        quality: '',//性质
+//        amount: '',//代表数量
+//        originPlace: '',//产地
+//        gainTime: '',//收货年度
+//        sampleTime: '',//扦样日期
+//        remark: '',//备注
+//        storageStatus:'',
+//        sampleInTime: "",
+//        sampleInSign: "",
+//        code:""
       	},
       	submitText:'确定',
 	  }

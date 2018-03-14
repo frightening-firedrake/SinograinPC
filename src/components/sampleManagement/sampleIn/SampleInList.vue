@@ -111,6 +111,7 @@ export default {
 	},
 //	扫码新建样品
 	scanCode(){
+		this.message.type='scaning';
 		this.messageShow=true;
 //		this.createlib()
 	},
@@ -196,7 +197,9 @@ export default {
 	    }).then(function (response) {
 			this.dataBySampleNo = response.data;
 			if(this.dataBySampleNo.sampleState == 2) {
-				alert("已入库")
+
+				this.message.type='success';
+				
 			} else {
   				this.modalVisible=true;
 			}
@@ -275,6 +278,7 @@ export default {
   	},
   	messageclick(type){
   		if(type=="success"){
+  			console.log("去编辑页面！！！")
   			console.log(type)
   		}else if(type=="error"){
   			console.log(type)  			
@@ -287,7 +291,8 @@ export default {
   		if(!code){
   			this.messageShow=false;
   		}else{  			
-  			this.modal.formdatas[0].value=code;
+//			this.modal.formdatas[0].value=code;
+  			this.modal.formdatas[0].value=6000601005;
 			this.messageShow=false;
 			this.getsample();
   		}
@@ -325,7 +330,7 @@ export default {
 	  		// 	value:'',
 	  		// },
 	  		{
-	  			label:"入库时间:",
+	  			label:"样品入库时间:",
 	  			model:"storageTime",
 	  			disabled:true,
 	  			value:this.getDateNow(),
@@ -447,6 +452,12 @@ export default {
 	  		icon:'iconfont icon-iconset0255',
 	  		messageTittle:'开始扫描',
 	  		messageText:'不要点击键盘和鼠标请将扫码枪对准条形码，然后按下扫码枪按钮！',
+	  	},
+	  	success:{
+	  		icon:'el-icon-success',
+	  		messageTittle:'已入库',
+	  		messageText:'该样品已入库，点击编辑按钮修改入库信息！',
+	  		buttonText:'编辑',
 	  	},
 	  },
     }

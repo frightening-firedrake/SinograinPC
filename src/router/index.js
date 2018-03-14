@@ -245,11 +245,11 @@ export default new Router({
             name:"样品管理/样品入库列表/查看样品",
             component:SampleInEdit
           },
-          {
-            path:"sampleManagement/sampleIn/sampleInCreate",
-            name:"样品管理/样品入库列表/新建样品",
-            component:SampleInCreate
-          },
+//        {
+//          path:"sampleManagement/sampleIn/sampleInCreate",
+//          name:"样品管理/样品入库列表/新建样品",
+//          component:SampleInCreate
+//        },
           
           {
             path:"sampleManagement/handover",

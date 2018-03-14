@@ -7,20 +7,21 @@
 		    <el-input v-model="formdatas.form.createTime" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="样品条形码：" class="code" prop="code" v-bind:class="{disabled:disabled}">
-			<img class="codeimg" :src="formdatas.form.code" alt="" />
+<!--			<img class="codeimg" :src="formdatas.form.code" alt="" />-->
+			<img class="codeimg" :src="code" alt="" />
 		</el-form-item>
 		<!--<el-form-item label="扦样编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">-->
 		<el-form-item label="检验编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.sampleNum" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="货位号：" prop="position" v-bind:class="{disabled:disabled}" >
+		<!--<el-form-item label="货位号：" prop="position" v-bind:class="{disabled:disabled}" >
 		    <el-input v-model="formdatas.form.depot" :disabled="disabled"></el-input>
-		</el-form-item>
+		</el-form-item>-->
 		<el-form-item label="性质：" prop="quality"  v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.quality" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="状态：" prop="state" v-bind:class="{disabled:disabled}">
-		    <el-input v-model="samplestate" :disabled="disabled"></el-input>
+		<el-form-item label="被查直属库：" prop="state" v-bind:class="{disabled:disabled}">
+		    <el-input v-model="formdatas.form.pLibraryName" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="产地：" prop="originPlace"  v-bind:class="{disabled:disabled}">
 		    <!--<el-select v-model="formdatas.form.originPlace" placeholder="请选择产地" :disabled="disabled">
@@ -33,7 +34,7 @@
 			 <el-input v-model="formdatas.form.originPlace" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="被查库点：" prop="libraryName" v-bind:class="{disabled:disabled}">
-		    <el-select v-model="formdatas.form.libraryName" placeholder="选择库点" :disabled="disabled">
+		    <!--<el-select v-model="formdatas.form.libraryName" placeholder="选择库点" :disabled="disabled">
 		        <el-option label="本库" value="本库"></el-option>
 		        <el-option label="山西屯留国家粮食储备库" value="山西屯留国家粮食储备库"></el-option>
 		        <el-option label="山西长治国家粮食储备库" value="山西长治国家粮食储备库"></el-option>
@@ -41,7 +42,8 @@
 		        <el-option label="长子分库" value="长子分库"></el-option>
 		        <el-option label="黎城分库" value="黎城分库"></el-option>
 		        <el-option label="沁县分库" value="沁县分库"></el-option>		
-		    </el-select>
+		    </el-select>-->
+		    <el-input v-model="formdatas.form.libraryName" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="品种：" prop="sort" v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.sort" :disabled="disabled"></el-input>
@@ -50,15 +52,15 @@
 		    <el-input v-model="formdatas.form.amount" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="收货年度："  v-bind:class="{disabled:disabled}" prop="gainTime">
-		    <el-form-item>
-		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
+		    <el-input v-model="formdatas.form.gainTime" :disabled="disabled"></el-input>
+		    <!--<el-form-item>
 		        <el-date-picker type="year" placeholder="选择年度" v-model="formdatas.form.gainTime" :disabled="disabled"></el-date-picker>
-		    </el-form-item>
+		    </el-form-item>-->
 		</el-form-item>
 		<el-form-item label="扦样日期：" prop="sampleTime"  v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.sampleTime" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="备注：" class="full" prop="remark" v-bind:class="{disabled:disabled}" >
+		<el-form-item label="备注："  prop="remark" v-bind:class="{disabled:disabled}" >
 		    <el-input v-model="formdatas.form.remark" :disabled="disabled"></el-input>
 		</el-form-item>
 		
@@ -67,7 +69,7 @@
 			<el-form-item label="存放状态：" prop="storageStatus"  v-bind:class="{disabled:disabled}">
 			    <el-input v-model="samplestate" :disabled="disabled"></el-input>
 			</el-form-item>
-			<el-form-item label="入库时间：" prop="sampleInTime" >
+			<el-form-item label="样品入库时间：" prop="sampleInTime" >
 		    	<el-form-item>
 		        	<el-date-picker type="date" placeholder="选择年度" v-model="formdatas.form.storageTime"></el-date-picker>
 		    	</el-form-item>
@@ -83,7 +85,7 @@
 		        	{{position_error_message}}
 		        </div>
 			</el-form-item>
-			<el-form-item label="入库签名：" prop="sampleInSign" >
+			<el-form-item label="入库签名：" prop="autograph" >
 			    <el-input v-model="formdatas.form.autograph"></el-input>
 			</el-form-item>
         
@@ -115,7 +117,10 @@ export default {
     		}else if(this.formdatas.form.sampleState==2){
     			return "已入库";
     		}
-    	}
+    	},
+    	code(){
+    		return  this.apiRoot +'/grain/upload/barcode/'+this.formdatas.form.samplePic;
+    	},
     },
     data() {
 
@@ -172,7 +177,7 @@ export default {
                 position:[
                     {validator:validateText,trigger:'blur'}
                 ],
-	            sampleInSign: [
+	            autograph: [
                     {validator:validateText,trigger:'blur'}
                 ],
 	            
@@ -182,12 +187,12 @@ export default {
     },
     methods: {  
         onSubmit(formname) {
-        	if(!this.formdatas.form.yangpinshi){
+        	if(!this.formdatas.form.depot){
         		this.position_error=true;
         		this.position_error_message="请选择样品室";
         		return
         	}
-        	if(!this.formdatas.form.gui){
+        	if(!this.formdatas.form.counter){
         		this.position_error=true;
         		this.position_error_message="请填写几号柜";
         		return
@@ -195,9 +200,9 @@ export default {
         	this.position_error=false;
             this.$refs[formname].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
-//                  this.$emit('btn_close')
-					window.history.go(-1)
+//                  alert('submit!');
+                    this.$emit('submit')
+//					window.history.go(-1)
                 } else {
                     console.log('error submit!!');
                     return false;
