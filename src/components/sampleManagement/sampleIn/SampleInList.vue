@@ -116,7 +116,6 @@ export default {
 	},
 //	填入新建数据并点击确认
 	createlibitem(form){
-		console.log(form)
 		this.$http({
 		    method: 'post',
 			url: this.editURL,
@@ -130,13 +129,16 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    sampleNo: form.sampleNo,
+				id: this.dataBySampleNo.id,
 				storageTime: form.storageTime,
 				depot: form.yangpinshi + form.gui,
-
+				autograph: form.autograph,
+				sampleState: 2
 			}
 	    }).then(function (response) {
-			
+			if(response.success == false) {
+				alert("入库失败，请重新入库")
+			}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -168,6 +170,35 @@ export default {
 	  		setTimeout(()=>{			  		
 		  		this.loading=false;
 		  	},1000)
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+  	getsample(){
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.getSampleNoURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+			   sampleNo : this.modal.formdatas[0].value
+			}
+	    }).then(function (response) {
+			this.dataBySampleNo = response.data;
+			if(this.dataBySampleNo.sampleState == 2) {
+				alert("已入库")
+			} else {
+  				this.modalVisible=true;
+			}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -256,8 +287,8 @@ export default {
   			this.messageShow=false;
   		}else{  			
   			this.modal.formdatas[0].value=code;
-  			this.messageShow=false;
-  			this.modalVisible=true;
+			this.messageShow=false;
+			this.getsample();
   		}
   	},
   	getDateNow(){
@@ -268,9 +299,12 @@ export default {
   data() {
     return {
       datalistURL: this.apiRoot + '/grain/sample/data',
-      searchURL:'/liquid/role2/data/search',
+	  getSampleNoURL: this.apiRoot + '/grain/sample/getBySampleNo',
+	  editURL: this.apiRoot + '/grain/sample/edit',
+	  searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
+	  dataBySampleNo: {},
       list:"samplinglist",
 	  modalVisible:false,
 	  modal:{

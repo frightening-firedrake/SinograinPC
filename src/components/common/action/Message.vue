@@ -3,7 +3,7 @@
 	  	<span :class="message.icon"></span>
 	  	<h3>{{message.messageTittle}}</h3>
 	  	<p>{{message.messageText}}</p>
-	  	<input style="width:0;height:0;opacity: 0;" ref="scanCode" v-if="messages.type=='scaning'" type="text" v-model="scanCode" @keyup.enter="getScanCode"  v-focus/>
+	  	<input style="height:0;opacity: 0;" ref="scanCode" v-if="messages.type=='scaning'" type="text" v-model="scanCode" @keyup.enter="getScanCode"  v-focus/>
 		<div slot="footer" class="dialog-footer center">
 		    <el-button @click="messageclick" :class="messages.type" v-if="messages.type!=='loading'&&messages.type!=='scaning'">{{message.buttonText?message.buttonText:'确 定'}}</el-button>
 		    <!--<el-button class="no" @click="messageVisible = false">取 消</el-button>-->
