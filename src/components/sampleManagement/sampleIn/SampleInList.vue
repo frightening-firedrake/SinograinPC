@@ -79,7 +79,7 @@ export default {
   	//	监听列表点击编辑事件
   	this.$root.eventHub.$on("editlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInEdit',query:{libid:id}})
+		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInEdit',query:{id:id}})
 		
   	}.bind(this));
   },
@@ -131,7 +131,8 @@ export default {
 			data: {
 				id: this.dataBySampleNo.id,
 				storageTime: form.storageTime,
-				depot: form.yangpinshi + form.gui,
+				depot: form.depot,
+				counter: form.counter,
 				autograph: form.autograph,
 				sampleState: 2
 			}
@@ -335,8 +336,8 @@ export default {
 				model: "depot",
 				value:'',
 //	  			model:"position",
-	  			modelselect:"yangpinshi",
-	  			modelinput:"gui",
+	  			modelselect:"depot",
+	  			modelinput:"counter",
 //	  			value:'朔水-9号仓-1号柜',
 	  		},
 	  		{

@@ -82,12 +82,12 @@ export default {
 //			}else{
 //				return
 //			}
-			if(!this.form.yangpinshi){
+			if(!this.form.depot){
         		this.position_error=true;
         		this.position_error_message="请选择样品室";
         		return
         	}
-        	if(!this.form.gui){
+        	if(!this.form.counter){
         		this.position_error=true;
         		this.position_error_message="请填写几号柜";
         		return

@@ -55,8 +55,8 @@ export default {
   		// 获取列表数据（第？页）
 		this.$http({
 		  method: 'post',
-			url: this.datalistURL,
-      transformRequest: [function (data) {
+			url: this.getdataURL,
+     	transformRequest: [function (data) {
 				// Do whatever you want to transform the data
 				let ret = ''
 				for (let it in data) {
@@ -66,12 +66,11 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-          // id: this.$router.query.id,
-          id: 1
+          id: this.$route.query.id,
 			}
 	    }).then(function (response) {
         console.log(response)
-		  	this.formdatas=response.data;
+		  	this.formdatas.form=response.data;
 		  	
 	  		// setTimeout(()=>{			  		
 		  	// 	this.loading=false;
@@ -106,7 +105,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'api/grain/sample/get',
+      getdataURL:this.apiRoot + '/grain/sample/get',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -127,16 +126,16 @@ export default {
       formdatas: {
       	title:'中央储备粮襄垣直属库',
       	form:{
-          createTime: '2017-12-12',//创建时间
-          sampleState: '未扦样',//状态
+          createTime: '',//创建时间
+          sampleState: '',//状态
           sampleNo: '',//迁样编号
-          libraryName: '山西',//被查库点
+          libraryName: '',//被查库点
           position: '',//货位号
           sort: '',//品种
           quality: '',//性质
           amount: '',//代表数量
-          originPlace: '山西',//产地
-          gainTime: '2017',//收货年度
+          originPlace: '',//产地
+          gainTime: '',//收货年度
           sampleTime: '',//扦样日期
           remark: '',//备注
           storageStatus:'',

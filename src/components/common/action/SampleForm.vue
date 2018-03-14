@@ -11,10 +11,10 @@
 		</el-form-item>
 		<!--<el-form-item label="扦样编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">-->
 		<el-form-item label="检验编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.sampleNo" :disabled="disabled"></el-input>
+		    <el-input v-model="formdatas.form.sampleNum" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="货位号：" prop="position" v-bind:class="{disabled:disabled}" >
-		    <el-input v-model="formdatas.form.position" :disabled="disabled"></el-input>
+		    <el-input v-model="formdatas.form.depot" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="性质：" prop="quality"  v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.quality" :disabled="disabled"></el-input>
@@ -23,16 +23,17 @@
 		    <el-input v-model="samplestate" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="产地：" prop="originPlace"  v-bind:class="{disabled:disabled}">
-		    <el-select v-model="formdatas.form.originPlace" placeholder="请选择产地" :disabled="disabled">
+		    <!--<el-select v-model="formdatas.form.originPlace" placeholder="请选择产地" :disabled="disabled">
 		        <el-option label="山西" value="1"></el-option>
 		        <el-option label="河南" value="henan"></el-option>
 		        <el-option label="山东" value="shandong"></el-option>
 		        <el-option label="陕西" value="shanxi2"></el-option>
 		        <el-option label="东北" value="dongbei"></el-option>
-		    </el-select>
+		    </el-select>-->
+			 <el-input v-model="formdatas.form.originPlace" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="被查库点：" prop="libraryName" v-bind:class="{disabled:disabled}">
-		    <el-select v-model="formdatas.form.checkregion" placeholder="选择库点" :disabled="disabled">
+		    <el-select v-model="formdatas.form.libraryName" placeholder="选择库点" :disabled="disabled">
 		        <el-option label="本库" value="本库"></el-option>
 		        <el-option label="山西屯留国家粮食储备库" value="山西屯留国家粮食储备库"></el-option>
 		        <el-option label="山西长治国家粮食储备库" value="山西长治国家粮食储备库"></el-option>
@@ -51,7 +52,7 @@
 		<el-form-item label="收货年度："  v-bind:class="{disabled:disabled}" prop="gainTime">
 		    <el-form-item>
 		        <!--<el-date-picker type="year" :default-value="dyear" placeholder="选择年度" v-model="form.harvestdate"></el-date-picker>-->
-		        <el-date-picker type="year" placeholder="选择年度" v-model="formdatas.form.harvestdate" :disabled="disabled"></el-date-picker>
+		        <el-date-picker type="year" placeholder="选择年度" v-model="formdatas.form.gainTime" :disabled="disabled"></el-date-picker>
 		    </el-form-item>
 		</el-form-item>
 		<el-form-item label="扦样日期：" prop="sampleTime"  v-bind:class="{disabled:disabled}">
@@ -64,26 +65,26 @@
 		<div class="line">
 		</div>
 			<el-form-item label="存放状态：" prop="storageStatus"  v-bind:class="{disabled:disabled}">
-			    <el-input v-model="formdatas.form.sampleState" :disabled="disabled"></el-input>
+			    <el-input v-model="samplestate" :disabled="disabled"></el-input>
 			</el-form-item>
 			<el-form-item label="入库时间：" prop="sampleInTime" >
 		    	<el-form-item>
-		        	<el-date-picker type="date" placeholder="选择年度" v-model="formdatas.form.sampleInTime"></el-date-picker>
+		        	<el-date-picker type="date" placeholder="选择年度" v-model="formdatas.form.storageTime"></el-date-picker>
 		    	</el-form-item>
 			</el-form-item>
 			<el-form-item label="存放位置："  class="position">
-				<el-select v-model="formdatas.form.yangpinshi" placeholder="选择样品室">
+				<el-select v-model="formdatas.form.depot" placeholder="选择样品室">
 			        <el-option label="样品1室" value="样品1室"></el-option>
 			        <el-option label="样品2室" value="样品2室"></el-option>
 			        <el-option label="样品3室" value="样品3室"></el-option>       
 			    </el-select>
-			    <el-input v-model="formdatas.form.gui" placeholder="请填写几号柜"></el-input>
+			    <el-input v-model="formdatas.form.counter" placeholder="请填写几号柜"></el-input>
 			    <div class="el-form-item__error" v-if="position_error">
 		        	{{position_error_message}}
 		        </div>
 			</el-form-item>
 			<el-form-item label="入库签名：" prop="sampleInSign" >
-			    <el-input v-model="formdatas.form.sampleInSign"></el-input>
+			    <el-input v-model="formdatas.form.autograph"></el-input>
 			</el-form-item>
         
         <div class="btns">
@@ -107,11 +108,11 @@ export default {
     },
     computed:{
     	samplestate(){
-    		if(this.formdatas.form.state==-1){
+    		if(this.formdatas.form.sampleState==-1){
     			return "未扦样";
-    		}else if(this.formdatas.form.state==1){
+    		}else if(this.formdatas.form.sampleState==1){
     			return "已扦样";
-    		}else if(this.formdatas.form.state==2){
+    		}else if(this.formdatas.form.sampleState==2){
     			return "已入库";
     		}
     	}
