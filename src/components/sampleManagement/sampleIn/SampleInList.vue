@@ -311,6 +311,7 @@ export default {
 				value: ''
 	  		},
 	  	],
+	  	addprop:true,
 	  	submitText:'入库',
 	  },
       breadcrumb:{

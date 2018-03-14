@@ -177,7 +177,7 @@
 .connect_form .project_details  .classify_num{
     text-align:center;
       height:4.9rem;
-   overflow-y:scroll; 
+   /*overflow-y:scroll;*/ 
 }
 .connect_form .project_details  .classify_num .classify_font{
     border-left:1px solid #dfdfdf;

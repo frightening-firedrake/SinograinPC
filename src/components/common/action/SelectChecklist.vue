@@ -3,7 +3,8 @@
     	<el-form ref="form" :model="form" :label-width="labelWidth" label-position="left">
 	    	<el-form-item label="选择库点">
 			    <template>
-				    <el-select v-model="libselect" placeholder="选择库点" @change="changelibselect">
+				    <el-select v-model="libselect" placeholder="选择库点">
+				    	<el-option label="全部" value="all"></el-option>
 				    	<el-option
 				        v-for="item in selectlist"
 				        :key="item.value"
@@ -58,7 +59,7 @@
 			<template>
 			  <el-checkbox-group v-model="checkedList">
 
-			  	<el-checkbox :label="item" v-for="(item,index) in checkList" :key="item"></el-checkbox>
+			  	<el-checkbox :label="item.checkNumber+' '+item.depot"  v-for="(item,index) in checkedListFilter" :key="item.id"></el-checkbox>
 
 			  		
 			    
@@ -81,6 +82,8 @@ export default {
 //  props: ["formdatas"],
     created(){
     	this.getselectList()
+		this.getcheckList();
+    	
     },
     mounted: function() {
 //		console.log(this.formdatas)
@@ -92,86 +95,20 @@ export default {
     		}else{
     			return true
     		}
-    	}
-    
-    },
-    data() {
-
-        return {
-//      	全部选中按钮
-        	checkAll:false,
-//      	表单数据
-        	form:{
-        		
-        	},
-			labelWidth:'1rem',
-//			获取下拉选项时的后台地址
-			selectlistUrl:'selectlist1',
-//			格式例子
-//			selectlist: [{
-//		          value: '选项1',
-//		          label: '长南',
-//		          url:'checklist1',
-//		        }, {
-//		          value: '选项2',
-//		          label: '山西',
-//		          url:'checklist2',
-//		        }, {
-//		          value: '选项3',
-//		          label: '运城',
-//		          url:'checklist3',
-//		        }],
-			selectlist: [],
-//			被选中的库点
-		    libselect:'',
-		    remSelect:'',
-//		        被选中库点对应的样品地址
-		    checkListUrl:'',
-			checkList:[
-				
-			],
-			checkedList:[
-
-			],
-			pickerOptions2: {
-		        shortcuts: [{
-		            text: '最近一周',
-		            onClick(picker) {
-		              const end = new Date();
-		              const start = new Date();
-		              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-		              picker.$emit('pick', [start, end]);
-		            }
-		        }, {
-		            text: '最近一个月',
-		            onClick(picker) {
-		              const end = new Date();
-		              const start = new Date();
-		              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-		              picker.$emit('pick', [start, end]);
-		            }
-		        }, {
-		            text: '最近三个月',
-		            onClick(picker) {
-		              const end = new Date();
-		              const start = new Date();
-		              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-		              picker.$emit('pick', [start, end]);
-		            }
-		        }]
-	        },	
-	        date_select: '',
-        }
+    	},
+    	checkedListFilter(){
+    		if(this.libselect=="all"){
+    			return this.checkList
+    		}else{
+    			return this.checkList.filter((item,index)=>{
+					return item.pid==this.libselect
+				});
+    		}
+    	},
     },
     methods: {  
     	//下拉框改变对应库去后台获取响应检测项目
-    	changelibselect(value){
-			var selectitem=this.selectlist.filter((item,index)=>{
-				return item.value==value
-			});
-			this.checkListUrl=selectitem[0].url;
-			this.getcheckList();
-    	},
+    	
 //  	日期选项
         dateChange(){
     		console.log(this.date_select);
@@ -183,7 +120,8 @@ export default {
             if (this.checkedList.length) {
 //                  alert('submit!');
 //                  this.$emit('btn_close')
-				window.history.go(-1)
+				console.log(this.checkedList)
+//				window.history.go(-1)
 //			未通过
             } else {
 //                  console.log('error submit!!');
@@ -214,7 +152,7 @@ export default {
 	//			}
 		    }).then(function (response) {
 			  	this.selectlist=response.data.selectlist;
-			  	this.libselect=response.data.libselect;
+//			  	this.libselect=response.data.libselect;
 //		  		setTimeout(()=>{			  		
 //			  		this.loading=false;
 //			  	},1000)
@@ -250,7 +188,58 @@ export default {
         		this.checkedList=[];
         	}
         },
-    }
+    },
+    data() {
+
+        return {
+//			获取下拉选项时的后台地址
+			selectlistUrl:'selectlist',
+//		        被选中库点对应的样品地址
+			checkListUrl:'checklist',
+			selectlist: [],
+//			被选中的库点
+		    libselect:'all',
+			checkList:[],
+			checkedList:[],
+//      	全部选中按钮
+        	checkAll:false,
+//      	表单数据
+        	form:{
+        		
+        	},
+			labelWidth:'1rem',
+//			
+		    remSelect:'',
+			pickerOptions2: {
+		        shortcuts: [{
+		            text: '最近一周',
+		            onClick(picker) {
+		              const end = new Date();
+		              const start = new Date();
+		              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+		              picker.$emit('pick', [start, end]);
+		            }
+		        }, {
+		            text: '最近一个月',
+		            onClick(picker) {
+		              const end = new Date();
+		              const start = new Date();
+		              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+		              picker.$emit('pick', [start, end]);
+		            }
+		        }, {
+		            text: '最近三个月',
+		            onClick(picker) {
+		              const end = new Date();
+		              const start = new Date();
+		              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+		              picker.$emit('pick', [start, end]);
+		            }
+		        }]
+	        },	
+	        date_select: '',
+        }
+    },
 }
 </script>
 

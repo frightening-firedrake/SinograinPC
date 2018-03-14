@@ -393,75 +393,50 @@ var Sampleedit=Mock.mock('/liquid/role11/data', {
 	  
 });
 //下拉选择样品数据库
-var selectlist=Mock.mock('selectlist1', {
+var selectlist=Mock.mock('selectlist', {
 		selectlist: [{
-          value: '选项1',
+          value: '1',
           label: '长南',
-          url:'checklist1',
+
         }, {
-          value: '选项2',
+          value: '2',
           label: '山西',
-          url:'checklist2',
+
         }, {
-          value: '选项3',
+          value: '3',
           label: '运城',
-          url:'checklist3',
+
         }],
     	libselect:'',
 });
 //下拉后更新多选框
-var checklist1=Mock.mock('checklist1', {
+var checklist=Mock.mock('checklist', {
 
     checkList:[
-		'监20170071 漫水-01-03',
-		'监20170072 漫水-01-03',
-		'监20170073 漫水-01-03',
-		'监20170074 漫水-01-03',
-		'监20170075 漫水-01-03',
-		'监20170076 漫水-01-03',
-	],
-	checkedList:[
-		'监20170076 漫水-01-03',
-	],
-});
-var checklist2=Mock.mock('checklist2', {
-
-    checkList:[
-		'监20170071 漫水-01-03',
-		'监20170072 漫水-01-03',
-		'监20170073 漫水-01-03',
-		'监20170074 漫水-01-03',
-		'监20170075 漫水-01-03',
-		'监20170076 漫水-01-03',
-		'监20170077 漫水-01-03',
-		'监20170078 漫水-01-03',
-		'监20170079 漫水-01-03',
-		'监20170080 漫水-01-03',
-		'监20170081 漫水-01-03',
-		'监20170082 漫水-01-03',
-		'监20170083 漫水-01-03',
-		'监20170084 漫水-01-03',
-		'监20170085 漫水-01-03',
-		'监20170086 漫水-01-03',
+		{checkNumber:'监201700941',depot:'TG-1-2',pid:1,id:1},
+		{checkNumber:'监201700942',depot:'TG-1-2',pid:1,id:2},
+		{checkNumber:'监201700943',depot:'TG-1-2',pid:1,id:3},
+		{checkNumber:'监201700944',depot:'TG-1-2',pid:1,id:4},
+		{checkNumber:'监201700945',depot:'TG-1-2',pid:1,id:5},
+		{checkNumber:'监201700946',depot:'TG-2-2',pid:2,id:6},
+		{checkNumber:'监201700947',depot:'TG-2-2',pid:2,id:7},
+		{checkNumber:'监201700948',depot:'TG-2-2',pid:2,id:8},
+		{checkNumber:'监201700949',depot:'TG-2-2',pid:2,id:9},
+		{checkNumber:'监201700950',depot:'TG-2-2',pid:2,id:10},
+		{checkNumber:'监201700951',depot:'TG-2-2',pid:2,id:11},
+		{checkNumber:'监201700952',depot:'TG-2-2',pid:3,id:12},
+		{checkNumber:'监201700953',depot:'TG-2-2',pid:3,id:13},
+		{checkNumber:'监201700954',depot:'TG-2-2',pid:3,id:14},
+		{checkNumber:'监201700955',depot:'TG-2-2',pid:3,id:15},
+		{checkNumber:'监201700956',depot:'TG-2-2',pid:3,id:16},
+		{checkNumber:'监201700957',depot:'TG-2-2',pid:3,id:17},
+		{checkNumber:'监201700958',depot:'TG-2-2',pid:3,id:18},
 	],
 	checkedList:[
 //		'复选框 A',
 	],
 });
-var checklist3=Mock.mock('checklist3', {
 
-    checkList:[
-		'监20170099 漫水-01-03',
-		'监20170012 漫水-01-03',
-		'监20170023 漫水-01-03',
-		'监20170064 漫水-01-03',
-		'监20170005 漫水-01-03',
-		'监20170116 漫水-01-03',
-	],
-	checkedList:[
-//		'复选框 A',
-	],
-});
 //分装小样列表数据
 var packingList=Mock.mock('/liquid/role12/data', {
       'rows|3-12':[

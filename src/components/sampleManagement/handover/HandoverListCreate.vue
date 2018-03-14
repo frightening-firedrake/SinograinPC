@@ -5,8 +5,9 @@
   	  <!--标题-->
   	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--表单-->
-      <handover-list-connect :formdatas="formdatas" :viewPath="viewPath"></handover-list-connect> 
-
+      <handover-list-connect :formdatas="formdatas" :viewPath="viewPath" @createlib="createlib"></handover-list-connect> 
+	  <!--新建库典弹框-->
+      <sinograin-modal :modal="modal" v-if="modalVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
     </div>
 </template>
 
@@ -20,7 +21,7 @@ import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import HandoverListConnect  from "@/components/common/action/HandoverListConnect"
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
-
+import SinograinModal from '@/components/common/action/Modal.vue';
 
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
@@ -28,10 +29,9 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 import data from '@/util/mock';
 
 
-
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,HandoverListConnect
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,HandoverListConnect,SinograinModal
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -95,6 +95,20 @@ export default {
 	titleEvent(){
   		console.log('titleEvent');
   	},
+  	//	打开新建弹框
+    createlib() {
+        this.modalVisible = true;
+    },
+    //	获取填入的新建数据
+    createlibitem(form) {
+//      console.log(form);
+//      console.log(this.formdatas);
+        this.$router.push({ path: this.viewPath })
+    },
+    //	关闭新建弹框
+    dialogClose() {
+        this.modalVisible = false;
+    },
   },
   data() {
     return {
@@ -103,6 +117,7 @@ export default {
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
 	  createlibVisible:false,
+	  modalVisible: false,
       breadcrumb:{
       	search:false,   
       	searching:'',
@@ -113,26 +128,36 @@ export default {
       },
 	  viewPath:'/index/sampleManagement/handover/handoverListCreate/handoverListPrint',
 	  
+	  modal: {
+	      title: '新建样品领取交接单',
+	      formdatas: [
+	          {
+	              label: "领取人",
+	              model: "receiptor",
+	              value:'',
+	          },
+	      ],
+	      submitText: '提交',
+	  },
       formdatas: {
-      	title:'样品领取交接单名称',
-      	form:{
-          ctime: '2017-12-12',//创建时间
-          status: '未扦样',//状态
-          nid: '',//迁样编号
-          checkregion: '山西',//被查库点
-          pnumber: '',//货位号
-          varieties: '',//品种
-          quality: '',//性质
-          weight: '',//代表数量
-          region: '山西',//产地
-          harvestdate: '2017',//收货年度
-          samplingdate: '',//扦样日期
-          remarks: '',//备注
-          storageStatus:'',
-          sampleInTime: "",
-          position:"",
-          sampleInSign: "",
-      	}
+  		title:'样品领取交接单',//标题
+        form:{            	
+        	name:'',//交接单名称
+        	manager:'',//管理员名
+        	remarks:'',//备注信息
+        },
+        checkList:[],//检验项目数组
+//          检验样品数组
+        items:[
+        	{checkNumber:'监20170094',depot:'TG-1-2'},
+        	{checkNumber:'监20170095',depot:'TG-1-2'},
+        	{checkNumber:'监20170096',depot:'TG-1-2'},
+        	{checkNumber:'监20170097',depot:'TG-1-2'},
+        	{checkNumber:'监20170094',depot:'TG-1-2'},
+        	{checkNumber:'监20170095',depot:'TG-1-2'},
+        	{checkNumber:'监20170096',depot:'TG-1-2'},
+        
+        ],
 	  }
     }
   }

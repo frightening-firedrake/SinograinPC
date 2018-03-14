@@ -35,7 +35,7 @@
 		</el-form>
 		<div slot="footer" class="dialog-footer center">
 		    <el-button class="yes" type="primary" @click="createlibitem('modalform')">{{modal.submitText?modal.submitText:'确 定'}}</el-button>
-		    <el-button class="no" @click="modalVisible = false">取 消</el-button>
+		    <el-button class="no" @click="dialogClose">取 消</el-button>
 	    </div>
 	</el-dialog>
 </template>
@@ -82,20 +82,22 @@ export default {
 //			}else{
 //				return
 //			}
-			if(!this.form.yangpinshi){
-        		this.position_error=true;
-        		this.position_error_message="请选择样品室";
-        		return
-        	}
-        	if(!this.form.gui){
-        		this.position_error=true;
-        		this.position_error_message="请填写几号柜";
-        		return
-        	}
+			if(this.modal.addprop){
+				
+				if(!this.form.yangpinshi){
+	        		this.position_error=true;
+	        		this.position_error_message="请选择样品室";
+	        		return
+	        	}
+	        	if(!this.form.gui){
+	        		this.position_error=true;
+	        		this.position_error_message="请填写几号柜";
+	        		return
+	        	}
+			}
         	this.position_error=false;
 			this.$refs[formname].validate((valid) => {
                 if (valid) {
-
 					this.$emit('createlibitem',this.form);
 					this.$emit('dialogClose')
 //					this.$refs['modalform'].resetFields();				
