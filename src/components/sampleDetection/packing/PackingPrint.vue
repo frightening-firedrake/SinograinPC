@@ -42,7 +42,7 @@ export default {
 	...mapGetters(["modal_id"]),
   },
   created(){
-  	console.log(this.$route.query)
+  	console.log(this.$route.params.code)//这就是扫到的条码
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
 

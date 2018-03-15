@@ -229,8 +229,8 @@ export default {
   			this.messageShow=false;
   		}else{  			
 			this.messageShow=false;
-			//var path=this.$route.path+'/packingPrint'
-			// this.$router.push({path: path,query: {code:code}})
+			var path=this.$route.name+'/打印条码'
+			 this.$router.push({name: path,params: {code:code}})
 			// getHandSample()
 		  }
   	},
