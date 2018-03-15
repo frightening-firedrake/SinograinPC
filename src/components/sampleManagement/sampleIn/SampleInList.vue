@@ -140,6 +140,7 @@ export default {
 	    }).then(function (response) {
 			console.log(response)
 			if(response.data.success) {
+				this.getlistdata();
 				this.$notify({
 		          	title: '入库成功',
 		          	message: '该样品已成功入库！！！',

@@ -140,6 +140,22 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+	getHandSample(page){
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.getHandSampleURL,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+			   
+			}
+	    }).then(function (response) {
+		  	
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
 //	获取列表数据方法
   	getlistdata(page){
   		this.loading=true;
@@ -213,14 +229,16 @@ export default {
   			this.messageShow=false;
   		}else{  			
 			this.messageShow=false;
-			var path=this.$route.path+'/packingPrint'
-			this.$router.push({path: path})
-  		}
+			//var path=this.$route.path+'/packingPrint'
+			// this.$router.push({path: path,query: {code:code}})
+			// getHandSample()
+		  }
   	},
   },
   data() {
     return {
       datalistURL:'/liquid/role12/data',
+	  getHandSampleURL: this.apiRoot +  '/grain/sample/',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
