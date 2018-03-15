@@ -124,12 +124,7 @@ export default {
   	},
 	//提交表单
 	submit(){
-		console.log('我要提交')
-		
-		  	this.$router.go(-1);//提交完成返回上一页
-	},
-	editsampledata() {
-		this.$http({
+	this.$http({
 		  method: 'post',
 			url: this.editURL,
      	transformRequest: [function (data) {
@@ -148,8 +143,7 @@ export default {
 					counter: this.formdatas.form.counter
 			}
 	    }).then(function (response) {
-        console.log(response)
-		  	this.formdatas.form=response.data;
+      	this.$router.go(-1);//提交完成返回上一页
 		  	
 	  		// setTimeout(()=>{			  		
 		  	// 	this.loading=false;

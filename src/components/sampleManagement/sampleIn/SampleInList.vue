@@ -138,7 +138,8 @@ export default {
 				sampleState: 2
 			}
 	    }).then(function (response) {
-			if(response.success) {
+			console.log(response)
+			if(response.data.success) {
 				this.$notify({
 		          	title: '入库成功',
 		          	message: '该样品已成功入库！！！',
