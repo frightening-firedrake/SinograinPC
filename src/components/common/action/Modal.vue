@@ -62,7 +62,7 @@ export default {
         	dialogWidth:'6.2rem',
         	modalVisible: true,
 		    form:{
-		       	
+
 		    },
 	        formLabelWidth: '1.4rem'
         }

@@ -151,7 +151,11 @@ export default {
 		        });
 			}
 		}.bind(this)).catch(function (error) {
-		    console.log(error);
+//		    console.log(error);
+		    this.$notify.error({
+	          	title: '入库失败',
+	          	message: '请重新核对入库信息！！！',
+	        });
 		}.bind(this));
 		// this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInCreate', params: {'position': form.position,'sampleInName': form.sampleInName} })
 		// this.$router.push({name: "样品管理/样品入库列表/新建样品", params: {'yangpinshi': form.yangpinshi,'gui': form.gui,'sampleInSign': form.sampleInSign,'sampleNumber': form.sampleNumber} })
@@ -350,7 +354,7 @@ export default {
 	  		{
 	  			label:"存放位置:",
 	  			position:true,
-				model: "depot",
+				model: "positions",
 				value:'',
 //	  			model:"position",
 	  			modelselect:"depot",
