@@ -13,6 +13,8 @@
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
       <!--新建库典弹框-->
       <sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
+      <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose" @getScanCode="getScanCode"></sinograin-message>
+    
     </div>
 </template>
 
@@ -27,6 +29,7 @@ import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SinograinPagination from '@/components/common/action/Pagination.vue';
 import ListHeader from '@/components/common/action/ListHeader.vue';
 import SinograinModal from '@/components/common/action/Modal.vue';
+import SinograinMessage from "@/components/common/action/Message"
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
@@ -36,7 +39,7 @@ import data from '@/util/mock';
 
 export default {
   components: {
-    SinograinList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader
+    SinograinList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader,SinograinMessage
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -102,7 +105,9 @@ export default {
 	},
 //	扫码新建样品
 	scanCode(){
-		this.$router.push({path: '/index/sampleDetection/packingList/packingPrint'})
+		this.messages.type='scaning';
+		this.messageShow=true;
+//		this.$router.push({path: '/index/sampleDetection/packingList/packingPrint'})
 	},
 //	填入新建数据
 	createlibitem(form){
@@ -193,7 +198,25 @@ export default {
   	getchecked(checkedId){
   		this.checkedId=checkedId;
   	},
-
+	messageclick(type){
+  		if(type=="success"){
+			console.log(type)
+  		}else if(type=="error"){
+  			console.log(type)  			
+  		}
+  	},
+  	messageClose(){
+  		this.messageShow=false;
+  	},
+  	getScanCode(code){
+  		if(!code){
+  			this.messageShow=false;
+  		}else{  			
+			this.messageShow=false;
+			var path=this.$route.path+'/packingPrint'
+			this.$router.push({path: path})
+  		}
+  	},
   },
   data() {
     return {
@@ -284,7 +307,22 @@ export default {
       	dele:false,
       	manuscript:false,
       	safetyReport:false,
-      }
+      },
+      messageShow:false,
+	  messages:{
+	  	type:'scaning',
+	  	scaning:{
+	  		icon:'iconfont icon-iconset0255',
+	  		messageTittle:'开始扫描',
+	  		messageText:'不要点击键盘和鼠标请将扫码枪对准条形码，然后按下扫码枪按钮！',
+	  	},
+	  	success:{
+	  		icon:'el-icon-success',
+	  		messageTittle:'该样品已入库',
+	  		messageText:'可点击编辑按钮修改入库信息！',
+	  		buttonText:'编辑',
+	  	},
+	  },
     }
   }
 }

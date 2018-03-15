@@ -61,38 +61,15 @@
             </el-col>
           </el-row>
           <el-row class="hand_view_tabbody">
-            <el-col :span="6">
+            <el-col :span="6" v-for="(item,index) in testItemListadd" :key="index" style="border-top:1px solid #dfdfdf;">
               <el-col :span="8">
-                <span>01</span>
+                <span>{{index+1}}</span>
               </el-col>
               <el-col :span="16">
-                <span>监11151658913546168</span>
+                <span>{{item.checkNum}}</span>
               </el-col>
             </el-col>
-            <el-col :span="6">
-              <el-col :span="8">
-                <span>02</span>
-              </el-col>
-              <el-col :span="16">
-                <span>监11151658913546168</span>
-              </el-col>
-            </el-col>
-            <el-col :span="6">
-              <el-col :span="8">
-                <span>03</span>
-              </el-col>
-              <el-col :span="16">
-                <span>监11151658913546168</span>
-              </el-col>
-            </el-col>
-            <el-col :span="6">
-              <el-col :span="8">
-                <span>04</span>
-              </el-col>
-              <el-col :span="16">
-                <span>监11151658913546168</span>
-              </el-col>
-            </el-col>
+            
           </el-row>
 
           <el-row class="hand_view_tabbody">
@@ -139,7 +116,7 @@
                 <span>&nbsp;</span>
               </el-col>
             </el-col>
-            <el-col :span="12">
+            <el-col :span="12" style="border-left:1px solid #dfdfdf;">
               <el-col :span="4">
                 <span>&nbsp;</span>
               </el-col>
@@ -184,6 +161,20 @@ export default {
   computed: {
     ...mapState(["modal_id_number", "viewdata", "editdata", "aultdata", "messions", "mask"]),
     ...mapGetters(["modal_id"]),
+    testItemListadd(){
+    	var length=4-this.formdatas.testItemList.length%4;
+    	var item={checkNum:undefined}
+    	if(length){
+		    for (var i=0;i<length;i++){
+					this.formdatas.testItemList.push(item)
+				}
+			  return this.formdatas.testItemList
+    		
+    	}else{
+    		return this.formdatas.testItemList    		
+    	}
+    	
+    }
   },
   created() {
     console.log(this.$route.query)

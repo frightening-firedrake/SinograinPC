@@ -87,7 +87,7 @@
             <div class="clear"></div>
             <el-row class="project_details">
                 
-                <el-col :span="15" class="classify_num">
+                <el-col :span="15" class="classify_num" style="overflow-y: scroll; overflow-x: hidden;"> 
                 	<div class="wrapbox">
                 		<template v-for="(item,index) in formdatas.items">
 		                    <el-col :span="12" class="classify_hao">
