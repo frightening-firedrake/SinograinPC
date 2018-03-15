@@ -60,13 +60,21 @@
               </el-col>
             </el-col>
           </el-row>
-          <el-row class="hand_view_tabbody">
-            <el-col :span="6" v-for="(item,index) in testItemListadd" :key="index" style="border-top:1px solid #dfdfdf;">
+          <el-row class="hand_view_tabbody" style="border-top:none;">
+            <el-col :span="6" v-for="(item,index) in formdatas.testItemList" :key="index" style="border-top:1px solid #dfdfdf;">
               <el-col :span="8">
                 <span>{{index+1}}</span>
               </el-col>
               <el-col :span="16">
                 <span>{{item.checkNum}}</span>
+              </el-col>
+            </el-col>
+            <el-col :span="6" v-for="(item,index) in testItemListadd" :key="index+99" style="border-top:1px solid #dfdfdf;">
+              <el-col :span="8">
+                <span>{{index+formdatas.testItemList.length+1}}</span>
+              </el-col>
+              <el-col :span="16">
+                <span>&nbsp;</span>
               </el-col>
             </el-col>
             
@@ -164,14 +172,15 @@ export default {
     testItemListadd(){
     	var length=4-this.formdatas.testItemList.length%4;
     	var item={checkNum:undefined}
+    	var arr=[]
     	if(length){
 		    for (var i=0;i<length;i++){
-					this.formdatas.testItemList.push(item)
+					arr.push(item)
 				}
-			  return this.formdatas.testItemList
+			  return arr
     		
     	}else{
-    		return this.formdatas.testItemList    		
+    		return arr   		
     	}
     	
     }
@@ -286,6 +295,10 @@ export default {
         	{checkNum:'监20180004'},
         	{checkNum:'监20180005'},
         	{checkNum:'监20180006'},
+        	{checkNum:'监20180007'},
+        	{checkNum:'监20180008'},
+        	{checkNum:'监20180009'},
+        	{checkNum:'监20180010'},
         ],
         remarks:'分两份不完善粒平行小样，其他按国标法分样。',
         gly:'张海星',
