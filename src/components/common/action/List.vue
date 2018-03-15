@@ -64,6 +64,9 @@
 		      				<template v-if="item.prop=='pLibraryId'">
 		    						{{findPLibraryName(scope.row[item.prop])}}				      				
 		      				</template>
+		      				<template v-if="item.prop=='depot'">
+				      				{{scope.row['depot']+scope.row['counter']}}
+		      				</template>
 		          </template>
 	    		</el-table-column>
    		</template>

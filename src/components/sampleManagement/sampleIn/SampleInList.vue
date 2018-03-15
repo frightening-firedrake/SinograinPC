@@ -432,6 +432,7 @@ export default {
         id: 4,
         prop:'depot',
         label: "存放位置",
+        status:true,
 //      sort:true,
       },
       {
