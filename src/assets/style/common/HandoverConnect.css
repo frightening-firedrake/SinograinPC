@@ -154,9 +154,12 @@
 .connect_form .project_details  .classify{
    height:4.9rem;
    overflow-y:scroll; 
+   
 }
 .connect_form .project_details  .classify .el-checkbox-group{
+	border:1px solid #dfdfdf;
    padding:0; 
+   
 }
 .connect_form .project_details  .classify .classify_col{
 	/*width:100%;*/
@@ -202,6 +205,9 @@
 }
 .connect_form .wrapbox{
 	position:relative;
+	overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
 }
 .connect_form .wrapbox:after{
 	content:"";

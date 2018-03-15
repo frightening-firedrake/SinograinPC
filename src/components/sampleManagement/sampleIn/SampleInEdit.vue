@@ -68,7 +68,9 @@ export default {
           id: this.$route.query.id,
 			}
 	    }).then(function (response) {
-		  	this.formdatas.form=response.data;
+	    	var res=response.data;
+	    	res.pLibraryName='';
+		  	this.formdatas.form=res;
 				this.getlibrarydata()
 		}.bind(this)).catch(function (error) {
 		    console.log(error);

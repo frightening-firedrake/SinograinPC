@@ -88,7 +88,7 @@
             <el-row class="project_details">
                 
                 <el-col :span="15" class="classify_num">
-                	<div class="wrapbox" style="overflow-y: scroll;overflow-x: hidden;">
+                	<div class="wrapbox">
                 		<template v-for="(item,index) in formdatas.items">
 		                    <el-col :span="12" class="classify_hao">
 		                        <el-col :span="4">
@@ -151,7 +151,7 @@ import "@/assets/style/common/HandoverConnect.css"
 
 export default {
 
-    props: ["formdatas","viewPath"],
+    props: ["formdatas"],
     methods: {
         //新建样品
         new_sample() {

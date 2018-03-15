@@ -5,7 +5,7 @@
   	  <!--标题-->
   	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--表单-->
-      <handover-list-connect :formdatas="formdatas" :viewPath="viewPath" @createlib="createlib"></handover-list-connect> 
+      <handover-list-connect :formdatas="formdatas" @createlib="createlib"></handover-list-connect> 
 	  <!--新建库典弹框-->
       <sinograin-modal :modal="modal" v-if="modalVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
     </div>
@@ -126,7 +126,7 @@ export default {
       	btn:false,
       	btntext:'',
       },
-	  viewPath:'/index/sampleManagement/handover/handoverListCreate/handoverListPrint',
+	  viewPath:this.$route.path+'/handoverListPrint',
 	  
 	  modal: {
 	      title: '新建样品领取交接单',

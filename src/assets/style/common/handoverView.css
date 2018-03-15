@@ -6,10 +6,10 @@
 }
 .handover_view .hand_view_title{
     width:100%;
-    height:0.33rem;
+    height:0.45rem;
     text-align:center;
-    line-height:0.33rem;
-    font-size:0.2rem;
+    line-height:0.45rem;
+    font-size:0.24rem;
     color:#333333;
 }
 .handover_view .hand_view_tab{

@@ -11,10 +11,10 @@
         </div>
         <div class="hand_view_tab">
           <div class="hand_view_tab_title">
-            <p>玉米样品领取交接单</p>
+            <p>{{formdatas.sort}}样品领取交接单</p>
           </div>
           <div class="hand_view_tab_num">
-            <p>编号:20</p>
+            <p>编号:{{formdatas.nid}}</p>
           </div>
           <el-row class="hand_view_tab_content">
             <el-col :span="24" class="hand_view_tab_content_font">
@@ -22,7 +22,7 @@
                 <span>检验项目:</span>
               </el-col>
               <el-col :span="20">
-                <span>检验质量、品质全项目指标</span>
+                <span>{{formdatas.testList}}</span>
               </el-col>
             </el-col>
           </el-row>
@@ -117,7 +117,7 @@
                 <span>备注</span>
               </el-col>
               <el-col :span="20">
-                <span>分两份不完善粒平行小样，其他按国标法分样。</span>
+                <span>{{formdatas.remarks}}</span>
               </el-col>
             </el-col>
           </el-row>
@@ -144,7 +144,7 @@
                 <span>&nbsp;</span>
               </el-col>
               <el-col :span="20">
-                <span> 样品管理员：张海兴 时间： 2017.03.07</span>
+                <span> 样品管理员：{{formdatas.gly}} 时间： {{formdatas.time}}</span>
               </el-col>
             </el-col>
           </el-row>
@@ -188,7 +188,7 @@ export default {
   created() {
     console.log(this.$route.query)
     //  获取列表数据（第一页）
-    this.getlistdata(1)
+//  this.getlistdata(1)
 
   },
   destroy() {
@@ -284,25 +284,21 @@ export default {
         type: 'info'
       }],
       formdatas: {
-        title: '中央储备粮襄垣直属库',
-        form: {
-          ctime: '2017-12-12',//创建时间
-          status: '未扦样',//状态
-          nid: '',//迁样编号
-          checkregion: '山西',//被查库点
-          pnumber: '',//货位号
-          varieties: '',//品种
-          quality: '',//性质
-          weight: '',//代表数量
-          region: '山西',//产地
-          harvestdate: '2017',//收货年度
-          samplingdate: '',//扦样日期
-          remarks: '',//备注
-          storageStatus: '',
-          sampleInTime: "",
-          position: "",
-          sampleInSign: "",
-        }
+        sort:'玉米',//品种
+        nid:20,//编号
+        testList:'检验质量、品质全项目指标',//检测项目
+        //检测样品
+        testItemList:[
+        	{checkNum:'监20180001'},
+        	{checkNum:'监20180002'},
+        	{checkNum:'监20180003'},
+        	{checkNum:'监20180004'},
+        	{checkNum:'监20180005'},
+        	{checkNum:'监20180006'},
+        ],
+        remarks:'分两份不完善粒平行小样，其他按国标法分样。',
+        gly:'张海星',
+        time:'2017-03-07',
       }
     }
   }
