@@ -111,7 +111,7 @@ export default {
 	},
 //	扫码新建样品
 	scanCode(){
-		this.message.type='scaning';
+		this.messages.type='scaning';
 		this.messageShow=true;
 //		this.createlib()
 	},
@@ -138,8 +138,17 @@ export default {
 				sampleState: 2
 			}
 	    }).then(function (response) {
-			if(response.success == false) {
-				alert("入库失败，请重新入库")
+			if(response.success) {
+				this.$notify({
+		          	title: '入库成功',
+		          	message: '该样品已成功入库！！！',
+		          	type: 'success'
+		        });
+			}else{
+				this.$notify.error({
+		          	title: '入库失败',
+		          	message: '请重新核对入库信息！！！',
+		        });
 			}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -198,9 +207,10 @@ export default {
 			this.dataBySampleNo = response.data;
 			if(this.dataBySampleNo.sampleState == 2) {
 
-				this.message.type='success';
+				this.messages.type='success';
 				
 			} else {
+				this.messageShow=false;				
   				this.modalVisible=true;
 			}
 		}.bind(this)).catch(function (error) {
@@ -278,8 +288,10 @@ export default {
   	},
   	messageclick(type){
   		if(type=="success"){
-  			console.log("去编辑页面！！！")
-  			console.log(type)
+//			console.log("去编辑页面！！！")
+  			var editPath=this.$route.path+'/sampleInEdit'
+  			this.$router.push({path:editPath})
+//			console.log(type)
   		}else if(type=="error"){
   			console.log(type)  			
   		}
@@ -291,9 +303,9 @@ export default {
   		if(!code){
   			this.messageShow=false;
   		}else{  			
-//			this.modal.formdatas[0].value=code;
-  			this.modal.formdatas[0].value=6000601005;
-			this.messageShow=false;
+			this.modal.formdatas[0].value=code;
+//			this.modal.formdatas[0].value=6000601005;
+//			this.messageShow=false;
 			this.getsample();
   		}
   	},
@@ -455,8 +467,8 @@ export default {
 	  	},
 	  	success:{
 	  		icon:'el-icon-success',
-	  		messageTittle:'已入库',
-	  		messageText:'该样品已入库，点击编辑按钮修改入库信息！',
+	  		messageTittle:'该样品已入库',
+	  		messageText:'可点击编辑按钮修改入库信息！',
 	  		buttonText:'编辑',
 	  	},
 	  },
