@@ -41,7 +41,6 @@ export default {
   created(){
 //  获取列表数据（第一页）
 	this.getlistdata()
-
   },
   destroy(){
 
@@ -70,6 +69,33 @@ export default {
 			}
 	    }).then(function (response) {
 		  	this.formdatas.form=response.data;
+				this.getlibrarydata()
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+		//	获取库列表数据方法
+  	getlibrarydata(){
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		  method: 'post',
+			url: this.getlibraryURL,
+     	transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+          id: this.formdatas.form.pLibraryId,
+			}
+	    }).then(function (response) {
+		  	this.formdatas.form.pLibraryName=response.data.libraryName;
+				console.log(this.formdatas.form)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -138,6 +164,7 @@ export default {
     return {
       getdataURL:this.apiRoot + '/grain/sample/get',
 			editURL: this.apiRoot + '/grain/sample/edit',
+			getlibraryURL: this.apiRoot + '/grain/library/get',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],

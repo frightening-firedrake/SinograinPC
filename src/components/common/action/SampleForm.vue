@@ -20,9 +20,10 @@
 		<el-form-item label="性质：" prop="quality"  v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.quality" :disabled="disabled"></el-input>
 		</el-form-item>
-		<el-form-item label="被查直属库：" prop="state" v-bind:class="{disabled:disabled}">
+		<el-form-item label="被查直属库：" prop="pLibraryName" v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.pLibraryName" :disabled="disabled"></el-input>
 		</el-form-item>
+		<div>直属库{{formdatas.form.pLibraryName}}</div>
 		<el-form-item label="产地：" prop="originPlace"  v-bind:class="{disabled:disabled}">
 		    <!--<el-select v-model="formdatas.form.originPlace" placeholder="请选择产地" :disabled="disabled">
 		        <el-option label="山西" value="1"></el-option>
