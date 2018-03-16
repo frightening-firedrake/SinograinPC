@@ -3,15 +3,11 @@
     	<el-form ref="form" :model="form" :label-width="labelWidth" label-position="left">
 	    	<el-form-item label="选择库点">
 			    <template>
-				    <el-select v-model="libselect" placeholder="选择库点">
-				    	<el-option label="全部" value="all"></el-option>
-				    	<el-option
-				        v-for="item in selectlist"
-				        :key="item.value"
-				        :label="item.label"
-				        :value="item.value"
-				        >
-				    	</el-option>
+				    <el-select  v-model="pLibraryId" placeholder="直属" class="zhishu">
+				        <el-option v-for="item2 in Plibrarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
+				    </el-select>
+				    <el-select  v-model="libraryId" placeholder="选择库点" >
+				        <el-option v-for="item2 in Clibrarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
 				    </el-select>
 				</template>
 
@@ -53,9 +49,7 @@
 			<el-checkbox v-model="checkAll" @change="handleCheckAllChange"  style="margin-left:0.35rem;">全部选中</el-checkbox>
 		</p>
 		<div class="checkboxwrap">
-			<div v-if="!checkList.length" class="checklistemit">
-				请先选择库点！！！
-			</div>
+			
 			
 			<!--序号-->
             <el-row class="order">
@@ -80,6 +74,10 @@
                     </div>                   
                 </el-col>
             </el-row>
+            
+            <div v-if="!checkList.length" class="checklistemit">
+				请先选择库点！！！
+			</div>
 			<template>
 				
 			  <el-checkbox-group v-model="checkedList">
@@ -106,7 +104,7 @@ import data from '@/util/mock';
 export default {
 //  props: ["formdatas"],
     created(){
-    	this.getselectList()
+    	this.getlibrarylist()
 		this.getcheckList();
     	
     },
@@ -147,6 +145,16 @@ export default {
     			}
     		}
     	},
+    	Plibrarylist(){
+	  		return this.librarylist.filter((item,index)=>{
+	  			return item.pLibraryId==-1;
+	  		})
+	  	},
+	  	Clibrarylist(){
+	  		return this.librarylist.filter((item,index)=>{
+	  			return item.pLibraryId==this.pLibraryId;
+	  		})
+	  	}
     },
     methods: {  
     	//下拉框改变对应库去后台获取响应检测项目
@@ -182,26 +190,30 @@ export default {
 //          this.$emit('btn_close')
 			window.history.go(-1)
         },
-//      获取库点选项
-        getselectList(){
-//      	this.loading=true;
-			this.$http({
-			    method: 'post',
-				url: this.selectlistUrl,
-				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-	//			data: {
-	//
-	//			}
-		    }).then(function (response) {
-			  	this.selectlist=response.data.selectlist;
-//			  	this.libselect=response.data.libselect;
-//		  		setTimeout(()=>{			  		
-//			  		this.loading=false;
-//			  	},1000)
-			}.bind(this)).catch(function (error) {
-			    console.log(error);
-			}.bind(this));
-        },
+//	获取库列表
+  	getlibrarylist(){
+		this.$http({
+		    method: 'post',
+			url: this.librarylistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				
+			}
+	    }).then(function (response) {
+		  	this.librarylist = response.data.rows;
+//			  console.log(this.librarylist)
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
 //      库点选中后,后台获取对应样品项目
         getcheckList(){
 //      	this.loading=true;
@@ -245,13 +257,13 @@ export default {
     data() {
 
         return {
-//			获取下拉选项时的后台地址
-			selectlistUrl:'selectlist',
-//		        被选中库点对应的样品地址
-			checkListUrl:'checklist',
+	 		librarylistURL: this.apiRoot + '/grain/library/data',//获取库列表
+			checkListUrl:'checklist',//		        被选中库点对应的样品地址
+			librarylist:[],
 			selectlist: [],
 //			被选中的库点
-		    libselect:'all',
+		    pLibraryId:'',
+		    libraryId:'',
 			checkList:[],
 			checkedList:[],
 //      	全部选中按钮
