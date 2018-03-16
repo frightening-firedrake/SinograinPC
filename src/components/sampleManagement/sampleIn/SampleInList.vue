@@ -418,7 +418,7 @@ export default {
       },
       {
         id: 2,
-        prop:'sampleNo',
+        prop:'sampleWord',
         label: "扦样编号",
 //      sort:true
       },

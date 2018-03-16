@@ -275,13 +275,13 @@ export default {
 					id: 2,
 					prop: 'connect',
 					label: "样品领取交接单名称",
-					sort: true,
+//					sort: true,
 				},
 				{
 					id: 3,
 					prop: 'test',
 					label: "检验项目",
-					sort: true,
+//					sort: true,
 				},
 				{
 					id: 4,
@@ -291,7 +291,7 @@ export default {
 				},
 			],
 			actions: {
-				selection: true,
+				selection: false,
 				number: false,
 				view: true,
 				edit: true,
