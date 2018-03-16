@@ -48,12 +48,12 @@
                         <span>序号</span>
                     </el-col>
                     <el-col :span="10">
-                        <el-col :span="10" style="padding-right:12px;">
+                        <el-col :span="18" style="padding-right:12px;">
                             <span>检验编号</span>
                         </el-col>
-                        <el-col :span="8" style="padding-right:6px;">
+                        <!--<el-col :span="8" style="padding-right:6px;">
                             <span>扦样编号</span>
-                        </el-col>
+                        </el-col>-->
                         <el-col :span="6" style="padding-right:12px;">
                             <span>操作</span>
                         </el-col>
@@ -62,12 +62,12 @@
                         <span>序号</span>
                     </el-col>
                     <el-col :span="10">
-                    	<el-col :span="10" style="padding-right:15px;">
+                    	<el-col :span="18" style="padding-right:15px;">
                             <span>检验编号</span>
                         </el-col>
-                        <el-col :span="8" style="padding-right:15px;">
+                        <!--<el-col :span="8" style="padding-right:15px;">
                             <span>扦样编号</span>
-                        </el-col>
+                        </el-col>-->
                         <el-col :span="6" style="padding-right:24px;">
                             <span>操作</span>
                         </el-col>
@@ -95,12 +95,12 @@
 		                            <span>{{index+1}}</span>
 		                        </el-col>
 		                        <el-col :span="20">
-		                            <el-col :span="10" class="classify_font">
+		                            <el-col :span="18" class="classify_font">
 		                                <span>{{item.sampleNum}}</span>
 		                            </el-col>
-		                            <el-col :span="8" class="">
+		                            <!--<el-col :span="8" class="">
 		                                <span>{{item.sampleWord}}</span>
-		                            </el-col>
+		                            </el-col>-->
 		                            <el-col :span="6" class="operation">
 		                                <span @click="deleteItem(index)">删除</span>
 		                            </el-col>
@@ -113,11 +113,11 @@
 	                            <span>&nbsp;</span>
 	                        </el-col>
 	                        <el-col :span="20">
-	                            <el-col :span="24" class="classify_font">
+	                            <el-col :span="18" class="classify_font">
 	                                <span @click="new_sample()" class="new_sample">+新建样品</span>
-	                            <!--</el-col>
-	                            <el-col :span="8" class="operation">
-	                                <span>&nbsp;</span>-->
+	                            </el-col>
+	                            <el-col :span="6" class="operation">
+	                                <span>&nbsp;</span>
 	                            </el-col>
 	                        </el-col>
 	                    </el-col>

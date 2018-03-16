@@ -1,14 +1,12 @@
 <template>
     <div class="SelectChecklist">
     	<el-form ref="form" :model="form" :label-width="labelWidth" label-position="left">
-	    	<el-form-item label="选择库点">
+	    	<el-form-item label="编号范围">
 			    <template>
-				    <el-select  v-model="pLibraryId" placeholder="直属" class="zhishu">
-				        <el-option v-for="item2 in Plibrarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
-				    </el-select>
-				    <el-select  v-model="libraryId" placeholder="选择库点" >
-				        <el-option v-for="item2 in Clibrarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
-				    </el-select>
+		    <el-input class="sampleNumRange" v-model="sampleNumRange[0]" placeholder="起始编号数字" style="margin-left:1em;"></el-input>
+		    <span style="font-size:0.16rem;"> 至 </span>
+		    <el-input class="sampleNumRange" v-model="sampleNumRange[1]" placeholder="结束编号数字"></el-input>
+				    
 				</template>
 
 			</el-form-item>
@@ -23,23 +21,10 @@
 			    </el-autocomplete>
 			</el-form-item>
 			
-	    	<el-form-item label="选择时间" style="border-top:none;width:100%;">
-	    		<el-date-picker
-	    		size='mini'
-	    		:clearable='false'
-	    		v-model="date_select"
-	    		type="daterange"
-	    		align="right"
-	    		unlink-panels
-	    		range-separator="—"
-	    		start-placeholder="开始日期"
-	    		end-placeholder="结束日期"
-	    		:picker-options="pickerOptions2"
-	    		@change="dateChange"
-	    		>
-	    		</el-date-picker>
+	    	<!--<el-form-item label="选择时间" style="border-top:none;width:100%;">
 	    		
-	    	</el-form-item>
+	    		
+	    	</el-form-item>-->
 			
 			
 		</el-form>
@@ -55,34 +40,34 @@
             <el-row class="order">
 				<el-col :span="6" class="">
                     <div class='pull-left1'>
-                    	检验编号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扦样编号
+                    	检验编号
                     </div>                   
                 </el-col>
                 <el-col :span="6" class="">
                     <div class='pull-left1'>
-                    	检验编号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扦样编号
+                    	检验编号
                     </div>                   
                 </el-col>
                 <el-col :span="6" class="">
                     <div class='pull-left1'>
-                    	检验编号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扦样编号
+                    	检验编号
                     </div>                   
                 </el-col>
                 <el-col :span="6" class="">
                     <div class='pull-left1'>
-                    	检验编号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扦样编号
+                    	检验编号
                     </div>                   
                 </el-col>
             </el-row>
             
-            <div v-if="!checkList.length" class="checklistemit">
-				请先选择库点！！！
+            <div v-if="!checkedListFilter.length" class="checklistemit">
+				请重新选择检验编号范围！！！
 			</div>
 			<template>
 				
 			  <el-checkbox-group v-model="checkedList">
 
-			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">{{item.sampleNum}}&nbsp;&nbsp;&nbsp;{{item.sampleWord}}</el-checkbox>
+			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">{{item.sampleNum}}</el-checkbox>
 
 			  		
 			    
@@ -104,7 +89,7 @@ import data from '@/util/mock';
 export default {
 //  props: ["formdatas"],
     created(){
-    	this.getlibrarylist()
+
 		this.getcheckList();
     	
     },
@@ -120,50 +105,15 @@ export default {
 //  		}
 //  	},
     	checkedListFilter(){
-    		if(this.libselect=="all"){
-    			if(!this.remSelect){
-    				return this.checkList
-    				
-    			}else{
-    				return this.checkList.filter((item,index)=>{
-						return item.remark.indexOf(this.remSelect)>-1
-					});
 
-    			}
-    		}else{
-    			var list=this.checkList.filter((item,index)=>{
-					return item.pid==this.libselect
-				});
-				if(!this.remSelect){
-    				return list
-    				
-    			}else{
-    				return list.filter((item,index)=>{
-						return item.remark.indexOf(this.remSelect)>-1
-					});
-
-    			}
-    		}
+			return this.checkList.filter((item,index)=>{
+				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&(this.sampleNumRange.length?(this.sampleNumRange[0]-0)<(item.sampleNum-0)&&(item.sampleNum-0)<(this.sampleNumRange[1]-0):true)
+			})
     	},
-    	Plibrarylist(){
-	  		return this.librarylist.filter((item,index)=>{
-	  			return item.pLibraryId==-1;
-	  		})
-	  	},
-	  	Clibrarylist(){
-	  		return this.librarylist.filter((item,index)=>{
-	  			return item.pLibraryId==this.pLibraryId;
-	  		})
-	  	}
+
     },
     methods: {  
-    	//下拉框改变对应库去后台获取响应检测项目
-    	
-//  	日期选项
-        dateChange(){
-    		console.log(this.date_select);
-//  		this.$emit('dateChange',this.date_select);
-    	},
+
 //  	提交
     	onSubmit(formname) {
 //			通过
@@ -190,36 +140,21 @@ export default {
 //          this.$emit('btn_close')
 			window.history.go(-1)
         },
-//	获取库列表
-  	getlibrarylist(){
-		this.$http({
-		    method: 'post',
-			url: this.librarylistURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-				
-			}
-	    }).then(function (response) {
-		  	this.librarylist = response.data.rows;
-//			  console.log(this.librarylist)
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
-  	},
-//      库点选中后,后台获取对应样品项目
+
+
         getcheckList(){
 //      	this.loading=true;
 			this.$http({
 			    method: 'post',
 				url: this.checkListUrl,
+				transformRequest: [function (data) {
+					// Do whatever you want to transform the data
+					let ret = ''
+					for (let it in data) {
+					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					}
+					return ret
+				}],
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	//			data: {
 	//
@@ -257,13 +192,8 @@ export default {
     data() {
 
         return {
-	 		librarylistURL: this.apiRoot + '/grain/library/data',//获取库列表
+
 			checkListUrl:'checklist',//		        被选中库点对应的样品地址
-			librarylist:[],
-			selectlist: [],
-//			被选中的库点
-		    pLibraryId:'',
-		    libraryId:'',
 			checkList:[],
 			checkedList:[],
 //      	全部选中按钮
@@ -276,36 +206,8 @@ export default {
         		
         	},
 			labelWidth:'1rem',
-//			
 		    remSelect:'',
-			pickerOptions2: {
-		        shortcuts: [{
-		            text: '最近一周',
-		            onClick(picker) {
-		              const end = new Date();
-		              const start = new Date();
-		              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-		              picker.$emit('pick', [start, end]);
-		            }
-		        }, {
-		            text: '最近一个月',
-		            onClick(picker) {
-		              const end = new Date();
-		              const start = new Date();
-		              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-		              picker.$emit('pick', [start, end]);
-		            }
-		        }, {
-		            text: '最近三个月',
-		            onClick(picker) {
-		              const end = new Date();
-		              const start = new Date();
-		              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-		              picker.$emit('pick', [start, end]);
-		            }
-		        }]
-	        },	
-	        date_select: '',
+	        sampleNumRange:[],
         }
     },
 }

@@ -213,3 +213,22 @@
 .SelectChecklist .order{
 	border-bottom: 1px solid #dfdfdf;
 }
+.SelectChecklist .sampleNumRange .el-input__inner{
+	border:none;
+	height:0.48rem;
+	line-height:0.48rem;
+	font-size:0.16rem;
+	text-align:center;
+	padding:0;
+	width:7em;
+}
+.SelectChecklist .sampleNumRange{
+	
+	border:none;
+	height:0.48rem;
+	line-height:0.48rem;
+	font-size:0.16rem;
+	text-align:center;
+	padding:0;
+	width:7em;
+}
