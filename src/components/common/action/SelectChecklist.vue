@@ -18,13 +18,13 @@
 			</el-form-item>
 			
 			<el-form-item label="选择备注" style="border-left:none;">
-			    <el-select v-model="remSelect" placeholder="选择备注">
-		    		<el-option label="春季普查" value="春季普查"></el-option>
-			        <el-option label="秋季普查" value="秋季普查"></el-option>
-			        <el-option label="2017-2018轮换年度" value="2017-2018轮换年度"></el-option>
-			        <el-option label="收购寻查" value="收购寻查"></el-option>
-			        <el-option label="其他" value="其他"></el-option>		    			    		
-			    </el-select>
+			    <el-autocomplete
+			      	class="remark-input"
+			      	v-model="remSelect"
+			     	:fetch-suggestions="querySearch"
+			      	placeholder="请填写备注"
+			    >
+			    </el-autocomplete>
 			</el-form-item>
 			
 	    	<el-form-item label="选择时间" style="border-top:none;width:100%;">
@@ -56,10 +56,35 @@
 			<div v-if="!checkList.length" class="checklistemit">
 				请先选择库点！！！
 			</div>
+			
+			<!--序号-->
+            <el-row class="order">
+				<el-col :span="6" class="">
+                    <div class='pull-left1'>
+                    	检验编号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扦样编号
+                    </div>                   
+                </el-col>
+                <el-col :span="6" class="">
+                    <div class='pull-left1'>
+                    	检验编号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扦样编号
+                    </div>                   
+                </el-col>
+                <el-col :span="6" class="">
+                    <div class='pull-left1'>
+                    	检验编号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扦样编号
+                    </div>                   
+                </el-col>
+                <el-col :span="6" class="">
+                    <div class='pull-left1'>
+                    	检验编号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扦样编号
+                    </div>                   
+                </el-col>
+            </el-row>
 			<template>
+				
 			  <el-checkbox-group v-model="checkedList">
 
-			  	<el-checkbox :label="item.checkNumber+' '+item.depot"  v-for="(item,index) in checkedListFilter" :key="item.id"></el-checkbox>
+			  	<el-checkbox :label="item.sampleNum+' '+item.sampleWord"  v-for="(item,index) in checkedListFilter" :key="item.id"></el-checkbox>
 
 			  		
 			    
@@ -188,6 +213,17 @@ export default {
         		this.checkedList=[];
         	}
         },
+        querySearch(queryString, cb){
+	        var restaurants = this.restaurants;
+	        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+	        // 调用 callback 返回建议列表的数据
+	        cb(results);
+		},
+		createFilter(queryString) {
+	    	return (restaurant) => {
+	      		return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+	    	};
+	  	},
     },
     data() {
 
@@ -203,6 +239,9 @@ export default {
 			checkedList:[],
 //      	全部选中按钮
         	checkAll:false,
+//      	筛选列表
+	  	  	restaurants: [{"value": "春季抽查"},{"value": "秋季普查"},{"value": "2017年度轮换验收"},{"value": "2018年度轮换验收"},{"value": "收购巡查"}],
+        	
 //      	表单数据
         	form:{
         		

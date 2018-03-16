@@ -149,13 +149,13 @@ export default {
         checkList:[],//检验项目数组
 //          检验样品数组
         items:[
-        	{checkNumber:'监20170094',depot:'TG-1-2'},
-        	{checkNumber:'监20170095',depot:'TG-1-2'},
-        	{checkNumber:'监20170096',depot:'TG-1-2'},
-        	{checkNumber:'监20170097',depot:'TG-1-2'},
-        	{checkNumber:'监20170094',depot:'TG-1-2'},
-        	{checkNumber:'监20170095',depot:'TG-1-2'},
-        	{checkNumber:'监20170096',depot:'TG-1-2'},
+        	{sampleNum:'监20170094',depot:'TG-1-2',sampleWord:'扦样编号123214'},
+        	{sampleNum:'监20170095',depot:'TG-1-2',sampleWord:'扦样编号123214'},
+        	{sampleNum:'监20170096',depot:'TG-1-2',sampleWord:'扦样编号123214'},
+        	{sampleNum:'监20170097',depot:'TG-1-2',sampleWord:'扦样编号123214'},
+        	{sampleNum:'监20170094',depot:'TG-1-2',sampleWord:'扦样编号123214'},
+        	{sampleNum:'监20170095',depot:'TG-1-2',sampleWord:'扦样编号123214'},
+        	{sampleNum:'监20170096',depot:'TG-1-2',sampleWord:'扦样编号123214'},
         
         ],
 	  }
