@@ -413,9 +413,9 @@ var selectlist=Mock.mock('selectlist', {
 var checklist=Mock.mock('checklist', {
 
     checkList:[
-		{sampleNum:'监201700941',sampleWord:'玉米-襄垣-忘了',pid:1,id:1,remark:'123'},
-		{sampleNum:'监201700942',sampleWord:'玉米-襄垣-忘了',pid:1,id:2,remark:'123'},
-		{sampleNum:'监201700943',sampleWord:'玉米-襄垣-忘了',pid:1,id:3,remark:'123'},
+		{sampleNum:'监201700941',sampleWord:'玉米-襄垣-春季抽查',pid:1,id:1,remark:'春季抽查'},
+		{sampleNum:'监201700942',sampleWord:'玉米-襄垣-秋季普查',pid:1,id:2,remark:'秋季普查'},
+		{sampleNum:'监201700943',sampleWord:'玉米-襄垣-忘了',pid:1,id:3,remark:'2017'},
 		{sampleNum:'监201700944',sampleWord:'玉米-襄垣-忘了',pid:1,id:4,remark:'123'},
 		{sampleNum:'监201700945',sampleWord:'玉米-襄垣-忘了',pid:1,id:5,remark:'123'},
 		{sampleNum:'监201700946',sampleWord:'玉米-襄垣-忘了',pid:2,id:6,remark:'123'},
