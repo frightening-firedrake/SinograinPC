@@ -50,7 +50,7 @@
 		<!--全选中处理-->
 		<p>
 			样品管理
-			<el-checkbox v-model="checkAll" @change="handleCheckAllChange" :disabled="disabledCheckAll" style="margin-left:0.35rem;">全部选中</el-checkbox>
+			<el-checkbox v-model="checkAll" @change="handleCheckAllChange"  style="margin-left:0.35rem;">全部选中</el-checkbox>
 		</p>
 		<div class="checkboxwrap">
 			<div v-if="!checkList.length" class="checklistemit">
@@ -84,7 +84,7 @@
 				
 			  <el-checkbox-group v-model="checkedList">
 
-			  	<el-checkbox :label="item.sampleNum+' '+item.sampleWord"  v-for="(item,index) in checkedListFilter" :key="item.id"></el-checkbox>
+			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">{{item.sampleNum}}&nbsp;&nbsp;&nbsp;{{item.sampleWord}}</el-checkbox>
 
 			  		
 			    
@@ -114,13 +114,13 @@ export default {
 //		console.log(this.formdatas)
     },
     computed:{
-    	disabledCheckAll(){
-    		if(this.checkList.length){
-    			return false
-    		}else{
-    			return true
-    		}
-    	},
+//  	disabledCheckAll(){
+//  		if(this.checkList.length){
+//  			return false
+//  		}else{
+//  			return true
+//  		}
+//  	},
     	checkedListFilter(){
     		if(this.libselect=="all"){
     			if(!this.remSelect){
