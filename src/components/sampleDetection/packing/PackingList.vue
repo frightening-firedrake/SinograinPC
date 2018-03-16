@@ -140,25 +140,41 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-	getHandSample(page){
+	getsample(){
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
-			url: this.getHandSampleURL,
+			url: this.getSampleNoURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			   
+			   sampleNo : this.modal.formdatas[0].value
 			}
 	    }).then(function (response) {
-		  	
+			this.dataBySampleNo = response.data;
+			if(this.dataBySampleNo.sampleState == 2) {
+
+				this.messages.type='success';
+				
+			} else {
+				this.messageShow=false;				
+  				this.modalVisible=true;
+			}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
   	},
 //	获取列表数据方法
   	getlistdata(page){
-  		this.loading=true;
+  		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -170,12 +186,7 @@ export default {
 			    pageSize:this.page.size,
 			}
 	    }).then(function (response) {
-		  	this.tabledatas=response.data.rows;
-	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -231,14 +242,13 @@ export default {
 			this.messageShow=false;
 			var path=this.$route.name+'/打印条码'
 			 this.$router.push({name: path,params: {code:code}})
-			// getHandSample()
+			this.getsample();
 		  }
   	},
   },
   data() {
     return {
-      datalistURL:'/liquid/role12/data',
-	  getHandSampleURL: this.apiRoot +  '/grain/sample/',
+      datalistURL: this.apiRoot +  '/grain/smallSample/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -294,13 +304,13 @@ export default {
       items: [
       {
         id: 1,
-        prop:'smallSampleNumber',
+        prop:'sampleNum',
         label: "样品编号",
         sort:true
       },
       {
         id: 2,
-        prop:'test',
+        prop:'checkPoint',
         label:"检验项目",
         sort:true,
       },

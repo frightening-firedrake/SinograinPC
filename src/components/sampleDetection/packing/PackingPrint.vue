@@ -138,7 +138,7 @@ export default {
 //    }],
 	listdatas:{
 		titleLabel:'样品编号',
-		title:'监20170078',
+		title:'监'+this.$route.params.code,
 		label:'检验项目',
 		listdata:[
 			{
