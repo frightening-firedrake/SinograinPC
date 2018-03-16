@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 const state = {
 	userName:'',//用户名
+	userId:'',//用户id
 	libraryName:'',//库点名
 	libraryId:'',//库点id
 	libraryNames:[],//库点组
@@ -46,6 +47,13 @@ const getters = {
     		return localStorage.getItem("userName");
     	}else{
     		return '未登录';
+    	}
+    },
+    userId:function(state){
+    	if(state.userId){
+    		return state.userId;    		
+    	}else{
+    		return localStorage.getItem("userId");
     	}
     },
     libraryNames:function(state){
@@ -94,9 +102,11 @@ const mutations = {
 		state.libraryName=payload.libraryName;
 		state.libraryId=payload.libraryId;
 		state.userName=payload.userName;
+		state.userId=payload.userId;
 		localStorage.setItem('libraryId', payload.libraryId);
 		localStorage.setItem('libraryName', payload.libraryName);
 		localStorage.setItem('userName', payload.userName);
+		localStorage.setItem('userId', payload.userId);
 	},
 	setBaseMsg(state,payload){
 		state.libraryNames=payload.libraryNames;

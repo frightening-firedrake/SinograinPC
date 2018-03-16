@@ -34,11 +34,12 @@ export default {
     SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,HandoverListConnect,SinograinModal
   },
   computed:{
-	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
-	...mapGetters(["modal_id"]),
+	...mapState([]),
+	...mapGetters(["libraryId","libraryName","userName","userId"]),
   },
   created(){
   	console.log(this.$route.query)
+  	console.log(this.userName,this.userId)
 //  获取列表数据（第一页）
 	// this.getlistdata(1)
 
@@ -143,7 +144,7 @@ export default {
   		title:'样品领取交接单',//标题
         form:{            	
         	name:'',//交接单名称
-        	manager:'',//管理员名
+        	manager:this.userName,//管理员名
         	remarks:'',//备注信息
         },
         checkList:[],//检验项目数组

@@ -123,11 +123,28 @@ export default {
     	},
     	checkedListFilter(){
     		if(this.libselect=="all"){
-    			return this.checkList
+    			if(!this.remSelect){
+    				return this.checkList
+    				
+    			}else{
+    				return this.checkList.filter((item,index)=>{
+						return item.remark.indexOf(this.remSelect)>-1
+					});
+
+    			}
     		}else{
-    			return this.checkList.filter((item,index)=>{
+    			var list=this.checkList.filter((item,index)=>{
 					return item.pid==this.libselect
 				});
+				if(!this.remSelect){
+    				return list
+    				
+    			}else{
+    				return list.filter((item,index)=>{
+						return item.remark.indexOf(this.remSelect)>-1
+					});
+
+    			}
     		}
     	},
     },

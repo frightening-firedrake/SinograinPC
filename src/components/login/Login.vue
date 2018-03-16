@@ -97,6 +97,7 @@ export default {
                		payload.libraryId=response.data.user.libraryId;
                		payload.libraryName=response.data.user.libraryName;
                		payload.userName=response.data.user.userName;
+               		payload.userId=response.data.user.id;
                		this.setUserInfo(payload)
                    	this.$router.push({ path: '/index'});
                }else {

@@ -5,8 +5,9 @@
   	  <!--标题-->
   	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--表单-->
-      <handover-list-connect :formdatas="formdatas" :viewPath="viewPath"></handover-list-connect> 
-
+      <handover-list-connect :formdatas="formdatas" @createlib="createlib"></handover-list-connect> 
+	  <!--新建库典弹框-->
+      <sinograin-modal :modal="modal" v-if="modalVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
     </div>
 </template>
 
@@ -20,7 +21,7 @@ import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import HandoverListConnect  from "@/components/common/action/HandoverListConnect"
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
-
+import SinograinModal from '@/components/common/action/Modal.vue';
 
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
@@ -28,17 +29,17 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 import data from '@/util/mock';
 
 
-
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,HandoverListConnect
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,HandoverListConnect,SinograinModal
   },
   computed:{
-	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
-	...mapGetters(["modal_id"]),
+	...mapState([]),
+	...mapGetters(["libraryId","libraryName","userName","userId"]),
   },
   created(){
   	console.log(this.$route.query)
+  	console.log(this.userName,this.userId)
 //  获取列表数据（第一页）
 	// this.getlistdata(1)
 
@@ -95,6 +96,20 @@ export default {
 	titleEvent(){
   		console.log('titleEvent');
   	},
+  	//	打开新建弹框
+    createlib() {
+        this.modalVisible = true;
+    },
+    //	获取填入的新建数据
+    createlibitem(form) {
+//      console.log(form);
+//      console.log(this.formdatas);
+        this.$router.push({ path: this.viewPath })
+    },
+    //	关闭新建弹框
+    dialogClose() {
+        this.modalVisible = false;
+    },
   },
   data() {
     return {
@@ -103,6 +118,7 @@ export default {
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
 	  createlibVisible:false,
+	  modalVisible: false,
       breadcrumb:{
       	search:false,   
       	searching:'',
@@ -111,19 +127,38 @@ export default {
       	btn:false,
       	btntext:'',
       },
-	  viewPath:'/index/sampleManagement/handover/handoverListEdit/handoverListPrint',
+	  viewPath:this.$route.path+'/handoverListPrint',
 	  
+	  modal: {
+	      title: '新建样品领取交接单',
+	      formdatas: [
+	          {
+	              label: "领取人",
+	              model: "receiptor",
+	              value:'',
+	          },
+	      ],
+	      submitText: '提交',
+	  },
       formdatas: {
-      	title:'样品领取交接单名称',
-      	form:{
-          name: '',//创建时间
-          manager: '',//状态
-          remarks: '',//迁样编号
-      	},
-      	checkList:[],
-      	items:[
-			      	
-      	],
+  		title:'样品领取交接单',//标题
+        form:{            	
+        	name:'',//交接单名称
+        	manager:this.userName,//管理员名
+        	remarks:'',//备注信息
+        },
+        checkList:[],//检验项目数组
+//          检验样品数组
+        items:[
+        	{sampleNum:'监20170094',depot:'TG-1-2',sampleWord:'扦样编号123214'},
+        	{sampleNum:'监20170095',depot:'TG-1-2',sampleWord:'扦样编号123214'},
+        	{sampleNum:'监20170096',depot:'TG-1-2',sampleWord:'扦样编号123214'},
+        	{sampleNum:'监20170097',depot:'TG-1-2',sampleWord:'扦样编号123214'},
+        	{sampleNum:'监20170094',depot:'TG-1-2',sampleWord:'扦样编号123214'},
+        	{sampleNum:'监20170095',depot:'TG-1-2',sampleWord:'扦样编号123214'},
+        	{sampleNum:'监20170096',depot:'TG-1-2',sampleWord:'扦样编号123214'},
+        
+        ],
 	  }
     }
   }
