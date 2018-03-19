@@ -73,6 +73,38 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+//	领取方法
+  	handover(){
+		var params = {};
+		params.sampleState = 2
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.handoverURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+			    sampleIds:'',
+			    sampleNums:'',
+			    checkeds:'',
+			    name:'',
+			    remark:'',
+			    userId:'',
+			}
+	    }).then(function (response) {
+
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
 //	获取搜索数据
   	searchingfor(searching){
   		console.log(searching);
@@ -102,9 +134,9 @@ export default {
     },
     //	获取填入的新建数据
     createlibitem(form) {
-//      console.log(form);
+        console.log(form);
 //      console.log(this.formdatas);
-        this.$router.push({ path: this.viewPath })
+//      this.$router.push({ path: this.viewPath })
     },
     //	关闭新建弹框
     dialogClose() {
@@ -113,6 +145,7 @@ export default {
   },
   data() {
     return {
+      handoverURL:this.apiRoot +'handover/save',
       datalistURL:'/liquid/role11/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
