@@ -393,6 +393,7 @@ export default {
 			this.uncomplate(msg)
 			return
 		}
+			console.log(sample)
 //		console.log(sample[0].barnTime,)
 		// 提交扦样列表
 		this.$http({

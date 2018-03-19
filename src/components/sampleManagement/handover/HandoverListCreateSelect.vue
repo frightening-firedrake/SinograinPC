@@ -47,6 +47,7 @@ export default {
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
+	this.getsampledata();
 
   },
   destroy(){
@@ -55,6 +56,24 @@ export default {
   methods: {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
+//	获取列表数据方法
+  	getsampledata(){
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.sampleURL,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+			}
+	    }).then(function (response) {
+			console.log(response)
+//		  	this.tabledatas=response.data.rows;
+//	  		this.page.total=response.data.total;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
 //	获取列表数据方法
   	getlistdata(page){
   		this.loading=true;
@@ -104,7 +123,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role9/data',
+      sampleURL:this.apiRoot + '/grain/sample/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
