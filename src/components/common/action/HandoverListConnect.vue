@@ -2,7 +2,7 @@
     <!--<el-form ref="form" :inline-message="errorinline"  :rules="rules" :model="formdatas.form" :label-width="labelWidth">-->
     <div>
 
-        <el-form class="connect_form">
+        <el-form class="connect_form" :model="formdatas.form" ref="form">
             <template>
                 <p>{{formdatas.title}}</p>
             </template>
@@ -17,7 +17,7 @@
                                 <el-input v-model="formdatas.form.pnumber" :disabled="disabled"></el-input>
                             </el-form-item>
                         </el-col>-->
-                        <el-form-item label="样品领取交接单名称:" prop="name"  class=" connect_font connect_font_title">
+                        <el-form-item label="样品领取交接单名称:" prop="name" labelWidth='2rem'  class=" connect_font connect_font_title" :rules="[{ required: true, message: '请输入交接单名称', trigger: 'blur' }]">
                             <el-input v-model="formdatas.form.name"></el-input>
                         </el-form-item>
                     </el-col>
@@ -28,14 +28,14 @@
                         <el-col :span="17" class="connect_font connect_font_content">
                             <span>张海新</span>
                         </el-col>-->
-                        <el-form-item label="样品管理员:" prop="manager"  class=" connect_font connect_font_title">
+                        <el-form-item label="样品管理员:" prop="manager" labelWidth='2rem'  class=" connect_font connect_font_title" :rules="[{ required: true, message: '请输入样品管理员', trigger: 'blur' }]">
                                 <el-input v-model="formdatas.form.manager"></el-input>
                             </el-form-item>
                     </el-col>
                 </el-col>
-                <el-col :span="24" class=" connect_fath">
-                    <el-col :span="12">
-                        <el-form-item label="备注:" prop="remarks"  class=" connect_font connect_font_title">
+                <el-col :span="24" class="connect_fath">
+                    <el-col :span="24">
+                        <el-form-item label="备注:" prop="remarks" labelWidth='2rem'  class=" connect_font connect_font_title" :rules="[{ required: true, message: '请输入备注信息', trigger: 'blur' }]">
                                 <el-input v-model="formdatas.form.remarks"></el-input>
                         </el-form-item>
                     </el-col>
@@ -127,18 +127,18 @@
                 
                 <el-col :span="9" class="classify">
                 	<el-checkbox-group v-model="formdatas.checkList">
-                		<el-checkbox label="不完善颗粒、杂质、生霉粒" class="classify_col"></el-checkbox>
-					    <el-checkbox label="水分" class="classify_col"></el-checkbox>
-					    <el-checkbox label="硬度" class="classify_col"></el-checkbox>
-					    <el-checkbox label="脂肪酸值" class="classify_col"></el-checkbox>
-					    <el-checkbox label="品尝评分" class="classify_col"></el-checkbox>
-					    <el-checkbox label="卫生" class="classify_col"></el-checkbox>
-					    <el-checkbox label="加工品质" class="classify_col"></el-checkbox>
+                		<el-checkbox label="1" class="classify_col">不完善颗粒、杂质、生霉粒</el-checkbox>
+					    <el-checkbox label="2" class="classify_col">水分</el-checkbox>
+					    <el-checkbox label="3" class="classify_col">硬度</el-checkbox>
+					    <el-checkbox label="4" class="classify_col">脂肪酸值</el-checkbox>
+					    <el-checkbox label="5" class="classify_col">品尝评分</el-checkbox>
+					    <el-checkbox label="6" class="classify_col">卫生</el-checkbox>
+					    <el-checkbox label="7" class="classify_col">加工品质</el-checkbox>
 					</el-checkbox-group>
                    
                 </el-col>
             </el-row>
-            <div class="leading_out" v-on:click="createlib">
+            <div class="leading_out" v-on:click="onSubmit('form')">
                 <span>生成样品领取交接单</span>
             </div>
         </el-form>
@@ -155,7 +155,8 @@ export default {
     methods: {
         //新建样品
         new_sample() {
-            this.$router.push({ path: '/index/sampleManagement/handover/handoverListCreate/handoverListCreateSelect' })
+            this.$emit('new_sample')       	
+//          this.$router.push({ path: '/index/sampleManagement/handover/handoverListCreate/handoverListCreateSelect' })
         },
         
         deleteItem(id){
@@ -163,8 +164,18 @@ export default {
         		return index!==id;
         	})
         },
-        createlib(){
-        	this.$emit('createlib')
+        onSubmit(formname){
+        	this.$refs[formname].validate((valid) => {
+                if (valid) {
+//                  alert('submit!');
+//                  this.$emit('btn_close')
+
+					this.$emit('createlib')
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
         },
     },
     data() {

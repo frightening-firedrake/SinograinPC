@@ -8,7 +8,7 @@
 
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
-      <select-checklist :selectdatas="selectdatas"></select-checklist> 
+      <select-checklist :checkList="checkList" @getCheckedList="getCheckedList" ></select-checklist> 
 
     </div>
 </template>
@@ -44,7 +44,11 @@ export default {
 	...mapGetters(["modal_id"]),
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.params.)
+  	if(this.$route.params.formdatas){
+  		console.log(this.$route.params.formdatas)
+		this.checkedList=this.$route.params.formdatas.items;
+	}
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
 	this.getsampledata();
@@ -58,17 +62,29 @@ export default {
   	...mapActions(['addAction']),
 //	获取列表数据方法
   	getsampledata(){
+  		var params={};
+  		params.sampleState=2
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
 			url: this.sampleURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
+				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-			console.log(response)
-//		  	this.tabledatas=response.data.rows;
+//			console.log(response)
+		  	this.checkList=response.data.rows;
+//		  	this.checkedList=response.data.rows;
 //	  		this.page.total=response.data.total;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -120,6 +136,13 @@ export default {
 	titleEvent(){
   		console.log('titleEvent');
   	},
+  	getCheckedList(checkedList){
+  		var path=this.$route.name
+  		var end=path.lastIndexOf('/');
+  		path=path.slice(0,end);
+  		this.$route.params.formdatas.items=checkedList
+		this.$router.push({name: path,params: {formdatas:this.$route.params.formdatas}})
+  	},
   },
   data() {
     return {
@@ -141,11 +164,10 @@ export default {
 //      title: '温馨提示：此页面灰色字为不可编辑状态!',
 //      type: 'info'
 //    }],
-      selectdatas: {
-      	
-	  }
+      checkList:[],
+	  checkedList:[],
+
     }
   }
 }
 </script>
-

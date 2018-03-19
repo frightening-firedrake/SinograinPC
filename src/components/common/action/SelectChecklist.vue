@@ -61,13 +61,13 @@
             </el-row>
             
             <div v-if="!checkedListFilter.length" class="checklistemit">
-				请重新选择检验编号范围！！！
+				请重新选择检索范围！！！
 			</div>
 			<template>
 				
 			  <el-checkbox-group v-model="checkedList">
 
-			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">监{{item.sampleNum}}</el-checkbox>
+			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">{{item.sampleNum}}</el-checkbox>
 
 			  		
 			    
@@ -87,10 +87,10 @@ import "@/assets/style/common/SelectChecklist.css";
 //本地测试要用下面import代码
 import data from '@/util/mock';
 export default {
-//  props: ["formdatas"],
+//  props: ["checkedList","checkList"],
+    props: ["checkList"],
     created(){
 
-		this.getcheckList();
     	
     },
     mounted: function() {
@@ -107,7 +107,7 @@ export default {
     	checkedListFilter(){
 
 			return this.checkList.filter((item,index)=>{
-				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&(this.sampleNumRange.length?(this.sampleNumRange[0]-0)<(item.sampleNum-0)&&(item.sampleNum-0)<(this.sampleNumRange[1]-0):true)
+				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 			})
     	},
 
@@ -119,8 +119,8 @@ export default {
 //			通过
             if (this.checkedList.length) {
 //                  alert('submit!');
-//                  this.$emit('btn_close')
-				console.log(this.checkedList)
+                    this.$emit('getCheckedList',this.checkedList)
+//				console.log(this.checkedList)
 //				window.history.go(-1)
 //			未通过
             } else {
@@ -172,7 +172,7 @@ export default {
         },
         handleCheckAllChange(val){
         	if(val){
-        		this.checkedList=this.checkList        			        		
+        		this.checkedList=this.checkedListFilter        			        		
         	}else{      		
         		this.checkedList=[];
         	}
@@ -193,8 +193,8 @@ export default {
 
         return {
 
-			checkListUrl:'checklist',//		        被选中库点对应的样品地址
-			checkList:[],
+//			checkListUrl:'checklist',//		        被选中库点对应的样品地址
+//			checkList:[],
 			checkedList:[],
 //      	全部选中按钮
         	checkAll:false,

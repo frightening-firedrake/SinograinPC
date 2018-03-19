@@ -60,27 +60,28 @@
     height:100%;
 }
 
-.connect_form .connect .connect_fath .el-col-12 .el-form-item{
+.connect_form .connect .connect_fath  .el-form-item{
     height:100%;
     
     margin:0;
 }
-.connect_form .connect .connect_fath .el-col-12 .el-form-item .el-form-item__label{
+.connect_form .connect .connect_fath  .el-form-item .el-form-item__label{
     width:2.06rem;
     font-size:0.16rem;
     height:100%;
     line-height:0.6rem;
     color:#333333;
 }
-.connect_form .connect .connect_fath .el-col-12 .el-form-item .el-form-item__content{
-    width:5rem;
+.connect_form .connect .connect_fath  .el-form-item .el-form-item__content{
+	font-size:0.16rem;
+    /*width:5rem;*/
     height:100%;
     border-left:1px solid #dfdfdf;
-    float:left;
+    /*float:left;*/
     line-height:0.6rem;
-    padding-left:0.3rem;
+    /*padding-left:0.3rem;*/
 }
-.connect_form .connect .connect_fath .el-col-12 .el-form-item .el-form-item__content .el-input input{
+.connect_form .connect .connect_fath  .el-form-item .el-form-item__content .el-input input{
     border:none;
 }
 
@@ -92,7 +93,7 @@
 .connect_form .connect .connect_fath .connect_font.connect_font_title{
     background-color:#fdfdfd;
     text-align:right;
-    padding-right:0.3rem;
+    /*padding-right:0.3rem;*/
 }
 .connect_form .connect .connect_fath .connect_font_content{
     background-color:white;
@@ -227,4 +228,19 @@
 	right:0;
 	top:0;
 	z-index: 2;
+}
+.connect_form .el-form-item .el-form-item__content .el-form-item__error {
+    top: 50%;
+    padding: 0;
+    right: 0.2rem;
+    left: auto;
+    margin-top: -7px;
+}
+.connect_form .el-form-item .el-form-item__content .el-input {
+    position:relative;
+}
+.connect_form .el-form-item .el-form-item__content .el-input input {
+    padding-right:7em;
+    font-size:0.16rem;
+    border:none;
 }
