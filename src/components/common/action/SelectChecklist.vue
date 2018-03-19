@@ -67,7 +67,7 @@
 				
 			  <el-checkbox-group v-model="checkedList">
 
-			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">{{item.sampleNum}}</el-checkbox>
+			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">监{{item.sampleNum}}</el-checkbox>
 
 			  		
 			    

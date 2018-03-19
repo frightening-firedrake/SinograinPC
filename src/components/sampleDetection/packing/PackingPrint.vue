@@ -10,6 +10,7 @@
       <sample-print-list :listdatas="listdatas" v-on:print="print"></sample-print-list> 
       <!--通知弹框-->
       <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
+      <img class="printChoice" :src=imgsrc alt="" />
     </div>
 </template>
 
@@ -100,9 +101,16 @@ export default {
   		console.log('打印'+number+'检测条码')
   		this.messageShow=true;
   		this.messages.type="loading";
-  		setTimeout(()=>{
-  			this.messages.type="success";
-  		},2000)
+  		var wind = window.open(this.imgsrc,'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
+		wind.onload=function(){
+			wind.print();
+			wind.close();			
+		};
+		
+//		return false;
+//		setTimeout(()=>{
+//			this.messages.type="success";
+//		},2000)
   	},
 	messageclick(type){
   		if(type=="success"){
@@ -122,6 +130,7 @@ export default {
     return {
       datalistURL:'/liquid/role9/data',
       searchURL:'/liquid/role2/data/search',
+      imgsrc:'static/images/test/code.jpg',
 	  createlibVisible:false,
       breadcrumb:{
       	search:false,   
@@ -140,41 +149,42 @@ export default {
 		titleLabel:'样品编号',
 		title:'监'+this.$route.params.code,
 		label:'检验项目',
+		buttonText:'打印',
 		listdata:[
 			{
 				number:'01',
 				content:'水分',
-				buttonText:'打印',
+
 			},
 			{
 				number:'02',
 				content:'水分',
-				buttonText:'打印',
+
 			},
 			{
 				number:'03',
 				content:'不完善粒',
-				buttonText:'打印',
+
 			},
 			{
 				number:'04',
 				content:'不完善粒',
-				buttonText:'打印',
+
 			},
 			{
 				number:'05',
 				content:'生霉粒指标',
-				buttonText:'打印',
+
 			},
 			{
 				number:'06',
 				content:'生霉粒指标',
-				buttonText:'打印',
+
 			},
 			{
 				number:'07',
 				content:'质量、品质全项目指标',
-				buttonText:'打印',
+
 			},
 		]
 	},

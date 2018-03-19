@@ -52,7 +52,7 @@
 						<div class="content">
 							{{item.content}}					
 						</div>							
-						<div v-if="item.buttonText" class="button" @click="buttonClick(item.number)">{{item.buttonText}}</div>
+						<div v-if="listdatas.buttonText" class="button" @click="buttonClick(item.number)">{{listdatas.buttonText}}</div>
 					</div>					
 				</template>
 				<div class="clear"></div>

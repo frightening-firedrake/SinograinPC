@@ -240,15 +240,17 @@ export default {
   			this.messageShow=false;
   		}else{  			
 			this.messageShow=false;
+//			暂时缺少一个验证方法
 			var path=this.$route.name+'/打印条码'
-			 this.$router.push({name: path,params: {code:code}})
-			this.getsample();
+			this.$router.push({name: path,params: {code:code}})
+//			this.getsample();
 		  }
   	},
   },
   data() {
     return {
       datalistURL: this.apiRoot +  '/grain/smallSample/data',
+	  getSampleNoURL: this.apiRoot + '/grain/sample/getBySampleNo',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -305,23 +307,29 @@ export default {
       {
         id: 1,
         prop:'sampleNum',
-        label: "样品编号",
+        label: "检验编号",
         sort:true
       },
       {
         id: 2,
+        prop:'sampleNum',
+        label: "小样编号",
+        sort:true
+      },
+      {
+        id: 3,
         prop:'checkPoint',
         label:"检验项目",
         sort:true,
       },
       {
-        id: 3,
+        id: 4,
         prop:'printTimes',
         label: "打印条码数",
         sort:true,
       },
       {
-        id: 4,
+        id: 5,
         prop:'printDate',
         label:"打印时间",
         sort:true,
