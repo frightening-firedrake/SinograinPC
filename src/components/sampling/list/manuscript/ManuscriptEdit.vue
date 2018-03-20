@@ -150,7 +150,6 @@ export default {
         if(!response.data.rows[0].storge){
         	this.formdatas.form.storge='';
         }
-        this.formdatas.form.libraryName = this.$route.query.libraryName
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

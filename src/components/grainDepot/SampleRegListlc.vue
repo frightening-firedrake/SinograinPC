@@ -170,6 +170,8 @@ export default {
   	},
   	//	发送删除id
   	sendDeleteId(id){
+		console.log("-------------------")
+		console.log(id)
 		this.$http({
 		    method: 'post',
 			url: this.deleteURL,
