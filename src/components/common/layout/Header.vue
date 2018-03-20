@@ -26,11 +26,11 @@
 				</el-badge>
     </div>
     <div class="search_h">
-			  <el-input
+			  <!--<el-input
 		    placeholder="Search"
 		    v-model="search_h">
 			    	<button slot="prefix" class="el-input__icon el-icon-search"></button>
-			  </el-input>
+			  </el-input>-->
     </div>
 	</div>
 </template>

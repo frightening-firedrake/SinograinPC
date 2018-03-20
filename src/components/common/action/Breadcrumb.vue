@@ -50,11 +50,12 @@ import {mapMutations} from 'vuex';
     },
     created(){
     	this.breadcrumbListFirst();
+    	console.log(this.$route)
     },
     methods:{
     	...mapMutations(['route_click']),
     	searchingfor(){
-      		this.$emit('searchingfor',this.searching)     		
+      		this.$emit('searchingfor',this.searching,1)     		
     	},
     	backhome(){
 //  		手动跳转

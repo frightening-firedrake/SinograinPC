@@ -97,22 +97,32 @@ export default {
 		this.modalVisible=false;
 	},
 //	获取搜索数据
-  	searchingfor(searching){
-  		console.log(searching);
+  	searchingfor(searching,page){
+  		page?page:1;
+  		this.searchText=searching;
+//		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
 			url: this.searchURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 			    listName: this.list,
-			    page:1,
+			    page:page,
 			    pageSize:this.page.size,
-			    name_like:searching,
+			    libraryNameLike:searching,
 			}
 	    }).then(function (response) {
-		  	this.tabledatas=response.data.rows;		  		
-		  	this.loading=false;
+		  	this.tabledatas=response.data;
+
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -192,7 +202,11 @@ export default {
 //	获取分页点击事件中及当前页码
     getCurrentPage(currentPage){
 //		console.log(currentPage)
-		this.getlistdata(currentPage)
+		if(this.searchText){			
+			this.searchingfor(this.searchText,currentPage)
+		}else{			
+			this.getlistdata(currentPage)
+		}
 	},
 //	映射分页触发的事件
   	paginationEvent(actiontype){
@@ -213,8 +227,9 @@ export default {
     return {
 	  librarylistURL: this.apiRoot + '/grain/library/data',//获取库列表
       datalistURL: this.apiRoot + '/grain/library/getFirst',
-      searchURL: this.apiRoot + '/grain/library/data/search',
+      searchURL: this.apiRoot + '/grain/library/getFirst',
       deleteURL: this.apiRoot + '/grain/',
+      searchText:'',
       checkedId:[],
       list:"librarylist",
 	  modalVisible:false,

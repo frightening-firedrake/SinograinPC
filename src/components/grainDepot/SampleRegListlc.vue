@@ -7,7 +7,7 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
-      <sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
+      <sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" :rowType="rowType"> 
       </sinograin-list>
       <!--分页-->
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
@@ -110,16 +110,25 @@ export default {
 		this.modalVisible=false;
 	},
 //	获取搜索数据
-  	searchingfor(searching){
-  		console.log(searching);
+  	searchingfor(searching,page){
+  		page?page:1;
+  		console.log(searching,page);
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
 			url: this.searchURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 			    listName: this.list,
-			    page:1,
+			    page:page,
 			    pageSize:this.page.size,
 			    name_like:searching,
 			}
@@ -164,9 +173,16 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.deleteURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
 			    id:id,
 			}
 	    }).then(function (response) {
@@ -198,11 +214,12 @@ export default {
   data() {
     return {
       datalistURL: this.apiRoot + '/grain/register/data',
-      searchURL:'/liquid/role/data/search',
-      deleteURL:'/liquid/role/data/delete',
+      searchURL:this.apiRoot + '/grain/register/data',
+      deleteURL:this.apiRoot + '/grain/register/remove',
       checkedId:[],
 	  list:"librarylist",
 	  modalVisible:false,
+	  rowType:'扦样登记表',
 	  modal:{
 	  	title:'新建库点',
 		formdatas:[
@@ -283,7 +300,7 @@ export default {
       	number:false,
       	view:true,
       	edit:false,
-      	dele:false,
+      	dele:true,
       }
     }
   }
