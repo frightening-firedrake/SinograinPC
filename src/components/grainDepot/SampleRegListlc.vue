@@ -60,9 +60,7 @@ export default {
     this.$root.eventHub.$off("viewlistitem")
 //	监听列表删除事件
     this.$root.eventHub.$on('delelistitem',function(rowid,list){
-    	this.tabledatas=this.tabledatas.filter(function(item){
-    		return item.id!==rowid;
-    	})
+    	
     	this.sendDeleteId(rowid);
 //  	console.log(rowid,list);
     }.bind(this)); 	
@@ -170,8 +168,8 @@ export default {
   	},
   	//	发送删除id
   	sendDeleteId(id){
-		console.log("-------------------")
-		console.log(id)
+//		console.log("-------------------")
+//		console.log(id)
 		this.$http({
 		    method: 'post',
 			url: this.deleteURL,
@@ -188,7 +186,11 @@ export default {
 			    id:id,
 			}
 	    }).then(function (response) {
-		  	
+		  	if(response.data.success){
+			  	this.tabledatas=this.tabledatas.filter(function(item){
+	    			return item.id!==id;
+    			})
+		  	}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

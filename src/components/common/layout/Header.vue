@@ -7,7 +7,7 @@
     	  <div class="dropdown">
 				    <el-dropdown trigger="click" @command="command">
 					      <span class="el-dropdown-link">
-					        	{{userName}}
+					        	{{userName?userName:"未登录"}}
 					        	<i class="el-icon-arrow-down el-icon--right"></i>
 					      </span>
 					      <el-dropdown-menu slot="dropdown" class="logout">

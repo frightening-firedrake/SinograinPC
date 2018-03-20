@@ -8,7 +8,7 @@
 			</div>
 			<div class="userinfo">
 				<h3>扦样员
-					<span>({{this.userName}})</span>
+					<span>({{userName?userName:"未登录"}})</span>
 				</h3>
 				<p>
 					<template v-if="user.status==1">

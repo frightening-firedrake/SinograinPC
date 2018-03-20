@@ -43,10 +43,8 @@ const getters = {
     userName:function(state){
     	if(state.userName){
     		return state.userName;    		
-    	}else if(sessionStorage.getItem("userName")){
-    		return sessionStorage.getItem("userName");
     	}else{
-    		return '未登录';
+    		return sessionStorage.getItem("userName");
     	}
     },
     userId:function(state){
