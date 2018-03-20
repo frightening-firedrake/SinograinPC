@@ -99,7 +99,7 @@ div.header div.manager{
 }
 div.header div.manager .dropdown{
 	float:left;
-	/*width:1.14rem;*/
+	width:1.14rem;
 }
 div.header div.manager .mphoto{
 	float:left;
@@ -121,4 +121,17 @@ div.header div.manager .el-dropdown{
 }
 div.header div.manager .el-dropdown i.el-icon--right{
 	color:#2dc0e8;
+}
+.el-dropdown-menu.logout{
+	font-size:0.14rem;
+	padding:0 0.15rem;
+	color:#4c5e70;
+	right:0.32rem;
+	left:auto!important;
+	width:1.54rem;
+}
+.el-dropdown-menu.logout .el-dropdown-menu__item{
+	font-size:0.16rem;
+	padding:0;
+	text-align:center;
 }

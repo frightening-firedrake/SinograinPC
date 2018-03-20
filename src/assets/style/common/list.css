@@ -116,6 +116,10 @@
 .el-main .list .el-table__body-wrapper td .cell button.dele{
     color:#e87373;
 }
+.el-main .list .el-table__body-wrapper td .cell button.undele{
+    color:#999999;
+    cursor:not-allowed;
+}
 .el-main .list .el-table__body-wrapper td .cell button.auth{
     color:#e17f00;
 }

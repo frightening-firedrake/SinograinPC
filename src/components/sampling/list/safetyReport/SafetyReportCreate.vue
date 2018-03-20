@@ -36,12 +36,13 @@ export default {
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
-	...mapGetters(["modal_id"]),
+	...mapGetters(["modal_id","userName"]),
   },
   created(){
   	console.log(this.$route.query)
 	this.formdatas.form.libraryName = this.$route.query.libraryName
 	this.formdatas.form.position = this.$route.query.position
+	this.formdatas.form.rummager = this.userName
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
 

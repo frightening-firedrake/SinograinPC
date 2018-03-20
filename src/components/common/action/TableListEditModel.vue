@@ -46,7 +46,7 @@
 									    <el-select v-if="item.editLibraryName" v-model="scope.row[item.prop]" placeholder="选择品种">
 									        <el-option v-for="item2 in librarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
 									    </el-select>-->
-									    <el-select  v-model="tabledata[0].libraryName" placeholder="选择库点" @change="libraryChange">
+									    <el-select  v-model="tabledata[0].libraryName" placeholder="库点" @change="libraryChange">
 									         <el-option v-for="item2 in Clibrarylist" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        
 									    </el-select>
 		

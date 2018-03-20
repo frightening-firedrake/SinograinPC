@@ -302,7 +302,9 @@ export default {
       	number:false,
       	view:true,
       	edit:false,
-      	dele:true,
+      	dele:false,
+      	deleCaogao:true,
+      	show:true,
       }
     }
   }

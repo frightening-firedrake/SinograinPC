@@ -11,7 +11,8 @@
     element-loading-customClass="table_loading"
     element-loading-text="loading..."
     element-loading-spinner="el-icon-loading"
-    element-loading-background="rgba(255,255,255, 0.8)">
+    element-loading-background="rgba(255,255,255, 0.8)"
+    @row-click="rowClick">
    		<!--是否包含多选框-->
    		<template v-if="actions.selection">
         <el-table-column :resizable="resizable" align="center" type="selection" class-name="tableAction">
@@ -92,11 +93,11 @@
 		          <template slot-scope="scope">
 		      <!--已完成工作底稿-->
 		      				<template v-if="scope.row.mId">
-		            			<button class="viewManuscript" @click="handleViewManuscript(scope.$index, scope.row)">中央储备粮实物检查工作底稿</button>
+		            			<button class="viewManuscript" @click.stop="handleViewManuscript(scope.$index, scope.row)">中央储备粮实物检查工作底稿</button>
 		      				</template>
 		      <!--未完成工作底稿-->
 						      <template v-else>
-						          <button class="createManuscript" @click="handleCreateManuscript(scope.$index, scope.row)">+新建工作底稿</button>
+						          <button class="createManuscript" @click.stop="handleCreateManuscript(scope.$index, scope.row)">+新建工作底稿</button>
 						      </template> 
 		          </template>
 		      </el-table-column>
@@ -108,37 +109,42 @@
 		          <template slot-scope="scope">
 		      <!--已完成安全报告-->
 		      				<template v-if="scope.row.srId">
-		            			<button class="viewSafetyReport" @click="handleViewSafetyReport(scope.$index, scope.row)">监督检查</button>
+		            			<button class="viewSafetyReport" @click.stop="handleViewSafetyReport(scope.$index, scope.row)">监督检查</button>
 		      				</template>
 		      <!--未完成安全报告-->
 						      <template v-else>
-						          <button class="createSafetyReport" @click="handleCreateSafetyReport(scope.$index, scope.row)">+新建监督检查</button>
+						          <button class="createSafetyReport" @click.stop="handleCreateSafetyReport(scope.$index, scope.row)">+新建监督检查</button>
 						      </template> 
 		          </template>
 		      </el-table-column>
       </template>
 	    
-      <el-table-column :resizable="resizable" align="center" label="操作" class-name="tableAction">
+      <el-table-column v-if="actions.show" :resizable="resizable" align="center" label="操作" class-name="tableAction">
           <template slot-scope="scope">
       <!--是否包含查看操作-->
       				<template v-if="actions.input">
-            			<button class="input" @click="handleInput(scope.$index, scope.row,scope)">录入</button>
+            			<button class="input" @click.stop="handleInput(scope.$index, scope.row,scope)">录入</button>
       				</template>
       <!--是否包含查看操作-->
-      				<template v-if="actions.view">
-            			<button class="view" @click="handleView(scope.$index, scope.row,scope)">查看</button>
+      				<template v-if="actions.view1">
+            			<button class="view" @click.stop="handleView(scope.$index, scope.row,scope)">查看</button>
       				</template>
       <!--是否包含编辑操作-->
 				      <template v-if="actions.edit">
-				          <button class="edit" @click="handleEdit(scope.$index, scope.row)">编辑</button>
+				          <button class="edit" @click.stop="handleEdit(scope.$index, scope.row)">编辑</button>
 				      </template> 
       <!--是否包含删除操作-->
+				      <template v-if="actions.deleCaogao">
+				          <button v-if="scope.row.regState==3" class="dele" @click.stop="handleDele(scope.$index, scope.row)">删除</button>
+				          <button v-else class="undele" @click.stop="notAllowed()">删除</button>
+				      </template>
+			<!--是否包含删除操作-->
 				      <template v-if="actions.dele">
-				          <button class="dele" @click="handleDele(scope.$index, scope.row)">删除</button>
+				          <button class="dele" @click.stop="handleDele(scope.$index, scope.row)">删除</button>
 				      </template>
 			<!--是否包含授权操作-->
 				      <template v-if="actions.auth">
-				          <button class="auth" @click="handleAuth(scope.$index, scope.row)">授权</button>
+				          <button class="auth" @click.stop="handleAuth(scope.$index, scope.row)">授权</button>
 				      </template>
           </template>
       </el-table-column>
@@ -261,6 +267,21 @@ export default {
 	  	if(pitem.length){	  		
 	  		return pitem[0].libraryName;
 	  	}
+	  },
+	  rowClick(row,event,column){
+	  	console.log("rowClick")
+	  	if(row.sampleState){
+				this.$root.eventHub.$emit('viewlistitem',row.id,row.sampleState)										
+			}else if(row.regState){
+				this.$root.eventHub.$emit('viewlistitem',row.id,row.regState)										
+			}else if(row.isDeal){
+				this.$root.eventHub.$emit('viewlistitem',row)										
+			}else{
+				this.$root.eventHub.$emit('viewlistitem',row.id)					
+			}
+	  },
+	  notAllowed(){
+	  	return false;
 	  },
 	}
 }

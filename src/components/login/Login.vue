@@ -1,5 +1,5 @@
 <template>
-    <div class="login" style="background-image:url(static/images/login/login_big.jpg)">
+    <div class="login" style="background-image:url(static/images/login/login_big.png)">
         <div class="login_box">
             <el-form ref="form"  class="login_form" :model="loginForm">
             	<p v-if="loginError" class="loginError"><span class="el-icon-warning"></span>您输入的账号或密码不正确，请重新输入！</p>

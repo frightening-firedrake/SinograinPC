@@ -64,9 +64,9 @@
 				  <img width="100%" :src="dialogImageUrl" alt="">
 				</el-dialog>
 			</el-form-item>	
-			<el-form-item label="" class="full button">
+			<el-form-item label="" class="full button" label-width="0">
 				<div class="btn">					
-					<el-button class="yes" type="primary" @click="pass(problem.id)" :key="problem.id" :disabled="problem.isDeal!==-1">{{problem.isDeal==-1?'待解决':'已解决'}}</el-button>
+					<el-button class="yes" type="primary" @click="pass(problem.id)" :key="problem.id" :disabled="problem.isDeal!==-1">该问题已解决</el-button>
 				</div>
 		    </el-form-item>
 		<!--</template>-->
@@ -127,6 +127,7 @@
 	form.sampling .el-form-item.button .el-form-item__content{
 		height:0.78rem;
 		line-height:0.76rem;
+		border-left:none;
 	}
 	form.sampling .btn{
 		clear:both;

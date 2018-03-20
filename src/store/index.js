@@ -30,21 +30,21 @@ const getters = {
     	if(state.libraryName){
     		return state.libraryName;    		
     	}else{
-    		return localStorage.getItem("libraryName");
+    		return sessionStorage.getItem("libraryName");
     	}
     },
     libraryId:function(state){
     	if(state.libraryId){
     		return state.libraryId;    		
     	}else{
-    		return localStorage.getItem("libraryId");
+    		return sessionStorage.getItem("libraryId");
     	}
     },
     userName:function(state){
     	if(state.userName){
     		return state.userName;    		
-    	}else if(localStorage.getItem("userName")){
-    		return localStorage.getItem("userName");
+    	}else if(sessionStorage.getItem("userName")){
+    		return sessionStorage.getItem("userName");
     	}else{
     		return '未登录';
     	}
@@ -53,14 +53,14 @@ const getters = {
     	if(state.userId){
     		return state.userId;    		
     	}else{
-    		return localStorage.getItem("userId");
+    		return sessionStorage.getItem("userId");
     	}
     },
     libraryNames:function(state){
     	if(state.libraryNames.length){
     		return state.libraryNames;    		
     	}else{
-    		var basemsg=JSON.parse(localStorage.getItem("basemsg"))
+    		var basemsg=JSON.parse(sessionStorage.getItem("basemsg"))
     		return basemsg.libraryNames;
     	}
     },
@@ -68,7 +68,7 @@ const getters = {
     	if(state.qualitys.length){
     		return state.qualitys;    		
     	}else{
-    		var basemsg=JSON.parse(localStorage.getItem("basemsg"))
+    		var basemsg=JSON.parse(sessionStorage.getItem("basemsg"))
     		return basemsg.qualitys;
     	}
     },
@@ -76,7 +76,7 @@ const getters = {
     	if(state.sorts.length){
     		return state.sorts;    		
     	}else{
-    		var basemsg=JSON.parse(localStorage.getItem("basemsg"))
+    		var basemsg=JSON.parse(sessionStorage.getItem("basemsg"))
     		return basemsg.sorts;
     	}
     },
@@ -84,7 +84,7 @@ const getters = {
     	if(state.remarkses.length){
     		return state.remarkses;    		
     	}else{
-    		var basemsg=JSON.parse(localStorage.getItem("basemsg"))
+    		var basemsg=JSON.parse(sessionStorage.getItem("basemsg"))
     		return basemsg.remarkses;
     	}
     },
@@ -92,7 +92,7 @@ const getters = {
     	if(state.tests.length){
     		return state.tests;    		
     	}else{
-    		var basemsg=JSON.parse(localStorage.getItem("basemsg"))
+    		var basemsg=JSON.parse(sessionStorage.getItem("basemsg"))
     		return basemsg.tests;
     	}
     },
@@ -103,10 +103,20 @@ const mutations = {
 		state.libraryId=payload.libraryId;
 		state.userName=payload.userName;
 		state.userId=payload.userId;
-		localStorage.setItem('libraryId', payload.libraryId);
-		localStorage.setItem('libraryName', payload.libraryName);
-		localStorage.setItem('userName', payload.userName);
-		localStorage.setItem('userId', payload.userId);
+		sessionStorage.setItem('libraryId', payload.libraryId);
+		sessionStorage.setItem('libraryName', payload.libraryName);
+		sessionStorage.setItem('userName', payload.userName);
+		sessionStorage.setItem('userId', payload.userId);
+	},
+	logout(state){
+		state.libraryName='';
+		state.libraryId='';
+		state.userName='';
+		state.userId='';
+		sessionStorage.removeItem('libraryId');
+		sessionStorage.removeItem('libraryName');
+		sessionStorage.removeItem('userName');
+		sessionStorage.removeItem('userId');
 	},
 	setBaseMsg(state,payload){
 		state.libraryNames=payload.libraryNames;
@@ -115,7 +125,7 @@ const mutations = {
 		state.remarkses=payload.remarkses;
 		state.tests=payload.tests;
 		var basemsg=payload;
-		localStorage.setItem('basemsg', JSON.stringify(basemsg));
+		sessionStorage.setItem('basemsg', JSON.stringify(basemsg));
 	},
 	create_modal_id(state){
         state.modal_id_number+=1;
