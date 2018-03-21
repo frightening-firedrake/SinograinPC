@@ -11,7 +11,8 @@
         </div>
         <div class="hand_view_tab">
           <div class="hand_view_tab_title">
-            <p>{{formdatas.sort}}样品领取交接单</p>
+            <!--<p>{{formdatas.sort}}样品领取交接单</p>-->
+            <p>{{formdatas.name}}</p>
           </div>
           <div class="hand_view_tab_num">
             <p>编号:{{formdatas.nid}}</p>
@@ -66,7 +67,7 @@
                 <span>{{index+1}}</span>
               </el-col>
               <el-col :span="16">
-                <span>{{item.checkNum}}</span>
+                <span>{{item}}</span>
               </el-col>
             </el-col>
             <el-col :span="6" v-for="(item,index) in testItemListadd" :key="index+99" style="border-top:1px solid #dfdfdf;">
@@ -129,7 +130,19 @@
                 <span>&nbsp;</span>
               </el-col>
               <el-col :span="20">
-                <span> 样品管理员：{{formdatas.gly}} 时间： {{formdatas.time}}</span>
+              	<el-col :span="2">
+              	
+              	</el-col>
+              	<el-col :span="10">
+              			样品管理员：
+              	</el-col>
+              	<el-col :span="2">
+              	
+              	</el-col>
+              	<el-col :span="10">
+              			时间：
+              	</el-col>
+                <!--<span> 样品管理员：{{formdatas.gly}} 时间： {{formdatas.time}}</span>-->
               </el-col>
             </el-col>
           </el-row>
@@ -158,7 +171,7 @@ import "@/assets/style/common/handoverView.css"
 import "@/assets/style/common/list.css"
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 
 
@@ -188,7 +201,7 @@ export default {
   created() {
     console.log(this.$route.query)
     //  获取列表数据（第一页）
-//  this.getlistdata(1)
+    this.getlistdata(1)
 
   },
   destroy() {
@@ -223,12 +236,28 @@ export default {
       this.$http({
         method: 'post',
         url: this.datalistURL,
+        transformRequest: [function (data) {
+					let ret = ''
+					for (let it in data) {
+					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					}
+					return ret
+				}],
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        //			data: {
-        //
-        //			}
+  			data: {
+  					id:this.$route.query.id
+  			}
       }).then(function(response) {
-        this.formdatas = response.data.formdatas;
+      	console.log(response.data)
+      	this.formdatas.remarks=response.data.remark;//备注
+//    	this.formdatas.gly="管理员"
+      	this.formdatas.time=response.data.updateTime;//领取时间
+      	this.formdatas.testList=this.findCheckeds(response.data.checkeds);//检测项目
+      	this.formdatas.nid=response.data.id;//编号
+//    	this.formdatas.sort='麦子';//品种
+      	this.formdatas.name=response.data.name;//品种
+      	this.formdatas.testItemList=response.data.sampleNums.split(',');//检测样品
+//      this.formdatas = response.data;
         //		  	this.tabledatas=response.data.rows;
         //	  		this.page.total=response.data.total;
 
@@ -262,10 +291,19 @@ export default {
 	titleEvent(){
   		console.log('titleEvent');
   	},
+  	findCheckeds(str){
+	  	var indexs=str.split(',');
+	  	var checkList=["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生","加工品质"]
+	  	var res=[];
+	  	indexs.forEach((item)=>{
+	  		res.push(checkList[item-1])
+	  	})
+	  	return res.join('，')
+	  },
   },
   data() {
     return {
-      datalistURL: '/liquid/role9/data',
+      datalistURL: this.apiRoot +'/grain/handover/get',
       searchURL: '/liquid/role2/data/search',
       deleteURL: '/liquid/role2/data/delete',
       checkedId: [],
@@ -284,21 +322,13 @@ export default {
         type: 'info'
       }],
       formdatas: {
+      	name:'',
         sort:'玉米',//品种
         nid:20,//编号
         testList:'检验质量、品质全项目指标',//检测项目
         //检测样品
         testItemList:[
-        	{checkNum:'监20180001'},
-        	{checkNum:'监20180002'},
-        	{checkNum:'监20180003'},
-        	{checkNum:'监20180004'},
-        	{checkNum:'监20180005'},
-        	{checkNum:'监20180006'},
-        	{checkNum:'监20180007'},
-        	{checkNum:'监20180008'},
-        	{checkNum:'监20180009'},
-        	{checkNum:'监20180010'},
+   
         ],
         remarks:'分两份不完善粒平行小样，其他按国标法分样。',
         gly:'张海星',

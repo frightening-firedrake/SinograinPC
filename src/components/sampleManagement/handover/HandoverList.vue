@@ -72,13 +72,13 @@ export default {
 		//	监听列表点击查看事件
 		this.$root.eventHub.$on("viewlistitem", function(id) {
 			//		console.log(id)
-			this.$router.push({ path: '/index/sampleManagement/handover/handoverListView', query: { libid: id } })
+			this.$router.push({ path: '/index/sampleManagement/handover/handoverListView', query: { id: id } })
 
 		}.bind(this));
 		//监听列表点击编辑事件
 		this.$root.eventHub.$on('editlistitem',function(id){
 //			console.log(id)
-			this.$router.push({ path: '/index/sampleManagement/handover/handoverListEdit', query: { libid: id } })
+			this.$router.push({ path: '/index/sampleManagement/handover/handoverListEdit', query: { id: id } })
 		}.bind(this));
 	},
 	destroy() {

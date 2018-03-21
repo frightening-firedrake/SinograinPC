@@ -65,7 +65,7 @@
 			</div>
 			<template>
 				
-			  <el-checkbox-group v-model="checkedList">
+			  <el-checkbox-group v-model="checkedList" @change="checkedListChange">
 
 			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">{{item.sampleNum}}</el-checkbox>
 
@@ -78,6 +78,7 @@
 		<div class="btns">
             <el-button class="yes" type="primary" @click="onSubmit('form')" v-bind:disabled="!checkedList.length">确认</el-button>
             <el-button class="no" @click="cancel('form')">取消</el-button>
+            <div>{{listready}}</div>
         </div>
     </div>
 </template>
@@ -87,16 +88,38 @@ import "@/assets/style/common/SelectChecklist.css";
 //本地测试要用下面import代码
 import data from '@/util/mock';
 export default {
-//  props: ["checkedList","checkList"],
-    props: ["checkList"],
+    props: ["checkedListAdd","checkList"],
+//  props: ["checkList"],
     created(){
+//		this.checkedList=this.checkedListAdd;
+//  	if(this.$route.params.formdatas){
+//			this.$route.params.formdatas.items.forEach((item)=>{
+//				this.checkedList.push(item)
+//			});
+//		}
+//		console.log(this.checkedListAdd)
 
-    	
+//		       	this.checkedList=this.$route.params.formdatas.items;
+
+
+
     },
     mounted: function() {
 //		console.log(this.formdatas)
     },
     computed:{
+    	listready(){
+    		if(this.checkList.length){
+    			var checkNums=this.$route.params.formdatas.items.map((val)=>{
+    				return val.sampleNum
+    			})
+    			this.checkedList=this.checkList.filter((item)=>{
+    				return checkNums.includes(item.sampleNum)
+    			})
+    		}else{
+    			
+    		}
+    	},
 //  	disabledCheckAll(){
 //  		if(this.checkList.length){
 //  			return false
@@ -113,7 +136,9 @@ export default {
 
     },
     methods: {  
-
+		checkedListChange(val){
+			console.log(val)
+		},
 //  	提交
     	onSubmit(formname) {
 //			通过

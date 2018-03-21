@@ -8,7 +8,7 @@
 
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
-      <select-checklist :checkList="checkList" @getCheckedList="getCheckedList" ></select-checklist> 
+      <select-checklist :checkList="checkList" :checkedListAdd="checkedList" @getCheckedList="getCheckedList" ></select-checklist> 
 
     </div>
 </template>
@@ -30,7 +30,7 @@ import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 
 
@@ -45,10 +45,7 @@ export default {
   },
   created(){
 //	console.log(this.$route.params.)
-  	if(this.$route.params.formdatas){
-  		console.log(this.$route.params.formdatas)
-		this.checkedList=this.$route.params.formdatas.items;
-	}
+  	
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
 	this.getsampledata();
@@ -84,6 +81,9 @@ export default {
 	    }).then(function (response) {
 //			console.log(response)
 		  	this.checkList=response.data.rows;
+		  	if(this.$route.params.formdatas){
+				this.checkedList=this.$route.params.formdatas.items;
+			}
 //		  	this.checkedList=response.data.rows;
 //	  		this.page.total=response.data.total;
 		}.bind(this)).catch(function (error) {
