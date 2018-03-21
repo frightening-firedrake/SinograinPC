@@ -567,7 +567,7 @@ export default {
         id: 3,
         prop:'libraryName',
         label:"被查库点",
-//      width:190,
+        width:140,
 //      sort:true,
       },
       

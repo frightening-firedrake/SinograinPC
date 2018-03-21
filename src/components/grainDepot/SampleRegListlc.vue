@@ -190,9 +190,21 @@ export default {
 			  	this.tabledatas=this.tabledatas.filter(function(item){
 	    			return item.id!==id;
     			})
+			  	this.$message({
+			        type: 'success',
+			        message: '删除成功!'
+			    });
+		  	}else{
+		  		this.$message({
+			        type: 'info',
+	        		message: '删除失败!'
+			    });
 		  	}
 		}.bind(this)).catch(function (error) {
-		    console.log(error);
+		    this.$message({
+		        type: 'info',
+        		message: '删除失败!'
+		    });
 		}.bind(this));
   	},
 //	获取分页点击事件中及当前页码

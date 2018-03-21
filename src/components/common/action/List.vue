@@ -242,10 +242,10 @@ export default {
 	      type: 'warning'
 	    }).then(() => {
 	    	this.$root.eventHub.$emit('delelistitem',row.id,this.list);
-	      this.$message({
-	        type: 'success',
-	        message: '删除成功!'
-	      });
+//	      this.$message({
+//	        type: 'success',
+//	        message: '删除成功!'
+//	      });
 	    }).catch(() => {
 	      this.$message({
 	        type: 'info',
