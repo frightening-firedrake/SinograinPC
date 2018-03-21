@@ -68,6 +68,9 @@
 		      				<template v-if="item.prop=='depot'">
 				      				{{scope.row['depot']+scope.row['counter']}}
 		      				</template>
+		      				<template v-if="item.prop=='checkeds'">
+				      				{{findCheckeds(scope.row[item.prop])}}
+		      				</template>
 		          </template>
 	    		</el-table-column>
    		</template>
@@ -267,6 +270,15 @@ export default {
 	  	if(pitem.length){	  		
 	  		return pitem[0].libraryName;
 	  	}
+	  },
+	  findCheckeds(str){
+	  	var indexs=str.split(',');
+	  	var checkList=["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生","加工品质"]
+	  	var res=[];
+	  	indexs.forEach((item)=>{
+	  		res.push(checkList[item-1])
+	  	})
+	  	return res.join('，')
 	  },
 	  rowClick(row,event,column){
 	  	console.log("rowClick")

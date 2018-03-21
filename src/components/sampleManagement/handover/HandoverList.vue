@@ -159,17 +159,15 @@ export default {
 				}],
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				data: {
-					listName: this.list,
-					page: page,
-					pageSize: this.page.size,
+					
 				}
 			}).then(function(response) {
 				this.tabledatas = response.data.rows;
 				this.page.total = response.data.total;
 
-				setTimeout(() => {
+
 					this.loading = false;
-				}, 1000)
+
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));
@@ -216,7 +214,7 @@ export default {
 	},
 	data() {
 		return {
-			datalistURL: '/liquid/role11/data',
+			datalistURL: this.apiRoot +'/grain/handover/data',
 			searchURL: '/liquid/role2/data/search',
 			deleteURL: '/liquid/role2/data/delete',
 			checkedId: [],
@@ -280,19 +278,20 @@ export default {
 //				},
 				{
 					id: 2,
-					prop: 'connect',
+					prop: 'name',
 					label: "样品领取交接单名称",
 //					sort: true,
 				},
 				{
 					id: 3,
-					prop: 'test',
+					prop: 'checkeds',
 					label: "检验项目",
+					status:true,
 //					sort: true,
 				},
 				{
 					id: 4,
-					prop: 'data',
+					prop: 'createTime',
 					label: "创建时间",
 					sort: true,
 				},
