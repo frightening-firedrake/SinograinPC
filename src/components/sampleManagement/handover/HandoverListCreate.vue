@@ -110,7 +110,7 @@ export default {
 			data: params,
 	    }).then(function (response) {
 	    	if(response.data.success){	    		
-	    		this.$router.push({ path: this.viewPath })
+	    		this.$router.push({ path: this.viewPath,query:{id:response.data.id} })
 	    	}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);

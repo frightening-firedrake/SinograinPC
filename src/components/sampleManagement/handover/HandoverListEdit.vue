@@ -5,7 +5,7 @@
   	  <!--标题-->
   	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--表单-->
-      <handover-list-connect :formdatas="formdatas" @createlib="createlib"></handover-list-connect> 
+      <handover-list-connect :formdatas="formdatas" @createlib="createlib" @new_sample="new_sample"></handover-list-connect> 
 	  <!--新建库典弹框-->
       <sinograin-modal :modal="modal" v-if="modalVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
     </div>
@@ -26,7 +26,7 @@ import SinograinModal from '@/components/common/action/Modal.vue';
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 
 export default {
@@ -38,12 +38,16 @@ export default {
 	...mapGetters(["libraryId","libraryName","userName","userId"]),
   },
   created(){
-  	console.log(this.$route.query)
-  	console.log(this.userName,this.userId)
-  	this.formdatas.form.manager=this.userName;
+//	console.log(this.$route.query)
+//	console.log(this.userName,this.userId)
+	this.formdatas.form.manager=this.userName;
 //  获取列表数据（第一页）
-	// this.getlistdata(1)
-
+	this.getlistdata(1)
+	
+//	console.log(this.$route.params.formdatas)
+	if(this.$route.params.formdatas){
+		this.formdatas=this.$route.params.formdatas
+	}
   },
   destroy(){
 
@@ -58,18 +62,64 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-//			data: {
-//
-//			}
+			data: {
+  				id:this.$route.query.id
+			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;		  
-//		  	this.tabledatas=response.data.rows;
-//	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+	    	this.formdatas.checkList=response.data.checkeds.split(',');
+			this.formdatas.form.name=response.data.name;
+			this.formdatas.form.remarks=response.data.remark;
+			this.formdatas.items=response.data.sampleNums.split(',');
+//			this.formdatas.form.items=this.checkList.filter((item)=>{
+//				return checkNums.includes(item.sampleNum)
+//			})
+		  	this.loading=false;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+//	领取方法
+  	handover(){
+		var params = {};
+		params.checkeds = this.formdatas.checkList.join(',');
+		params.name = this.formdatas.form.name;
+		params.remark = this.formdatas.form.remarks;
+		params.receiver =this.receiver;
+		params.userId = this.userId;
+		params.sampleNums = []
+		params.sampleIds = [];
+		this.formdatas.items.forEach((val)=>{
+			params.sampleNums.push(val.sampleNum)
+			params.sampleIds.push(val.id)
+		})
+		
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.handoverURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: params,
+	    }).then(function (response) {
+	    	if(response.data.success){	    		
+	    		this.$router.push({ path: this.viewPath,query:{id:response.data.id} })
+	    	}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -96,25 +146,38 @@ export default {
   	},
 	titleEvent(){
   		console.log('titleEvent');
-  	},
+    },
   	//	打开新建弹框
     createlib() {
+    	//额外验证检查样品组和检查项目组
+    	if(!this.formdatas.checkList.length){
+    		this.$alert('请添检查项目!!!','提示信息',{});
+    		return false;
+    	}
+    	if(!this.formdatas.items.length){
+    		this.$alert('请添加样品!!!','提示信息',{});
+    		return false;
+    	}
         this.modalVisible = true;
     },
     //	获取填入的新建数据
     createlibitem(form) {
-//      console.log(form);
-//      console.log(this.formdatas);
-        this.$router.push({ path: this.viewPath })
+        this.receiver=form.receiver;
+		this.handover();
     },
     //	关闭新建弹框
     dialogClose() {
         this.modalVisible = false;
     },
+    new_sample(){
+    	var path=this.$route.name+'/选择样品编号'
+		this.$router.push({name: path,params: {formdatas:this.formdatas}})
+    },
   },
   data() {
     return {
-      datalistURL:'/liquid/role11/data',
+      handoverURL:this.apiRoot +'/grain/handover/save',
+      datalistURL:this.apiRoot +'/grain/handover/get',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -135,30 +198,24 @@ export default {
 	      formdatas: [
 	          {
 	              label: "领取人",
-	              model: "receiptor",
+	              model: "receiver",
 	              value:'',
 	          },
 	      ],
 	      submitText: '提交',
 	  },
+	  receiver:'',
       formdatas: {
   		title:'样品领取交接单',//标题
         form:{            	
         	name:'',//交接单名称
-        	manager:'',//管理员名
+        	manager:this.userName,//管理员名
         	remarks:'',//备注信息
         },
         checkList:[],//检验项目数组
-//          检验样品数组
+//      检验样品数组
         items:[
-        	{sampleNum:'监20170094',depot:'TG-1-2',sampleWord:'扦样编号123214'},
-        	{sampleNum:'监20170095',depot:'TG-1-2',sampleWord:'扦样编号123214'},
-        	{sampleNum:'监20170096',depot:'TG-1-2',sampleWord:'扦样编号123214'},
-        	{sampleNum:'监20170097',depot:'TG-1-2',sampleWord:'扦样编号123214'},
-        	{sampleNum:'监20170094',depot:'TG-1-2',sampleWord:'扦样编号123214'},
-        	{sampleNum:'监20170095',depot:'TG-1-2',sampleWord:'扦样编号123214'},
-        	{sampleNum:'监20170096',depot:'TG-1-2',sampleWord:'扦样编号123214'},
-        
+        	
         ],
 	  }
     }

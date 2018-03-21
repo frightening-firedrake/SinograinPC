@@ -8,7 +8,7 @@
 
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
-      <select-checklist :selectdatas="selectdatas"></select-checklist> 
+      <select-checklist :checkList="checkList" :checkedListAdd="checkedList" @getCheckedList="getCheckedList" ></select-checklist> 
 
     </div>
 </template>
@@ -30,7 +30,7 @@ import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 
 
@@ -44,9 +44,11 @@ export default {
 	...mapGetters(["modal_id"]),
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.params.)
+  	
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
+	this.getsampledata();
 
   },
   destroy(){
@@ -55,6 +57,39 @@ export default {
   methods: {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
+//	获取列表数据方法
+  	getsampledata(){
+  		var params={};
+  		params.sampleState=2
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.sampleURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				params:JSON.stringify(params)
+			}
+	    }).then(function (response) {
+//			console.log(response)
+		  	this.checkList=response.data.rows;
+		  	if(this.$route.params.formdatas){
+				this.checkedList=this.$route.params.formdatas.items;
+			}
+//		  	this.checkedList=response.data.rows;
+//	  		this.page.total=response.data.total;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
 //	获取列表数据方法
   	getlistdata(page){
   		this.loading=true;
@@ -101,10 +136,17 @@ export default {
 	titleEvent(){
   		console.log('titleEvent');
   	},
+  	getCheckedList(checkedList){
+  		var path=this.$route.name
+  		var end=path.lastIndexOf('/');
+  		path=path.slice(0,end);
+  		this.$route.params.formdatas.items=checkedList
+		this.$router.push({name: path,params: {formdatas:this.$route.params.formdatas}})
+  	},
   },
   data() {
     return {
-      datalistURL:'/liquid/role9/data',
+      sampleURL:this.apiRoot + '/grain/sample/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -122,11 +164,10 @@ export default {
 //      title: '温馨提示：此页面灰色字为不可编辑状态!',
 //      type: 'info'
 //    }],
-      selectdatas: {
-      	
-	  }
+      checkList:[],
+	  checkedList:[],
+
     }
   }
 }
 </script>
-

@@ -111,7 +111,7 @@ export default {
     	listready(){
     		if(this.checkList.length){
     			var checkNums=this.$route.params.formdatas.items.map((val)=>{
-    				return val.sampleNum
+    				return val.sampleNum?val.sampleNum:val;
     			})
     			this.checkedList=this.checkList.filter((item)=>{
     				return checkNums.includes(item.sampleNum)
