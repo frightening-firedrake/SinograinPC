@@ -65,7 +65,7 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-          id: this.$route.query.id,
+          id: this.$route.query.libid,
 			}
 	    }).then(function (response) {
 	    	var res=response.data;
@@ -137,10 +137,11 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-          id: this.$route.query.id,
-					storageTime: this.formdatas.form.storageTime,
-					depot: this.formdatas.form.depot,
-					counter: this.formdatas.form.counter
+          		id: this.$route.query.libid,
+				storageTime: this.formdatas.form.storageTime,
+				depot: this.formdatas.form.depot,
+				counter: this.formdatas.form.counter,
+				autograph:this.formdatas.form.autograph,
 			}
 	    }).then(function (response) {
       	this.$router.go(-1);//提交完成返回上一页

@@ -138,7 +138,8 @@ export default {
             console.log('取消!');
 //			this.$refs[formname].resetFields();
 //          this.$emit('btn_close')
-			window.history.go(-1)
+			this.$router.go(-1)
+//			window.history.go(-1)
         },
 
 

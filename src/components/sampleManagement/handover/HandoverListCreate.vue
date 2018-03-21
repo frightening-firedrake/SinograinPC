@@ -84,6 +84,7 @@ export default {
 		params.checkeds = this.formdatas.checkList.join(',');
 		params.name = this.formdatas.form.name;
 		params.remark = this.formdatas.form.remarks;
+		params.receiver =this.receiver;
 		params.userId = this.userId;
 		params.sampleNums = []
 		params.sampleIds = [];
@@ -106,16 +107,11 @@ export default {
 				return ret
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-				checkeds:params.checkeds,
-				name:params.name,
-				remark:params.remark,
-				userId:params.userId,
-				sampleNums:params.sampleNums,
-				sampleIds:params.sampleIds,
-			},
+			data: params,
 	    }).then(function (response) {
-
+	    	if(response.data.success){	    		
+	    		this.$router.push({ path: this.viewPath })
+	    	}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -158,9 +154,7 @@ export default {
     },
     //	获取填入的新建数据
     createlibitem(form) {
-//      console.log(form);
-//      console.log(this.formdatas);
-//      this.$router.push({ path: this.viewPath })
+        this.receiver=form.receiver;
 		this.handover();
     },
     //	关闭新建弹框
@@ -196,12 +190,13 @@ export default {
 	      formdatas: [
 	          {
 	              label: "领取人",
-	              model: "receiptor",
+	              model: "receiver",
 	              value:'',
 	          },
 	      ],
 	      submitText: '提交',
 	  },
+	  receiver:'',
       formdatas: {
   		title:'样品领取交接单',//标题
         form:{            	

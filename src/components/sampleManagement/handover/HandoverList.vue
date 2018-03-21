@@ -150,6 +150,13 @@ export default {
 			this.$http({
 				method: 'post',
 				url: this.datalistURL,
+				transformRequest: [function (data) {
+					let ret = ''
+					for (let it in data) {
+					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					}
+					return ret
+				}],
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				data: {
 					listName: this.list,
@@ -298,6 +305,7 @@ export default {
 				dele: false,
 				manuscript: false,
 				safetyReport: false,
+				show:true,
 			}
 		}
 	}

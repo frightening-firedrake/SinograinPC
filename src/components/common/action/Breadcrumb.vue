@@ -50,7 +50,7 @@ import {mapMutations} from 'vuex';
     },
     created(){
     	this.breadcrumbListFirst();
-    	console.log(this.$route)
+//  	console.log(this.$route)
     },
     methods:{
     	...mapMutations(['route_click']),
@@ -86,7 +86,23 @@ import {mapMutations} from 'vuex';
     		}else{
     			return this.breadcrumbListsCache;
     		}
-	    }
+	    },
+//	    breadtest(){
+//		    var routeList = []
+//	
+//			router.beforeEach((to, from, next) => {
+//			  var index = routeList.indexOf(to.name)
+//			  if (index !== -1) {
+//			    //如果存在路由列表，则把之后的路由都删掉
+//			    routeList.splice(index + 1, routeList.length - index - 1)
+//			  } else {
+//			    routeList.push(to.name)
+//			  }
+//			  to.meta.routeList = routeList
+//			  next()
+//			})
+//	    	
+//	    },
     },
     computed: {
 	    breadcrumbList: function () {
