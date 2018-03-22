@@ -84,8 +84,9 @@ export default {
 		params.checkeds = this.formdatas.checkList.join(',');
 		params.name = this.formdatas.form.name;
 		params.remark = this.formdatas.form.remarks;
-		params.receiver =this.receiver;
+		params.receiptor =this.receiptor;
 		params.userId = this.userId;
+		params.sampleAdmin = this.formdatas.form.manager;
 		params.sampleNums = []
 		params.sampleIds = [];
 		this.formdatas.items.forEach((val)=>{
@@ -154,7 +155,7 @@ export default {
     },
     //	获取填入的新建数据
     createlibitem(form) {
-        this.receiver=form.receiver;
+        this.receiptor=form.receiptor;
 		this.handover();
     },
     //	关闭新建弹框
@@ -190,13 +191,13 @@ export default {
 	      formdatas: [
 	          {
 	              label: "领取人",
-	              model: "receiver",
+	              model: "receiptor",
 	              value:'',
 	          },
 	      ],
 	      submitText: '提交',
 	  },
-	  receiver:'',
+	  receiptor:'',
       formdatas: {
   		title:'样品领取交接单',//标题
         form:{            	

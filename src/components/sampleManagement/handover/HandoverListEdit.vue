@@ -5,7 +5,7 @@
   	  <!--标题-->
   	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--表单-->
-      <handover-list-connect :formdatas="formdatas" @createlib="createlib" @new_sample="new_sample"></handover-list-connect> 
+      <handover-list-connect :formdatas="formdatas" @createlib="createlib" @new_sample="new_sample" @sampleIdsDel="sampleIdsDel"></handover-list-connect> 
 	  <!--新建库典弹框-->
       <sinograin-modal :modal="modal" v-if="modalVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
     </div>
@@ -40,13 +40,14 @@ export default {
   created(){
 //	console.log(this.$route.query)
 //	console.log(this.userName,this.userId)
-	this.formdatas.form.manager=this.userName;
+//	this.formdatas.form.manager=this.userName;
 //  获取列表数据（第一页）
-	this.getlistdata(1)
-	
-//	console.log(this.$route.params.formdatas)
-	if(this.$route.params.formdatas){
+	if(this.$route.query.id){
+		this.getlistdata(1)
+	}else if(this.$route.params.formdatas){
 		this.formdatas=this.$route.params.formdatas
+	}else{
+		this.$router.push({name:"样品管理/样品领取交接单"})
 	}
   },
   destroy(){
@@ -74,10 +75,13 @@ export default {
   				id:this.$route.query.id
 			}
 	    }).then(function (response) {
-	    	this.formdatas.checkList=response.data.checkeds.split(',');
-			this.formdatas.form.name=response.data.name;
-			this.formdatas.form.remarks=response.data.remark;
-			this.formdatas.items=response.data.sampleNums.split(',');
+	    	this.formdatas.checkList=response.data.checkeds.split(',');//检测项
+			this.formdatas.form.name=response.data.name;//交接单名字
+			this.formdatas.form.manager=response.data.sampleAdmin;//管理员
+			this.formdatas.form.remarks=response.data.remark;//备注
+			this.formdatas.items=response.data.sampleNums.split(',');//待检测样品
+			this.formdatas.handoverId=response.data.id//保存交接单ID
+			this.sampleIds=response.data.sampleIds//样品id集
 //			this.formdatas.form.items=this.checkList.filter((item)=>{
 //				return checkNums.includes(item.sampleNum)
 //			})
@@ -92,15 +96,26 @@ export default {
 		params.checkeds = this.formdatas.checkList.join(',');
 		params.name = this.formdatas.form.name;
 		params.remark = this.formdatas.form.remarks;
-		params.receiver =this.receiver;
-		params.userId = this.userId;
+		params.receiptor =this.receiptor;
+		params.id =this.formdatas.handoverId;
+
 		params.sampleNums = []
 		params.sampleIds = [];
-		this.formdatas.items.forEach((val)=>{
-			params.sampleNums.push(val.sampleNum)
-			params.sampleIds.push(val.id)
-		})
-		
+//		通过是否存在id判断数组结构
+		if(this.formdatas.items[0].id){
+			this.formdatas.items.forEach((val)=>{
+				params.sampleNums.push(val.sampleNum)		
+				params.sampleIds.push(val.id)
+			})			
+		}else{
+			this.formdatas.items.forEach((val)=>{
+				params.sampleNums.push(val)			
+			})
+			params.sampleIds=this.sampleIds
+		}
+
+//		params.sampleNums=params.sampleNums.join(',');
+
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -115,10 +130,10 @@ export default {
 				return ret
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: params,
+			data:params,
 	    }).then(function (response) {
 	    	if(response.data.success){	    		
-	    		this.$router.push({ path: this.viewPath,query:{id:response.data.id} })
+	    		this.$router.push({ path: this.viewPath,query:{id:this.formdatas.handoverId} })
 	    	}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -162,7 +177,7 @@ export default {
     },
     //	获取填入的新建数据
     createlibitem(form) {
-        this.receiver=form.receiver;
+        this.receiptor=form.receiptor;
 		this.handover();
     },
     //	关闭新建弹框
@@ -173,13 +188,45 @@ export default {
     	var path=this.$route.name+'/选择样品编号'
 		this.$router.push({name: path,params: {formdatas:this.formdatas}})
     },
+    //  直接删除检查编号时获取样品id
+    sampleIdsDel(sampleNum){
+    	console.log(sampleNum)
+    	
+    	this.$http({
+		    method: 'post',
+			url: this.getIdURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data:{
+    			sampleNum:sampleNum,				
+			},
+	   }).then(function (response) {	    	
+	    	if(response.data.id){	    		
+				this.sampleIds=this.sampleIds.split(',');
+				this.sampleIds=this.sampleIds.filter((val)=>{
+					return (val-0)!==response.data.id
+				})
+				this.sampleIds=this.sampleIds.join(',')
+	    	}
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));	
+    },
+    
   },
   data() {
     return {
-      handoverURL:this.apiRoot +'/grain/handover/save',
+      handoverURL:this.apiRoot +'/grain/handover/edit',
       datalistURL:this.apiRoot +'/grain/handover/get',
+      getIdURL:this.apiRoot +'/grain/sample/getBySampleNum',
       searchURL:'/liquid/role2/data/search',
-      deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
 	  createlibVisible:false,
 	  modalVisible: false,
@@ -198,14 +245,16 @@ export default {
 	      formdatas: [
 	          {
 	              label: "领取人",
-	              model: "receiver",
+	              model: "receiptor",
 	              value:'',
 	          },
 	      ],
 	      submitText: '提交',
 	  },
-	  receiver:'',
+	  receiptor:'',
+	  sampleIds:'',//编辑时保存获取到的样品id集合
       formdatas: {
+      	handoverId:'',//编辑时保存获取到的id
   		title:'样品领取交接单',//标题
         form:{            	
         	name:'',//交接单名称

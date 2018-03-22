@@ -3,8 +3,6 @@ import Router from 'vue-router'
 import Login from '@/components/login/Login.vue'
 import Layout from '@/components/common/layout/Layout.vue'
 import Home from '@/components/home/Home.vue'
-import test1 from "@/components/test/test1.vue"
-import test2 from "@/components/test/test2.vue"
 import ExaminationLibraryList from "@/components/sampling/examination/ExaminationLibraryList.vue"
 import SampleRegListlc from "@/components/grainDepot/SampleRegListlc.vue"
 import SampleReglc from "@/components/grainDepot/SampleReglc.vue"
@@ -78,19 +76,6 @@ export default new Router({
       component: Layout,
       redirect: '/index/grainDepot/createSampleReglc',
       children:[
-//        来一个测试用的路径玩一玩
-					{
-            path:"leve1/leve2/:id",
-            name:"测试1/测试2",
-            component:test1,
-            props: true
-          }, 
-          {
-            path:"leve1/leve2/leve3/:id",
-            name:"测试1/测试2/测试3",
-            component:test2,
-            props: true
-          }, 
           {
             path:"home",
             name: '首页',

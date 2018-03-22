@@ -28,8 +28,8 @@
                         <el-col :span="17" class="connect_font connect_font_content">
                             <span>张海新</span>
                         </el-col>-->
-                        <el-form-item label="样品管理员:" prop="manager" labelWidth='2rem'  class=" connect_font connect_font_title" :rules="[{ required: true, message: '请输入样品管理员', trigger: 'blur' }]">
-                                <el-input v-model="formdatas.form.manager"></el-input>
+                        <el-form-item label="样品管理员:" prop="manager" labelWidth='2rem'  class="disabled connect_font connect_font_title" :rules="[{ required: true, message: '请输入样品管理员', trigger: 'blur' }]">
+                                <el-input v-model="formdatas.form.manager" disabled></el-input>
                             </el-form-item>
                     </el-col>
                 </el-col>
@@ -102,7 +102,7 @@
 		                                <span>{{item.sampleWord}}</span>
 		                            </el-col>-->
 		                            <el-col :span="6" class="operation">
-		                                <span @click="deleteItem(index)">删除</span>
+		                                <span @click="deleteItem(index,item)">删除</span>
 		                            </el-col>
 		                        </el-col>
 		                    </el-col>                			
@@ -159,10 +159,13 @@ export default {
 //          this.$router.push({ path: '/index/sampleManagement/handover/handoverListCreate/handoverListCreateSelect' })
         },
         
-        deleteItem(id){
+        deleteItem(index0,item){
         	this.formdatas.items=this.formdatas.items.filter((value,index)=>{
-        		return index!==id;
+        		return index!==index0;
         	})
+        	if(!item.sampleNum){
+          		this.$emit('sampleIdsDel',item)       		
+        	}
         },
         onSubmit(formname){
         	this.$refs[formname].validate((valid) => {
