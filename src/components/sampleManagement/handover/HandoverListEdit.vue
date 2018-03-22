@@ -82,6 +82,7 @@ export default {
 			this.formdatas.items=response.data.sampleNums.split(',');//待检测样品
 			this.formdatas.handoverId=response.data.id//保存交接单ID
 			this.sampleIds=response.data.sampleIds//样品id集
+			this.formdatas.sampleIds2=response.data.sampleIds//样品id集2
 //			this.formdatas.form.items=this.checkList.filter((item)=>{
 //				return checkNums.includes(item.sampleNum)
 //			})
@@ -105,15 +106,25 @@ export default {
 		if(this.formdatas.items[0].id){
 			this.formdatas.items.forEach((val)=>{
 				params.sampleNums.push(val.sampleNum)		
-				params.sampleIds.push(val.id)
-			})			
+				params.sampleIds.push(val.id.toString())
+			})	
+			params.sampleIds.join(',')
 		}else{
 			this.formdatas.items.forEach((val)=>{
 				params.sampleNums.push(val)			
 			})
-			params.sampleIds=this.sampleIds
+			params.sampleIds=this.sampleIds.split(',')
 		}
 
+		var oldsampleIds=this.formdatas.sampleIds2.split(',');
+		
+		var newsampleIds=params.sampleIds;
+		var deleteIds=oldsampleIds.filter((val)=>{
+			return !newsampleIds.includes(val)
+		})
+//		if(deleteIds.length){
+			params.deleteIds=deleteIds
+//		}
 //		params.sampleNums=params.sampleNums.join(',');
 
   		this.loading=false;
@@ -254,6 +265,7 @@ export default {
 	  receiptor:'',
 	  sampleIds:'',//编辑时保存获取到的样品id集合
       formdatas: {
+      	sampleIds2:'',//编辑时保存获取到的样品id集合2
       	handoverId:'',//编辑时保存获取到的id
   		title:'样品领取交接单',//标题
         form:{            	
