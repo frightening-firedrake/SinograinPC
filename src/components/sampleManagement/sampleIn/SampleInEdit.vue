@@ -69,6 +69,7 @@ export default {
 			}
 	    }).then(function (response) {
 	    	var res=response.data;
+	    	res.sampleNum="监"+res.sampleNum;
 	    	res.pLibraryName='';
 		  	this.formdatas.form=res;
 				this.getlibrarydata()

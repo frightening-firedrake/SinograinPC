@@ -414,6 +414,7 @@ export default {
         id: 1,
         prop:'sampleNum',
         label: "检验编号",
+        status:true,
 //      sort:true
       },
       {

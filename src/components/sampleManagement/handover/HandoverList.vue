@@ -159,7 +159,8 @@ export default {
 				}],
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				data: {
-					
+					page:page,
+			    	rows:this.page.size,
 				}
 			}).then(function(response) {
 				this.tabledatas = response.data.rows;

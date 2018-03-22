@@ -96,7 +96,7 @@
 		                        </el-col>
 		                        <el-col :span="20">
 		                            <el-col :span="18" class="classify_font">
-		                                <span>{{item.sampleNum?item.sampleNum:item}}</span>
+		                                <span>监{{item.sampleNum?item.sampleNum:item}}</span>
 		                            </el-col>
 		                            <!--<el-col :span="8" class="">
 		                                <span>{{item.sampleWord}}</span>

@@ -71,6 +71,9 @@
 		      				<template v-if="item.prop=='checkeds'">
 				      				{{findCheckeds(scope.row[item.prop])}}
 		      				</template>
+		      				<template v-if="item.prop=='sampleNum'">
+				      				监{{scope.row[item.prop]}}
+		      				</template>
 		          </template>
 	    		</el-table-column>
    		</template>
