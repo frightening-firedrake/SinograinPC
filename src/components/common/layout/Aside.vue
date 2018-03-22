@@ -93,6 +93,7 @@
 </template>
 <script>
 require("../../../assets/style/common/Sidebar.css");
+import '@/assets/style/index/index.scss';
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
 	components: {
