@@ -112,8 +112,8 @@ export default {
   		page?page:1;
   		this.searchText=searching;
   		var params = {};
-  		params.wpLibraryId = -1;
-		params.wlibraryName = searching;
+  		params.pId = this.$route.query.pId;
+		params.sampleWordOrsampleNumLike = searching;
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
@@ -132,7 +132,9 @@ export default {
 			   params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-		  	this.tabledatas=response.data;
+		  	this.tabledatas=response.data.rows;
+	  		this.page.total=response.data.total;
+		  	this.loading=false;
 
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -141,6 +143,8 @@ export default {
 //	获取列表数据方法
   	getlistdata(page){
   		this.loading=true;
+		var params = {};
+		params.pId = this.$route.query.pId;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -158,10 +162,9 @@ export default {
 			    listName: this.list,
 			    page:page,
 			    rows:this.page.size,
-					params:JSON.stringify(this.$route.query),
+				params:JSON.stringify(params),
 			}
 	    }).then(function (response) {
-			console.log(response)
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
 		  	this.loading=false;

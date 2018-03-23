@@ -122,8 +122,7 @@ export default {
   		page?page:1;
   		this.searchText=searching;
   		var params = {};
-  		params.wpLibraryId = -1;
-		params.wlibraryName = searching;
+		params.sampleNumOrSmallSampleNum = searching;
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
@@ -163,7 +162,10 @@ export default {
 			    pageSize:this.page.size,
 			}
 	    }).then(function (response) {
-
+			console.log(response)
+			this.tabledatas = response.data.rows;
+			this.page.total = response.data.total;
+			this.loading = false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
