@@ -101,8 +101,9 @@ export default {
   		page?page:1;
   		this.searchText=searching;
   		var params = {};
-  		params.wpLibraryId = -1;
-		params.wlibraryName = searching;
+  		params.pLibraryId = this.$route.query.libraryId;
+		params.regState = 2;
+		params.formNameLike = searching;
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
@@ -269,7 +270,7 @@ export default {
       },
       {
         id: 3,
-        prop:'createTime',
+        prop:'regCreateTime',
         label:"最后检查日期",
         sort:true,
       },
