@@ -100,6 +100,9 @@ export default {
   	searchingfor(searching,page){
   		page?page:1;
   		this.searchText=searching;
+  		var params = {};
+  		params.wpLibraryId = -1;
+		params.wlibraryName = searching;
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
@@ -115,10 +118,7 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
-			    page:page,
-			    pageSize:this.page.size,
-			    libraryNameLike:searching,
+			   params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data;
@@ -130,7 +130,7 @@ export default {
 //	获取列表数据方法
   	getlistdata(page){
 		var params = {};
-		params.pLibraryId = -1
+		params.wpLibraryId = -1
   		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -146,9 +146,6 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
-			    page:page,
-			    rows:this.page.size,
 				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
@@ -201,7 +198,6 @@ export default {
   	},
 //	获取分页点击事件中及当前页码
     getCurrentPage(currentPage){
-//		console.log(currentPage)
 		if(this.searchText){			
 			this.searchingfor(this.searchText,currentPage)
 		}else{			
