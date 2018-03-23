@@ -106,7 +106,7 @@ export default {
 		if(this.formdatas.items[0].id){
 			this.formdatas.items.forEach((val)=>{
 				params.sampleNums.push(val.sampleNum)		
-				params.sampleIds.push(val.id.toString())
+				params.sampleIds.push(val.id.toString())//为了后期数组比较将数字转为字符串
 			})	
 			params.sampleIds.join(',')
 		}else{
@@ -115,10 +115,11 @@ export default {
 			})
 			params.sampleIds=this.sampleIds.split(',')
 		}
-
+		//旧的id集合
 		var oldsampleIds=this.formdatas.sampleIds2.split(',');
-		
+		//新的id集合
 		var newsampleIds=params.sampleIds;
+//		排除比对删除掉的id集合
 		var deleteIds=oldsampleIds.filter((val)=>{
 			return !newsampleIds.includes(val)
 		})

@@ -10,7 +10,7 @@
 						{{listdatas.titleNumber}}					
 					</div>
 					<div class="content">
-						{{listdatas.title}}	
+						监{{listdatas.title}}	
 					</div>
 				</div>
 				<div class="rowItem" v-if="listdatas.subtitle" :class="{sub:listdatas.subtitle}">
@@ -44,15 +44,15 @@
 				</span>
 			</div>
 			<div class="listRow">
-				<template v-for="(item,index) in listdatas.listdata">
+				<template v-for="(item,index) in checkList">
 					<div class="rowItem">
 						<div class="number">
-							{{item.number}}					
+							0{{index+1}}					
 						</div>
 						<div class="content">
-							{{item.content}}					
+							{{checkAllList[item-1]}}					
 						</div>							
-						<div v-if="listdatas.buttonText" class="button" @click="buttonClick(item.number)">{{listdatas.buttonText}}</div>
+						<div v-if="listdatas.buttonText" class="button" @click="buttonClick(item)">{{listdatas.buttonText}}</div>
 					</div>					
 				</template>
 				<div class="clear"></div>
@@ -74,7 +74,7 @@ import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 import data from '@/util/mock';
 
 export default {
-	props:['listdatas',],
+	props:['listdatas','checkList','checkAllList'],
 	components: {
 //		SinograinModal
 	},

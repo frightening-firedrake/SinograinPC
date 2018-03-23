@@ -140,38 +140,7 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-	getsample(){
-  		this.loading=false;
-  		// 获取列表数据（第？页）
-		this.$http({
-		    method: 'post',
-			url: this.getSampleNoURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-			   sampleNo : this.modal.formdatas[0].value
-			}
-	    }).then(function (response) {
-			this.dataBySampleNo = response.data;
-			if(this.dataBySampleNo.sampleState == 2) {
-
-				this.messages.type='success';
-				
-			} else {
-				this.messageShow=false;				
-  				this.modalVisible=true;
-			}
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
-  	},
+	
 //	获取列表数据方法
   	getlistdata(page){
   		this.loading=false;
@@ -240,17 +209,53 @@ export default {
   			this.messageShow=false;
   		}else{  			
 			this.messageShow=false;
-//			暂时缺少一个验证方法
-			var path=this.$route.name+'/打印条码'
-			this.$router.push({name: path,params: {code:code}})
-//			this.getsample();
-		  }
+			this.checkcode(code);			
+		}
   	},
+//	去验证条码有效否
+	checkcode(code){
+		this.$http({
+		    method: 'post',
+			url: this.checkURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				sampleNum:code,
+			}
+	    }).then(function (response) {
+
+			if(response.data.checkeds) {
+				var path=this.$route.name+'/打印条码'
+				this.$router.push({name: path,params: {code:code,checkeds:response.data.checkeds}})
+			}else{
+
+				this.$notify.error({
+		          	title: '未获取到检验信息',
+		          	message: '请重新核对条码信息！！！',
+		        });
+			}
+		}.bind(this)).catch(function (error) {
+//		    console.log(error);
+
+		    this.$notify.error({
+	          	title: '扫码失败',
+	          	message: '请重新核对条码信息！！！',
+	        });
+		}.bind(this));
+	},
+
   },
   data() {
     return {
       datalistURL: this.apiRoot +  '/grain/smallSample/data',
-	  getSampleNoURL: this.apiRoot + '/grain/sample/getBySampleNo',
+      checkURL:this.apiRoot +'/grain/sample/getBySampleNum',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -308,25 +313,25 @@ export default {
         id: 1,
         prop:'sampleNum',
         label: "检验编号",
-        sort:true
+
       },
       {
         id: 2,
-        prop:'sampleNum',
+        prop:'smallSampleNum',
         label: "小样编号",
-        sort:true
+
       },
       {
         id: 3,
         prop:'checkPoint',
         label:"检验项目",
-        sort:true,
+
       },
       {
         id: 4,
         prop:'printTimes',
         label: "打印条码数",
-        sort:true,
+
       },
       {
         id: 5,

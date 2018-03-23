@@ -138,7 +138,7 @@ export default {
 				sampleState: 2
 			}
 	    }).then(function (response) {
-			console.log(response)
+//			console.log(response)
 			if(response.data.success) {
 				this.getlistdata();
 				this.$notify({

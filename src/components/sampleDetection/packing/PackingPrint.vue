@@ -7,10 +7,11 @@
       <!--提示-->
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
-      <sample-print-list :listdatas="listdatas" v-on:print="print"></sample-print-list> 
+      <sample-print-list :listdatas="listdatas" :checkAllList="checkAllList" :checkList="checkList" v-on:print="print"></sample-print-list> 
       <!--通知弹框-->
       <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
       <img class="printChoice" :src=imgsrc alt="" />
+
     </div>
 </template>
 
@@ -30,7 +31,7 @@ import SinograinMessage from "@/components/common/action/Message"
 import "@/assets/style/common/SamplePrintList.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 
 
@@ -41,11 +42,24 @@ export default {
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
 	...mapGetters(["modal_id"]),
+//	计算检测项目并排序
+	checkList(){
+		if(this.checkeds){
+			var indexs=this.checkeds.split(',');
+			indexs.sort((a,b)=>{return a-b});
+			return indexs
+		}
+	},
   },
   created(){
-  	console.log(this.$route.params.code)//这就是扫到的条码
+//	console.log(this.$route.params.code)//这就是扫到的条码
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
+	if(!this.$route.params.code){
+		this.$router.push({name:"样品检测/分装小样管理"})		
+	}else{
+		
+	}
 
   },
   destroy(){
@@ -61,21 +75,24 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-//			data: {
-//
-//			}
-	    }).then(function (response) {
-//		  	this.formdatas=response.data.formdatas;
-//		  	this.tabledatas=response.data.rows;
-//	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+			data:{
+    			sampleNum:this.$route.params.code,				
+			},
+	   }).then(function (response) {	    	
+	    	this.checkeds=response.data.checkeds
+			console.log(this.checkeds)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
-		}.bind(this));
+		}.bind(this));	
   	},
 //	获取搜索数据
   	searchingfor(searching){
@@ -97,20 +114,52 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-  	print(number){
-  		console.log('打印'+number+'检测条码')
+  	print(checked){
+//		console.log('打印'+checked+'检测条码')
   		this.messageShow=true;
   		this.messages.type="loading";
-  		var wind = window.open(this.imgsrc,'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
+  		this.getPrintCode(checked);
+
+  		
+  	},
+  	getPrintCode(checked){
+  		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
+  		
+  		this.$http({
+		    method: 'post',
+			url: this.getPrintCodeURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data:{
+//  			checked:checked,				
+    			sampleNum:this.$route.params.code,				
+			},
+	   }).then(function (response) {	    	
+//	    	返回打印需要的条码格式待定
+//			假设是图片吧临时的
+//			this.imgsrc=response.data
+			this.printBar(wind);
+			
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+  	printBar(wind){
+//		var wind = window.open(this.imgsrc,'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
+		wind.location.href = this.imgsrc;
 		wind.onload=function(){
 			wind.print();
 			wind.close();			
 		};
+//		this.messageShow=false;
 		
-//		return false;
-//		setTimeout(()=>{
-//			this.messages.type="success";
-//		},2000)
   	},
 	messageclick(type){
   		if(type=="success"){
@@ -125,10 +174,12 @@ export default {
   	titleEvent(){
   		console.log('titleEvent');
   	},
+    
   },
   data() {
     return {
-      datalistURL:'/liquid/role9/data',
+      datalistURL:this.apiRoot +'/grain/sample/getBySampleNum',
+      getPrintCodeURL:this.apiRoot +'/grain/sample/getBySampleNum',
       searchURL:'/liquid/role2/data/search',
       imgsrc:'static/images/test/code.jpg',
 	  createlibVisible:false,
@@ -146,48 +197,13 @@ export default {
 //      type: 'info'
 //    }],
 	listdatas:{
-		titleLabel:'样品编号',
-		title:'监'+this.$route.params.code,
+		titleLabel:'检验编号',
+		title:this.$route.params.code,
 		label:'检验项目',
 		buttonText:'打印',
-		listdata:[
-			{
-				number:'01',
-				content:'水分',
-
-			},
-			{
-				number:'02',
-				content:'水分',
-
-			},
-			{
-				number:'03',
-				content:'不完善粒',
-
-			},
-			{
-				number:'04',
-				content:'不完善粒',
-
-			},
-			{
-				number:'05',
-				content:'生霉粒指标',
-
-			},
-			{
-				number:'06',
-				content:'生霉粒指标',
-
-			},
-			{
-				number:'07',
-				content:'质量、品质全项目指标',
-
-			},
-		]
 	},
+	checkeds:this.$route.params.checkeds,
+	checkAllList:["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生","加工品质"],
 	  messageShow:false,
 	  messages:{
 	  	type:'error',

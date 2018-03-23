@@ -11,7 +11,7 @@
 					<span>({{userName?userName:"未登录"}})</span>
 				</h3>
 				<p>
-					<template v-if="user.status==1">
+					<template v-if="userName">
 						<span class="circle" style="background-color:#029441;"></span>
 						<span>在线</span>
 					</template>
@@ -93,7 +93,7 @@
 </template>
 <script>
 require("../../../assets/style/common/Sidebar.css");
-import '@/assets/style/index/index.scss';
+//import '@/assets/style/index/index.scss';
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
 	components: {
