@@ -251,15 +251,14 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				sampleNum:code,
+				smallSampleNum:code,
 			}
 	    }).then(function (response) {
 			console.log(response)
-			if(response.data.checkeds) {
-				var path=this.$route.name+'/打印条码'
+			if(response.data) {
+				var path=this.$route.name+'/样品检验单详情'
 				this.$router.push({name: path,params: {code:code,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState}})
 			}else{
-
 				this.$notify.error({
 		          	title: '未获取到检验信息',
 		          	message: '请重新核对条码信息！！！',
@@ -294,7 +293,7 @@ export default {
   data() {
     return {
       datalistURL: this.apiRoot +  '/grain/smallSample/data',
-      checkURL:this.apiRoot +'/grain/sample/getBySampleNum',
+      checkURL:this.apiRoot +'/grain/smallSample/getBySmallSampleNum',
       searchURL:this.apiRoot +  '/grain/smallSample/data',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
