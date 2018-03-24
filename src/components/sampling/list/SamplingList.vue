@@ -122,7 +122,9 @@ export default {
 			   params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-		  	this.tabledatas=response.data;
+		  	this.tabledatas=response.data.rows;
+	  		this.page.total=response.data.total;
+			this.loading=false;
 
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
