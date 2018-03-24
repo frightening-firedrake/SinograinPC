@@ -160,7 +160,7 @@
 				      </template>
 			<!--是否包含打印操作-->
 				      <template v-if="actions.print">
-				          <button class="print" @click.stop="handlePrint(scope.$index, scope.row,scope)">打印</button>
+				          <button class="print" @click.stop="handlePrint(scope.$index, scope.row,scope)">打印小样条码</button>
 				      </template>
           </template>
       </el-table-column>

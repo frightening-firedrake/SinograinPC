@@ -162,6 +162,7 @@ export default {
 //		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no'); 		
   		var params = {};
 		params.sampleId = this.$route.params.id
+
 		this.$http({
 		    method: 'post',
 			url: this.getPrintCodeAllURL,
@@ -177,11 +178,13 @@ export default {
 			data:{
 //  			checked:checked,				
     			// sampleNum:this.$route.params.code,
-				id:this.$route.params.id, 
+				id:this.$route.params.id,
+				isPrint:this.isPrint,
 				params:JSON.stringify(params)				
 			},
-	   	}).then(function (response) {
-		 this.printBarAll(respones.data);	
+	   }).then(function (response) {
+	   	 this.isPrint=3;
+		 this.printBarAll(response.data);	
 //	    	返回打印需要的条码格式待定
 //			假设是图片吧临时的
 //			this.imgsrc=response.data
@@ -248,6 +251,8 @@ export default {
       getPrintCodeAllURL:this.apiRoot +'/grain/sample/split',
       searchURL:'/liquid/role2/data/search',
       imgsrc:'static/images/test/code.jpg',
+      printBarOver:false,
+	  isPrint:this.$route.params.sampleState,
 	  createlibVisible:false,
       breadcrumb:{
       	search:false,   

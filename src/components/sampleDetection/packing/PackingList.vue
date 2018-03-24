@@ -253,10 +253,10 @@ export default {
 				sampleNum:code,
 			}
 	    }).then(function (response) {
-
+			console.log(response)
 			if(response.data.checkeds) {
 				var path=this.$route.name+'/打印条码'
-				this.$router.push({name: path,params: {code:code,checkeds:response.data.checkeds,id:response.data.id}})
+				this.$router.push({name: path,params: {code:code,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState}})
 			}else{
 
 				this.$notify.error({
@@ -372,12 +372,12 @@ export default {
 //      label: "打印条码数",
 //
 //    },
-      {
-        id: 5,
-        prop:'printDate',
-        label:"打印时间",
-        sort:true,
-      },
+//    {
+//      id: 5,
+//      prop:'printDate',
+//      label:"打印时间",
+//      sort:true,
+//    },
       ],
       actions:{
       	noview:true,
