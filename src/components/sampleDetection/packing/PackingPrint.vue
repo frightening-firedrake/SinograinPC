@@ -160,7 +160,9 @@ export default {
   	},
   	getPrintCodeAll(){
 //		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no'); 		
-  		this.$http({
+  		var params = {};
+		params.sampleId = this.$route.params.id
+		this.$http({
 		    method: 'post',
 			url: this.getPrintCodeAllURL,
 			transformRequest: [function (data) {
@@ -175,12 +177,11 @@ export default {
 			data:{
 //  			checked:checked,				
     			// sampleNum:this.$route.params.code,
-				id:this.$route.params.id, 				
+				id:this.$route.params.id, 
+				params:JSON.stringify(params)				
 			},
-	   	}).then(function (response) {	
-		   	if(response.data.success) {
-//				this.printBarAll();
-			}    	
+	   	}).then(function (response) {
+		 this.printBarAll(respones.data);	
 //	    	返回打印需要的条码格式待定
 //			假设是图片吧临时的
 //			this.imgsrc=response.data
