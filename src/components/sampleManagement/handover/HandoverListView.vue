@@ -375,7 +375,7 @@ export default {
 
   			LODOP.PRINT_INIT("打印交接单");
 //			LODOP.SET_PRINTER_INDEX("Godex G530");  
-  			LODOP.SET_PRINT_PAGESIZE(2, 297, 210, "A4");
+  			LODOP.SET_PRINT_PAGESIZE(2, 210, 297, "A4");
 				LODOP.ADD_PRINT_HTM(88,200,350,600,document.getElementById("print").innerHTML);
     		LODOP.PREVIEW(); 
 //			  LODOP.PRINT(); 
