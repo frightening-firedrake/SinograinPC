@@ -158,6 +158,10 @@
 				      <template v-if="actions.auth">
 				          <button class="auth" @click.stop="handleAuth(scope.$index, scope.row)">授权</button>
 				      </template>
+			<!--是否包含打印操作-->
+				      <template v-if="actions.print">
+				          <button class="print" @click.stop="handlePrint(scope.$index, scope.row,scope)">打印</button>
+				      </template>
           </template>
       </el-table-column>
       
@@ -269,6 +273,9 @@ export default {
 //	  	console.log(index,row,this.list);
 		    this.$root.eventHub.$emit('authlistitem',row.id)
 		},
+		handlePrint(index, row,scope) {
+			this.$root.eventHub.$emit('printlistitem',row.smallSampleNum)					
+		},
 	  emptyCreate(){
 	  	this.$emit('emptyCreate');
 	  },
@@ -295,7 +302,9 @@ export default {
 	  	return res;
 	  },
 	  rowClick(row,event,column){
-	  	console.log("rowClick")
+			if(this.actions.noview){
+				return
+			}
 	  	if(row.sampleState){
 				this.$root.eventHub.$emit('viewlistitem',row.id,row.sampleState)										
 			}else if(row.regState){

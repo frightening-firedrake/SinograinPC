@@ -32,8 +32,12 @@ import SinograinModal from '@/components/common/action/Modal.vue';
 import SinograinMessage from "@/components/common/action/Message"
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
+
+//这里是打印控件
+import {getLodop} from 'static/lodop/LodopFuncs'
+let LODOP
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 
 
@@ -62,6 +66,7 @@ export default {
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
+    this.$root.eventHub.$off("printlistitem")
 //	监听列表删除事件
     this.$root.eventHub.$on('delelistitem',function(rowid,list){
     	this.tabledatas=this.tabledatas.filter(function(item){
@@ -76,9 +81,14 @@ export default {
 		this.$router.push({path: '/index/sampleDetection/packingList/packingView',query:{libid:id}})
 		
   	}.bind(this));
+//	监听列表点击打印事件
+  	this.$root.eventHub.$on("printlistitem",function(code){  
+		this.printitem(code);	
+  	}.bind(this));
   },
   destroy(){
   	this.$root.eventHub.$off("viewlistitem")
+    this.$root.eventHub.$off("printlistitem")
   	this.$root.eventHub.$off('delelistitem')
   },
   methods: {
@@ -263,7 +273,22 @@ export default {
 	        });
 		}.bind(this));
 	},
+	printitem(code){
+		this.messageShow=true;
+		this.messages.type="loading";
+		this.printCodeBar(code)
+	},
+	printCodeBar(code){
+		LODOP = getLodop();
 
+		LODOP.PRINT_INIT("打印条码");
+		LODOP.SET_PRINTER_INDEX("Godex G530");  
+		LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
+		LODOP.ADD_PRINT_BARCODE(3,30,232,115,'Codabar',code);
+//  			LODOP.PREVIEW(); 
+		LODOP.PRINT(); 
+
+	}
   },
   data() {
     return {
@@ -355,11 +380,14 @@ export default {
       },
       ],
       actions:{
+      	noview:true,
       	selection:false,
       	number:false,
-      	view:true,
+      	view:false,
       	edit:false,
       	dele:false,
+      	print:true,
+      	show:true,
       	manuscript:false,
       	safetyReport:false,
       },
@@ -376,6 +404,11 @@ export default {
 	  		messageTittle:'该样品已入库',
 	  		messageText:'可点击编辑按钮修改入库信息！',
 	  		buttonText:'编辑',
+	  	},
+	  	loading:{
+	  		icon:'el-icon-printer',
+	  		messageTittle:'正在打印中...',
+	  		messageText:'请您耐心等待，正在打印中...',
 	  	},
 	  },
     }

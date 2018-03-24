@@ -28,6 +28,9 @@ import SamplePrintList  from "@/components/common/action/SamplePrintList.vue"
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 import SinograinMessage from "@/components/common/action/Message"
 import TfootButtons from '@/components/common/action/TfootButtons.vue';
+//这里是打印控件
+import {getLodop} from 'static/lodop/LodopFuncs'
+let LODOP
 
 import "@/assets/style/common/SamplePrintList.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
@@ -125,7 +128,7 @@ export default {
 //		console.log('打印'+checked+'检测条码')
   		this.messageShow=true;
   		this.messages.type="loading";
-  		this.getPrintCodeAll();		
+  		this.getPrintCodeAll();	
   	},
   	getPrintCode(checked){
   		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no'); 		
@@ -156,7 +159,7 @@ export default {
 		}.bind(this));
   	},
   	getPrintCodeAll(){
-		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no'); 		
+//		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no'); 		
   		this.$http({
 		    method: 'post',
 			url: this.getPrintCodeAllURL,
@@ -174,10 +177,10 @@ export default {
     			// sampleNum:this.$route.params.code,
 				id:this.$route.params.id, 				
 			},
-	   }).then(function (response) {	
+	   	}).then(function (response) {	
 		   	if(response.data.success) {
-				this.printBarAll(wind);
-			   }    	
+//				this.printBarAll();
+			}    	
 //	    	返回打印需要的条码格式待定
 //			假设是图片吧临时的
 //			this.imgsrc=response.data
@@ -193,13 +196,17 @@ export default {
 			wind.close();			
 		};
   	},
-  	printBarAll(wind){
-		wind.location.href = this.imgsrc;
-		wind.onload=function(){
-			console.log(123)
-			wind.print();
-			wind.close();			
-		};
+  	printBarAll(str){
+  		var arr=str.split(',');
+  		LODOP = getLodop();
+  		arr.forEach((val)=>{  			
+  			LODOP.PRINT_INIT("打印条码");
+  			LODOP.SET_PRINTER_INDEX("Godex G530");  
+  			LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
+  			LODOP.ADD_PRINT_BARCODE(3,30,232,115,'Codabar',val);
+//  			LODOP.PREVIEW(); 
+			LODOP.PRINT(); 
+  		})
   	},
 	messageclick(type){
   		if(type=="success"){
