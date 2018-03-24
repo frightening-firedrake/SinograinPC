@@ -246,7 +246,7 @@ export default {
 
 			if(response.data.checkeds) {
 				var path=this.$route.name+'/打印条码'
-				this.$router.push({name: path,params: {code:code,checkeds:response.data.checkeds}})
+				this.$router.push({name: path,params: {code:code,checkeds:response.data.checkeds,id:response.data.id}})
 			}else{
 
 				this.$notify.error({

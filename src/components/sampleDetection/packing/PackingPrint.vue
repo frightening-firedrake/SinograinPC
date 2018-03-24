@@ -159,7 +159,7 @@ export default {
 		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no'); 		
   		this.$http({
 		    method: 'post',
-			url: this.getPrintCodeURL,
+			url: this.getPrintCodeAllURL,
 			transformRequest: [function (data) {
 				// Do whatever you want to transform the data
 				let ret = ''
@@ -171,13 +171,16 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data:{
 //  			checked:checked,				
-    			sampleNum:this.$route.params.code,				
+    			// sampleNum:this.$route.params.code,
+				id:this.$route.params.id, 				
 			},
-	   }).then(function (response) {	    	
+	   }).then(function (response) {	
+		   	if(response.data.success) {
+				this.printBarAll(wind);
+			   }    	
 //	    	返回打印需要的条码格式待定
 //			假设是图片吧临时的
 //			this.imgsrc=response.data
-			this.printBarAll(wind);
 			
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -234,6 +237,7 @@ export default {
     return {
       datalistURL:this.apiRoot +'/grain/sample/getBySampleNum',
       getPrintCodeURL:this.apiRoot +'/grain/sample/getBySampleNum',
+      getPrintCodeAllURL:this.apiRoot +'/grain/sample/split',
       searchURL:'/liquid/role2/data/search',
       imgsrc:'static/images/test/code.jpg',
 	  createlibVisible:false,
