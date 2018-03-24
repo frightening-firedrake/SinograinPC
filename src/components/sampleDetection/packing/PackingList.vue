@@ -327,26 +327,26 @@ export default {
         id: 1,
         prop:'sampleNum',
         label: "检验编号",
-
+		status:true,
       },
       {
         id: 2,
         prop:'smallSampleNum',
         label: "小样编号",
-
+		status:true,
       },
       {
         id: 3,
         prop:'checkPoint',
         label:"检验项目",
-
+		status:true,
       },
-      {
-        id: 4,
-        prop:'printTimes',
-        label: "打印条码数",
-
-      },
+//    {
+//      id: 4,
+//      prop:'printTimes',
+//      label: "打印条码数",
+//
+//    },
       {
         id: 5,
         prop:'printDate',

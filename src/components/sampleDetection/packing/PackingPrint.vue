@@ -10,8 +10,9 @@
       <sample-print-list :listdatas="listdatas" :checkAllList="checkAllList" :checkList="checkList" v-on:print="print"></sample-print-list> 
       <!--通知弹框-->
       <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
-      <img class="printChoice" :src=imgsrc alt="" />
-
+	  <!--底部按钮-->
+      <tfoot-buttons :tfbtns="tfbtns" @tfootEvent="tfootEvent" ></tfoot-buttons>
+	  
     </div>
 </template>
 
@@ -26,7 +27,7 @@ import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SamplePrintList  from "@/components/common/action/SamplePrintList.vue"
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 import SinograinMessage from "@/components/common/action/Message"
-
+import TfootButtons from '@/components/common/action/TfootButtons.vue';
 
 import "@/assets/style/common/SamplePrintList.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
@@ -37,7 +38,7 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SamplePrintList,SinograinMessage
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SamplePrintList,SinograinMessage,TfootButtons
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -118,13 +119,16 @@ export default {
 //		console.log('打印'+checked+'检测条码')
   		this.messageShow=true;
   		this.messages.type="loading";
-  		this.getPrintCode(checked);
-
-  		
+  		this.getPrintCode(checked);		
+  	},
+  	printAll(){
+//		console.log('打印'+checked+'检测条码')
+  		this.messageShow=true;
+  		this.messages.type="loading";
+  		this.getPrintCodeAll();		
   	},
   	getPrintCode(checked){
-  		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
-  		
+  		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no'); 		
   		this.$http({
 		    method: 'post',
 			url: this.getPrintCodeURL,
@@ -151,15 +155,48 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+  	getPrintCodeAll(){
+		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no'); 		
+  		this.$http({
+		    method: 'post',
+			url: this.getPrintCodeURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data:{
+//  			checked:checked,				
+    			sampleNum:this.$route.params.code,				
+			},
+	   }).then(function (response) {	    	
+//	    	返回打印需要的条码格式待定
+//			假设是图片吧临时的
+//			this.imgsrc=response.data
+			this.printBarAll(wind);
+			
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
   	printBar(wind){
-//		var wind = window.open(this.imgsrc,'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
 		wind.location.href = this.imgsrc;
 		wind.onload=function(){
 			wind.print();
 			wind.close();			
 		};
-//		this.messageShow=false;
-		
+  	},
+  	printBarAll(wind){
+		wind.location.href = this.imgsrc;
+		wind.onload=function(){
+			console.log(123)
+			wind.print();
+			wind.close();			
+		};
   	},
 	messageclick(type){
   		if(type=="success"){
@@ -174,7 +211,24 @@ export default {
   	titleEvent(){
   		console.log('titleEvent');
   	},
-    
+    //	表单底部触发事件btnCenterNo btnCenterYes btnLeft btnRight btnOne
+	tfootEvent(date){
+		console.log(date);
+		if(date=='btnCenterL'){
+
+//			this.$router.go(-1)
+		}else if(date=='btnCenterR'){
+
+//			this.$router.go(-1)
+//			window.history.go(-1)
+		}else if(date=='btnLeft'){
+
+		}else if(date=='btnRight'){
+			this.printAll()
+		}else if(date=='btnOne'){
+
+		}
+	},
   },
   data() {
     return {
@@ -200,7 +254,7 @@ export default {
 		titleLabel:'检验编号',
 		title:this.$route.params.code,
 		label:'检验项目',
-		buttonText:'打印',
+		buttonText:false,
 	},
 	checkeds:this.$route.params.checkeds,
 	checkAllList:["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生","加工品质"],
@@ -225,6 +279,22 @@ export default {
 	  		messageText:'请您耐心等待，正在打印中...',
 	  	},
 	  },
+	  tfbtns:{
+//    	btnCenter:{
+//			btnTextL:'不同意',
+//			btnTextR:'同意',
+//			doubleColor:true,
+//		},
+//		btnLeft:{
+//			btnText:'打印检验项目条形码',
+//		},
+		btnRight:{
+			btnText:'打印检验项目条形码',
+		},
+//		btnOne:{
+//			btnText:'导出Excel表格',
+//		},     	
+      },
     }
   },
 }

@@ -74,6 +74,12 @@
 		      				<template v-if="item.prop=='sampleNum'">
 				      				监{{scope.row[item.prop]}}
 		      				</template>
+		      				<template v-if="item.prop=='smallSampleNum'">
+				      				监{{scope.row[item.prop]}}
+		      				</template>
+		      				<template v-if="item.prop=='checkPoint'">
+				      				{{findCheckPoint(scope.row[item.prop])}}
+		      				</template>
 		          </template>
 	    		</el-table-column>
    		</template>
@@ -282,6 +288,11 @@ export default {
 	  		res.push(checkList[item-1])
 	  	})
 	  	return res.join('，')
+	  },
+	  findCheckPoint(str){
+	  	var checkList=["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生","加工品质"]
+	  	var res=checkList[str-1];
+	  	return res;
 	  },
 	  rowClick(row,event,column){
 	  	console.log("rowClick")

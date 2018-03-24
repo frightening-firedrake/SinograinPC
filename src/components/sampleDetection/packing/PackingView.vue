@@ -7,7 +7,7 @@
       <!--提示-->
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
-      <sample-print-list :listdatas="listdatas" v-on:print="print"></sample-print-list> 
+      <sample-print-list :listdatas="listdatas" :checkAllList="checkAllList" :checkList="checkList" v-on:print="print"></sample-print-list> 
       <!--通知弹框-->
       <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
     </div>
@@ -40,6 +40,13 @@ export default {
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
 	...mapGetters(["modal_id"]),
+	checkList(){
+		if(this.checkeds){
+			var indexs=this.checkeds.split(',');
+			indexs.sort((a,b)=>{return a-b});
+			return indexs
+		}
+	},
   },
   created(){
   	console.log(this.$route.query)
@@ -137,44 +144,16 @@ export default {
 //      type: 'info'
 //    }],
 listdatas:{
-		titleLabel:'样品编号',
+		titleLabel:'检验编号',
 		title:'监20170078',
 		titleNumber:'12',
 		subtitleLabel:'打印条数',
 		subtitle:'8',
 		printDate:'2018.01.25',
 		label:'检验项目',
-		listdata:[
-			{
-				number:'01',
-				content:'水分',
-			},
-			{
-				number:'02',
-				content:'水分',
-			},
-			{
-				number:'03',
-				content:'不完善粒',
-			},
-			{
-				number:'04',
-				content:'不完善粒',
-			},
-			{
-				number:'05',
-				content:'生霉粒指标',
-			},
-			{
-				number:'06',
-				content:'生霉粒指标',
-			},
-			{
-				number:'07',
-				content:'质量、品质全项目指标',
-			},
-		]
 	},
+	checkeds:'1,3,5',
+	checkAllList:["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生","加工品质"],
 	  messageShow:false,
 	  messages:{
 	  	type:'error',

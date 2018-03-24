@@ -285,7 +285,7 @@ export default {
 				{
 					id: 1,
 					prop: 'sampling_number',
-					label: "扦样编号",
+					label: "检验编号",
 					sort: true
 				},
 				{

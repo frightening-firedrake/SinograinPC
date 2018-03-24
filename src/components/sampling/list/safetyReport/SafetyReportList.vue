@@ -293,7 +293,7 @@ export default {
       	createSampling:false,
       	status:false,
       	date:true,
-      	selectlib:true,
+      	selectlib:false,
       	libraryList:[],
       },
       tabledatas:[],

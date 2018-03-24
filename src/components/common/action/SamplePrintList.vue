@@ -58,7 +58,7 @@
 				<div class="clear"></div>
 			</div>
 		</div>
-		<div class="printfoot">
+		<div class="printfoot" style="height:0.5rem;">
 		</div>
 	</div>
 </template>
@@ -83,8 +83,8 @@ export default {
 		...mapGetters(["modal_id"]),
 		bodyheight(){
 			var height;
-			if(this.listdatas.listdata){				
-				height=Math.ceil(this.listdatas.listdata.length/2)*0.5;
+			if(this.checkList){				
+				height=Math.ceil(this.checkList.length/2)*0.5;
 				if(!height){
 					height=0.5;
 				}
