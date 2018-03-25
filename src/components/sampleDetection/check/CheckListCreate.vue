@@ -9,10 +9,10 @@
       <div class="fromwrap"  id="print" style="background:rgba(241, 241, 241, 1);">  	
 	      <!--表单-->
 	      <!--<hr>-->
-	      <bwsl-check-from v-if="checktype=='bwsl'" :formdatas="formdatas.bwsl1" @submit="submit"></bwsl-check-from> 
+	      <bwsl-check-from v-if="checktype=='bwsl'" :formdatas="formdatas.bwsl" @submit="submit"></bwsl-check-from> 
 
 	      <!--<hr>-->
-	      <sfcd-check-from v-if="checktype=='sfcd'" :formdatas="formdatas.sfcd1" @submit="submit"></sfcd-check-from> 
+	      <sfcd-check-from v-if="checktype=='sfcd'" :formdatas="formdatas.sfcd" @submit="submit"></sfcd-check-from> 
 
 	      <!--<hr>-->
 	      <mjxsl-check-from v-if="checktype=='mjxs'" :formdatas="formdatas.mjxs" @submit="submit"></mjxsl-check-from> 
@@ -23,7 +23,7 @@
 	      <!--<hr>-->
 	      <mtpc-check-from v-if="checktype=='mtpc'" :formdatas="formdatas.mtpc" @submit="submit"></mtpc-check-from> 
 	      <!--<hr>-->
-	      <dscd-check-from v-if="checktype=='dscd'" :formdatas="formdatas.dscd1" @submit="submit"></dscd-check-from> 
+	      <dscd-check-from v-if="checktype=='dscd'" :formdatas="formdatas.dscd" @submit="submit"></dscd-check-from> 
 
 	      <!--<hr>-->
 	      <pcpf-check-from v-if="checktype=='pcpf'" :formdatas="formdatas.pcpf" @submit="submit"></pcpf-check-from> 
@@ -174,6 +174,7 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
+
 //	this.getlistdata()
 	this.setform()
 
@@ -286,7 +287,7 @@ export default {
 			this.saveUrlend="/grain/buwanshanli/save"
 		}else if(this.checktype=='sfcd'){
 			this.saveUrlend="/grain/shuifen/save"
-		}else if(this.checktype='zfsz'){
+		}else if(this.checktype=='zfsz'){
 			this.saveUrlend="/grain/zhifangsuanzhi/save"
 		}else if(this.checktype=='mtpc'){
 			this.saveUrlend="/grain/mantoupinchang/save"
@@ -350,7 +351,7 @@ export default {
       checkedId:[],
 	  createlibVisible:false,
 //	  类型
-	  checktype:'zfsz',
+	  checktype:'bwsl',
 	  saveUrlend:'',
       breadcrumb:{
       	search:false,   
@@ -403,23 +404,26 @@ export default {
 			buwanshanlizhiliang_2:'678',
 			buwanshanlihanliang_1:'678',
 			buwanshanlihanliang_2:'678',
-			buwanshanlihanliang_pingjunzhi:'678',
+//			buwanshanlihanliang_pingjunzhi:'678',
+			buwanshanlihanliang_pingjunzhi_1:'678',
+			buwanshanlihanliang_pingjunzhi_2:'678',
 			shengmeilizhiliang_1:'678',
 			shengmeilizhiliang_2:'678',
 			shengmeilihanliang_1:'678',
 			shengmeilihanliang_2:'678',
 			shengmeilihanliang_pingjunzhi:'678',
-			beizhu:'678',
+			beizhu:'双试验结果M≤0.3    N≤0.3    A≤0.1    C≤1.0或C≤0.5',
 			fenyangjiance:'678',
 			buwanshanli_zazhi_jiance:'678',
 			jiaohe:'678',
 			sort:'678',
 			sampleNum:'678',
+			smallSamplePic:'',
       	},
 //    	水分测定
       	sfcd:{
       		table_version:'678',
-      		riqi:'678',
+      		riqi:new Date(),
       		shiwen:'678',
       		xiangduishidu:'678',
       		jiancefangfa:'678',
@@ -442,18 +446,21 @@ export default {
       		shuifenhanliang_1:'678',
       		shuifenhanliang_2:'678',
       		pingjunzhi:'678',
-      		pingxingcha:'678',
-      		xiangduicha:'678',
+//    		pingxingcha:'678',
+//    		xiangduicha:'678',
+			pingxingcha_xiangduicha:'平行差',
+      		pingxingcha_xiangduicha_zhi:'667',
       		beizhu:'678',
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
 			sampleNum:'678',
+			smallSamplePic:'',
       	},
 //    	面筋吸水
       	mjxs:{
       		table_version:'678',
-      		riqi:'678',
+      		riqi:new Date(),
       		shiwen:'678',
       		xiangduishidu:'678',
       		jiancefangfa:'678',
@@ -477,6 +484,7 @@ export default {
       		jiaohe:'678',
       		sort:'678',
 			sampleNum:'678',
+			smallSamplePic:'',
       	},
 //    	脂肪酸值
       	zfsz:{
@@ -512,11 +520,12 @@ export default {
       		jiaohe:'678',
       		sort:'玉米',
 			sampleNum:'456561',
+			smallSamplePic:'',
       	},
 //    	玉米品尝
       	ympc:{
       		table_version:'678',
-      		riqi:'678',
+      		riqi:new Date(),
       		shiwen:'678',
       		xiangduishidu:'678',
       		jiancefangfa:'678',
@@ -530,11 +539,12 @@ export default {
       		jiaohe:'678',
       		sort:'678',
 			sampleNum:'678',
+			smallSamplePic:'',
       	},
 //    	馒头品尝
       	mtpc:{
       		table_version:'678',
-      		riqi:'678',
+      		riqi:new Date(),
       		shiwen:'678',
       		xiangduishidu:'678',
       		jiancefangfa:'678',
@@ -548,11 +558,12 @@ export default {
       		jiaohe:'678',
       		sort:'678',
 			sampleNum:'678',
+			smallSamplePic:'',
       	},
 //    	毒素测定
       	dscd:{
       		table_version:'678',
-      		riqi:'678',
+      		riqi:new Date(),
       		shiwen:'678',
       		xiangduishidu:'678',
       		jiancefangfa:'678',
@@ -560,9 +571,9 @@ export default {
       		yiqishebei_mingcheng_2:'678',
       		yiqishebei_bianhao_1:'678',
       		yiqishebei_bianhao_2:'678',
-      		outudusu_1:'678',
-      		outudusu_2:'678',
-      		outudusu_pingjunzhi:'678',
+      		outudushu_1:'678',
+      		outudushu_2:'678',
+      		outudushu_pingjunzhi:'678',
       		huangqumeidusu_1:'678',
       		huangqumeidusu_2:'678',
       		huangqumeidusu_pingjunzhi:'678',
@@ -577,11 +588,12 @@ export default {
       		jiaohe:'678',
       		sort:'678',
 			sampleNum:'678',
+			smallSamplePic:'',
       	},
 //    	馒头比容
       	mtbr:{
       		table_version:'678',
-      		riqi:'678',
+      		riqi:new Date(),
       		shiwen:'678',
       		xiangduishidu:'678',
       		jiancefangfa:'678',
@@ -595,11 +607,12 @@ export default {
       		jiaohe:'678',
       		sort:'678',
 			sampleNum:'678',
+			smallSamplePic:'',
       	},
 //    	品尝评分
       	pcpf:{
       		table_version:'678',
-      		riqi:'678',
+      		riqi:new Date(),
       		shiwen:'678',
       		xiangduishidu:'678',
       		jiancefangfa:'678',
@@ -613,18 +626,19 @@ export default {
       		jiaohe:'678',
       		sort:'678',
 			sampleNum:'678',
+			smallSamplePic:'',
       	},
 //    	测定记录
       	cdjl:{
       		table_version:'678',
-      		riqi:'678',
+      		riqi:new Date(),
       		shiwen:'678',
       		xiangduishidu:'678',
       		jiancefangfa:'678',
-      		yiqishebei_mingcheng_1:'678',
-      		yiqishebei_mingcheng_2:'678',
-      		yiqishebei_mingcheng_3:'678',
-      		yiqishebei_mingcheng_4:'678',
+      		yiqishebei_mingcheng_1:1,
+      		yiqishebei_mingcheng_2:'1',
+      		yiqishebei_mingcheng_3:'2',
+      		yiqishebei_mingcheng_4:2,
       		yiqishebei_bianhao_1:'678',
       		yiqishebei_bianhao_2:'678',
       		yiqishebei_bianhao_3:'678',
@@ -676,6 +690,7 @@ export default {
       		jiaohe:'678',
       		sort:'678',
 			sampleNum:'678',
+			smallSamplePic:'',
       	},
 	  }
     }

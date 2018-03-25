@@ -849,8 +849,8 @@ export default {
       gs1Url:'static/images/sys/gs1.jpg',
       yangpinbianhao:'9527',
       yangpinmingcheng:'666',
-      jianyanbianhao_1:'111',
-      jianyanbianhao_2:'222',
+      jianyanbianhao_1:'1',
+      jianyanbianhao_2:'2',
       jsdjg:{
 
       }
