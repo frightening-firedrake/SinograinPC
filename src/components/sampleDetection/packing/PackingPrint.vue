@@ -162,7 +162,6 @@ export default {
 //		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no'); 		
   		var params = {};
 		params.sampleId = this.$route.params.id
-
 		this.$http({
 		    method: 'post',
 			url: this.getPrintCodeAllURL,

@@ -149,8 +149,8 @@
         </div>
       </div>
       </div>
-     <!--<div class="leading_out" @click="print()">-->
-     <div class="leading_out" @click="lodopPrint()">
+     <div class="leading_out" @click="print()">
+     <!--<div class="leading_out" @click="lodopPrint()">-->
         <span>打印样品领取交接单</span>
       </div>
     

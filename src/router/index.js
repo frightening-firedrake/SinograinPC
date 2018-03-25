@@ -36,6 +36,7 @@ import PackingView from '@/components/sampleDetection/packing/PackingView.vue'
 import PackingPrint from '@/components/sampleDetection/packing/PackingPrint.vue'
 import CheckList from '@/components/sampleDetection/check/CheckList.vue'
 import CheckEdit from '@/components/sampleDetection/check/CheckListEdit.vue'
+import CheckCreate from '@/components/sampleDetection/check/CheckListCreate.vue'
 import TestReportMaker from '@/components/TestReport/TestReportMaker.vue'
 import SampleSelect from '@/components/TestReport/SampleSelect.vue'
 import TestReport from '@/components/TestReport/TestReport.vue'
@@ -306,7 +307,7 @@ export default new Router({
           },
           {
             path:"sampleDetection/checkList/checkEdit",
-            name:"样品检测/样品检验单/样品检验单编辑",
+            name:"样品检测/样品检验单/编辑样品检验单",
             component:CheckEdit
           },
           {
@@ -315,9 +316,9 @@ export default new Router({
             component:CheckEdit
           },
           {
-            path:"sampleDetection/checkList/checkView",
-            name:"样品检测/样品检验单/样品检验单详情",
-            component:CheckEdit
+            path:"sampleDetection/checkList/checkCreate",
+            name:"样品检测/样品检验单/新建样品检验单",
+            component:CheckCreate
           },
 //        样品检验报告TestReportManagement
 					{

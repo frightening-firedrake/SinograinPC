@@ -76,10 +76,11 @@ export default {
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击查看事件
-  	this.$root.eventHub.$on("viewlistitem",function(id){  
+  	this.$root.eventHub.$on("viewlistitem",function(id,row){  
 //		console.log(id)
 //		this.$router.push({path: '/index/sampleDetection/packingList/packingView',query:{libid:id}})
-		this.$router.push({ path: '/index/sampleDetection/checkList/checkView', query: { libid: id } })
+//		this.$router.push({ path: '/index/sampleDetection/checkList/checkEdit', query: { id: id } })
+		this.$router.push({path: '/index/sampleDetection/checkList/checkEdit',query: {checkPoint:row.checkPoint,sort:row.sort,smallSamplePic:row.smallSamplePic,smallSampleNum:row.smallSampleNum,id:row.id,}})
 		
   	}.bind(this));
 //	监听列表点击打印事件
@@ -255,10 +256,14 @@ export default {
 			}
 	    }).then(function (response) {
 			console.log(response)
-			if(response.data) {
-				var path=this.$route.name+'/样品检验单详情'
-				this.$router.push({name: path,query: {checkPoint:response.data.checkPoint,sort:response.data.sort}})
+			if(response.data.state==1) {
+				var path=this.$route.name+'/新建样品检验单'
+				this.$router.push({name: path,query: {checkPoint:response.data.checkPoint,sort:response.data.sort,smallSamplePic:response.data.smallSamplePic,smallSampleNum:response.data.smallSampleNum,id:response.data.id,}})
 //				this.$router.push({name: path})
+			}else if(response.data.state==2) {
+				var path=this.$route.name+'/编辑样品检验单'
+				this.$router.push({name: path,query: {checkPoint:response.data.checkPoint,sort:response.data.sort,smallSamplePic:response.data.smallSamplePic,smallSampleNum:response.data.smallSampleNum,id:response.data.id,}})
+//				this.$router.push({name: path,query: {id:response.data.id,}})
 			}else{
 				this.$notify.error({
 		          	title: '未获取到检验信息',
@@ -336,7 +341,7 @@ export default {
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：此页面只展示本库信息!',
+        title: '温馨提示：此页面扫码只能扫码小样条码!',
         type: 'info'
       }],
 //    表格数据
@@ -349,11 +354,11 @@ export default {
       },
       tabledatas:[],
       items: [
-      {
-        id: 1,
-        prop:'sampleNum',
-        label: "检验单名称",
-      },
+//    {
+//      id: 1,
+//      prop:'sampleNum',
+//      label: "检验单名称",
+//    },
       {
         id: 2,
         prop:'checkPoint',

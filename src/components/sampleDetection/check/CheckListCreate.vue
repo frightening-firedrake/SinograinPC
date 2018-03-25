@@ -6,7 +6,7 @@
   	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--提示-->
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
-      <div class="fromwrap" id="print" style="background:rgba(241, 241, 241, 1);">  	
+      <div class="fromwrap"  id="print" style="background:rgba(241, 241, 241, 1);">  	
 	      <!--表单-->
 	      <!--<hr>-->
 	      <bwsl-check-from v-if="checktype=='bwsl'" :formdatas="formdatas.bwsl1" @submit="submit"></bwsl-check-from> 
@@ -32,8 +32,9 @@
 	      <!--<hr>-->
 	      <mtbr-check-from v-if="checktype=='mtbr'" :formdatas="formdatas.mtbr" @submit="submit"></mtbr-check-from> 
 	      <!--<hr>-->
+
       </div>
-	  <div class="checklistsavebtn">
+      <div class="checklistsavebtn">
 	  	<div @click="footsave">
 	  		<span>保存</span>
 	  	</div>
@@ -171,10 +172,10 @@ export default {
     
   },
   created(){
-//	console.log(this.$route.query)
+  	console.log(this.$route.query)
 //  获取列表数据（第一页）
 //	this.getlistdata()
-	this.setform(this.$route.query)
+	this.setform()
 
 	
   },
@@ -200,11 +201,12 @@ export default {
 				}],
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				data: {
-					id:this.$route.query.id
+
 				}
 			}).then(function(response) {
-//				this.setform(response.data)
 				this.formdatas[this.checktype] = response.data;
+				
+
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));
@@ -237,93 +239,78 @@ export default {
   		this.$root.eventHub.$emit('printChecklist')  		
   	},
 //	设置表单
-	setform(data){
-		if(data.sort=="小麦"){
-			if(data.checkPoint==1){
+	setform(){
+		if(this.$route.query.sort=="小麦"){
+			if(this.$route.query.checkPoint==1){
 				this.checktype='bwsl';
 
-			}else if(data.checkPoint==2){
+			}else if(this.$route.query.checkPoint==2){
 				this.checktype='sfcd';
 
-			}else if(data.checkPoint==4){
+			}else if(this.$route.query.checkPoint==4){
 				this.checktype='zfsz';
 
-			}else if(data.checkPoint==5){
+			}else if(this.$route.query.checkPoint==5){
 				this.checktype='mtpc';
 
-			}else if(data.checkPoint==6){
+			}else if(this.$route.query.checkPoint==6){
 				this.checktype='dscd';
 
 			}			
-		}else if(data.sort=="玉米"){
-			if(data.checkPoint==1){
+		}else if(this.$route.query.sort=="玉米"){
+			if(this.$route.query.checkPoint==1){
 				this.checktype='bwsl';
 
-			}else if(data.checkPoint==2){
+			}else if(this.$route.query.checkPoint==2){
 				this.checktype='sfcd';
 
-			}else if(data.checkPoint==4){
+			}else if(this.$route.query.checkPoint==4){
 				this.checktype='mjxs';
 
-			}else if(data.checkPoint==5){
+			}else if(this.$route.query.checkPoint==5){
 				this.checktype='ympc';
 
-			}else if(data.checkPoint==6){
+			}else if(this.$route.query.checkPoint==6){
 				this.checktype='dscd';
 
 			}	
 		}
-		this.Urlcomputed()
+		this.saveUrlcomputed()
 		if(this.$route.query.smallSampleNum){
 			this.formdatas[this.checktype]['smallSampleNum']=this.$route.query.smallSampleNum;
 			this.formdatas[this.checktype]['smallSamplePic']=this.$route.query.smallSamplePic;
 		}
 	},
-	Urlcomputed(){
+	saveUrlcomputed(){
     	if(this.checktype=='bwsl'){
-			this.editUrlend="/grain/buwanshanli/edit"
-			this.datalistUrlend="/grain/buwanshanli/getBySmallSampleId"
+			this.saveUrlend="/grain/buwanshanli/save"
 		}else if(this.checktype=='sfcd'){
-			this.editUrlend="/grain/shuifen/edit"
-			this.datalistUrlend="/grain/shuifen/getBySmallSampleId"
+			this.saveUrlend="/grain/shuifen/save"
 		}else if(this.checktype='zfsz'){
-			this.editUrlend="/grain/zhifangsuanzhi/edit"
-			this.datalistUrlend="/grain/zhifangsuanzhi/getBySmallSampleId"
+			this.saveUrlend="/grain/zhifangsuanzhi/save"
 		}else if(this.checktype=='mtpc'){
-			this.editUrlend="/grain/mantoupinchang/edit"
-			this.datalistUrlend="/grain/mantoupinchang/getBySmallSampleId"
+			this.saveUrlend="/grain/mantoupinchang/save"
 		}else if(this.checktype=='dscd'){			
-			this.editUrlend="/grain/dusuceding/edit"			
-			this.datalistUrlend="/grain/dusuceding/getBySmallSampleId"			
+			this.saveUrlend="/grain/dusuceding/save"			
 		}else if(this.checktype=='mjxs'){
-			this.editUrlend="/grain/mianjinxishuiliang/edit"
-			this.datalistUrlend="/grain/mianjinxishuiliang/getBySmallSampleId"
+			this.saveUrlend="/grain/mianjinxishuiliang/save"
 		}else if(this.checktype=='ympc'){
-			this.editUrlend="/grain/yumipinchang/edit"
-			this.datalistUrlend="/grain/yumipinchang/getBySmallSampleId"
+			this.saveUrlend="/grain/yumipinchang/save"
 		}
-    	this.editUrl=this.apiRoot + this.editUrlend;
-    	this.datalistURL=this.apiRoot + this.datalistUrlend;
-    	this.getlistdata()
+    	this.saveUrl=this.apiRoot + this.saveUrlend;
 	},
 	submit(jsdjg){
 		for(var key in jsdjg){
 			this.formdatas[this.checktype][key]=jsdjg[key]
 		}	
-		console.log(this.editUrl)
 		this.save()
 	},
 	save(){
 		// 提交保存
-		this.formdatas[this.checktype]['smallSampleId']=this.$route.query.id;
-		var params=this.formdatas[this.checktype]
-		delete params['riqi'];
-		delete params['createTime'];
-		delete params['updateTime'];
-		delete params['guid'];
+		this.formdatas[this.checktype]['smallSampleId']=this.$route.query.id
 		this.$http({
 		    method: 'post',
-			url:this.editUrl,
+			url: this.saveUrl,
 			transformRequest: [function (data) {
 				// Do whatever you want to transform the data
 				let ret = ''
@@ -333,9 +320,9 @@ export default {
 				return ret
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data:params,
+			data:this.formdatas[this.checktype],
 	    }).then(function (response) {
-			this.getlistdata()
+
 		}.bind(this)).catch(function (error) {
 
 		}.bind(this));
@@ -356,8 +343,8 @@ export default {
   },
   data() {
     return {
-      editUrl:'',
-      datalistURL:'',
+      saveUrl:'',
+      datalistURL:this.apiRoot + '/grain/sample/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],

@@ -312,7 +312,7 @@ export default {
 			}else if(row.isDeal){
 				this.$root.eventHub.$emit('viewlistitem',row)										
 			}else{
-				this.$root.eventHub.$emit('viewlistitem',row.id)					
+				this.$root.eventHub.$emit('viewlistitem',row.id,row)					
 			}
 	  },
 	  notAllowed(){
