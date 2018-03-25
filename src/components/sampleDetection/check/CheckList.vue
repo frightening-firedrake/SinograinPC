@@ -257,7 +257,8 @@ export default {
 			console.log(response)
 			if(response.data) {
 				var path=this.$route.name+'/样品检验单详情'
-				this.$router.push({name: path,params: {code:code,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState}})
+				this.$router.push({name: path,query: {checkPoint:response.data.checkPoint,sort:response.data.sort}})
+//				this.$router.push({name: path})
 			}else{
 				this.$notify.error({
 		          	title: '未获取到检验信息',

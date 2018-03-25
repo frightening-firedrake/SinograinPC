@@ -5,141 +5,141 @@
     <!--标题-->
     <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>
     <div id="print">
-      <div class="handover_view">
-        <div class="hand_view_title">
+      <div class="handover_view" style="width:100%;">
+        <div class="hand_view_title" style="width:100%;height:0.45rem;text-align:center;line-height:0.45rem;font-size:0.24rem;color:#333333;">
           <span>山西中储粮粮食质检中心</span>
         </div>
-        <div class="hand_view_tab">
-          <div class="hand_view_tab_title">
+        <div class="hand_view_tab" style="">
+          <div class="hand_view_tab_title" style="">
             <!--<p>{{formdatas.sort}}样品领取交接单</p>-->
-            <p>{{formdatas.name}}</p>
+            <p style="">{{formdatas.name}}</p>
           </div>
-          <div class="hand_view_tab_num">
-            <p>编号:{{formdatas.nid}}</p>
+          <div class="hand_view_tab_num" style="">
+            <p style="">编号:{{formdatas.nid}}</p>
           </div>
-          <el-row class="hand_view_tab_content">
-            <el-col :span="24" class="hand_view_tab_content_font">
-              <el-col :span="2">
+          <el-row style="" class="hand_view_tab_content">
+            <el-col style="" :span="24" class="hand_view_tab_content_font">
+              <el-col style="" :span="2">
                 <span>检验项目:</span>
               </el-col>
-              <el-col :span="20">
+              <el-col style="" :span="20">
                 <span>{{formdatas.testList}}</span>
               </el-col>
             </el-col>
           </el-row>
-          <el-row class="hand_view_tabbody">
-            <el-col :span="6">
-              <el-col :span="8">
+          <el-row style="" class="hand_view_tabbody">
+            <el-col style="" :span="6">
+              <el-col style="" :span="8">
                 <span>序号</span>
               </el-col>
-              <el-col :span="16">
+              <el-col style="" :span="16">
                 <span>样品编号</span>
               </el-col>
             </el-col>
-            <el-col :span="6">
-              <el-col :span="8">
+            <el-col style=""  :span="6">
+              <el-col style="" :span="8">
                 <span>序号</span>
               </el-col>
-              <el-col :span="16">
+              <el-col  style="" :span="16">
                 <span>样品编号</span>
               </el-col>
             </el-col>
-            <el-col :span="6">
-              <el-col :span="8">
+            <el-col style="" :span="6">
+              <el-col style="" :span="8">
                 <span>序号</span>
               </el-col>
-              <el-col :span="16">
+              <el-col style="" :span="16">
                 <span>样品编号</span>
               </el-col>
             </el-col>
-            <el-col :span="6">
-              <el-col :span="8">
+            <el-col style="" :span="6">
+              <el-col style="" :span="8">
                 <span>序号</span>
               </el-col>
-              <el-col :span="16">
+              <el-col style="" :span="16">
                 <span>样品编号</span>
               </el-col>
             </el-col>
           </el-row>
           <el-row class="hand_view_tabbody" style="border-top:none;">
             <el-col :span="6" v-for="(item,index) in formdatas.testItemList" :key="index" style="border-top:1px solid #dfdfdf;">
-              <el-col :span="8">
+              <el-col style="" :span="8">
                 <span>{{index+1}}</span>
               </el-col>
-              <el-col :span="16">
+              <el-col style="" :span="16">
                 <span>{{item}}</span>
               </el-col>
             </el-col>
-            <el-col :span="6" v-for="(item,index) in testItemListadd" :key="index+99" style="border-top:1px solid #dfdfdf;">
-              <el-col :span="8">
+            <el-col style="" :span="6" v-for="(item,index) in testItemListadd" :key="index+99" style="border-top:1px solid #dfdfdf;">
+              <el-col style="" :span="8">
                 <span>{{index+formdatas.testItemList.length+1}}</span>
               </el-col>
-              <el-col :span="16">
+              <el-col style="" :span="16">
                 <span>&nbsp;</span>
               </el-col>
             </el-col>
             
           </el-row>
 
-          <el-row class="hand_view_tabbody">
-            <el-col :span="6">
-              <el-col :span="8">
+          <el-row style="" class="hand_view_tabbody">
+            <el-col style="" :span="6">
+              <el-col style="" :span="8">
                 <span>领取人</span>
               </el-col>
-              <el-col :span="16">
+              <el-col style="" :span="16">
                 <span>&nbsp;</span>
               </el-col>
             </el-col>
-            <el-col :span="6">
-              <el-col :span="8">
+            <el-col style="" :span="6">
+              <el-col style="" :span="8">
                 <span>归还人</span>
               </el-col>
-              <el-col :span="16">
+              <el-col style="" :span="16">
                 <span>&nbsp;</span>
               </el-col>
             </el-col>
-            <el-col :span="12">
-              <el-col :span="4">
+            <el-col style="" :span="12">
+              <el-col style="" :span="4">
                 <span>备注</span>
               </el-col>
-              <el-col :span="20">
+              <el-col style="" :span="20">
                 <span>{{formdatas.remarks}}</span>
               </el-col>
             </el-col>
           </el-row>
 
-          <el-row class="hand_view_tabbody date">
-            <el-col :span="6">
-              <el-col :span="8">
+          <el-row style="" class="hand_view_tabbody date">
+            <el-col style="" :span="6">
+              <el-col style="" :span="8">
                 <span>领取日期</span>
               </el-col>
-              <el-col :span="16">
+              <el-col style="" :span="16">
                 <span>&nbsp;</span>
               </el-col>
             </el-col>
-            <el-col :span="6">
-              <el-col :span="8">
+            <el-col style="" :span="6">
+              <el-col style="" :span="8">
                 <span>归还日期</span>
               </el-col>
-              <el-col :span="16">
+              <el-col style="" :span="16">
                 <span>&nbsp;</span>
               </el-col>
             </el-col>
-            <el-col :span="12" style="border-left:1px solid #dfdfdf;">
-              <el-col :span="4">
+            <el-col style="" :span="12" style="border-left:1px solid #dfdfdf;">
+              <el-col style="" :span="4">
                 <span>&nbsp;</span>
               </el-col>
-              <el-col :span="20">
-              	<el-col :span="2">
+              <el-col style="" :span="20">
+              	<el-col style="" :span="2">
               	
               	</el-col>
-              	<el-col :span="10">
+              	<el-col style="" :span="10">
               			样品管理员：
               	</el-col>
-              	<el-col :span="2">
+              	<el-col style="" :span="2">
               	
               	</el-col>
-              	<el-col :span="10">
+              	<el-col style="" :span="10">
               			时间：
               	</el-col>
                 <!--<span> 样品管理员：{{formdatas.gly}} 时间： {{formdatas.time}}</span>-->
