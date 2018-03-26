@@ -9,10 +9,10 @@
       <div class="fromwrap" id="print" style="background:rgba(241, 241, 241, 1);">  	
 	      <!--表单-->
 	      <!--<hr>-->
-	      <bwsl-check-from v-if="checktype=='bwsl'" :formdatas="formdatas.bwsl1" @submit="submit"></bwsl-check-from> 
+	      <bwsl-check-from v-if="checktype=='bwsl'" :formdatas="formdatas.bwsl" @submit="submit"></bwsl-check-from> 
 
 	      <!--<hr>-->
-	      <sfcd-check-from v-if="checktype=='sfcd'" :formdatas="formdatas.sfcd1" @submit="submit"></sfcd-check-from> 
+	      <sfcd-check-from v-if="checktype=='sfcd'" :formdatas="formdatas.sfcd" @submit="submit"></sfcd-check-from> 
 
 	      <!--<hr>-->
 	      <mjxsl-check-from v-if="checktype=='mjxs'" :formdatas="formdatas.mjxs" @submit="submit"></mjxsl-check-from> 
@@ -23,7 +23,7 @@
 	      <!--<hr>-->
 	      <mtpc-check-from v-if="checktype=='mtpc'" :formdatas="formdatas.mtpc" @submit="submit"></mtpc-check-from> 
 	      <!--<hr>-->
-	      <dscd-check-from v-if="checktype=='dscd'" :formdatas="formdatas.dscd1" @submit="submit"></dscd-check-from> 
+	      <dscd-check-from v-if="checktype=='dscd'" :formdatas="formdatas.dscd" @submit="submit"></dscd-check-from> 
 
 	      <!--<hr>-->
 	      <pcpf-check-from v-if="checktype=='pcpf'" :formdatas="formdatas.pcpf" @submit="submit"></pcpf-check-from> 
@@ -171,7 +171,7 @@ export default {
     
   },
   created(){
-//	console.log(this.$route.query)
+	console.log(this.$route.query)
 //  获取列表数据（第一页）
 //	this.getlistdata()
 	this.setform(this.$route.query)
@@ -205,6 +205,11 @@ export default {
 			}).then(function(response) {
 //				this.setform(response.data)
 				this.formdatas[this.checktype] = response.data;
+				if(this.$route.query.smallSampleNum){
+					this.formdatas[this.checktype]['smallSampleNum']=this.$route.query.smallSampleNum;
+					this.formdatas[this.checktype]['smallSamplePic']=this.$route.query.smallSamplePic;
+					this.formdatas[this.checktype]['sort']=this.$route.query.sort;
+				}
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));
@@ -246,7 +251,7 @@ export default {
 				this.checktype='sfcd';
 
 			}else if(data.checkPoint==4){
-				this.checktype='zfsz';
+				this.checktype='mjxs';
 
 			}else if(data.checkPoint==5){
 				this.checktype='mtpc';
@@ -263,7 +268,7 @@ export default {
 				this.checktype='sfcd';
 
 			}else if(data.checkPoint==4){
-				this.checktype='mjxs';
+				this.checktype='zfsz';
 
 			}else if(data.checkPoint==5){
 				this.checktype='ympc';
@@ -277,7 +282,9 @@ export default {
 		if(this.$route.query.smallSampleNum){
 			this.formdatas[this.checktype]['smallSampleNum']=this.$route.query.smallSampleNum;
 			this.formdatas[this.checktype]['smallSamplePic']=this.$route.query.smallSamplePic;
+			this.formdatas[this.checktype]['sort']=this.$route.query.sort;
 		}
+		
 	},
 	Urlcomputed(){
     	if(this.checktype=='bwsl'){
@@ -286,15 +293,15 @@ export default {
 		}else if(this.checktype=='sfcd'){
 			this.editUrlend="/grain/shuifen/edit"
 			this.datalistUrlend="/grain/shuifen/getBySmallSampleId"
-		}else if(this.checktype='zfsz'){
+		}else if(this.checktype=='zfsz'){
 			this.editUrlend="/grain/zhifangsuanzhi/edit"
 			this.datalistUrlend="/grain/zhifangsuanzhi/getBySmallSampleId"
 		}else if(this.checktype=='mtpc'){
 			this.editUrlend="/grain/mantoupinchang/edit"
 			this.datalistUrlend="/grain/mantoupinchang/getBySmallSampleId"
 		}else if(this.checktype=='dscd'){			
-			this.editUrlend="/grain/dusuceding/edit"			
-			this.datalistUrlend="/grain/dusuceding/getBySmallSampleId"			
+			this.editUrlend="/grain/zhenjundusu/edit"			
+			this.datalistUrlend="/grain/zhenjundusu/getBySmallSampleId"			
 		}else if(this.checktype=='mjxs'){
 			this.editUrlend="/grain/mianjinxishuiliang/edit"
 			this.datalistUrlend="/grain/mianjinxishuiliang/getBySmallSampleId"
@@ -427,7 +434,7 @@ export default {
 			buwanshanli_zazhi_jiance:'678',
 			jiaohe:'678',
 			sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
       	},
 //    	水分测定
       	sfcd:{
@@ -461,7 +468,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
       	},
 //    	面筋吸水
       	mjxs:{
@@ -489,7 +496,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
       	},
 //    	脂肪酸值
       	zfsz:{
@@ -524,7 +531,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'玉米',
-			sampleNum:'456561',
+			smallSampleNum:'456561',
       	},
 //    	玉米品尝
       	ympc:{
@@ -542,7 +549,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
       	},
 //    	馒头品尝
       	mtpc:{
@@ -560,7 +567,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
       	},
 //    	毒素测定
       	dscd:{
@@ -589,7 +596,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
       	},
 //    	馒头比容
       	mtbr:{
@@ -607,7 +614,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
       	},
 //    	品尝评分
       	pcpf:{
@@ -625,7 +632,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
       	},
 //    	测定记录
       	cdjl:{
@@ -688,7 +695,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
       	},
 	  }
     }

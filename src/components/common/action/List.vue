@@ -78,7 +78,7 @@
 				      				监{{scope.row[item.prop]}}
 		      				</template>
 		      				<template v-if="item.prop=='checkPoint'">
-				      				{{findCheckPoint(scope.row[item.prop])}}
+				      				{{findCheckPoint(scope.row)}}
 		      				</template>
 		          </template>
 	    		</el-table-column>
@@ -289,16 +289,23 @@ export default {
 	  },
 	  findCheckeds(str){
 	  	var indexs=str.split(',');
-	  	var checkList=["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生","加工品质"]
+	  	var checkList=["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值（面筋吸水）","品尝评分","卫生","加工品质"]
 	  	var res=[];
 	  	indexs.forEach((item)=>{
 	  		res.push(checkList[item-1])
 	  	})
 	  	return res.join('，')
 	  },
-	  findCheckPoint(str){
-	  	var checkList=["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生","加工品质"]
-	  	var res=checkList[str-1];
+	  findCheckPoint(obj){
+	  	var checkList1=["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值","玉米品尝评分","卫生","加工品质"]
+	  	var checkList2=["不完善颗粒、杂质、生霉粒","水分","硬度","面筋吸水","馒头品尝评分","卫生","加工品质"]
+	  	var index=obj.checkPoint
+	  	var res;
+	  	if(obj.sort=='玉米'){
+	  		res=checkList1[index-1];  		
+	  	}else if(obj.sort=='小麦'){
+	  		res=checkList2[index-1];	  		
+	  	}
 	  	return res;
 	  },
 	  rowClick(row,event,column){

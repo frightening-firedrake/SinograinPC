@@ -280,6 +280,7 @@ export default {
 		if(this.$route.query.smallSampleNum){
 			this.formdatas[this.checktype]['smallSampleNum']=this.$route.query.smallSampleNum;
 			this.formdatas[this.checktype]['smallSamplePic']=this.$route.query.smallSamplePic;
+			this.formdatas[this.checktype]['sort']=this.$route.query.sort;
 		}
 	},
 	saveUrlcomputed(){
@@ -292,7 +293,7 @@ export default {
 		}else if(this.checktype=='mtpc'){
 			this.saveUrlend="/grain/mantoupinchang/save"
 		}else if(this.checktype=='dscd'){			
-			this.saveUrlend="/grain/dusuceding/save"			
+			this.saveUrlend="/grain/zhenjundusu/save"			
 		}else if(this.checktype=='mjxs'){
 			this.saveUrlend="/grain/mianjinxishuiliang/save"
 		}else if(this.checktype=='ympc'){
@@ -369,7 +370,7 @@ export default {
       formdatas: {
 //    	不完善粒
       	bwsl:{
-      		table_version:'',
+      		table_version:'123',
       		riqi:new Date(),
       		shiwen:'',
       		xiangduishidu:'',
@@ -417,7 +418,7 @@ export default {
 			buwanshanli_zazhi_jiance:'',
 			jiaohe:'',
 			sort:'',
-			sampleNum:'',
+			smallSampleNum:'',
 			smallSamplePic:'',
       	},
 //    	水分测定
@@ -454,7 +455,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
 			smallSamplePic:'',
       	},
 //    	面筋吸水
@@ -483,7 +484,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
 			smallSamplePic:'',
       	},
 //    	脂肪酸值
@@ -519,7 +520,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'玉米',
-			sampleNum:'456561',
+			smallSampleNum:'456561',
 			smallSamplePic:'',
       	},
 //    	玉米品尝
@@ -538,7 +539,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
 			smallSamplePic:'',
       	},
 //    	馒头品尝
@@ -557,7 +558,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
 			smallSamplePic:'',
       	},
 //    	毒素测定
@@ -587,7 +588,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
 			smallSamplePic:'',
       	},
 //    	馒头比容
@@ -606,7 +607,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
 			smallSamplePic:'',
       	},
 //    	品尝评分
@@ -625,7 +626,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
 			smallSamplePic:'',
       	},
 //    	测定记录
@@ -689,7 +690,7 @@ export default {
       		jiance:'678',
       		jiaohe:'678',
       		sort:'678',
-			sampleNum:'678',
+			smallSampleNum:'678',
 			smallSamplePic:'',
       	},
 	  }

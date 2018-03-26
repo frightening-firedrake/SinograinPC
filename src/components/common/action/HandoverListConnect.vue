@@ -130,7 +130,8 @@
                 		<el-checkbox label="1" class="classify_col">不完善颗粒、杂质、生霉粒</el-checkbox>
 					    <el-checkbox label="2" class="classify_col">水分</el-checkbox>
 					    <el-checkbox label="3" class="classify_col">硬度</el-checkbox>
-					    <el-checkbox label="4" class="classify_col">脂肪酸值</el-checkbox>
+					    <el-checkbox label="4" class="classify_col">脂肪酸值（面筋吸水）</el-checkbox>
+					    <!--<el-checkbox label="4" class="classify_col">面筋吸水</el-checkbox>-->
 					    <el-checkbox label="5" class="classify_col">品尝评分</el-checkbox>
 					    <el-checkbox label="6" class="classify_col">卫生</el-checkbox>
 					    <el-checkbox label="7" class="classify_col">加工品质</el-checkbox>
