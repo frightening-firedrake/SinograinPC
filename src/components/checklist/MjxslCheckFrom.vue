@@ -602,9 +602,7 @@ export default {
 		return this.jsdjg.mianjinxishuiliang_2 = mianjinxishuiliang_2.toFixed(2)
 	},
 	pingjunzhiganmianjinzhiliang(){
-		console.log(111)
 		var pingjunzhiganmianjinzhiliang = (((this.formdatas.shimianjinzhiliang_1 - this.formdatas.ganmianjinzhiliang_1)/this.formdatas.ganmianjinzhiliang_1)*100 + ((this.formdatas.shimianjinzhiliang_2 - this.formdatas.ganmianjinzhiliang_2)/this.formdatas.ganmianjinzhiliang_2)*100)/2
-		console.log(pingjunzhiganmianjinzhiliang)
 		if(!pingjunzhiganmianjinzhiliang){
 			return 0
 		}else{
