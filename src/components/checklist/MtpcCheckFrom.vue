@@ -72,8 +72,13 @@
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: left; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
+							</td> 
+							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 46.4667px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+								<div class="zw-cell-container" style="position: relative;">
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
+								</div>
 							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 46.4667px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 46.4667px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
@@ -92,12 +97,7 @@
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
-							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 46.4667px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
-								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
-								</div>
-							</td>
+							</td>-->
 						</tr>
 						<tr class="zw-tr">
 							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 67.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -112,7 +112,12 @@
 									<p style="margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-top: 0px; border-top: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">比容每下降0.1分扣1.0分;</span></p>
 								</div>
 							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 67.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 67.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+								<div class="zw-cell-container" style="position: relative;">
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model="birong"/></p>
+								</div>
+							</td>
+							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 67.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
@@ -131,12 +136,7 @@
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
-							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 67.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
-								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
-								</div>
-							</td>
+							</td>-->
 						</tr>
 						<tr class="zw-tr">
 							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 65.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -152,7 +152,12 @@
 									<p style="margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-top: 0px; border-top: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"> 灰暗： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0分—5分；</span></p>
 								</div>
 							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 65.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 65.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+								<div class="zw-cell-container" style="position: relative;">
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model="biaomianseze"/></p>
+								</div>
+							</td>
+							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 65.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
@@ -171,12 +176,7 @@
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
-							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 65.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
-								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
-								</div>
-							</td>
+							</td>-->
 						</tr>
 						<tr class="zw-tr">
 							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 73.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -192,7 +192,12 @@
 									<p style="margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-top: 0px; border-top: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"> 手指按压不回弹或按压困难： &nbsp; &nbsp; &nbsp; &nbsp; 0分—4分；</span></p>
 								</div>
 							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 73.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 73.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+								<div class="zw-cell-container" style="position: relative;">
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text" v-model="tanxin" /></p>
+								</div>
+							</td>
+							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 73.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
@@ -211,12 +216,7 @@
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
-							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 73.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
-								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
-								</div>
-							</td>
+							</td>-->
 						</tr>
 						<tr class="zw-tr">
 							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 118.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -234,7 +234,12 @@
 									<p style="margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-top: 0px; border-top: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"> 有严重异味： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0分；</span></p>
 								</div>
 							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 118.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 118.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+								<div class="zw-cell-container" style="position: relative;">
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model="qiwei"/></p>
+								</div>
+							</td>
+							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 118.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
@@ -253,12 +258,7 @@
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
-							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 118.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
-								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
-								</div>
-							</td>
+							</td>-->
 						</tr>
 						<tr class="zw-tr">
 							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 119.133px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -276,7 +276,12 @@
 									<p style="margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-top: 0px; border-top: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"> 有严重异味： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0分；</span></p>
 								</div>
 							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 119.133px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 119.133px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+								<div class="zw-cell-container" style="position: relative;">
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text" v-model="shiwei" /></p>
+								</div>
+							</td>
+							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 119.133px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
@@ -295,12 +300,7 @@
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
-							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 119.133px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
-								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
-								</div>
-							</td>
+							</td>-->
 						</tr>
 						<tr class="zw-tr">
 							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 78.1333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -316,7 +316,12 @@
 									<p style="margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-top: 0px; border-top: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"> 咬劲差,切时掉渣或咀嚼干硬： &nbsp; &nbsp; &nbsp; &nbsp; 0分—4分；</span></p>
 								</div>
 							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 78.1333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 78.1333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+								<div class="zw-cell-container" style="position: relative;">
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model="renxing"/></p>
+								</div>
+							</td>
+							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 78.1333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
@@ -335,12 +340,7 @@
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
-							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 78.1333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
-								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
-								</div>
-							</td>
+							</td>-->
 						</tr>
 						<tr class="zw-tr">
 							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 86.7333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -356,7 +356,12 @@
 									<p style="margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-top: 0px; border-top: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"> 咀嚼不爽口，很粘： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0分—4分；</span></p>
 								</div>
 							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 86.7333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 86.7333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+								<div class="zw-cell-container" style="position: relative;">
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model="nianxing"/></p>
+								</div>
+							</td>
+							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 86.7333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
@@ -375,12 +380,7 @@
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
-							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 86.7333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
-								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
-								</div>
-							</td>
+							</td>-->
 						</tr>
 						<tr class="zw-tr">
 							<td class="zw-td" rowspan="1" colspan="2" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 60.3333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -393,7 +393,12 @@
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
 							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 60.3333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 60.3333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+								<div class="zw-cell-container" style="position: relative;">
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model="pingfenzhi"/></p>
+								</div>
+							</td>
+							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 60.3333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
@@ -412,12 +417,7 @@
 								<div class="zw-cell-container" style="position: relative;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
 								</div>
-							</td>
-							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 60.3333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
-								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
-								</div>
-							</td>
+							</td>-->
 						</tr>
 					</tbody>
 				</table>
@@ -438,8 +438,16 @@
 <script>
 
 //import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
-
+// birong比容
+// biaomianseze表面色泽
+// tanxin弹 性
+// qiwei气 味
+// shiwei食 味
+// renxing韧 性
+// nianxing粘 性
+// pingfenzhi品 &nbsp;尝 &nbsp;评 &nbsp;分 &nbsp;值
 export default {
+
   components: {
 
   },
