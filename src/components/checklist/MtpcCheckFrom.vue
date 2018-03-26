@@ -440,7 +440,7 @@
 //import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 // birong比容
 // biaomianseze表面色泽
-// tanxin弹 性
+// tanxin 弹 性
 // qiwei气 味
 // shiwei食 味
 // renxing韧 性
