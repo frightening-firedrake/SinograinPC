@@ -324,7 +324,9 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data:this.formdatas[this.checktype],
 	    }).then(function (response) {
-
+			if(response.data.success){
+				this.$router.push({name:'样品检测/样品检验单'})
+			}
 		}.bind(this)).catch(function (error) {
 
 		}.bind(this));
@@ -352,7 +354,7 @@ export default {
       checkedId:[],
 	  createlibVisible:false,
 //	  类型
-	  checktype:'bwsl',
+	  checktype:'ympc',
 	  saveUrlend:'',
       breadcrumb:{
       	search:false,   
