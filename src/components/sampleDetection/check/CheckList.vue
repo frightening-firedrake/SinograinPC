@@ -162,16 +162,27 @@ export default {
 	
 //	获取列表数据方法
   	getlistdata(page){
+  		var params={};
+  		params.state=2;
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 			    listName: this.list,
 			    page:page,
 			    pageSize:this.page.size,
+			    params:JSON.stringify(params),
 			}
 	    }).then(function (response) {
 			console.log(response)
