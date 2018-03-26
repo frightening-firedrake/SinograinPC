@@ -442,7 +442,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="4" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 33.4px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 7.68px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.outudushu_pingjunzhi" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{outudushu_pingjunzhi}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
@@ -504,7 +504,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="4" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 32.5333px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 7.68px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.huangqumeidusu_pingjunzhi" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{huangqumeidusu_pingjunzhi}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
@@ -566,7 +566,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="4" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 32.5333px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 7.68px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.yumichimeixitong_pingjunzhi" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{yumichimeixitong_pingjunzhi}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
@@ -628,7 +628,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="4" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 32.5333px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 7.68px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.zhequmeidusu_pingjunzhi" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{zhequmeidusu_pingjunzhi}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
@@ -1355,6 +1355,22 @@ export default {
 	pingjunzhi() { 
 //		var pingjunzhi = (this.formdatas.koh_rongyeyongliang_1-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_1*(100-this.formdatas.shiyangzhiliang_1))*100;
 //		return this.jsdjg.pingjunzhi = pingjunzhi.toFixed(1);
+	},
+	outudushu_pingjunzhi(){
+		var outudushu_pingjunzhi = (this.formdatas.outudushu_1*1 + this.formdatas.outudushu_2*1)/2
+		return this.jsdjg.outudushu_pingjunzhi = outudushu_pingjunzhi
+	}, 
+	huangqumeidusu_pingjunzhi(){
+		var huangqumeidusu_pingjunzhi = (this.formdatas.huangqumeidusu_1*1 + this.formdatas.huangqumeidusu_2*1)/2
+		return this.jsdjg.huangqumeidusu_pingjunzhi = huangqumeidusu_pingjunzhi
+	},
+	yumichimeixitong_pingjunzhi(){
+		var yumichimeixitong_pingjunzhi = (this.formdatas.yumichimeixitong_1*1 + this.formdatas.yumichimeixitong_2*1)/2
+		return this.jsdjg.yumichimeixitong_pingjunzhi = yumichimeixitong_pingjunzhi
+	},
+	zhequmeidusu_pingjunzhi(){
+		var zhequmeidusu_pingjunzhi = (this.formdatas.zhequmeidusu_1*1 + this.formdatas.zhequmeidusu_2*1)/2
+		return this.jsdjg.zhequmeidusu_pingjunzhi = zhequmeidusu_pingjunzhi
 	},
     codeUrl(){
     	return this.apiRoot +'/grain/upload/smaBarcode/'+this.formdatas.smallSamplePic
