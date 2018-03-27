@@ -33,7 +33,7 @@
                 <span>序号</span>
               </el-col>
               <el-col style="" :span="16">
-                <span>样品编号</span>
+                <span>检验编号</span>
               </el-col>
             </el-col>
             <el-col style=""  :span="6">
@@ -41,7 +41,7 @@
                 <span>序号</span>
               </el-col>
               <el-col  style="" :span="16">
-                <span>样品编号</span>
+                <span>检验编号</span>
               </el-col>
             </el-col>
             <el-col style="" :span="6">
@@ -49,7 +49,7 @@
                 <span>序号</span>
               </el-col>
               <el-col style="" :span="16">
-                <span>样品编号</span>
+                <span>检验编号</span>
               </el-col>
             </el-col>
             <el-col style="" :span="6">
@@ -57,7 +57,7 @@
                 <span>序号</span>
               </el-col>
               <el-col style="" :span="16">
-                <span>样品编号</span>
+                <span>检验编号</span>
               </el-col>
             </el-col>
           </el-row>
@@ -445,7 +445,7 @@ export default {
   	},
   	findCheckeds(str){
 	  	var indexs=str.split(',');
-	  	var checkList=["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生","加工品质"]
+	  	var checkList=["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值(面筋吸水量)","品尝评分","卫生","加工品质"]
 	  	var res=[];
 	  	indexs.forEach((item)=>{
 	  		res.push(checkList[item-1])
