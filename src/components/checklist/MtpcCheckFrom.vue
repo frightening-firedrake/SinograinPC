@@ -9,9 +9,9 @@
 				<p style="margin: 0px; line-height: 2.16667; text-align: center; font-family: 黑体; font-size: 18pt; color: rgb(0, 0, 0); padding-bottom: 0px; border-bottom: 0px;"><span style="font-family: 黑体; font-size: 18pt;">山西中储粮粮油质监中心</span></p>
 				<p style="margin: 0px; line-height: 2.16667; text-align: center; font-family: 黑体; font-size: 18pt; color: rgb(0, 0, 0); padding-bottom: 10.4px; padding-top: 0px; border-top: 0px;"><span style="font-family: 黑体; font-size: 18pt;">馒头品尝评分记录表</span></p>
 				<div class="zw-header">
-					<p style="margin: 0px 0 0px 0px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">时间：</span><input class="check" type="text"  /></p>
-					<p style="margin: 0px 0 0px 0px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"> 品评员：</span><input class="check" type="text"  /></p>
-					<p style="margin: 0px 0px 0px 35px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">SXZCZJ/JL009-2015</span></p>		
+					<p style="margin: 0px 0 0px 0px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">时间：</span>{{formdatas.riqi|data}}</p>
+					<p style="margin: 0px 0 0px 0px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"> 品评员：</span><input style='text-algin:left;' class="check" v-model="formdatas.pinpingyuan" type="text"  /></p>
+					<p style="margin: 0px 0px 0px 35px; line-height: 2.16667; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">{{formdatas.table_version}}</span></p>		
 				</div>
 
 				<table class="zw-table" data-node-id="node_08907544552050795" style="margin-left: 0; direction: ltr; width: 6.38889in; border-collapse: collapse;">
@@ -75,7 +75,7 @@
 							</td> 
 							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 46.4667px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">监{{formdatas.smallSampleNum}}</p>
 								</div>
 							</td>
 							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 46.4667px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -102,7 +102,7 @@
 						<tr class="zw-tr">
 							<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 67.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.5; text-indent: 0.0729167in; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-bottom: 0px; border-bottom: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">比容(ml/g)</span></p>
+									<p style="text-align:center; margin: 0px; line-height: 1.5; text-indent: 0.0729167in; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-bottom: 0px; border-bottom: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">比容(ml/g)</span></p>
 									<p style="margin: 0px; line-height: 1.5; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-top: 0px; border-top: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">（15分）</span></p>
 								</div>
 							</td>
@@ -114,7 +114,7 @@
 							</td>
 							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 67.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model="birong"/></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model.number="formdatas.birong"/></p>
 								</div>
 							</td>
 							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 67.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -154,7 +154,7 @@
 							</td>
 							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 65.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model="biaomianseze"/></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model.number="formdatas.biaomianseze"/></p>
 								</div>
 							</td>
 							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 65.9333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -194,7 +194,7 @@
 							</td>
 							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 73.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text" v-model="tanxin" /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text" v-model.number="formdatas.tanxing" /></p>
 								</div>
 							</td>
 							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 73.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -236,7 +236,7 @@
 							</td>
 							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 118.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model="qiwei"/></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model.number="formdatas.qiwei"/></p>
 								</div>
 							</td>
 							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 118.2px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -278,7 +278,7 @@
 							</td>
 							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 119.133px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text" v-model="shiwei" /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text" v-model.number="formdatas.shiwei" /></p>
 								</div>
 							</td>
 							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 119.133px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -318,7 +318,7 @@
 							</td>
 							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 78.1333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model="renxing"/></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model.number="formdatas.renxing"/></p>
 								</div>
 							</td>
 							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 78.1333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -358,7 +358,7 @@
 							</td>
 							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 86.7333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model="nianxing"/></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model.number="formdatas.nianxing"/></p>
 								</div>
 							</td>
 							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 86.7333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -395,7 +395,7 @@
 							</td>
 							<td class="zw-td" colspan="5" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 60.3333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model="pingfenzhi"/></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{pinchangpingfenzhi}}</p>
 								</div>
 							</td>
 							<!--<td class="zw-td" style="border-width: 1.33333px 1px 1.33333px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 60.3333px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1.32813px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -438,37 +438,78 @@
 <script>
 
 //import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
-// birong比容
-// biaomianseze表面色泽
-// tanxin 弹性
-// qiwei气 味
-// shiwei食 味
-// renxing韧 性
-// nianxing粘 性
-// pingfenzhi品 &nbsp;尝 &nbsp;评 &nbsp;分 &nbsp;值
 export default {
-
-  components: {
-
-  },
+  props: ['formdatas'],
   computed:{
-
+	pinchangpingfenzhi(){
+		var pinchangpingfenzhi = this.formdatas.birong*1 + this.formdatas.biaomianseze*1+ this.formdatas.tanxing*1+ this.formdatas.qiwei*1+ this.formdatas.shiwei*1+ this.formdatas.renxing*1+ this.formdatas.nianxing*1
+		if(pinchangpingfenzhi!==0){
+			return this.jsdjg.pinchangpingfenzhi = pinchangpingfenzhi;		
+		}
+		return this.jsdjg.pinchangpingfenzhi='';
+	},
+    codeUrl(){
+    	return this.apiRoot +'/grain/upload/smaBarcode/'+this.formdatas.smallSamplePic
+    }
   },
   created(){
 
+//	移除监听事件
+    this.$root.eventHub.$off('printChecklist')
+//	监听打印事件
+  	this.$root.eventHub.$on("printChecklist",function(){  
+		this.submit();
+
+  	}.bind(this));
   },
   destroy(){
-
+  	this.$root.eventHub.$off('printChecklist')
   },
   methods: {
-
+	submit(){	
+		for(var key in this.formdatas){
+			if(!this.formdatas[key]){
+				this.isEmpty=true;
+				break
+			}else{
+				this.isEmpty=false;
+			}
+		}
+		if(this.isEmpty){			
+			this.$alert('请完善表内信息','提示信息',{});
+		}else{			
+			this.$emit('submit',this.jsdjg)
+		}
+	}
 
   },
   data() {
     return {
-      codeUrl:'static/images/test/code.jpg',
+      isEmpty:false,
+
+      gs1Url:'static/images/sys/gs1.jpg',
+      gs2Url:'static/images/sys/gs2.jpg',
+      mjxsf1Url:'static/images/sys/mjxsf1.png',
+
+      jianyanbianhao_1:'1',
+      jianyanbianhao_2:'2',
+      jsdjg:{
+		
+      }
     }
+  },
+  filters: {
+   data:function (input) {
+       var d = new Date(input);
+       var year = d.getFullYear();
+       var month = d.getMonth() + 1;
+       var day = d.getDate() <10 ? '0' + d.getDate() : '' + d.getDate();
+       var hour = d.getHours();
+       var minutes = d.getMinutes();
+       var seconds = d.getSeconds();
+       return  year+ '-' + month + '-' + day;
+//     return  year+ '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
+   }
   }
 }
 </script>
-
