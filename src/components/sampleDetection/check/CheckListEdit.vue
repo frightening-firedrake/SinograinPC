@@ -342,7 +342,9 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data:params,
 	    }).then(function (response) {
-			this.getlistdata()
+	    	if(response.data.success){
+	    		this.getlistdata()
+	    	}
 		}.bind(this)).catch(function (error) {
 
 		}.bind(this));

@@ -372,7 +372,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="2" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.dayangzazhihanliang_1" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{dayangzazhihanliang_1}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -382,7 +382,7 @@
 							</td>
 							<td class="zw-td" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.dayangzazhihanliang_2" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{dayangzazhihanliang_2}}</p>
 								</div>
 							</td>
 							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -412,7 +412,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.dayangzazhihanliang_pingjunzhi" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{dayangzazhihanliang_pingjunzhi}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -538,7 +538,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="2" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 43.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.xiaoyangzazhihanliang_1" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{xiaoyangzazhihanliang_1}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -548,7 +548,7 @@
 							</td>
 							<td class="zw-td" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 43.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.xiaoyangzazhihanliang_2" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{xiaoyangzazhihanliang_2}}</p>
 								</div>
 							</td>
 							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 43.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -578,7 +578,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.xiaoyangzazhihanliang_pingjunzhi" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{xiaoyangzazhihanliang_pingjunzhi}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -662,7 +662,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="2" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 43.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.kuangwuzhihanliang_1" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{kuangwuzhihanliang_1}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -672,7 +672,7 @@
 							</td>
 							<td class="zw-td" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 43.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.kuangwuzhihanliang_2" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{kuangwuzhihanliang_2}}</p>
 								</div>
 							</td>
 							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 43.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -702,7 +702,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.8px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.kuangwuzhihanliang_pingjunzhi" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{kuangwuzhihanliang_pingjunzhi}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -744,7 +744,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.8px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.zazhizongliang_1" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{zazhizongliang_1}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -828,7 +828,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="2" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 43.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.buwanshanlihanliang_1" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{buwanshanlihanliang_1}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -838,7 +838,7 @@
 							</td>
 							<td class="zw-td" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 43.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.buwanshanlihanliang_2" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{buwanshanlihanliang_2}}</p>
 								</div>
 							</td>
 							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 43.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -868,7 +868,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="2" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 27.2px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-model.number="formdatas.buwanshanlihanliang_pingjunzhi_1" /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{buwanshanlihanliang_pingjunzhi_1}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -878,7 +878,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="1" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 27.2px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text" v-model.number="formdatas.buwanshanlihanliang_pingjunzhi_2" /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{buwanshanlihanliang_pingjunzhi_2}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -957,7 +957,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="2" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 44.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.shengmeilihanliang_1" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{shengmeilihanliang_1}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -967,7 +967,7 @@
 							</td>
 							<td class="zw-td" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 44.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.shengmeilihanliang_2" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{shengmeilihanliang_2}}</p>
 								</div>
 							</td>
 							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 44.6667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -997,7 +997,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.8px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model.number="formdatas.shengmeilihanliang_pingjunzhi" class="check" type="text"  /></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{shengmeilihanliang_pingjunzhi}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -1095,6 +1095,158 @@ export default {
 //		var pingjunzhi = (this.formdatas.koh_rongyeyongliang_1-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_1*(100-this.formdatas.shiyangzhiliang_1))*100;
 //		return this.jsdjg.pingjunzhi = pingjunzhi.toFixed(1);
 	},
+	dayangzazhihanliang_1(){
+		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+		if(!isNaN(dayangzazhihanliang_1)){
+			return this.jsdjg.dayangzazhihanliang_1 = dayangzazhihanliang_1.toFixed(1);		
+		}
+		return this.jsdjg.dayangzazhihanliang_1='';
+	},
+	dayangzazhihanliang_2(){
+		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+		if(!isNaN(dayangzazhihanliang_2)){
+			return this.jsdjg.dayangzazhihanliang_2 = dayangzazhihanliang_2.toFixed(1);		
+		}
+		return this.jsdjg.dayangzazhihanliang_2='';
+	},
+	dayangzazhihanliang_pingjunzhi(){
+		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+		var dayangzazhihanliang_pingjunzhi=(dayangzazhihanliang_1+dayangzazhihanliang_2)/2
+		if(!isNaN(dayangzazhihanliang_pingjunzhi)){
+			return this.jsdjg.dayangzazhihanliang_pingjunzhi = dayangzazhihanliang_pingjunzhi.toFixed(1);		
+		}
+		return this.jsdjg.dayangzazhihanliang_pingjunzhi='';
+	},
+	xiaoyangzazhihanliang_1(){
+		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+		var xiaoyangzazhihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.xiaoyangzazhizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+		if(!isNaN(xiaoyangzazhihanliang_1)){
+			return this.jsdjg.xiaoyangzazhihanliang_1 = xiaoyangzazhihanliang_1.toFixed(1);		
+		}
+		return this.jsdjg.xiaoyangzazhihanliang_1='';
+	},
+	xiaoyangzazhihanliang_2(){
+		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+		var xiaoyangzazhihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.xiaoyangzazhizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
+		if(!isNaN(xiaoyangzazhihanliang_2)){
+			return this.jsdjg.xiaoyangzazhihanliang_2 = xiaoyangzazhihanliang_2.toFixed(1);		
+		}
+		return this.jsdjg.xiaoyangzazhihanliang_2='';
+	},
+	xiaoyangzazhihanliang_pingjunzhi(){
+		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+		var xiaoyangzazhihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.xiaoyangzazhizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+		var xiaoyangzazhihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.xiaoyangzazhizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
+		var xiaoyangzazhihanliang_pingjunzhi=(xiaoyangzazhihanliang_1+xiaoyangzazhihanliang_2)/2
+		if(!isNaN(xiaoyangzazhihanliang_pingjunzhi)){
+			return this.jsdjg.xiaoyangzazhihanliang_pingjunzhi = xiaoyangzazhihanliang_pingjunzhi.toFixed(1);		
+		}
+		return this.jsdjg.xiaoyangzazhihanliang_pingjunzhi='';
+	},
+	kuangwuzhihanliang_1(){
+		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+		var kuangwuzhihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.kuangwuzhizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+		if(!isNaN(kuangwuzhihanliang_1)){
+			return this.jsdjg.kuangwuzhihanliang_1 = kuangwuzhihanliang_1.toFixed(1);		
+		}
+		return this.jsdjg.kuangwuzhihanliang_1='';
+	},
+	kuangwuzhihanliang_2(){
+		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+		var kuangwuzhihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.kuangwuzhizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
+		if(!isNaN(kuangwuzhihanliang_2)){
+			return this.jsdjg.kuangwuzhihanliang_2 = kuangwuzhihanliang_2.toFixed(1);		
+		}
+		return this.jsdjg.kuangwuzhihanliang_2='';
+	},
+	kuangwuzhihanliang_pingjunzhi(){
+		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+		var kuangwuzhihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.kuangwuzhizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+		var kuangwuzhihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.kuangwuzhizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
+		var kuangwuzhihanliang_pingjunzhi=(kuangwuzhihanliang_1+kuangwuzhihanliang_2)/2
+		if(!isNaN(kuangwuzhihanliang_pingjunzhi)){
+			return this.jsdjg.kuangwuzhihanliang_pingjunzhi = kuangwuzhihanliang_pingjunzhi.toFixed(1);		
+		}
+		return this.jsdjg.kuangwuzhihanliang_pingjunzhi='';
+	},
+	zazhizongliang_1(){
+		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+		var xiaoyangzazhihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.xiaoyangzazhizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+		var zazhizongliang_1=dayangzazhihanliang_1+xiaoyangzazhihanliang_1
+		if(!isNaN(zazhizongliang_1)){
+			return this.jsdjg.zazhizongliang_1 = zazhizongliang_1.toFixed(1);		
+		}
+		return this.jsdjg.zazhizongliang_1='';
+	},
+	buwanshanlihanliang_1(){
+		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+		var buwanshanlihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.buwanshanlizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+		if(!isNaN(buwanshanlihanliang_1)){
+			return this.jsdjg.buwanshanlihanliang_1 = buwanshanlihanliang_1.toFixed(1);		
+		}
+		return this.jsdjg.buwanshanlihanliang_1='';
+	},
+	buwanshanlihanliang_2(){
+		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+		var buwanshanlihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.buwanshanlizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
+		if(!isNaN(buwanshanlihanliang_2)){
+			return this.jsdjg.buwanshanlihanliang_2 = buwanshanlihanliang_2.toFixed(1);		
+		}
+		return this.jsdjg.buwanshanlihanliang_2='';
+	},
+	buwanshanlihanliang_pingjunzhi_1(){
+		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+		var buwanshanlihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.buwanshanlizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+		var buwanshanlihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.buwanshanlizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
+		var buwanshanlihanliang_pingjunzhi_1=(buwanshanlihanliang_1+buwanshanlihanliang_2)/2;
+		if(!isNaN(buwanshanlihanliang_pingjunzhi_1)){
+			return this.jsdjg.buwanshanlihanliang_pingjunzhi_1 = buwanshanlihanliang_pingjunzhi_1.toFixed(1);		
+		}
+		return this.jsdjg.buwanshanlihanliang_pingjunzhi_1='';
+	},
+	buwanshanlihanliang_pingjunzhi_2(){
+		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+		var buwanshanlihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.buwanshanlizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+		var buwanshanlihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.buwanshanlizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
+		var buwanshanlihanliang_pingjunzhi_2=(buwanshanlihanliang_1+buwanshanlihanliang_2)/2;
+		if(!isNaN(buwanshanlihanliang_pingjunzhi_2)){
+			return this.jsdjg.buwanshanlihanliang_pingjunzhi_2 = buwanshanlihanliang_pingjunzhi_2.toFixed(1);		
+		}
+		return this.jsdjg.buwanshanlihanliang_pingjunzhi_2='';
+	},
+	shengmeilihanliang_1(){
+		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+		var shengmeilihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.shengmeilizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+		if(!isNaN(shengmeilihanliang_1)){
+			return this.jsdjg.shengmeilihanliang_1 = shengmeilihanliang_1.toFixed(1);		
+		}
+		return this.jsdjg.shengmeilihanliang_1='';
+	},
+	shengmeilihanliang_2(){
+		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+		var shengmeilihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.shengmeilizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
+		if(!isNaN(shengmeilihanliang_2)){
+			return this.jsdjg.shengmeilihanliang_2 = shengmeilihanliang_2.toFixed(1);		
+		}
+		return this.jsdjg.shengmeilihanliang_2='';
+	},
+	shengmeilihanliang_pingjunzhi(){
+		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+		var shengmeilihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.shengmeilizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+		var shengmeilihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.shengmeilizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
+		var shengmeilihanliang_pingjunzhi=(shengmeilihanliang_1+shengmeilihanliang_2)/2;
+		if(!isNaN(shengmeilihanliang_pingjunzhi)){
+			return this.jsdjg.shengmeilihanliang_pingjunzhi = shengmeilihanliang_pingjunzhi.toFixed(1);		
+		}
+		return this.jsdjg.shengmeilihanliang_pingjunzhi='';
+	},
+	
     codeUrl(){
     	return this.apiRoot +'/grain/upload/smaBarcode/'+this.formdatas.smallSamplePic
     }
@@ -1115,7 +1267,7 @@ export default {
 	submit(){	
 		for(var key in this.formdatas){
 			if(!this.formdatas[key]){
-				if(!this.formdatas[key]==0){
+				if(this.formdatas[key]!==0){
 					this.isEmpty=true;
 					break					
 				}else{

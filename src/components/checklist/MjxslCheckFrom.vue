@@ -629,7 +629,7 @@ export default {
 	submit(){	
 		for(var key in this.formdatas){
 			if(!this.formdatas[key]){
-				if(!this.formdatas[key]==0){
+				if(this.formdatas[key]!==0){
 					this.isEmpty=true;
 					break					
 				}else{
