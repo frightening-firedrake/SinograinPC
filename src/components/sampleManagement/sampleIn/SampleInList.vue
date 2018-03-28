@@ -31,8 +31,12 @@ import SinograinModal from '@/components/common/action/Modal.vue';
 import SinograinMessage from "@/components/common/action/Message"
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
+
+//这里是打印控件
+import {getLodop} from 'static/lodop/LodopFuncs'
+let LODOP
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 
 
@@ -62,6 +66,7 @@ export default {
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
     this.$root.eventHub.$off("editlistitem")
+    this.$root.eventHub.$off("printlistitem")
 //	监听列表删除事件
     this.$root.eventHub.$on('delelistitem',function(rowid,list){
     	this.tabledatas=this.tabledatas.filter(function(item){
@@ -81,6 +86,10 @@ export default {
 //		console.log(id)
 		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInEdit',query:{id:id}})
 		
+  	}.bind(this));
+  	//	监听列表点击打印事件
+  	this.$root.eventHub.$on("printlistitem",function(code){  
+		this.printitem(code);	
   	}.bind(this));
   },
   destroy(){
@@ -146,6 +155,7 @@ export default {
 		          	message: '该样品已成功入库！！！',
 		          	type: 'success'
 		        });
+		        this.printCodeBar(this.modal.formdatas[0].value)
 			}else{
 				this.$notify.error({
 		          	title: '入库失败',
@@ -331,6 +341,22 @@ export default {
   		var date1=new Date()
   		return date1.getFullYear()+'-'+(date1.getMonth()+1)+'-'+date1.getDate()
   	},
+  	printitem(code){
+		this.messageShow=true;
+		this.messages.type="loading";
+		this.printCodeBar(code)
+	},
+  	printCodeBar(code){
+		LODOP = getLodop();
+
+		LODOP.PRINT_INIT("打印条码");
+		LODOP.SET_PRINTER_INDEX("Godex G530");  
+		LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
+		LODOP.ADD_PRINT_BARCODE(3,30,232,115,'Codabar',code);
+//  			LODOP.PREVIEW(); 
+		LODOP.PRINT(); 
+
+	},
   },
   data() {
     return {
@@ -383,7 +409,7 @@ export default {
 	  		},
 	  	],
 	  	addprop:true,
-	  	submitText:'入库',
+	  	submitText:'入库打印条码',
 	  },
       breadcrumb:{
       	search:true,   
@@ -410,7 +436,7 @@ export default {
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：此页面只展示本库信息!',
+        title: '温馨提示：入库前请准备好条码打印机，以便于更换检验编号!',
         type: 'info'
       }],
 //    表格数据
@@ -474,9 +500,11 @@ export default {
       	number:false,
       	view:false,
       	edit:true,
+      	show:true,
       	dele:false,
       	manuscript:false,
       	safetyReport:false,
+      	printSampleIn:true,
       },
       messageShow:false,
 	  messages:{
@@ -491,6 +519,11 @@ export default {
 	  		messageTittle:'该样品已入库',
 	  		messageText:'可点击编辑按钮修改入库信息！',
 	  		buttonText:'编辑',
+	  	},
+	  	loading:{
+	  		icon:'el-icon-printer',
+	  		messageTittle:'正在打印中...',
+	  		messageText:'请您耐心等待，正在打印中...',
 	  	},
 	  },
     }

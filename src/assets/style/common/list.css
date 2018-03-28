@@ -38,6 +38,7 @@
     color: #666666;
     font-size: 0.16rem;
     font-weight:normal;
+    cursor:pointer;
 }
 /*表格左右边颜色*/
 .el-main .list .el-table__body-wrapper,.el-main .list .el-table__header-wrapper{
@@ -111,7 +112,7 @@
     color:#1adced;
 }
 .el-main .list .el-table__body-wrapper td .cell button.print{
-    color:rgba(2, 148, 65, 0.6);
+    color:#ffe7b8;
 }
 .el-main .list.le .el-table__body-wrapper td .cell button.edit{
     color:#58b481;

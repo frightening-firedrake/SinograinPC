@@ -160,10 +160,12 @@ export default {
             }
         },
         cancel(formname) {
-            console.log('取消!');
+            this.$emit('getCheckedList',this.checkedList)
+        	
+//          console.log('取消!');
 //			this.$refs[formname].resetFields();
 //          this.$emit('btn_close')
-			this.$router.go(-1)
+//			this.$router.go(-1)
 //			window.history.go(-1)
         },
 

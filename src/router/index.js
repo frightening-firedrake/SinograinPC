@@ -59,8 +59,7 @@ import ExaminationLibrary from '@/components/sampling/list/ExaminationLibrary.vu
 
 Vue.use(Router)
 
-export default new Router({
-  routes: [
+const routes= [
     {
       path: '/',
       redirect: '/login',
@@ -421,4 +420,9 @@ export default new Router({
     },
     
   ]
-})
+const router = new Router({routes})
+//router.beforeEach((to, from, next) => {
+//console.log(from)
+//next()
+//})
+export default router ;

@@ -162,6 +162,9 @@
 				      <template v-if="actions.print">
 				          <button class="print" @click.stop="handlePrint(scope.$index, scope.row,scope)">打印小样条码</button>
 				      </template>
+				       <template v-if="actions.printSampleIn">
+				          <button class="print" @click.stop="handlePrintSampleIn(scope.$index, scope.row,scope)">打印检验条码</button>
+				      </template>
           </template>
       </el-table-column>
       
@@ -275,6 +278,9 @@ export default {
 		},
 		handlePrint(index, row,scope) {
 			this.$root.eventHub.$emit('printlistitem',row.smallSampleNum)					
+		},
+		handlePrintSampleIn(index, row,scope) {
+			this.$root.eventHub.$emit('printlistitem',row.sampleNum)					
 		},
 	  emptyCreate(){
 	  	this.$emit('emptyCreate');
