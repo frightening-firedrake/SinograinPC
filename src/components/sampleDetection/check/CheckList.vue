@@ -150,6 +150,8 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
+				page:page,
+				rows:this.page.size,
 			   params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
@@ -181,7 +183,7 @@ export default {
 			data: {
 			    listName: this.list,
 			    page:page,
-			    pageSize:this.page.size,
+			    rows:this.page.size,
 			    params:JSON.stringify(params),
 			}
 	    }).then(function (response) {
