@@ -97,7 +97,7 @@
 .handover_view .hand_view_tab .hand_view_tabbody .el-col-16,.handover_view .hand_view_tab .hand_view_tabbody .el-col-20{
     border-left:1px solid #dfdfdf;
     text-align:center;
-    background-color:white;
+    /*background-color:white;*/
 }
 .handover_view .hand_view_tab .hand_view_tabbody.date .el-col-4{
     background-color:transparent;

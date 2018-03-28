@@ -421,7 +421,12 @@ export default {
         label:"被查库点",
 //      sort:true,
       },
-      
+      {
+        id: 3,
+        prop:'position',
+        label:"货位号",
+//      sort:true,
+      },
       {
         id: 4,
         prop:'sort',
@@ -453,7 +458,7 @@ export default {
 //      sort:true,
       },
       {
-        id: 3,
+        id: 9,
         prop:'barnTimes',
         label:"入库时间",
 //      width:150,

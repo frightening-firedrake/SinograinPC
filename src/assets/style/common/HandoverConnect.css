@@ -163,10 +163,11 @@
    
 }
 .connect_form .project_details  .classify .classify_col{
-	/*width:100%;*/
+	width:50%;
+	float:left;
 	display: block;
     border-bottom:1px solid #dfdfdf;
-    padding-left:0.81rem;
+    padding-left:0.4rem;
     margin:0;
 }
 .connect_form .project_details  .classify .el-checkbox__label{

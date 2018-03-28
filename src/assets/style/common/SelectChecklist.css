@@ -212,6 +212,7 @@
 }
 .SelectChecklist .order{
 	border-bottom: 1px solid #dfdfdf;
+	background-color:#fbfbfb;
 }
 .SelectChecklist .sampleNumRange .el-input__inner{
 	border:none;

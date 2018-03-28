@@ -109,7 +109,7 @@ export default {
     },
     computed:{
     	listready(){
-    		if(this.checkList.length){
+    		if(this.checkList.length&&this.$route.params.formdatas){
     			var checkNums=this.$route.params.formdatas.items.map((val)=>{
     				return val.sampleNum?val.sampleNum:val;
     			})
@@ -130,7 +130,8 @@ export default {
     	checkedListFilter(){
 
 			return this.checkList.filter((item,index)=>{
-				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
+//				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
+				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 			})
     	},
 

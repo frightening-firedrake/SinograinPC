@@ -27,7 +27,7 @@
               </el-col>
             </el-col>
           </el-row>
-          <el-row style="" class="hand_view_tabbody">
+          <el-row style="background-color:#fbfbfb;" class="hand_view_tabbody">
             <el-col style="" :span="6">
               <el-col style="" :span="8">
                 <span>序号</span>
@@ -134,13 +134,13 @@
               	
               	</el-col>
               	<el-col style="" :span="10">
-              			样品管理员：
+              			样品管理员：{{userName}}
               	</el-col>
               	<el-col style="" :span="2">
               	
               	</el-col>
               	<el-col style="" :span="10">
-              			时间：
+              			时间：{{new Date()|data}}
               	</el-col>
                 <!--<span> 样品管理员：{{formdatas.gly}} 时间： {{formdatas.time}}</span>-->
               </el-col>
@@ -257,7 +257,7 @@
 .handover_view .hand_view_tab .hand_view_tabbody .el-col-16,.handover_view .hand_view_tab .hand_view_tabbody .el-col-20{
     border-left:1px solid #dfdfdf;
     text-align:center;
-    background-color:white;
+    /*background-color:white;*/
 }
 .handover_view .hand_view_tab .hand_view_tabbody.date .el-col-4{
     background-color:transparent;
@@ -322,7 +322,7 @@ export default {
   },
   computed: {
     ...mapState(["modal_id_number", "viewdata", "editdata", "aultdata", "messions", "mask"]),
-    ...mapGetters(["modal_id"]),
+    ...mapGetters(["userName"]),
     testItemListadd(){
     	var length=4-this.formdatas.testItemList.length%4;
     	var item={checkNum:undefined}
@@ -445,13 +445,27 @@ export default {
   	},
   	findCheckeds(str){
 	  	var indexs=str.split(',');
-	  	var checkList=["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值(面筋吸水量)","品尝评分","卫生","加工品质"]
+	  	indexs.sort((a,b)=>{return a-b;});
+	  	var checkList=["不完善颗粒","杂质","生霉粒","水分","硬度","脂肪酸值(面筋吸水量)","品尝评分","卫生","加工品质"]
 	  	var res=[];
 	  	indexs.forEach((item)=>{
 	  		res.push(checkList[item-1])
 	  	})
 	  	return res.join('，')
 	  },
+  },
+  filters: {
+   data:function (input) {
+       var d = new Date(input);
+       var year = d.getFullYear();
+       var month = d.getMonth() + 1;
+       var day = d.getDate() <10 ? '0' + d.getDate() : '' + d.getDate();
+       var hour = d.getHours();
+       var minutes = d.getMinutes();
+       var seconds = d.getSeconds();
+       return  year+ '-' + month + '-' + day;
+//     return  year+ '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
+   }
   },
   data() {
     return {

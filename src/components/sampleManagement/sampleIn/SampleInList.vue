@@ -46,7 +46,7 @@ export default {
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
-	...mapGetters(["modal_id"]),
+	...mapGetters(["userName"]),
 	tabledatasFilter(){
 
 		if(this.filterStatus=="全部"){
@@ -60,6 +60,7 @@ export default {
   },
   created(){
   	console.log(this.$route.query)
+  	this.modal.formdatas[3].value=this.userName;
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 //	移除监听事件
@@ -155,7 +156,7 @@ export default {
 		          	message: '该样品已成功入库！！！',
 		          	type: 'success'
 		        });
-		        this.printCodeBar(this.modal.formdatas[0].value)
+//		        this.printCodeBar(this.modal.formdatas[0].value)
 			}else{
 				this.$notify.error({
 		          	title: '入库失败',
@@ -405,11 +406,12 @@ export default {
 	  		{
 	  			label:"入库签名:",
 	  			model:"autograph",
-				value: ''
+				value: "",
+	  			disabled:true,
 	  		},
 	  	],
 	  	addprop:true,
-	  	submitText:'入库打印条码',
+	  	submitText:'入库',
 	  },
       breadcrumb:{
       	search:true,   
@@ -499,12 +501,12 @@ export default {
       	selection:false,
       	number:false,
       	view:false,
-      	edit:true,
-      	show:true,
+//    	edit:true,
+//    	show:true,
       	dele:false,
       	manuscript:false,
       	safetyReport:false,
-      	printSampleIn:true,
+//    	printSampleIn:true,
       },
       messageShow:false,
 	  messages:{
