@@ -149,6 +149,7 @@ export default {
     			sampleNum:this.$route.params.code,				
 			},
 	   }).then(function (response) {	    	
+		//    console.log(response)
 //	    	返回打印需要的条码格式待定
 //			假设是图片吧临时的
 //			this.imgsrc=response.data
@@ -182,8 +183,9 @@ export default {
 				params:JSON.stringify(params)				
 			},
 	   }).then(function (response) {
-	   	 this.isPrint=3;
-		 this.printBarAll(response.data);	
+		   	console.log(response)
+			this.isPrint=3;				
+			this.printBarAll(response.data);
 //	    	返回打印需要的条码格式待定
 //			假设是图片吧临时的
 //			this.imgsrc=response.data
@@ -201,15 +203,19 @@ export default {
   	},
   	printBarAll(str){
   		var arr=str.split(',');
-  		LODOP = getLodop();
-  		arr.forEach((val)=>{  			
-  			LODOP.PRINT_INIT("打印条码");
-  			LODOP.SET_PRINTER_INDEX("Godex G530");  
-  			LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
-  			LODOP.ADD_PRINT_BARCODE(3,30,232,115,'Codabar',val);
-//  			LODOP.PREVIEW(); 
-			LODOP.PRINT(); 
-  		})
+		arr.sort((a,b)=>{
+			return a-b
+		})
+		console.log(arr)
+//   		LODOP = getLodop();
+//   		arr.forEach((val)=>{  			
+//   			LODOP.PRINT_INIT("打印条码");
+//   			LODOP.SET_PRINTER_INDEX("Godex G530");  
+//   			LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
+//   			LODOP.ADD_PRINT_BARCODE(3,30,232,115,'Codabar',val);
+// //  			LODOP.PREVIEW(); 
+// 			LODOP.PRINT(); 
+//   		})
   	},
 	messageclick(type){
   		if(type=="success"){

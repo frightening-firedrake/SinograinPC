@@ -250,13 +250,13 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				sampleNum:code,
+				sampleNo:code,
 			}
 	    }).then(function (response) {
 			console.log(response)
 			if(response.data.checkeds) {
 				var path=this.$route.name+'/打印条码'
-				this.$router.push({name: path,params: {code:code,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState}})
+				this.$router.push({name: path,params: {code:response.data.sampleNum,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState}})
 			}else{
 
 				this.$notify.error({
