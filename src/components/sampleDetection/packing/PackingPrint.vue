@@ -276,7 +276,7 @@ export default {
 		buttonText:false,
 	},
 	checkeds:this.$route.params.checkeds,
-	checkAllList:["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生","加工品质"],
+	checkAllList:["不完善颗粒","杂质","生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生","加工品质"],
 	  messageShow:false,
 	  messages:{
 	  	type:'error',

@@ -75,7 +75,7 @@ export default {
   				id:this.$route.query.id
 			}
 	    }).then(function (response) {
-	    	this.formdatas.checkList=response.data.checkeds.split(',');//检测项
+	    	this.formdatas.checkList=response.data.checkeds.split(',').sort();//检测项
 			this.formdatas.form.name=response.data.name;//交接单名字
 			this.formdatas.form.manager=response.data.sampleAdmin;//管理员
 			this.formdatas.form.remarks=response.data.remark;//备注
@@ -94,7 +94,7 @@ export default {
 //	领取方法
   	handover(){
 		var params = {};
-		params.checkeds = this.formdatas.checkList.join(',');
+		params.checkeds = this.formdatas.checkList.sort().join(',');
 		params.name = this.formdatas.form.name;
 		params.remark = this.formdatas.form.remarks;
 		params.receiptor =this.receiptor;

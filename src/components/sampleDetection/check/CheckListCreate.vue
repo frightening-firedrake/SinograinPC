@@ -115,8 +115,10 @@
 	width:150px;
 	/*height:130px;*/
 	position:absolute;
-	top:100px;
-	left:116px;
+	/*top:100px;
+	left:116px;*/
+	top:0;
+	right:0;
 }
 .zw-header p{
 	display: inline-block;
@@ -242,36 +244,36 @@ export default {
 //	设置表单
 	setform(){
 		if(this.$route.query.sort=="小麦"){
-			if(this.$route.query.checkPoint==1){
+			if(this.$route.query.checkPoint==1||this.$route.query.checkPoint==2||this.$route.query.checkPoint==3){
 				this.checktype='bwsl';
 
-			}else if(this.$route.query.checkPoint==2){
+			}else if(this.$route.query.checkPoint==4){
 				this.checktype='sfcd';
 
-			}else if(this.$route.query.checkPoint==4){
+			}else if(this.$route.query.checkPoint==6){
 				this.checktype='mjxs';
 
-			}else if(this.$route.query.checkPoint==5){
+			}else if(this.$route.query.checkPoint==7){
 				this.checktype='mtpc';
 
-			}else if(this.$route.query.checkPoint==6){
+			}else if(this.$route.query.checkPoint==8){
 				this.checktype='dscd';
 
 			}			
 		}else if(this.$route.query.sort=="玉米"){
-			if(this.$route.query.checkPoint==1){
+			if(this.$route.query.checkPoint==1||this.$route.query.checkPoint==2||this.$route.query.checkPoint==3){
 				this.checktype='bwsl';
 
-			}else if(this.$route.query.checkPoint==2){
+			}else if(this.$route.query.checkPoint==4){
 				this.checktype='sfcd';
 
-			}else if(this.$route.query.checkPoint==4){
+			}else if(this.$route.query.checkPoint==6){
 				this.checktype='zfsz';
 
-			}else if(this.$route.query.checkPoint==5){
+			}else if(this.$route.query.checkPoint==7){
 				this.checktype='ympc';
 
-			}else if(this.$route.query.checkPoint==6){
+			}else if(this.$route.query.checkPoint==8){
 				this.checktype='dscd';
 
 			}	

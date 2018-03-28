@@ -114,8 +114,10 @@
 	width:150px;
 	/*height:130px;*/
 	position:absolute;
-	top:100px;
-	left:116px;
+	/*top:100px;
+	left:116px;*/
+	top:0;
+	right:0;
 }
 .zw-header p{
 	display: inline-block;
@@ -244,36 +246,36 @@ export default {
 //	设置表单
 	setform(data){
 		if(data.sort=="小麦"){
-			if(data.checkPoint==1){
+			if(data.checkPoint==1||data.checkPoint==2||data.checkPoint==3){
 				this.checktype='bwsl';
 
-			}else if(data.checkPoint==2){
+			}else if(data.checkPoint==4){
 				this.checktype='sfcd';
 
-			}else if(data.checkPoint==4){
+			}else if(data.checkPoint==5){
 				this.checktype='mjxs';
 
-			}else if(data.checkPoint==5){
+			}else if(data.checkPoint==7){
 				this.checktype='mtpc';
 
-			}else if(data.checkPoint==6){
+			}else if(data.checkPoint==8){
 				this.checktype='dscd';
 
 			}			
 		}else if(data.sort=="玉米"){
-			if(data.checkPoint==1){
+			if(data.checkPoint==1||data.checkPoint==2||data.checkPoint==3){
 				this.checktype='bwsl';
 
-			}else if(data.checkPoint==2){
+			}else if(data.checkPoint==4){
 				this.checktype='sfcd';
 
-			}else if(data.checkPoint==4){
+			}else if(data.checkPoint==6){
 				this.checktype='zfsz';
 
-			}else if(data.checkPoint==5){
+			}else if(data.checkPoint==7){
 				this.checktype='ympc';
 
-			}else if(data.checkPoint==6){
+			}else if(data.checkPoint==8){
 				this.checktype='dscd';
 
 			}	
