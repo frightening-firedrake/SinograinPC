@@ -1,5 +1,5 @@
 <template>
-	<el-container class="Sinograinrelative" style="min-height: 100%;">
+	<el-container id="father" class="Sinograinrelative" style="min-height: 100%;">
 		<el-header>
 			<Sinograin-header></Sinograin-header>
 		</el-header>

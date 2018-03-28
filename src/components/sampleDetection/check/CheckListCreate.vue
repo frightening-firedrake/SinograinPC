@@ -1,5 +1,5 @@
 <template>
-    <div class='listpagewrap'>
+    <div class='listpagewrap' id='listpagewrap'>
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
   	  <!--标题-->
@@ -367,14 +367,14 @@ export default {
 	},
 	printhtml(){
 		let subOutputRankPrint = document.getElementById('print');
-      	console.log(subOutputRankPrint.innerHTML);
-      	let newContent = subOutputRankPrint.innerHTML;
-      	let oldContent = document.body.innerHTML;
-      	document.body.innerHTML = newContent;
-      	print.portrait   =  false  
+		let father = document.getElementById('father');
+		let listpagewrap = document.getElementById('listpagewrap');
+		document.body.insertBefore(subOutputRankPrint,father)
+		father.style.display="none";
+      	print.portrait   =  true;  
       	window.print();
-     	window.location.reload();
-     	document.body.innerHTML = oldContent;
+      	listpagewrap.appendChild(subOutputRankPrint)
+		father.style.display="block";
      	return false;
 	},
 	
