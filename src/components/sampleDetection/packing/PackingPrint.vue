@@ -183,7 +183,7 @@ export default {
 				params:JSON.stringify(params)				
 			},
 	   }).then(function (response) {
-		   	console.log(response)
+		   	console.log(response,this.isPrint)
 			this.isPrint=3;				
 			this.printBarAll(response.data);
 //	    	返回打印需要的条码格式待定
@@ -203,10 +203,7 @@ export default {
   	},
   	printBarAll(str){
   		var arr=str.split(',');
-		arr.sort((a,b)=>{
-			return a-b
-		})
-		console.log(arr)
+		arr.sort()
 //   		LODOP = getLodop();
 //   		arr.forEach((val)=>{  			
 //   			LODOP.PRINT_INIT("打印条码");
