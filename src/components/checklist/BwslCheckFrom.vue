@@ -204,17 +204,17 @@
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="jsdjg.yiqishebei_bianhao_1" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_1:''}}</p>
+									<p style="text-align:center; margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.yiqishebei_bianhao_1" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_1:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="jsdjg.yiqishebei_bianhao_2" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_2:''}}</p>
+									<p style="text-align:center; margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.yiqishebei_bianhao_2" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_2:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="jsdjg.yiqishebei_bianhao_3" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_3:''}}</p>
+									<p style="text-align:center; margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.yiqishebei_bianhao_3" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_3:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -1265,23 +1265,23 @@ export default {
   },
   methods: {
 	submit(){	
-		for(var key in this.formdatas){
-			if(!this.formdatas[key]){
-				if(this.formdatas[key]!==0){
-					this.isEmpty=true;
-					break					
-				}else{
-					this.isEmpty=false;
-				}
-			}else{
-				this.isEmpty=false;
-			}
-		}
-		if(this.isEmpty){			
-			this.$alert('请完善表内信息','提示信息',{});
-		}else{			
+//		for(var key in this.formdatas){
+//			if(!this.formdatas[key]){
+//				if(this.formdatas[key]!==0){
+//					this.isEmpty=true;
+//					break					
+//				}else{
+//					this.isEmpty=false;
+//				}
+//			}else{
+//				this.isEmpty=false;
+//			}
+//		}
+//		if(this.isEmpty){			
+//			this.$alert('请完善表内信息','提示信息',{});
+//		}else{			
 			this.$emit('submit',this.jsdjg)
-		}
+//		}
 	}
 
   },
@@ -1300,9 +1300,9 @@ export default {
       jianyanbianhao_1:'1',
       jianyanbianhao_2:'2',
       jsdjg:{
-		yiqishebei_bianhao_1:'',
-      	yiqishebei_bianhao_2:'',
-      	yiqishebei_bianhao_3:'',
+//		yiqishebei_bianhao_1:'',
+//    	yiqishebei_bianhao_2:'',
+//    	yiqishebei_bianhao_3:'',
       }
     }
   },

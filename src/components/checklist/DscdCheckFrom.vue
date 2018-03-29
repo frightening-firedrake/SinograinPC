@@ -163,8 +163,8 @@
 							<td class="zw-td" rowspan="1" colspan="10" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 33.4px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
 									
-									<p style="margin: 0px 0px 0px 0.0729167in; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-bottom: 0px; border-bottom: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.jiancefangfa" type="radio" class="check_checkbox" disabled='readonly'  name="jcff" value="LS/T6113-2015" />LS/T6113-2015 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input v-model="formdatas.jiancefangfa" type="radio" class="check_checkbox" disabled='readonly'  name="jcff" value="LS/T6111-2015" />LS/T6111-2015</span></p>
-									<p style="margin: 0px 0px 0px 0.0729167in; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-top: 0px; border-top: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.jiancefangfa" type="radio" class="check_checkbox" disabled='readonly'  name="jcff" value="LS/T6112-2015" />LS/T6112-2015 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input v-model="formdatas.jiancefangfa" type="radio" class="check_checkbox" disabled='readonly'  name="jcff" value="LS/T6114-2015" />LS/T6114-2015 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+									<p style="margin: 0px 0px 0px 0.0729167in; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-bottom: 0px; border-bottom: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.jiancefangfa" type="radio" class="check_checkbox" :disabled='readonly'  name="jcff" value="LS/T6113-2015" />LS/T6113-2015 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input v-model="formdatas.jiancefangfa" type="radio" class="check_checkbox" :disabled='readonly'  name="jcff" value="LS/T6111-2015" />LS/T6111-2015</span></p>
+									<p style="margin: 0px 0px 0px 0.0729167in; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0); padding-top: 0px; border-top: 0px;"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.jiancefangfa" type="radio" class="check_checkbox" :disabled='readonly'  name="jcff" value="LS/T6112-2015" />LS/T6112-2015 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input v-model="formdatas.jiancefangfa" type="radio" class="check_checkbox" :disabled='readonly'  name="jcff" value="LS/T6114-2015" />LS/T6114-2015 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
@@ -226,7 +226,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="2" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 32.5333px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.yiqishebei_mingcheng_1" type="checkbox" class="check_checkbox" disabled='readonly'  name="yqsb" true-value="2" false-value="1" />锤式旋风磨</span></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.yiqishebei_mingcheng_1" type="checkbox" class="check_checkbox" :disabled='readonly'  name="yqsb" true-value="2" false-value="1" />锤式旋风磨</span></p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
@@ -236,7 +236,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="6" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 32.5333px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.yiqishebei_mingcheng_2" type="checkbox" class="check_checkbox" disabled='readonly'  name="yqsb" true-value="2" false-value="1" />真菌毒素快速检测系统</span></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.yiqishebei_mingcheng_2" type="checkbox" class="check_checkbox" :disabled='readonly'  name="yqsb" true-value="2" false-value="1" />真菌毒素快速检测系统</span></p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
@@ -288,7 +288,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="2" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 32.5333px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="jsdjg.yiqishebei_bianhao_1" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_1:''}}</p>
+									<p style="text-align:center; margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.yiqishebei_bianhao_1" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_1:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
@@ -298,7 +298,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="6" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 32.5333px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="jsdjg.yiqishebei_bianhao_2" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_2:''}}</p>
+									<p style="text-align:center; margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.yiqishebei_bianhao_2" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_2:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgb(255, 255, 255);color:rgb(0, 0, 0)">
@@ -1429,8 +1429,8 @@ export default {
       jianyanbianhao_1:'1',
       jianyanbianhao_2:'2',
       jsdjg:{
-		yiqishebei_bianhao_1:'',
-      	yiqishebei_bianhao_2:'',
+//		yiqishebei_bianhao_1:'',
+//    	yiqishebei_bianhao_2:'',
       }
     }
   },
