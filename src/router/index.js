@@ -35,6 +35,7 @@ import PackingList from '@/components/sampleDetection/packing/PackingList.vue'
 import PackingView from '@/components/sampleDetection/packing/PackingView.vue'
 import PackingPrint from '@/components/sampleDetection/packing/PackingPrint.vue'
 import CheckList from '@/components/sampleDetection/check/CheckList.vue'
+import CheckView from '@/components/sampleDetection/check/CheckListView.vue'
 import CheckEdit from '@/components/sampleDetection/check/CheckListEdit.vue'
 import CheckCreate from '@/components/sampleDetection/check/CheckListCreate.vue'
 import TestReportMaker from '@/components/TestReport/TestReportMaker.vue'
@@ -310,9 +311,9 @@ const routes= [
             component:CheckEdit
           },
           {
-            path:"sampleDetection/checkList/checkInput",
-            name:"样品检测/样品检验单/样品检验单录入",
-            component:CheckEdit
+            path:"sampleDetection/checkList/checkView",
+            name:"样品检测/样品检验单/查看样品检验单",
+            component:CheckView
           },
           {
             path:"sampleDetection/checkList/checkCreate",

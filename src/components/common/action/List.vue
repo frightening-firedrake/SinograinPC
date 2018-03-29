@@ -251,7 +251,7 @@ export default {
 		},
 		handleEdit(index, row) {
 //	  	console.log(index,row,this.list);
-		    this.$root.eventHub.$emit('editlistitem',row.id)
+		    this.$root.eventHub.$emit('editlistitem',row.id,row)
 		},
 	
 	  handleDele(index, row) {

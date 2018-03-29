@@ -67,6 +67,7 @@ export default {
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
     this.$root.eventHub.$off("printlistitem")
+    this.$root.eventHub.$off("editlistitem")
 //	监听列表删除事件
     this.$root.eventHub.$on('delelistitem',function(rowid,list){
     	this.tabledatas=this.tabledatas.filter(function(item){
@@ -77,6 +78,14 @@ export default {
     }.bind(this)); 	
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id,row){  
+//		console.log(id)
+//		this.$router.push({path: '/index/sampleDetection/packingList/packingView',query:{libid:id}})
+//		this.$router.push({ path: '/index/sampleDetection/checkList/checkEdit', query: { id: id } })
+		this.$router.push({path: '/index/sampleDetection/checkList/checkView',query: {checkPoint:row.checkPoint,sort:row.sort,smallSamplePic:row.smallSamplePic,smallSampleNum:row.smallSampleNum,id:row.id,}})
+		
+  	}.bind(this));
+//	监听列表点击编辑事件
+  	this.$root.eventHub.$on("editlistitem",function(id,row){  
 //		console.log(id)
 //		this.$router.push({path: '/index/sampleDetection/packingList/packingView',query:{libid:id}})
 //		this.$router.push({ path: '/index/sampleDetection/checkList/checkEdit', query: { id: id } })
@@ -92,6 +101,7 @@ export default {
   	this.$root.eventHub.$off("viewlistitem")
     this.$root.eventHub.$off("printlistitem")
   	this.$root.eventHub.$off('delelistitem')
+  	this.$root.eventHub.$off('editlistitem')
   },
   methods: {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
@@ -401,11 +411,11 @@ export default {
       	selection:false,
       	number:false,
       	view:false,
-      	edit:false,
-      	dele:false,
+      	edit:true,
+//    	dele:false,
 //    	noview:true,
 //    	print:true,
-//    	show:true,
+      	show:true,
       	manuscript:false,
       	safetyReport:false,
       },
