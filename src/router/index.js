@@ -31,6 +31,7 @@ import HandoverListCreateSelect from '@/components/sampleManagement/handover/Han
 import HandoverListView from '@/components/sampleManagement/handover/HandoverListView.vue'
 import HandoverListEdit from '@/components/sampleManagement/handover/HandoverListEdit.vue'
 import HandoverListEditSelect from '@/components/sampleManagement/handover/HandoverListEditSelect.vue'
+import PackingTaskList from '@/components/sampleDetection/packing/PackingTaskList.vue'
 import PackingList from '@/components/sampleDetection/packing/PackingList.vue'
 import PackingView from '@/components/sampleDetection/packing/PackingView.vue'
 import PackingPrint from '@/components/sampleDetection/packing/PackingPrint.vue'
@@ -282,21 +283,26 @@ const routes= [
             path:"sampleDetection",
             name: '样品检测',
             component:PackingList,
-            redirect: 'sampleDetection/packingList',
+            redirect: 'sampleDetection/packingTaskList',
           },
           {
-            path:"sampleDetection/packingList",
-            name:"样品检测/分装小样管理",
+            path:"sampleDetection/packingTaskList",
+            name:"样品检测/分装任务列表",
+            component:PackingTaskList
+          },
+          {
+            path:"sampleDetection/packingTaskList/packingList",
+            name:"样品检测/分装任务列表/分装小样管理",
             component:PackingList
           },
           {
-            path:"sampleDetection/packingList/packingView",
-            name:"样品检测/分装小样管理/查看小样",
+            path:"sampleDetection/packingTaskList/packingList/packingView",
+            name:"样品检测/分装任务列表/分装小样管理/查看小样",
             component:PackingView
           },
           {
-            path:"sampleDetection/packingList/packingPrint",
-            name:"样品检测/分装小样管理/打印条码",
+            path:"sampleDetection/packingTaskList/packingList/packingPrint",
+            name:"样品检测/分装任务列表/分装小样管理/打印条码",
             component:PackingPrint
           },
           

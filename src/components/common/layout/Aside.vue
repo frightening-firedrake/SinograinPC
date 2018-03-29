@@ -235,8 +235,8 @@ export default {
 
 				{
 					icon: 'icon-subcontractor',
-					title: '分装小样管理',
-					linkto: '/index/sampleDetection/packingList',
+					title: '分装任务列表',
+					linkto: '/index/sampleDetection/packingTaskList',
 					level: 2,
 					pid: 9,
 					lid: 10

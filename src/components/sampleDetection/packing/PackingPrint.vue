@@ -60,7 +60,7 @@ export default {
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
 	if(!this.$route.params.code){
-		this.$router.push({name:"样品检测/分装小样管理"})		
+		this.$router.push({name:"样品检测/分装任务列表/分装小样管理"})		
 	}else{
 		
 	}
@@ -179,6 +179,7 @@ export default {
 //  			checked:checked,				
     			// sampleNum:this.$route.params.code,
 				id:this.$route.params.id,
+				taskId:this.$route.params.id,
 				isPrint:this.isPrint,
 				params:JSON.stringify(params)				
 			},
@@ -204,15 +205,15 @@ export default {
   	printBarAll(str){
   		var arr=str.split(',');
 		arr.sort()
-//   		LODOP = getLodop();
-//   		arr.forEach((val)=>{  			
-//   			LODOP.PRINT_INIT("打印条码");
-//   			LODOP.SET_PRINTER_INDEX("Godex G530");  
-//   			LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
-//   			LODOP.ADD_PRINT_BARCODE(3,30,232,115,'Codabar',val);
-// //  			LODOP.PREVIEW(); 
-// 			LODOP.PRINT(); 
-//   		})
+     		LODOP = getLodop();
+     		arr.forEach((val)=>{  			
+     			LODOP.PRINT_INIT("打印条码");
+     			LODOP.SET_PRINTER_INDEX("Godex G530");  
+     			LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
+     			LODOP.ADD_PRINT_BARCODE(3,30,232,115,'Codabar',val);
+   //  			LODOP.PREVIEW(); 
+   			LODOP.PRINT(); 
+     		})
   	},
 	messageclick(type){
   		if(type=="success"){

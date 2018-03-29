@@ -5,7 +5,7 @@
       <!--alert-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" ></list-header>
+      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createPackling="createPackling" ></list-header>
       <!--表格-->
       <sinograin-list class="list" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
@@ -33,9 +33,6 @@ import SinograinMessage from "@/components/common/action/Message"
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
-//这里是打印控件
-import {getLodop} from 'static/lodop/LodopFuncs'
-let LODOP
 //本地测试要用下面import代码
 //import data from '@/util/mock';
 
@@ -60,13 +57,13 @@ export default {
 	}
   },
   created(){
-//	console.log(this.$route.query)
+  	console.log(this.$route.query)
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
-    this.$root.eventHub.$off("printlistitem")
+
 //	监听列表删除事件
     this.$root.eventHub.$on('delelistitem',function(rowid,list){
     	this.tabledatas=this.tabledatas.filter(function(item){
@@ -78,17 +75,14 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampleDetection/packingList/packingView',query:{libid:id}})
+		this.$router.push({path: '/index/sampleDetection/packingTaskList/packingList',query:{id:id}})
 		
   	}.bind(this));
-//	监听列表点击打印事件
-  	this.$root.eventHub.$on("printlistitem",function(code){  
-		this.printitem(code);	
-  	}.bind(this));
+
   },
   destroy(){
   	this.$root.eventHub.$off("viewlistitem")
-    this.$root.eventHub.$off("printlistitem")
+
   	this.$root.eventHub.$off('delelistitem')
   },
   methods: {
@@ -102,9 +96,9 @@ export default {
 //		console.log(data)
 		this.filterStatus=data
 	},
-	createSampling(){
-//		console.log('createSampling');
-//		this.$router.push({path: '/index/sampling/samplingList/samplingListCreate'})
+	createPackling(){
+		this.modalVisible=true;
+
 	},
 	emptyCreate(){
 //		this.scanCode();
@@ -113,19 +107,41 @@ export default {
 	createlib(){
 		this.modalVisible=true;
 	},
-//	扫码新建样品
-	scanCode(){
-		this.messages.type='scaning';
-		this.messageShow=true;
-//		this.$router.push({path: '/index/sampleDetection/packingList/packingPrint'})
-	},
+
 //	填入新建数据
 	createlibitem(form){
 		console.log(form);
+		this.createTask(form.taskName)
 	},
 //	关闭新建弹框
 	dialogClose(){
 		this.modalVisible=false;
+	},
+//	新建任务
+	createTask(taskName){
+		this.$http({
+		    method: 'post',
+			url: this.createTaskURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+			    taskName: taskName,
+			}
+	    }).then(function (response) {
+			if(response.data.success){
+				this.getlistdata(1)
+				
+			}
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
 	},
 //	获取搜索数据
   	searchingfor(searching,page){
@@ -163,8 +179,6 @@ export default {
 //	获取列表数据方法
   	getlistdata(page){
   		this.loading=false;
-  		var params={};
-  		params.taskId=this.$route.query.id;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -182,10 +196,8 @@ export default {
 			    listName: this.list,
 			    page:page,
 			    rows:this.page.size,
-			    params:JSON.stringify(params),
 			}
-	    }).then(function (response) {
-			console.log(response)
+	   }).then(function (response) {
 			this.tabledatas = response.data.rows;
 			this.page.total = response.data.total;
 			this.loading = false;
@@ -248,64 +260,12 @@ export default {
 			this.checkcode(code);			
 		}
   	},
-//	去验证条码有效否
-	checkcode(code){
-		this.$http({
-		    method: 'post',
-			url: this.checkURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-				sampleNo:code,
-			}
-	    }).then(function (response) {
-			console.log(response)
-			if(response.data.checkeds) {
-				var path=this.$route.name+'/打印条码'
-				this.$router.push({name: path,params: {code:response.data.sampleNum,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState,taskId:this.$route.query.id}})
-			}else{
 
-				this.$notify.error({
-		          	title: '未获取到检验信息',
-		          	message: '请重新核对条码信息！！！',
-		        });
-			}
-		}.bind(this)).catch(function (error) {
-//		    console.log(error);
-
-		    this.$notify.error({
-	          	title: '扫码失败',
-	          	message: '请重新核对条码信息！！！',
-	        });
-		}.bind(this));
-	},
-	printitem(code){
-		this.messageShow=true;
-		this.messages.type="loading";
-		this.printCodeBar(code)
-	},
-	printCodeBar(code){
-		LODOP = getLodop();
-
-		LODOP.PRINT_INIT("打印条码");
-		LODOP.SET_PRINTER_INDEX("Godex G530");  
-		LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
-		LODOP.ADD_PRINT_BARCODE(3,30,232,115,'Codabar',code);
-//  			LODOP.PREVIEW(); 
-		LODOP.PRINT(); 
-
-	}
   },
   data() {
     return {
-      datalistURL: this.apiRoot +  '/grain/smallSample/data',
+      datalistURL: this.apiRoot +  '/grain/task/data',
+      createTaskURL: this.apiRoot +  '/grain/task/save',
       checkURL:this.apiRoot +'/grain/sample/getBySampleNum',
       searchURL:this.apiRoot +  '/grain/smallSample/data',
       deleteURL:'/liquid/role2/data/delete',
@@ -314,15 +274,11 @@ export default {
       list:"samplinglist",
 	  modalVisible:false,
 	  modal:{
-	  	title:'新建库点',
+	  	title:'新建任务',
 		formdatas:[
 	  		{
-	  			label:"单位名称",
-	  			model:"unit",
-	  		},
-	  		{
-	  			label:"库点名称",
-	  			model:"lib",
+	  			label:"任务名称",
+	  			model:"taskName",
 	  		},
 	  	],
 	  	submitText:'确定',
@@ -357,27 +313,21 @@ export default {
       	createSampling:false,
       	status:false,
       	date:true,
-      	scanCode:true,
+      	createPackling:true,
       },
       tabledatas:[],
       items: [
       {
         id: 1,
-        prop:'sampleNum',
-        label: "检验编号",
-		status:true,
+        prop:'taskName',
+        label: "任务名称",
+//		status:true,
       },
       {
         id: 2,
-        prop:'smallSampleNum',
-        label: "小样编号",
-		status:true,
-      },
-      {
-        id: 3,
-        prop:'checkPoint',
-        label:"检验项目",
-		status:true,
+        prop:'createTime',
+        label: "创建时间",
+//		status:true,
       },
 //    {
 //      id: 4,
@@ -393,17 +343,15 @@ export default {
 //    },
       ],
       actions:{
-      	noview:true,
+//    	noview:true,
       	selection:false,
       	number:false,
-      	view:false,
+      	view:true,
       	edit:false,
       	dele:false,
-      	print:true,
-      	show:true,
+//    	show:true,
       	manuscript:false,
       	safetyReport:false,
-      	sort:'smallSampleNum',
       },
       messageShow:false,
 	  messages:{

@@ -143,7 +143,9 @@
       				</template>
       <!--是否包含编辑操作-->
 				      <template v-if="actions.edit">
-				          <button class="edit" @click.stop="handleEdit(scope.$index, scope.row)">编辑</button>
+				          <!--<button class="edit" @click.stop="handleEdit(scope.$index, scope.row)">编辑</button>-->
+				          <button v-if="scope.row.checkPoint"  class="undele" @click.stop="notAllowed()">编辑</button>
+				          <button v-else class="edit" @click.stop="handleEdit(scope.$index, scope.row)">编辑</button>
 				      </template> 
       <!--是否包含删除操作-->
 				      <template v-if="actions.deleCaogao">

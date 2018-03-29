@@ -57,6 +57,11 @@
 					新建扦样
 				</div>
 			</template>
+			<template v-if="listHeader.createPackling">				
+				<div class="create" @click="createPackling" style="background-image:url('static/images/sys/create.png');">
+					新建任务
+				</div>
+			</template>
 			<template v-if="listHeader.autH">				
 				<div class="create" @click="createAut" style="background-image:url('static/images/sys/create.png');">
 					{{listHeader.autH}}
@@ -326,6 +331,10 @@ export default {
     	createSampling(){
 //  		console.log('createSampling');
     		this.$emit('createSampling');
+    	},
+    	createPackling(){
+//  		console.log('createSampling');
+    		this.$emit('createPackling');
     	},
     	createAut(){
 //  		console.log('createSampling');
