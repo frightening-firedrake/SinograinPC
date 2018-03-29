@@ -144,7 +144,8 @@ export default {
   		page?page:1;
   		this.searchText=searching;
   		var params = {};
-		params.sampleNumOrSmallSampleNum = searching;
+		params.state=2;
+		params.smallSampleNumLike = searching;
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
@@ -165,7 +166,8 @@ export default {
 			   params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-		  	this.tabledatas=response.data;
+		  	this.tabledatas = response.data.rows;
+			this.page.total = response.data.total;
 
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -384,14 +386,14 @@ export default {
 //    },
       {
         id: 2,
-        prop:'checkPoint',
-        label:"检验项目",
+        prop:'smallSampleNum',
+        label: "小样编号",
 		status:true,
       },
       {
         id: 3,
-        prop:'smallSampleNum',
-        label: "小样编号",
+        prop:'checkPoint',
+        label:"检验项目",
 		status:true,
       },
 //    {
