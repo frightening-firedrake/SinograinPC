@@ -259,11 +259,27 @@ export default {
 				},
 				{
 					icon: 'icon-baobiao',
-					title: '样品检测报告',
+					title: '样品检测报表制作',
 					linkto: '/index/TestReportManagement/TestReportMaker',
 					level: 2,
 					pid: 15,
 					lid: 16
+				},
+				{
+					icon: 'icon-jiandukaohe',
+					title: '监督检查报告',
+					linkto: '/index/TestReportManagement/SuperviseList',
+					level: 2,
+					pid: 15,
+					lid: 17
+				},
+				{
+					icon: 'icon-baobiaoguanli',
+					title: '质量验收报告',
+					linkto: '/index/TestReportManagement/QualityAcceptance',
+					level: 2,
+					pid: 15,
+					lid: 24
 				},
 				{
 					icon: 'icon-quanxianguanli',
@@ -271,31 +287,31 @@ export default {
 					linkto: '',
 					level: 2,
 					pid: 0,
-					lid: 17
+					lid: 18
 				},
 				{
 					icon: 'icon-jiaoseguanli',
 					title: '角色管理',
 					linkto: '/index/AuthorityManagement/RoleList',
 					level: 2,
-					pid: 17,
-					lid: 18
+					pid: 18,
+					lid: 19
 				},
 				{
 					icon: 'icon-yonghuguanli',
 					title: '用户管理',
 					linkto: '/index/AuthorityManagement/UserList',
 					level: 2,
-					pid: 17,
-					lid: 19
+					pid: 18,
+					lid: 20
 				},
 				{
 					icon: 'icon-ziyuanguanli',
 					title: '资源管理',
 					linkto: '/index/AuthorityManagement/ResourcesList',
 					level: 2,
-					pid: 17,
-					lid: 20
+					pid: 18,
+					lid: 21
 				},
 				{
 					icon: 'icon-pingtaixinxiguanli',
@@ -303,15 +319,15 @@ export default {
 					title: '信息管理',
 					level: 2,
 					pid: 0,
-					lid: 21
+					lid: 22
 				},
 				{
 					icon: 'icon-xinjian2',
 					linkto: '/index/InformationManagement/InformationAdd',
 					title: '添加信息',
 					level: 2,
-					pid: 21,
-					lid: 22
+					pid: 22,
+					lid: 23
 				},
 
 			]

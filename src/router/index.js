@@ -57,6 +57,10 @@ import InformationAdd from '@/components/informationManagement/InformationAdd.vu
 import SampleLibraryList from '@/components/sampling/list/SampleLibraryList.vue'
 import ExaminationLibrary from '@/components/sampling/list/ExaminationLibrary.vue'
 
+import SuperviseList from '@/components/testReport/supervise/SuperviseList.vue'
+import SuperviseShow from '@/components/testReport/supervise/SuperviseShow.vue'
+import QualityAcceptance from '@/components/testReport/QualityAcceptance.vue'
+
 
 
 Vue.use(Router)
@@ -348,6 +352,22 @@ const routes= [
             name:"检测报表管理/样品检测报表制作/样品检测报表详情",
             component:TestReport
           },
+          {
+            path:"TestReportManagement/SuperviseList",
+            name:"检测报表管理/监督检查报告",
+            component:SuperviseList
+          },
+          {
+            path:"TestReportManagement/SuperviseList/SuperviseShow",
+            name:"检测报表管理/监督检查报告/监督检查详情",
+            component:SuperviseShow
+          },
+          {
+            path:"TestReportManagement/QualityAcceptance",
+            name:"检测报表管理/质量验收报告",
+            component:QualityAcceptance
+          },
+
 //        权限管理AuthorityManagement
 					{
             path:"AuthorityManagement",
