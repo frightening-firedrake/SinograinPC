@@ -32,12 +32,16 @@
 			</div>
 		</div>
 		<!--下拉选择库点筛选-->
-		<div class="dataSelete" v-if="listHeader.selectlib">			
+		<div class="dataSelete libSelete" v-if="listHeader.selectlib">			
 			<p>选择库点:</p>
 			<div>
-			    <el-select v-model="selectlib"  placeholder="请选择库点" @change="selectlibChange">
+			    <el-select v-model="selectlib"  placeholder="请选择库点" popper-class='headerSelectlib1' @change="selectlibChange1">
 					<el-option  label="全部"  value="全部"></el-option>								        									        
-					<el-option v-for="item2 in listHeader.libraryList" :label="item2.libraryName" :key="item2.id" :value="item2.libraryName"></el-option>								        									        
+					<el-option v-for="item2 in listHeader.libraryList" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        									        
+				</el-select>
+				<el-select v-model="selectlib2"  placeholder="请选择库点" popper-class='headerSelectlib1' @change="selectlibChange">
+					<el-option  label="全部"  value="全部"></el-option>								        									        
+					<el-option v-for="item3 in libraryList2" :label="item3.libraryName" :key="item3.id" :value="item3.id"></el-option>								        									        
 				</el-select>
 			</div>
 		</div>
@@ -188,6 +192,11 @@
 		width:3rem;
 		line-height:0.54rem;
 	}
+	div.listHeader div.libSelete >div{
+		float:left;
+		width:4rem;
+		line-height:0.54rem;
+	}
 	div.listHeader .el-date-editor{
 		width:3rem;
 		height:0.32rem;
@@ -263,6 +272,19 @@
 		background:#f2f2f2;
 		border-radius:0;
 	}
+	div.listHeader .libSelete .el-select .el-input input{
+		height:0.36rem;
+		width:1.75rem;
+		line-height:0.34rem;
+		border:solid  0.01rem #dfdfdf;
+		font-size:0.16rem;
+		background:#f2f2f2;
+		border-radius:0;
+		text-align: center;
+	}
+	.headerSelectlib1{
+		text-align:center;
+	}
 </style>
 <script>
 //import SinograinModal from '@/components/common/action/Modal.vue';
@@ -305,6 +327,7 @@ export default {
 	        date_select: '',
 	        radio_status:'全部',
 	        selectlib:'全部',
+	        selectlib2:'全部',
         };
     },
     created(){
@@ -320,8 +343,11 @@ export default {
 			console.log(datearr)
 //  		this.$emit('dateChange',this.date_select);
     	},
+    	selectlibChange1(){
+
+    	},
     	selectlibChange(){
-    		this.$emit('selectlibChange',this.selectlib);
+    		this.$emit('selectlibChange',this.selectlib2);
     	},
     	statusChange(){
 //  		console.log(this.radio_status)
@@ -356,7 +382,16 @@ export default {
 	    	return this.listHeader.subtitle;
 //          const route = this.$route.name.split("/")
 //          return route[route.length-1]
-        }
+       },
+	    libraryList2(){
+	    	if(this.selectlib=='全部'){
+	    		return [];
+	    	}else{    		
+	    		return	this.listHeader.libraryList.filter((item)=>{
+	    			return item.pLibraryId==this.selectlib
+	    		})
+	    	}
+	    },
 	},
     mounted:function(){
  

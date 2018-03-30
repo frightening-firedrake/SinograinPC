@@ -2,17 +2,14 @@
     <div class='listpagewrap'>
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
-      <!--alert-->
-      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
-      <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" @selectlibChange="selectlibChange"></list-header>
-      <!--表格-->
-      <sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
-      </sinograin-list>
-      <!--分页-->
-      <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
-      <!--输入弹框-->
-      <sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
+  	  <!--标题-->
+  	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
+      <!--提示-->
+      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
+      <!--表单-->
+      <safety-form-pass :formdatas="formdatas" :problem="formdatas.problem" @problemStatusChange="problemStatusChange" @pass="pass" @addsafety="addsafety"></safety-form-pass> 
+      <!--通知弹框-->
+      <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
     </div>
 </template>
 
@@ -21,102 +18,124 @@
 </style>
 
 <script>
-import SinograinList from '@/components/common/action/List.vue';
+
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
-import SinograinPagination from '@/components/common/action/Pagination.vue';
-import ListHeader from '@/components/common/action/ListHeader.vue';
-import SinograinModal from '@/components/common/action/Modal.vue';
+import SafetyFormPass  from "@/components/common/action/SafetyFormPass"
+import SinograinOptionTitle from "@/components/common/action/OptionTitle"
+import SinograinMessage from "@/components/common/action/Message"
+
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-// import data from '@/util/mock';
+//import data from '@/util/mock';
 
 
 
 export default {
   components: {
-    SinograinList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SafetyFormPass,SinograinMessage
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
 	...mapGetters(["modal_id"]),
-	tabledatasFilter(){
-  		if(this.filterlib=="全部"){
-			return this.tabledatas;
-		}else{
-			return this.tabledatas.filter((value,index)=>{
-				return value.libraryName==this.filterlib
-			})
-		}
-  	},
   },
   created(){
+  	console.log(this.$route.query)
 //  获取列表数据（第一页）
-	this.getlistdata(1)
-	this.getlibrarylist()
-//	移除监听事件
-    this.$root.eventHub.$off('delelistitem')
-    this.$root.eventHub.$off("viewlistitem")
-//	监听列表删除事件
-    this.$root.eventHub.$on('delelistitem',function(rowid,list){
-    	this.tabledatas=this.tabledatas.filter(function(item){
-    		return item.id!==rowid;
-    	})
-    	this.sendDeleteId(rowid);
-//  	console.log(rowid,list);
-    }.bind(this)); 	
-//	监听列表点击查看事件
-  	this.$root.eventHub.$on("viewlistitem",function(row){  
-//		console.log(id)
-		this.$router.push({path: '/index/sampling/SRLibraryList/SafetyReportList/SafetyProblem',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
-  	}.bind(this));
+
+//	this.getdata()
+	this.getSafetyData()
   },
   destroy(){
-  	this.$root.eventHub.$off("viewlistitem")
-  	this.$root.eventHub.$off('delelistitem')
+
   },
   methods: {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
-//	列表头触发的事件
-	dateChange(data){
-		console.log(data);
-	},
-	statusChange(data){
-		console.log(data)
-	},
-	createSampling(){
-//		console.log('createSampling');
-		this.$router.push({path: '/index/sampling/libraryList/samplingList/samplingListCreate'})
-	},
-	emptyCreate(){
-//		this.createlib();
-	},
-//	打开新建弹框
-	createlib(){
-		this.modalVisible=true;
-	},
-//	填入新建数据
-	createlibitem(data){
-		console.log(data);
-	},
-//	关闭新建弹框
-	dialogClose(){
-		this.modalVisible=false;
-	},
+
+
+ //	获取安全报告数据
+  	getSafetyData(){
+		  var params = {}
+		  params.id = this.$route.query.id
+
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.dataSafetyURL,
+			transformRequest: [function (data) {
+			// Do whatever you want to transform the data
+			let ret = ''
+			for (let it in data) {
+			ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+			}
+			return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				id: this.$route.query.id
+			}
+	  }).then(function (response) {			
+			var res0=response.data
+			var res=response.data
+//			循环问题			
+			var images=[]
+			var imagesbox=res.images.split(',');
+			imagesbox.forEach((value2,index2)=>{
+				var obj={};
+				obj.url= this.apiRoot + "/grain/upload/picture/"+value2;
+				images.push(obj);
+			})
+			res0.images=images			
+			this.formdatas.problem= res0
+		    this.formdatas.form.libraryName = this.$route.query.libraryName
+			this.formdatas.form.position = this.$route.query.position  
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+//	获取样品数据
+  	// getdata(){
+
+  	// 	// 获取列表数据（第？页）
+	// 	this.$http({
+	// 	    method: 'post',
+	// 		url: this.dataURL,
+	// 		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+	// 		data: {
+	// 			id:this.$route.query
+	// 		}
+	//     }).then(function (response) {
+	// 	  	this.formdatas.form=response.data.formdatas;
+	// 	}.bind(this)).catch(function (error) {
+	// 	    console.log(error);
+	// 	}.bind(this));
+  	// },
 //	获取搜索数据
-  	searchingfor(searching,page){
-  		page?page:1;
-  		this.searchText=searching;
-  		var params = {};
-		params.pLibraryId = this.$route.query.libraryId;
-		params.libraryNameLike = searching;
-//		console.log(this.breadcrumb.searching);
+  	searchingfor(searching){
+  		console.log(searching);
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
 			url: this.searchURL,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+//			data: {
+//			   
+//			}
+	    }).then(function (response) {
+//		  	this.tabledatas=response.data.rows;
+	  		setTimeout(()=>{			  		
+		  		this.loading=false;
+		  	},1000)
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+	passProblem(id){
+		this.$http({
+		    method: 'post',
+			url: this.passURL,
 			transformRequest: [function (data) {
 				// Do whatever you want to transform the data
 				let ret = ''
@@ -127,217 +146,113 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			   params:JSON.stringify(params)
-			}
-	    }).then(function (response) {
-		  	this.tabledatas=response.data.rows;
-	  		this.page.total=response.data.total;		  		
-		  	this.loading=false;
-
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
-  	},
-//	获取列表数据方法
-  	getlistdata(page){
-		var params = {};
-		params.pLibraryId = this.$route.query.libraryId
-  		this.loading=false;
-  		// 获取列表数据（第？页）
-		this.$http({
-		    method: 'post',
-			url: this.datalistURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-			    listName: this.list,
-			    page:page,
-			    rows:this.page.size,
-				params:JSON.stringify(params)
-			}
-	    }).then(function (response) {
-		  	this.tabledatas=response.data.rows;
-	  		this.page.total=response.data.total;		  		
-		  	this.loading=false;
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
-  	},
-	  getlibrarylist(){
-		var params = {};
-		params.pLibraryId = this.$route.query.libraryId
-  		// 获取列表数据（第？页）
-		this.$http({
-		    method: 'post',
-			url: this.librarylistURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-			    params: JSON.stringify(params)
-			}
-	    }).then(function (response) {
-			console.log(response)
-		  	this.listHeader.libraryList = response.data.rows;
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
-  	},
-  	//	发送删除id
-  	sendDeleteId(id){
-		this.$http({
-		    method: 'post',
-			url: this.deleteURL,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-			    listName: this.list,
 			    id:id,
+				isDeal:1
 			}
-	    }).then(function (response) {
-		  	
+	   }).then(function (response) {
+			  if(response.data.success) {
+				  this.formdatas.problem.isDeal=1	
+			  }
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
   	},
-//	获取分页点击事件中及当前页码
-    getCurrentPage(currentPage){
-		if(this.searchText){			
-			this.searchingfor(this.searchText,currentPage)
-		}else{			
-			this.getlistdata(currentPage)
-		}
-	},
-//	映射分页触发的事件
-  	paginationEvent(actiontype){
-  		if(actiontype=='leading_out'){
-  			console.log('leading_out')
-  		}else if(actiontype=='refresh'){
-  			// 获取列表数据（第一页）
-			this.getlistdata(1)			
+  	messageclick(type){
+  		if(type=="confirm"){
+
+			var id=this.passProblemId;
+			this.passProblem(id)
+//			console.log(id)
+	  		
+  		}else if(type=="error"){
+//			console.log(type)  			
   		}
   	},
-//	获取多选框选中数据的id(这是一个数组)
-  	getchecked(checkedId){
-  		this.checkedId=checkedId;
+  	messageClose(){
+  		this.messageShow=false;
   	},
-//	筛选库
-	selectlibChange(lib){
-		this.filterlib=lib
-		console.log(this.filterlib)
-	},
+
+	titleEvent(){
+  		console.log('titleEvent');
+  	},
+  	problemStatusChange(filterStatus){
+  		this.problemStatus=filterStatus;
+  	},
+//	问题通过处理事件
+  	pass(id){
+		// console.log(id)
+		this.messageShow=true;
+		
+		this.passProblemId=id;
+
+
+
+  	},
+
+//	新建安全报告
+  	addsafety(){
+    	this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate',query:{id:this.$route.query.id,libraryName:this.$route.query.libraryName,position:this.$route.query.position}})
+  	}
   },
+
   data() {
     return {
-      datalistURL: this.apiRoot + '/grain/safetyReport/data',
-	  librarylistURL: this.apiRoot + '/grain/library/data',
-	  searchURL: this.apiRoot + '/grain/safetyReport/data',
-      deleteURL: this.apiRoot + '/grain/',
-      searchText:'',
+      dataURL: this.apiRoot + '/grain/sample/get',
+	  dataSafetyURL: this.apiRoot +  '/grain/safetyReport/get',
+	  editURL:  this.apiRoot + '/grain/safetyReport/edit',
+      searchURL:'/liquid/role2/data/search',
+      passURL: this.apiRoot + '/grain/safetyReport/edit',
+      problemStatus:'all',
+      passProblemId:'',
       checkedId:[],
-      filterlib:'全部',
-      list:"librarylist",
-	  modalVisible:false,
-	  modal:{
-	  	title:'新建库点',
-		formdatas:[
-	  		{
-	  			label:"单位名称",
-	  			model:"unit",
-	  		},
-	  		{
-	  			label:"库点名称",
-	  			model:"lib",
-	  		},
-	  	],
-	  	submitText:'确定',
-	  },
+	  createlibVisible:false,
       breadcrumb:{
-      	search:true,   
+      	search:false,   
       	searching:'',
       },
-      loading:true,
-//    分页数据
-      page: {
-        size: 10,
-        total: 0,
-        currentPage: 1,
-        show:true,
-        tfootbtns:{
-        	btns:false,//是否添加按钮组
-        	leading_out:true,//导出按钮
-        	refresh:true,//刷新按钮
-        	delete:true, //删除按钮            	
-        }
+      subtitle:{
+      	btn:false,
+      	btntext:'',
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：此页面只展示本库信息!',
+        title: '温馨提示：此页面灰色字为不可编辑状态!',
         type: 'info'
       }],
-//    表格数据
-      listHeader:{
-      	createlib:false,
-      	createSampling:false,
-      	status:false,
-      	date:true,
-      	selectlib:false,
-      	libraryList:[],
-      },
-      tabledatas:[],
-      items: [
-      {
-        id: 1,
-        prop:'libraryName',
-        label: "被查库点",
-//      sort:true,
-      },
-      {
-        id: 2,
-        prop:'position',
-        label: "货位号",
-//      sort:true,
-      },
-      {
-        id: 3,
-        prop:'createTime',
-        label: "创建时间",
-//      sort:true,
-      },
-      {
-        id: 4,
-        prop:'isDeal',
-        label:"问题状态",
-        status:true,
-//      sort:true,
-      },
-      {
-        id: 5,
-        prop:'problem',
-        label:"问题描述",
-//      sort:true,
-      },
-      ],
-      actions:{
-      	selection:false,
-      	number:true,
-      	view:true,
-      	edit:false,
-      	dele:false,
-      }
+//    通知弹窗
+ 	  messageShow:false,
+	  messages:{
+	  	type:'confirm',
+	  	confirm:{
+	  		icon:'el-icon-success',
+	  		messageTittle:'确认此问题已解决?',
+	  		messageText:'此操作不可逆，请慎重操作',
+	  		buttonText:'确认',
+	  	},
+	  },
+      formdatas: {
+      	title:'监督检查',
+      	statusItems:[
+      		{label:'all',text:'全部'},
+      		{label:-1,text:'待解决'},
+      		{label:1,text:'已解决'},
+      	],
+      	form:{
+          libraryName: '',//被查库点
+          position: '',//货位号  
+		  createTime: '',        
+      	},
+      	problem:{
+  			problem: '',//问题
+  			images: [],//图片
+          	rummager:'',
+  			isDeal:-1,
+  			createTime:'',
+      	},
+      	
+	  }
     }
   }
 }
 </script>
+
