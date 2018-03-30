@@ -57,7 +57,7 @@ import InformationAdd from '@/components/informationManagement/InformationAdd.vu
 import SampleLibraryList from '@/components/sampling/list/SampleLibraryList.vue'
 import ExaminationLibrary from '@/components/sampling/list/ExaminationLibrary.vue'
 
-import SuperviseList from '@/components/testReport/supervise/SuperviseList.vue'
+import SuperviseList from '@/components/testReport/supervise/SafetyProblem.vue'
 import SuperviseShow from '@/components/testReport/supervise/SuperviseShow.vue'
 import QualityAcceptance from '@/components/testReport/QualityAcceptance.vue'
 
