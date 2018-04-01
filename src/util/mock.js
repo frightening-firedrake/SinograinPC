@@ -571,6 +571,34 @@ var spkd=Mock.mock('/liquid/role19/data', {
 	      remarks:'',
       },
 });
+// 质量验收情况
+Mock.mock('/liquid/role_lyx/data', {
+      'rows|8-19':[
+        {
+       
+          'id|+1': 1,
+          slip:'2017年春',
+          
+          dj_zl:'良',
+          rz_zl:'容重',
+          sf_zl:'水分',
+          zz_zl:'杂质',
+          zl_bwsl:'54',
+          kwz_bwsl:'',
+          szqw_zl:'气味',
+          result_zl:'合格',
+          mjxsl_pz:'面筋吸水量',
+          smj_pz:'湿面筋',
+          pcpfz_pz:'品尝评分值',
+          result_pz:'合格',
+          bwsl:"不完善里",
+          ydzs:"硬度指数",
+          seqw_pz:"色泽气味"
+        }
+      ],
+      	total:56,
+
+});
 //粮库基本列表
 var jblb=Mock.mock('/liquid/role20/data', {
       'rows|8-19':[
@@ -681,6 +709,19 @@ var zysq=Mock.mock('/liquid/role24/data', {
       ],
       	total:56,
 });
+// 图表信息
+var charts = Mock.mock("/liquid/chart/data",{
+     'rows|3-12':[
+        {
+          'id|+1': 0,
+            name:"容重统计表",
+            Testing:"容重",
+            year:['2017年春','2017年春','2017年春','2017年春','2017年春','2017年春','2017年春','2017年春'],
+            data: [43,43,234,523,2523,1241,653,234 ]
+        }
+      ],
+      total:6,
+})
 export default {
 //	LibraryList:LibraryList,
 }

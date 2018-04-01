@@ -1,0 +1,49 @@
+.common_select{
+    width:100%;
+    height:0.5rem;
+    border:1px solid #dfdfdf;
+    padding:0.06rem 0;
+    label{
+        margin-left:1.04rem;
+        &:first-child{
+            margin-left:0;
+        }
+        .title_select{
+            width:1.3rem;
+            height:100%;
+            font-size:0.16rem;
+            color:#333333;
+            display:inline-block;
+            text-align:center;
+        }
+        .el-select{
+            margin-left:0.23rem;
+            width:2.75rem;
+            height:0.36rem;
+            background-color:#f2f2f2;
+            .el-input{
+                height:100%;
+                input{
+                    height:100% !important;
+                    border-radius:0;
+                    font-size:0.16rem;
+                    color:#333333;
+                    background-color: #f2f2f2;
+                }
+            }
+        }
+    }
+}
+.el-select-dropdown{
+    .el-scrollbar{
+        .el-select-dropdown__wrap{
+            ul{
+                li{
+                    &.selected{
+                            color: #409EFF;
+                    }
+                }
+            }
+        }
+    }
+}
