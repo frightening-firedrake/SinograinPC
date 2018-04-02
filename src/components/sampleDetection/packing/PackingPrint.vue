@@ -179,13 +179,16 @@ export default {
 //  			checked:checked,				
     			// sampleNum:this.$route.params.code,
 				id:this.$route.params.id,
-				taskId:this.$route.params.id,
+				taskId:this.$route.params.taskId,
 				isPrint:this.isPrint,
 				params:JSON.stringify(params)				
 			},
 	   }).then(function (response) {
+			if(response.success) {
+				this.isPrint=3;				
+			}
+		   console.log("111111111111111111")
 		   	console.log(response,this.isPrint)
-			this.isPrint=3;				
 			this.printBarAll(response.data);
 //	    	返回打印需要的条码格式待定
 //			假设是图片吧临时的
