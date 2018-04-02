@@ -226,7 +226,7 @@ export default {
                     prop: 'dj_zl',
                     label: "等级",
                     pid: 25,
-                    width: 70,
+//                  width: 70,
                     //      sort:true,
                 },
                 {
@@ -240,7 +240,7 @@ export default {
                     prop: 'result_zl',
                     label: "结果判定",
                     pid: 25,
-                    width: 70,
+//                  width: 70,
                     //      sort:true,
                 },
                 {
@@ -248,7 +248,7 @@ export default {
                     prop: 'rz_zl',
                     label: "容重",
                     pid: 28,
-                    width: 70,
+//                  width: 70,
                     //      sort:true,
                 },
                 {
@@ -256,7 +256,7 @@ export default {
                     prop: 'sf_zl',
                     label: "水分",
                     pid: 28,
-                    width: 70,
+//                  width: 70,
                     //      sort:true,
                 },
                 {
@@ -264,7 +264,7 @@ export default {
                     prop: 'zz_zl',
                     label: "杂质",
                     pid: 28,
-                    width: 70,
+//                  width: 70,
                     //      sort:true,
                 },
                 {
@@ -305,7 +305,7 @@ export default {
                     prop: 'result_pz',
                     label: "结果判定",
                     pid: 26,
-                    width: 70,
+//                  width: 70,
                     //      sort:true,
                 },
                 {
@@ -313,7 +313,7 @@ export default {
                     prop: 'mjxsl_pz',
                     label: "脂肪酸值",
                     pid: 37,
-                    width: 70,
+//                  width: 70,
                     //      sort:true,
                 },
                 // {
@@ -329,7 +329,7 @@ export default {
                     prop: 'pcpfz_pz',
                     label: "品尝评分值",
                     pid: 37,
-                    width: 70,
+//                  width: 70,
                     //      sort:true,
                 },
                 {
@@ -344,7 +344,7 @@ export default {
                     prop: 'seqw_pz',
                     label: "色泽气味",
                     pid: 37,
-                    width: 70,
+//                  width: 70,
                     //      sort:true,
                 },
             ],

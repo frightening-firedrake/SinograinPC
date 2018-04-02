@@ -148,7 +148,7 @@ export default {
       items: [
 	      {
 	        id: 1,
-	        prop:'libraryName',
+	        prop:'pLibraryName',
 	        label: "被查直属库",
 	//      sort:true
 	      },
@@ -163,7 +163,7 @@ export default {
 	        id: 3,
 	        prop:'sampleNum',
 	        label: "检验编号",
-	        // status:true,
+	        status:true,
 	//      sort:true,
 	      },
       ],
