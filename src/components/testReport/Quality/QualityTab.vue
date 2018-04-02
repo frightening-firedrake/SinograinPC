@@ -27,6 +27,16 @@
         </el-table>
     </div>
 </template>
+<style lang="scss">
+    .complex{
+
+        div{
+            .cell{
+                white-space:normal;
+            }
+        }
+    }
+</style>
 
 <script>
 export default {
