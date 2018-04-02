@@ -131,7 +131,7 @@ export default {
 
                 }
             }).then(function(res){
-
+                console.log(res)
                 this.charts = res.data
             }.bind(this))
         },
@@ -180,7 +180,6 @@ export default {
     },
         
     },
-
     data() {
         return {
             datalistURL: '/liquid/role_lyx/data',
@@ -199,6 +198,7 @@ export default {
             },
             // 持续显示按钮
             show: false,
+            // 玉米的标头
             items: [
                 {
                     id: 24,
@@ -282,14 +282,14 @@ export default {
                     id: 35,
                     prop: 'zl_bwsl',
                     label: "总量",
-                    pid: 32,
+                    pid: 33,
                     //      sort:true,
                 },
                 {
                     id: 36,
                     prop: 'kwz_bwsl',
-                    label: "其中:矿物质",
-                    pid: 32,
+                    label: "其中:生霉粒",
+                    pid: 33,
                     //      sort:true,
                 },
                 {
@@ -308,19 +308,19 @@ export default {
                 {
                     id: 39,
                     prop: 'mjxsl_pz',
-                    label: "面筋吸水量",
+                    label: "脂肪酸值",
                     pid: 37,
                     width: 70,
                     //      sort:true,
                 },
-                {
-                    id: 40,
-                    prop: 'smj_pz',
-                    label: "湿面筋",
-                    pid: 37,
-                    width: 70,
-                    //      sort:true,
-                },
+                // {
+                //     id: 40,
+                //     prop: 'smj_pz',
+                //     label: "湿面筋",
+                //     pid: 37,
+                //     width: 70,
+                //     //      sort:true,
+                // },
                 {
                     id: 41,
                     prop: 'pcpfz_pz',
@@ -345,6 +345,153 @@ export default {
                     //      sort:true,
                 },
             ],
+            // 小麦的表头
+            // items: [
+            //     {
+            //         id: 24,
+            //         prop: 'slip',
+            //         label: "任务名称",
+            //         pid: 0,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 25,
+            //         label: "质量情况",
+            //         pid: 0,
+            //     },
+            //     {
+            //         id: 26,
+            //         label: "储存品质情况",
+            //         pid: 0,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 27,
+            //         prop: 'dj_zl',
+            //         label: "等级",
+            //         pid: 25,
+            //         width: 70,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 28,
+            //         label: "质量指标",
+            //         pid: 25,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 29,
+            //         prop: 'result_zl',
+            //         label: "结果判定",
+            //         pid: 25,
+            //         width: 70,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 30,
+            //         prop: 'rz_zl',
+            //         label: "容重",
+            //         pid: 28,
+            //         width: 70,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 31,
+            //         prop: 'sf_zl',
+            //         label: "水分",
+            //         pid: 28,
+            //         width: 70,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 32,
+            //         prop: 'zz_zl',
+            //         label: "杂质",
+            //         pid: 28,
+            //         width: 70,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 33,
+            //         prop: 'bwsl',
+            //         label: "不完善粒",
+            //         pid: 28,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 34,
+            //         prop: 'szqw_zl',
+            //         label: "色泽气味",
+            //         pid: 28,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 35,
+            //         prop: 'zl_bwsl',
+            //         label: "总量",
+            //         pid: 32,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 36,
+            //         prop: 'kwz_bwsl',
+            //         label: "其中:矿物质",
+            //         pid: 32,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 37,
+            //         label: "储存品质指标",
+            //         pid: 26,
+            //     },
+            //     {
+            //         id: 38,
+            //         prop: 'result_pz',
+            //         label: "结果判定",
+            //         pid: 26,
+            //         width: 70,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 39,
+            //         prop: 'mjxsl_pz',
+            //         label: "面筋吸水量",
+            //         pid: 37,
+            //         width: 70,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 40,
+            //         prop: 'smj_pz',
+            //         label: "湿面筋",
+            //         pid: 37,
+            //         width: 70,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 41,
+            //         prop: 'pcpfz_pz',
+            //         label: "品尝评分值",
+            //         pid: 37,
+            //         width: 70,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 42,
+            //         prop: 'ydzs',
+            //         label: "硬度指数",
+            //         pid: 28,
+            //         //      sort:true,
+            //     },
+            //     {
+            //         id: 43,
+            //         prop: 'seqw_pz',
+            //         label: "色泽气味",
+            //         pid: 37,
+            //         width: 70,
+            //         //      sort:true,
+            //     },
+            // ],
             tfbtns: {
                 // btnCenter: {
                 //     btnTextL: '申请扦样',

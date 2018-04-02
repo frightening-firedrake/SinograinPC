@@ -40,6 +40,10 @@ Mock.Random.extend({
         var tableNames = ['春季扦样登记表', '秋季扦样登记表','抽查扦样登记表']
         return this.pick(tableNames)
     },
+    chartsName:function(){
+      var charsname = [1,2,3,4,5,6]
+      return this.pick(charsname)
+    },
     test: function(data){
         var tests = []
         var test = ['水分','不完善粒','生霉粒指','质量','品质全项目指标']
@@ -711,10 +715,10 @@ var zysq=Mock.mock('/liquid/role24/data', {
 });
 // 图表信息
 var charts = Mock.mock("/liquid/chart/data",{
-     'rows|3-12':[
+     'rows|6':[
         {
           'id|+1': 0,
-            name:"容重统计表",
+            name:"@chartsName",
             Testing:"容重",
             year:['2017年春','2017年春','2017年春','2017年春','2017年春','2017年春','2017年春','2017年春'],
             data: [43,43,234,523,2523,1241,653,234 ]

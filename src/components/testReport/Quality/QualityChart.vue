@@ -4,7 +4,12 @@
             质量验收情况
         </p>
         <div  :class="{'rongzhong chart':true,'right':(index+1)%2==0}" v-for="(chart,index) in chartonly.rows" :key="index">
-            <p>{{chart.name}}</p>
+            <p v-if="chart.name == 1">容重统计图</p>
+            <p v-else-if="chart.name == 2">水分统计图</p>
+            <p v-else-if="chart.name == 3">杂质</p>
+            <p v-else-if="chart.name == 4">不完善粒统计图</p>
+            <p v-else-if="chart.name == 5">硬度统计图</p>
+            <p v-else>面筋吸水量统计图</p>                        
             <div :id="'myChart'+index"  class='chartonly'>
             </div>
         </div>
@@ -61,10 +66,8 @@ export default {
     props:["charts"],
     mounted() {
         this.chartonly = this.charts
-        console.log(this.charts)
     },
     updated(){
-        console.log(2222)
         this.drawLine();
     },
     methods: {

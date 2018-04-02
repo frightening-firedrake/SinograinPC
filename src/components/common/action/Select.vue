@@ -1,7 +1,7 @@
 <template>
     <div class="common_select">
         <label>
-            <span class="title_select">选择地区:</span>
+            <span class="title_select">选择直属库:</span>
             <el-select v-model="region" @change="select(1)" placeholder="全部">
                 <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
