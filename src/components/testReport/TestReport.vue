@@ -62,30 +62,17 @@ export default {
 	}
   },
   created(){
-//	console.log(this.$route.query)
+	console.log(this.$route.params)
 //  获取列表数据（第一页）
-	this.getlistdata(1)
-//	移除监听事件
-    this.$root.eventHub.$off('delelistitem')
-    this.$root.eventHub.$off("viewlistitem")
-//	监听列表删除事件
-    this.$root.eventHub.$on('delelistitem',function(rowid,list){
-    	this.tabledatas=this.tabledatas.filter(function(item){
-    		return item.id!==rowid;
-    	})
-    	this.sendDeleteId(rowid);
-//  	console.log(rowid,list);
-    }.bind(this)); 	
-//	监听列表点击查看事件
-  	this.$root.eventHub.$on("viewlistitem",function(id){  
-//		console.log(id)
-		this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/samplingListEdit',query:{libid:id}})
-		
-  	}.bind(this));
-  },
-  destroy(){
-  	this.$root.eventHub.$off("viewlistitem")
-  	this.$root.eventHub.$off('delelistitem')
+	if(this.$route.params.sampleNums){
+		this.sampleNums=this.$route.params.sampleNums;
+		this.getlistdata(this.sampleNums)
+	}else{
+		var path=this.$route.path;
+		var end=path.lastIndexOf('/');
+  		path=path.slice(0,end);
+		this.$router.push({path:path});
+	}
   },
   methods: {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
@@ -141,25 +128,31 @@ export default {
 		}.bind(this));
   	},
 //	获取列表数据方法
-  	getlistdata(page){
+  	getlistdata(sampleNums){
   		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
-			    page:page,
-			    pageSize:this.page.size,
+
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
-	  		this.page.total=response.data.total;
+
 		  	
-	  		setTimeout(()=>{			  		
+
 		  		this.loading=false;
-		  	},1000)
+
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -239,6 +232,7 @@ export default {
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
+      sampleNums:'',
       list:"samplinglist",
       breadcrumb:{
       	search:false,   
@@ -479,7 +473,7 @@ export default {
 	        prop:'dj_zl',
 	        label: "等级",
 	        pid:25,
-	        width:70,
+//	        width:70,
 	//      sort:true,
 	      },
 	      {
@@ -493,7 +487,7 @@ export default {
 	        prop:'result_zl',
 	        label:"结果判定",
 	        pid:25,
-	        width:70,
+//	        width:70,
 	//      sort:true,
 	      },
 	      {
@@ -501,7 +495,7 @@ export default {
 	        prop:'rz_zl',
 	        label:"容重",
 	        pid:28,
-	        width:70,
+//	        width:70,
 	//      sort:true,
 	      },
 	      {
@@ -509,7 +503,7 @@ export default {
 	        prop:'sf_zl',
 	        label:"水分",
 	        pid:28,
-	        width:70,
+//	        width:70,
 	//      sort:true,
 	      },
 	      {
@@ -517,7 +511,7 @@ export default {
 	        prop:'zz_zl',
 	        label:"杂质",
 	        pid:28,
-	        width:70,
+//	        width:70,
 	//      sort:true,
 	      },
 	      {
@@ -557,7 +551,7 @@ export default {
 	        prop:'result_pz',
 	        label:"结果判定",
 	        pid:26,
-	        width:70,
+//	        width:70,
 	//      sort:true,
 	      },
 	      {
@@ -565,7 +559,7 @@ export default {
 	        prop:'rz_pz',
 	        label:"容重",
 	        pid:37,
-	        width:70,
+//	        width:70,
 	//      sort:true,
 	      },
 	      {
@@ -573,7 +567,7 @@ export default {
 	        prop:'sf_pz',
 	        label:"水分",
 	        pid:37,
-	        width:70,
+//	        width:70,
 	//      sort:true,
 	      },
 	      {
@@ -581,7 +575,7 @@ export default {
 	        prop:'zz_pz',
 	        label:"杂质",
 	        pid:37,
-	        width:70,
+//	        width:70,
 	//      sort:true,
 	      },
 	      {

@@ -10,8 +10,8 @@
 	color:#333333;
 	border:1px solid #dfdfdf;
 }
-.tbwrap{
-	/*height:;*/
+/*.tbwrap{
+	height:;
 	text-align: center;
 	color:#333333;
 	line-height:0.5rem;
@@ -56,7 +56,7 @@
 }
 .tbwrap .item,.tbwrap .add{
 	height:0.5rem;
-	/*overflow: hidden;*/
+	overflow: hidden;
 	border-bottom:1px solid #dfdfdf;
 	border-left:1px solid #dfdfdf;
 }
@@ -73,7 +73,7 @@
 }
 .trmwrap .tbrow:before{
 	position:absolute;
-	/*top:100%;*/
+	top:100%;
 	bottom:0;
 	left:0;
 	width:100%;
@@ -84,7 +84,7 @@
 }
 .pointer{
 	cursor:pointer;
-}
+}*/
 .trmwrap .bottom{
 	height:1rem;
 	background-color:#ffffff;
@@ -118,4 +118,34 @@
     width: 100%;
     height: 100%;
     display: block;
+}
+
+.tableAddWrap{
+	height:0.5rem;
+	position:relative;
+	/*border:1px solid #e6e7e7;*/
+	/*border-top:none;*/
+}
+.tableAddWrap .tableAdd {
+    float:right;
+   	padding:0 0.1rem;
+    height: 0.35rem;
+    line-height: 0.35rem;
+    text-align: center;
+    border-radius: 0 0 0.1rem 0.1rem;
+    background-color: #ffffff;
+    border: solid 1px #58b481;
+    color: #58b481;
+    font-size: 0.16rem;
+    cursor: pointer;
+}
+.tableAddWrap .tableAdd p{
+    padding-left:0.35rem;
+    background-repeat:no-repeat;
+    background-position:left center;
+    background-size:0.3rem 0.3rem;
+    font-size:0.16rem;
+}
+.trmwrap .el-table__empty-block{
+	height:3rem;
 }

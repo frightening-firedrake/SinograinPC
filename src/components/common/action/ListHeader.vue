@@ -37,7 +37,7 @@
 			<div>
 			    <el-select v-model="selectlib"  placeholder="请选择库点" popper-class='headerSelectlib1' @change="selectlibChange1">
 					<el-option  label="全部"  value="全部"></el-option>								        									        
-					<el-option v-for="item2 in listHeader.libraryList" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        									        
+					<el-option v-for="item2 in libraryList1" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        									        
 				</el-select>
 				<el-select v-model="selectlib2"  placeholder="请选择库点" popper-class='headerSelectlib1' @change="selectlibChange">
 					<el-option  label="全部"  value="全部"></el-option>								        									        
@@ -344,10 +344,15 @@ export default {
 //  		this.$emit('dateChange',this.date_select);
     	},
     	selectlibChange1(){
-
+			this.selectlib2='全部';
+			this.$emit('selectlibChange','pLibraryId',this.selectlib);
     	},
     	selectlibChange(){
-    		this.$emit('selectlibChange',this.selectlib2);
+    		if(this.selectlib2=='全部'){
+    			this.$emit('selectlibChange','pLibraryId',this.selectlib);
+    		}else{
+    			this.$emit('selectlibChange','libraryId',this.selectlib2);
+    		}
     	},
     	statusChange(){
 //  		console.log(this.radio_status)
@@ -383,6 +388,15 @@ export default {
 //          const route = this.$route.name.split("/")
 //          return route[route.length-1]
        },
+       	libraryList1(){
+//	    	if(this.selectlib=='全部'){
+//	    		return [];
+//	    	}else{    		
+	    		return	this.listHeader.libraryList.filter((item)=>{
+	    			return item.pLibraryId==-1
+	    		})
+//	    	}
+	    },
 	    libraryList2(){
 	    	if(this.selectlib=='全部'){
 	    		return [];

@@ -80,6 +80,9 @@
 		      				<template v-if="item.prop=='checkPoint'">
 				      				{{findCheckPoint(scope.row)}}
 		      				</template>
+		      				<template v-if="item.prop=='libraryFullName'">
+				      				{{scope.row.pLibraryName}}—{{scope.row.libraryName}}
+		      				</template>
 		          </template>
 	    		</el-table-column>
    		</template>

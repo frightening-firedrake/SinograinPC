@@ -16,6 +16,9 @@
         <!--表格-->
         <template v-if="!show">
         <!--正式内容-->
+        <p class="tableName">
+            {{title}}
+        </p>
         <QualityTab :items="items" class="complex" :tabledata="tabledatas" :title="title" :loading="loading"></QualityTab>
         <!--导出按钮-->
         <TfootButtons :tfbtns="tfbtns" @tfootEvent="tfootEvent"></TfootButtons>
@@ -92,13 +95,13 @@
     }
 }
 
-.el-main {
+/*.el-main {
     .complex {
         .el-table__body-wrapper {
             overflow-y: scroll !important;
         }
     }
-}
+}*/
 </style>
 <script>
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';

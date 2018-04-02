@@ -69,7 +69,7 @@ export default {
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(row){  
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/SRLibraryList/SafetyReportList/SafetyProblem',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
+		this.$router.push({path: '/index/TestReportManagement/SuperviseList/SuperviseShow',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
   	}.bind(this));
   },
   destroy(){
@@ -109,39 +109,49 @@ export default {
   	searchingfor(searching,page){
   		page?page:1;
   		this.searchText=searching;
-  		var params = {};
-		params.pLibraryId = this.$route.query.libraryId;
-		params.libraryNameLike = searching;
-//		console.log(this.breadcrumb.searching);
-  		// 获取列表数据（第？页）
-		this.$http({
-		    method: 'post',
-			url: this.searchURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-			   params:JSON.stringify(params)
-			}
-	    }).then(function (response) {
-		  	this.tabledatas=response.data.rows;
-	  		this.page.total=response.data.total;		  		
-		  	this.loading=false;
-
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
+  		this.getlistdata(page)
+//		var params = {};
+//		params.pLibraryId = this.$route.query.libraryId;
+//		params.libraryNameLike = searching;
+////		console.log(this.breadcrumb.searching);
+//		// 获取列表数据（第？页）
+//		this.$http({
+//		    method: 'post',
+//			url: this.searchURL,
+//			transformRequest: [function (data) {
+//				// Do whatever you want to transform the data
+//				let ret = ''
+//				for (let it in data) {
+//				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+//				}
+//				return ret
+//			}],
+//			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+//			data: {
+//			   params:JSON.stringify(params)
+//			}
+//	    }).then(function (response) {
+//		  	this.tabledatas=response.data.rows;
+//	  		this.page.total=response.data.total;		  		
+//		  	this.loading=false;
+//
+//		}.bind(this)).catch(function (error) {
+//		    console.log(error);
+//		}.bind(this));
   	},
 //	获取列表数据方法
   	getlistdata(page){
 		var params = {};
-		params.pLibraryId = this.$route.query.libraryId
+		console.log(this.libtype,this.selectLibraryId)
+		if(this.selectLibraryId!=='全部'){
+			params[this.libtype]=this.selectLibraryId
+		}
+		if(this.searchText){
+			params.position=this.searchText
+		}
+//		var data={};
+//		data.page=page;
+//		data.rows=this.page.size;
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -157,7 +167,6 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
 			    page:page,
 			    rows:this.page.size,
 				params:JSON.stringify(params)
@@ -187,10 +196,9 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    params: JSON.stringify(params)
+//			    params: JSON.stringify(params)
 			}
-	    }).then(function (response) {
-			console.log(response)
+	   }).then(function (response) {
 		  	this.listHeader.libraryList = response.data.rows;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -234,9 +242,13 @@ export default {
   		this.checkedId=checkedId;
   	},
 //	筛选库
-	selectlibChange(lib){
-		this.filterlib=lib
-		console.log(this.filterlib)
+	selectlibChange(libtype,selectLibraryId){
+		this.selectLibraryId=selectLibraryId;
+		this.libtype=libtype;
+//		console.log(this.libtype,this.selectLibraryId)
+//		this.filterlib=lib
+//		console.log(this.filterlib)
+		this.getlistdata(1)
 	},
   },
   data() {
@@ -247,6 +259,8 @@ export default {
       deleteURL: this.apiRoot + '/grain/',
       searchText:'',
       checkedId:[],
+      libtype:'pLibrary',
+      selectLibraryId:'全部',
       filterlib:'全部',
       list:"librarylist",
 	  modalVisible:false,
@@ -298,12 +312,14 @@ export default {
       },
       tabledatas:[],
       items: [
-//    {
-//      id: 1,
-//      prop:'libraryName',
-//      label: "被查库点",
-////      sort:true,
-//    },
+      {
+        id: 1,
+        prop:'libraryFullName',
+        label: "被查库点",
+        status:'true',
+        
+//      sort:true,
+      },
       {
         id: 2,
         prop:'problem',
@@ -320,7 +336,7 @@ export default {
       {
         id: 4,
         prop:'position',
-        label: "仓位号",
+        label: "货位号",
 //      sort:true,
       },
       {

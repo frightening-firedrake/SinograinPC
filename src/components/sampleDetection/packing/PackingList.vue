@@ -185,7 +185,7 @@ export default {
 			    params:JSON.stringify(params),
 			}
 	    }).then(function (response) {
-			console.log(response)
+//			console.log(response)
 			this.tabledatas = response.data.rows;
 			this.page.total = response.data.total;
 			this.loading = false;

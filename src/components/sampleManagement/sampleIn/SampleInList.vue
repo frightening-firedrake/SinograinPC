@@ -59,7 +59,7 @@ export default {
 	}
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.query)
   	this.modal.formdatas[3].value=this.userName;
 //  获取列表数据（第一页）
 	this.getlistdata(1)
@@ -268,7 +268,7 @@ export default {
 				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-			console.log(response.data.rows)
+//			console.log(response.data.rows)
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
 		}.bind(this)).catch(function (error) {

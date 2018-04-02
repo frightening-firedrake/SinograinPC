@@ -8,7 +8,7 @@
         </template>      
        	
 		<el-form-item label="被查库点：" prop="checkregion"  v-bind:class="{disabled:disabled}">
-		    <el-select v-model="formdatas.form.libraryName" placeholder="选择库点" :disabled="disabled">
+		    <!--<el-select v-model="formdatas.form.libraryName" placeholder="选择库点" :disabled="disabled">
 		        <el-option label="本库" value="本库"></el-option>
 		        <el-option label="山西屯留国家粮食储备库" value="山西屯留国家粮食储备库"></el-option>
 		        <el-option label="山西长治国家粮食储备库" value="山西长治国家粮食储备库"></el-option>
@@ -16,7 +16,8 @@
 		        <el-option label="长子分库" value="长子分库"></el-option>
 		        <el-option label="黎城分库" value="黎城分库"></el-option>
 		        <el-option label="沁县分库" value="沁县分库"></el-option>	
-		    </el-select>
+		    </el-select>-->
+		    <el-input v-model="formdatas.form.libraryName" :disabled="disabled"></el-input>
 		</el-form-item>
 		<el-form-item label="货位号：" prop="pnumber"  v-bind:class="{disabled:disabled}">
 		    <el-input v-model="formdatas.form.position" :disabled="disabled"></el-input>
@@ -39,7 +40,7 @@
 			    <el-input v-model="problem.rummager" disabled></el-input>
 			</el-form-item>
 			<el-form-item 
-				label="问题" 
+				label="问题：" 
 				class="problem disabled" 
 				:rules="{
 			      required: true, message: '请填写问题详情', trigger: 'blur'

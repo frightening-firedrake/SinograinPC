@@ -44,7 +44,7 @@
 	   		<template slot="empty"> 
 	      		<i class="iconfont icon-xinjian" @click=emptyCreate></i>
 	      		<br />
-	      		页面空空如也 快去新建吧！     		
+	      		未检索到相关信息！     		
 	      	</template>
 	  </el-table>	
 	  
