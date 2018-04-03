@@ -150,7 +150,7 @@ export default {
 	    }).then(function (response) {
 //			console.log(response)
 			if(response.data.success) {
-				this.getlistdata();
+				this.getlistdata(1);
 				this.$notify({
 		          	title: '入库成功',
 		          	message: '该样品已成功入库！！！',
@@ -247,6 +247,7 @@ export default {
   	getlistdata(page){
 		var params = {};
 		params.sampleState = 2
+		params.ruKuSampleState = 3
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({

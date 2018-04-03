@@ -311,12 +311,12 @@ export default {
 			actions: {
 				selection: false,
 				number: false,
-				view: true,
-				edit: true,
+				view: false,
+				edit: false,
 				dele: false,
 				manuscript: false,
 				safetyReport: false,
-				show:true,
+				show:false,
 			}
 		}
 	}

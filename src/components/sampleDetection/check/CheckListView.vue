@@ -252,6 +252,9 @@ export default {
 			}else if(data.checkPoint==4){
 				this.checktype='sfcd';
 
+			}else if(data.checkPoint==5){
+				this.checktype='cdjl';
+
 			}else if(data.checkPoint==6){
 				this.checktype='mjxs';
 
@@ -268,6 +271,9 @@ export default {
 
 			}else if(data.checkPoint==4){
 				this.checktype='sfcd';
+
+			}else if(data.checkPoint==5){
+				this.checktype='cdjl';
 
 			}else if(data.checkPoint==6){
 				this.checktype='zfsz';
@@ -295,6 +301,9 @@ export default {
 		}else if(this.checktype=='sfcd'){
 			this.editUrlend="/grain/shuifen/edit"
 			this.datalistUrlend="/grain/shuifen/getBySmallSampleId"
+		}else if(this.checktype=='cdjl'){
+			this.editUrlend="/grain/cedingjilu/edit"
+			this.datalistUrlend="/grain/cedingjilu/getBySmallSampleId"
 		}else if(this.checktype=='zfsz'){
 			this.editUrlend="/grain/zhifangsuanzhi/edit"
 			this.datalistUrlend="/grain/zhifangsuanzhi/getBySmallSampleId"

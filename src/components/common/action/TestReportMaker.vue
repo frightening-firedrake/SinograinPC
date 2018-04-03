@@ -192,7 +192,7 @@ export default {
             }
         }
         return {
-        	max_height:'4rem',
+        	max_height:'280',
       		resizable:false,
         	labelWidth:'2rem',
         	errorinline:false,

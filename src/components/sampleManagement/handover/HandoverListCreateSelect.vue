@@ -61,6 +61,7 @@ export default {
   	getsampledata(){
   		var params={};
   		params.sampleState=2
+  		params.ruKuSampleState=3
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({

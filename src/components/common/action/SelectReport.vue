@@ -6,7 +6,7 @@
 	    		 <!--<input type="text" v-model="searching" @keyup.enter='searchingfor' />-->
 	    	</el-form-item>
 	    	<el-form-item label="选择品种" style="border-bottom:none;border-left:none;">
-			    <el-select v-model="sort" placeholder="请选择品种">
+			    <el-select v-model="sort" placeholder="请选择品种" @change="changeSort">
 			        <el-option label="玉米" value="玉米"></el-option>
 			        <el-option label="小麦" value="小麦"></el-option>
 			    </el-select>
@@ -124,6 +124,7 @@ export default {
     			var checkNums=this.$route.params.tabledatas.map((val)=>{
     				return val.sampleNum?val.sampleNum:val;
     			})
+    			this.sort=this.checkList[0].sort
     			this.checkedList=this.checkList.filter((item)=>{
     				return checkNums.includes(item.sampleNum)
     			})
@@ -231,6 +232,9 @@ export default {
 //	    任务搜索
 	  	searchingfor(){
 	  		this.$emit('searchingfor',this.searching)
+	  	},
+	  	changeSort(){
+	  		this.checkedList=[];
 	  	},
     },
     data() {

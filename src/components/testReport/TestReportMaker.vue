@@ -112,14 +112,19 @@ export default {
 		this.$router.push({name:name,params})
     },
     create(){
-    	var sampleNums=[]
+    	if(!this.tabledatas.length){
+    		 this.$alert('请先添加样品！！！','提示信息',{});
+    		 return;
+    	}
+    	var ids=[]
     	this.tabledatas.forEach((item)=>{
-    		sampleNums.push(item.sampleNum)
+    		ids.push(item.id)
     	})
-    	sampleNums.sort();
-    	sampleNums=sampleNums.join(',')
+    	var sort=this.tabledatas[0].sort
+    	ids.sort();
+    	ids=ids.join(',');
 		var name=this.$route.name+'/样品检测报表详情';
-		this.$router.push({name:name,params:{sampleNums:'123456789'}})
+		this.$router.push({name:name,params:{ids:ids,title:this.formdatas.tableName,sort:sort}})
     },
   },
   data() {

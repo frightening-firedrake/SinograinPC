@@ -250,6 +250,9 @@ export default {
 			}else if(this.$route.query.checkPoint==4){
 				this.checktype='sfcd';
 
+			}else if(this.$route.query.checkPoint==5){
+				this.checktype='cdjl';
+
 			}else if(this.$route.query.checkPoint==6){
 				this.checktype='mjxs';
 
@@ -266,6 +269,9 @@ export default {
 
 			}else if(this.$route.query.checkPoint==4){
 				this.checktype='sfcd';
+
+			}else if(this.$route.query.checkPoint==5){
+				this.checktype='cdjl';
 
 			}else if(this.$route.query.checkPoint==6){
 				this.checktype='zfsz';
@@ -290,6 +296,8 @@ export default {
 			this.saveUrlend="/grain/buwanshanli/save"
 		}else if(this.checktype=='sfcd'){
 			this.saveUrlend="/grain/shuifen/save"
+		}else if(this.checktype=='cdjl'){
+			this.saveUrlend="/grain/cedingjilu/save"
 		}else if(this.checktype=='zfsz'){
 			this.saveUrlend="/grain/zhifangsuanzhi/save"
 		}else if(this.checktype=='mtpc'){

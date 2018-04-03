@@ -409,6 +409,7 @@ export default {
 //    	this.formdatas.sort='麦子';//品种
       	this.formdatas.name=response.data.name;//品种
       	this.formdatas.testItemList=response.data.sampleNums.split(',');//检测样品
+      	this.formdatas.testItemList.sort();//检测样品排序
 //      this.formdatas = response.data;
         //		  	this.tabledatas=response.data.rows;
         //	  		this.page.total=response.data.total;

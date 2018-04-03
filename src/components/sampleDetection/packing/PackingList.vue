@@ -266,10 +266,10 @@ export default {
 				sampleNo:code,
 			}
 	    }).then(function (response) {
-			console.log(response)
+//			console.log(response)
 			if(response.data.checkeds) {
 				var path=this.$route.name+'/打印条码'
-				this.$router.push({name: path,params: {code:response.data.sampleNum,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState,taskId:this.$route.query.id}})
+				this.$router.push({name: path,params: {code:response.data.sampleNum,sort:response.data.sort,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState,taskId:this.$route.query.id}})
 			}else{
 
 				this.$notify.error({

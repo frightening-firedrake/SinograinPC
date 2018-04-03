@@ -149,3 +149,6 @@
 .trmwrap .el-table__empty-block{
 	height:3rem;
 }
+.trmwrap .list .el-table__body-wrapper{
+	overflow-y:auto;
+}

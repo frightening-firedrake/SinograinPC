@@ -10,7 +10,7 @@
 	  	:data='tabledatasFilter'
 	  	show-summary
 	  	:summary-method="headerGetSummaries"
-	  	:default-sort = "{prop: 'unit', order: 'ascending'}" 
+	  	:default-sort = "{prop: 'pLibraryName', order: 'ascending'}" 
 	  	v-loading="loading"
 	  	:row-class-name="row_class_name"
 	    element-loading-customClass="table_loading"
@@ -19,7 +19,7 @@
 	    element-loading-background="rgba(255,255,255, 0.8)">
 
 	      <!--单位-->
-	      <el-table-column show-overflow-tooltip width="auto" :resizable="resizable" align="center" label="单位" prop="unit">
+	      <el-table-column show-overflow-tooltip width="auto" :resizable="resizable" align="center" label="单位" prop="pLibraryName">
 		    </el-table-column>
 	      <!--是否添加编号-->
 	      <el-table-column type="index" :index="1" align="center" label="序号" v-if="actions.number"></el-table-column>
@@ -33,6 +33,11 @@
 					    		<el-table-column show-overflow-tooltip :width="item2.width?item2.width:'auto'" :resizable="resizable"	 align="center" :key="item2.id" :label="item2.label" :sortable="item2.sort" :prop="item2.prop" :class-name="item2.class">
 						    		<template v-for="item3 in items" v-if="item3.pid==item2.id">    
 							    		<el-table-column show-overflow-tooltip :width="item3.width?item3.width:'auto'" :resizable="resizable"	 align="center" :key="item3.id" :label="item3.label" :sortable="item3.sort" :prop="item3.prop" :class-name="item3.class">
+							    			<template v-for="item4 in items" v-if="item4.pid==item3.id">    
+									    		<el-table-column show-overflow-tooltip :width="item4.width?item4.width:'auto'" :resizable="resizable"	 align="center" :key="item4.id" :label="item4.label" :sortable="item4.sort" :prop="item4.prop" :class-name="item4.class">
+									    		
+									    		</el-table-column>
+									   		</template>
 							    		</el-table-column>
 							   		</template>
 					    		</el-table-column>
@@ -42,9 +47,9 @@
 	    		</el-table-column>
 	   		</template>
 	   		<template slot="empty"> 
-	      		<i class="iconfont icon-xinjian" @click=emptyCreate></i>
-	      		<br />
-	      		未检索到相关信息！     		
+	      		<!--<i class="iconfont icon-xinjian" @click=emptyCreate></i>-->
+	      		<!--<br />
+	      		加载中请稍后！     		-->
 	      	</template>
 	  </el-table>	
 	  
@@ -79,7 +84,7 @@
 			    element-loading-spinner="el-icon-loading"
 			    element-loading-background="rgba(255,255,255, 0.8)">
 			      <!--单位-->
-			      <el-table-column width="auto" :resizable="resizable" align="center" label="单位" prop="unit" class-name="unit">
+			      <el-table-column width="auto" :resizable="resizable" align="center" label="单位" prop="pLibraryName" class-name="unit">
 				    </el-table-column>
 			      <!--是否添加编号-->
 			      <el-table-column type="index" :index="1" align="center" label="序号" v-if="actions.number"></el-table-column>
@@ -87,16 +92,31 @@
 			      <!--循环数据-->
 			   		<template v-for="item in items">    
 		    		<el-table-column v-if="item.pid==0" show-overflow-tooltip :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
-			    		<template v-for="item1 in items">    
-				    		<el-table-column v-if="item1.pid==item.id" show-overflow-tooltip :width="item1.width?item1.width:'auto'" :resizable="resizable"	 align="center" :key="item1.id" :label="item1.label" :sortable="item1.sort" :prop="item1.prop" :class-name="item1.class">
+			    		<template v-for="item1 in items"> 
+			    			
+				    		<el-table-column v-if="item1.pid==item.id&&item1.prop=='sampleNum'" show-overflow-tooltip :width="item1.width?item1.width:'auto'" :resizable="resizable"	 align="center" :key="item1.id" :label="item1.label" :sortable="item1.sort" :prop="item1.prop" :class-name="item1.class">
+	    						<template slot-scope="scope">
+						      		监{{scope.row[item1.prop]}}
+				      			</template>
+				    		</el-table-column>
+
+				    		<el-table-column v-if="item1.pid==item.id&&item1.prop!=='sampleNum'" show-overflow-tooltip :width="item1.width?item1.width:'auto'" :resizable="resizable"	 align="center" :key="item1.id" :label="item1.label" :sortable="item1.sort" :prop="item1.prop" :class-name="item1.class">
 					    		<template v-for="item2 in items">    
-						    		<el-table-column v-if="item2.pid==item1.id" show-overflow-tooltip :width="item2.width?item2.width:'auto'" :resizable="resizable"	 align="center" :key="item2.id" :label="item2.label" :sortable="item2.sort" :prop="item2.prop" :class-name="item2.class">
+
+						    		<el-table-column v-if="item2.pid==item1.id&&item2.prop!=='sampleNum'" show-overflow-tooltip :width="item2.width?item2.width:'auto'" :resizable="resizable"	 align="center" :key="item2.id" :label="item2.label" :sortable="item2.sort" :prop="item2.prop" :class-name="item2.class">
 							    		<template v-for="item3 in items">    
 								    		<el-table-column v-if="item3.pid==item2.id" show-overflow-tooltip :width="item3.width?item3.width:'auto'" :resizable="resizable"	 align="center" :key="item3.id" :label="item3.label" :sortable="item3.sort" :prop="item3.prop" :class-name="item3.class">
+								    			<template v-for="item4 in items" v-if="item4.pid==item3.id">    
+										    		<el-table-column show-overflow-tooltip :width="item4.width?item4.width:'auto'" :resizable="resizable"	 align="center" :key="item4.id" :label="item4.label" :sortable="item4.sort" :prop="item4.prop" :class-name="item4.class">
+										    		
+										    		</el-table-column>
+										   		</template>
 								    		</el-table-column>
 								   		</template>
 						    		</el-table-column>
 						   		</template>
+						   		
+						   		
 				    		</el-table-column>
 				   		</template>
 		    		</el-table-column>
@@ -118,15 +138,15 @@ export default {
 			return this.tabledata;
 		}else{
 			return this.tabledata.filter((value,index)=>{
-				return value.unit==this.unitfilter
+				return value.pLibraryName==this.unitfilter
 			})
 		}
 	},
 	units(){
 		var units=[];
 		this.tabledatasFilter.forEach((value,index)=>{
-			if(!units.includes(value.unit)){
-				units.push(value.unit);
+			if(!units.includes(value.pLibraryName)){
+				units.push(value.pLibraryName);
 			}
 		});
 		return units;
@@ -134,8 +154,8 @@ export default {
 	unitall(){
 		var unitall=[];
 		this.tabledata.forEach((value,index)=>{
-			if(!unitall.includes(value.unit)){
-				unitall.push(value.unit);
+			if(!unitall.includes(value.pLibraryName)){
+				unitall.push(value.pLibraryName);
 			}
 		});
 		return unitall;
@@ -161,7 +181,7 @@ export default {
   methods: {
   	unitdata(unit){
   		return  this.tabledatasFilter.filter((data,index)=>{
-		  			return data.unit==unit;
+		  			return data.pLibraryName==unit;
 		  		});
   	},
   	arraySpanMethod({ row, column, rowIndex, columnIndex }) {
@@ -184,9 +204,9 @@ export default {
             	return;
             }
             const values = data.map((item)=>{
-            		if(column.property=="weight"){ 
+            		if(column.property=="amount"){ 
             			return Number(item[column.property]);       			
-            		}else if(column.property=="bgzsl"){
+            		}else if(column.property=="grainQuality"){
             			return Number(item[column.property]);       			
             		}else{
             			return "心情不好这行我不加"
@@ -202,7 +222,7 @@ export default {
                    		return prev;
                     }
                 }, 0);
-                if(column.property=="weight"){
+                if(column.property=="amount"){
                 	sums[index]=sums[index].toFixed(3);
                 }
 //              sums[index] += ' 元';
@@ -223,9 +243,9 @@ export default {
             	return;
             }
             const values = data.map((item)=>{
-            		if(column.property=="weight"){ 
+            		if(column.property=="amount"){ 
             			return Number(item[column.property]);       			
-            		}else if(column.property=="bgzsl"){
+            		}else if(column.property=="grainQuality"){
             			return Number(item[column.property]);       			
             		}else{
             			return "心情不好这行我不加"
@@ -241,7 +261,7 @@ export default {
                    		return prev;
                     }
                 }, 0);
-                if(column.property=="weight"){
+                if(column.property=="amount"){
                 	sums[index]=sums[index].toFixed(3);
                 }
 //              sums[index] += ' 元';
