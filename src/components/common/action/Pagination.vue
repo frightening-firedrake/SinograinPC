@@ -9,7 +9,7 @@
       		<span>打印样品领取交接单</span>
     	</p>
 		<p v-if='page.tfootbtns.checkPrint' class='leading_out' @click="checkPrint">
-      		<span>打印样品检验单</span>
+      		<span>{{page.tfootbtns.btnText?page.tfootbtns.btnText:'打印样品检验单'}}</span>
     	</p>
 	</div>
     <el-pagination v-show='page.show' @size-change="sizeChange" @current-change="currentChange" :current-page.sync="page.currentPage" :page-size="page.size" layout="prev, pager, next" prev-text="上一页" next-text="下一页" :total="page.total">

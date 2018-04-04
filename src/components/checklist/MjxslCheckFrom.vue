@@ -639,18 +639,18 @@ export default {
   },
   methods: {
 	submit(){	
-		for(var key in this.formdatas){
-			if(!this.formdatas[key]){
-				if(this.formdatas[key]!==0){
-					this.isEmpty=true;
-					break					
-				}else{
-					this.isEmpty=false;
-				}
-			}else{
-				this.isEmpty=false;
-			}
-		}
+//		for(var key in this.formdatas){
+//			if(!this.formdatas[key]){
+//				if(this.formdatas[key]!==0){
+//					this.isEmpty=true;
+//					break					
+//				}else{
+//					this.isEmpty=false;
+//				}
+//			}else{
+//				this.isEmpty=false;
+//			}
+//		}
 		if(this.isEmpty){			
 			this.$alert('请完善表内信息','提示信息',{});
 		}else{			

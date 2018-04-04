@@ -5,7 +5,7 @@
       <!--alert-->
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" @selectlibChange="selectlibChange"></list-header>
+      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" @selectlibChange="selectlibChange" @selectTaskChange='selectTaskChange'></list-header>
       <!--表格-->
       <sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
@@ -55,6 +55,7 @@ export default {
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 	this.getlibrarylist()
+	this.getTaskList()
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
@@ -142,12 +143,15 @@ export default {
 //	获取列表数据方法
   	getlistdata(page){
 		var params = {};
-		console.log(this.libtype,this.selectLibraryId)
+//		console.log(this.libtype,this.selectLibraryId)
 		if(this.selectLibraryId!=='全部'){
 			params[this.libtype]=this.selectLibraryId
 		}
 		if(this.searchText){
 			params.position=this.searchText
+		}
+		if(this.taskId!=='全部'){
+			params.taskId=this.taskId
 		}
 //		var data={};
 //		data.page=page;
@@ -179,7 +183,7 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-	  getlibrarylist(){
+	getlibrarylist(){
 		var params = {};
 		params.pLibraryId = -1
   		// 获取列表数据（第？页）
@@ -204,6 +208,32 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+//	获取任务列表
+  	getTaskList(){
+//		var params = {};
+//		params.pLibraryId = -1
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.taskListURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+//			    params: JSON.stringify(params)
+			}
+	   }).then(function (response) {
+		  	this.listHeader.taskList = response.data.rows;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
   	//	发送删除id
   	sendDeleteId(id){
 		this.$http({
@@ -222,21 +252,46 @@ export default {
   	},
 //	获取分页点击事件中及当前页码
     getCurrentPage(currentPage){
-		if(this.searchText){			
-			this.searchingfor(this.searchText,currentPage)
-		}else{			
+//		if(this.searchText){			
+//			this.searchingfor(this.searchText,currentPage)
+//		}else{			
 			this.getlistdata(currentPage)
-		}
+//		}
 	},
 //	映射分页触发的事件
   	paginationEvent(actiontype){
-  		if(actiontype=='leading_out'){
-  			console.log('leading_out')
+  		if(actiontype=='PrintCheck'){//历史原因名字一下改不了
+  			
+//			console.log('exportExcel')
+  			this.exportExcel();
   		}else if(actiontype=='refresh'){
   			// 获取列表数据（第一页）
 			this.getlistdata(1)			
   		}
   	},
+//	导出事件
+	exportExcel(){
+		var str='?';
+		if(this.selectLibraryId!=='全部'){
+			str+=this.libtype+'='+this.selectLibraryId;
+//			params[this.libtype]=this.selectLibraryId
+		}
+		if(this.searchText){
+//			params.position=this.searchText
+			if(this.selectLibraryId!=='全部'){
+				str+='&'
+			}
+			str+='position='+this.searchText
+		}
+		if(this.taskId!=='全部'){
+			if(this.selectLibraryId!=='全部'||this.taskId!=='全部'){
+				str+='&'
+			}
+//			params.taskId=this.taskId
+			str+='taskId='+this.taskId
+		}
+		window.open(this.exportURL+str,"_blank");
+	},
 //	获取多选框选中数据的id(这是一个数组)
   	getchecked(checkedId){
   		this.checkedId=checkedId;
@@ -250,14 +305,22 @@ export default {
 //		console.log(this.filterlib)
 		this.getlistdata(1)
 	},
+//	筛选任务
+	selectTaskChange(taskId){
+		this.taskId=taskId;
+		this.getlistdata(1)
+	}
   },
   data() {
     return {
       datalistURL: this.apiRoot + '/grain/safetyReport/data',
+      exportURL:this.apiRoot + '/grain/safetyReport/data',
 	  librarylistURL: this.apiRoot + '/grain/library/data',
+	  taskListURL:this.apiRoot + '/grain/task/data',
 	  searchURL: this.apiRoot + '/grain/safetyReport/data',
       deleteURL: this.apiRoot + '/grain/',
       searchText:'',
+      taskId:'全部',
       checkedId:[],
       libtype:'pLibrary',
       selectLibraryId:'全部',
@@ -281,6 +344,7 @@ export default {
       breadcrumb:{
       	search:true,   
       	searching:'',
+      	searchPlaceholder:'请输入货位号进行搜索',
       },
       loading:true,
 //    分页数据
@@ -290,10 +354,12 @@ export default {
         currentPage: 1,
         show:true,
         tfootbtns:{
-        	btns:false,//是否添加按钮组
-        	leading_out:true,//导出按钮
-        	refresh:true,//刷新按钮
-        	delete:true, //删除按钮            	
+        	btns:true,//是否添加按钮组
+        	leading_out:false,//导出按钮
+        	refresh:false,//刷新按钮
+        	delete:false, //删除按钮     
+        	checkPrint:true,//历史原因名字不改了
+        	btnText:'导出监督检查报告',//按钮文字checkPrint为true时生效
         }
       },
 //    弹窗数据
@@ -309,6 +375,8 @@ export default {
       	date:true,
       	selectlib:true,
       	libraryList:[],
+      	task:true,
+      	taskList:[],      	
       },
       tabledatas:[],
       items: [
@@ -347,6 +415,7 @@ export default {
       },
       ],
       actions:{
+      	noview:true,
       	selection:false,
       	number:true,
       	view:true,

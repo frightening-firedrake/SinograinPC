@@ -27,7 +27,7 @@
 		
 		<div class="bread_search" v-if="breadcrumb.search">
 			<el-input
-		    placeholder="请输入搜索信息"
+		    :placeholder="breadcrumb.searchPlaceholder?breadcrumb.searchPlaceholder:'请输入搜索信息'"
 		    v-model="searching">
 			    <button slot="suffix" class="el-input__icon el-icon-search" @click="searchingfor"></button>
 			</el-input>

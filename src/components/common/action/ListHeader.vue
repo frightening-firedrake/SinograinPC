@@ -35,13 +35,23 @@
 		<div class="dataSelete libSelete" v-if="listHeader.selectlib">			
 			<p>选择库点:</p>
 			<div>
-			    <el-select v-model="selectlib"  placeholder="请选择库点" popper-class='headerSelectlib1' @change="selectlibChange1">
+			    <el-select class="lib1" v-model="selectlib"  placeholder="请选择库点" popper-class='headerSelectlib1' @change="selectlibChange1">
 					<el-option  label="全部"  value="全部"></el-option>								        									        
 					<el-option v-for="item2 in libraryList1" :label="item2.libraryName" :key="item2.id" :value="item2.id"></el-option>								        									        
 				</el-select>
-				<el-select v-model="selectlib2"  placeholder="请选择库点" popper-class='headerSelectlib1' @change="selectlibChange">
+				<el-select class="lib2" v-model="selectlib2"  placeholder="请选择库点" popper-class='headerSelectlib1' @change="selectlibChange">
 					<el-option  label="全部"  value="全部"></el-option>								        									        
 					<el-option v-for="item3 in libraryList2" :label="item3.libraryName" :key="item3.id" :value="item3.id"></el-option>								        									        
+				</el-select>
+			</div>
+		</div>
+		<!--下拉选择任务筛选-->
+		<div class="dataSelete libSelete mission" v-if="listHeader.task">			
+			<p>选择任务:</p>
+			<div>
+			    <el-select v-model="selectTask"  placeholder="请选择任务名" popper-class='headerSelectlib1' @change="selectTaskChange">
+					<el-option  label="全部"  value="全部"></el-option>								        									        
+					<el-option v-for="item4 in listHeader.taskList" :label="item4.taskName" :key="item4.id" :value="item4.id"></el-option>								        									        
 				</el-select>
 			</div>
 		</div>
@@ -187,6 +197,9 @@
 	div.listHeader div.dataSelete >p:before{
 		background:#1bb45f;
 	}
+	div.listHeader div.dataSelete.mission >p:before{
+		background:#ff4c78;
+	}
 	div.listHeader div.dataSelete >div{
 		float:left;
 		width:3rem;
@@ -272,9 +285,29 @@
 		background:#f2f2f2;
 		border-radius:0;
 	}
+	div.listHeader .libSelete .el-select.lib1 .el-input input{
+		height:0.36rem;
+		width:1.25rem;
+		line-height:0.34rem;
+		border:solid  0.01rem #dfdfdf;
+		font-size:0.16rem;
+		background:#f2f2f2;
+		border-radius:0;
+		text-align: center;
+	}
+	div.listHeader .libSelete .el-select.lib2 .el-input input{
+		height:0.36rem;
+		width:2.25rem;
+		line-height:0.34rem;
+		border:solid  0.01rem #dfdfdf;
+		font-size:0.16rem;
+		background:#f2f2f2;
+		border-radius:0;
+		text-align: center;
+	}
 	div.listHeader .libSelete .el-select .el-input input{
 		height:0.36rem;
-		width:1.75rem;
+		width:3rem;
 		line-height:0.34rem;
 		border:solid  0.01rem #dfdfdf;
 		font-size:0.16rem;
@@ -328,6 +361,7 @@ export default {
 	        radio_status:'全部',
 	        selectlib:'全部',
 	        selectlib2:'全部',
+	        selectTask:'全部',
         };
     },
     created(){
@@ -353,6 +387,9 @@ export default {
     		}else{
     			this.$emit('selectlibChange','libraryId',this.selectlib2);
     		}
+    	},	
+    	selectTaskChange(){
+			this.$emit('selectTaskChange',this.selectTask);
     	},
     	statusChange(){
 //  		console.log(this.radio_status)

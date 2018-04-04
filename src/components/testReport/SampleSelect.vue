@@ -7,7 +7,7 @@
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
-      <select-report :checkList="checkList" :checkedListAdd="checkedList" @getCheckedList="getCheckedList" @searchingfor="searchingfor"></select-report> 
+      <select-report :taskList="taskList" :checkList="checkList" :checkedListAdd="checkedList" @getCheckedList="getCheckedList" @searchingfor="searchingfor"></select-report> 
 
     </div>
 </template>
@@ -44,6 +44,7 @@ export default {
   },
   created(){
 //	console.log(this.$route.params)
+	this.getTaskList()
   	
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
@@ -112,6 +113,32 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+//	获取任务列表
+  	getTaskList(){
+//		var params = {};
+//		params.pLibraryId = -1
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.taskListURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+//			    params: JSON.stringify(params)
+			}
+	   }).then(function (response) {
+		  	this.taskList = response.data.rows;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
 //	获取搜索数据
   	searchingfor(searching){
 //		console.log(searching)
@@ -162,6 +189,7 @@ export default {
   data() {
     return {
       sampleURL:this.apiRoot + '/grain/sample/findSamplesByTask',
+	  taskListURL:this.apiRoot + '/grain/task/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -182,6 +210,7 @@ export default {
       checkList:[],
 	  checkedList:[],
       searching:'',
+      taskList:[],
     }
   }
 }

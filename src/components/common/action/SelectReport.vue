@@ -2,8 +2,11 @@
     <div class="SelectChecklist">
     	<el-form ref="form" :model="form" :label-width="labelWidth" label-position="left">
 	    	<el-form-item label="任务名称" style="border-bottom:none;">
-	    		 <el-input class="searching" v-model="searching" @keyup.native.enter='searchingfor'></el-input>
+	    		 <!--<el-input class="searching" v-model="searching" @keyup.native.enter='searchingfor'></el-input>-->
 	    		 <!--<input type="text" v-model="searching" @keyup.enter='searchingfor' />-->
+	    		<el-select v-model="searching" placeholder="请选择任务名称" @change="searchingfor">
+			        <el-option v-for="item in taskList" :label="item.taskName" :value="item.taskName" :key="item.id"></el-option>
+			    </el-select>
 	    	</el-form-item>
 	    	<el-form-item label="选择品种" style="border-bottom:none;border-left:none;">
 			    <el-select v-model="sort" placeholder="请选择品种" @change="changeSort">
@@ -95,7 +98,7 @@ import "@/assets/style/common/SelectChecklist.css";
 //本地测试要用下面import代码
 import data from '@/util/mock';
 export default {
-    props: ["checkedListAdd","checkList"],
+    props: ["checkedListAdd","checkList","taskList"],
 //  props: ["checkList"],
     created(){
     	if(this.$route.params.searching){
