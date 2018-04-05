@@ -15,13 +15,13 @@
         <CommonSelect @_select="_select"></CommonSelect>
         <!--表格-->
         <template v-if="!show">
-        <!--正式内容-->
-        <p class="tableName">
-            {{title}}
-        </p>
-        <QualityTab :items="items" class="complex" :tabledata="tabledatas" :title="title" :loading="loading"></QualityTab>
-        <!--导出按钮-->
-        <TfootButtons :tfbtns="tfbtns" @tfootEvent="tfootEvent"></TfootButtons>
+            <!--正式内容-->
+            <p class="tableName">
+                {{title}}
+            </p>
+            <QualityTab :items="items" class="complex" :tabledata="tabledatas" :title="title" :loading="loading" :key="iskey"></QualityTab>
+            <!--导出按钮-->
+            <TfootButtons :tfbtns="tfbtns" @tfootEvent="tfootEvent"></TfootButtons>
         </template>
         <!--图表-->
         <template v-if="show">
@@ -31,13 +31,13 @@
 </template>
 <style lang="scss">
 .quality {
-    .tfootbtns{
-        .btntfoot{
-            width:2.76rem;
-            padding-top:0.03rem;
-            span{
-                width:100%;
-                display:inline-block;
+    .tfootbtns {
+        .btntfoot {
+            width: 2.76rem;
+            padding-top: 0.03rem;
+            span {
+                width: 100%;
+                display: inline-block;
             }
         }
     }
@@ -95,6 +95,7 @@
     }
 }
 
+
 /*.el-main {
     .complex {
         .el-table__body-wrapper {
@@ -117,53 +118,99 @@ import data from '@/util/mock';
 
 export default {
     components: {
-        SinograinBreadcrumb, SinograinOptionTitle, CommonSelect, QualityTab,TfootButtons,QualityChart
+        SinograinBreadcrumb, SinograinOptionTitle, CommonSelect, QualityTab, TfootButtons, QualityChart
     },
     created() {
-        this.getlistdata(1)
-        this.getChart()
+        // this.getlistdata(1)
+        // this.getChart()
     },
     methods: {
-        // 获取图表的数据
-        getChart(){
-             this.$http({
-                method: 'post',
-                url: this.chartURL,
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                data: {
+        // // 获取图表的数据
+        // getChart() {
+        //     this.$http({
+        //         method: 'post',
+        //         url: this.chartURL,
+        //         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        //         data: {
 
-                }
-            }).then(function(res){
-                console.log(res)
-                this.charts = res.data
-            }.bind(this))
-        },
-        //	获取列表数据方法
-        getlistdata(page) {
-            this.loading = true;
-            // 获取列表数据（第？页）
-            this.$http({
-                method: 'post',
-                url: this.datalistURL,
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                data: {
+        //         }
+        //     }).then(function(res) {
+        //         console.log(res)
+        //         this.charts = res.data
+        //     }.bind(this))
+        // },
+        // //	获取列表数据方法
+        // getlistdata(page) {
+        //     this.loading = true;
+        //     // 获取列表数据（第？页）
+        //     this.$http({
+        //         method: 'post',
+        //         url: this.datalistURL,
+        //         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        //         data: {
 
-                }
-            }).then(function(response) {
-                this.tabledatas = response.data.rows;
+        //         }
+        //     }).then(function(response) {
+        //         this.tabledatas = response.data.rows;
 
-                setTimeout(() => {
-                    this.loading = false;
-                }, 1000)
-            }.bind(this)).catch(function(error) {
-                console.log(error);
-            }.bind(this));
-        },
+        //         setTimeout(() => {
+        //             this.loading = false;
+        //         }, 1000)
+        //     }.bind(this)).catch(function(error) {
+        //         console.log(error);
+        //     }.bind(this));
+        // },
         statusChange() {
             this.show = !this.show
         },
         _select(ev) {
             console.log(ev)
+            let randomUrl = this.apiRoot + "/grain/task/findsampleIdBylibraryId"
+            let params;
+            // 1:玉米
+            // 2:小麦
+            switch(ev.sample){
+                case "1":
+                     randomUrl = this.apiRoot + "/grain/task/findCornSampleIdBylibraryId"
+                     params = `{"libraryId":${ev.point},"position":${ev.number},"sort":"玉米"}`
+                     
+                     break;
+                case "2":
+                    params = `{"libraryId":${ev.point},"position":${ev.number},"sort":"小麦"}`
+                    randomUrl = this.apiRoot + "/grain/task/findWheatSampleIdBylibraryId" 
+                  
+                    break;
+            }
+            this.loading = true
+            this.$http({
+                method: 'post',
+                url: randomUrl,
+                transformRequest: [function(data) {
+                    // Do whatever you want to transform the data
+                    let ret = ''
+                    for (let it in data) {
+                        ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                    }
+                    return ret
+                }],
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                data: {
+                    params:params
+                }
+            }).then(function(res) {
+                this.loading = false;
+                this.items = []
+                if(ev.sample == "1"){
+                    this.iskey = "Corn"
+                    this.items = this.Corn
+                }else{
+                    this.iskey = "Wheat"
+                    this.items = this.Wheat 
+                }
+                this.tabledatas = res.data
+                this.charts = res.data
+                this.charts["iskey"] = ev.sample
+            }.bind(this))
         },
         //	表单底部触发事件btnCenterNo btnCenterYes btnLeft btnRight btnOne
         tfootEvent(date) {
@@ -171,7 +218,7 @@ export default {
             if (date == 'btnCenterL') {
 
             } else if (date == 'btnCenterR') {
-              
+
             } else if (date == 'btnLeft') {
 
             } else if (date == 'btnRight') {
@@ -179,16 +226,18 @@ export default {
             } else if (date == 'btnOne') {
 
             } else if (date == 'tableAdd') {
-        }
-    },
-        
+            }
+        },
+
     },
     data() {
         return {
             datalistURL: '/liquid/role_lyx/data',
-            chartURL:'/liquid/chart/data',
-            charts:[],
+            chartURL: '/liquid/chart/data',
+            charts: [],
+            items:[],
             tabledatas: [],
+            iskey:"Wheat",
             loading: false,
             title: "质量验收情况",
             breadcrumb: {
@@ -202,10 +251,10 @@ export default {
             // 持续显示按钮
             show: false,
             // 玉米的标头
-            items: [
+            Corn: [
                 {
                     id: 24,
-                    prop: 'slip',
+                    prop: 'taskName',
                     label: "任务名称",
                     pid: 0,
                     //      sort:true,
@@ -223,10 +272,10 @@ export default {
                 },
                 {
                     id: 27,
-                    prop: 'dj_zl',
+                    prop: 'qualityGrade',
                     label: "等级",
                     pid: 25,
-//                  width: 70,
+                    //                  width: 70,
                     //      sort:true,
                 },
                 {
@@ -240,57 +289,56 @@ export default {
                     prop: 'result_zl',
                     label: "结果判定",
                     pid: 25,
-//                  width: 70,
+                    //                  width: 70,
                     //      sort:true,
                 },
                 {
                     id: 30,
-                    prop: 'rz_zl',
+                    prop: 'realCapacity',
                     label: "容重",
                     pid: 28,
-//                  width: 70,
+                    //                  width: 70,
                     //      sort:true,
                 },
                 {
                     id: 31,
-                    prop: 'sf_zl',
+                    prop: 'shuifen_pingjunzhi',
                     label: "水分",
                     pid: 28,
-//                  width: 70,
+                    //                  width: 70,
                     //      sort:true,
                 },
                 {
                     id: 32,
-                    prop: 'zz_zl',
+                    prop: 'zazhizongliang_1',
                     label: "杂质",
                     pid: 28,
-//                  width: 70,
+                    //                  width: 70,
                     //      sort:true,
                 },
                 {
                     id: 33,
-                    prop: 'bwsl',
                     label: "不完善粒",
                     pid: 28,
                     //      sort:true,
                 },
                 {
                     id: 34,
-                    prop: 'szqw_zl',
+                    prop: 'sezeqiwei_pingjunzhi',
                     label: "色泽气味",
                     pid: 28,
                     //      sort:true,
                 },
                 {
                     id: 35,
-                    prop: 'zl_bwsl',
+                    prop: 'buwanshanlihanliang_pingjunzhi_1',
                     label: "总量",
                     pid: 33,
                     //      sort:true,
                 },
                 {
                     id: 36,
-                    prop: 'kwz_bwsl',
+                    prop: 'shengmeilihanliang_pingjunzhi',
                     label: "其中:生霉粒",
                     pid: 33,
                     //      sort:true,
@@ -305,15 +353,15 @@ export default {
                     prop: 'result_pz',
                     label: "结果判定",
                     pid: 26,
-//                  width: 70,
+                    //                  width: 70,
                     //      sort:true,
                 },
                 {
                     id: 39,
-                    prop: 'mjxsl_pz',
+                    prop: 'pingjunzhi',
                     label: "脂肪酸值",
                     pid: 37,
-//                  width: 70,
+                    //                  width: 70,
                     //      sort:true,
                 },
                 // {
@@ -326,175 +374,168 @@ export default {
                 // },
                 {
                     id: 41,
-                    prop: 'pcpfz_pz',
+                    prop: 'pinchangpingfenzhi',
                     label: "品尝评分值",
                     pid: 37,
-//                  width: 70,
+                    //                  width: 70,
+                    //      sort:true,
+                },
+                {
+                    id: 43,
+                    prop: ' sezeqiwei_pingjunzhi',
+                    label: "色泽气味",
+                    pid: 37,
+                    //                  width: 70,
+                    //      sort:true,
+                },
+            ],
+            // 小麦的表头
+            Wheat: [
+                {
+                    id: 24,
+                    prop: 'taskName',
+                    label: "任务名称",
+                    pid: 0,
+                    //      sort:true,
+                },
+                {
+                    id: 25,
+                    label: "质量情况",
+                    pid: 0,
+                },
+                {
+                    id: 26,
+                    label: "储存品质情况",
+                    pid: 0,
+                    //      sort:true,
+                },
+                {
+                    id: 27,
+                    prop: 'qualityGrade',
+                    label: "等级",
+                    pid: 25,
+                    width: 70,
+                    //      sort:true,
+                },
+                {
+                    id: 28,
+                    label: "质量指标",
+                    pid: 25,
+                    //      sort:true,
+                },
+                {
+                    id: 29,
+                    prop: 'result_zl',
+                    label: "结果判定",
+                    pid: 25,
+                    width: 70,
+                    //      sort:true,
+                },
+                {
+                    id: 30,
+                    prop: 'realCapacity',
+                    label: "容重",
+                    pid: 28,
+                    width: 70,
+                    //      sort:true,
+                },
+                {
+                    id: 31,
+                    prop: 'shuifen_pingjunzhi',
+                    label: "水分",
+                    pid: 28,
+                    width: 70,
+                    //      sort:true,
+                },
+                {
+                    id: 32,
+                    prop: 'zazhizongliang_1',
+                    label: "杂质",
+                    pid: 28,
+                    width: 70,
+                    //      sort:true,
+                },
+                {
+                    id: 33,
+                    prop: 'buwanshanlihanliang_pingjunzhi_1',
+                    label: "不完善粒",
+                    pid: 28,
+                    //      sort:true,
+                },
+                {
+                    id: 34,
+                    prop: 'szqw_zl',
+                    label: "色泽气味",
+                    pid: 28,
+                    //      sort:true,
+                },
+                {
+                    id: 35,
+                    prop: 'buwanshanlihanliang_pingjunzhi_1',
+                    label: "总量",
+                    pid: 32,
+                    //      sort:true,
+                },
+                {
+                    id: 36,
+                    prop: 'kuangwuzhihanliang_pingjunzhi',
+                    label: "其中:矿物质",
+                    pid: 32,
+                    //      sort:true,
+                },
+                {
+                    id: 37,
+                    label: "储存品质指标",
+                    pid: 26,
+                },
+                {
+                    id: 38,
+                    prop: 'result_pz',
+                    label: "结果判定",
+                    pid: 26,
+                    width: 70,
+                    //      sort:true,
+                },
+                {
+                    id: 39,
+                    prop: 'pingjunzhiganmianjinzhiliang',
+                    label: "面筋吸水量",
+                    pid: 37,
+                    width: 70,
+                    //      sort:true,
+                },
+                {
+                    id: 40,
+                    prop: 'shimianjin_pingjunzhi',
+                    label: "湿面筋",
+                    pid: 37,
+                    width: 70,
+                    //      sort:true,
+                },
+                {
+                    id: 41,
+                    prop: 'pinchangpingfenzhi',
+                    label: "品尝评分值",
+                    pid: 37,
+                    width: 70,
                     //      sort:true,
                 },
                 {
                     id: 42,
-                    prop: 'ydzs',
+                    prop: 'yingduzhishu_pingjunzhi',
                     label: "硬度指数",
                     pid: 28,
                     //      sort:true,
                 },
                 {
                     id: 43,
-                    prop: 'seqw_pz',
+                    prop: 'sezeqiwei_pingjunzhi',
                     label: "色泽气味",
                     pid: 37,
-//                  width: 70,
+                    width: 70,
                     //      sort:true,
                 },
             ],
-            // 小麦的表头
-            // items: [
-            //     {
-            //         id: 24,
-            //         prop: 'slip',
-            //         label: "任务名称",
-            //         pid: 0,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 25,
-            //         label: "质量情况",
-            //         pid: 0,
-            //     },
-            //     {
-            //         id: 26,
-            //         label: "储存品质情况",
-            //         pid: 0,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 27,
-            //         prop: 'dj_zl',
-            //         label: "等级",
-            //         pid: 25,
-            //         width: 70,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 28,
-            //         label: "质量指标",
-            //         pid: 25,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 29,
-            //         prop: 'result_zl',
-            //         label: "结果判定",
-            //         pid: 25,
-            //         width: 70,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 30,
-            //         prop: 'rz_zl',
-            //         label: "容重",
-            //         pid: 28,
-            //         width: 70,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 31,
-            //         prop: 'sf_zl',
-            //         label: "水分",
-            //         pid: 28,
-            //         width: 70,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 32,
-            //         prop: 'zz_zl',
-            //         label: "杂质",
-            //         pid: 28,
-            //         width: 70,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 33,
-            //         prop: 'bwsl',
-            //         label: "不完善粒",
-            //         pid: 28,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 34,
-            //         prop: 'szqw_zl',
-            //         label: "色泽气味",
-            //         pid: 28,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 35,
-            //         prop: 'zl_bwsl',
-            //         label: "总量",
-            //         pid: 32,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 36,
-            //         prop: 'kwz_bwsl',
-            //         label: "其中:矿物质",
-            //         pid: 32,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 37,
-            //         label: "储存品质指标",
-            //         pid: 26,
-            //     },
-            //     {
-            //         id: 38,
-            //         prop: 'result_pz',
-            //         label: "结果判定",
-            //         pid: 26,
-            //         width: 70,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 39,
-            //         prop: 'mjxsl_pz',
-            //         label: "面筋吸水量",
-            //         pid: 37,
-            //         width: 70,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 40,
-            //         prop: 'smj_pz',
-            //         label: "湿面筋",
-            //         pid: 37,
-            //         width: 70,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 41,
-            //         prop: 'pcpfz_pz',
-            //         label: "品尝评分值",
-            //         pid: 37,
-            //         width: 70,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 42,
-            //         prop: 'ydzs',
-            //         label: "硬度指数",
-            //         pid: 28,
-            //         //      sort:true,
-            //     },
-            //     {
-            //         id: 43,
-            //         prop: 'seqw_pz',
-            //         label: "色泽气味",
-            //         pid: 37,
-            //         width: 70,
-            //         //      sort:true,
-            //     },
-            // ],
             tfbtns: {
                 // btnCenter: {
                 //     btnTextL: '申请扦样',
@@ -506,9 +547,9 @@ export default {
                 //		btnRight:{
                 //			btnText:'导出Excel表格',
                 //		},
-                		btnOne:{
-                			btnText:'导出Excel表格',
-                		},     	
+                btnOne: {
+                    btnText: '导出Excel表格',
+                },
             },
         }
     }

@@ -7,6 +7,13 @@
            margin-left: 0.5rem;
            height:100%;
            display:inline-block;
+           .el-tooltip{
+               width:1.3rem;
+               background-color:transparent;
+               border:none;
+               padding:0;
+               height:100%;
+           }
         &:first-child{
             margin-left:0;
         }
@@ -21,16 +28,26 @@
         .el-select{
             // margin-left:0.23rem
             width:2rem;
+            font-size:0.16rem;
             height:0.36rem;
             background-color:#f2f2f2;
+            .el-input__inner{
+                border-radius: 0;
+                height:100%;
+            }
             .el-input{
                 height:100%;
+                
                 input{
                     height:100% !important;
                     border-radius:0;
                     font-size:0.16rem;
                     color:#333333;
                     background-color: #f2f2f2;
+                }
+                &.is-disabled{
+                    background-color:#f2f2f2;
+                    
                 }
             }
         }
