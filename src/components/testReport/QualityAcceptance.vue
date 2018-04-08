@@ -21,7 +21,7 @@
             </p>
             <QualityTab :items="items" class="complex" :tabledata="tabledatas" :title="title" :loading="loading" :key="iskey"></QualityTab>
             <!--导出按钮-->
-            <TfootButtons :tfbtns="tfbtns" @tfootEvent="tfootEvent"></TfootButtons>
+            <TfootButtons :tfbtns="tfbtns" @tfootEvent="tfootEvent" v-if="isenter"></TfootButtons>
         </template>
         <!--图表-->
         <template v-if="show">
@@ -96,6 +96,7 @@
 }
 
 
+
 /*.el-main {
     .complex {
         .el-table__body-wrapper {
@@ -164,21 +165,22 @@ export default {
             this.show = !this.show
         },
         _select(ev) {
+            this.isenter = true
             console.log(ev)
             let randomUrl = this.apiRoot + "/grain/task/findsampleIdBylibraryId"
             let params;
             // 1:玉米
             // 2:小麦
-            switch(ev.sample){
+            switch (ev.sample) {
                 case "1":
-                     randomUrl = this.apiRoot + "/grain/task/findCornSampleIdBylibraryId"
-                     params = `{"libraryId":${ev.point},"position":${ev.number},"sort":"玉米"}`
-                     
-                     break;
+                    randomUrl = this.apiRoot + "/grain/task/findCornSampleIdBylibraryId"
+                    params = `{"libraryId":${ev.point},"position":${ev.number},"sort":"玉米"}`
+
+                    break;
                 case "2":
                     params = `{"libraryId":${ev.point},"position":${ev.number},"sort":"小麦"}`
-                    randomUrl = this.apiRoot + "/grain/task/findWheatSampleIdBylibraryId" 
-                  
+                    randomUrl = this.apiRoot + "/grain/task/findWheatSampleIdBylibraryId"
+
                     break;
             }
             this.loading = true
@@ -195,17 +197,17 @@ export default {
                 }],
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 data: {
-                    params:params
+                    params: params
                 }
             }).then(function(res) {
                 this.loading = false;
                 this.items = []
-                if(ev.sample == "1"){
+                if (ev.sample == "1") {
                     this.iskey = "Corn"
                     this.items = this.Corn
-                }else{
+                } else {
                     this.iskey = "Wheat"
-                    this.items = this.Wheat 
+                    this.items = this.Wheat
                 }
                 this.tabledatas = res.data
                 this.charts = res.data
@@ -224,7 +226,41 @@ export default {
             } else if (date == 'btnRight') {
 
             } else if (date == 'btnOne') {
-
+                let btnUrl
+                let ids = []
+                this.tabledatas.forEach((i, v) => {
+                    ids.push(i.sampleId)
+                })
+                switch (this.tabledatas.iskey) {
+                    case "1":
+                        // 玉米
+                        btnUrl = this.apiRoot + "/grain/sample/ExportYMzhiliang"
+                        break;
+                    case "2":
+                        // 小麦
+                        btnUrl = this.apiRoot + "/grain/sample/ExportXMzhiliang"
+                        break;
+                }
+                ids = ids.join()
+                console.log(ids)
+                this.$http({
+                    method: 'post',
+                    url: btnUrl,
+                    transformRequest: [function(data) {
+                        // Do whatever you want to transform the data
+                        let ret = ''
+                        for (let it in data) {
+                            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                        }
+                        return ret
+                    }],
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    data: {
+                        id: ids
+                    }
+                }).then(res=>{
+                    console.log(res)
+                })
             } else if (date == 'tableAdd') {
             }
         },
@@ -235,9 +271,9 @@ export default {
             datalistURL: '/liquid/role_lyx/data',
             chartURL: '/liquid/chart/data',
             charts: [],
-            items:[],
+            items: [],
             tabledatas: [],
-            iskey:"Wheat",
+            iskey: "Wheat",
             loading: false,
             title: "质量验收情况",
             breadcrumb: {
@@ -248,6 +284,8 @@ export default {
                 btn: false,
                 btntext: '',
             },
+            // 按钮的显示隐藏
+            isenter: false,
             // 持续显示按钮
             show: false,
             // 玉米的标头

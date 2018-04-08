@@ -98,7 +98,6 @@ export default {
         this.zazhizongliang_1()
         this.buwanshanlihanliang_pingjunzhi_1()
         if(this.chartonly.iskey == "1"){
-            alert(1)
             this.zhifangsuanzhi()
         }else{
             this.yingduzhishu_pingjunzhi()
