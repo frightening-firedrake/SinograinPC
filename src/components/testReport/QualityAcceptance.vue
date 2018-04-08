@@ -116,7 +116,6 @@ import QualityChart from "@/components/testReport/Quality/QualityChart"
 import "@/assets/style/common/list.css"
 //本地测试要用下面import代码
 import data from '@/util/mock';
-
 export default {
     components: {
         SinograinBreadcrumb, SinograinOptionTitle, CommonSelect, QualityTab, TfootButtons, QualityChart
@@ -174,13 +173,20 @@ export default {
             switch (ev.sample) {
                 case "1":
                     randomUrl = this.apiRoot + "/grain/task/findCornSampleIdBylibraryId"
-                    params = `{"libraryId":${ev.point},"position":${ev.number},"sort":"玉米"}`
+                    if(ev.number){
+                        params = `{"libraryId":${ev.point},"position":${ev.number},"sort":"玉米"}`
+                    }else{
+                        params = `{"libraryId":${ev.point},"sort":"玉米"}`
+                    }
 
                     break;
                 case "2":
-                    params = `{"libraryId":${ev.point},"position":${ev.number},"sort":"小麦"}`
+                     if(ev.number){
+                       params = `{"libraryId":${ev.point},"position":${ev.number},"sort":"小麦"}`
+                    }else{
+                        params = `{"libraryId":${ev.point},"sort":"小麦"}`
+                    }
                     randomUrl = this.apiRoot + "/grain/task/findWheatSampleIdBylibraryId"
-
                     break;
             }
             this.loading = true
@@ -243,24 +249,8 @@ export default {
                 }
                 ids = ids.join()
                 console.log(ids)
-                this.$http({
-                    method: 'post',
-                    url: btnUrl,
-                    transformRequest: [function(data) {
-                        // Do whatever you want to transform the data
-                        let ret = ''
-                        for (let it in data) {
-                            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-                        }
-                        return ret
-                    }],
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    data: {
-                        id: ids
-                    }
-                }).then(res=>{
-                    console.log(res)
-                })
+                console.log(btnUrl)
+                window.open(btnUrl+'?ids='+ids+'&title=质量验收报告',"_blank");
             } else if (date == 'tableAdd') {
             }
         },
