@@ -25,7 +25,7 @@
         </template>
         <!--图表-->
         <template v-if="show">
-            <QualityChart :charts="charts"></QualityChart>
+            <QualityChart :charts="charts" :key="iskey"></QualityChart>
         </template>
     </div>
 </template>

@@ -4,15 +4,15 @@
             质量验收情况
         </p>
         <!--<div  :class="{'rongzhong chart':true,'right':(index+1)%2==0}" v-for="(chart,index) in chartonly.rows" :key="index">
-                            <p v-if="chart.name == 1">容重统计图</p>
-                            <p v-else-if="chart.name == 2">水分统计图</p>
-                            <p v-else-if="chart.name == 3">杂质</p>
-                            <p v-else-if="chart.name == 4">不完善粒统计图</p>
-                            <p v-else-if="chart.name == 5">硬度统计图</p>
-                            <p v-else>面筋吸水量统计图</p>                        
-                            <div :id="'myChart'+index"  class='chartonly'>
-                            </div>
-                        </div>-->
+                                    <p v-if="chart.name == 1">容重统计图</p>
+                                    <p v-else-if="chart.name == 2">水分统计图</p>
+                                    <p v-else-if="chart.name == 3">杂质</p>
+                                    <p v-else-if="chart.name == 4">不完善粒统计图</p>
+                                    <p v-else-if="chart.name == 5">硬度统计图</p>
+                                    <p v-else>面筋吸水量统计图</p>                        
+                                    <div :id="'myChart'+index"  class='chartonly'>
+                                    </div>
+                                </div>-->
         <div class='rongzhong chart'>
             <p>容重统计图</p>
             <div id="rongzhong" class='chartonly'></div>
@@ -29,15 +29,15 @@
             <p>不完善粒统计图</p>
             <div id="buwanshanli" class='chartonly'> </div>
         </div>
-        <div class='rongzhong chart' >
+        <div class='rongzhong chart' v-show="!issample">
             <p>硬度统计图</p>
             <div id="yingdu" class='chartonly'></div>
         </div>
-        <div class='rongzhong chart right' >
+        <div class='rongzhong chart right' v-show="!issample">
             <p>面筋吸水量统计图</p>
             <div id="mianjinxishuiliang" class='chartonly'></div>
         </div>
-        <div class='rongzhong chart' >
+        <div class='rongzhong chart' v-show="issample">
             <p>脂肪酸值</p>
             <div id="zhifangsuanzhi" class='chartonly'></div>
         </div>
@@ -97,9 +97,9 @@ export default {
         this.shuifen()
         this.zazhizongliang_1()
         this.buwanshanlihanliang_pingjunzhi_1()
-        if(this.chartonly.iskey == "1"){
+        if (this.chartonly.iskey == "1") {
             this.zhifangsuanzhi()
-        }else{
+        } else {
             this.yingduzhishu_pingjunzhi()
             this.pingjunzhiganmianjinzhiliang()
         }
@@ -110,6 +110,17 @@ export default {
         // this.foronly(this.chartonly, "yingduzhishu_pingjunzhi", "硬度", "yingdu")
         // this.foronly( this.chartonly, "pingjunzhiganmianjinzhiliang", "面筋吸水量", "mianjinxishuiliang")
     },
+    computed: {
+        issample() {
+            if (this.charts.iskey == "1") {
+                // 1玉米
+                return true
+            } else {
+                // 小麦
+                return false
+            }
+        }
+    },
     watch: {
         'charts': function(i, v) {
             this.chartonly = this.charts
@@ -117,15 +128,22 @@ export default {
             this.shuifen()
             this.zazhizongliang_1()
             this.buwanshanlihanliang_pingjunzhi_1()
-            if(this.chartonly.iskey == "1"){
-            this.zhifangsuanzhi()
-        }else{
-            this.yingduzhishu_pingjunzhi()
-            this.pingjunzhiganmianjinzhiliang()
-        }
+            if (this.chartonly.iskey == "1") {
+                this.zhifangsuanzhi()
+            } else {
+                this.yingduzhishu_pingjunzhi()
+                this.pingjunzhiganmianjinzhiliang()
+            }
         }
     },
     methods: {
+        zhifangsuanzhi() {
+            if (this.issample) {
+                let option = this.foronly(this.chartonly, "pingjunzhi", "脂肪酸值")
+                this.drawChart(option, "zhifangsuanzhi")
+            }
+
+        },
         // 容重统计图
         rongzhong() {
             let option = this.foronly(this.chartonly, "realCapacity", "容重")
@@ -144,17 +162,20 @@ export default {
             this.drawChart(option, "buwanshanli")
         },
         yingduzhishu_pingjunzhi() {
-            let option = this.foronly(this.chartonly, "yingduzhishu_pingjunzhi", "硬度")
-            this.drawChart(option, "yingdu")
+            if (!this.issample) {
+                let option = this.foronly(this.chartonly, "yingduzhishu_pingjunzhi", "硬度")
+                this.drawChart(option, "yingdu")
+            }
+
         },
         pingjunzhiganmianjinzhiliang() {
-            let option = this.foronly(this.chartonly, "pingjunzhiganmianjinzhiliang", "面筋吸水量")
-            this.drawChart(option, "mianjinxishuiliang")
+            if (!this.issample) {
+                let option = this.foronly(this.chartonly, "pingjunzhiganmianjinzhiliang", "面筋吸水量")
+                this.drawChart(option, "mianjinxishuiliang")
+            }
+
         },
-        zhifangsuanzhi() {
-            let option = this.foronly(this.chartonly, "pingjunzhi", "脂肪酸值")
-            this.drawChart(option, "zhifangsuanzhi")
-        },
+
         foronly(forchild, only, tableName) {
             // 数据 data
             // 颜色 color
@@ -174,12 +195,12 @@ export default {
                     data.push(i["buwanshanlihanliang_pingjunzhi_1"])
                     datas.push(i["kuangwuzhihanliang_pingjunzhi"])
                     legend = ["总量", "其中:矿物质"]
-                    color.push(this.ChartColor[this.index + 1 % this.ChartColor.length])
+                    color.push(this.ChartColor[(this.index + 1) % this.ChartColor.length])
                 } else if (only == "buwanshanlihanliang_pingjunzhi_1" && this.chartonly.iskey == "1") {
                     data.push(i["buwanshanlihanliang_pingjunzhi_1"])
                     datas.push(i["shengmeilihanliang_pingjunzhi"])
                     legend = ["总量", "其中:生霉粒"]
-                    color.push(this.ChartColor[this.index + 1 % this.ChartColor.length])
+                    color.push(this.ChartColor[(this.index + 1) % this.ChartColor.length])
                 } else {
                     data.push(i[only])
                     legend.push(tableName)
@@ -209,12 +230,6 @@ export default {
                 ]
             }
             this.index++
-            console.log({
-                data: optiondata,
-                xAxis: xAxis,
-                color: color,
-                legend: legend,
-            })
             return {
                 data: optiondata,
                 xAxis: xAxis,
@@ -223,7 +238,6 @@ export default {
             }
         },
         drawChart(option, id) {
-            console.log(id)
             let myChart = echarts.init(document.getElementById(id))
             myChart.setOption({
                 // 图标内容的位置
