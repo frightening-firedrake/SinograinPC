@@ -271,8 +271,15 @@ export default {
   	},
 //	导出事件
 	exportExcel(){
+//		做个拦截筛选结果为空时不执行
+		if(!this.tabledatas.length){
+			this.$notify.error({
+	          	title: '导出失败',
+	          	message: '请重新选择筛选信息！！！',
+	        });
+	        return;
+		}
 //		打开新窗口
-		var newWindow=window.open('about:blank');
 //		设置参数
 		var params = {};
 		if(this.selectLibraryId!=='全部'){
@@ -285,8 +292,7 @@ export default {
 			params.taskId=this.taskId
 		}
 		params = JSON.stringify(params);
-		newWindow.location.href="http://192.168.1.223/grain/safetyReport/export/"+params;
-		
+		window.open(this.exportURL+'/'+params,"_blank");
 	},
 //	获取多选框选中数据的id(这是一个数组)
   	getchecked(checkedId){
