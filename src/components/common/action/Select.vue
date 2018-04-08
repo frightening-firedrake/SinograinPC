@@ -17,7 +17,7 @@
         </label>
         <label>
             <span class="title_select">选择库点:</span>
-            <el-select v-model="point" placeholder="请选择库点">
+            <el-select v-model="point" placeholder="请选择库点" @change="_select">
                 <el-option v-for="item in pointList" :key="item.id" :label="item.libraryName" :value="item.id">
                 </el-option>
             </el-select>
