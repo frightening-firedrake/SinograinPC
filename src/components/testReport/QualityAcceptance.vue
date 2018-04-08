@@ -116,7 +116,6 @@ import QualityChart from "@/components/testReport/Quality/QualityChart"
 import "@/assets/style/common/list.css"
 //本地测试要用下面import代码
 import data from '@/util/mock';
-
 export default {
     components: {
         SinograinBreadcrumb, SinograinOptionTitle, CommonSelect, QualityTab, TfootButtons, QualityChart
@@ -249,6 +248,8 @@ export default {
                         break;
                 }
                 ids = ids.join()
+                console.log(ids)
+                console.log(btnUrl)
                 window.open(btnUrl+'?ids='+ids+'&title=质量验收报告',"_blank");
             } else if (date == 'tableAdd') {
             }
