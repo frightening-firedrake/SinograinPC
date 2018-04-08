@@ -284,34 +284,9 @@ export default {
 		if(this.taskId!=='全部'){
 			params.taskId=this.taskId
 		}
-//		去获取url
-		this.$http({
-		    method: 'post',
-			url: this.exportURL,
-			dataType:'jsonp',
-//			url: this.datalistURL,
-			transformRequest: [function (data) {
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-				params:JSON.stringify(params)
-			}
-	    }).then(function (response) {
-//	    	console.log(response)
-			if(!response.data.success){
-				newWindow.close();
-			}else{				
-				newWindow.location.href=response.data;
-			}
-		}.bind(this)).catch(function (error) {
-//			newWindow.close();
-		    console.log(error);
-		}.bind(this));
+		params = JSON.stringify(params);
+		newWindow.location.href="http://192.168.1.223/grain/safetyReport/export/"+params;
+		
 	},
 //	获取多选框选中数据的id(这是一个数组)
   	getchecked(checkedId){
