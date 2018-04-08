@@ -271,26 +271,47 @@ export default {
   	},
 //	导出事件
 	exportExcel(){
-		var str='?';
+//		打开新窗口
+		var newWindow=window.open('about:blank');
+//		设置参数
+		var params = {};
 		if(this.selectLibraryId!=='全部'){
-			str+=this.libtype+'='+this.selectLibraryId;
-//			params[this.libtype]=this.selectLibraryId
+			params[this.libtype]=this.selectLibraryId
 		}
 		if(this.searchText){
-//			params.position=this.searchText
-			if(this.selectLibraryId!=='全部'){
-				str+='&'
-			}
-			str+='position='+this.searchText
+			params.position=this.searchText
 		}
 		if(this.taskId!=='全部'){
-			if(this.selectLibraryId!=='全部'||this.taskId!=='全部'){
-				str+='&'
-			}
-//			params.taskId=this.taskId
-			str+='taskId='+this.taskId
+			params.taskId=this.taskId
 		}
-		window.open(this.exportURL+str,"_blank");
+//		去获取url
+		this.$http({
+		    method: 'post',
+			url: this.exportURL,
+			dataType:'jsonp',
+//			url: this.datalistURL,
+			transformRequest: [function (data) {
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				params:JSON.stringify(params)
+			}
+	    }).then(function (response) {
+//	    	console.log(response)
+			if(!response.data.success){
+				newWindow.close();
+			}else{				
+				newWindow.location.href=response.data;
+			}
+		}.bind(this)).catch(function (error) {
+//			newWindow.close();
+		    console.log(error);
+		}.bind(this));
 	},
 //	获取多选框选中数据的id(这是一个数组)
   	getchecked(checkedId){
@@ -314,7 +335,7 @@ export default {
   data() {
     return {
       datalistURL: this.apiRoot + '/grain/safetyReport/data',
-      exportURL:this.apiRoot + '/grain/safetyReport/data',
+      exportURL:this.apiRoot + '/grain/safetyReport/export',
 	  librarylistURL: this.apiRoot + '/grain/library/data',
 	  taskListURL:this.apiRoot + '/grain/task/data',
 	  searchURL: this.apiRoot + '/grain/safetyReport/data',
