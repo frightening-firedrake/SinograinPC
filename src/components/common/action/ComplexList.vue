@@ -187,7 +187,7 @@ export default {
   	arraySpanMethod({ row, column, rowIndex, columnIndex }) {
         if (columnIndex === 0) {
           	if (rowIndex === 0) {
-            	return [100, 1];
+            	return [100000, 1];
           	}else{
           		return [0, 0];
           	}

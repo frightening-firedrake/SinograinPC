@@ -163,6 +163,7 @@
 }*/
 .complex .el-table__body-wrapper{
 	width:100%!important;
+	min-height:auto;
 	overflow-x: hidden;
 	/*overflow:hidden;*/
 	/*padding:1px;*/

@@ -163,6 +163,7 @@
 .tablelist .el-table__body-wrapper{
 	width:100%!important;
 	overflow-x: hidden;
+	min-height:5rem;
 	/*overflow:hidden;*/
 	/*padding:1px;*/
 }
