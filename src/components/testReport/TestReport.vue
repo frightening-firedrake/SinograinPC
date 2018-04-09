@@ -7,7 +7,7 @@
       <!--标题-->
       <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>
       <!--合格筛选--> 
-      <tabselect :hege="hege" :currentTab="currentTab" @hegeChange="hegeChange"></tabselect> 
+      <!--<tabselect :hege="hege" :currentTab="currentTab" @hegeChange="hegeChange"></tabselect>--> 
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->

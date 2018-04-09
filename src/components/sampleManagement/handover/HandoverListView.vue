@@ -1,10 +1,10 @@
 <template>
-  <div class='listpagewrap'>
+  <div class='listpagewrap' id="listpagewrap">
     <!--面包屑-->
     <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
     <!--标题-->
     <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>
-    <div id="print">
+    <div id="print" >
       <div class="handover_view" style="width:100%;">
         <div class="hand_view_title" style="width:100%;height:0.45rem;text-align:center;line-height:0.45rem;font-size:0.24rem;color:#333333;">
           <span>山西中储粮粮食质检中心</span>
@@ -62,7 +62,7 @@
             </el-col>
           </el-row>
           <el-row class="hand_view_tabbody" style="border-top:none;">
-            <el-col :span="6" v-for="(item,index) in formdatas.testItemList" :key="index" style="border-top:1px solid #dfdfdf;">
+            <el-col :span="6" v-for="(item,index) in formdatas.testItemList" class='loopBorder' :key="index" style="border-top:1px solid #dfdfdf;">
               <el-col style="" :span="8">
                 <span>{{index+1}}</span>
               </el-col>
@@ -70,7 +70,7 @@
                 <span>监{{item}}</span>
               </el-col>
             </el-col>
-            <el-col style="" :span="6" v-for="(item,index) in testItemListadd" :key="index+99" style="border-top:1px solid #dfdfdf;">
+            <el-col style="" :span="6" v-for="(item,index) in testItemListadd" class='loopBorder' :key="index+99" style="border-top:1px solid #dfdfdf;">
               <el-col style="" :span="8">
                 <span>{{index+formdatas.testItemList.length+1}}</span>
               </el-col>
@@ -125,7 +125,7 @@
                 <span>&nbsp;</span>
               </el-col>
             </el-col>
-            <el-col style="" :span="12" style="border-left:1px solid #dfdfdf;">
+            <el-col :span="12" class="loopBorder" style="border-left:1px solid #dfdfdf;">
               <el-col style="" :span="4">
                 <span>&nbsp;</span>
               </el-col>
@@ -149,7 +149,7 @@
         </div>
       </div>
       </div>
-     <div class="leading_out" @click="print()">
+     <div id='printbuttom' class="leading_out" @click="print()">
      <!--<div class="leading_out" @click="lodopPrint()">-->
         <span>打印样品领取交接单</span>
       </div>
@@ -158,144 +158,7 @@
 </template>
 
 <style>
-.handover_view{
-    width:100%;
-    /*border-right:1px solid #dfdfdf;*/
-    /*border-bottom:1px solid #dfdfdf; */
-    /*padding-bottom:0.2rem;*/
-}
-.handover_view .hand_view_title{
-    width:100%;
-    height:0.45rem;
-    text-align:center;
-    line-height:0.45rem;
-    font-size:0.24rem;
-    color:#333333;
-}
-.handover_view .hand_view_tab{
-    width:100%;   
-    border-bottom:1px solid #dfdfdf;
-}
-.handover_view .hand_view_tab .hand_view_tab_title{
-    width:100%;
-    height:0.62rem;
-    border:1px solid #dfdfdf;
-    border-bottom:none;
-    background-color:#eeeeee;
-    text-align:center;
-    border-right:none;
-    line-height:0.62rem;
-    border-right:1px solid #dfdfdf;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-.handover_view .hand_view_tab .hand_view_tab_title p{
-    font-size:0.22rem;
-}
-.handover_view .hand_view_tab .hand_view_tab_num{
-    width:100%;
-    line-height:0.4rem;
-    height:0.4rem;
-    border-top:1px solid #dfdfdf;
-    border-left:1px solid #dfdfdf;
-    text-align:right;
-    border-right:1px solid #dfdfdf;
-    padding-right:1rem;
-}
-.handover_view .hand_view_tab .hand_view_tab_num p{
-    font-size:0.18rem;
-}
-.handover_view .hand_view_tab .hand_view_tab_content{
-    width:100%;
-    border-right:1px solid #dfdfdf;
-    
-}
-.handover_view .hand_view_tab .hand_view_tab_content .hand_view_tab_content_font{
-    width:100%;
-    height:0.6rem;
-    border-top:1px solid #dfdfdf;
-    color:#333333;
-    font-size:0.18rem;
-    line-height:0.6rem;
-    overflow: hidden;
-}
-.handover_view .hand_view_tab .hand_view_tab_content .hand_view_tab_content_font .el-col-2{
-    text-align:right;
-    padding-right:0.2rem;
-    background-color:#fbfbfb;
-    border-left:1px solid #dfdfdf;
-    overflow: hidden;
-}
-.handover_view .hand_view_tab .hand_view_tab_content .hand_view_tab_content_font .el-col-2 span{
-    display:block;
-    width:100%;
-    height:100%;
 
-    text-align:right;
-}
-.handover_view .hand_view_tab .hand_view_tab_content .hand_view_tab_content_font .el-col-20{
-    padding-left:0.88rem;
-    border-left:1px solid #dfdfdf;
-}
-.handover_view .hand_view_tab .hand_view_tabbody{
-    width:100%;
-    /*height:0.6rem;*/
-    line-height:0.6rem;
-    border-top:1px solid #dfdfdf;
-    overflow: hidden;
-    border-right:1px solid #dfdfdf;
-    
-}
-.handover_view .hand_view_tab .hand_view_tabbody .el-col-8,.el-col-4{
-    text-align:center;
-    background-color:#fbfbfb;
-    border-left:1px solid #dfdfdf;
-}
-.handover_view .hand_view_tab .hand_view_tabbody .el-col-8,.el-col-4,.el-col-16,.el-col-20 span{
-    font-size:0.16rem;
-}
-.handover_view .hand_view_tab .hand_view_tabbody .el-col-16,.handover_view .hand_view_tab .hand_view_tabbody .el-col-20{
-    border-left:1px solid #dfdfdf;
-    text-align:center;
-    /*background-color:white;*/
-}
-.handover_view .hand_view_tab .hand_view_tabbody.date .el-col-4{
-    background-color:transparent;
-    border:none;
-}
-.handover_view .hand_view_tab .hand_view_tabbody.date .el-col-20{
-    border:none;
-}
-
- .leading_out{
-     margin-bottom:0.2rem;
-    /*float: left;*/
-    height: 0.4rem;
-    line-height: 0.33rem;
-
-    font-size: 0.24rem;
-    cursor: pointer;
-    width:auto;
-    display:inline-block;
-    margin-top:0.3rem;
-    background-color: #58b481;
-    border-radius: 0.05rem;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 0.04rem;
-    color: #ffffff;
-}
- .leading_out span{
-   border: 1px solid #FFFFFF;
-    border-radius: 0.04rem;
-    padding: 0 0.2rem;
-    font-weight: 500;
-    line-height:0.3rem;
-    text-align:center;
-    width:100%;
-    height:100%;
-    display:block;
-}
 </style>
 
 <script>
@@ -359,16 +222,30 @@ export default {
       // 		 operaSupport: false
       // 		 });
       // alert(0)
+//    let subOutputRankPrint = document.getElementById('print');
+//    console.log(subOutputRankPrint.innerHTML);
+//    let newContent = subOutputRankPrint.innerHTML;
+//    let oldContent = document.body.innerHTML;
+//    document.body.innerHTML = newContent;
+//    print.portrait   =  false  
+//    window.print();
+//    window.location.reload();
+//    document.body.innerHTML = oldContent;
+//    return false;
+      
       let subOutputRankPrint = document.getElementById('print');
-      console.log(subOutputRankPrint.innerHTML);
-      let newContent = subOutputRankPrint.innerHTML;
-      let oldContent = document.body.innerHTML;
-      document.body.innerHTML = newContent;
-      print.portrait   =  false  
+			let father = document.getElementById('father');
+			let listpagewrap = document.getElementById('listpagewrap');
+			let printbuttom = document.getElementById('printbuttom');
+			document.body.insertBefore(subOutputRankPrint,father)
+			subOutputRankPrint.classList.add('blackBorder')
+			father.style.display="none";
+      print.portrait   =  true;  
       window.print();
-      window.location.reload();
-      document.body.innerHTML = oldContent;
-      return false;
+      subOutputRankPrint.classList.remove('blackBorder')
+      listpagewrap.insertBefore(subOutputRankPrint,printbuttom)
+			father.style.display="block";
+     	return false;
     },
     lodopPrint() {
     	LODOP = getLodop();
