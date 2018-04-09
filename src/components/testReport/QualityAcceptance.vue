@@ -25,7 +25,7 @@
         </template>
         <!--图表-->
         <template v-if="show">
-            <QualityChart :charts="charts"></QualityChart>
+            <QualityChart :charts="charts" :key="iskey"></QualityChart>
         </template>
     </div>
 </template>
@@ -216,6 +216,9 @@ export default {
                     this.items = this.Wheat
                 }
                 this.tabledatas = res.data
+                this.tabledatas.forEach((i,v)=>{
+                    i.sampleNum = "监"+i.sampleNum
+                })
                 this.charts = res.data
                 this.charts["iskey"] = ev.sample
             }.bind(this))
@@ -285,6 +288,14 @@ export default {
                     prop: 'taskName',
                     label: "任务名称",
                     pid: 0,
+                    //      sort:true,
+                },
+                {
+                    id: 23,
+                    prop: 'sampleNum',
+                    label: "检验编号",
+                    pid: 25,
+                    //                  width: 70,
                     //      sort:true,
                 },
                 {
@@ -416,6 +427,7 @@ export default {
                     //                  width: 70,
                     //      sort:true,
                 },
+                
             ],
             // 小麦的表头
             Wheat: [
@@ -424,6 +436,14 @@ export default {
                     prop: 'taskName',
                     label: "任务名称",
                     pid: 0,
+                    //      sort:true,
+                },
+                {
+                    id: 23,
+                    prop: 'sampleNum',
+                    label: "检验编号",
+                    pid: 25,
+                    //                  width: 70,
                     //      sort:true,
                 },
                 {
