@@ -270,6 +270,8 @@ export default {
       	edit:true,
       	dele:true,
       	auth:true,
+      	show:true,
+      	noview:true,
       }
     }
   }

@@ -142,7 +142,7 @@ export default {
   },
   data() {
     return {
-      datalistURL: this.apiRoot + '/liquid/role21/data',
+      datalistURL: '/liquid/role21/data',
       searchURL: this.apiRoot + '/liquid/role2/data/search',
       deleteURL: this.apiRoot + '/liquid/role2/data/delete',
       checkedId:[],
