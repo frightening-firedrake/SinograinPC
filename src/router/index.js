@@ -80,7 +80,7 @@ const routes= [
     {
       path: '/index',
       component: Layout,
-      redirect: '/index/grainDepot/createSampleReglc',
+//    redirect: '/index/grainDepot/createSampleReglc',
       children:[
           {
             path:"home",
@@ -89,7 +89,7 @@ const routes= [
             redirect: 'grainDepot/createSampleReglc',
           },
 //        粮库管理
-					{
+		  {
             path:"grainDepot",
             name: '粮库管理',
             component:CreateSampleReglc,
@@ -98,27 +98,28 @@ const routes= [
           {
             path:"grainDepot/createSampleReglc",
             name:"粮库管理/新建扦样登记表",
-            component:CreateSampleReglc
+            component:CreateSampleReglc,
+            meta: { needAuth: 'grainDepot' },
           },
           {
             path:"grainDepot/createSampleReglc/sampleReglc",
             name:"粮库管理/新建扦样登记表/扦样登记表",
-            component:SampleReglc
+            component:SampleReglc,
           },
           {
             path:"grainDepot/sampleRegListlc",
             name:"粮库管理/扦样登记列表",
-            component:SampleRegListlc
+            component:SampleRegListlc,
           },
           {
             path:"grainDepot/sampleRegListlc/sampleReglc",
             name:"粮库管理/扦样登记列表/扦样登记表",
-            component:SampleReglc
+            component:SampleReglc,
           },
           {
             path:"grainDepot/sampleRegListlc/sampleDraft",
             name:"粮库管理/扦样登记列表/扦样登记草稿",
-            component:CreateSampleReglc
+            component:CreateSampleReglc,
           },
 //        扦样流程
           {
@@ -135,89 +136,89 @@ const routes= [
           {
             path:"sampling/examinationLibraryList",
             name:"扦样流程/审批扦样库点列表",
-            component:ExaminationLibraryList
+            component:ExaminationLibraryList,
           },
           {
             path:"sampling/examinationLibraryList/sampleRegList",
             name:"扦样流程/审批扦样列表/扦样登记列表",
-            component:SampleRegList
+            component:SampleRegList,
           },
           
           {
             path:"sampling/examinationLibraryList/sampleRegList/sampleReg",
             name:"扦样流程/审批扦样列表/扦样登记列表/扦样登记表",
-            component:SampleReg
+            component:SampleReg,
           },
           {
             path:"sampling/sampleLibraryList",
             name:"扦样流程/扦样单位列表",
-            component:SampleLibraryList
+            component:SampleLibraryList,
           },       
           {
             path:"sampling/libraryList",
             name:"扦样流程/扦样库点列表",
-            component:LibraryList
+            component:LibraryList,
           },
           {
             path:"sampling/libraryList/samplingList",
             name:"扦样流程/扦样库点列表/扦样登记列表",
-            component:SamplingList
+            component:SamplingList,
           },
           
           {
             path:"sampling/libraryList/samplingList/sampleShowList",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表",
-            component:SampleShowList
+            component:SampleShowList,
           },
 		    	{
             path:"sampling/libraryList/samplingList/sampleShowList/samplingListCreate",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建扦样",
-            component:SamplingListCreate
+            component:SamplingListCreate,
           },
           {
             path:"sampling/libraryList/samplingList/sampleShowList/samplingListEdit",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/查看扦样",
-            component:SamplingListEdit
+            component:SamplingListEdit,
           },
           {
             path:"sampling/libraryList/samplingList/sampleShowList/manuscriptCreate",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建工作底稿",
-            component:ManuscriptCreate
+            component:ManuscriptCreate,
           },
           {
             path:"sampling/libraryList/samplingList/sampleShowList/manuscriptEdit",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/查看工作底稿",
-            component:ManuscriptEdit
+            component:ManuscriptEdit,
           },
           {
             path:"sampling/libraryList/samplingList/sampleShowList/safetyReportCreate",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建监督检查报告",
-            component:SafetyReportCreate
+            component:SafetyReportCreate,
           },
           {
             path:"sampling/libraryList/samplingList/sampleShowList/safetyReportEdit",
             name:"扦样流程/扦样库点列表/扦样登记列表/被查库点列表/查看监督检查报告",
-            component:SafetyReportEdit
+            component:SafetyReportEdit,
           },
           {
             path:"sampling/PLibraryList",
             name:"扦样流程/监督检查情况",
-            component:PLibraryList
+            component:PLibraryList,
           },
           {
             path:"sampling/SRLibraryList",
             name:"扦样流程/监督检查库点列表",
-            component:SRLibraryList
+            component:SRLibraryList,
           },
           {
             path:"sampling/SRLibraryList/SafetyReportList",
             name:"扦样流程/监督检查库点列表/监督检查列表",
-            component:SafetyReportList
+            component:SafetyReportList,
           },
           {
             path:"sampling/SRLibraryList/SafetyReportList/SafetyProblem",
             name:"扦样流程/监督检查库点列表/监督检查列表/监督检查详情",
-            component:SafetyProblem
+            component:SafetyProblem,
           },
 //        样品管理
  					{
@@ -229,58 +230,58 @@ const routes= [
           {
             path:"sampleManagement/sampleIn",
             name:"样品管理/样品入库列表",
-            component:SampleInList
+            component:SampleInList,
           },
           {
             path:"sampleManagement/sampleIn/sampleInEdit",
             name:"样品管理/样品入库列表/查看样品",
-            component:SampleInEdit
+            component:SampleInEdit,
           },
 //        {
 //          path:"sampleManagement/sampleIn/sampleInCreate",
 //          name:"样品管理/样品入库列表/新建样品",
-//          component:SampleInCreate
+//          component:SampleInCreate,
 //        },
           
           {
             path:"sampleManagement/handover",
             name:"样品管理/样品领取交接单",
-            component:HandoverList
+            component:HandoverList,
           },
           {
             path:"sampleManagement/handover/handoverListCreate",
             name:"样品管理/样品领取交接单/新建样品领取交接单",
-            component:HandoverListCreate
+            component:HandoverListCreate,
           },
           {
             path:"sampleManagement/handover/handoverListCreate/handoverListCreateSelect",
             name:"样品管理/样品领取交接单/新建样品领取交接单/选择样品编号",
-            component:HandoverListCreateSelect
+            component:HandoverListCreateSelect,
           },
           {
             path:"sampleManagement/handover/handoverListCreate/handoverListPrint",
             name:"样品管理/样品领取交接单/新建样品领取交接单/打印样品领取交接单",
-            component:HandoverListView
+            component:HandoverListView,
           },
           {
             path:"sampleManagement/handover/handoverListView",
             name:"样品管理/样品领取交接单/查看样品领取交接单",
-            component:HandoverListView
+            component:HandoverListView,
           },
           {
             path:"sampleManagement/handover/handoverListEdit/handoverListPrint",
             name:"样品管理/样品领取交接单/编辑样品领取交接单/打印样品领取交接单",
-            component:HandoverListView
+            component:HandoverListView,
           },
           {
             path:"sampleManagement/handover/handoverListEdit",
             name:"样品管理/样品领取交接单/编辑样品领取交接单",
-            component:HandoverListEdit
+            component:HandoverListEdit,
           },
           {
             path:"sampleManagement/handover/handoverListEdit/handoverListEditSelect",
             name:"样品管理/样品领取交接单/编辑样品领取交接单/选择样品编号",
-            component:HandoverListEditSelect
+            component:HandoverListEditSelect,
           },
 //         样品检测
  					{
@@ -292,43 +293,43 @@ const routes= [
           {
             path:"sampleDetection/packingTaskList",
             name:"样品检测/分装任务列表",
-            component:PackingTaskList
+            component:PackingTaskList,
           },
           {
             path:"sampleDetection/packingTaskList/packingList",
             name:"样品检测/分装任务列表/分装小样管理",
-            component:PackingList
+            component:PackingList,
           },
           {
             path:"sampleDetection/packingTaskList/packingList/packingView",
             name:"样品检测/分装任务列表/分装小样管理/查看小样",
-            component:PackingView
+            component:PackingView,
           },
           {
             path:"sampleDetection/packingTaskList/packingList/packingPrint",
             name:"样品检测/分装任务列表/分装小样管理/打印条码",
-            component:PackingPrint
+            component:PackingPrint,
           },
           
           {
             path:"sampleDetection/checkList",
             name:"样品检测/样品检验单",
-            component:CheckList
+            component:CheckList,
           },
           {
             path:"sampleDetection/checkList/checkEdit",
             name:"样品检测/样品检验单/编辑样品检验单",
-            component:CheckEdit
+            component:CheckEdit,
           },
           {
             path:"sampleDetection/checkList/checkView",
             name:"样品检测/样品检验单/查看样品检验单",
-            component:CheckView
+            component:CheckView,
           },
           {
             path:"sampleDetection/checkList/checkCreate",
             name:"样品检测/样品检验单/新建样品检验单",
-            component:CheckCreate
+            component:CheckCreate,
           },
 //        样品检验报告TestReportManagement
 					{
@@ -340,36 +341,36 @@ const routes= [
           {
             path:"TestReportManagement/TestReportMaker",
             name:"检测报表管理/样品检测报表制作",
-            component:TestReportMaker
+            component:TestReportMaker,
           },
           {
             path:"TestReportManagement/TestReportMaker/SampleSelect",
             name:"检测报表管理/样品检测报表制作/选取样品",
-            component:SampleSelect
+            component:SampleSelect,
           },
           {
             path:"TestReportManagement/TestReportMaker/TestReport",
             name:"检测报表管理/样品检测报表制作/样品检测报表详情",
-            component:TestReport
+            component:TestReport,
           },
           {
             path:"TestReportManagement/SuperviseList",
             name:"检测报表管理/监督检查报告",
-            component:SuperviseList
+            component:SuperviseList,
           },
           {
             path:"TestReportManagement/SuperviseList/SuperviseShow",
             name:"检测报表管理/监督检查报告/监督检查详情",
-            component:SuperviseShow
+            component:SuperviseShow,
           },
           {
             path:"TestReportManagement/QualityAcceptance",
             name:"检测报表管理/质量验收报告",
-            component:QualityAcceptance
+            component:QualityAcceptance,
           },
 
 //        权限管理AuthorityManagement
-					{
+		  {
             path:"AuthorityManagement",
             name: '权限管理',
             component:RoleList,
@@ -378,60 +379,61 @@ const routes= [
           {
             path:"AuthorityManagement/RoleList",
             name:"权限管理/角色管理",
-            component:RoleList
+            component:RoleList,
+            meta: { needAuth: 'AuthorityManagement' },
           },
           {
             path:"AuthorityManagement/RoleList/RoleEdit",
             name:"权限管理/角色管理/编辑角色",
-            component:RoleEdit
+            component:RoleEdit,
           },
           {
             path:"AuthorityManagement/RoleList/RoleAdd",
             name:"权限管理/角色管理/新建角色",
-            component:RoleAdd
+            component:RoleAdd,
           },
           {
             path:"AuthorityManagement/RoleList/RoleAut",
             name:"权限管理/角色管理/角色授权",
-            component:RoleAut
+            component:RoleAut,
           },        
           {
             path:"AuthorityManagement/UserList",
             name:"权限管理/用户管理",
-            component:UserList
+            component:UserList,
           },
           {
             path:"AuthorityManagement/UserList/UserEdit",
             name:"权限管理/用户管理/编辑用户",
-            component:UserEdit
+            component:UserEdit,
           },
           {
             path:"AuthorityManagement/UserList/UserAdd",
             name:"权限管理/用户管理/新建用户",
-            component:UserAdd
+            component:UserAdd,
           },
           {
             path:"AuthorityManagement/UserList/UserAut",
             name:"权限管理/用户管理/用户授权",
-            component:UserAut
+            component:UserAut,
           },
            {
             path:"AuthorityManagement/ResourcesList",
             name:"权限管理/资源管理",
-            component:ResourcesList
+            component:ResourcesList,
           },
           {
             path:"AuthorityManagement/ResourcesList/ResourcesEdit",
             name:"权限管理/资源管理/编辑资源",
-            component:ResourcesEdit
+            component:ResourcesEdit,
           },
           {
             path:"AuthorityManagement/ResourcesList/ResourcesAdd",
             name:"权限管理/资源管理/新建资源",
-            component:ResourcesAdd
+            component:ResourcesAdd,
           },
 //     		信息管理InformationManagement
-					{
+		  {
             path:"InformationManagement",
             name: '信息管理',
             component:InformationAdd,
@@ -440,16 +442,51 @@ const routes= [
           {
             path:"InformationManagement/InformationAdd",
             name:"信息管理/添加信息",
-            component:InformationAdd
+            component:InformationAdd,
+            meta: { needAuth: 'InformationManagement' },
+//          beforeEnter: (to, from, next) => {
+//
+//		    }
           },
 
       ]
     },
     
-  ]
+  ];
+
 const router = new Router({routes})
-//router.beforeEach((to, from, next) => {
-//console.log(from)
-//next()
-//})
+//通过全局导航守卫检查权限？
+router.beforeEach((to, from, next) => {
+	var userAuth=router.app.$store.getters.userAuth
+	
+
+//	验证登录状态
+ 	if (!userAuth&&to.path!=='/login') {
+		console.log('没登陆')
+	    next({
+	      path: '/login',
+	      //query: { redirect: to.fullPath }// 考虑登录成功之后可以根据query中的内容跳转回原来的路由(页面)
+	    })
+	}else if (userAuth&&to.path=='/index') {
+//		验证用户权限制定不同首页地址重定向
+		userAuth=userAuth.split(',');
+	  	if (userAuth.includes('grainDepot')) {
+
+	    	next({path: '/index/grainDepot'})	  	
+	  	}else{	  		
+	  		next({path: '/index/sampling'})	  	
+	  	}
+	}else if (to.matched.some(record => record.meta.needAuth)) {
+//		验证用户权限
+		userAuth=userAuth.split(',');
+	  	if (!userAuth.includes(to.meta.needAuth)) {
+	  		console.log('没权限')
+	    	next(false)	  	
+	  	}else{	  		
+	  		next()	  	
+	  	}
+	} else {
+	    next()
+	}
+})
 export default router ;

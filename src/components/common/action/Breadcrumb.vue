@@ -43,11 +43,27 @@ import {mapMutations} from 'vuex';
     props: ['breadcrumb'],
     data() {
       return {
+      	routeTest:'测试中哦！！！',
         searching:'',
 		firstfalg:true,//第一次加载确定路由的开关
 		breadcrumbListsCache:[],
       };
     },
+//  beforeRouteEnter (to, from, next) {
+//  	console.log('44354321213154')
+//	    next(vm => {
+//	        console.log(vm.routeTest)
+//	    })
+//	},
+//	beforeRouteUpdate (to, from, next) {
+//  	console.log(from)
+//	},
+//	watch:{	
+//		'$route' (to, from) {
+//	      	// 对路由变化作出响应...
+//	      	console.log(32132131313213)
+//	    }
+//	},
     created(){
     	this.breadcrumbListFirst();
 //  	console.log(this.$route)

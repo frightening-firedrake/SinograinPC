@@ -24,7 +24,7 @@
 		</div>
 		<!--导航-->
 		<!--  <div style="min-height:4.5rem;">-->
-		<template v-for="item in navlist" v-if="item.pid==0">
+		<template v-for="item in navlist" v-if="checkAuth(userAuth,item.needAuth)&&item.pid==0">
 			<el-submenu :index="item.lid.toString()">
 			<!--<el-submenu :index="item.lid.toString()" key="item.lid">-->
 				<template slot="title">
@@ -101,7 +101,7 @@ export default {
 	},
 	computed:{
 		...mapState(["isCollapse"]),
-		...mapGetters(["modal_id","libraryId","libraryName","userName"]),
+		...mapGetters(["modal_id","libraryId","libraryName","userName","userAuth"]),
 		activePath(){
 
 			var path=this.$route.path.split('/')
@@ -129,7 +129,8 @@ export default {
 					linkto: '',
 					level: 2,
 					pid: 0,
-					lid: 12
+					lid: 12,
+					needAuth: 'grainDepot',
 				},
 
 				{
@@ -287,7 +288,8 @@ export default {
 					linkto: '',
 					level: 2,
 					pid: 0,
-					lid: 18
+					lid: 18,
+					needAuth: 'AuthorityManagement',
 				},
 				{
 					icon: 'icon-jiaoseguanli',
@@ -327,7 +329,9 @@ export default {
 					title: '添加信息',
 					level: 2,
 					pid: 22,
-					lid: 23
+					lid: 23,
+					needAuth: 'InformationManagement',
+					
 				},
 
 			]
@@ -362,7 +366,17 @@ export default {
 			setTimeout(()=>{
 				this.slideToggle();				
 			},100)
-		}
+		},
+		checkAuth(userAuth,needAuth){
+			if(!needAuth){
+				return true
+			}
+			if(!userAuth){
+				return false				
+			}
+			userAuth=userAuth.split(',')
+			return userAuth.includes(needAuth);
+		},
 	},
 
 }

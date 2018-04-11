@@ -6,6 +6,7 @@ Vue.use(Vuex)
 const state = {
 	userName:'',//用户名
 	userId:'',//用户id
+	userAuth:'',//用户权限逗号隔开的字符串
 	libraryName:'',//库点名
 	libraryId:'',//库点id
 	libraryNames:[],//库点组
@@ -45,6 +46,13 @@ const getters = {
     		return state.userName;    		
     	}else{
     		return sessionStorage.getItem("userName");
+    	}
+    },
+    userAuth:function(state){
+    	if(state.userAuth){
+    		return state.userAuth;    		
+    	}else{
+    		return sessionStorage.getItem("userAuth");
     	}
     },
     userId:function(state){
@@ -101,20 +109,24 @@ const mutations = {
 		state.libraryId=payload.libraryId;
 		state.userName=payload.userName;
 		state.userId=payload.userId;
+		state.userAuth=payload.userAuth;
 		sessionStorage.setItem('libraryId', payload.libraryId);
 		sessionStorage.setItem('libraryName', payload.libraryName);
 		sessionStorage.setItem('userName', payload.userName);
 		sessionStorage.setItem('userId', payload.userId);
+		sessionStorage.setItem('userAuth', payload.userAuth);
 	},
 	logout(state){
 		state.libraryName='';
 		state.libraryId='';
 		state.userName='';
 		state.userId='';
+		state.userAuth='';
 		sessionStorage.removeItem('libraryId');
 		sessionStorage.removeItem('libraryName');
 		sessionStorage.removeItem('userName');
 		sessionStorage.removeItem('userId');
+		sessionStorage.removeItem('userAuth');
 	},
 	setBaseMsg(state,payload){
 		state.libraryNames=payload.libraryNames;
