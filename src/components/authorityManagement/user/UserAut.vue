@@ -59,9 +59,17 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				id:this.$route.query
+				id:this.$route.query.id
 			}
 	    }).then(function (response) {
 		  	this.formdatas=response.data.formdatas;
@@ -103,7 +111,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role23/data',
+      datalistURL:this.apiRoot +'/grain/user/get',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],

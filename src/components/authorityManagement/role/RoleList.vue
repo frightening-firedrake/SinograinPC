@@ -136,11 +136,18 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
 			    page:page,
-			    pageSize:this.page.size,
+			    rows:this.page.size,
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
@@ -191,7 +198,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role22/data',
+      datalistURL:this.apiRoot +'/grain/role/data',
       searchURL:'/liquid/role/data/search',
       deleteURL:'/liquid/role/data/delete',
       checkedId:[],
@@ -246,13 +253,13 @@ export default {
       items: [
       {
         id: 1,
-        prop:'roleName',
+        prop:'displayName',
         label: "角色名称",
 //      sort:true
       },
       {
         id: 2,
-        prop:'maxMember',
+        prop:'roleMaxNum',
         label: "最大限制用户数",
 //      sort:true,
       },

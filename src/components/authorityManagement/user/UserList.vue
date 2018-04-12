@@ -65,7 +65,7 @@ export default {
 //	监听列表点击授权事件
   	this.$root.eventHub.$on("authlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/AuthorityManagement/UserList/UserAut',query:{libid:id}})
+		this.$router.push({path: '/index/AuthorityManagement/UserList/UserAut',query:{id:id}})
   	}.bind(this));
   },
   destroy(){
@@ -136,11 +136,18 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
 			    page:page,
-			    pageSize:this.page.size,
+			    rows:this.page.size,
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
@@ -191,7 +198,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role23/data',
+      datalistURL:this.apiRoot +'/grain/user/data',
       searchURL:'/liquid/role/data/search',
       deleteURL:'/liquid/role/data/delete',
       checkedId:[],
@@ -252,8 +259,8 @@ export default {
       },
       {
         id:3,
-        prop:'assignRole',
-        label:"分配用户",
+        prop:'displayName',
+        label:"分配角色",
 //      sort:true,
       },
       {
