@@ -45,7 +45,7 @@
 	        <div class="treewrap">
 		    	<header>
 					<el-checkbox v-model="tree_select_toggle" @change="checkall">选中全部</el-checkbox>
-					<el-checkbox v-model="tree_open_toggle" @change="openall">展开全部</el-checkbox>
+					<!--<el-checkbox v-model="tree_open_toggle" @change="openall">展开全部</el-checkbox>-->
 					<div class="prompt">
 						温馨小提示：此
 						<el-checkbox v-model="disabletrue" disabled></el-checkbox>				
