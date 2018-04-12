@@ -146,7 +146,7 @@ export default {
       	title:'新建用户',
       	form:{
       	  userName:"",
-          assignRole:'',
+          userPass:'',
           phone: "",
           email: "",
 //        action:['查看','增加'],
@@ -154,11 +154,7 @@ export default {
       	},
       	labels:[
       		{label:'用户名称：',type:"input",},
-      		{label:'分配角色：',type:"select",
-      			items:[
-	      		
-	      		],
-      		},
+      		{label:'用户密码：',type:"input",},
       		{label:'电话号码：',type:"input",},
       		{label:'邮箱号码：',type:"input",},
 //    		{label:'分配角色：',type:"num",},

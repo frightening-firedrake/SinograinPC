@@ -126,6 +126,8 @@ export default {
       	title:'新建角色',
       	form:{
           roleName: '',
+          fath: '',
+          rely: '',
           maxNumber: '1',
           remarks: '',
 //        action:['查看','增加'],
@@ -133,6 +135,20 @@ export default {
       	},
       	labels:[
       		{label:'角色名称：',type:"input",},
+      		{label:'父级角色：',type:"select",
+      			items:[
+	      			{label:'父级角色1',value:'1'},
+	      			{label:'父级角色2',value:'2'},
+	      			{label:'父级角色3',value:'3'},
+	      		],
+      		},
+      		{label:'依赖角色：',type:"select",
+      			items:[
+	      			{label:'依赖角色1',value:'1'},
+	      			{label:'依赖角色2',value:'2'},
+	      			{label:'依赖角色3',value:'3'},
+	      		],
+      		},
       		{label:'最大用户限制数：',type:"num",},
       		{label:'备注：',type:"input",class:'full'},
 //    		{label:'相关操作：',type:"checkbox",class:'full',

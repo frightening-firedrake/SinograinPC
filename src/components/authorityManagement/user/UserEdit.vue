@@ -123,7 +123,7 @@ export default {
       	title:'编辑用户',
       	form:{
       	  userName:"李佳",
-          assignRole:'管理员',
+          userPass:'管理员',
           phone: "15940324325",
           email: "23474@qq.com",
 //        action:['查看','增加'],
@@ -131,13 +131,7 @@ export default {
       	},
       	labels:[
       		{label:'用户名称：',type:"input",},
-      		{label:'分配角色：',type:"select",
-      			items:[
-	      			{label:'管理员',value:'1'},
-	      			{label:'管理员2',value:'2'},
-	      			{label:'管理员3',value:'3'},
-	      		],
-      		},
+      		{label:'用户密码：',type:"input",},
       		{label:'电话号码：',type:"input",},
       		{label:'邮箱号码：',type:"input",},
 //    		{label:'分配角色：',type:"num",},
