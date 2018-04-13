@@ -164,6 +164,12 @@ export default {
       	actions:[
       		{displayName:'写点啥？',permission:'不知道',operationRId:'瞎胡写吧' }
       	],
+//    	依赖操作下拉项目
+      	operationRIds:[
+      		{label:'菜单',value:'1'},
+	      	{label:'菜单2',value:'2'},
+	      	{label:'菜单3',value:'3'},
+      	],
       	labels:[
       		{label:'资源名称：',type:"input",class:'full'},
       		{label:'资源类型：',type:"select",
