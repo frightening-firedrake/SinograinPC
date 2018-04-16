@@ -39,10 +39,10 @@ export default {
 	...mapGetters(["modal_id"]),
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.query)
 //  获取列表数据（第一页）
-//	this.getdata()
-
+	this.getdata()
+	this.getRole();
   },
   destroy(){
 
@@ -58,16 +58,86 @@ export default {
 		    method: 'post',
 			url: this.datalistURL,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],			
 			data: {
-				id:this.$route.query
+				id:this.$route.query.id
+			}
+	   }).then(function (response) {
+		  	this.formdatas.form.displayName=response.data.displayName;
+		  	this.formdatas.form.roleExtendPId=response.data.roleExtendPId;
+		  	this.formdatas.form.roleRelyId=response.data.roleRelyId;
+		  	this.formdatas.form.maxNumber=response.data.maxNumber;
+		  	this.formdatas.form.remarks=response.data.remarks;
+
+		  		this.loading=false;
+
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+  	getRole(){
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.getRoleURL,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			data: {
+		
 			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
-//	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+		  	response.data.rows.forEach((item)=>{
+		  		var obj={label:item.displayName,value:item.id}
+		  		if(item.id!==this.$route.query.id){
+		  			this.formdatas.labels[1].items.push(obj)
+		  			this.formdatas.labels[2].items.push(obj)		  			
+		  		}
+			})
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+  	submit(data){
+		console.log(data)
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.saveURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				displayName:data.displayName,
+				roleExtendPId:data.roleExtendPId,
+				roleRelyId:data.roleRelyId,
+				roleMaxNum:data.maxNumber,
+				remarks:data.remarks,
+				id:this.$route.query.id,
+			}
+	    }).then(function (response) {
+		  	this.$router.go(-1)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -79,6 +149,14 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.searchURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 //			data: {
 //			   
@@ -94,14 +172,13 @@ export default {
   	},
 	titleEvent(){
   		console.log('titleEvent');
-  	},
-  	submit(data){
-  		console.log(data);
-  	}
+    },
   },
   data() {
     return {
-      datalistURL:'/liquid/role23/data',
+      getRoleURL:this.apiRoot +'/grain/role/data',
+      saveURL:this.apiRoot +'/grain/role/edit',
+      datalistURL:this.apiRoot +'/grain/role/get',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -122,9 +199,9 @@ export default {
       formdatas: {
       	title:'编辑角色',
       	form:{
-          roleName: '',
-          fath: '',
-          rely: '',
+          displayName: '',
+          roleExtendPId: '',
+          roleRelyId: '',
           maxNumber: '1',
           remarks: '',
 //        action:['查看','增加'],
@@ -134,16 +211,12 @@ export default {
       		{label:'角色名称：',type:"input",},
       		{label:'父级角色：',type:"select",
       			items:[
-	      			{label:'父级角色1',value:'1'},
-	      			{label:'父级角色2',value:'2'},
-	      			{label:'父级角色3',value:'3'},
+	      			{label:'无',value:-1},
 	      		],
       		},
       		{label:'依赖角色：',type:"select",
       			items:[
-	      			{label:'依赖角色1',value:'1'},
-	      			{label:'依赖角色2',value:'2'},
-	      			{label:'依赖角色3',value:'3'},
+	      			{label:'无',value:-1},
 	      		],
       		},
       		{label:'最大用户限制数：',type:"num",},

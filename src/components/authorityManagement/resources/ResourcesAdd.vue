@@ -41,7 +41,7 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
-//	this.getdata()
+	this.getResource()
 
   },
   destroy(){
@@ -51,23 +51,27 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
 //	获取列表数据方法
-  	getdata(page){
-  		this.loading=true;
+  	getResource(){
+  		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
-			url: this.datalistURL,
+			url: this.getResourceURL,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				id:this.$route.query
+		
 			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
-//	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+//		  	response.data.operation.forEach((item)=>{
+//				var obj={label:item.displayName,value:item.id}
+//	  			this.formdatas.labels[1].items.push(obj)
+//	  			this.formdatas.labels[2].items.push(obj)
+//			})
+//		  	response.data.resource.forEach((item)=>{
+//				var obj={label:item.displayName,value:item.id}
+//	  			this.formdatas.labels[1].items.push(obj)
+//	  			this.formdatas.labels[2].items.push(obj)
+//			})
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -94,10 +98,7 @@ export default {
   	},
 	titleEvent(){
   		console.log('titleEvent');
-  	},
-  	submit(data){
-  		console.log(data);
-  	},
+    },
   	actionAdd(){
   		var lastIndex=this.formdatas.actions.length-1;
   		var lastItem=this.formdatas.actions[lastIndex];
@@ -133,10 +134,39 @@ export default {
 	      });          
 	    });
   	},
+  	submit(data){
+		console.log(data)
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.saveURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				resourceName:data.resourceName,
+				resourceType:data.resourceType,
+				resourcePId:data.resourcePId,
+				params:JSON.stringify(data.actions),
+			}
+	    }).then(function (response) {
+			this.$router.go(-1)
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
   },
   data() {
     return {
-      datalistURL:'/liquid/role23/data',
+      getResourceURL:this.apiRoot +'/grain/resource/get/resourceAndOperation',
+      saveURL:this.apiRoot +'/grain/resource/save',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -158,34 +188,30 @@ export default {
       	title:'新建资源',
       	form:{
       	  resourceName:"",
-      	  resourceType:"",
-          resourcePName:"",
-//        resourceType:'2',
+      	  resourceType:1,
+          resourcePId:"",
       	},
 //    	操作相关的
       	actions:[
-//    		{displayName:'',permission:'',operationRId:'' }
+      		{operation:'',permission:'',relyName:'' }
       	],
 //    	依赖操作下拉项目
       	operationRIds:[
-      		{label:'菜单',value:'1'},
-	      	{label:'菜单2',value:'2'},
-	      	{label:'菜单3',value:'3'},
+      		{label:'无',value:-1},
       	],
       	labels:[
       		{label:'资源名称：',type:"input",class:'full'},
       		{label:'资源类型：',type:"select",
       			items:[
-	      			{label:'菜单',value:'1'},
-	      			{label:'菜单2',value:'2'},
-	      			{label:'菜单3',value:'3'},
+	      			{label:'菜单',value:1},
+	      			{label:'元素',value:2},
+	      			{label:'文件',value:3},
+	      			{label:'操作',value:4},
 	      		],
       		},
       		{label:'父级资源：',type:"select",
       			items:[
-	      			{label:'菜单',value:'1'},
-	      			{label:'菜单2',value:'2'},
-	      			{label:'菜单3',value:'3'},
+	      			{label:'无',value:-1},
 	      		],
       		},
 //    		{label:'分配角色：',type:"num",},

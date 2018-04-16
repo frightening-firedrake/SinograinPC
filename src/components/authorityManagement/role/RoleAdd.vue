@@ -39,7 +39,8 @@ export default {
 	...mapGetters(["modal_id"]),
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.query)
+	this.getRole();
 //  获取列表数据（第一页）
 //	this.getdata()
   },
@@ -50,6 +51,26 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
 //	获取列表数据方法
+	getRole(){
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.getRoleURL,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+		
+			}
+	    }).then(function (response) {
+		  	response.data.rows.forEach((item)=>{
+				var obj={label:item.displayName,value:item.id}
+	  		this.formdatas.labels[1].items.push(obj)
+	  		this.formdatas.labels[2].items.push(obj)
+			})
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
   	submit(data){
 		console.log(data)
   		this.loading=false;
@@ -67,12 +88,15 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				displayName:data.roleName,
+				displayName:data.displayName,
+				roleExtendPId:data.roleExtendPId,
+				roleRelyId:data.roleRelyId,
 				roleMaxNum:data.maxNumber,
-				remarks:data.remarks
+				remarks:data.remarks,
+
 			}
 	    }).then(function (response) {
-		
+			this.$router.go(-1)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -104,6 +128,7 @@ export default {
   },
   data() {
     return {
+      getRoleURL:this.apiRoot +'/grain/role/data',
       saveURL:this.apiRoot +'/grain/role/save',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
@@ -125,9 +150,9 @@ export default {
       formdatas: {
       	title:'新建角色',
       	form:{
-          roleName: '',
-          fath: '',
-          rely: '',
+          displayName: '',
+          roleExtendPId: '',
+          roleRelyId: '',
           maxNumber: '1',
           remarks: '',
 //        action:['查看','增加'],
@@ -137,16 +162,12 @@ export default {
       		{label:'角色名称：',type:"input",},
       		{label:'父级角色：',type:"select",
       			items:[
-	      			{label:'父级角色1',value:'1'},
-	      			{label:'父级角色2',value:'2'},
-	      			{label:'父级角色3',value:'3'},
+	      			{label:'无',value:'-1'},
 	      		],
       		},
       		{label:'依赖角色：',type:"select",
       			items:[
-	      			{label:'依赖角色1',value:'1'},
-	      			{label:'依赖角色2',value:'2'},
-	      			{label:'依赖角色3',value:'3'},
+	      			{label:'无',value:'-1'},
 	      		],
       		},
       		{label:'最大用户限制数：',type:"num",},

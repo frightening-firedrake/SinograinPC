@@ -101,11 +101,11 @@ const routes= [
             component:CreateSampleReglc,
             meta: { needAuth: 'grainDepot' },
           },
-          {
-            path:"grainDepot/createSampleReglc/sampleReglc",
-            name:"粮库管理/新建扦样登记表/扦样登记表",
-            component:SampleReglc,
-          },
+//        {
+//          path:"grainDepot/createSampleReglc/sampleReglc",
+//          name:"粮库管理/新建扦样登记表/扦样登记表",
+//          component:SampleReglc,
+//        },
           {
             path:"grainDepot/sampleRegListlc",
             name:"粮库管理/扦样登记列表",
@@ -114,7 +114,7 @@ const routes= [
           {
             path:"grainDepot/sampleRegListlc/sampleReglc",
             name:"粮库管理/扦样登记列表/扦样登记表",
-            component:SampleReglc,
+//          component:SampleReglc,
           },
           {
             path:"grainDepot/sampleRegListlc/sampleDraft",
@@ -140,13 +140,13 @@ const routes= [
           },
           {
             path:"sampling/examinationLibraryList/sampleRegList",
-            name:"扦样流程/审批扦样列表/扦样登记列表",
+            name:"扦样流程/审批扦样库点列表/扦样登记列表",
             component:SampleRegList,
           },
           
           {
             path:"sampling/examinationLibraryList/sampleRegList/sampleReg",
-            name:"扦样流程/审批扦样列表/扦样登记列表/扦样登记表",
+            name:"扦样流程/审批扦样库点列表/扦样登记列表/扦样登记表",
             component:SampleReg,
           },
           {
@@ -221,7 +221,7 @@ const routes= [
             component:SafetyProblem,
           },
 //        样品管理
- 					{
+ 		  {
             path:"sampleManagement",
             name: '样品管理',
             component:SampleInList,
@@ -284,7 +284,7 @@ const routes= [
             component:HandoverListEditSelect,
           },
 //         样品检测
- 					{
+ 		  {
             path:"sampleDetection",
             name: '样品检测',
             component:PackingList,
@@ -332,7 +332,7 @@ const routes= [
             component:CheckCreate,
           },
 //        样品检验报告TestReportManagement
-					{
+		  {
             path:"TestReportManagement",
             name: '检测报表管理',
             component:TestReportMaker,

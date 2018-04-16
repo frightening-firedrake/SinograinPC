@@ -41,9 +41,9 @@ export default {
 	...mapGetters(["modal_id"]),
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.query)
 //  获取列表数据（第一页）
-//	this.getdata()
+	this.getdata()
 
   },
   destroy(){
@@ -53,23 +53,30 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
 //	获取列表数据方法
-  	getdata(page){
+  	getdata(){
   		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-				id:this.$route.query
-			}
+//			data: {
+//				id:this.$route.query
+//			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
-//	  		this.page.total=response.data.total;
+
 		  	
-	  		setTimeout(()=>{			  		
+
 		  		this.loading=false;
-		  	},1000)
+
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -103,7 +110,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role23/data',
+      datalistURL:this.apiRoot +'/grain/resource/get/resourceAndOperation',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],

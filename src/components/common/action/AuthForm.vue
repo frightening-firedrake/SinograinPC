@@ -50,20 +50,20 @@
         			<br />
         			作
         		</div>
-			    <el-form-item label="相关操作：" :prop="'actions['+index+']'+'.displayName'" class="full" :rules="[
+			    <el-form-item label="相关操作：" :prop="'actions['+index+']'+'.operation'" class="full" :rules="[
       				{ required: true, message: '请输入操作名称', trigger: 'blur' },
     			]">
-					<el-input v-model="value.displayName" placeholder="请输入"></el-input>
+					<el-input v-model="value.operation" placeholder="请输入"></el-input>
 				</el-form-item>
 				<el-form-item label="权限许可：" :prop="'actions['+index+']'+'.permission'"  class="full" :rules="[
       				{ required: true, message: '权限许可名称', trigger: 'blur' },
     			]">
 					<el-input v-model="value.permission" placeholder="请输入"></el-input>
 				</el-form-item>
-				<el-form-item label="选择依赖操作：" :prop="'actions['+index+']'+'.operationRId'"  class="full" :rules="[
+				<el-form-item label="选择依赖操作：" :prop="'actions['+index+']'+'.relyName'"  class="full" :rules="[
       				{ required: true, message: '选择依赖操作', trigger: 'change' },
     			]">
-					<el-select v-model="value.operationRId" placeholder="请选择">
+					<el-select v-model="value.relyName" placeholder="请选择">
 				        <el-option
 					      v-for="item in formdatas.operationRIds"
 					      :key="item.value"

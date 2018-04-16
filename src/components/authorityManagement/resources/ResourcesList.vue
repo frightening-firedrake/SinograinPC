@@ -30,7 +30,7 @@ import SinograinModal from '@/components/common/action/Modal.vue';
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 
 
@@ -110,6 +110,14 @@ export default {
 		    method: 'post',
 			url: this.searchURL,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			data: {
 			    listName: this.list,
 			    page:1,
@@ -133,6 +141,14 @@ export default {
 		    method: 'post',
 			url: this.datalistURL,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			data: {
 			    listName: this.list,
 			    page:page,
@@ -187,7 +203,7 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role24/data',
+      datalistURL:this.apiRoot +'/grain/resource/data',
       searchURL:'/liquid/role/data/search',
       deleteURL:'/liquid/role/data/delete',
       checkedId:[],

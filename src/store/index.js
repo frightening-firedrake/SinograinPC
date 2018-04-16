@@ -22,10 +22,17 @@ const state = {
 	messions:[],//任务数据组
 //	current_modal:{},
 	isCollapse:false,
+	breadcrumbHistory:[],
 }
 const getters = {
     modal_id:function(state){
         return 'Modal'+state.modal_id_number;
+    },
+    breadcrumbHistory:function(state){
+    	if(sessionStorage.getItem("breadcrumbHistory")){
+    		state.breadcrumbHistory=JSON.parse(sessionStorage.getItem("breadcrumbHistory"));
+    	}
+    	return state.breadcrumbHistory;    		
     },
     libraryName:function(state){
     	if(state.libraryName){
@@ -136,6 +143,24 @@ const mutations = {
 		state.tests=payload.tests;
 		var basemsg=payload;
 		sessionStorage.setItem('basemsg', JSON.stringify(basemsg));
+	},
+	pushBreadcrumbHistory(state,payload){
+//		payload栗子{name:'',fullPath:''}
+		state.breadcrumbHistory.push(payload)
+		sessionStorage.setItem('breadcrumbHistory', JSON.stringify(state.breadcrumbHistory));
+	},
+	spliceBreadcrumbHistory(state,payload){
+		var startIndex=state.breadcrumbHistory.findIndex((item)=>{
+			return item.path==payload.path
+		});
+		if(startIndex>-1){			
+			state.breadcrumbHistory.splice(startIndex,state.breadcrumbHistory.length-1)
+		}
+		sessionStorage.setItem('breadcrumbHistory', JSON.stringify(state.breadcrumbHistory));
+	},
+	statBreadcrumbHistory(state){
+		state.breadcrumbHistory=[];
+		sessionStorage.setItem('breadcrumbHistory', JSON.stringify(state.breadcrumbHistory));
 	},
 	create_modal_id(state){
         state.modal_id_number+=1;

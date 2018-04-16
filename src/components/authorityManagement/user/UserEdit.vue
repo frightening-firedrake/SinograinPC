@@ -39,9 +39,10 @@ export default {
 	...mapGetters(["modal_id"]),
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.query)
 //  获取列表数据（第一页）
-//	this.getdata()
+	this.getdata()
+	this.getdata()
 
   },
   destroy(){
@@ -57,14 +58,20 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				id:this.$route.query
+				id:this.$route.query.id
 			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
-//	  		this.page.total=response.data.total;
-		  	
+
 	  		setTimeout(()=>{			  		
 		  		this.loading=false;
 		  	},1000)
@@ -96,12 +103,36 @@ export default {
   		console.log('titleEvent');
   	},
   	submit(data){
-  		console.log(data);
-  	}
+			console.log(data)
+			this.$http({
+		  method: 'post',
+			url: this.saveURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				userName:data.userName,
+				email:data.email,
+				phone:data.phone,
+				userPass:data.userPass
+			}
+	    }).then(function (response) {
+		  	this.$router.go(-1)
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+    }
   },
   data() {
     return {
-      datalistURL:'/liquid/role23/data',
+	  saveURL: this.apiRoot + '/grain/user/save',
+      datalistURL:this.apiRoot + '/grain/user/get',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -123,7 +154,7 @@ export default {
       	title:'编辑用户',
       	form:{
       	  userName:"李佳",
-          userPass:'管理员',
+          userPass:'',
           phone: "15940324325",
           email: "23474@qq.com",
 //        action:['查看','增加'],

@@ -42,7 +42,7 @@ export default {
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
 //	this.getdata()
-		this.getRole();
+//		this.getRole();
 
   },
   destroy(){
@@ -112,19 +112,19 @@ export default {
 				userName:data.userName,
 				email:data.email,
 				phone:data.phone,
-				roleId:data.assignRole
+				userPass:data.userPass
 			}
 	    }).then(function (response) {
-		  
+		  	this.$router.go(-1)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
-  }
+    }
   },
   data() {
     return {
-      getRoleURL:this.apiRoot +'/grain/role/data',
-			saveURL: this.apiRoot + '/grain/user/save',
+//    getRoleURL:this.apiRoot +'/grain/role/data',
+	  saveURL: this.apiRoot + '/grain/user/save',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],

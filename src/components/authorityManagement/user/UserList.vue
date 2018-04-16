@@ -60,7 +60,7 @@ export default {
 //	监听列表点击编辑事件
   	this.$root.eventHub.$on("editlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/AuthorityManagement/UserList/UserEdit',query:{libid:id}})
+		this.$router.push({path: '/index/AuthorityManagement/UserList/UserEdit',query:{id:id}})
   	}.bind(this));
 //	监听列表点击授权事件
   	this.$root.eventHub.$on("authlistitem",function(id){  
