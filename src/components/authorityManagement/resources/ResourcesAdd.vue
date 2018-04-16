@@ -197,7 +197,7 @@ export default {
       	],
 //    	依赖操作下拉项目
       	operationRIds:[
-      		{label:'无',value:-1},
+      		{label:'无',value:"无"},
       	],
       	labels:[
       		{label:'资源名称：',type:"input",class:'full'},
