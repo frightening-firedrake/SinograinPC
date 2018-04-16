@@ -113,7 +113,7 @@ export default {
   				
   			}
   		}
-      	this.formdatas.actions.push({displayName:'',permission:'',operationRId:'' })
+      	this.formdatas.actions.push({operation:'',permission:'',relyName:'' })
   	},
   	actionDel(){
   		this.$confirm('将删除最后一组操作项, 是否继续?', '提示', {
@@ -157,7 +157,7 @@ export default {
 				params:JSON.stringify(data.actions),
 			}
 	    }).then(function (response) {
-			this.$router.go(-1)
+//			this.$router.go(-1)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
