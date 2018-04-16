@@ -6,6 +6,7 @@ Vue.use(Vuex)
 const state = {
 	userName:'',//用户名
 	userId:'',//用户id
+	userAuth:'',//用户权限逗号隔开的字符串
 	libraryName:'',//库点名
 	libraryId:'',//库点id
 	libraryNames:[],//库点组
@@ -21,10 +22,17 @@ const state = {
 	messions:[],//任务数据组
 //	current_modal:{},
 	isCollapse:false,
+	breadcrumbHistory:[],
 }
 const getters = {
     modal_id:function(state){
         return 'Modal'+state.modal_id_number;
+    },
+    breadcrumbHistory:function(state){
+    	if(sessionStorage.getItem("breadcrumbHistory")){
+    		state.breadcrumbHistory=JSON.parse(sessionStorage.getItem("breadcrumbHistory"));
+    	}
+    	return state.breadcrumbHistory;    		
     },
     libraryName:function(state){
     	if(state.libraryName){
@@ -45,6 +53,13 @@ const getters = {
     		return state.userName;    		
     	}else{
     		return sessionStorage.getItem("userName");
+    	}
+    },
+    userAuth:function(state){
+    	if(state.userAuth){
+    		return state.userAuth;    		
+    	}else{
+    		return sessionStorage.getItem("userAuth");
     	}
     },
     userId:function(state){
@@ -101,20 +116,24 @@ const mutations = {
 		state.libraryId=payload.libraryId;
 		state.userName=payload.userName;
 		state.userId=payload.userId;
+		state.userAuth=payload.userAuth;
 		sessionStorage.setItem('libraryId', payload.libraryId);
 		sessionStorage.setItem('libraryName', payload.libraryName);
 		sessionStorage.setItem('userName', payload.userName);
 		sessionStorage.setItem('userId', payload.userId);
+		sessionStorage.setItem('userAuth', payload.userAuth);
 	},
 	logout(state){
 		state.libraryName='';
 		state.libraryId='';
 		state.userName='';
 		state.userId='';
+		state.userAuth='';
 		sessionStorage.removeItem('libraryId');
 		sessionStorage.removeItem('libraryName');
 		sessionStorage.removeItem('userName');
 		sessionStorage.removeItem('userId');
+		sessionStorage.removeItem('userAuth');
 	},
 	setBaseMsg(state,payload){
 		state.libraryNames=payload.libraryNames;
@@ -124,6 +143,24 @@ const mutations = {
 		state.tests=payload.tests;
 		var basemsg=payload;
 		sessionStorage.setItem('basemsg', JSON.stringify(basemsg));
+	},
+	pushBreadcrumbHistory(state,payload){
+//		payload栗子{name:'',fullPath:''}
+		state.breadcrumbHistory.push(payload)
+		sessionStorage.setItem('breadcrumbHistory', JSON.stringify(state.breadcrumbHistory));
+	},
+	spliceBreadcrumbHistory(state,payload){
+		var startIndex=state.breadcrumbHistory.findIndex((item)=>{
+			return item.path==payload.path
+		});
+		if(startIndex>-1){			
+			state.breadcrumbHistory.splice(startIndex,state.breadcrumbHistory.length-1)
+		}
+		sessionStorage.setItem('breadcrumbHistory', JSON.stringify(state.breadcrumbHistory));
+	},
+	statBreadcrumbHistory(state){
+		state.breadcrumbHistory=[];
+		sessionStorage.setItem('breadcrumbHistory', JSON.stringify(state.breadcrumbHistory));
 	},
 	create_modal_id(state){
         state.modal_id_number+=1;

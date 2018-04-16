@@ -7,7 +7,7 @@
   	border
   	highlight-current-row
   	@current-change="currentChange"
-  	:max-height="maxHeight"
+  
   	@selection-change="handleSelectionChange" 
   	:default-sort = "{prop: 'id', order: 'ascending'}" 
   	v-loading="loading"
@@ -142,6 +142,9 @@
 	font-size:0.16rem;
 	height:34px;
 	line-height:34px;
+}
+.tablelist.editmodel .el-table__body-wrapper{
+	min-height: auto; 
 }
 </style>
 <script>

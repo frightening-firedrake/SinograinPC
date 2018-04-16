@@ -4,7 +4,7 @@
             <el-form ref="form"  class="login_form" :model="loginForm">
             	<p v-if="loginError" class="loginError"><span class="el-icon-warning"></span>您输入的账号或密码不正确，请重新输入！</p>
             	<p v-else class="loginError"></p>
-                <el-form-item label="" @click="addborder($event)" :class="{focus:isfocus}">
+                <el-form-item label=""  :class="{focus:isfocus}">
                 	<el-input
 					    placeholder="请输入您的账号"
 					    v-model="loginForm.name">
@@ -13,7 +13,7 @@
                     <!--<i class="iconfont icon-zhanghao"></i>-->
                     <!--<el-input type="text" placeholder="请输入您的账号" v-model="loginForm.name" @focus="focus" @blur="blur"></el-input>-->
                 </el-form-item>
-                <el-form-item label="" @click="addBorder()">
+                <el-form-item label="" >
                 	<el-input
 					    placeholder="请输入您的密码"
 					    v-model="loginForm.password">
@@ -98,6 +98,8 @@ export default {
                		payload.libraryName=response.data.user.libraryName;
                		payload.userName=response.data.user.userName;
                		payload.userId=response.data.user.id;
+//             		payload.userRole=response.data.user.userRole;
+               		payload.userAuth='InformationManagement,AuthorityManagement,grainDepot';//grainDepot
                		this.setUserInfo(payload)
                    	this.$router.push({ path: '/index'});
                }else {

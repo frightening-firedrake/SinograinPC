@@ -36,24 +36,43 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex';
+
+import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 	
 //import "@/assets/style/common/Breadcrumb.css"
   export default {
     props: ['breadcrumb'],
     data() {
       return {
+      	routeTest:'测试中哦！！！',
         searching:'',
 		firstfalg:true,//第一次加载确定路由的开关
 		breadcrumbListsCache:[],
       };
     },
+//  beforeRouteEnter (to, from, next) {
+//  	console.log('44354321213154')
+//	    next(vm => {
+//	        console.log(vm.routeTest)
+//	    })
+//	},
+//	beforeRouteUpdate (to, from, next) {
+//  	console.log(from)
+//	},
+//	watch:{	
+//		'$route' (to, from) {
+//	      	// 对路由变化作出响应...
+//	      	console.log(32132131313213)
+//	    }
+//	},
     created(){
     	this.breadcrumbListFirst();
-//  	console.log(this.$route)
+    	console.log(this.$route)
+		this.getBreadcrumbHistory();
     },
+
     methods:{
-    	...mapMutations(['route_click']),
+  		...mapMutations(['pushBreadcrumbHistory','spliceBreadcrumbHistory','statBreadcrumbHistory']),
     	searchingfor(){
       		this.$emit('searchingfor',this.searching,1)     		
     	},
@@ -87,6 +106,30 @@ import {mapMutations} from 'vuex';
     			return this.breadcrumbListsCache;
     		}
 	    },
+	    getBreadcrumbHistory(){
+	    	var name=this.$route.name;
+	    	var fullPath=this.$route.fullPath;
+	    	var res=name.match(/\//g).length;
+	    	var payload={};
+	    	payload.name=name;
+	    	payload.fullPath=fullPath;
+			if(res<2){
+				this.statBreadcrumbHistory();
+				console.log('重置历史记录')
+			}
+//			查询历史
+			var is_set=this.breadcrumbHistory.some((item)=>{
+				return item.name=name
+			})
+//			获取历史记录
+			if(is_set){
+				this.spliceBreadcrumbHistory(payload);				
+			}else{
+//			新增历史
+				this.pushBreadcrumbHistory(payload);				
+			}
+			console.log(this.breadcrumbHistory)
+	    },
 //	    breadtest(){
 //		    var routeList = []
 //	
@@ -105,6 +148,8 @@ import {mapMutations} from 'vuex';
 //	    },
     },
     computed: {
+//  	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
+		...mapGetters(["breadcrumbHistory"]),
 	    breadcrumbList: function () {
 //	    	获取连接名按照"/"切分并反转
 	        var breadcrumbName=this.$route.name.split('/').reverse();

@@ -7,7 +7,7 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" @createAut="createAut"></list-header>
       <!--表格-->
-      <sinograin-list class="list" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
+      <sinograin-list class="list" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" :rowType="rowType" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
       <!--分页-->
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
@@ -51,21 +51,18 @@ export default {
     this.$root.eventHub.$off("authlistitem")
 //	监听列表删除事件
     this.$root.eventHub.$on('delelistitem',function(rowid,list){
-    	this.tabledatas=this.tabledatas.filter(function(item){
-    		return item.id!==rowid;
-    	})
     	this.sendDeleteId(rowid);
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击编辑事件
   	this.$root.eventHub.$on("editlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/AuthorityManagement/RoleList/RoleEdit',query:{libid:id}})
+		this.$router.push({path: '/index/AuthorityManagement/RoleList/RoleEdit',query:{id:id}})
   	}.bind(this));
 //	监听列表点击授权事件
   	this.$root.eventHub.$on("authlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/AuthorityManagement/RoleList/RoleAut',query:{libid:id}})
+		this.$router.push({path: '/index/AuthorityManagement/RoleList/RoleAut',query:{id:id}})
   	}.bind(this));
   },
   destroy(){
@@ -136,11 +133,18 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
 			    page:page,
-			    pageSize:this.page.size,
+			    rows:this.page.size,
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
@@ -158,13 +162,22 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.deleteURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
 			    id:id,
 			}
 	    }).then(function (response) {
-		  	
+		  	this.tabledatas=this.tabledatas.filter(function(item){
+	    		return item.id!==rowid;
+	    	})
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -191,10 +204,11 @@ export default {
   },
   data() {
     return {
-      datalistURL:'/liquid/role22/data',
+      datalistURL:this.apiRoot +'/grain/role/data',
       searchURL:'/liquid/role/data/search',
       deleteURL:'/liquid/role/data/delete',
       checkedId:[],
+      rowType:'角色',
       list:"librarylist",
 	  modalVisible:false,
 	  modal:{
@@ -246,13 +260,13 @@ export default {
       items: [
       {
         id: 1,
-        prop:'roleName',
+        prop:'displayName',
         label: "角色名称",
 //      sort:true
       },
       {
         id: 2,
-        prop:'maxMember',
+        prop:'roleMaxNum',
         label: "最大限制用户数",
 //      sort:true,
       },
@@ -268,7 +282,7 @@ export default {
       	number:false,
       	view:false,
       	edit:true,
-      	dele:true,
+      	dele:false,
       	auth:true,
       	show:true,
       	noview:true,

@@ -169,7 +169,7 @@ export default {
 			}
 	    }).then(function (response) {
 		  	this.librarylist = response.data.rows;
-			  console.log(this.librarylist)
+
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

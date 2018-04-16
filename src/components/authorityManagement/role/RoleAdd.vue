@@ -39,10 +39,10 @@ export default {
 	...mapGetters(["modal_id"]),
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.query)
+	this.getRole();
 //  获取列表数据（第一页）
 //	this.getdata()
-
   },
   destroy(){
 
@@ -51,23 +51,52 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
 //	获取列表数据方法
-  	getdata(page){
-  		this.loading=true;
+	getRole(){
+  		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
-			url: this.datalistURL,
+			url: this.getRoleURL,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				id:this.$route.query
+		
 			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
-//	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+		  	response.data.rows.forEach((item)=>{
+				var obj={label:item.displayName,value:item.id}
+	  		this.formdatas.labels[1].items.push(obj)
+	  		this.formdatas.labels[2].items.push(obj)
+			})
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+  	submit(data){
+		console.log(data)
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.saveURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				displayName:data.displayName,
+				roleExtendPId:data.roleExtendPId,
+				roleRelyId:data.roleRelyId,
+				roleMaxNum:data.maxNumber,
+				remarks:data.remarks,
+
+			}
+	    }).then(function (response) {
+			this.$router.go(-1)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -95,13 +124,12 @@ export default {
 	titleEvent(){
   		console.log('titleEvent');
   	},
-  	submit(data){
-  		console.log(data);
-  	}
+  
   },
   data() {
     return {
-      datalistURL:'/liquid/role23/data',
+      getRoleURL:this.apiRoot +'/grain/role/data',
+      saveURL:this.apiRoot +'/grain/role/save',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -122,7 +150,9 @@ export default {
       formdatas: {
       	title:'新建角色',
       	form:{
-          roleName: '',
+          displayName: '',
+          roleExtendPId: '',
+          roleRelyId: '',
           maxNumber: '1',
           remarks: '',
 //        action:['查看','增加'],
@@ -130,6 +160,16 @@ export default {
       	},
       	labels:[
       		{label:'角色名称：',type:"input",},
+      		{label:'父级角色：',type:"select",
+      			items:[
+	      			{label:'无',value:'-1'},
+	      		],
+      		},
+      		{label:'依赖角色：',type:"select",
+      			items:[
+	      			{label:'无',value:'-1'},
+	      		],
+      		},
       		{label:'最大用户限制数：',type:"num",},
       		{label:'备注：',type:"input",class:'full'},
 //    		{label:'相关操作：',type:"checkbox",class:'full',

@@ -42,6 +42,7 @@ export default {
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
 //	this.getdata()
+//		this.getRole();
 
   },
   destroy(){
@@ -51,23 +52,21 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
 //	获取列表数据方法
-  	getdata(page){
-  		this.loading=true;
+  	getRole(){
+  		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
-			url: this.datalistURL,
+			url: this.getRoleURL,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				id:this.$route.query
+		
 			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
-//	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+		  	response.data.rows.forEach((item)=>{
+					var obj={label:item.displayName,value:item.id}
+		  		this.formdatas.labels[1].items.push(obj)
+				})
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -96,12 +95,36 @@ export default {
   		console.log('titleEvent');
   	},
   	submit(data){
-  		console.log(data);
-  	}
+			console.log(data)
+			this.$http({
+		  method: 'post',
+			url: this.saveURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				userName:data.userName,
+				email:data.email,
+				phone:data.phone,
+				userPass:data.userPass
+			}
+	    }).then(function (response) {
+		  	this.$router.go(-1)
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+    }
   },
   data() {
     return {
-      datalistURL:'/liquid/role23/data',
+//    getRoleURL:this.apiRoot +'/grain/role/data',
+	  saveURL: this.apiRoot + '/grain/user/save',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -123,7 +146,7 @@ export default {
       	title:'新建用户',
       	form:{
       	  userName:"",
-          assignRole:'',
+          userPass:'',
           phone: "",
           email: "",
 //        action:['查看','增加'],
@@ -131,13 +154,7 @@ export default {
       	},
       	labels:[
       		{label:'用户名称：',type:"input",},
-      		{label:'分配角色：',type:"select",
-      			items:[
-	      			{label:'管理员',value:'1'},
-	      			{label:'管理员2',value:'2'},
-	      			{label:'管理员3',value:'3'},
-	      		],
-      		},
+      		{label:'用户密码：',type:"input",},
       		{label:'电话号码：',type:"input",},
       		{label:'邮箱号码：',type:"input",},
 //    		{label:'分配角色：',type:"num",},

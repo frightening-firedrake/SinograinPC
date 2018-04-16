@@ -7,7 +7,7 @@
       <!--提示-->
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
-      <auth-form :formdatas="formdatas" @submit='submit'></auth-form> 
+      <auth-form :formdatas="formdatas" @submit='submit' @actionAdd="actionAdd" @actionDel='actionDel'></auth-form> 
     </div>
 </template>
 
@@ -97,7 +97,42 @@ export default {
   	},
   	submit(data){
   		console.log(data);
-  	}
+  	},
+  	actionAdd(){
+  		var lastIndex=this.formdatas.actions.length-1;
+  		var lastItem=this.formdatas.actions[lastIndex];
+  		for(var key in lastItem){
+  			if(!lastItem[key]){
+  				this.$notify.error({
+		          	title: '错误',
+		          	message: '请先完善上一组操作项目'
+		        });
+		        return
+  			}else{
+  				
+  			}
+  		}
+      	this.formdatas.actions.push({displayName:'',permission:'',operationRId:'' })
+  	},
+  	actionDel(){
+  		this.$confirm('将删除最后一组操作项, 是否继续?', '提示', {
+	      confirmButtonText: '确定',
+	      cancelButtonText: '取消',
+	      type: 'warning'
+	    }).then(() => {
+	    	this.formdatas.actions.pop()
+
+	      	this.$message({
+	        	type: 'success',
+	        	message: '删除成功!'
+	      	});
+	    }).catch(() => {
+	      this.$message({
+	        type: 'info',
+	        message: '已取消删除'
+	      });          
+	    });
+  	},
   },
   data() {
     return {
@@ -125,9 +160,16 @@ export default {
       	  resourceName:"扦样登记列表",
       	  resourceType:"菜单",
           resourcePName:"权限管理",
-          action:['查看','增加'],
-//        resourceType:'2',
       	},
+      	actions:[
+      		{displayName:'写点啥？',permission:'不知道',operationRId:'瞎胡写吧' }
+      	],
+//    	依赖操作下拉项目
+      	operationRIds:[
+      		{label:'菜单',value:'1'},
+	      	{label:'菜单2',value:'2'},
+	      	{label:'菜单3',value:'3'},
+      	],
       	labels:[
       		{label:'资源名称：',type:"input",class:'full'},
       		{label:'资源类型：',type:"select",
@@ -146,13 +188,13 @@ export default {
       		},
 //    		{label:'分配角色：',type:"num",},
 //    		{label:'备注：',type:"input",class:'full'},
-      		{label:'相关操作：',type:"checkbox",class:'full',
-	      		items:[
-	      			{label:'查看'},
-	      			{label:'增加'},
-	      			{label:'更改'},
-	      		],
-      		},
+//    		{label:'相关操作：',type:"checkbox",class:'full',
+//	      		items:[
+//	      			{label:'查看'},
+//	      			{label:'增加'},
+//	      			{label:'更改'},
+//	      		],
+//    		},
       	],
 	  }
     }

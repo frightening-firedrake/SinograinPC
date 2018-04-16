@@ -1,21 +1,23 @@
 <template>
-    <el-form ref="form" :inline-message="errorinline" class="sampling" :rules="rules" :model="formdatas.form" :label-width="labelWidth">
+    <el-form ref="form" :inline-message="errorinline" class="sampling"  :model="formdatas" :label-width="labelWidth">
         <template>
             <p>{{formdatas.title}}</p>
         </template>      
         <template v-for="(value,key,index) in formdatas.form">
             <template v-if="formdatas.labels[index]['type']=='input'">
-		        <el-form-item :label="formdatas.labels[index]['label']" :prop="key" v-bind:class="formdatas.labels[index]['class']">
-				    <el-input v-model="formdatas.form[key]" :disabled="formdatas.labels[index]['disable']"></el-input>
+		        <el-form-item :label="formdatas.labels[index]['label']" :prop="'form.'+key" v-bind:class="formdatas.labels[index]['class']" 
+		        	:rules="[{ required: true, message: '请完善输入内容', trigger: 'blur' }
+    			]">
+				    <el-input v-model="formdatas.form[key]" placeholder="请输入" :disabled="formdatas.labels[index]['disable']"></el-input>
 				</el-form-item>
             </template>
             <template v-if="formdatas.labels[index]['type']=='num'">
-		        <el-form-item :label="formdatas.labels[index]['label']" :prop="key" v-bind:class="formdatas.labels[index]['class']">
+		        <el-form-item :label="formdatas.labels[index]['label']" :prop="'form.'+key" v-bind:class="formdatas.labels[index]['class']">
 					<el-input-number v-model="formdatas.form[key]" :min="1" :max="10"></el-input-number>
 				</el-form-item>
             </template>
             <template v-if="formdatas.labels[index]['type']=='checkbox'">
-		        <el-form-item :label="formdatas.labels[index]['label']" :prop="key" v-bind:class="formdatas.labels[index]['class']">
+		        <el-form-item :label="formdatas.labels[index]['label']" :prop="'form.'+key" v-bind:class="formdatas.labels[index]['class']">
 					<el-checkbox-group v-model="formdatas.form[key]">
 				      	<el-checkbox
 					      v-for="item in formdatas.labels[index]['items']"
@@ -26,8 +28,10 @@
 				</el-form-item>
             </template>
             <template v-if="formdatas.labels[index]['type']=='select'">
-		        <el-form-item :label="formdatas.labels[index]['label']" :prop="key" v-bind:class="formdatas.labels[index]['class']">
-					<el-select v-model="formdatas.form[key]" placeholder="">
+		        <el-form-item :label="formdatas.labels[index]['label']" :prop="'form.'+key" v-bind:class="formdatas.labels[index]['class']"
+		        	:rules="[{ required: true, message: '请完善选择内容', trigger: 'change' }
+    			]">
+					<el-select v-model="formdatas.form[key]"  placeholder="请选择">
 				        <el-option
 					      v-for="item in formdatas.labels[index]['items']"
 					      :key="item.value"
@@ -38,6 +42,41 @@
 				</el-form-item>
             </template>
         </template> 
+        
+        <template v-for="(value,index) in formdatas.actions">
+        	<div class="actionsWrap">
+        		<div class='actionsTitle'>
+        			操
+        			<br />
+        			作
+        		</div>
+			    <el-form-item label="相关操作：" :prop="'actions['+index+']'+'.operation'" class="full" :rules="[
+      				{ required: true, message: '请输入操作名称', trigger: 'blur' },
+    			]">
+					<el-input v-model="value.operation" placeholder="请输入"></el-input>
+				</el-form-item>
+				<el-form-item label="权限许可：" :prop="'actions['+index+']'+'.permission'"  class="full" :rules="[
+      				{ required: true, message: '权限许可名称', trigger: 'blur' },
+    			]">
+					<el-input v-model="value.permission" placeholder="请输入"></el-input>
+				</el-form-item>
+				<el-form-item label="选择依赖操作：" :prop="'actions['+index+']'+'.relyName'"  class="full" :rules="[
+      				{ required: true, message: '选择依赖操作', trigger: 'change' },
+    			]">
+					<el-select v-model="value.relyName" placeholder="请选择">
+				        <el-option
+					      v-for="item in formdatas.operationRIds"
+					      :key="item.value"
+					      :label="item.label"
+					      :value="item.value">
+					    </el-option>
+				    </el-select>
+				</el-form-item>
+        	</div>
+        </template>
+
+
+        	
 		 <!--<template v-for="(item,index) in formdatas.labels">-->
             <!--<template v-if="item.type=='input'">
 		        <el-form-item :label="item.label" prop="ctime" v-bind:class="item.class">
@@ -71,6 +110,19 @@
 
         
         <div class="btns">
+        	<div class="tableAddWrap" v-if="formdatas.actions">        		
+	        	<div class="tableAdd"  @click="actionAdd">
+					<p style="background-image:url('static/images/sys/create.png');">					
+						新增一组操作
+					</p>
+				</div>
+				<div class="tableDel"  @click="actionDel" v-if="formdatas.actions.length>1">
+					<p style="background-image:url('static/images/sys/icons2.png');">					
+						删除最后一组操作
+					</p>
+				</div>
+        	</div>
+			
             <el-button class="yes" type="primary" @click="onSubmit('form')">确认</el-button>
             <el-button class="no" @click="cancel('form')">取消</el-button>
         </div>
@@ -78,7 +130,9 @@
         <div class="clear"></div>
     </el-form>
 </template>
+<style>
 
+</style>
 <script>
 import "@/assets/style/common/Form.css";
 export default {
@@ -187,8 +241,17 @@ export default {
 
             this.$refs[formname].validate((valid) => {
                 if (valid) {
-                    this.$emit('submit',this.formdatas.form)
-					window.history.go(-1)
+                	var formobj={};
+                	for(var key in this.formdatas.form){
+//              		console.log(this.formdatas.form[key])
+                		formobj[key]=this.formdatas.form[key]
+                	}
+                	if(this.formdatas.actions){                		
+						formobj.actions=this.formdatas.actions
+                	}
+                	this.$emit('submit',formobj)            		
+
+//					window.history.go(-1)
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -201,7 +264,12 @@ export default {
 //          this.$emit('btn_close')
 			window.history.go(-1)
         },
-        
+        actionAdd(){
+        	this.$emit('actionAdd');
+        },
+        actionDel(){
+        	this.$emit('actionDel');
+        },
     }
 
 }
