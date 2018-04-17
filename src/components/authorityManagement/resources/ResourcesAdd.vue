@@ -69,7 +69,7 @@ export default {
 //			})
 //		  	资源项目
 		  	response.data.resource.forEach((item)=>{
-				var obj={label:item.resourceName,value:item.resourceName}
+				var obj={label:item.resourceName,value:item.id}
 				this.formdatas.labels[2].items.push(obj)
 			})
 		}.bind(this)).catch(function (error) {
@@ -124,20 +124,46 @@ export default {
   		this.$confirm('将删除最后一组操作项, 是否继续?', '提示', {
 	      confirmButtonText: '确定',
 	      cancelButtonText: '取消',
-	      type: 'warning'
+	      type: 'warning',
+//	      callback:(action, instance)=>{
+//
+//	      	if(action=='confirm'){
+//	//	    	删除操作组
+//		    	this.formdatas.actions.pop()
+//	//	    	删除操作下拉选项
+//				if(this.formdatas.actions.length){					
+//			  		var lastOperation=this.formdatas.actions[this.formdatas.actions.length-1].operation	    	
+//					this.formdatas.operationRIds=this.formdatas.operationRIds.filter((item)=>{
+//						return item.label!==lastOperation
+//					})
+//				}
+//		      	this.$message({
+//		        	type: 'success',
+//		        	message: '删除成功!'
+//		      	});
+//	      	}else if(action=='cancel'){
+//	      		this.$message({
+//			       	type: 'info',
+//			        message: '已取消删除'
+//			    }); 
+//	      	}
+//	      }
+//	    })
 	    }).then(() => {
 //	    	删除操作组
 	    	this.formdatas.actions.pop()
 //	    	删除操作下拉选项
-	  		var lastOperation=this.formdatas.actions[this.formdatas.actions.length-1].operation	    	
-			this.formdatas.operationRIds=this.formdatas.operationRIds.filter((item)=>{
-				return item.label!==lastOperation
-			})
-			
+			if(this.formdatas.actions.length){				
+		  		var lastOperation=this.formdatas.actions[this.formdatas.actions.length-1].operation	    	
+				this.formdatas.operationRIds=this.formdatas.operationRIds.filter((item)=>{
+					return item.label!==lastOperation
+				})
+			}
 	      	this.$message({
 	        	type: 'success',
 	        	message: '删除成功!'
 	      	});
+			
 	    }).catch(() => {
 	      this.$message({
 	        type: 'info',
