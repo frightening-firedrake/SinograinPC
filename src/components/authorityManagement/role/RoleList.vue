@@ -60,9 +60,9 @@ export default {
 		this.$router.push({path: '/index/AuthorityManagement/RoleList/RoleEdit',query:{id:id}})
   	}.bind(this));
 //	监听列表点击授权事件
-  	this.$root.eventHub.$on("authlistitem",function(id){  
-//		console.log(id)
-		this.$router.push({path: '/index/AuthorityManagement/RoleList/RoleAut',query:{id:id}})
+  	this.$root.eventHub.$on("authlistitem",function(row){  
+
+		this.$router.push({path: '/index/AuthorityManagement/RoleList/RoleAut',query:{id:row.id,name:row.displayName}})
   	}.bind(this));
   },
   destroy(){

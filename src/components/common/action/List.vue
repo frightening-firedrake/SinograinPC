@@ -296,7 +296,7 @@ export default {
 	  },
 	  handleAuth(index, row) {
 //	  	console.log(index,row,this.list);
-		    this.$root.eventHub.$emit('authlistitem',row.id)
+		    this.$root.eventHub.$emit('authlistitem',row)
 		},
 		handlePrint(index, row,scope) {
 			this.$root.eventHub.$emit('printlistitem',row.smallSampleNum)					

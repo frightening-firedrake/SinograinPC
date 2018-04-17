@@ -44,7 +44,7 @@ export default {
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
 //	this.getdata()
-
+	this.formdatas.form.userName=this.$route.query.name;
   },
   destroy(){
 
