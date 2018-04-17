@@ -57,13 +57,27 @@
 				            			<span style="color:#666666;">已入库</span>
 				      				</template>
 		      				</template>
+		      				<template v-if="item.prop=='resourceType'">
+				      				<template v-if="scope.row[item.prop]==1">
+				            			<span style="color:#666666;">菜单</span>
+				      				</template>
+								    	<template v-if="scope.row[item.prop]==2">
+				            			<span style="color:#666666;">元素</span>
+				      				</template>
+				      				<template v-if="scope.row[item.prop]==3">
+				            			<span style="color:#666666;">文件</span>
+				      				</template>
+				      				<template v-if="scope.row[item.prop]==4">
+				            			<span style="color:#666666;">操作</span>
+				      				</template>
+		      				</template>
 		      				<template v-if="item.prop=='isDeal'">
 				      				<template v-if="scope.row[item.prop]==-1">
 				            			<span style="color:#fc6500;">待解决</span>
 				      				</template>
 								    	<template v-if="scope.row[item.prop]==1">
 				            			<span style="color:#999999;">已解决</span>
-				      			</template>
+				      				</template>
 		      				</template>
 		      				<template v-if="item.prop=='pLibraryId'">
 		    						{{findPLibraryName(scope.row[item.prop])}}				      				
@@ -282,7 +296,7 @@ export default {
 	  },
 	  handleAuth(index, row) {
 //	  	console.log(index,row,this.list);
-		    this.$root.eventHub.$emit('authlistitem',row.id)
+		    this.$root.eventHub.$emit('authlistitem',row)
 		},
 		handlePrint(index, row,scope) {
 			this.$root.eventHub.$emit('printlistitem',row.smallSampleNum)					

@@ -156,7 +156,7 @@ form.sampling .el-form-item .el-form-item__content .el-select{
 	margin-left:0.2rem;
 }
 form.sampling .el-form-item .el-form-item__content .el-select .el-input input{
-	height:0.36rem;
+	height:0.36rem!important;
 	width:2.75rem;
 	line-height:0.34rem;
 	border:solid  0.01rem #dfdfdf;

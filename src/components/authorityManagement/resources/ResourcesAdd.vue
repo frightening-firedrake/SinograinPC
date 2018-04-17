@@ -62,16 +62,16 @@ export default {
 		
 			}
 	    }).then(function (response) {
+//	    	操作项目波哥说不走后台了
 //		  	response.data.operation.forEach((item)=>{
 //				var obj={label:item.displayName,value:item.id}
-//	  			this.formdatas.labels[1].items.push(obj)
-//	  			this.formdatas.labels[2].items.push(obj)
+//				this.formdatas.operationRIds.push(obj)
 //			})
-//		  	response.data.resource.forEach((item)=>{
-//				var obj={label:item.displayName,value:item.id}
-//	  			this.formdatas.labels[1].items.push(obj)
-//	  			this.formdatas.labels[2].items.push(obj)
-//			})
+//		  	资源项目
+		  	response.data.resource.forEach((item)=>{
+				var obj={label:item.resourceName,value:item.id}
+				this.formdatas.labels[2].items.push(obj)
+			})
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -113,20 +113,57 @@ export default {
   				
   			}
   		}
-      	this.formdatas.actions.push({displayName:'',permission:'',operationRId:'' })
+  		if(this.formdatas.actions.length){  			
+	  		var lastOperation=this.formdatas.actions[this.formdatas.actions.length-1].operation
+	      	var obj={label:lastOperation,value:lastOperation}
+			this.formdatas.operationRIds.push(obj)
+  		}
+      	this.formdatas.actions.push({operation:'',permission:'',relyName:'' })
   	},
   	actionDel(){
   		this.$confirm('将删除最后一组操作项, 是否继续?', '提示', {
 	      confirmButtonText: '确定',
 	      cancelButtonText: '取消',
-	      type: 'warning'
+	      type: 'warning',
+//	      callback:(action, instance)=>{
+//
+//	      	if(action=='confirm'){
+//	//	    	删除操作组
+//		    	this.formdatas.actions.pop()
+//	//	    	删除操作下拉选项
+//				if(this.formdatas.actions.length){					
+//			  		var lastOperation=this.formdatas.actions[this.formdatas.actions.length-1].operation	    	
+//					this.formdatas.operationRIds=this.formdatas.operationRIds.filter((item)=>{
+//						return item.label!==lastOperation
+//					})
+//				}
+//		      	this.$message({
+//		        	type: 'success',
+//		        	message: '删除成功!'
+//		      	});
+//	      	}else if(action=='cancel'){
+//	      		this.$message({
+//			       	type: 'info',
+//			        message: '已取消删除'
+//			    }); 
+//	      	}
+//	      }
+//	    })
 	    }).then(() => {
+//	    	删除操作组
 	    	this.formdatas.actions.pop()
-
+//	    	删除操作下拉选项
+			if(this.formdatas.actions.length){				
+		  		var lastOperation=this.formdatas.actions[this.formdatas.actions.length-1].operation	    	
+				this.formdatas.operationRIds=this.formdatas.operationRIds.filter((item)=>{
+					return item.label!==lastOperation
+				})
+			}
 	      	this.$message({
 	        	type: 'success',
 	        	message: '删除成功!'
 	      	});
+			
 	    }).catch(() => {
 	      this.$message({
 	        type: 'info',
@@ -157,7 +194,7 @@ export default {
 				params:JSON.stringify(data.actions),
 			}
 	    }).then(function (response) {
-			this.$router.go(-1)
+//			this.$router.go(-1)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -193,11 +230,11 @@ export default {
       	},
 //    	操作相关的
       	actions:[
-      		{operation:'',permission:'',relyName:'' }
+//    		{operation:'',permission:'',relyName:'' }
       	],
 //    	依赖操作下拉项目
       	operationRIds:[
-      		{label:'无',value:-1},
+      		{label:'无',value:"无"},
       	],
       	labels:[
       		{label:'资源名称：',type:"input",class:'full'},

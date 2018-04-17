@@ -3,7 +3,7 @@
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
       <!--alert-->
-      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
+      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" @createAut="createAut"></list-header>
       <!--表格-->
@@ -103,13 +103,16 @@ export default {
 		this.modalVisible=false;
 	},
 //	获取搜索数据
-  	searchingfor(searching){
-  		console.log(searching);
+  	searchingfor(searching,page){
+  		page?page:1;
+  		this.searchText=searching;
+  		var params = {};
+		params.resourceNameOrResourceTypeLike = searching;
+//		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
 			url: this.searchURL,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			transformRequest: [function (data) {
 				// Do whatever you want to transform the data
 				let ret = ''
@@ -118,17 +121,14 @@ export default {
 				}
 				return ret
 			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
-			    page:1,
-			    pageSize:this.page.size,
-			    name_like:searching,
+			   params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-		  	this.tabledatas=response.data.rows;
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+			this.tabledatas=response.data.rows;
+	  		this.page.total=response.data.total;
+
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -150,17 +150,16 @@ export default {
 				return ret
 			}],
 			data: {
-			    listName: this.list,
 			    page:page,
-			    pageSize:this.page.size,
+			    rows:this.page.size,
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
 		  	
-	  		setTimeout(()=>{			  		
+
 		  		this.loading=false;
-		  	},1000)
+
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -183,8 +182,11 @@ export default {
   	},
 //	获取分页点击事件中及当前页码
     getCurrentPage(currentPage){
-//		console.log(currentPage)
-		this.getlistdata(currentPage)
+		if(this.searchText){			
+			this.searchingfor(this.searchText,currentPage)
+		}else{			
+			this.getlistdata(currentPage)
+		}
 	},
 //	映射分页触发的事件
   	paginationEvent(actiontype){
@@ -204,9 +206,10 @@ export default {
   data() {
     return {
       datalistURL:this.apiRoot +'/grain/resource/data',
-      searchURL:'/liquid/role/data/search',
+      searchURL:this.apiRoot +'/grain/resource/data',
       deleteURL:'/liquid/role/data/delete',
       checkedId:[],
+      searchText:'',
       list:"librarylist",
 	  modalVisible:false,
 	  modal:{
@@ -243,7 +246,7 @@ export default {
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：此页面展示的角色列表页面，您在本页面可以对资源进行查看、编辑、删除和新建的操作。单击右方x号，你可以关闭此条提示语！',
+        title: '温馨提示：此页面展示的资源列表页面，您在本页面可以对资源进行查看、编辑、删除和新建的操作。单击右方x号，你可以关闭此条提示语！',
         type: 'info'
       }],
 //    表格数据
@@ -266,6 +269,7 @@ export default {
         id: 3,
         prop:'resourceType',
         label: "资源类型",
+        status:true
 //      sort:true,
       },
       {
@@ -276,7 +280,7 @@ export default {
       },
       {
         id:5,
-        prop:'action',
+        prop:'operatingNum',
         label:"相关操作",
 //      sort:true,
       },
@@ -288,7 +292,7 @@ export default {
       	edit:true,
       	dele:true,
       	auth:false,
-      	show:true,
+      	show:false,
       	noview:true,
       }
     }
