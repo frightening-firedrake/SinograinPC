@@ -658,7 +658,7 @@ var jblb=Mock.mock('/liquid/role20/data', {
 var spkd=Mock.mock('/liquid/role21/data', {
       informations:[
       	{
-  			title:'库点',
+  			title:'直属库',
   			'items|4-13':[
   				{'id|+1': 1,sampleNumber:'长子库'},
   			],

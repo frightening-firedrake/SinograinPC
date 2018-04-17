@@ -326,10 +326,20 @@ export default {
 				{
 					icon: 'icon-xinjian2',
 					linkto: '/index/InformationManagement/InformationAdd',
-					title: '添加信息',
+					title: '添加直属库',
 					level: 2,
 					pid: 22,
 					lid: 23,
+					needAuth: 'InformationManagement',
+					
+				},
+				{
+					icon: 'icon-xinjian2',
+					linkto: '/index/InformationManagement/Informationpoint',
+					title: '添加库点',
+					level: 2,
+					pid: 22,
+					lid: 24,
 					needAuth: 'InformationManagement',
 					
 				},

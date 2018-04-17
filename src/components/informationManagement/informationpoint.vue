@@ -1,11 +1,20 @@
 <template>
 	<div class='listpagewrap'>
 		<!--面包屑-->
-		<sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
+		<sinograin-breadcrumb :breadcrumb="breadcrumb" ></sinograin-breadcrumb>
 		<!--alert-->
 		<!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
+        <div class="common_select">
+          <label>
+            <span class="title_select">选择直属库:</span>
+            <el-select v-model="point" placeholder="选择直属库" @change="_select">
+                <el-option v-for="item in pointList" :key="item.id" :label="item.libraryName" :value="item.id">
+                </el-option>
+            </el-select>
+        </label>
+        </div>
 		<!--表单-->
-		<information-set :informations="informations" @addinformation="addinformationLib" :title="title"></information-set>
+		<information-set :informations="informations" @addinformation="addinformationLib" :title="title" :inforSelect="inforselect"></information-set>
 		<!--<information-set :informations="informations[1]" @addinformation="addinformationVarieties"></information-set> -->
 		<!--输入弹框-->
 		<sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
@@ -25,6 +34,7 @@ import InformationSet from "@/components/common/action/InformationSet";
 import SinograinModal from '@/components/common/action/Modal.vue';
 
 import "@/assets/style/information/InformationSet.css"
+import "@/assets/style/common/Select.scss";
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 //本地测试要用下面import代码
 import data from '@/util/mock';
@@ -43,6 +53,41 @@ export default {
 
 	},
 	methods: {
+        // 下拉框选择直属库
+        _select(){
+            this.loading = true;
+            var params = {};
+            params.libraryId = this.point
+			// 获取列表数据（第？页）
+			this.$http({
+				method: 'post',
+				url: this.apiRoot + "/grain/register/data",
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				data: {
+					params:JSON.stringify(params),
+				},
+                transformRequest: [function(data) {
+					// Do whatever you want to transform the data
+					let ret = ''
+					for (let it in data) {
+						ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					}
+					return ret
+				}],
+			}).then(function(response) {
+                console.log(response)
+				this.informations = response.data.rows;
+				//		  	this.formdatas=response.data.formdatas;		  
+				//		  	this.tabledatas=response.data.rows;
+				//	  		this.page.total=response.data.total;
+
+				setTimeout(() => {
+					this.loading = false;
+				}, 1000)
+			}.bind(this)).catch(function(error) {
+				console.log(error);
+			}.bind(this));
+        },
 		//	获取列表数据方法
 		getlistdata(page) {
 			this.loading = true;
@@ -55,31 +100,11 @@ export default {
 					pLibraryId: "-1"
 				}
 			}).then(function(response) {
-				this.informations = response.data.rows;
+				this.pointList = response.data.rows;
 				//		  	this.formdatas=response.data.formdatas;		  
 				//		  	this.tabledatas=response.data.rows;
 				//	  		this.page.total=response.data.total;
 
-				setTimeout(() => {
-					this.loading = false;
-				}, 1000)
-			}.bind(this)).catch(function(error) {
-				console.log(error);
-			}.bind(this));
-		},
-		//	获取搜索数据
-		searchingfor(searching) {
-			console.log(searching);
-			// 获取列表数据（第？页）
-			this.$http({
-				method: 'post',
-				url: this.searchURL,
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				//			data: {
-				//			   
-				//			}
-			}).then(function(response) {
-				//		  	this.tabledatas=response.data.rows;
 				setTimeout(() => {
 					this.loading = false;
 				}, 1000)
@@ -95,10 +120,10 @@ export default {
 		addinformationLib(type) {
 			this.informationType = type;
 			this.modal = {
-				title: '新建直属库',
+				title: '新建库点',
 				formdatas: [
 					{
-						label: "直属库名称",
+						label: "库点名称",
 						model: "unit",
 					},
 					// {
@@ -110,31 +135,16 @@ export default {
 			},
 				this.modalVisible = true;
 		},
-		//	新建品种
-		addinformationVarieties(type) {
-			this.informationType = type;
-			this.modal = {
-				title: '新建品种',
-				formdatas: [
-					{
-						label: "添加名称",
-						model: "unit",
-					},
-				],
-				submitText: '确定',
-			},
-				this.modalVisible = true;
-		},
 		//	填入新建数据
 		createlibitem(data) {
 			var params = {
 				id: this.informations.length,
 				libraryName: data.unit
 			}
-			this.informations.push({ id: this.informations.length, libraryName: data.unit })
+			this.informations.push({ id: this.informations.length, formName: data.unit })
 			this.$http({
 				method: 'post',
-				url: this.apiRoot + "/grain/library/save",
+				url: this.apiRoot + "/grain/register/save",
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				transformRequest: [function(data) {
 					// Do whatever you want to transform the data
@@ -146,7 +156,8 @@ export default {
 				}],
 				data: {
 					id: this.informations.length,
-					libraryName:data.unit
+					formName:data.unit,
+                    libraryId:this.point
 				}
 			}).then(function(response) {
 				//		  	this.tabledatas=response.data.rows;
@@ -167,7 +178,10 @@ export default {
 	},
 	data() {
 		return {
-			title: "直属库",
+            inforselect:"2",
+			title: "库点",
+            pointList:"",
+            point:"",
 			datalistURL: this.apiRoot + '/grain/library/data',
 			searchURL: this.apiRoot + '/liquid/role2/data/search',
 			deleteURL: this.apiRoot + '/liquid/role2/data/delete',
@@ -175,14 +189,10 @@ export default {
 			createlibVisible: false,
 			modalVisible: false,
 			modal: {
-				title: '新建直属库',
+				title: '新建库点',
 				formdatas: [
 					{
-						label: "单位名称",
-						model: "unit",
-					},
-					{
-						label: "直属库名称",
+						label: "库点名称",
 						model: "lib",
 					},
 				],
@@ -198,18 +208,7 @@ export default {
 			}],
 			informationType: '',
 			informations: [
-				{
-					title: '库',
-					items: [
-						{},
-					],
-				},
-				{
-					title: '品种',
-					items: [
-						{},
-					],
-				},
+			
 			],
 		}
 	}
