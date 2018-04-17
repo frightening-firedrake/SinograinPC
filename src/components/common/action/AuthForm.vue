@@ -50,20 +50,20 @@
         			<br />
         			作
         		</div>
-			    <el-form-item label="相关操作：" :prop="'actions['+index+']'+'.operation'" class="full" :rules="[
+			    <el-form-item label="相关操作："  :class="formdatas.actions.length-1>index?'disabled':''" :prop="'actions['+index+']'+'.operation'" class="full" :rules="[
       				{ required: true, message: '请输入操作名称', trigger: 'blur' },
     			]">
-					<el-input v-model="value.operation" placeholder="请输入"></el-input>
+					<el-input v-model="value.operation" placeholder="请输入" :disabled="formdatas.actions.length-1>index"></el-input>
 				</el-form-item>
-				<el-form-item label="权限许可：" :prop="'actions['+index+']'+'.permission'"  class="full" :rules="[
+				<el-form-item label="权限许可：" :class="formdatas.actions.length-1>index?'disabled':''" :prop="'actions['+index+']'+'.permission'"  class="full" :rules="[
       				{ required: true, message: '权限许可名称', trigger: 'blur' },
     			]">
-					<el-input v-model="value.permission" placeholder="请输入"></el-input>
+					<el-input v-model="value.permission" placeholder="请输入" :disabled="formdatas.actions.length-1>index"></el-input>
 				</el-form-item>
-				<el-form-item label="选择依赖操作：" :prop="'actions['+index+']'+'.relyName'"  class="full" :rules="[
+				<el-form-item label="依赖操作：" :class="formdatas.actions.length-1>index?'disabled':''" :prop="'actions['+index+']'+'.relyName'"  class="full" :rules="[
       				{ required: true, message: '选择依赖操作', trigger: 'change' },
     			]">
-					<el-select v-model="value.relyName" placeholder="请选择">
+					<el-select v-model="value.relyName" placeholder="请选择" :disabled="formdatas.actions.length-1>index">
 				        <el-option
 					      v-for="item in formdatas.operationRIds"
 					      :key="item.value"
@@ -116,7 +116,7 @@
 						新增一组操作
 					</p>
 				</div>
-				<div class="tableDel"  @click="actionDel" v-if="formdatas.actions.length>1">
+				<div class="tableDel"  @click="actionDel" v-if="formdatas.actions.length>0">
 					<p style="background-image:url('static/images/sys/icons2.png');">					
 						删除最后一组操作
 					</p>

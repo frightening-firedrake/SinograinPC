@@ -266,6 +266,7 @@ export default {
         id: 3,
         prop:'resourceType',
         label: "资源类型",
+        status:true
 //      sort:true,
       },
       {
@@ -276,7 +277,7 @@ export default {
       },
       {
         id:5,
-        prop:'action',
+        prop:'operatingNum',
         label:"相关操作",
 //      sort:true,
       },
