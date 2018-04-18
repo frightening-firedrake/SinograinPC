@@ -67,7 +67,7 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //	},
     created(){
     	this.breadcrumbListFirst();
-    	console.log(this.$route)
+//  	console.log(this.$route)
 		this.getBreadcrumbHistory();
     },
 
@@ -115,7 +115,7 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 	    	payload.fullPath=fullPath;
 			if(res<2){
 				this.statBreadcrumbHistory();
-				console.log('重置历史记录')
+//				console.log('重置历史记录')
 			}
 //			查询历史
 			var is_set=this.breadcrumbHistory.some((item)=>{
@@ -128,7 +128,7 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //			新增历史
 				this.pushBreadcrumbHistory(payload);				
 			}
-			console.log(this.breadcrumbHistory)
+//			console.log(this.breadcrumbHistory)
 	    },
 //	    breadtest(){
 //		    var routeList = []

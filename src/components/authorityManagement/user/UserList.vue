@@ -107,24 +107,34 @@ export default {
 		this.modalVisible=false;
 	},
 //	获取搜索数据
-  	searchingfor(searching){
-  		console.log(searching);
+  	searchingfor(searching,page){
+  		page?page:1;
+  		this.searchText=searching;
+  		var params = {};
+		params.userNameLike = searching;
+//		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
 			url: this.searchURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
-			    page:1,
-			    pageSize:this.page.size,
-			    name_like:searching,
+			    params:JSON.stringify(params),
+			    page:page,
+			    rows:this.page.size,
 			}
 	    }).then(function (response) {
-		  	this.tabledatas=response.data.rows;
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+			this.tabledatas=response.data.rows;
+	  		this.page.total=response.data.total;
+
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -178,8 +188,11 @@ export default {
   	},
 //	获取分页点击事件中及当前页码
     getCurrentPage(currentPage){
-//		console.log(currentPage)
-		this.getlistdata(currentPage)
+		if(this.searchText){			
+			this.searchingfor(this.searchText,currentPage)
+		}else{			
+			this.getlistdata(currentPage)
+		}
 	},
 //	映射分页触发的事件
   	paginationEvent(actiontype){
@@ -199,8 +212,9 @@ export default {
   data() {
     return {
       datalistURL:this.apiRoot +'/grain/user/data',
-      searchURL:'/liquid/role/data/search',
+      searchURL:this.apiRoot +'/grain/user/data',
       deleteURL:'/liquid/role/data/delete',
+      searchText:'',
       checkedId:[],
       list:"librarylist",
 	  modalVisible:false,

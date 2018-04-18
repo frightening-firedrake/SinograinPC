@@ -54,11 +54,11 @@
 				</header>
 				<div class="treezl">
 					<el-tree
+						node-key="index"
 					    :data="tree.data"
 					    show-checkbox
-				  	    node-key="id"
 					    ref="tree"
-					    @check-change="getCheckedKeys"
+					    @check-change="getCheckedNodes"
 					    :check-strictly="tree.checkStrictly"
 					    highlight-current
 						:default-expand-all="tree_open_toggle"
@@ -82,6 +82,7 @@
         </div>
         
         <div class="clear"></div>
+        {{treeDataReady}}
     </el-form>
 </template>
            	
@@ -95,25 +96,24 @@ export default {
 
 //  components:{ LemonAult},
     props: ['formdatas','tree'],
-    beforeMount: function() {
-//    	this.finddisablecheckkey(this.tree.data)
-      	this.finddisablecheckedid(this.tree.data);
-      	this.finddefaultcheckkey(this.tree.data);
-      	this.findallcheckedid(this.tree.data);
-    },
-    mounted: function() {
-//	console.log(this.$refs,this.$refs.tree);
-////    	this.finddisablecheckkey(this.tree.data)
-//    	this.finddisablecheckedid(this.tree.data);
-//    	this.finddefaultcheckkey(this.tree.data);
-    },
+    computed:{	
+//  	由于异步的原因监控数据加载完成时点
+		treeDataReady(){      	
+	      	if(this.tree.data.length){
+	      		this.finddisablecheckkey(this.tree.data)
+	      		this.finddisablecheckedid(this.tree.data);
+	      		this.finddefaultcheckkey(this.tree.data);
+	      		this.findallcheckedid(this.tree.data);	      		
+	      	}
+	    }
+	},
     methods: {
       	onSubmit(formname) {
 
             this.$refs[formname].validate((valid) => {
                 if (valid) {
-                    this.$emit('submit',this.formdatas.form,this.$refs.tree.getCheckedKeys())
-					window.history.go(-1)
+                    this.$emit('submit',this.formdatas.form,this.$refs.tree.getCheckedNodes())
+
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -127,7 +127,8 @@ export default {
 			window.history.go(-1)
         },
       getCheckedNodes() {
-        console.log(this.$refs.tree.getCheckedNodes());
+//      console.log(this.$refs.tree.getCheckedNodes());
+//      console.log(this.tree.data)
       },
       getCheckedKeys() {
         console.log(this.$refs.tree.getCheckedKeys());
@@ -135,11 +136,14 @@ export default {
       resetChecked() {
         this.$refs.tree.setCheckedKeys([]);
       },
-      checkall:function(a){
+      checkall(value){
+      	console.log(value)
       	var allkeys;
-      	if(a){
+      	if(value){
+//    		this.$refs.tree.setCheckedNodes(this.tree.data)
       		allkeys=this.checkallkey;
       	}else{
+//    		this.$refs.tree.setCheckedNodes([])
       		allkeys=this.disablecheckedkey;
       	}
       	this.$refs.tree.setCheckedKeys(allkeys);
@@ -153,44 +157,48 @@ export default {
       	console.log(this.tree_open_toggle)
       },
       	findallcheckedid(arr){
-      		arr.forEach((val,index)=>{	      		   			
+      		arr.forEach((val)=>{	      		   			
 	      		if((val.checked)&&val.disabled||(!val.disabled)){    			
-	      			this.checkallkey.push(val.id);
+	      			this.checkallkey.push(val.index);
 	      		}
 				if(val.children){
 					this.findallcheckedid(val.children)
 				}
 			})	
         },
+        //禁用且选中
         finddisablecheckedid(arr){
-      		arr.forEach((val,index)=>{	      		   			
+      		arr.forEach((val)=>{	      		   			
 	      		if(!(!val.checked)&&val.disabled){    			
-	      			this.disablecheckedkey.push(val.id);
+	      			this.disablecheckedkey.push(val.index);
 	      		}
 				if(val.children){
 					this.finddisablecheckedid(val.children)
 				}
 			})	
         },
+        //禁用的
       	finddisablecheckkey(arr){
-      		arr.forEach((val,index)=>{
+      		arr.forEach((val)=>{
 	      		if(val.disabled){    			
-	      			this.disablekey.push(val.id);
+	      			this.disablekey.push(val.index);
 	      		}
 				if(val.children){
 					this.finddisablecheckkey(val.children)
 				}
 			})
         },
+//      已经选中的
         finddefaultcheckkey(arr){
-      		arr.forEach((val,index)=>{
+      		arr.forEach((val)=>{
 	      		if(val.checked){    			
-	      			this.defaultCheckedKeys.push(val.id);
+	      			this.defaultCheckedKeys.push(val.index);
 	      		}
 				if(val.children){
 					this.finddefaultcheckkey(val.children)
 				}
 			})
+//    		console.log(this.defaultCheckedKeys)
         },
     },
     data() {

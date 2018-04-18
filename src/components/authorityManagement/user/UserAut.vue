@@ -75,9 +75,9 @@ export default {
 		  	this.formdatas=response.data.formdatas;
 //	  		this.page.total=response.data.total;
 		  	
-	  		setTimeout(()=>{			  		
+
 		  		this.loading=false;
-		  	},1000)
+
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -95,9 +95,9 @@ export default {
 //			}
 	    }).then(function (response) {
 //		  	this.tabledatas=response.data.rows;
-	  		setTimeout(()=>{			  		
+
 		  		this.loading=false;
-		  	},1000)
+
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -106,7 +106,16 @@ export default {
   		console.log('titleEvent');
   	},
   	submit(data,tree){
-  		console.log(data,tree);
+//		console.log(data,tree);
+//筛选树节点
+		var operationIds=[];
+		tree.forEach((item)=>{
+			if(item.type==1){
+				operationIds.push(item.id)
+			}
+		})
+		operationIds=operationIds.join(',')
+		console.log(operationIds)
   	}
   },
   data() {
@@ -159,121 +168,16 @@ export default {
       	],
  	  },     	
 
-			       tree:{
-			       		label:'用户授权：',
-			//	      	defaultCheckedKeys:[1,2,3,4,5,6,8,15,16,17,18],//默认选中的key id
-				      	checkStrictly:true,//分割了上下父子选中关系
-				        data: [
-				        	{
-				            id: 1,
-				            label: '插件管理',
-					        disabled: true,
-					        checked:true,
-				            children: [
-				            	{
-					                id: 2,
-					                label: '查看',
-					                disabled: true,
-					        		checked:true,
-				            	},    
-				            	{
-					                id: 3,
-					                label: '添加',          
-					                disabled: true,
-					       		 	checked:true,
-				           		},
-					            {
-					                id: 4,
-					                label: '修改',          
-					                disabled: true,
-					        		checked:true,
-					            },
-					            {
-					                id: 5,
-					                label: '删除',          
-					                disabled: true,
-					        		checked:true,
-					            },
-					            {
-					                id: 6,
-					                label: '本地安装',          
-					                disabled: true,
-					        		checked:true,
-					            },
-					            {
-					                id: 7,
-					                label: '禁用',          
-					                disabled: true,
-					        		checked:false,
-					            },
-				            ]
-				       		}, {
-				            id: 8,
-				            label: '权限管理',
-					        checked:true,
-				            children: [
-				            	{
-					                id: 9,
-					                label: '规则管理',
-					        		checked:false,
-					                children: [
-					                {
-					                	id: 10,
-					                	label: '规则管理1',
-					        			checked:false,
-					                },
-					                {
-					                	id: 11,
-					                	label: '规则管理2',
-					        			checked:false,
-					                },
-					                {
-					                	id: 12,
-					                	label: '规则管理3',
-					        			checked:false,
-					                },
-					                {
-					                	id: 13,
-					                	label: '规则管理4',
-					        			checked:false,
-					                },
-				               		],
-				            	},
-				            	{
-					                id: 15,
-					                label: '角色组',
-					        		checked:true,
-					                children: [
-						                {
-						                	id: 16,
-						                	label: '角色组1',
-					        				checked:true,
-						                },
-						                {
-						                	id: 17,
-						                	label: '角色组2',
-					        				checked:true,
-						                },
-						                {
-						                	id: 18,
-						                	label: '角色组3',
-					        				checked:true,
-						                },
-						                {
-						                	id: 19,
-						                	label: '角色组4',
-					        				checked:true,
-						                },
-				            		],
-				        
-				       			},
-				            	]},
-				        	],
-				        defaultProps: {
-				            children: 'children',
-				            label: 'label'
-				        }
-				      }, 
+    tree:{
+   		label:'用户授权：',
+//	    defaultCheckedKeys:[1,2,3,4,5,6,8,15,16,17,18],//默认选中的key id
+      	checkStrictly:true,//分割了上下父子选中关系
+        data: [],
+        defaultProps: {
+            children: 'children',
+            label: 'label'
+        }
+    }, 
 
       	
       	

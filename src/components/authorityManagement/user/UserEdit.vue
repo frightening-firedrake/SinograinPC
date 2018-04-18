@@ -163,7 +163,7 @@ export default {
       	labels:[
       		{label:'用户名称：',type:"input",},
       		{label:'用户密码：',type:"input",},
-      		{label:'电话号码：',type:"input",},
+      		{label:'手机号码：',type:"input",},
       		{label:'邮箱号码：',type:"input",},
 //    		{label:'分配角色：',type:"num",},
 //    		{label:'备注：',type:"input",class:'full'},

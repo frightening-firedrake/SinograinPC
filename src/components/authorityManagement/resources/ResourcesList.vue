@@ -107,7 +107,7 @@ export default {
   		page?page:1;
   		this.searchText=searching;
   		var params = {};
-		params.resourceNameOrResourceTypeLike = searching;
+		params.resourceNameLike = searching;
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
@@ -123,7 +123,9 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			   params:JSON.stringify(params)
+			    params:JSON.stringify(params),
+			    page:page,
+			    rows:this.page.size,
 			}
 	    }).then(function (response) {
 			this.tabledatas=response.data.rows;
