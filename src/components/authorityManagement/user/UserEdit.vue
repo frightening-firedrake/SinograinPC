@@ -78,7 +78,7 @@ export default {
 				// 	email: "23474@qq.com",
 				var { userName,userPass,phone,email } = response.data
 				this.formdatas.form.userName = userName
-				this.formdatas.form.userPass = userPass
+				this.formdatas.form.userPass = ""
 				this.formdatas.form.phone = phone
 				this.formdatas.form.email = email
 				console.log(this.formdatas.form)
