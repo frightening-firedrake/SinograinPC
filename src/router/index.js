@@ -54,6 +54,7 @@ import ResourcesEdit from '@/components/authorityManagement/resources/ResourcesE
 import ResourcesAdd from '@/components/authorityManagement/resources/ResourcesAdd.vue'
 import ResourcesList from '@/components/authorityManagement/resources/ResourcesList.vue'
 import InformationAdd from '@/components/informationManagement/InformationAdd.vue'
+import Informationpoint from '@/components/informationManagement/Informationpoint.vue'
 import SampleLibraryList from '@/components/sampling/list/SampleLibraryList.vue'
 import ExaminationLibrary from '@/components/sampling/list/ExaminationLibrary.vue'
 
@@ -441,9 +442,18 @@ const routes= [
           },
           {
             path:"InformationManagement/InformationAdd",
-            name:"信息管理/添加信息",
+            name:"信息管理/添加直属库",
             component:InformationAdd,
             meta: { needAuth: 'InformationManagement' },
+//          beforeEnter: (to, from, next) => {
+//
+//		    }
+          },
+           {
+            path:"InformationManagement/Informationpoint",
+            name:"信息管理/添加库点",
+            component:Informationpoint,
+           
 //          beforeEnter: (to, from, next) => {
 //
 //		    }

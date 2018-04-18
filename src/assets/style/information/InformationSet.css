@@ -132,6 +132,9 @@
 	border-bottom:1px solid #dfdfdf;
 	border-left:1px solid #dfdfdf;
 }
+.tbwrap .item:last-child{
+	border-right:1px solid #dfdfdf;
+}
 .tbwrap .item .index{
 	border-right:1px solid #dfdfdf;
 }

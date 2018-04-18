@@ -91,7 +91,7 @@ export default {
 
         return {
             option: [],
-            region: "全部",
+            region: "",
             point: [],
             number: "",
             sample: "1"
