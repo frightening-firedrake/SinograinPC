@@ -334,7 +334,7 @@ export default {
 					
 				},
 				{
-					icon: 'icon-xinjian2',
+					icon: 'icon-tianjia',
 					linkto: '/index/InformationManagement/Informationpoint',
 					title: '添加库点',
 					level: 2,
