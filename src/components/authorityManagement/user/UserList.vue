@@ -58,7 +58,7 @@ export default {
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击编辑事件
-  	this.$root.eventHub.$on("editlistitem",function(id){  
+  	this.$root.eventHub.$on("editlistitem",function(id,row){  
 //		console.log(id)
 		this.$router.push({path: '/index/AuthorityManagement/UserList/UserEdit',query:{id:id}})
   	}.bind(this));
