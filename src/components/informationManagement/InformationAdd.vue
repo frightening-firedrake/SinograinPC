@@ -45,14 +45,25 @@ export default {
 	methods: {
 		//	获取列表数据方法
 		getlistdata(page) {
+			let params = {
+				pLibraryId: "-1"
+			}
 			this.loading = true;
 			// 获取列表数据（第？页）
 			this.$http({
 				method: 'post',
 				url: this.datalistURL,
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				transformRequest: [function(data) {
+					// Do whatever you want to transform the data
+					let ret = ''
+					for (let it in data) {
+						ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					}
+					return ret
+				}],
 				data: {
-					pLibraryId: "-1"
+					params: JSON.stringify(params)
 				}
 			}).then(function(response) {
 				this.informations = response.data.rows;
@@ -146,7 +157,7 @@ export default {
 				}],
 				data: {
 					id: this.informations.length,
-					libraryName:data.unit
+					libraryName: data.unit
 				}
 			}).then(function(response) {
 				//		  	this.tabledatas=response.data.rows;
