@@ -6,7 +6,7 @@
 		</h3>
 	    <div class='errorMassage'>
 	        <h2>你没有权限访问该页面</h2>
-	        <h6>如有不满请联系你领导</h6>
+	        <h6>请联系管理员获取权限</h6>
 	        <p>
 	        	或者你可以返回:
 	        	<a href="javascript:;" @click="back">上一页</a>
@@ -58,7 +58,7 @@ export default {
  	text-align: center;
  	background-position: bottom center;
  	background-repeat:no-repeat;
- 	background-size:430px 320px;
+ 	background-size:6rem 4.6rem;
 }
 /*.errorPageWrap .bg img{
  	width:520px;

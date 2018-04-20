@@ -2,7 +2,7 @@
 	<!--<el-menu default-active="/index/sampling/libraryList" class="el-menu-vertical-demo" :router=true @open="handleOpen" @select="handleSelect" @close="handleClose" :collapse="this.isCollapse" :background-color="backgroundColor" :unique-opened=true>-->
 	<el-menu :default-active="activePath" class="el-menu-vertical-demo" :router=true @open="handleOpen" @select="handleSelect" @close="handleClose" :collapse="this.isCollapse" :background-color="backgroundColor">
 		<!--用户信息-->
-		<div class="user">
+		<div class="user" style="width:2.5rem;">
 			<div class="photo">
 				<img :src="user.avater" alt="">
 			</div>
