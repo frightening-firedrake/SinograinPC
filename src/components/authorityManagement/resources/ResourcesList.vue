@@ -3,7 +3,7 @@
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
       <!--alert-->
-      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
+      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" @createAut="createAut"></list-header>
       <!--表格-->
@@ -248,7 +248,8 @@ export default {
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：此页面展示的资源列表页面，您在本页面可以对资源进行查看、编辑、删除和新建的操作。单击右方x号，你可以关闭此条提示语！',
+//      title: '温馨提示：此页面展示的资源列表页面，您在本页面可以对资源进行查看、编辑、删除和新建的操作。单击右方x号，你可以关闭此条提示语！',
+        title: '温馨提示：此页面展示的资源列表页面，您在本页面可以对资源进行编辑和新建的操作。单击右方x号，你可以关闭此条提示语！',
         type: 'info'
       }],
 //    表格数据

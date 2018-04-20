@@ -57,10 +57,10 @@ import InformationAdd from '@/components/informationManagement/InformationAdd.vu
 import Informationpoint from '@/components/informationManagement/Informationpoint.vue'
 import SampleLibraryList from '@/components/sampling/list/SampleLibraryList.vue'
 import ExaminationLibrary from '@/components/sampling/list/ExaminationLibrary.vue'
-
 import SuperviseList from '@/components/testReport/supervise/SuperviseList.vue'
 import SuperviseShow from '@/components/testReport/supervise/SuperviseShow.vue'
 import QualityAcceptance from '@/components/testReport/QualityAcceptance.vue'
+import error403 from '@/components/error/error403.vue'
 
 
 
@@ -89,6 +89,11 @@ const routes= [
             component:Home,
             redirect: 'grainDepot/createSampleReglc',
           },
+          {
+            path:"error403",
+            name: '没有权限',
+            component:error403,
+          },
 //        粮库管理
 		  {
             path:"grainDepot",
@@ -100,7 +105,7 @@ const routes= [
             path:"grainDepot/createSampleReglc",
             name:"粮库管理/新建扦样登记表",
             component:CreateSampleReglc,
-            meta: { needAuth: 'grainDepot' },
+            meta: { needAuth: '新建扦样登记表' },
           },
 //        {
 //          path:"grainDepot/createSampleReglc/sampleReglc",
@@ -111,6 +116,7 @@ const routes= [
             path:"grainDepot/sampleRegListlc",
             name:"粮库管理/扦样登记列表",
             component:SampleRegListlc,
+            meta: { needAuth: '扦样登记列表' },
           },
           {
             path:"grainDepot/sampleRegListlc/sampleReglc",
@@ -138,6 +144,7 @@ const routes= [
             path:"sampling/examinationLibraryList",
             name:"扦样流程/审批扦样库点列表",
             component:ExaminationLibraryList,
+            meta: { needAuth: '审批扦样列表' },
           },
           {
             path:"sampling/examinationLibraryList/sampleRegList",
@@ -159,6 +166,7 @@ const routes= [
             path:"sampling/libraryList",
             name:"扦样流程/扦样库点列表",
             component:LibraryList,
+            meta: { needAuth: '扦样库点列表' },
           },
           {
             path:"sampling/libraryList/samplingList",
@@ -205,11 +213,13 @@ const routes= [
             path:"sampling/PLibraryList",
             name:"扦样流程/监督检查情况",
             component:PLibraryList,
+            meta: { needAuth: '监督检查情况' },
           },
           {
             path:"sampling/SRLibraryList",
             name:"扦样流程/监督检查库点列表",
             component:SRLibraryList,
+            meta: { needAuth: '监督检查情况' },
           },
           {
             path:"sampling/SRLibraryList/SafetyReportList",
@@ -232,6 +242,7 @@ const routes= [
             path:"sampleManagement/sampleIn",
             name:"样品管理/样品入库列表",
             component:SampleInList,
+            meta: { needAuth: '样品入库列表' },
           },
           {
             path:"sampleManagement/sampleIn/sampleInEdit",
@@ -248,6 +259,7 @@ const routes= [
             path:"sampleManagement/handover",
             name:"样品管理/样品领取交接单",
             component:HandoverList,
+            meta: { needAuth: '样品领取交接单' },
           },
           {
             path:"sampleManagement/handover/handoverListCreate",
@@ -295,6 +307,7 @@ const routes= [
             path:"sampleDetection/packingTaskList",
             name:"样品检测/分装任务列表",
             component:PackingTaskList,
+            meta: { needAuth: '分装任务列表' },
           },
           {
             path:"sampleDetection/packingTaskList/packingList",
@@ -316,6 +329,7 @@ const routes= [
             path:"sampleDetection/checkList",
             name:"样品检测/样品检验单",
             component:CheckList,
+            meta: { needAuth: '样品检测单' },
           },
           {
             path:"sampleDetection/checkList/checkEdit",
@@ -343,6 +357,7 @@ const routes= [
             path:"TestReportManagement/TestReportMaker",
             name:"检测报表管理/样品检测报表制作",
             component:TestReportMaker,
+            meta: { needAuth: '样品检测报表制作' },
           },
           {
             path:"TestReportManagement/TestReportMaker/SampleSelect",
@@ -358,6 +373,7 @@ const routes= [
             path:"TestReportManagement/SuperviseList",
             name:"检测报表管理/监督检查报告",
             component:SuperviseList,
+            meta: { needAuth: '监督检查报告' },
           },
           {
             path:"TestReportManagement/SuperviseList/SuperviseShow",
@@ -368,6 +384,7 @@ const routes= [
             path:"TestReportManagement/QualityAcceptance",
             name:"检测报表管理/质量验收报告",
             component:QualityAcceptance,
+            meta: { needAuth: '质量验收报告' },
           },
 
 //        权限管理AuthorityManagement
@@ -381,7 +398,7 @@ const routes= [
             path:"AuthorityManagement/RoleList",
             name:"权限管理/角色管理",
             component:RoleList,
-            meta: { needAuth: 'AuthorityManagement' },
+            meta: { needAuth: '角色管理' },
           },
           {
             path:"AuthorityManagement/RoleList/RoleEdit",
@@ -402,6 +419,7 @@ const routes= [
             path:"AuthorityManagement/UserList",
             name:"权限管理/用户管理",
             component:UserList,
+            meta: { needAuth: '用户管理' },
           },
           {
             path:"AuthorityManagement/UserList/UserEdit",
@@ -422,6 +440,7 @@ const routes= [
             path:"AuthorityManagement/ResourcesList",
             name:"权限管理/资源管理",
             component:ResourcesList,
+            meta: { needAuth: '资源管理' },
           },
           {
             path:"AuthorityManagement/ResourcesList/ResourcesEdit",
@@ -444,7 +463,7 @@ const routes= [
             path:"InformationManagement/InformationAdd",
             name:"信息管理/添加直属库",
             component:InformationAdd,
-            meta: { needAuth: 'InformationManagement' },
+            meta: { needAuth: '添加直属库' },
 //          beforeEnter: (to, from, next) => {
 //
 //		    }
@@ -452,7 +471,9 @@ const routes= [
            {
             path:"InformationManagement/Informationpoint",
             name:"信息管理/添加库点",
+            meta: { needAuth: '添加库点' },
             component:Informationpoint,
+
            
 //          beforeEnter: (to, from, next) => {
 //
@@ -480,7 +501,7 @@ router.beforeEach((to, from, next) => {
 	}else if (userAuth&&to.path=='/index') {
 //		验证用户权限制定不同首页地址重定向
 		userAuth=userAuth.split(',');
-	  	if (userAuth.includes('grainDepot')) {
+	  	if (userAuth.includes('新建扦样登记表')) {
 
 	    	next({path: '/index/grainDepot'})	  	
 	  	}else{	  		
@@ -491,7 +512,7 @@ router.beforeEach((to, from, next) => {
 		userAuth=userAuth.split(',');
 	  	if (!userAuth.includes(to.meta.needAuth)) {
 	  		console.log('没权限')
-	    	next(false)	  	
+	    	next({path: '/index/error403'})	  	
 	  	}else{	  		
 	  		next()	  	
 	  	}

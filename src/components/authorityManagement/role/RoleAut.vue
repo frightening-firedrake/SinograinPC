@@ -130,12 +130,12 @@ export default {
 				operationIds:operationIds,
 			}
 	    }).then(function (response) {
-	//		window.history.go(-1)
+			this.$router.go(-1)
 			
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
-		console.log(operationIds)
+//		console.log(operationIds)
 //		console.log(data,tree);
   	}
   },

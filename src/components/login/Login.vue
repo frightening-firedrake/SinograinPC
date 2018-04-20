@@ -98,8 +98,9 @@ export default {
                		payload.libraryName=response.data.user.libraryName;
                		payload.userName=response.data.user.userName;
                		payload.userId=response.data.user.id;
+               		payload.userAuth=response.data.user.resourceName;
 //             		payload.userRole=response.data.user.userRole;
-               		payload.userAuth='InformationManagement,AuthorityManagement,grainDepot';//grainDepot
+//             		payload.userAuth='InformationManagement,AuthorityManagement';//grainDepot
                		this.setUserInfo(payload)
                    	this.$router.push({ path: '/index'});
                }else {

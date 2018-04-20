@@ -252,7 +252,8 @@ export default {
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：此页面展示的用户列表页面，您在本页面可以对用户进行查看、编辑、删除、授权以及批量删除和新建的操作。单击右方x号，你可以关闭此条提示语！',
+//      title: '温馨提示：此页面展示的用户列表页面，您在本页面可以对用户进行查看、编辑、删除、授权以及批量删除和新建的操作。单击右方x号，你可以关闭此条提示语！',
+        title: '温馨提示：此页面展示的用户列表页面，您在本页面可以对用户进行编辑、授权和新建的操作。单击右方x号，你可以关闭此条提示语！',
         type: 'info'
       }],
 //    表格数据
@@ -273,7 +274,7 @@ export default {
       },
       {
         id:3,
-        prop:'displayName',
+        prop:'rolesName',
         label:"分配角色",
 //      sort:true,
       },
@@ -296,7 +297,7 @@ export default {
       	number:false,
       	view:false,
       	edit:true,
-      	dele:true,
+      	dele:false,
       	auth:true,
       	show:true,
       	noview:true,

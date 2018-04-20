@@ -58,13 +58,14 @@
 					    :data="tree.data"
 					    show-checkbox
 					    ref="tree"
-					    @check-change="getCheckedNodes"
+						@check-change="checkChange"
 					    :check-strictly="tree.checkStrictly"
 					    highlight-current
 						:default-expand-all="tree_open_toggle"
 						:default-checked-keys="defaultCheckedKeys"
 					    :props="tree.defaultProps">
 					</el-tree>
+<!--					@check="checkCurrent"-->
 				</div>
 	    	
 		    	<div class="prompt">
@@ -137,7 +138,7 @@ export default {
         this.$refs.tree.setCheckedKeys([]);
       },
       checkall(value){
-      	console.log(value)
+//    	console.log(value)
       	var allkeys;
       	if(value){
 //    		this.$refs.tree.setCheckedNodes(this.tree.data)
@@ -200,6 +201,61 @@ export default {
 			})
 //    		console.log(this.defaultCheckedKeys)
         },
+        checkCurrent(node,data){
+
+        },
+        findchildrenNode(arr){
+        	
+        },
+        checkChange(node,val,child){
+        	if(!node.relyId){
+        		return
+        	}
+//      	console.log(node,val,child)
+//      	console.log(this.$refs.tree)
+        	var nodeName=node.name;//当前节点名称
+        	var nodeKey=node.index;//当前节点key
+        	var pName;//依赖节点名称
+        	var pKey=node.relyId;//依赖节点id
+        	var pNode//依赖节点
+        	if(pKey!=='-1'){//存在依赖节点
+        		pNode=this.$refs.tree.getNode(pKey);//依赖节点
+        		pName=pNode.label//依赖节点名称
+        	}
+//      	var cKey=node.index;//被依赖节点id
+//      	var cNode=node.index;//依赖节点
+//      	var checkedKeys=this.$refs.tree.getCheckedKeys()//全部选中key值
+        	var CheckedNodes=this.$refs.tree.getCheckedNodes()//全部选中节点
+//      	当前节点未选中点击后选中了
+			if(val&&pNode){
+				if(!pNode.checked){//依赖节点未选中
+					this.$notify.error({
+			          	title: '错误',
+			          	message: nodeName+' 依赖于 '+pName+' 目前无法勾选请先勾选 '+pName,
+			          	type: 'warning',
+//			          	duration: 0,
+			        });
+			        this.$refs.tree.setChecked(nodeKey,false)
+				}
+			}else if(!val){
+				var childrenNames=[];
+				CheckedNodes.forEach((item)=>{
+					if(item.relyId==nodeKey){
+						childrenNames.push(item.name)
+					}
+				})
+				if(childrenNames.length){
+					childrenNames.join('、');
+					this.$notify.error({
+			          	title: '错误',
+			          	message: nodeName+' 被 '+childrenNames+' 依赖无法取消勾选请先取消勾选 '+childrenNames,
+			          	type: 'warning',
+//			          	duration: 0,
+			        });
+			        this.$refs.tree.setChecked(nodeKey,true)
+				}
+			}
+        }
     },
     data() {
     	// 普通文本的验证

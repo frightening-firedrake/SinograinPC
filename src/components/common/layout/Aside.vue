@@ -24,7 +24,8 @@
 		</div>
 		<!--导航-->
 		<!--  <div style="min-height:4.5rem;">-->
-		<template v-for="item in navlist" v-if="checkAuth(userAuth,item.needAuth)&&item.pid==0">
+		<!--<template v-for="item in navlist" v-if="checkAuth(userAuth,item.needAuth)&&item.pid==0">-->
+		<template v-for="item in navlist" v-if="item.pid==0">
 			<el-submenu :index="item.lid.toString()">
 			<!--<el-submenu :index="item.lid.toString()" key="item.lid">-->
 				<template slot="title">

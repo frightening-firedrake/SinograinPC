@@ -1,13 +1,13 @@
 <template>
-    <el-form ref="form" :inline-message="errorinline" class="sampling"  :model="formdatas" :label-width="labelWidth">
+    <el-form ref="form" :inline-message="errorinline" class="sampling" :model="formdatas" :label-width="labelWidth">
         <template>
             <p>{{formdatas.title}}</p>
         </template>      
         <template v-for="(value,key,index) in formdatas.form">
             <template v-if="formdatas.labels[index]['type']=='input'">
-		        <el-form-item :label="formdatas.labels[index]['label']" :prop="'form.'+key" v-bind:class="formdatas.labels[index]['class']" 
-		        	:rules="[{ required: true, message: '请完善输入内容', trigger: 'blur' }
-    			]">
+		        <el-form-item :label="formdatas.labels[index]['label']" :prop="'form.'+key" v-bind:class="formdatas.labels[index]['class']"     			
+		        	:rules="rules[key]"
+    			>
 				    <el-input v-model="formdatas.form[key]" placeholder="请输入" :disabled="formdatas.labels[index]['disable']"></el-input>
 				</el-form-item>
             </template>
@@ -75,39 +75,6 @@
         	</div>
         </template>
 
-
-        	
-		 <!--<template v-for="(item,index) in formdatas.labels">-->
-            <!--<template v-if="item.type=='input'">
-		        <el-form-item :label="item.label" prop="ctime" v-bind:class="item.class">
-				    <el-input v-model="formdatas.form[index]" :disabled="item.disable"></el-input>
-				</el-form-item>
-            </template>-->
-        <!--</template>-->
-		<!--<el-form-item label="产地：" prop="region" >
-		    <el-select v-model="formdatas.form.region" placeholder="请选择产地">
-		        <el-option label="山西" value="1"></el-option>
-		        <el-option label="河南" value="henan"></el-option>
-		        <el-option label="山东" value="shandong"></el-option>
-		        <el-option label="陕西" value="shanxi2"></el-option>
-		        <el-option label="东北" value="dongbei"></el-option>
-		    </el-select>
-		</el-form-item>
-		<el-form-item label="最大限制用户数：" prop="num" >
-			<el-input-number v-model="num1" :min="1" :max="10" label="描述文字"></el-input-number>
-		</el-form-item>
-		<el-form-item label="相关操作：" class="full" prop="action" >
-		    <el-checkbox-group v-model="formdatas.form.action">
-		      <el-checkbox label="美食/餐厅线上活动" name="action"></el-checkbox>
-		      <el-checkbox label="地推活动" name="action"></el-checkbox>
-		      <el-checkbox label="线下主题活动" name="action"></el-checkbox>
-		      <el-checkbox label="单纯品牌曝光" name="action"></el-checkbox>
-		    </el-checkbox-group>
-		</el-form-item>
-		<el-form-item label="备注：" class="full" prop="remarks" >
-		    <el-input v-model="formdatas.form.remarks"></el-input>
-		</el-form-item>-->
-
         
         <div class="btns">
         	<div class="tableAddWrap" v-if="formdatas.actions">        		
@@ -171,9 +138,9 @@ export default {
             var validatePhone = ( rule, value, callback ) => {
                 var str = /^1[3|4|5|8][0-9]\d{4,8}$/
                 if(!value){
-                    return callback(new Error("手机号不能为空"))
+                    return callback(new Error("手机号码不能为空"))
                 }else if(!str.test(value)){
-                    return callback(new Error("手机号不对"))
+                    return callback(new Error("请填写正确的手机号码"))
                 }else{
                     callback()
                 }
@@ -189,50 +156,126 @@ export default {
                     return callback()
                 }
             }
+//          重名验证后台比对
+			var displayName = ( rule, value, callback ) => {
+				if(!value){
+					return
+				}
+				this.$http({
+				    method: 'post',
+					url: this.apiRoot +'/grain/role/findBydisplayName',
+					transformRequest: [function (data) {
+						// Do whatever you want to transform the data
+						let ret = ''
+						for (let it in data) {
+						ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+						}
+						return ret
+					}],
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					data: {
+						displayName:value,
+					}
+			    }).then(function (response) {
+					if(response.data.success){					
+						return callback()
+					}else{
+						return callback(new Error("该角色名称已存在"))					
+					}
+				}.bind(this)).catch(function (error) {
+				    console.log(error);
+				}.bind(this));
+
+            }
+//          重名验证后台比对
+			var userName = ( rule, value, callback ) => {
+				this.$http({
+				    method: 'post',
+					url: this.apiRoot +'/grain/user/findByuserName',
+					transformRequest: [function (data) {
+						// Do whatever you want to transform the data
+						let ret = ''
+						for (let it in data) {
+						ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+						}
+						return ret
+					}],
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					data: {
+						userName:this.$route.query.id,
+					}
+			    }).then(function (response) {
+					if(response.data.success){					
+						return callback()
+					}else{
+						return callback(new Error("该用户名称已存在"))					
+					}
+				}.bind(this)).catch(function (error) {
+				    console.log(error);
+				}.bind(this));
+
+            }
+//          重名验证后台比对
+			var resourceName = ( rule, value, callback ) => {
+				this.$http({
+				    method: 'post',
+					url: this.apiRoot +'/grain/resource/findByresourceName',
+					transformRequest: [function (data) {
+						// Do whatever you want to transform the data
+						let ret = ''
+						for (let it in data) {
+						ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+						}
+						return ret
+					}],
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					data: {
+						resourceName:this.$route.query.id,
+					}
+			    }).then(function (response) {
+					if(response.data.success){					
+						return callback()
+					}else{
+						return callback(new Error("该资源名称已存在"))					
+					}
+				}.bind(this)).catch(function (error) {
+				    console.log(error);
+				}.bind(this));
+
+            }
         return {
         labelWidth:'2rem',
         errorinline:false,
         disabled:true,
+        
             rules: {
-                text: [
-                    {validator:validateText,trigger:'blur'}
+                phone:[
+                	{ required: true, message: '请完善输入内容', trigger: 'blur' },
+                    {validator:validatePhone,trigger:'blur'}
                 ],
-                select:[
-                    {validator:validateSelect,trigger:'blur'}
+                email:[
+                	{ required: true, message: '请完善输入内容', trigger: 'blur' },
+                    {type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change'}
                 ],
-                roleName:[
-                    {validator:validateText,trigger:'blur'}
+                displayName:[
+                	{ required: true, message: '请完善输入内容', trigger: 'blur' },
+                    {validator:displayName,trigger:'blur'}
                 ],
-	            status: [
-                    {validator:validateText,trigger:'blur'}
+                userName:[
+                	{ required: true, message: '请完善输入内容', trigger: 'blur' },
+                    {validator:userName,trigger:'blur'}
                 ],
-	            nid: [
-                    {validator:validateText,trigger:'blur'}
+	            resourceName: [
+                	{ required: true, message: '请完善输入内容', trigger: 'blur' },
+                    {validator:resourceName,trigger:'blur'}
+                ], 
+				remarks:[
+                	{ required: true, message: '请完善输入内容', trigger: 'blur' },
                 ],
-	            checkregion:[
-                    {validator:validateSelect,trigger:'blur'}
+                userPass:[
+                	{ required: true, message: '请完善输入内容', trigger: 'blur' },
                 ],
-	            pnumber:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            varieties:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            quality:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            weight:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-	            region:[
-                    {validator:validateSelect,trigger:'blur'}
-                ],
-//	            harvestdate: '2017',//收货年度
-	            samplingdate:[
-                    {validator:validateText,trigger:'blur'}
-                ],
-//	            remarks: '',//备注
-                
+
             }
         }
     },
