@@ -99,6 +99,8 @@ export default {
                		payload.userName=response.data.user.userName;
                		payload.userId=response.data.user.id;
                		payload.userAuth=response.data.user.resourceName;
+               		payload.Token=response.data.user.token;
+//             		payload.Token='akjshjakjclacahdawhdlahwdiua';
 //             		payload.userRole=response.data.user.userRole;
 //             		payload.userAuth='InformationManagement,AuthorityManagement';//grainDepot
                		this.setUserInfo(payload)

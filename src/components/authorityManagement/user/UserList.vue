@@ -163,9 +163,9 @@ export default {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
 		  	
-	  		setTimeout(()=>{			  		
+
 		  		this.loading=false;
-		  	},1000)
+
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

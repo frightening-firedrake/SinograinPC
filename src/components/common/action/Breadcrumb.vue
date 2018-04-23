@@ -19,7 +19,7 @@
 			    	<!--<i class="icon-home"></i>-->
 			    	首页
 			    </el-breadcrumb-item>
-			    <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.index" >{{item.name}}</el-breadcrumb-item>
+			    <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.index" @click='breadcrumbLink(item.index)'>{{item.name}}</el-breadcrumb-item>
 			    <!--<el-breadcrumb-item v-for="item in breadcrumbList" :key="item.index" :to="item.path">{{item.name}}</el-breadcrumb-item>-->
 			    <!--<el-breadcrumb-item v-for="item in breadcrumbList" :key="item.index" >{{item.name}}</el-breadcrumb-item>-->
 			</template>
@@ -78,7 +78,7 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
     	},
     	backhome(){
 //  		手动跳转
-			this.route_click();
+//			this.route_click();
     		this.$router.push({ path: '/index/home' });
     	},
     	breadcrumbListFirst() {
@@ -130,22 +130,10 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 			}
 //			console.log(this.breadcrumbHistory)
 	    },
-//	    breadtest(){
-//		    var routeList = []
-//	
-//			router.beforeEach((to, from, next) => {
-//			  var index = routeList.indexOf(to.name)
-//			  if (index !== -1) {
-//			    //如果存在路由列表，则把之后的路由都删掉
-//			    routeList.splice(index + 1, routeList.length - index - 1)
-//			  } else {
-//			    routeList.push(to.name)
-//			  }
-//			  to.meta.routeList = routeList
-//			  next()
-//			})
-//	    	
-//	    },
+	    breadcrumbLink(index){
+	    	console.log(index,this.breadcrumbHistory)
+//	    	this.$router.push({path:this.breadcrumbHistory[index]})
+	    },
     },
     computed: {
 //  	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
