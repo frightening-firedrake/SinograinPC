@@ -254,6 +254,7 @@ export default {
       	createSampling:false,
       	status:false,
       	date:true,
+      	subtitle:true,     
       },
       tabledatas:[],
       items: [

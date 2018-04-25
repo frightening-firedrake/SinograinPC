@@ -121,7 +121,7 @@ const routes= [
           {
             path:"grainDepot/sampleRegListlc/sampleReglc",
             name:"粮库管理/扦样登记列表/扦样登记表",
-//          component:SampleReglc,
+            component:SampleReglc,
           },
           {
             path:"grainDepot/sampleRegListlc/sampleDraft",
@@ -492,7 +492,7 @@ router.beforeEach((to, from, next) => {
 	
 
 //	验证登录状态
- 	if (!userAuth&&to.path!=='/login') {
+   	if (!userAuth&&to.path!=='/login') {
 		console.log('没登陆')
 	    next({
 	      path: '/login',
@@ -509,6 +509,7 @@ router.beforeEach((to, from, next) => {
 	  	}
 	}else if (to.matched.some(record => record.meta.needAuth)) {
 //		验证用户权限
+//		console.log('needAuth')
 		userAuth=userAuth.split(',');
 	  	if (!userAuth.includes(to.meta.needAuth)) {
 	  		console.log('没权限')
@@ -517,6 +518,7 @@ router.beforeEach((to, from, next) => {
 	  		next()	  	
 	  	}
 	} else {
+//		console.log('最终')
 	    next()
 	}
 })

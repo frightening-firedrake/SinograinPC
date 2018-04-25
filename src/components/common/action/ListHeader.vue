@@ -91,7 +91,7 @@
 			</template>
 		</div>
 		<div class="dataSelete" v-if="listHeader.subtitle">
-			<p>{{subtitle}}</p>
+			<p>{{title}}</p>
 		</div>
 		<div class="tableName" v-if="listHeader.tableNameShow">
 			<template v-if="listHeader.editModel">
@@ -443,6 +443,10 @@ export default {
 	    		})
 	    	}
 	    },
+	    title(){
+            const route = this.$route.name.split("/")
+            return route[route.length-1]
+        }
 	},
     mounted:function(){
  

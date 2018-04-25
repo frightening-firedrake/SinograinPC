@@ -41,8 +41,9 @@ export default {
   created(){
   	console.log(this.$route.query)
 //  获取列表数据（第一页）
-//	this.getdata()
-
+	this.getResource()
+	this.getdata()
+	
   },
   destroy(){
 
@@ -51,23 +52,72 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
 //	获取列表数据方法
-  	getdata(page){
-  		this.loading=true;
+  	getResource(){
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.getResourceURL,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			data: {
+		
+			}
+	    }).then(function (response) {
+//	    	操作项目波哥说不走后台了
+//		  	response.data.operation.forEach((item)=>{
+//				var obj={label:item.displayName,value:item.id}
+//				this.formdatas.operationRIds.push(obj)
+//			})
+//		  	资源项目
+		  	response.data.resource.forEach((item)=>{
+				var obj={label:item.resourceName,value:item.id}
+				this.formdatas.labels[2].items.push(obj)
+			})
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
+  	getdata(){
+  		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
 			data: {
-				id:this.$route.query
+				resourceId:this.$route.query.id,
 			}
 	    }).then(function (response) {
-		  	this.formdatas=response.data.formdatas;
-//	  		this.page.total=response.data.total;
-		  	
-	  		setTimeout(()=>{			  		
-		  		this.loading=false;
-		  	},1000)
+
+			this.formdatas.form.resourceName=response.data.resourceName;
+		  	this.formdatas.form.resourcePId=response.data.resourcePId;
+		  	this.formdatas.form.resourceType=response.data.resourceType;
+		  	response.data.listDTO.forEach((item)=>{
+
+				var obj={operation:item.operation,permission:item.permission,relyName:item.relyName}
+				if(this.formdatas.actions.length){  			
+			  		var lastOperation=this.formdatas.actions[this.formdatas.actions.length-1].operation
+			      	var obj2={label:lastOperation,value:lastOperation}
+					this.formdatas.operationRIds.push(obj2)
+		  		}
+				this.formdatas.actions.push(obj)
+			})
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -94,10 +144,7 @@ export default {
   	},
 	titleEvent(){
   		console.log('titleEvent');
-  	},
-  	submit(data){
-  		console.log(data);
-  	},
+    },
   	actionAdd(){
   		var lastIndex=this.formdatas.actions.length-1;
   		var lastItem=this.formdatas.actions[lastIndex];
@@ -112,20 +159,57 @@ export default {
   				
   			}
   		}
-      	this.formdatas.actions.push({displayName:'',permission:'',operationRId:'' })
+  		if(this.formdatas.actions.length){  			
+	  		var lastOperation=this.formdatas.actions[this.formdatas.actions.length-1].operation
+	      	var obj={label:lastOperation,value:lastOperation}
+			this.formdatas.operationRIds.push(obj)
+  		}
+      	this.formdatas.actions.push({operation:'',permission:'',relyName:'' })
   	},
   	actionDel(){
   		this.$confirm('将删除最后一组操作项, 是否继续?', '提示', {
 	      confirmButtonText: '确定',
 	      cancelButtonText: '取消',
-	      type: 'warning'
+	      type: 'warning',
+//	      callback:(action, instance)=>{
+//
+//	      	if(action=='confirm'){
+//	//	    	删除操作组
+//		    	this.formdatas.actions.pop()
+//	//	    	删除操作下拉选项
+//				if(this.formdatas.actions.length){					
+//			  		var lastOperation=this.formdatas.actions[this.formdatas.actions.length-1].operation	    	
+//					this.formdatas.operationRIds=this.formdatas.operationRIds.filter((item)=>{
+//						return item.label!==lastOperation
+//					})
+//				}
+//		      	this.$message({
+//		        	type: 'success',
+//		        	message: '删除成功!'
+//		      	});
+//	      	}else if(action=='cancel'){
+//	      		this.$message({
+//			       	type: 'info',
+//			        message: '已取消删除'
+//			    }); 
+//	      	}
+//	      }
+//	    })
 	    }).then(() => {
+//	    	删除操作组
 	    	this.formdatas.actions.pop()
-
+//	    	删除操作下拉选项
+			if(this.formdatas.actions.length){				
+		  		var lastOperation=this.formdatas.actions[this.formdatas.actions.length-1].operation	    	
+				this.formdatas.operationRIds=this.formdatas.operationRIds.filter((item)=>{
+					return item.label!==lastOperation
+				})
+			}
 	      	this.$message({
 	        	type: 'success',
 	        	message: '删除成功!'
 	      	});
+			
 	    }).catch(() => {
 	      this.$message({
 	        type: 'info',
@@ -133,10 +217,41 @@ export default {
 	      });          
 	    });
   	},
+  	submit(data){
+		console.log(data)
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.editURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				id:this.$route.query.id,
+				resourceName:data.resourceName,
+				resourceType:data.resourceType,
+				resourcePId:data.resourcePId,
+				params:JSON.stringify(data.actions),
+			}
+	    }).then(function (response) {
+//			this.$router.go(-1)
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
   },
   data() {
     return {
-      datalistURL:'/liquid/role23/data',
+      datalistURL:this.apiRoot +'/grain/resource/checkResource',
+      getResourceURL:this.apiRoot +'/grain/resource/get/resourceAndOperation',
+      editURL:this.apiRoot +'/grain/resource/edit',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -157,33 +272,31 @@ export default {
       formdatas: {
       	title:'编辑资源',
       	form:{
-      	  resourceName:"扦样登记列表",
-      	  resourceType:"菜单",
-          resourcePName:"权限管理",
+      	  resourceName:"",
+      	  resourceType:1,
+          resourcePId:"",
       	},
+//    	操作相关的
       	actions:[
-      		{displayName:'写点啥？',permission:'不知道',operationRId:'瞎胡写吧' }
+//    		{operation:'',permission:'',relyName:'' }
       	],
 //    	依赖操作下拉项目
       	operationRIds:[
-      		{label:'菜单',value:'1'},
-	      	{label:'菜单2',value:'2'},
-	      	{label:'菜单3',value:'3'},
+      		{label:'无',value:"无"},
       	],
       	labels:[
-      		{label:'资源名称：',type:"input",class:'full'},
+      		{label:'资源名称：',type:"input",class:'disabled full',disabled:true,},
       		{label:'资源类型：',type:"select",
       			items:[
-	      			{label:'菜单',value:'1'},
-	      			{label:'菜单2',value:'2'},
-	      			{label:'菜单3',value:'3'},
+	      			{label:'菜单',value:1},
+	      			{label:'元素',value:2},
+	      			{label:'文件',value:3},
+	      			{label:'操作',value:4},
 	      		],
       		},
       		{label:'父级资源：',type:"select",
       			items:[
-	      			{label:'菜单',value:'1'},
-	      			{label:'菜单2',value:'2'},
-	      			{label:'菜单3',value:'3'},
+	      			{label:'无',value:-1},
 	      		],
       		},
 //    		{label:'分配角色：',type:"num",},

@@ -11,19 +11,21 @@ import router from './router/index'
 
 Vue.use(ElementUI);
 //Vue.prototype.apiRoot = 'http://m.ityyedu.com'
-//Vue.prototype.apiRoot = 'http://192.168.1.210:80'
-Vue.prototype.apiRoot = 'http://192.168.1.223:80'
+Vue.prototype.apiRoot = 'http://192.168.1.210:80'
+//Vue.prototype.apiRoot = 'http://192.168.1.223:80'
 //Vue.prototype.apiRoot = 'http://192.168.1.176:8082'
 //Vue.prototype.apiRoot = 'http://192.168.1.221:80'
 //axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-axios.defaults.withCredentials=true;
+//axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
+//axios.defaults.withCredentials=true;
 axios.interceptors.request.use(function (response) {
 	if (store.getters.Token) {
 	  response.headers.Authorization= store.getters.Token
 	}	
+//	console.log(response)
     return response;
 }, function (error) {
-
+//	console.log(error)
     return Promise.reject(error);
 });
 
@@ -31,9 +33,13 @@ axios.interceptors.request.use(function (response) {
 //axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.interceptors.response.use(function (response) {
 //  console.log('全局的拦截测试，好简单')
+//	console.log(response)
+//	if(response){
+//		
+//	}
     return response;
 }, function (error) {
-		console.log(error)
+//		console.log(error)
 
 //		console.log(error.response.status)
 //			if(error)

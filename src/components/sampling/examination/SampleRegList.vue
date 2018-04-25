@@ -250,6 +250,7 @@ export default {
       	createSampling:false,
       	status:false,
       	date:true,
+      	subtitle:true,     
       	statusitems:[
       		{label:'all',text:'全部'},
       		{label:-1,text:'待审核'},

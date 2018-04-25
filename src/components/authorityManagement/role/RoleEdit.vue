@@ -73,7 +73,7 @@ export default {
 		  	this.formdatas.form.displayName=response.data.displayName;
 		  	this.formdatas.form.roleExtendPId=response.data.roleExtendPId;
 		  	this.formdatas.form.roleRelyId=response.data.roleRelyId;
-		  	this.formdatas.form.maxNumber=response.data.maxNumber;
+		  	this.formdatas.form.roleMaxNum=response.data.roleMaxNum;
 		  	this.formdatas.form.remarks=response.data.remarks;
 
 		  		this.loading=false;
@@ -132,7 +132,7 @@ export default {
 				displayName:data.displayName,
 				roleExtendPId:data.roleExtendPId,
 				roleRelyId:data.roleRelyId,
-				roleMaxNum:data.maxNumber,
+				roleMaxNum:data.roleMaxNum,
 				remarks:data.remarks,
 				id:this.$route.query.id,
 			}
@@ -202,13 +202,13 @@ export default {
           displayName: '',
           roleExtendPId: '',
           roleRelyId: '',
-          maxNumber: '1',
+          roleMaxNum: '1',
           remarks: '',
 //        action:['查看','增加'],
 //        resourceType:'2',
       	},
       	labels:[
-      		{label:'角色名称：',type:"input",},
+      		{label:'角色名称：',type:"input",class:'disabled',disabled:true,},
       		{label:'父级角色：',type:"select",
       			items:[
 	      			{label:'无',value:-1},

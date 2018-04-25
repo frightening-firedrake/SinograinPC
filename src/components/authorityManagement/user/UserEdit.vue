@@ -172,7 +172,7 @@ export default {
 					//        resourceType:'2',
 				},
 				labels: [
-					{ label: '用户名称：', type: "input", },
+					{ label: '用户名称：', type: "input", class:'disabled',disabled:true,},
 					{ label: '用户密码：', type: "input", },
 					{ label: '电话号码：', type: "input", },
 					{ label: '邮箱号码：', type: "input", },

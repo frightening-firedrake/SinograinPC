@@ -30,10 +30,11 @@ const getters = {
         return 'Modal'+state.modal_id_number;
     },
     breadcrumbHistory:function(state){
-    	if(sessionStorage.getItem("breadcrumbHistory")){
-    		state.breadcrumbHistory=JSON.parse(sessionStorage.getItem("breadcrumbHistory"));
+    	if(state.breadcrumbHistory.length){
+    		return state.breadcrumbHistory;    		
+    	}else{
+    		return state.breadcrumbHistory=JSON.parse(sessionStorage.getItem("breadcrumbHistory"));
     	}
-    	return state.breadcrumbHistory;    		
     },
     libraryName:function(state){
     	if(state.libraryName){
@@ -163,10 +164,10 @@ const mutations = {
 	},
 	spliceBreadcrumbHistory(state,payload){
 		var startIndex=state.breadcrumbHistory.findIndex((item)=>{
-			return item.path==payload.path
+			return item.fullPath==payload.fullPath
 		});
 		if(startIndex>-1){			
-			state.breadcrumbHistory.splice(startIndex,state.breadcrumbHistory.length-1)
+			state.breadcrumbHistory.splice(startIndex+1,state.breadcrumbHistory.length)
 		}
 		sessionStorage.setItem('breadcrumbHistory', JSON.stringify(state.breadcrumbHistory));
 	},

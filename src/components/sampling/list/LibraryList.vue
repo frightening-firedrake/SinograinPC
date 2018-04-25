@@ -174,6 +174,7 @@ export default {
 				
 			}
 	    }).then(function (response) {
+
 		  	this.librarylist = response.data.rows;
 //			  console.log(this.librarylist)
 		}.bind(this)).catch(function (error) {
@@ -272,6 +273,7 @@ export default {
       	createSampling:false,
       	status:false,
       	date:true,
+      	subtitle:true,     
       },
       tabledatas:[],
       librarylist:[],

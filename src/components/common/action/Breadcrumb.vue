@@ -14,12 +14,13 @@
 			    </el-breadcrumb-item>				
 			</template>
 			<template v-else>
-				<el-breadcrumb-item >
-				<!--<el-breadcrumb-item to="/index/home">-->
+				<!--<el-breadcrumb-item >-->
+				<el-breadcrumb-item to="/index/home">
 			    	<!--<i class="icon-home"></i>-->
 			    	首页
 			    </el-breadcrumb-item>
-			    <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.index" @click='breadcrumbLink(item.index)'>{{item.name}}</el-breadcrumb-item>
+			    <!--<el-breadcrumb-item v-for="(item,index) in breadcrumbList" :key="index" >{{item.name}}</el-breadcrumb-item>-->
+			    <el-breadcrumb-item v-for="(item,index) in breadcrumbList" :key="index" :to='breadcrumbLink(index)'>{{item.name}}</el-breadcrumb-item>
 			    <!--<el-breadcrumb-item v-for="item in breadcrumbList" :key="item.index" :to="item.path">{{item.name}}</el-breadcrumb-item>-->
 			    <!--<el-breadcrumb-item v-for="item in breadcrumbList" :key="item.index" >{{item.name}}</el-breadcrumb-item>-->
 			</template>
@@ -113,13 +114,15 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 	    	var payload={};
 	    	payload.name=name;
 	    	payload.fullPath=fullPath;
+
 			if(res<2){
-				this.statBreadcrumbHistory();
 //				console.log('重置历史记录')
+				this.statBreadcrumbHistory();
+
 			}
 //			查询历史
-			var is_set=this.breadcrumbHistory.some((item)=>{
-				return item.name=name
+			var is_set=this.breadcrumbHistory.some((item,index)=>{
+				return item.name==name
 			})
 //			获取历史记录
 			if(is_set){
@@ -131,8 +134,11 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //			console.log(this.breadcrumbHistory)
 	    },
 	    breadcrumbLink(index){
-	    	console.log(index,this.breadcrumbHistory)
-//	    	this.$router.push({path:this.breadcrumbHistory[index]})
+	    	if(index==0){
+	    		return this.breadcrumbList[index].path
+	    	}else if(index!==0){	    		
+	    		return this.breadcrumbHistory[index-1].fullPath
+	    	}
 	    },
     },
     computed: {
@@ -155,6 +161,7 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 	        		breadcrumbItem.index=i;
 	        		breadcrumbLists.unshift(breadcrumbItem);
 	        	}    
+//	        	console.log(breadcrumbLists)
 	        return breadcrumbLists;
 	    }
 	},

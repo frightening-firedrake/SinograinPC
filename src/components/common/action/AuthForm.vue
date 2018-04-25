@@ -8,7 +8,7 @@
 		        <el-form-item :label="formdatas.labels[index]['label']" :prop="'form.'+key" v-bind:class="formdatas.labels[index]['class']"     			
 		        	:rules="rules[key]"
     			>
-				    <el-input v-model="formdatas.form[key]" placeholder="请输入" :disabled="formdatas.labels[index]['disable']"></el-input>
+				    <el-input v-model="formdatas.form[key]" placeholder="请输入" :disabled="formdatas.labels[index]['disabled']"></el-input>
 				</el-form-item>
             </template>
             <template v-if="formdatas.labels[index]['type']=='num'">
@@ -202,7 +202,7 @@ export default {
 					}],
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 					data: {
-						userName:this.$route.query.id,
+						userName:value,
 					}
 			    }).then(function (response) {
 					if(response.data.success){					
@@ -230,7 +230,7 @@ export default {
 					}],
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 					data: {
-						resourceName:this.$route.query.id,
+						resourceName:value,
 					}
 			    }).then(function (response) {
 					if(response.data.success){					

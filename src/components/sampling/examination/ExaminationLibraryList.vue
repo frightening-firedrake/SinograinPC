@@ -261,7 +261,7 @@ export default {
       	createSampling:false,
       	status:false,
       	date:false,
-      	subtitle:'库点审批列表',     
+      	subtitle:true,     
       },
       tabledatas:[],
 	  librarylist:[],

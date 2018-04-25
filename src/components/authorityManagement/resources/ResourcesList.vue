@@ -60,7 +60,7 @@ export default {
 //	监听列表点击编辑事件
   	this.$root.eventHub.$on("editlistitem",function(id){  
 //		console.log(id)
-		this.$router.push({path: '/index/AuthorityManagement/ResourcesList/ResourcesEdit',query:{libid:id}})
+		this.$router.push({path: '/index/AuthorityManagement/ResourcesList/ResourcesEdit',query:{id:id}})
   	}.bind(this));
 
   },
@@ -293,9 +293,9 @@ export default {
       	number:false,
       	view:false,
       	edit:true,
-      	dele:true,
+      	dele:false,
       	auth:false,
-      	show:false,
+      	show:true,
       	noview:true,
       }
     }
