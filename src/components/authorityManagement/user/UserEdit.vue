@@ -7,7 +7,7 @@
 		<!--提示-->
 		<!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
 		<!--表单-->
-		<auth-form :formdatas="formdatas" @submit='submit'></auth-form>
+		<auth-form-edit :formdatas="formdatas" @submit='submit'></auth-form-edit>
 	</div>
 </template>
 
@@ -19,7 +19,7 @@
 
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
-import AuthForm from "@/components/common/action/AuthForm"
+import AuthFormEdit from "@/components/common/action/AuthFormEdit"
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 
 
@@ -32,7 +32,7 @@ import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 
 export default {
 	components: {
-		SinograinPrompt, SinograinBreadcrumb, SinograinOptionTitle, AuthForm
+		SinograinPrompt, SinograinBreadcrumb, SinograinOptionTitle, AuthFormEdit
 	},
 	computed: {
 		...mapState(["modal_id_number", "viewdata", "editdata", "aultdata", "messions", "mask"]),
@@ -81,10 +81,10 @@ export default {
 				this.formdatas.form.userPass = ""
 				this.formdatas.form.phone = phone
 				this.formdatas.form.email = email
-				console.log(this.formdatas.form)
-				setTimeout(() => {
+//				console.log(this.formdatas.form)
+//				setTimeout(() => {
 					this.loading = false;
-				}, 1000)
+//				}, 1000)
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));

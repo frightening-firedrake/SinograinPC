@@ -26,7 +26,7 @@ import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 
 
@@ -98,7 +98,7 @@ export default {
 			}
 	    }).then(function (response) {
 		  	this.formdatas.form.pLibraryName=response.data.libraryName;
-				console.log(this.formdatas.form)
+//				console.log(this.formdatas.form)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -116,9 +116,9 @@ export default {
 //			}
 	    }).then(function (response) {
 //		  	this.tabledatas=response.data.rows;
-	  		setTimeout(()=>{			  		
+//	  		setTimeout(()=>{			  		
 		  		this.loading=false;
-		  	},1000)
+//		  	},1000)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

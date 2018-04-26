@@ -194,7 +194,7 @@ export default {
 				params:JSON.stringify(data.actions),
 			}
 	    }).then(function (response) {
-//			this.$router.go(-1)
+			this.$router.go(-1)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

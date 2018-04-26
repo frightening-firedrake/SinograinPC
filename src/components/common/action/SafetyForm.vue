@@ -6,13 +6,7 @@
        
 		<el-form-item label="被查库点：" prop="libraryName"  v-bind:class="{disabled:disabled}">
 		    <el-select v-model="formdatas.form.libraryName" placeholder="选择库点" :disabled="disabled">
-		        <el-option label="本库" value="本库"></el-option>
-		        <el-option label="山西屯留国家粮食储备库" value="山西屯留国家粮食储备库"></el-option>
-		        <el-option label="山西长治国家粮食储备库" value="山西长治国家粮食储备库"></el-option>
-		        <el-option label="山西晋城国家粮食储备库" value="山西晋城国家粮食储备库"></el-option>
-		        <el-option label="长子分库" value="长子分库"></el-option>
-		        <el-option label="黎城分库" value="黎城分库"></el-option>
-		        <el-option label="沁县分库" value="沁县分库"></el-option>	
+		        <el-option label="本库" value="本库"></el-option>	
 		    </el-select>
 		</el-form-item>
 		<el-form-item label="货位号：" prop="position"  v-bind:class="{disabled:disabled}">
@@ -39,6 +33,7 @@
 				  :action="uploadPicURL"
 				  list-type="picture-card"
 				  ref='upload'
+				  :headers="{'Authorization':Token}"
 				  :limit='limit'
 				  :on-preview="handlePictureCardPreview"
 				  name="pictureFile"
@@ -73,15 +68,18 @@
 
 <script>
 import "@/assets/style/common/Form.css";
+import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
     props: ["formdatas","uploadPicURL"],
     created(){
     	this.createimgbox()
+		console.log(this.Token)
     },
     mounted: function() {
 //		console.log(this.formdatas)
     },
     computed:{
+		...mapGetters(["Token"]),
     	delebtn(){
 			if(this.formdatas.form.problems.length>1){
 				return true;
@@ -253,11 +251,12 @@ export default {
 				this.imgbox[index1].images[index2]=url
 //				this.$emit('changeProblems',this.problems);
 			}else{
-				alert(response.msg)				
+//				alert(response.msg)	
+				this.$message.error(response.msg);
 			}
 	    },
 		imageUploadError(err, file, fileList){
-			alert('上传失败！！！')
+			this.$message.error('上传失败！！！');
 		},
 //	       问题加一
 		addproblem(){

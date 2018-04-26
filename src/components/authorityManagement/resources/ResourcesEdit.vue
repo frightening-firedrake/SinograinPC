@@ -7,7 +7,7 @@
       <!--提示-->
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
-      <auth-form :formdatas="formdatas" @submit='submit' @actionAdd="actionAdd" @actionDel='actionDel'></auth-form> 
+      <auth-form-edit :formdatas="formdatas" @submit='submit' @actionAdd="actionAdd" @actionDel='actionDel'></auth-form-edit> 
     </div>
 </template>
 
@@ -19,7 +19,7 @@
 
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
-import AuthForm  from "@/components/common/action/AuthForm"
+import AuthFormEdit  from "@/components/common/action/AuthFormEdit"
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 
 
@@ -32,7 +32,7 @@ import data from '@/util/mock';
 
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,AuthForm
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,AuthFormEdit
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -241,7 +241,7 @@ export default {
 				params:JSON.stringify(data.actions),
 			}
 	    }).then(function (response) {
-//			this.$router.go(-1)
+			this.$router.go(-1)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

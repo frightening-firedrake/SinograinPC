@@ -47,10 +47,50 @@ axios.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 Vue.prototype.$http=axios;
+/**权限指令**/
+//控制点击事件
+Vue.directive('permissionClick', {
+   	bind: (el, binding, vnode) => {
+		el.addEventListener('click', (e) => {
+   			if (!Vue.prototype.$_has(binding.value.auth)) {
+    			app.$notify.error({
+		          	title: '错误',
+		          	message: '你没有权限进行此项操作！！！'
+		        });
+   			}else{
+    			binding.value.fun()
+   			}
+		})
+   	}
+})
+//控制是否显示
+Vue.directive('permission-show', {
+	bind: function(el, binding) {
+    	if (!Vue.prototype.$_has(binding.value)) {
+      		el.parentNode.removeChild(el);
+    	}
+	}
+});
+//权限检查方法
+Vue.prototype.$_has = function(value) {
+	let isExist=false;
+	let buttonpermsStr=store.getters.permissions;
+	if(!buttonpermsStr){
+    	isExist=false;
+	}else{
+		buttonpermsStr=buttonpermsStr.split(',');
+		if(buttonpermsStr.includes(value)){
+			isExist=true;
+		}else{
+			isExist=false;
+		}
+	}
+	
+	return isExist;
+};
 
 
-
-new Vue({
+var app=new Vue({
   el: '#app',
   router,//使用路由
   store,//使用store

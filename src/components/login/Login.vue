@@ -15,6 +15,7 @@
                 </el-form-item>
                 <el-form-item label="" >
                 	<el-input
+                		type='password'
 					    placeholder="请输入您的密码"
 					    v-model="loginForm.password">
 					    <i slot="prefix" class="iconfont icon-mima"></i>
@@ -100,6 +101,7 @@ export default {
                		payload.userId=response.data.user.id;
                		payload.userAuth=response.data.user.resourceName;
                		payload.Token=response.data.user.token;
+               		payload.permissions=response.data.user.permissions;
 //             		payload.Token='akjshjakjclacahdawhdlahwdiua';
 //             		payload.userRole=response.data.user.userRole;
 //             		payload.userAuth='InformationManagement,AuthorityManagement';//grainDepot

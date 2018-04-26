@@ -19,6 +19,7 @@
       <!--<sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>-->      	
       <!--底部按钮们-->
       <tfoot-buttons :tfbtns="tfbtns" @tfootEvent="tfootEvent" ></tfoot-buttons>
+      <!--<el-button v-permission-click="{auth:'register:edit2',fun:authtest}">测试自定义指令按钮</el-button>-->
     </div>
 </template>
 
@@ -444,6 +445,14 @@ export default {
 			this.savedata()	
 			
 		}else if(date=='tableAdd'){
+//			权限判断
+//			if (!this.$_has('register:edit')) {
+//				this.$notify.error({
+//		          	title: '错误',
+//		          	message: '你没有权限进行此项操作！！！'
+//		        });
+//				return
+//	    	}
 			this.rowid++;
 			var newdata={
 				id:0,
@@ -476,6 +485,9 @@ export default {
 	},
 	getLibraryId(id){
 		this.libraryName2=id
+	},
+	authtest(){
+		alert("权限测试通过！！！")
 	},
   },
   data() {

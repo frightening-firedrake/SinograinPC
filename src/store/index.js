@@ -7,6 +7,7 @@ const state = {
 	userName:'',//用户名
 	userId:'',//用户id
 	userAuth:'',//用户权限逗号隔开的字符串
+	permissions:'',//用户可操作按钮逗号隔开的字符串
 	Token:'',//用户token后台鉴权
 	libraryName:'',//库点名
 	libraryId:'',//库点id
@@ -62,6 +63,13 @@ const getters = {
     		return state.userAuth;    		
     	}else{
     		return sessionStorage.getItem("userAuth");
+    	}
+    },
+    permissions:function(state){
+    	if(state.permissions){
+    		return state.permissions;    		
+    	}else{
+    		return sessionStorage.getItem("permissions");
     	}
     },
     userId:function(state){
@@ -127,12 +135,14 @@ const mutations = {
 		state.userId=payload.userId;
 		state.userAuth=payload.userAuth;
 		state.Token=payload.Token;
+		state.permissions=payload.permissions;
 		sessionStorage.setItem('libraryId', payload.libraryId);
 		sessionStorage.setItem('libraryName', payload.libraryName);
 		sessionStorage.setItem('userName', payload.userName);
 		sessionStorage.setItem('userId', payload.userId);
 		sessionStorage.setItem('userAuth', payload.userAuth);
 		sessionStorage.setItem('Token', payload.Token);
+		sessionStorage.setItem('permissions', payload.permissions);
 	},
 	logout(state){
 		state.libraryName='';
@@ -146,6 +156,7 @@ const mutations = {
 		sessionStorage.removeItem('userId');
 		sessionStorage.removeItem('userAuth');
 		sessionStorage.removeItem('Token');
+		sessionStorage.removeItem('permissions');
 		sessionStorage.removeItem('breadcrumbHistory');
 	},
 	setBaseMsg(state,payload){
