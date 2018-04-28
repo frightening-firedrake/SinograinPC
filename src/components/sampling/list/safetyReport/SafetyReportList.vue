@@ -68,7 +68,7 @@ export default {
     }.bind(this)); 	
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(row){  
-  		if(!this.$_ault_alert('safetyReport:get')){
+  		if(!this.$_ault_alert('safety:getById')){
 			return
 		}
 //		console.log(id)

@@ -40,7 +40,7 @@ export default {
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
-	...mapGetters(["modal_id"]),
+	...mapGetters(["modal_id","Token"]),
 	tabledatasFilter(){
   		if(this.filterlib=="全部"){
 			return this.tabledatas;
@@ -272,6 +272,9 @@ export default {
 //	导出事件
 	exportExcel(){
 //		做个拦截筛选结果为空时不执行
+		if(!this.$_ault_alert('safety:export')){
+			return
+		}
 		if(!this.tabledatas.length){
 			this.$notify.error({
 	          	title: '导出失败',
@@ -292,7 +295,8 @@ export default {
 			params.taskId=this.taskId
 		}
 		params = JSON.stringify(params);
-		window.open(this.exportURL+'/'+params,"_blank");
+		console.log(params,this.exportURL+'/'+params)
+		window.open(this.exportURL+'/'+params+'?sessionid='+this.Token,"_blank");
 	},
 //	获取多选框选中数据的id(这是一个数组)
   	getchecked(checkedId){

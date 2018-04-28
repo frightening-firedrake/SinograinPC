@@ -112,6 +112,9 @@ export default {
 		this.$router.push({name:name,params})
     },
     create(){
+    	if(!this.$_ault_alert('sample:dataWheatReport')){
+			return
+		}
     	if(!this.tabledatas.length){
     		 this.$alert('请先添加样品！！！','提示信息',{});
     		 return;

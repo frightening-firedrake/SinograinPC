@@ -36,10 +36,10 @@ export default {
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
-	...mapGetters(["modal_id"]),
+	...mapGetters(["modal_id","Token"]),
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.query)
 //  获取列表数据（第一页）
 	this.getSample();
 	this.getManuscript()
@@ -52,6 +52,9 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
     submit(jsdjg,type){
+    	if(!this.$_ault_alert('manuscript:edit')){
+			return
+		}
        var params = {
             id: this.formdatas.form.id,
             sampleId: this.$route.query.id,//样品id
@@ -219,7 +222,10 @@ export default {
   		console.log('titleEvent');
     },
   	exportExcel(id){
-		window.open(this.exportExcelURL+'?id='+id,"_blank");
+  		if(!this.$_ault_alert('manuscript:export')){
+			return
+		}
+		window.open(this.exportExcelURL+'?id='+id+'&sessionid='+this.Token,"_blank");
 		
 //		console.log(pId)
 //		// 获取列表数据（第？页）

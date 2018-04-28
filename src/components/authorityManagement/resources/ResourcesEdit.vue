@@ -149,7 +149,7 @@ export default {
   		var lastIndex=this.formdatas.actions.length-1;
   		var lastItem=this.formdatas.actions[lastIndex];
   		for(var key in lastItem){
-  			if(!lastItem[key]){
+  			if(!lastItem[key]&&lastItem[key]!==0){
   				this.$notify.error({
 		          	title: '错误',
 		          	message: '请先完善上一组操作项目'

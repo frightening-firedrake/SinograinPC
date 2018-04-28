@@ -312,6 +312,9 @@ export default {
     	this.saveUrl=this.apiRoot + this.saveUrlend;
 	},
 	submit(jsdjg){
+		if(!this.$_ault_alert('all:save')){
+			return
+		}
 		for(var key in jsdjg){
 			this.formdatas[this.checktype][key]=jsdjg[key]
 		}

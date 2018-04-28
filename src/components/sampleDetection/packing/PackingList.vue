@@ -156,8 +156,8 @@ export default {
 			   params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-		  	this.tabledatas=response.data;
-
+		  	this.tabledatas=response.data.rows;
+			this.page.total = response.data.total;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

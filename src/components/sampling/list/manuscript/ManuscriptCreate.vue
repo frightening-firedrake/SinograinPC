@@ -36,7 +36,7 @@ export default {
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
-	...mapGetters(["modal_id"]),
+	...mapGetters(["modal_id","Token"]),
   },
   created(){
   	console.log(this.$route.query)
@@ -191,7 +191,10 @@ export default {
   		console.log('titleEvent');
   	},
   	exportExcel(id){
-		window.open(this.exportExcelURL+'?id='+id,"_blank");
+  		if(!this.$_ault_alert('manuscript:export')){
+			return
+		}
+		window.open(this.exportExcelURL+'?id='+id+'&sessionid='+this.Token,"_blank");
 	},
   },
   data() {

@@ -104,6 +104,9 @@ export default {
 		//	打开新建弹框
 		//	新建库
 		addinformationLib(type) {
+			if(!this.$_ault_alert('library:save')){
+				return
+			}
 			this.informationType = type;
 			this.modal = {
 				title: '新建直属库',

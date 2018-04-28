@@ -286,7 +286,9 @@ export default {
   	},
 // 编辑扦样
 	editdata(regState) {
-
+		if(!this.$_ault_alert('sample:saveAll')){
+			return
+		}
 		if(!this.listHeader.tableName) {
 			var msg="请先填写表名，再尝试提交！"
 			this.uncomplate(msg)

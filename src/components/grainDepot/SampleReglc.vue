@@ -36,7 +36,7 @@ import SinograinModal from '@/components/common/action/Modal.vue';
 import "@/assets/style/common/Tablelist.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 
 
@@ -46,7 +46,7 @@ export default {
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
-	...mapGetters(["modal_id"]),
+	...mapGetters(["modal_id","Token"]),
 	tabledatasFilter(){
 
 		if(this.filterStatus=="全部"){
@@ -128,7 +128,10 @@ export default {
 	},
 	//导出Excel表格
 	exportExcel(pId){
-		window.open(this.exportExcelURL+'?pId='+pId,"_blank");
+		if(!this.$_ault_alert('register:export')){
+			return
+		}
+		window.open(this.exportExcelURL+'?pId='+pId+'&sessionid='+this.Token,"_blank");
 		
 //		console.log(pId)
 //		// 获取列表数据（第？页）

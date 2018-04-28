@@ -51,7 +51,7 @@ export default {
 	}
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.query)
 //  获取列表数据（第一页）
 
 //	this.getdata()
@@ -88,7 +88,7 @@ export default {
 				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-		  	console.log(response)
+//		  	console.log(response)
 			
 			var res0=response.data.rows
 
@@ -108,7 +108,7 @@ export default {
 			this.formdatas.problems = res0
 		    this.formdatas.form.libraryName = this.$route.query.libraryName
 			this.formdatas.form.position = this.$route.query.position
-		    console.log(res)
+//		    console.log(res)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -151,6 +151,9 @@ export default {
 		}.bind(this));
   	},
 	passProblem(id){
+		if(!this.$_ault_alert('safety:edit')){
+			return
+		}
 		this.$http({
 		    method: 'post',
 			url: this.passURL,

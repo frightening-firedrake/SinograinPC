@@ -80,6 +80,9 @@ export default {
   	},
 //	领取方法
   	handover(){
+  		if(!this.$_ault_alert('handover:save')){
+			return
+		}
 		var params = {};
 		params.checkeds = this.formdatas.checkList.sort().join(',');
 		params.name = this.formdatas.form.name;

@@ -325,6 +325,9 @@ export default {
     	this.getlistdata()
 	},
 	submit(jsdjg){
+		if(!this.$_ault_alert('all:edit')){
+			return
+		}
 		for(var key in jsdjg){
 			this.formdatas[this.checktype][key]=jsdjg[key]
 		}	

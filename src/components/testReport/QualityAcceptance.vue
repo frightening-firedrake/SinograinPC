@@ -112,14 +112,19 @@ import CommonSelect from "@/components/common/action/Select";
 import QualityTab from "@/components/testReport/Quality/QualityTab"
 import TfootButtons from "@/components/common/action/TfootButtons"
 import QualityChart from "@/components/testReport/Quality/QualityChart"
+import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
 import "@/assets/style/common/list.css"
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 export default {
     components: {
         SinograinBreadcrumb, SinograinOptionTitle, CommonSelect, QualityTab, TfootButtons, QualityChart
     },
+    computed:{
+	...mapGetters(["Token"]),
+
+	},
     created() {
         // this.getlistdata(1)
         // this.getChart()
@@ -235,6 +240,9 @@ export default {
             } else if (date == 'btnRight') {
 
             } else if (date == 'btnOne') {
+            	if(!this.$_ault_alert('sample:ExportXMorYMzhiliang')){
+					return
+				}
                 let btnUrl
                 let ids = []
                 this.tabledatas.forEach((i, v) => {
@@ -253,7 +261,10 @@ export default {
                 ids = ids.join()
                 console.log(ids)
                 console.log(btnUrl)
-                window.open(btnUrl+'?ids='+ids+'&title=质量验收报告',"_blank");
+                if(!this.$_ault_alert('sample:ExportXMorYMzhiliang')){
+					return
+				}
+                window.open(btnUrl+'?ids='+ids+'&title=质量验收报告'+'&sessionid='+this.Token,"_blank");
             } else if (date == 'tableAdd') {
             }
         },

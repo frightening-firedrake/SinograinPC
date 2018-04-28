@@ -40,7 +40,7 @@ axios.interceptors.response.use(function (response) {
           	title: '错误',
           	message: '你没有权限进行此项操作！！！'
         });
-        throw "————————";
+        throw "你没有权限进行此项操作！！！";
 //      app.$alert('你没有权限进行此项操作！！！', '错误', {
 //        confirmButtonText: '确定',
 //        callback: action => {
@@ -109,6 +109,7 @@ Vue.prototype.$_ault_alert = function(value) {
 	      	message: '你没有权限进行此项操作！！！'
 	    });
 		return false
+//      throw "——";
 	}else{
 		buttonpermsStr=buttonpermsStr.split(',');
 		if(buttonpermsStr.includes(value)){
@@ -119,6 +120,7 @@ Vue.prototype.$_ault_alert = function(value) {
 		      	message: '你没有权限进行此项操作！！！'
 		    });
 			return false
+//      	throw "——";
 		}
 	}
 };

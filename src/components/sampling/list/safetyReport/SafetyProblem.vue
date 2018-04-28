@@ -133,6 +133,9 @@ export default {
 		}.bind(this));
   	},
 	passProblem(id){
+		if(!this.$_ault_alert('safety:edit')){
+			return
+		}
 		this.$http({
 		    method: 'post',
 			url: this.passURL,
@@ -180,7 +183,7 @@ export default {
   	},
 //	问题通过处理事件
   	pass(id){
-  		if(!this.$_ault_alert('safetyReport:edit')){
+  		if(!this.$_ault_alert('safety:edit')){
 			return
 		}
 		// console.log(id)

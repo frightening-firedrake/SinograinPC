@@ -37,7 +37,7 @@ import "@/assets/style/information/InformationSet.css"
 import "@/assets/style/common/Select.scss";
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 export default {
 	components: {
@@ -129,6 +129,10 @@ export default {
 		//	打开新建弹框
 		//	新建库
 		addinformationLib(type) {
+			
+			if(!this.$_ault_alert('register:save')){
+				return
+			}
 			this.informationType = type;
 			this.modal = {
 				title: '新建库点',

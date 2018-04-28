@@ -100,6 +100,9 @@ export default {
 		this.filterStatus=data
 	},
 	createPackling(){
+		if(!this.$_ault_alert('task:save')){
+			return
+		}
 		this.modalVisible=true;
 
 	},

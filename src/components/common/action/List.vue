@@ -228,7 +228,7 @@ export default {
 		},
 		//  工作底稿
 		handleViewManuscript(index, row) {
-			if(!this.$_ault_alert('manuscript:edit')){
+			if(!this.$_ault_alert('manuscript:saveMan')){
 				return
 			}
 			this.$router.push({ path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptEdit', query: { id: row.id, libraryName: row.libraryName } })
@@ -241,7 +241,7 @@ export default {
 		},
 		//  安全报告
 		handleViewSafetyReport(index, row) {
-			if(!this.$_ault_alert('safety:edit')){
+			if(!this.$_ault_alert('safety:save')){
 				return
 			}
 			this.$router.push({ path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportEdit', query: { id: row.id, libraryName: row.libraryName, position: row.position } })

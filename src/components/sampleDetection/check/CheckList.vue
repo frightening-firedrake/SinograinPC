@@ -60,7 +60,7 @@ export default {
 	}
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.query)
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 //	移除监听事件
@@ -130,6 +130,9 @@ export default {
 	},
 //	扫码新建样品
 	scanCode(){
+		if(!this.$_ault_alert('sample:getBySmallSampleNum')){
+			return
+		}
 		this.messages.type='scaning';
 		this.messageShow=true;
 //		this.$router.push({path: '/index/sampleDetection/packingList/packingPrint'})
@@ -202,7 +205,7 @@ export default {
 			    params:JSON.stringify(params),
 			}
 	    }).then(function (response) {
-			console.log(response)
+//			console.log(response)
 			this.tabledatas = response.data.rows;
 			this.page.total = response.data.total;
 			this.loading = false;
@@ -283,7 +286,7 @@ export default {
 				smallSampleNum:code,
 			}
 	    }).then(function (response) {
-			console.log(response)
+//			console.log(response)
 			if(response.data.state==1) {
 				var path=this.$route.name+'/新建样品检验单'
 				this.$router.push({name: path,query: {checkPoint:response.data.checkPoint,sort:response.data.sort,smallSamplePic:response.data.smallSamplePic,smallSampleNum:response.data.smallSampleNum,id:response.data.id,}})

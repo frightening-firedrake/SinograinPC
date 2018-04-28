@@ -39,7 +39,7 @@ import Tabselect from '@/components/common/action/Tabselect.vue';
 import "@/assets/style/common/ComplexList.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 
 
@@ -49,7 +49,7 @@ export default {
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
-	...mapGetters(["modal_id"]),
+	...mapGetters(["modal_id","Token"]),
 	tabledatasFilter(){
 
 		if(this.filterStatus=="全部"){
@@ -230,7 +230,10 @@ export default {
 	},
 //	导出事件
 	exportExcel(ids,title){
-		window.open(this.exportURL+'?ids='+ids+'&title='+title,"_blank");
+		if(!this.$_ault_alert('sample:reportXMorYM')){
+			return
+		}
+		window.open(this.exportURL+'?ids='+ids+'&title='+title+'&sessionid='+this.Token,"_blank");
 	},
 //	选项卡切换
 	TabChange(currentTab){
