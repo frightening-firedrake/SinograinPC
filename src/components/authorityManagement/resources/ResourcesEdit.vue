@@ -110,7 +110,7 @@ export default {
 		  	this.formdatas.form.resourceType=response.data.resourceType;
 		  	response.data.listDTO.forEach((item)=>{
 
-				var obj={operation:item.operation,permission:item.permission,relyName:item.relyName}
+				var obj={id:item.id,operation:item.operation,permission:item.permission,relyName:item.relyName}
 				if(this.formdatas.actions.length){  			
 			  		var lastOperation=this.formdatas.actions[this.formdatas.actions.length-1].operation
 			      	var obj2={label:lastOperation,value:lastOperation}
@@ -164,7 +164,7 @@ export default {
 	      	var obj={label:lastOperation,value:lastOperation}
 			this.formdatas.operationRIds.push(obj)
   		}
-      	this.formdatas.actions.push({operation:'',permission:'',relyName:'' })
+      	this.formdatas.actions.push({id:0,operation:'',permission:'',relyName:'' })
   	},
   	actionDel(){
   		this.$confirm('将删除最后一组操作项, 是否继续?', '提示', {
@@ -197,7 +197,31 @@ export default {
 //	    })
 	    }).then(() => {
 //	    	删除操作组
-	    	this.formdatas.actions.pop()
+	    	var lostItem=this.formdatas.actions.pop()
+	    	
+	    	if(lostItem.id){
+	    		this.$http({
+				    method: 'post',
+					url: this.deleteURL,
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					transformRequest: [function (data) {
+						// Do whatever you want to transform the data
+						let ret = ''
+						for (let it in data) {
+						ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+						}
+						return ret
+					}],
+					data: {
+						operationId:lostItem.id,
+					}
+			    }).then(function (response) {
+		
+					
+				}.bind(this)).catch(function (error) {
+				    console.log(error);
+				}.bind(this));
+	    	}
 //	    	删除操作下拉选项
 			if(this.formdatas.actions.length){				
 		  		var lastOperation=this.formdatas.actions[this.formdatas.actions.length-1].operation	    	
@@ -218,7 +242,10 @@ export default {
 	    });
   	},
   	submit(data){
-		console.log(data)
+//		console.log(data)
+		if(!this.$_ault_alert('resource:edit')){
+			return
+		}
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -253,7 +280,7 @@ export default {
       getResourceURL:this.apiRoot +'/grain/resource/get/resourceAndOperation',
       editURL:this.apiRoot +'/grain/resource/edit',
       searchURL:'/liquid/role2/data/search',
-      deleteURL:'/liquid/role2/data/delete',
+      deleteURL:this.apiRoot +'/grain/resource/delete',
       checkedId:[],
 	  createlibVisible:false,
       breadcrumb:{

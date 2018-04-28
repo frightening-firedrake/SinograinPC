@@ -113,7 +113,10 @@ export default {
 			console.log('titleEvent');
 		},
 		submit(data) {
-			console.log(data)
+			if(!this.$_ault_alert('user:edit')){
+				return
+			}
+//			console.log(data)
 			this.$http({
 				method: 'post',
 				url: this.saveURL,

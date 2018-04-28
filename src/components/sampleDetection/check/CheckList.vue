@@ -78,6 +78,9 @@ export default {
     }.bind(this)); 	
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id,row){  
+  		if(!this.$_ault_alert('cedingjilu:getBySmallSampleId')){
+			return
+		}
 //		console.log(id)
 //		this.$router.push({path: '/index/sampleDetection/packingList/packingView',query:{libid:id}})
 //		this.$router.push({ path: '/index/sampleDetection/checkList/checkEdit', query: { id: id } })

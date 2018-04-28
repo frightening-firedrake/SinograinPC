@@ -71,6 +71,9 @@ export default {
 		}.bind(this));
 		//	监听列表点击查看事件
 		this.$root.eventHub.$on("viewlistitem", function(id) {
+			if(!this.$_ault_alert('handover:get')){
+				return
+			}
 			//		console.log(id)
 			this.$router.push({ path: '/index/sampleManagement/handover/handoverListView', query: { id: id } })
 
@@ -110,6 +113,9 @@ export default {
 		},
 		//	扫码新建样品交接单
 		connect() {
+			if(!this.$_ault_alert('handover:save')){
+				return
+			}
 			this.$router.push({ path: '/index/sampleManagement/handover/handoverListCreate' })
 		},
 		//	填入新建数据

@@ -135,6 +135,9 @@ export default {
   		console.log('titleEvent');
   	},
   	submit(imgbox){
+  		if(!this.$_ault_alert('safety:save')){
+			return
+		}
   		this.imgbox=imgbox;
 //		console.log(this.imgbox)
 		this.savedata();

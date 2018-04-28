@@ -95,8 +95,11 @@ export default {
   		console.log('titleEvent');
   	},
   	submit(data){
-			console.log(data)
-			this.$http({
+//			console.log(data)
+		if(!this.$_ault_alert('user:save')){
+			return
+		}
+		this.$http({
 		  method: 'post',
 			url: this.saveURL,
 			transformRequest: [function (data) {

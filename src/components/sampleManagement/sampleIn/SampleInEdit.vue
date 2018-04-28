@@ -125,6 +125,9 @@ export default {
   	},
 	//提交表单
 	submit(){
+		if(!this.$_ault_alert('sample:edit')){
+			return
+		}
 	this.$http({
 		  method: 'post',
 			url: this.editURL,

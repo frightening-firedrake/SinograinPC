@@ -228,17 +228,28 @@ export default {
 		},
 		//  工作底稿
 		handleViewManuscript(index, row) {
+			if(!this.$_ault_alert('manuscript:edit')){
+				return
+			}
 			this.$router.push({ path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptEdit', query: { id: row.id, libraryName: row.libraryName } })
 		},
 		handleCreateManuscript(index, row) {
-			console.log(this.$router)
+			if(!this.$_ault_alert('manuscript:saveMan')){
+				return
+			}
 			this.$router.push({ path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptCreate', query: { id: row.id, libraryName: row.libraryName } })
 		},
 		//  安全报告
 		handleViewSafetyReport(index, row) {
+			if(!this.$_ault_alert('safety:edit')){
+				return
+			}
 			this.$router.push({ path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportEdit', query: { id: row.id, libraryName: row.libraryName, position: row.position } })
 		},
 		handleCreateSafetyReport(index, row) {
+			if(!this.$_ault_alert('safety:save')){
+				return
+			}
 			this.$router.push({ path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate', query: { id: row.id, libraryName: row.libraryName, position: row.position } })
 		},
 		handleInput(index, row, scope) {

@@ -78,6 +78,9 @@ export default {
     }.bind(this)); 	
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
+  		if(!this.$_ault_alert('sample:get')){
+			return
+		}
 //		console.log(id)
 		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInEdit',query:{libid:id}})
 		
@@ -121,6 +124,9 @@ export default {
 	},
 //	扫码新建样品
 	scanCode(){
+		if(!this.$_ault_alert('sample:getBySampleNo')){
+			return
+		}
 		this.messages.type='scaning';
 		this.messageShow=true;
 //		this.createlib()

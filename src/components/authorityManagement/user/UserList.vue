@@ -60,10 +60,16 @@ export default {
 //	监听列表点击编辑事件
   	this.$root.eventHub.$on("editlistitem",function(id,row){  
 //		console.log(id)
+		if(!this.$_ault_alert('user:edit')){
+			return
+		}
 		this.$router.push({path: '/index/AuthorityManagement/UserList/UserEdit',query:{id:id}})
   	}.bind(this));
 //	监听列表点击授权事件
-  	this.$root.eventHub.$on("authlistitem",function(row){  
+  	this.$root.eventHub.$on("authlistitem",function(row){ 
+  		if(!this.$_ault_alert('user:auth')){
+			return
+		}
 //		console.log(id)
 		this.$router.push({path: '/index/AuthorityManagement/UserList/UserAut',query:{id:row.id,name:row.userName}})
   	}.bind(this));
@@ -89,6 +95,9 @@ export default {
 	},
 //	新建授权项目
 	createAut(){
+		if(!this.$_ault_alert('user:save')){
+			return
+		}
 		this.$router.push({path: '/index/AuthorityManagement/UserList/UserAdd'})		
 	},
 	emptyCreate(){

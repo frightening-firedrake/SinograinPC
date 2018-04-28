@@ -51,6 +51,9 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
     submit(jsdjg,type){
+    	if(!this.$_ault_alert('manuscript:saveMan')){
+			return
+		}
        var params = {
             sampleId: this.$route.query.id,//样品id
             // libraryName: this.formdatas.form.libraryName,//被查企业

@@ -58,7 +58,10 @@ export default {
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击编辑事件
-  	this.$root.eventHub.$on("editlistitem",function(id){  
+  	this.$root.eventHub.$on("editlistitem",function(id){ 
+  		if(!this.$_ault_alert('resource:edit')){
+			return
+		}
 //		console.log(id)
 		this.$router.push({path: '/index/AuthorityManagement/ResourcesList/ResourcesEdit',query:{id:id}})
   	}.bind(this));
@@ -85,6 +88,9 @@ export default {
 	},
 //	新建授权项目
 	createAut(){
+		if(!this.$_ault_alert('resource:save')){
+			return
+		}
 		this.$router.push({path: '/index/AuthorityManagement/ResourcesList/ResourcesAdd'})		
 	},
 	emptyCreate(){

@@ -11,7 +11,8 @@ import router from './router/index'
 
 Vue.use(ElementUI);
 //Vue.prototype.apiRoot = 'http://m.ityyedu.com'
-Vue.prototype.apiRoot = 'http://192.168.1.210:80'
+Vue.prototype.apiRoot = 'http://192.168.1.233:80'
+//Vue.prototype.apiRoot = 'http://192.168.0.100:80'
 //Vue.prototype.apiRoot = 'http://192.168.1.223:80'
 //Vue.prototype.apiRoot = 'http://192.168.1.176:8082'
 //Vue.prototype.apiRoot = 'http://192.168.1.221:80'
@@ -34,9 +35,20 @@ axios.interceptors.request.use(function (response) {
 axios.interceptors.response.use(function (response) {
 //  console.log('全局的拦截测试，好简单')
 //	console.log(response)
-//	if(response){
-//		
-//	}
+	if(response.data.access=='unauthorized'){
+		app.$notify.error({
+          	title: '错误',
+          	message: '你没有权限进行此项操作！！！'
+        });
+        throw "————————";
+//      app.$alert('你没有权限进行此项操作！！！', '错误', {
+//        confirmButtonText: '确定',
+//        callback: action => {
+//          
+//        }
+//      });
+//		alert('你没有权限进行此项操作！！！')
+	}
     return response;
 }, function (error) {
 //		console.log(error)
@@ -88,7 +100,28 @@ Vue.prototype.$_has = function(value) {
 	
 	return isExist;
 };
-
+//方法内权限判断
+Vue.prototype.$_ault_alert = function(value) {
+	let buttonpermsStr=store.getters.permissions;
+	if(!buttonpermsStr){
+    	app.$notify.error({
+	      	title: '错误',
+	      	message: '你没有权限进行此项操作！！！'
+	    });
+		return false
+	}else{
+		buttonpermsStr=buttonpermsStr.split(',');
+		if(buttonpermsStr.includes(value)){
+			return true
+		}else{
+			app.$notify.error({
+		      	title: '错误',
+		      	message: '你没有权限进行此项操作！！！'
+		    });
+			return false
+		}
+	}
+};
 
 var app=new Vue({
   el: '#app',

@@ -172,7 +172,10 @@ export default {
 	    });
   	},
   	submit(data){
-		console.log(data)
+  		if(!this.$_ault_alert('resource:save')){
+			return
+		}
+
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({

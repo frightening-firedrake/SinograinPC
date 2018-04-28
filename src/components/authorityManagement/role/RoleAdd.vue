@@ -72,7 +72,9 @@ export default {
 		}.bind(this));
   	},
   	submit(data){
-		console.log(data)
+		if(!this.$_ault_alert('role:save')){
+			return
+		}
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({

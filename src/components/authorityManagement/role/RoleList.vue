@@ -56,12 +56,17 @@ export default {
     }.bind(this)); 	
 //	监听列表点击编辑事件
   	this.$root.eventHub.$on("editlistitem",function(id){  
+  		if(!this.$_ault_alert('role:edit')){
+			return
+		}
 //		console.log(id)
 		this.$router.push({path: '/index/AuthorityManagement/RoleList/RoleEdit',query:{id:id}})
   	}.bind(this));
 //	监听列表点击授权事件
   	this.$root.eventHub.$on("authlistitem",function(row){  
-
+		if(!this.$_ault_alert('role:auth')){
+			return
+		}
 		this.$router.push({path: '/index/AuthorityManagement/RoleList/RoleAut',query:{id:row.id,name:row.displayName}})
   	}.bind(this));
   },
@@ -86,6 +91,9 @@ export default {
 	},
 //	新建授权项目
 	createAut(){
+		if(!this.$_ault_alert('role:save')){
+			return
+		}
 		this.$router.push({path: '/index/AuthorityManagement/RoleList/RoleAdd'})		
 	},
 	emptyCreate(){

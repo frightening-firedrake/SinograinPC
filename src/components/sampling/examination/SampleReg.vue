@@ -215,6 +215,9 @@ export default {
 		}.bind(this));
   	},
 	agree() {
+		if(!this.$_ault_alert('register:edit')){
+			return
+		}
 		this.$http({
 			method: 'post',
 			url: this.agreeURL,
@@ -240,6 +243,9 @@ export default {
 		}.bind(this));
 	},
 	disagree() {
+		if(!this.$_ault_alert('register:edit')){
+			return
+		}
 		this.$http({
 			method: 'post',
 			url: this.disagreeURL,

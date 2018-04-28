@@ -74,6 +74,9 @@ export default {
     }.bind(this)); 	
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
+  		if(!this.$_ault_alert('smallSample:list')){
+			return
+		}
 //		console.log(id)
 		this.$router.push({path: '/index/sampleDetection/packingTaskList/packingList',query:{id:id}})
 		

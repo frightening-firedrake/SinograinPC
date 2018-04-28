@@ -105,6 +105,9 @@ export default {
   		console.log('titleEvent');
   	},
   	submit(data,tree){
+		if(!this.$_ault_alert('role:auth')){
+			return
+		}
 //		处理ids数据
   		var operationIds=[];
 		tree.forEach((item)=>{

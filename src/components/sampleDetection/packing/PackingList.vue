@@ -115,6 +115,9 @@ export default {
 	},
 //	扫码新建样品
 	scanCode(){
+		if(!this.$_ault_alert('sample:getBySampleNum')){
+			return
+		}
 		this.messages.type='scaning';
 		this.messageShow=true;
 //		this.$router.push({path: '/index/sampleDetection/packingList/packingPrint'})

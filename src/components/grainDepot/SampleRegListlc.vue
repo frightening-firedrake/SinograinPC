@@ -60,7 +60,9 @@ export default {
     this.$root.eventHub.$off("viewlistitem")
 //	监听列表删除事件
     this.$root.eventHub.$on('delelistitem',function(rowid,list){
-    	
+    	if(!this.$_ault_alert('register:remove')){
+			return
+		}
     	this.sendDeleteId(rowid);
 //  	console.log(rowid,list);
     }.bind(this)); 	

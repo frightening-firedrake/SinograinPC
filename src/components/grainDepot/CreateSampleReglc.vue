@@ -356,6 +356,9 @@ export default {
 		}.bind(this));
 	},
 	savedata(regState){
+		if(!this.$_ault_alert('sample:saveAll')){
+			return
+		}
 		if(!this.listHeader.tableName) {
 			var msg="请先填写表名，再尝试提交！"
 			this.uncomplate(msg)
@@ -445,7 +448,7 @@ export default {
 			this.savedata()	
 			
 		}else if(date=='tableAdd'){
-//			权限判断
+//			权限判断旧方法啊
 //			if (!this.$_has('register:edit')) {
 //				this.$notify.error({
 //		          	title: '错误',
@@ -453,6 +456,7 @@ export default {
 //		        });
 //				return
 //	    	}
+			
 			this.rowid++;
 			var newdata={
 				id:0,

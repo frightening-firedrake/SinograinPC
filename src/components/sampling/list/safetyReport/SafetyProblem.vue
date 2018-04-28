@@ -180,6 +180,9 @@ export default {
   	},
 //	问题通过处理事件
   	pass(id){
+  		if(!this.$_ault_alert('safetyReport:edit')){
+			return
+		}
 		// console.log(id)
 		this.messageShow=true;
 		

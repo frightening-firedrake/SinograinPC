@@ -68,6 +68,9 @@ export default {
     }.bind(this)); 	
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(row){  
+  		if(!this.$_ault_alert('safetyReport:get')){
+			return
+		}
 //		console.log(id)
 		this.$router.push({path: '/index/sampling/SRLibraryList/SafetyReportList/SafetyProblem',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
   	}.bind(this));
