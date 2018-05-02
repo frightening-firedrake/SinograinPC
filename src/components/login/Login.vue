@@ -23,16 +23,16 @@
                     <!--<i class="iconfont icon-mima"></i>
                     <el-input type="password" placeholder="请输入您的密码"   v-model="loginForm.password"></el-input>-->
                 </el-form-item>
-                <!--<el-form-item label="" class="code" @click="addBorder()">
+                <el-form-item label="" class="code" @click="addBorder()">
                 	<el-input
 					    placeholder="请输入验证码"
 					    v-model="loginForm.number">
 					    <i slot="prefix" class="iconfont icon-yanzhengma"></i>
 					</el-input>
-                    <i class="iconfont icon-yanzhengma"></i>
-                    <el-input   placeholder="请输入验证码" v-model="loginForm.number"></el-input>
+                    <!--<i class="iconfont icon-yanzhengma"></i>-->
+                    <!--<el-input   placeholder="请输入验证码" v-model="loginForm.number"></el-input>-->
                 </el-form-item>
-                <img class="code_img" :src="captcha" @click="change()" alt="">-->
+                <img class="code_img" :src="captcha" @click="change()" alt="我是个验证码">
                 <el-button class="login_submit" @click="submitForm()">登录</el-button>
             </el-form>
         </div>
@@ -132,7 +132,9 @@ export default {
             captcha:'',
         	isfocus:false,
             loginForm: {
-                name:""
+                name:"",
+                password:"",
+                number:"",
             },
         }
     }

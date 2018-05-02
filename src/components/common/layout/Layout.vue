@@ -9,6 +9,7 @@
 				<router-view></router-view>
 			</el-main>
 		</el-container>
+		<iframe id="fordownload" style="display:none"></iframe>
       	<!--<div>{{viewdata}}</div>-->
 	</el-container>
 </template>

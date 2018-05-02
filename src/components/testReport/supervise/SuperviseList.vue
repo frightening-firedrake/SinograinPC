@@ -295,8 +295,10 @@ export default {
 			params.taskId=this.taskId
 		}
 		params = JSON.stringify(params);
-		console.log(params,this.exportURL+'/'+params)
-		window.open(this.exportURL+'/'+params+'?sessionid='+this.Token,"_blank");
+//		console.log(params,this.exportURL+'/'+params)
+		var loadiframe=document.getElementById('fordownload');
+		loadiframe.src=this.exportURL+'/'+params+'?sessionid='+this.Token;
+//		window.open(this.exportURL+'/'+params+'?sessionid='+this.Token,"_blank");
 	},
 //	获取多选框选中数据的id(这是一个数组)
   	getchecked(checkedId){

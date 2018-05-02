@@ -233,7 +233,9 @@ export default {
 		if(!this.$_ault_alert('sample:reportXMorYM')){
 			return
 		}
-		window.open(this.exportURL+'?ids='+ids+'&title='+title+'&sessionid='+this.Token,"_blank");
+		var loadiframe=document.getElementById('fordownload');
+		loadiframe.src=this.exportURL+'?ids='+ids+'&title='+title+'&sessionid='+this.Token;
+//		window.open(this.exportURL+'?ids='+ids+'&title='+title+'&sessionid='+this.Token,"_blank");
 	},
 //	选项卡切换
 	TabChange(currentTab){

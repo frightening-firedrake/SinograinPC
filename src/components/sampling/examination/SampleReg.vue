@@ -134,7 +134,9 @@ export default {
 		if(!this.$_ault_alert('register:export')){
 			return
 		}
-		window.open(this.exportExcelURL+'?pId='+pId+'&sessionid='+this.Token,"_blank");
+		var loadiframe=document.getElementById('fordownload');
+		loadiframe.src=this.exportExcelURL+'?pId='+pId+'&sessionid='+this.Token;
+//		window.open(this.exportExcelURL+'?pId='+pId+'&sessionid='+this.Token,"_blank");
 		// 获取列表数据（第？页）
 //		this.$http({
 //		    method: 'post',

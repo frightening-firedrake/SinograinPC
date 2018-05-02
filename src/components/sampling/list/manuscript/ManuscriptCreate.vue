@@ -194,7 +194,9 @@ export default {
   		if(!this.$_ault_alert('manuscript:export')){
 			return
 		}
-		window.open(this.exportExcelURL+'?id='+id+'&sessionid='+this.Token,"_blank");
+  		var loadiframe=document.getElementById('fordownload');
+		loadiframe.src=this.exportExcelURL+'?id='+id+'&sessionid='+this.Token;
+//		window.open(this.exportExcelURL+'?id='+id+'&sessionid='+this.Token,"_blank");
 	},
   },
   data() {

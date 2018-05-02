@@ -264,7 +264,9 @@ export default {
                 if(!this.$_ault_alert('sample:ExportXMorYMzhiliang')){
 					return
 				}
-                window.open(btnUrl+'?ids='+ids+'&title=质量验收报告'+'&sessionid='+this.Token,"_blank");
+                var loadiframe=document.getElementById('fordownload');
+				loadiframe.src=btnUrl+'?ids='+ids+'&title=质量验收报告'+'&sessionid='+this.Token;
+//              window.open(btnUrl+'?ids='+ids+'&title=质量验收报告'+'&sessionid='+this.Token,"_blank");
             } else if (date == 'tableAdd') {
             }
         },
