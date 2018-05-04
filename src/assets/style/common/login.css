@@ -37,8 +37,8 @@
  	line-height:0.4rem;
  	color:#dd0707;
  	font-size:0.17rem;
- 	margin:0 -0.1rem;
- 	text-align: center;
+ 	margin:0 -0.2rem 0 0;
+ 	/*text-align: center;*/
  }
  .login .login_box .login_form .loginError span{
 	vertical-align: -1px;
@@ -65,7 +65,9 @@
  }
  
  .login .login_box .login_form .code_img {
- 	width: 1.21rem;
+ 	border-top:1px solid white;
+ 	border-bottom:1px solid white;
+ 	width: 1.26rem;
  	height: 0.48rem;
  	border-radius: 0.05rem;
  	vertical-align: top;

@@ -2,7 +2,7 @@
     <div class="login" style="background-image:url(static/images/login/login_big.png)">
         <div class="login_box">
             <el-form ref="form"  class="login_form" :model="loginForm">
-            	<p v-if="loginError" class="loginError"><span class="el-icon-warning"></span>您输入的账号或密码不正确，请重新输入！</p>
+            	<p v-if="loginError" class="loginError"><span class="el-icon-warning"></span>{{errorMessage}}</p>
             	<p v-else class="loginError"></p>
                 <el-form-item label=""  :class="{focus:isfocus}">
                 	<el-input
@@ -26,6 +26,7 @@
                 <el-form-item label="" class="code" @click="addBorder()">
                 	<el-input
 					    placeholder="请输入验证码"
+					    @blur="checkcode"
 					    v-model="loginForm.number">
 					    <i slot="prefix" class="iconfont icon-yanzhengma"></i>
 					</el-input>
@@ -47,34 +48,45 @@ export default {
 		...mapGetters(["libraryId","libraryName"]),
   	},
     created() {
-        this.$http({
-		    method: 'post',
-			url:  this.apiRoot + '/grain/captcha',
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-                
-			}
-	        }).then(function (response) {
-               this.captcha =  this.apiRoot + '/grain/captcha'
-            }.bind(this)).catch(function (error) {
-                console.log(error);
-            }.bind(this));
+        this.change()
     },
     methods: {
     	...mapMutations(['setUserInfo']),
   		...mapActions([]),
         change() {
-            this.captcha = this.apiRoot + '/grain/captcha?d='+new Date().getTime()
+        	this.$http({
+			    method: 'post',
+				url:  this.apiRoot + '/grain/captcha?d='+new Date().getTime(),
+				withCredentials: true,
+       			crossDomain: true,
+				transformRequest: [function (data) {
+					// Do whatever you want to transform the data
+					let ret = ''
+					for (let it in data) {
+					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					}
+					return ret
+				}],
+				headers: {'Content-Type': 'application/x-www-form-urlencoded','crossDomain': true},
+				data: {
+	                
+				}
+	       }).then(function (response) {
+//	        	console.log(response)
+//	        	console.log(response.data.capText)
+	           	this.captcha = 'data:image/jpg;base64,'+response.data.img;
+//	           	this.captcha = response.data;
+//          	this.captcha = this.apiRoot + '/grain/captcha?d='+new Date().getTime()
+	           	this.captchaId = response.data.captcha; 
+	        }.bind(this)).catch(function (error) {
+	            console.log(error);
+	        }.bind(this));
+//          this.captcha = this.apiRoot + '/grain/captcha?d='+new Date().getTime()
         },
         submitForm() {
+        	if(!this.checkcode()){
+        		return
+        	}
             this.$http({
 		    method: 'post',
 			url: this.apiRoot +  '/grain/login',
@@ -86,14 +98,17 @@ export default {
 				}
 				return ret
 			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			headers: {'Content-Type': 'application/x-www-form-urlencoded','crossDomain': true},
+			withCredentials: true,
+       		crossDomain: true,
 			data: {
-			    userName: this.loginForm.name,
-                userPass: this.loginForm.password,
-                verityCode: this.loginForm.number
+			    userName:this.loginForm.name,
+                userPass:this.loginForm.password,
+                verityCode:this.loginForm.number,
+                captcha:this.captchaId,
 			}
 	        }).then(function (response) {
-               if(response.data.success == true) {
+               	if(response.data.success == true) {
                		var payload={};
                		payload.libraryId=response.data.user.libraryId;
                		payload.libraryName=response.data.user.libraryName;
@@ -107,9 +122,14 @@ export default {
 //             		payload.userAuth='InformationManagement,AuthorityManagement';//grainDepot
                		this.setUserInfo(payload)
                    	this.$router.push({ path: '/index'});
-               }else {
-                   this.loginError=true
-               }
+               	}else if(response.data.success == false){
+                    this.loginError=true;
+            		this.errorMessage=response.data.code+'!';    
+            		this.loginForm.name='',
+                	this.loginForm.password='',
+                	this.loginForm.number='',
+        			this.change();           		
+               	}
             }.bind(this)).catch(function (error) {
                 console.log(error);
             }.bind(this));
@@ -117,6 +137,17 @@ export default {
         addborder(e){
             alert(1)
             console.log(e)
+        },
+//      失去焦点时是否需要验证码的验证
+        checkcode(){
+			if(this.captchaId==this.loginForm.number){
+                this.loginError=false;			
+				return true;
+			}else{
+                this.loginError=true;
+				this.errorMessage="您输入的验证码信息不正确，请重新输入！";
+				return false;
+			}
         },
         focus(a,b){
         	console.log(this,a,b)
@@ -130,12 +161,14 @@ export default {
         return {
         	loginError:false,
             captcha:'',
+            captchaId:'',
         	isfocus:false,
             loginForm: {
                 name:"",
                 password:"",
                 number:"",
             },
+            errorMessage:"",
         }
     }
 }
