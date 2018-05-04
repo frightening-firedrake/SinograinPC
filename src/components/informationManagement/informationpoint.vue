@@ -75,7 +75,7 @@ export default {
 					return ret
 				}],
 			}).then(function(response) {
-                console.log(response)
+				this.isinformations = true
 				this.informations = response.data.rows;
 				//		  	this.formdatas=response.data.formdatas;		  
 				//		  	this.tabledatas=response.data.rows;
@@ -133,22 +133,31 @@ export default {
 			if(!this.$_ault_alert('register:save')){
 				return
 			}
-			this.informationType = type;
-			this.modal = {
-				title: '新建库点',
-				formdatas: [
-					{
-						label: "库点名称",
-						model: "unit",
-					},
-					// {
-					// 	label:"添加库点",
-					// 	model:"lib",
-					// },
-				],
-				submitText: '确定',
-			},
+			if(this.isinformations){
+				this.informationType = type;
+				this.modal = {
+					title: '新建库点',
+					formdatas: [
+						{
+							label: "库点名称",
+							model: "unit",
+						},
+						// {
+						// 	label:"添加库点",
+						// 	model:"lib",
+						// },
+					],
+					submitText: '确定',
+				},
 				this.modalVisible = true;
+			}else{
+				// alert("请先选择直属库")
+				this.$notify.error({
+					title:"警告",
+					message:"请先选择直属库"
+				})
+			}
+			
 		},
 		//	填入新建数据
 		createlibitem(data) {
@@ -195,6 +204,7 @@ export default {
 		return {
             inforselect:"2",
 			title: "库点",
+			isinformations:false,
             pointList:"",
             point:"",
 			datalistURL: this.apiRoot + '/grain/library/data',
