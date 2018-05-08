@@ -71,7 +71,7 @@ export default {
   	this.$root.eventHub.$on("viewlistitem",function(id,state){  
 //		console.log(id)
 
-			this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList/sampleReg',query:{pId:id,state:state}})			
+			this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList/sampleReg',query:{registerId:id,state:state}})			
 
   	}.bind(this));
   },
@@ -134,8 +134,9 @@ export default {
 //	获取列表数据方法
   	getlistdata(page){
   		this.loading=true;
-  		var params = this.$route.query;
-		params.regStates = 3
+  		var params = {};
+  		params.pLibraryId = this.$route.query.pLibraryId;
+		params.regState = -1;
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,

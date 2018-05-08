@@ -59,7 +59,7 @@ export default {
 	}
   },
   created(){
-  	this.getlibrarylist()
+//	this.getlibrarylist()
 //	console.log(this.$route.query)
 //	if(this.$route.query.state==3){
 //		this.tfbtns={
@@ -188,6 +188,8 @@ export default {
 //	获取列表数据方法
   	getlistdata(page){
   		this.loading=true;
+  		var params={};
+  		params.pId=this.$route.query.registerId
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -205,7 +207,7 @@ export default {
 			    listName: this.list,
 			    page:page,
 			    rows:this.page.size,
-				params:JSON.stringify(this.$route.query),
+				params:JSON.stringify(params),
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
@@ -390,11 +392,11 @@ export default {
 //       },
       {
         id: 2,
-        prop:'pLibraryId',
+        prop:'pLibraryName',
         label:"被查直属库",
 //      sort:true,
 //      width:80,
-        status:true,
+//      status:true,
       },
       {
         id: 3,

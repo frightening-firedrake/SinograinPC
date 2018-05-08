@@ -3,8 +3,8 @@
         <template>
             <p>{{formdatas.title}}</p>
         </template>      
-		<el-form-item label="被检查企业" prop="enterprise" class="three">
-		    <el-input v-model="pLibraryName" disabled></el-input>
+		<el-form-item label="被检查企业" prop="enterprise" class="three" v-bind:class="{disabled:disabled}">
+		    <el-input v-model="formdatas.form.pLibraryName" disabled></el-input>
 		</el-form-item>
 		<!--<el-form-item label="被查时点"  class="three">
 		    <el-form-item prop="checkedTime">
@@ -323,7 +323,7 @@ import "@/assets/style/common/Form.css";
 export default {
     props: ["formdatas"],
     created(){
-    	this.getlibrarylist();
+//  	this.getlibrarylist();
     },
     mounted: function() {
 //		console.log(this.formdatas)
@@ -433,16 +433,16 @@ export default {
 //		lssjsl(){
 //			return this.formdatas.form.grainQuality;
 //		},
-		pLibraryName(){
-			if(this.librarylist.length){
-			  	var pitem= this.librarylist.filter((item)=>{
-			  		return item.id==this.formdatas.form.pLibraryId
-			  	})
-			  	return pitem[0].libraryName;
-			}else{
-				return "";				
-			}
-		},
+//		pLibraryName(){
+//			if(this.librarylist.length){
+//			  	var pitem= this.librarylist.filter((item)=>{
+//			  		return item.id==this.formdatas.form.pLibraryId
+//			  	})
+//			  	return pitem[0].libraryName;
+//			}else{
+//				return "";				
+//			}
+//		},
 		
     },
     data() {

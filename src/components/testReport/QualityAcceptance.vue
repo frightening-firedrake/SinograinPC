@@ -63,7 +63,7 @@
                 width: 1.7rem;
                 height: 0.3rem;
                 border-radius: 5px;
-                border: 2px solid #d5d5d5;
+                border: 1px solid #d5d5d5;
                 text-align: center;
                 overflow: hidden;
                 &:last-child {

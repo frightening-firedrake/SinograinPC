@@ -23,7 +23,7 @@ import "@/assets/style/testReport/TestReportMaker.css"
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 export default {
   components: {
@@ -34,7 +34,7 @@ export default {
   },
   created(){
 //	this.getlistdata(1);
-	console.log(this.$route.params)
+//	console.log(this.$route.params)
 	if(this.$route.params.formdatas){
 		this.formdatas=this.$route.params.formdatas;
 		this.tabledatas=this.$route.params.tabledatas;

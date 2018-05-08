@@ -12,7 +12,7 @@
 		</el-form-item>
 		<!--<el-form-item label="扦样编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">-->
 		<el-form-item label="检验编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.sampleNum" :disabled="disabled"></el-input>
+		    <el-input v-model="formdatas.form.sampleNo" :disabled="disabled"></el-input>
 		</el-form-item>
 		<!--<el-form-item label="货位号：" prop="position" v-bind:class="{disabled:disabled}" >
 		    <el-input v-model="formdatas.form.depot" :disabled="disabled"></el-input>
@@ -116,6 +116,8 @@ export default {
     			return "已扦样";
     		}else if(this.formdatas.form.sampleState==2){
     			return "已入库";
+    		}else if(this.formdatas.form.sampleState==3){
+    			return "已分小样";
     		}
     	},
     	code(){

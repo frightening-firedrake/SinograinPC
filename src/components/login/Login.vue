@@ -33,7 +33,7 @@
                     <!--<i class="iconfont icon-yanzhengma"></i>-->
                     <!--<el-input   placeholder="请输入验证码" v-model="loginForm.number"></el-input>-->
                 </el-form-item>
-                <img class="code_img" :src="captcha" @click="change()" alt="我是个验证码">
+                <img class="code_img" :src="captcha" @click="change()" alt="验证码加载中...">
                 <el-button class="login_submit" @click="submitForm()">登录</el-button>
             </el-form>
         </div>

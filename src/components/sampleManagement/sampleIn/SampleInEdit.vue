@@ -70,9 +70,9 @@ export default {
 	    }).then(function (response) {
 	    	var res=response.data;
 	    	res.sampleNum="监"+res.sampleNum;
-	    	res.pLibraryName='';
 		  	this.formdatas.form=res;
-				this.getlibrarydata()
+//		  	res.pLibraryName='';
+//				this.getlibrarydata()
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

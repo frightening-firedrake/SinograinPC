@@ -366,9 +366,9 @@ export default {
       items: [
       {
         id: 1,
-        prop:'sampleNum',
-        label: "检验编号",
-		status:true,
+        prop:'sampleWord',
+        label: "扦样编号",
+//		status:true,
       },
       {
         id: 2,

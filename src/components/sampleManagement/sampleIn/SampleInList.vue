@@ -191,7 +191,8 @@ export default {
   		this.searchText=searching;
   		var params = {};
 		params.sampleWordOrsampleNumLike = searching;
-		params.sampleState = 2
+		params.ruKuSampleState = 2
+		params.fenxiaoyangSampleState = 3
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
@@ -252,8 +253,9 @@ export default {
 //	获取列表数据方法
   	getlistdata(page){
 		var params = {};
-		params.sampleState = 2
-		params.ruKuSampleState = 3
+		params.sampleWordOrsampleNumLike = '';
+		params.ruKuSampleState = 2
+		params.fenxiaoyangSampleState = 3
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -275,7 +277,7 @@ export default {
 				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-//			console.log(response.data.rows)
+			console.log(response)
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
 		}.bind(this)).catch(function (error) {
@@ -460,9 +462,9 @@ export default {
       items: [
       {
         id: 1,
-        prop:'sampleNum',
+        prop:'sampleNo',
         label: "检验编号",
-        status:true,
+//      status:true,
 //      sort:true
       },
       {

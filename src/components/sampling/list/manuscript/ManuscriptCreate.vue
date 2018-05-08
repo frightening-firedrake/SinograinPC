@@ -39,7 +39,7 @@ export default {
 	...mapGetters(["modal_id","Token"]),
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.query)
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 

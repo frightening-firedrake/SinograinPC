@@ -11,9 +11,9 @@ import router from './router/index'
 
 Vue.use(ElementUI);
 //Vue.prototype.apiRoot = 'http://m.ityyedu.com'
-Vue.prototype.apiRoot = 'http://192.168.1.233:80'
+//Vue.prototype.apiRoot = 'http://192.168.1.233:80'
 //Vue.prototype.apiRoot = 'http://192.168.0.100:80'
-//Vue.prototype.apiRoot = 'http://192.168.1.223:80'
+Vue.prototype.apiRoot = 'http://192.168.1.232:80'
 //Vue.prototype.apiRoot = 'http://192.168.1.176:8082'
 //Vue.prototype.apiRoot = 'http://192.168.1.221:80'
 //axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';

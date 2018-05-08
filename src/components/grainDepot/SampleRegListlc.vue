@@ -70,9 +70,9 @@ export default {
   	this.$root.eventHub.$on("viewlistitem",function(id,state){  
 //		console.log(id)
 		if(state==3){			
-			this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleDraft',query:{pId:id,state:state}})
+			this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleDraft',query:{registerId:id,state:state}})
 		}else{
-			this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleReglc',query:{pId:id,state:state}})
+			this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleReglc',query:{registerId:id,state:state}})
 		}
   	}.bind(this));
   },
@@ -308,7 +308,7 @@ export default {
       {
         id: 3,
         prop:'createTime',
-        label:"最后检查日期",
+        label:"申请日期",
         sort:true,
       },
       ],

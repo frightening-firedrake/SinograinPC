@@ -14,7 +14,7 @@
       <!--分页-->
       <!--<sinograin-pagination style="border:none;" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
       <!--弹框-->
-      <!--<sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>-->      	
+      <sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
       <!--底部按钮们-->
       <tfoot-buttons :tfbtns="tfbtns" @tfootEvent="tfootEvent" ></tfoot-buttons>
     </div>
@@ -60,7 +60,7 @@ export default {
   },
   created(){
 //	console.log(this.$route.query)
-  	this.getlibrarylist()
+//	this.getlibrarylist()
   	if(this.$route.query.state==-1){
   		this.tfbtns={
 	      	btnCenter:{
@@ -120,9 +120,13 @@ export default {
 	createlib(){
 		this.modalVisible=true;
 	},
+	newModal(){
+		this.modalVisible=true;
+	},
 //	填入新建数据
-	createlibitem(unit,lib){
-		console.log(unit,lib);
+	createlibitem(form){
+//		console.log(form);
+		this.disagreeSubmit(form.reason)
 	},
 //	关闭新建弹框
 	dialogClose(){
@@ -191,6 +195,8 @@ export default {
   	getlistdata(page){
   		this.loading=true;
   		// 获取列表数据（第？页）
+  		var params={};
+  		params.pId=this.$route.query.registerId;
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
@@ -207,7 +213,7 @@ export default {
 			    listName: this.list,
 			    page:page,
 			    rows:this.page.size,
-				params:JSON.stringify(this.$route.query),
+				params:JSON.stringify(params),
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
@@ -251,6 +257,10 @@ export default {
 		if(!this.$_ault_alert('register:edit')){
 			return
 		}
+//		this.modalVisible=true;
+		this.disagreeSubmit('没通过的原因我不说！！！')
+	},
+	disagreeSubmit(reason) {
 		this.$http({
 			method: 'post',
 			url: this.disagreeURL,
@@ -265,10 +275,11 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 				id: JSON.stringify(this.$route.query.pId),
-				regState: 1 
+				regState:1,
+				reason:reason,
 			}
 		}).then(function (response) {
-			this.$router.go(-1)
+			this.$router.push({name:'扦样流程/审批扦样库点列表'})
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -314,6 +325,7 @@ export default {
 	tfootEvent(date){
 		console.log(date);
 		if(date=='btnCenterL'){
+			
 			this.disagree()
 //			this.$router.go(-1)
 		}else if(date=='btnCenterR'){
@@ -367,15 +379,11 @@ export default {
       list:"samplinglist",
 	  modalVisible:false,
 	  modal:{
-	  	title:'新建库点',
+	  	title:'未能通过审批',
 		formdatas:[
 	  		{
-	  			label:"单位名称",
-	  			model:"unit",
-	  		},
-	  		{
-	  			label:"库点名称",
-	  			model:"lib",
+	  			label:"具体原因",
+	  			model:"reason",
 	  		},
 	  	],
 	  	submitText:'确定',
@@ -422,9 +430,9 @@ export default {
       items: [
       {
       	id: 1,
-      	prop:'pLibraryId',
+      	prop:'pLibraryName',
       	label:"被查直属库",
-      	status:true,
+//    	status:true,
       },
       {
         id: 2,

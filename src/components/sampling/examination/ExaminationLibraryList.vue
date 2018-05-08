@@ -58,9 +58,9 @@ export default {
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击查看事件
-  	this.$root.eventHub.$on("viewlistitem",function(id,state){  
-//		console.log(id)
-		this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList',query:{libraryId:id,status:state}})
+  	this.$root.eventHub.$on("viewlistitem",function(id,row){  
+//		console.log(row)
+		this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList',query:{pLibraryId:row.pLibraryId}})
   	}.bind(this));
   },
   destroy(){

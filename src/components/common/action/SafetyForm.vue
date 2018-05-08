@@ -236,6 +236,7 @@ export default {
 	    },
 //	       回收图片地址
 	    imageUploadSuccess(response, file, fileList, index){
+	    	console.log('上传成功')
 //	    	console.log(response, file, fileList,index)
 	    	var index2;
 	    	fileList.forEach((value,listindex)=>{

@@ -53,7 +53,7 @@ export default {
 	}
   },
   created(){
-  	console.log(this.$route.query)
+//	console.log(this.$route.query)
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 //	移除监听事件
