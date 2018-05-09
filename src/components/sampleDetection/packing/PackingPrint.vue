@@ -163,6 +163,7 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+//	目前执行的打印方法
   	getPrintCodeAll(){
 //		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no'); 		
   		var params = {};
@@ -191,9 +192,10 @@ export default {
 			if(response.success) {
 				this.isPrint=3;				
 			}
-		   console.log("111111111111111111")
-		   	console.log(response,this.isPrint)
-			this.printBarAll(response.data);
+//		   console.log("111111111111111111")
+//		   	console.log(response,this.isPrint)
+			console.log(response.data)
+//			this.printBarAll(response.data);
 //	    	返回打印需要的条码格式待定
 //			假设是图片吧临时的
 //			this.imgsrc=response.data

@@ -272,7 +272,7 @@ export default {
 //			console.log(response)
 			if(response.data.checkeds) {
 				var path=this.$route.name+'/打印条码'
-				this.$router.push({name: path,params: {code:response.data.sampleNum,sort:response.data.sort,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState,taskId:this.$route.query.id}})
+				this.$router.push({name: path,params: {code:response.data.sampleNo,sort:response.data.sort,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState,taskId:this.$route.query.id}})
 			}else{
 
 				this.$notify.error({
@@ -366,8 +366,8 @@ export default {
       items: [
       {
         id: 1,
-        prop:'sampleWord',
-        label: "扦样编号",
+        prop:'sampleNo',
+        label: "检验编号",
 //		status:true,
       },
       {
