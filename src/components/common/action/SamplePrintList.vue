@@ -10,7 +10,7 @@
 						{{listdatas.titleNumber}}					
 					</div>
 					<div class="content">
-						监{{listdatas.title}}	
+						{{listdatas.title}}	
 					</div>
 				</div>
 				<div class="rowItem" v-if="listdatas.subtitle" :class="{sub:listdatas.subtitle}">
@@ -71,7 +71,7 @@
 import "@/assets/style/common/SamplePrintList.css"
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 export default {
 	props:['listdatas','checkList','checkAllList'],

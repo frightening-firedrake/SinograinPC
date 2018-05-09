@@ -67,7 +67,7 @@
                 <span>{{index+1}}</span>
               </el-col>
               <el-col style="" :span="16">
-                <span>监{{item}}</span>
+                <span>{{item}}</span>
               </el-col>
             </el-col>
             <el-col style="" :span="6" v-for="(item,index) in testItemListadd" class='loopBorder' :key="index+99" style="border-top:1px solid #dfdfdf;">
@@ -277,7 +277,7 @@ export default {
   					id:this.$route.query.id
   			}
       }).then(function(response) {
-      	console.log(response.data)
+//    	console.log(response.data)
       	this.formdatas.remarks=response.data.remark;//备注
 //    	this.formdatas.gly="管理员"
       	this.formdatas.time=response.data.updateTime;//领取时间
@@ -290,10 +290,7 @@ export default {
 //      this.formdatas = response.data;
         //		  	this.tabledatas=response.data.rows;
         //	  		this.page.total=response.data.total;
-
-        setTimeout(() => {
           this.loading = false;
-        }, 1000)
       }.bind(this)).catch(function(error) {
         console.log(error);
       }.bind(this));

@@ -67,7 +67,7 @@
 				
 			  <el-checkbox-group v-model="checkedList" @change="checkedListChange">
 
-			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">监{{item.sampleNum}}</el-checkbox>
+			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">{{item.sampleNo}}</el-checkbox>
 
 			  		
 			    
@@ -86,7 +86,7 @@
 <script>
 import "@/assets/style/common/SelectChecklist.css";
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 export default {
     props: ["checkedListAdd","checkList"],
 //  props: ["checkList"],
@@ -111,10 +111,10 @@ export default {
     	listready(){
     		if(this.checkList.length&&this.$route.params.formdatas){
     			var checkNums=this.$route.params.formdatas.items.map((val)=>{
-    				return val.sampleNum?val.sampleNum:val;
+    				return val.sampleNo?val.sampleNo:val;
     			})
     			this.checkedList=this.checkList.filter((item)=>{
-    				return checkNums.includes(item.sampleNum)
+    				return checkNums.includes(item.sampleNo)
     			})
     		}else{
     			
