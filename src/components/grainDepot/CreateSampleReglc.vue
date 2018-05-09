@@ -169,7 +169,7 @@ export default {
 				
 			}
 	    }).then(function (response) {
-		  	this.librarylist = response.data.rows;
+		  	this.librarylist = response.data;
 
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -502,7 +502,7 @@ export default {
       rowid:999,//临时id
       deleteURL: this.apiRoot + '/grain/sample/remove',//草稿删除
       datalistURL: this.apiRoot + '/grain/sample/data',//获取草稿地址
-	  librarylistURL: this.apiRoot + '/grain/library/data',//获取库列表
+	  librarylistURL: this.apiRoot + '/grain/library/getAll',//获取库列表
       saveURL: this.apiRoot + '/grain/sample/saveAll',//草稿保存地址
       sampleURL: this.apiRoot + '/grain/register/edit',//申请扦样地址
 	  editURL: this.apiRoot + '/grain/sample/saveOrEditAll',
