@@ -154,7 +154,7 @@ export default {
   		page?page:1;
   		this.searchText=searching;
   		var params = {};
-		params.sampleNumOrSmallSampleNum = searching;
+		params.taskNameLike = searching;
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
