@@ -273,7 +273,7 @@ export default {
       datalistURL: this.apiRoot +  '/grain/task/data',
       createTaskURL: this.apiRoot +  '/grain/task/save',
       checkURL:this.apiRoot +'/grain/sample/getBySampleNum',
-      searchURL:this.apiRoot +  '/grain/smallSample/data',
+      searchURL:this.apiRoot +  '/grain/task/data',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
       checkedId:[],
