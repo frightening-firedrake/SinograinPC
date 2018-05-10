@@ -154,7 +154,7 @@ export default {
   		page?page:1;
   		this.searchText=searching;
   		var params = {};
-		params.sampleNumOrSmallSampleNum = searching;
+		params.taskNameLike = searching;
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
@@ -273,7 +273,7 @@ export default {
       datalistURL: this.apiRoot +  '/grain/task/data',
       createTaskURL: this.apiRoot +  '/grain/task/save',
       checkURL:this.apiRoot +'/grain/sample/getBySampleNum',
-      searchURL:this.apiRoot +  '/grain/smallSample/data',
+      searchURL:this.apiRoot +  '/grain/task/data',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
       checkedId:[],
