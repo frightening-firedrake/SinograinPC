@@ -131,7 +131,7 @@ export default {
 		//	新建库
 		addinformationLib(type) {
 			
-			if(!this.$_ault_alert('register:save')){
+			if(!this.$_ault_alert('library:save')){
 				return
 			}
 			if(this.isinformations){
