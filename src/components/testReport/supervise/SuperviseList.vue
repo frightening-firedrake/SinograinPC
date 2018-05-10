@@ -203,7 +203,7 @@ export default {
 //			    params: JSON.stringify(params)
 			}
 	   }).then(function (response) {
-		  	this.listHeader.libraryList = response.data.rows;
+		  	this.listHeader.libraryList = response.data;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -323,7 +323,7 @@ export default {
     return {
       datalistURL: this.apiRoot + '/grain/safetyReport/data',
       exportURL:this.apiRoot + '/grain/safetyReport/export',
-	  librarylistURL: this.apiRoot + '/grain/library/data',
+	  librarylistURL: this.apiRoot + '/grain/library/getAll',
 	  taskListURL:this.apiRoot + '/grain/task/data',
 	  searchURL: this.apiRoot + '/grain/safetyReport/data',
       deleteURL: this.apiRoot + '/grain/',

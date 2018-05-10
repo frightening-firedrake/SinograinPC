@@ -34,9 +34,16 @@
 				<el-col  :span="24" class="right">				
 					<template v-for="(sample,index2) in informations">					
 						<el-col  :span="8" class="item">					
-							<el-col  :span="5" class="index">{{index2+1}}</el-col >
+							<el-col  :span="5" class="index">{{sample.id?index2+1:''}}</el-col >
 							<el-col  :span="19" class="content" v-if="inforSelect=='2'">{{sample.formName}}</el-col >
 							<el-col  :span="19" class="content" v-else>{{sample.libraryName}}</el-col >
+							<!--<el-col  :span="5" class="action"><span class="pointer" @click="del(index2,sample.id)">删除</span></el-col >-->
+						</el-col >
+					</template>
+					<template v-for="(item,index3) in informationsEnd">					
+						<el-col  :span="8" class="item">					
+							<el-col  :span="5" class="index">{{informations.length+index3+1}}</el-col >
+							<el-col  :span="19" class="content"></el-col >
 							<!--<el-col  :span="5" class="action"><span class="pointer" @click="del(index2,sample.id)">删除</span></el-col >-->
 						</el-col >
 					</template>
@@ -57,6 +64,18 @@ export default {
     props: ["formdatas","formtitle","addPath","informations","title","inforSelect"],
     mounted(){
 				console.log(this.informations)
+				console.log(this.informations.length%3)
+    },
+    computed:{
+    	informationsEnd(){
+    		var num=3-(this.informations.length%3)
+    		var item={};
+    		var arr=[];
+    		for(var i=0;i<=num-1;i++){
+    			arr.push(item)
+    		}
+    		return arr;
+    	}
     },
     methods: {
         del(index,id){

@@ -194,8 +194,8 @@ export default {
 			}
 //		   console.log("111111111111111111")
 //		   	console.log(response,this.isPrint)
-			console.log(response.data)
-//			this.printBarAll(response.data);
+//			console.log(response.data)
+			this.printBarAll(response.data);
 //	    	返回打印需要的条码格式待定
 //			假设是图片吧临时的
 //			this.imgsrc=response.data

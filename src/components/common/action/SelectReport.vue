@@ -77,7 +77,7 @@
 				
 			  <el-checkbox-group v-model="checkedList" @change="checkedListChange">
 
-			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">监{{item.sampleNum}}</el-checkbox>
+			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">{{item.sampleNo}}</el-checkbox>
 
 			  		
 			    
@@ -96,7 +96,7 @@
 <script>
 import "@/assets/style/common/SelectChecklist.css";
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 export default {
     props: ["checkedListAdd","checkList","taskList"],
 //  props: ["checkList"],
@@ -143,10 +143,9 @@ export default {
 //  		}
 //  	},
     	checkedListFilter(){
-
 			return this.checkList.filter((item,index)=>{
 //				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
-				return (item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
+				return (item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNo-0)&&((item.sampleNo-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 			})
     	},
 

@@ -135,7 +135,7 @@ export default {
   		page?page:1;
   		this.searchText=searching;
   		var params = {};
-		params.sampleNumOrSmallSampleNum = searching;
+		params.sampleNoOrSmallSampleNumLike = searching;
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
@@ -153,7 +153,7 @@ export default {
 			data: {
 				page:page,
 			    rows:this.page.size,
-			   params:JSON.stringify(params)
+			   	params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;

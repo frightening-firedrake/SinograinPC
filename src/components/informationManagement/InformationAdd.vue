@@ -27,7 +27,7 @@ import SinograinModal from '@/components/common/action/Modal.vue';
 import "@/assets/style/information/InformationSet.css"
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 //本地测试要用下面import代码
-import data from '@/util/mock';
+//import data from '@/util/mock';
 
 export default {
 	components: {
@@ -66,7 +66,9 @@ export default {
 					params: JSON.stringify(params)
 				}
 			}).then(function(response) {
-				this.informations = response.data.rows;
+				this.informations = response.data.filter((item)=>{
+					return item.pLibraryId==-1;
+				});
 				//		  	this.formdatas=response.data.formdatas;		  
 				//		  	this.tabledatas=response.data.rows;
 				//	  		this.page.total=response.data.total;
@@ -159,8 +161,9 @@ export default {
 					return ret
 				}],
 				data: {
-					id: this.informations.length,
-					libraryName: data.unit
+
+					libraryName: data.unit,
+					pLibraryId: -1,
 				}
 			}).then(function(response) {
 				//		  	this.tabledatas=response.data.rows;
@@ -182,7 +185,7 @@ export default {
 	data() {
 		return {
 			title: "直属库",
-			datalistURL: this.apiRoot + '/grain/library/data',
+			datalistURL: this.apiRoot + '/grain/library/getAll',
 			searchURL: this.apiRoot + '/liquid/role2/data/search',
 			deleteURL: this.apiRoot + '/liquid/role2/data/delete',
 			checkedId: [],

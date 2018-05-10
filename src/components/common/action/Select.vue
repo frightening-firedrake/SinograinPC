@@ -43,12 +43,12 @@ export default {
         // this.region = null
         this.$http({
             method: 'post',
-            url: this.apiRoot + "/grain/library/data",
+            url: this.apiRoot + "/grain/library/getAll",
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data: {
             }
         }).then(function(res) {
-            this.option = res.data.rows
+            this.option = res.data
             // console.log(this.regionList)
         }.bind(this)).catch(function(error) {
             console.log(error);

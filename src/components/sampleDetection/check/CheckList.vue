@@ -89,6 +89,9 @@ export default {
   	}.bind(this));
 //	监听列表点击编辑事件
   	this.$root.eventHub.$on("editlistitem",function(id,row){  
+  		if(!this.$_ault_alert('all:edit')){
+			return
+		}
 //		console.log(id)
 //		this.$router.push({path: '/index/sampleDetection/packingList/packingView',query:{libid:id}})
 //		this.$router.push({ path: '/index/sampleDetection/checkList/checkEdit', query: { id: id } })

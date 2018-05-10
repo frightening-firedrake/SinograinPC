@@ -57,14 +57,14 @@ export default {
         _select(){
             this.loading = true;
             var params = {};
-            params.libraryId = this.point
+            params.pLibraryId = this.point
 			// 获取列表数据（第？页）
 			this.$http({
 				method: 'post',
-				url: this.apiRoot + "/grain/register/data",
+				url: this.apiRoot + "/grain/library/getByParams",
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				data: {
-					params:JSON.stringify(params),
+					params:JSON.stringify(params)
 				},
                 transformRequest: [function(data) {
 					// Do whatever you want to transform the data
@@ -76,14 +76,14 @@ export default {
 				}],
 			}).then(function(response) {
 				this.isinformations = true
-				this.informations = response.data.rows;
+				this.informations = response.data;
 				//		  	this.formdatas=response.data.formdatas;		  
 				//		  	this.tabledatas=response.data.rows;
 				//	  		this.page.total=response.data.total;
 
-				setTimeout(() => {
+
 					this.loading = false;
-				}, 1000)
+
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));
@@ -91,7 +91,7 @@ export default {
 		//	获取列表数据方法
 		getlistdata(page) {
 			let params = {
-				pLibraryId: "-1"
+				pLibraryId: -1
 			}
 			this.loading = true;
 			// 获取列表数据（第？页）
@@ -108,17 +108,18 @@ export default {
 					return ret
 				}],
 				data: {
+					
 					params:JSON.stringify(params)
 				}
 			}).then(function(response) {
-				this.pointList = response.data.rows;
+				this.pointList = response.data
 				//		  	this.formdatas=response.data.formdatas;		  
 				//		  	this.tabledatas=response.data.rows;
 				//	  		this.page.total=response.data.total;
 
-				setTimeout(() => {
+
 					this.loading = false;
-				}, 1000)
+
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));
@@ -161,14 +162,14 @@ export default {
 		},
 		//	填入新建数据
 		createlibitem(data) {
-			var params = {
-				id: this.informations.length,
-				libraryName: data.unit
-			}
-			this.informations.push({ id: this.informations.length, formName: data.unit })
+//			var params = {
+//				id: this.informations.length,
+//				libraryName: data.unit
+//			}
+//			this.informations.push({ id: this.informations.length, formName: data.unit })
 			this.$http({
 				method: 'post',
-				url: this.apiRoot + "/grain/register/save",
+				url: this.apiRoot + "/grain/library/save",
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				transformRequest: [function(data) {
 					// Do whatever you want to transform the data
@@ -179,13 +180,15 @@ export default {
 					return ret
 				}],
 				data: {
-					id: this.informations.length,
-					formName:data.unit,
-                    libraryId:this.point
+//
+//					formName:data.unit,
+//                  libraryId:this.point
+                    libraryName: data.unit,
+					pLibraryId: this.point,
 				}
 			}).then(function(response) {
 				//		  	this.tabledatas=response.data.rows;
-				this.getlistdata(1);
+				this._select();
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));
@@ -202,12 +205,12 @@ export default {
 	},
 	data() {
 		return {
-            inforselect:"2",
+            inforselect:"1",
 			title: "库点",
 			isinformations:false,
-            pointList:"",
+            pointList:[],
             point:"",
-			datalistURL: this.apiRoot + '/grain/library/data',
+			datalistURL: this.apiRoot + '/grain/library/getByParams',
 			searchURL: this.apiRoot + '/liquid/role2/data/search',
 			deleteURL: this.apiRoot + '/liquid/role2/data/delete',
 			checkedId: [],
@@ -233,7 +236,7 @@ export default {
 			}],
 			informationType: '',
 			informations: [
-			
+
 			],
 		}
 	}
