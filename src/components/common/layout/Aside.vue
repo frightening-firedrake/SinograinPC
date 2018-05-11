@@ -25,6 +25,18 @@
 		<!--导航-->
 		<!--  <div style="min-height:4.5rem;">-->
 		<!--<template v-for="item in navlist" v-if="checkAuth(userAuth,item.needAuth)&&item.pid==0">-->
+			
+		<!--首页的不循环-->
+			<el-submenu index="/index/home">
+				<!--<el-submenu :index="item.lid.toString()" key="item.lid">-->
+					<template slot="title">
+						<div class="rightborder"></div>
+						<!--<div class="rightarrow"></div>-->
+						<i class="iconfont icon-shouye firstlevel"></i>
+						<span slot="title">首页</span>
+					</template>
+			</el-submenu>
+			
 		<template v-for="item in navlist" v-if="item.pid==0">
 			<el-submenu :index="item.lid.toString()">
 			<!--<el-submenu :index="item.lid.toString()" key="item.lid">-->

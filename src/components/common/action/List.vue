@@ -1,5 +1,5 @@
 <template>
-	<el-table ref="multipleTable" tooltip-effect="dark" style="width: 100%" :data="tabledata" @selection-change="handleSelectionChange" :default-sort="{prop: actions.sort, order: 'ascending'}" v-loading="loading" :row-class-name="row_class_name" element-loading-customClass="table_loading" element-loading-text="loading..." element-loading-spinner="el-icon-loading" element-loading-background="rgba(255,255,255, 0.8)" @row-click="rowClick">
+	<el-table ref="multipleTable" tooltip-effect="light" style="width: 100%" :data="tabledata" @selection-change="handleSelectionChange" :default-sort="{prop: actions.sort, order: 'ascending'}" v-loading="loading" :row-class-name="row_class_name" element-loading-customClass="table_loading" element-loading-text="loading..." element-loading-spinner="el-icon-loading" element-loading-background="rgba(255,255,255, 0.8)" @row-click="rowClick">
 		<!--是否包含多选框-->
 		<template v-if="actions.selection">
 			<el-table-column :resizable="resizable" align="center" type="selection" class-name="tableAction">
@@ -64,6 +64,20 @@
 						</template>
 						<template v-if="scope.row[item.prop]==1">
 							<span style="color:#999999;">已解决</span>
+						</template>
+					</template>
+					<template v-if="item.prop=='reason'">
+						<template v-if="scope.row.regState==-1">
+							<span style="color:#fc6500;">等待审核中</span>
+						</template>
+						<template v-if="scope.row.regState==1">
+							<span style="color:#f56c6c;">{{scope.row[item.prop]}}我真的好想你在每一个雨季你选择遗忘的是我最不舍得纸短情长啊道不尽太多涟漪我的故事都是关于你呀五十</span>
+						</template>
+						<template v-if="scope.row.regState==2">
+							<span style="color:#58b481;">已通过审核</span>
+						</template>
+						<template v-if="scope.row.regState==3">
+							<span style="color:blue;">未提交审核</span>
 						</template>
 					</template>
 					<template v-if="item.prop=='pLibraryId'">

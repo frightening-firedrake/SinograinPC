@@ -307,6 +307,13 @@ export default {
       },
       {
         id: 3,
+        prop:'reason',
+        label: "审批结果备注",
+        status:true,
+//      sort:true,
+      },
+      {
+        id: 4,
         prop:'createTime',
         label:"申请日期",
         sort:true,

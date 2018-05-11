@@ -87,7 +87,6 @@ const routes= [
             path:"home",
             name: '首页',
             component:Home,
-            redirect: 'grainDepot/createSampleReglc',
           },
           {
             path:"error403",
@@ -495,18 +494,19 @@ router.beforeEach((to, from, next) => {
    	if (!userAuth&&to.path!=='/login') {
 		console.log('没登陆')
 	    next({
-	      path: '/login',
+//	      path: '/login',
 	      //query: { redirect: to.fullPath }// 考虑登录成功之后可以根据query中的内容跳转回原来的路由(页面)
 	    })
 	}else if (userAuth&&to.path=='/index') {
 //		验证用户权限制定不同首页地址重定向
-		userAuth=userAuth.split(',');
-	  	if (userAuth.includes('新建扦样登记表')) {
-
-	    	next({path: '/index/grainDepot'})	  	
-	  	}else{	  		
-	  		next({path: '/index/sampling'})	  	
-	  	}
+//		userAuth=userAuth.split(',');
+//	  	if (userAuth.includes('新建扦样登记表')) {
+//
+//	    	next({path: '/index/grainDepot'})	  	
+//	  	}else{	  		
+//	  		next({path: '/index/sampling'})	  	
+//	  	}
+	    next()
 	}else if (to.matched.some(record => record.meta.needAuth)) {
 //		验证用户权限
 //		console.log('needAuth')
