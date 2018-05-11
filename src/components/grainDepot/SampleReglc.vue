@@ -189,7 +189,7 @@ export default {
   	getlistdata(page){
   		this.loading=true;
   		var params={};
-  		params.pId=this.$route.query.registerId
+  		params.pId=this.$route.query.pId
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',

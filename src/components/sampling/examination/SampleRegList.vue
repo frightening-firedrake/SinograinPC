@@ -71,7 +71,7 @@ export default {
   	this.$root.eventHub.$on("viewlistitem",function(id,state){  
 //		console.log(id)
 
-			this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList/sampleReg',query:{registerId:id,state:state}})			
+			this.$router.push({path: '/index/sampling/examinationLibraryList/sampleRegList/sampleReg',query:{pId:id,state:state}})			
 
   	}.bind(this));
   },
