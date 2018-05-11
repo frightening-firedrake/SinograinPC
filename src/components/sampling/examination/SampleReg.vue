@@ -196,7 +196,7 @@ export default {
   		this.loading=true;
   		// 获取列表数据（第？页）
   		var params={};
-  		params.pId=this.$route.query.registerId;
+  		params.pId=this.$route.query.pId;
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
@@ -257,8 +257,8 @@ export default {
 		if(!this.$_ault_alert('register:edit')){
 			return
 		}
-//		this.modalVisible=true;
-		this.disagreeSubmit('没通过的原因我不说！！！')
+		this.modalVisible=true;
+		// this.disagreeSubmit('没通过的原因我不说！！！')
 	},
 	disagreeSubmit(reason) {
 		this.$http({
@@ -276,7 +276,7 @@ export default {
 			data: {
 				id: JSON.stringify(this.$route.query.pId),
 				regState:1,
-				reason:reason,
+				// reason:reason,
 			}
 		}).then(function (response) {
 			this.$router.push({name:'扦样流程/审批扦样库点列表'})
