@@ -2,7 +2,7 @@
 	<el-dialog :title="modal.title" :visible.sync="modalVisible" custom-class="createlib" :width="dialogWidth" @close="dialogClose">
 	  	<el-form :model="form" ref="modalform">
 	  		<template v-for="(item, index) in modal.formdatas">
-	  			<el-form-item v-if="!item.position" :label="item.label" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '内容不能为空'}]">
+	  			<el-form-item v-if="!item.position&&item.type!=='textarea'" :label="item.label" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '内容不能为空'}]">
 			        <el-input v-model="form[item.model]" auto-complete="off" :disabled="item.disabled"></el-input>
 			    </el-form-item>
 			    <el-form-item class="position" v-if="item.position" :label="item.label"  :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}">
@@ -15,6 +15,15 @@
 				    <div class="el-form-item__error" v-if="position_error">
 			        	{{position_error_message}}
 			        </div>
+			    </el-form-item>
+			    <el-form-item v-if="!item.position&&item.type=='textarea'" class="textareaall" label="none" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '内容不能为空'}]">
+			        <el-input
+					  	type="textarea"
+					  	:autosize="{ minRows: item.rows}"
+					  	:placeholder="item.label"
+					  	:disabled="item.disabled"
+					  	v-model="form[item.model]">
+					</el-input>
 			    </el-form-item>
 	  		</template>
 	  		
@@ -171,6 +180,28 @@ export default {
 .createlib .el-dialog__body .el-form-item:first-of-type{
 	border-top:solid 1px #dfdfdf;
 }
+.createlib .el-dialog__body .el-form-item.textareaall{
+	border:none;
+}
+.createlib .el-dialog__body .textareaall .el-form-item__label{
+	display: none;
+}
+.createlib .el-dialog__body .textareaall .el-form-item__content{
+	margin:0!important;
+}
+.createlib .el-dialog__body .textareaall .el-form-item__content .el-textarea__inner{
+	border-color:#dfdfdf!important;
+}
+.createlib .textareaall .el-form-item__error{
+	top:17.5px;
+}
+.createlib .el-dialog__body .el-textarea textarea{
+	/*line-height:0.5rem;*/
+	font-size:0.18rem;
+	color:#333333;
+	/*height:auto;*/
+}
+
 .createlib .el-dialog__body .el-form-item__label{
 	line-height: 0.5rem;
 	background-color: #fbfbfb;

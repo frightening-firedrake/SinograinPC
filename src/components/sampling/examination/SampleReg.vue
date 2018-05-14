@@ -242,10 +242,10 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				id: JSON.stringify(this.$route.query.pId),
+				id: this.$route.query.pId,
 				regState: 2,
 				libraryName: this.tabledatas[0].libraryName,
-
+				reason:'已通过审核',
 			}
 		}).then(function (response) {
 			this.$router.go(-1)
@@ -274,9 +274,9 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				id: JSON.stringify(this.$route.query.pId),
+				id: this.$route.query.pId,
 				regState:1,
-				// reason:reason,
+				reason:reason,
 			}
 		}).then(function (response) {
 			this.$router.push({name:'扦样流程/审批扦样库点列表'})
@@ -379,12 +379,49 @@ export default {
       list:"samplinglist",
 	  modalVisible:false,
 	  modal:{
-	  	title:'未能通过审批',
+	  	title:'填写原因',
 		formdatas:[
 	  		{
-	  			label:"具体原因",
+	  			label:"请您填写不同意的原因",
+	  			type:'textarea',
+	  			rows:3,
 	  			model:"reason",
 	  		},
+//	  		{
+//	  			label:"扦样编号:",
+//	  			model:"sampleNo",
+//	  			disabled:true,
+//	  			value:'',
+//	  			type:'password'
+//	  		},
+			// {
+	  		// 	label:"检验编号",
+	  		// 	model:"sampleNum",
+	  		// 	disabled:true,
+	  		// 	value:'',
+	  		// },
+//	  		{
+//	  			label:"样品入库时间:",
+//	  			model:"storageTime",
+//	  			disabled:true,
+//	  			value:this.getDateNow(),
+//	  		},
+//	  		{
+//	  			label:"存放位置:",
+//	  			position:true,
+//				model: "positions",
+//				value:'',
+////	  			model:"position",
+//	  			modelselect:"depot",
+//	  			modelinput:"counter",
+////	  			value:'朔水-9号仓-1号柜',
+//	  		},
+//	  		{
+//	  			label:"入库签名:",
+//	  			model:"autograph",
+//				value: "",
+//	  			disabled:true,
+//	  		},
 	  	],
 	  	submitText:'确定',
 	  },

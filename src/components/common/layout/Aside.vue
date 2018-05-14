@@ -27,15 +27,22 @@
 		<!--<template v-for="item in navlist" v-if="checkAuth(userAuth,item.needAuth)&&item.pid==0">-->
 			
 		<!--首页的不循环-->
-			<el-submenu index="/index/home">
-				<!--<el-submenu :index="item.lid.toString()" key="item.lid">-->
+			<!--<el-submenu index="/index/home">
+
 					<template slot="title">
 						<div class="rightborder"></div>
-						<!--<div class="rightarrow"></div>-->
+						<div class="rightarrow"></div>
 						<i class="iconfont icon-shouye firstlevel"></i>
 						<span slot="title">首页</span>
 					</template>
-			</el-submenu>
+			</el-submenu>-->
+			<el-menu-item index="/index/home">
+				<!--<div class="rightborder"></div>
+				<div class="rightarrow"></div>-->
+				<i class="iconfont icon-shouye firstlevel"></i>
+				<span slot="title">首页</span>
+	      	</el-menu-item>
+			
 			
 		<template v-for="item in navlist" v-if="item.pid==0">
 			<el-submenu :index="item.lid.toString()">
@@ -116,9 +123,13 @@ export default {
 		...mapState(["isCollapse"]),
 		...mapGetters(["modal_id","libraryId","libraryName","userName","userAuth"]),
 		activePath(){
-
-			var path=this.$route.path.split('/')
-			var zpath=path[0]+'/'+path[1]+'/'+path[2]+'/'+path[3]
+			var path=this.$route.path.split('/');
+			var zpath=path[0]
+			for(var i=1;i<=3;i++){
+				if(path[i]){
+					zpath+='/'+path[i]
+				}
+			}
 			return zpath;
 		}
   	},
