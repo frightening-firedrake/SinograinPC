@@ -71,7 +71,7 @@
 							<span style="color:#fc6500;">等待审核中</span>
 						</template>
 						<template v-if="scope.row.regState==1">
-							<span style="color:#f56c6c;">{{scope.row[item.prop]}}我真的好想你在每一个雨季你选择遗忘的是我最不舍得纸短情长啊道不尽太多涟漪我的故事都是关于你呀五十</span>
+							<span style="color:#f56c6c;">{{scope.row[item.prop]}}</span>
 						</template>
 						<template v-if="scope.row.regState==2">
 							<span style="color:#58b481;">已通过审核</span>

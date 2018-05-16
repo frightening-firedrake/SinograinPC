@@ -10,15 +10,17 @@
     		<div class="left">
     			<ul>
     				<li v-for="(item,index) in information">
-    					<span class="icon" :style="styleLeft[index]"></span>
-    					<p class="totalQuantity" :style="{color:styleLeft[index].backgroundColor}">
-    						{{item.totalQuantity}}
-    						<span>/万吨</span>
-    					</p>
-    					<p class="sort">
-    						<b>{{item.sort}}</b>
-    						—库存总量
-    					</p>
+    					<div class="liwrap">    						
+    						<span class="icon" :style="styleLeft[index]"></span>
+    						<p class="totalQuantity" :style="{color:styleLeft[index].backgroundColor}">
+    							{{item.totalQuantity}}
+    							<span>/万吨</span>
+    						</p>
+    						<p class="sort">
+    							<b>{{item.sort}}</b>
+    							—库存总量
+    						</p>
+    					</div>
     				</li>
     			</ul>
     		</div>
@@ -44,13 +46,15 @@
 .home{
 	padding-left:0;
 	padding-right:0;
-	border-top:1px solid rgba(0,0,0,0);
+	/*border-top:1px solid rgba(0,0,0,0);*/
 	background-color:rgba(241, 241, 241, 1);
 }
 .home .banner{
-	margin-top:0.3rem;
+	border-top:0.3rem solid rgba(0,0,0,0);
 	width:auto;
-	height:4.5rem;
+	/*height:4.2rem;*/
+	height:50%;
+	box-sizing: border-box;
 }
 .home .banner ul{
 	width:100%;
@@ -59,34 +63,53 @@
 .home .banner ul li{
 	width:100%;
 	height:100%;
-	background-size:100% 100%;
+	background-size: cover;
 	background-position:center;
 	background-repeat: no-repeat;
 }
 .home .mainwrap{
 	width:auto;
-	height:auto;
+	/*height:auto;*/
+	height:50%;
 }
 .home .mainwrap .left{
-	margin-top:0.2rem;
+	/*margin-top:0.2rem;*/
+	border-top:0.2rem solid rgba(0,0,0,0);
+	height:100%;
+	box-sizing:border-box;
 	float:left;
 	width:40%;
 	background-color:white;
+	
 }
 .home .mainwrap .left ul{
-	height:auto;
+	/*height:auto;*/
+	height:100%;
 	width:100%;
 	padding:0 0.5rem;
 }
 .home .mainwrap .left ul li{
-	height:1.53rem;
+	/*height:1.53rem;*/
+	/*height:1.4rem;*/
+	height:33.3%;
+	box-sizing:border-box;
 	width:100%;
 	border-top:1px dotted #878787;
 	box-sizing: border-box;
-	padding-top:0.315rem;
+	/*padding-top:0.315rem;*/
+	/*padding-top:0.25rem;*/
+	position:relative;
 }
 .home .mainwrap .left ul li:first-of-type{
 	border-top:none;
+}
+.home .mainwrap .left ul li .liwrap{
+	position:absolute;
+	top:50%;
+	left:0;
+	right:0;
+	height:0.9rem;
+	margin-top:-0.45rem;
 }
 .home .mainwrap .left ul li span.icon{
 	float:left;
@@ -120,23 +143,30 @@
 .home .mainwrap .right{
 	float:left;
 	width:60%;
+	height:100%;
 }
 .home .mainwrap .right ul{
-	height:auto;
+	/*height:auto;*/
+	height:100%;
 	width:100%;
 }
 .home .mainwrap .right ul li{ 
-	height:2.4rem;
+	/*height:2.4rem;*/
+	/*height:2.1rem;*/
+	height:50%;
 	width:50%;
-	padding-top:0.2rem;
-	padding-left:0.2rem;
+	/*padding-top:0.2rem;*/
+	/*padding-left:0.2rem;*/
+	border-top:0.2rem solid rgba(0,0,0,0);
+	border-left:0.2rem solid rgba(0,0,0,0);
+	box-sizing: border-box;
 	float:left;
 }
 .home .mainwrap .right ul li .box{ 
 	height:100%;
 	width:100%;
 	background-repeat: no-repeat;
-	background-position: right top;
+	background-position: right bottom;
 	background-size:auto 100%;
 	padding-left:0.45rem;
 }
