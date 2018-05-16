@@ -74,7 +74,7 @@
 }
 .home .mainwrap .left{
 	/*margin-top:0.2rem;*/
-	border-top:0.2rem solid rgba(0,0,0,0);
+	border-top:0.2rem solid rgba(241,241,241,1);
 	height:100%;
 	box-sizing:border-box;
 	float:left;
