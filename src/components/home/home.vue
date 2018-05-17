@@ -71,6 +71,7 @@
 	width:auto;
 	/*height:auto;*/
 	height:50%;
+	border-bottom:0.1rem solid rgba(0,0,0,0);
 }
 .home .mainwrap .left{
 	/*margin-top:0.2rem;*/
