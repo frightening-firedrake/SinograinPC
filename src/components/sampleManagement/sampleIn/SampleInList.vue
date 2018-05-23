@@ -238,7 +238,7 @@ export default {
 			}
 	    }).then(function (response) {
 			this.dataBySampleNo = response.data;
-			if(this.dataBySampleNo.sampleState == 2) {
+			if(this.dataBySampleNo.sampleState == 2||this.dataBySampleNo.sampleState == 3) {
 
 				this.messages.type='success';
 				
@@ -328,7 +328,7 @@ export default {
   		if(type=="success"){
 //			console.log("去编辑页面！！！")
   			var editPath=this.$route.path+'/sampleInEdit'
-  			this.$router.push({path:editPath})
+  			this.$router.push({path:editPath,query:{libid:this.dataBySampleNo.id}})
 //			console.log(type)
   		}else if(type=="error"){
   			console.log(type)  			
@@ -529,7 +529,7 @@ export default {
 	  		icon:'el-icon-success',
 	  		messageTittle:'该样品已入库',
 	  		messageText:'可点击编辑按钮修改入库信息！',
-	  		buttonText:'编辑',
+	  		buttonText:'查看',
 	  	},
 	  	loading:{
 	  		icon:'el-icon-printer',
