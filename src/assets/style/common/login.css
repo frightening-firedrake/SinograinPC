@@ -62,6 +62,7 @@
  .login .login_box .login_form .el-form-item.code {
  	width: 2.1rem;
  	display: inline-block;
+ 	position:static;
  }
  
  .login .login_box .login_form .code_img {
