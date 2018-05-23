@@ -43,7 +43,7 @@
 </template>
 
 <style>
-.home{
+.listpagewrap.home{
 	padding-left:0;
 	padding-right:0;
 	/*border-top:1px solid rgba(0,0,0,0);*/
@@ -71,7 +71,7 @@
 	width:auto;
 	/*height:auto;*/
 	height:50%;
-	border-bottom:0.2rem solid rgba(0,0,0,0);
+	border-bottom:0.3rem solid rgba(0,0,0,0);
 }
 .home .mainwrap .left{
 	/*margin-top:0.2rem;*/
