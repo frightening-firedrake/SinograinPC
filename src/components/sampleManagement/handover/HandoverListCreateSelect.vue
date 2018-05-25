@@ -8,7 +8,7 @@
 
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
-      <select-checklist :checkList="checkList" :checkedListAdd="checkedList" @getCheckedList="getCheckedList" ></select-checklist> 
+      <select-checklist :checkList="checkList" :checkedListAdd="checkedList" @getCheckedList="getCheckedList" @changeIsChecked="changeIsChecked"></select-checklist> 
 
     </div>
 </template>
@@ -61,8 +61,14 @@ export default {
   	getsampledata(){
   		var params={};
   		params.sampleWordOrsampleNumLike='';
-  		params.ruKuSampleState=2;
-  		params.fenxiaoyangSampleState=3;
+//		if(!this.IsChecked){  			
+  			params.ruKuSampleState=2;
+  			params.fenxiaoyangSampleState=3;
+//		}else if(this.IsChecked==2){
+//			params.ruKuSampleState=2;
+//		}else if(this.IsChecked==3){
+//			params.fenxiaoyangSampleState=3;			
+//		}
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -145,6 +151,9 @@ export default {
   		this.$route.params.formdatas.items=checkedList
 		this.$router.push({name: path,params: {formdatas:this.$route.params.formdatas}})
   	},
+  	changeIsChecked(val){
+  		this.IsChecked=val
+  	},
   },
   data() {
     return {
@@ -152,6 +161,7 @@ export default {
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
+      IsChecked:2,
 	  createlibVisible:false,
       breadcrumb:{
       	search:false,   

@@ -169,9 +169,10 @@ export default {
 	      },
 	      {
 	        id: 3,
-	        prop:'sampleNo',
+//	        prop:'sampleNo',
+	        prop:'sampleNum',
 	        label: "检验编号",
-//	        status:true,
+	        status:true,
 	//      sort:true,
 	      },
       ],

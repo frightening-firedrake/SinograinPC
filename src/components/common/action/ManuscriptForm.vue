@@ -333,13 +333,13 @@ export default {
 			var length = this.formdatas.form.length;
 			var high = this.formdatas.form.high;
 			var wide = this.formdatas.form.wide;
-			return this.jsdjg.measuredVolume = (length*high*wide).toFixed(1)
+			return this.jsdjg.measuredVolume = (length*high*wide).toFixed(2)
 		},
 		ldsjtj() { //粮堆实际体积
 			var length = this.formdatas.form.length;
 			var high = this.formdatas.form.high;
 			var wide = this.formdatas.form.wide;
-			return this.jsdjg.realVolume = (length*high*wide - this.formdatas.form.deductVolume).toFixed(1)
+			return this.jsdjg.realVolume = (length*high*wide - this.formdatas.form.deductVolume).toFixed(2)
 		},
 		bzldpjmd() { // 标准粮堆平均密度
 			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor).toFixed(1)
@@ -416,7 +416,7 @@ export default {
 			var bgzrsh = this.formdatas.form.lossNature - 0;
 			var sum = sfjl + bgzrsh;
 			var jcjss = cljss +sum;
-//			console.log(jcjss)
+//			console.log(111111,this.formdatas.form.amount,jcjss)
 			return this.jsdjg.difference = (this.formdatas.form.amount*1000 - jcjss).toFixed(0);
 		},
 		slip() { //差率
@@ -533,28 +533,28 @@ export default {
 		        ],
 		        storageCapacity: [
 		            { required: true, message: '请输入', trigger: 'blur' },
-		            { type: 'number', message: '请输数字', trigger: 'blur' },
+//		            { type: 'number', message: '请输数字', trigger: 'blur' },
 		        ],
 		        storageWater: [
 		            { required: true, message: '请输入', trigger: 'blur' },
-		            { type: 'number', message: '请输数字', trigger: 'blur' },
+//		            { type: 'number', message: '请输数字', trigger: 'blur' },
 		        ],
-		        storageImpurity: [
-		            { required: true, message: '请输入', trigger: 'blur' },
-		            { type: 'number', message: '请输数字', trigger: 'blur' },
-		        ],
+//		        storageImpurity: [
+//		            { required: true, message: '请输入', trigger: 'blur' },
+//		            { type: 'number', message: '请输数字', trigger: 'blur' },
+//		        ],
 		        realCapacity: [
 		            { required: true, message: '请输入', trigger: 'blur' },
-		            { type: 'number', message: '请输数字', trigger: 'blur' },
+//		            { type: 'number', message: '请输数字', trigger: 'blur' },
 		        ],
 		        realWater: [
 		            { required: true, message: '请输入', trigger: 'blur' },
-		            { type: 'number', message: '请输数字', trigger: 'blur' },
+//		            { type: 'number', message: '请输数字', trigger: 'blur' },
 		        ],
-		        realImpurity: [
-		            { required: true, message: '请输入', trigger: 'blur' },
-		            { type: 'number', message: '请输数字', trigger: 'blur' },
-		        ],
+//		        realImpurity: [
+//		            { required: true, message: '请输入', trigger: 'blur' },
+//		            { type: 'number', message: '请输数字', trigger: 'blur' },
+//		        ],
 		        
 		        deductVolume: [
 		            { required: true, message: '请输入', trigger: 'blur' },
@@ -562,15 +562,15 @@ export default {
 		        ],
 		        length: [
 		            { required: true, message: '请输入', trigger: 'blur' },
-		            { type: 'number', message: '请输数字', trigger: 'blur' },
+//		            { type: 'number', message: '请输数字', trigger: 'blur' },
 		        ],
 		        wide: [
 		            { required: true, message: '请输入', trigger: 'blur' },
-		            { type: 'number', message: '请输数字', trigger: 'blur' },
+//		            { type: 'number', message: '请输数字', trigger: 'blur' },
 		        ],
 		        high: [
 		            { required: true, message: '请输入', trigger: 'blur' },
-		            { type: 'number', message: '请输数字', trigger: 'blur' },
+//		            { type: 'number', message: '请输数字', trigger: 'blur' },
 		        ],
 		        correctioFactor: [
 		            { required: true, message: '请输入', trigger: 'blur' },

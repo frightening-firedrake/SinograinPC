@@ -60,7 +60,7 @@
 					</template>
 					<template v-if="item.prop=='isDeal'">
 						<template v-if="scope.row[item.prop]==-1">
-							<span style="color:#fc6500;">待解决</span>
+							<span style="color:#fc6500;">待整改</span>
 						</template>
 						<template v-if="scope.row[item.prop]==1">
 							<span style="color:#999999;">已解决</span>
@@ -337,7 +337,7 @@ export default {
 		findCheckeds(str) {
 			var indexs = str.split(',');
 			indexs.sort((a, b) => { return a - b; });
-			var checkList = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度（测定记录）", "脂肪酸值（面筋吸水）", "品尝评分", "卫生", "加工品质"]
+			var checkList = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度（测定记录）", "脂肪酸值（面筋吸水）", "品尝评分", "卫生指标", "加工品质"]
 			var res = [];
 			indexs.forEach((item) => {
 				res.push(checkList[item - 1])
@@ -345,8 +345,8 @@ export default {
 			return res.join('，')
 		},
 		findCheckPoint(obj) {
-			var checkList1 = ["不完善颗粒", "杂质", "生霉粒", "水分", "测定记录", "脂肪酸值", "品尝评分", "卫生", "加工品质"]
-			var checkList2 = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "面筋吸水", "品尝评分", "卫生", "加工品质"]
+			var checkList1 = ["不完善颗粒", "杂质", "生霉粒", "水分", "测定记录", "脂肪酸值", "品尝评分", "卫生指标", "加工品质"]
+			var checkList2 = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "面筋吸水", "品尝评分", "卫生指标", "加工品质"]
 			var index = obj.checkPoint
 			var res;
 			if (obj.sort == '玉米') {
