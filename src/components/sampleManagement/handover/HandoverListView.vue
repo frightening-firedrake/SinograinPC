@@ -67,7 +67,7 @@
                 <span>{{index+1}}</span>
               </el-col>
               <el-col style="" :span="16">
-                <span>{{item}}</span>
+                <span>监{{item}}</span>
               </el-col>
             </el-col>
             <el-col style="" :span="6" v-for="(item,index) in testItemListadd" class='loopBorder' :key="index+99" style="border-top:1px solid #dfdfdf;">

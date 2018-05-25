@@ -147,7 +147,17 @@ export default {
 			}
 	    }).then(function (response) {
         for (var key in response.data.rows[0]){
-	    		this.formdatas.form[key]=response.data.rows[0][key];
+        		if(key=='storageCapacity'||key=='storageWater'||key=='storageImpurity'||key=='realCapacity'||key=='realWater'||key=='realImpurity'){
+        			if(response.data.rows[0][key]){
+        				this.formdatas.form[key]=(response.data.rows[0][key]).toFixed(1);				
+        			}else{        				
+        				this.formdatas.form[key]=response.data.rows[0][key];
+        			}
+        		}else if(key=='length'||key=='wide'||key=='high'){
+        			this.formdatas.form[key]=(response.data.rows[0][key]).toFixed(2);
+        		}else{        			
+        			this.formdatas.form[key]=response.data.rows[0][key];
+        		}
 	    	}
         this.formdatas.form.realCheckedTime= new Date(this.formdatas.form.realCheckedTime);//实际查库日处理
         if(!response.data.rows[0].storge){
@@ -178,7 +188,11 @@ export default {
 			}
 	    }).then(function (response) {
        for (var key in response.data){
-	    		this.formdatas.form[key]=response.data[key];
+       			if(key=='id'){
+       				console.log('id')
+       			}else{       				
+       				this.formdatas.form[key]=response.data[key];
+       			}
 	    	}
         this.formdatas.form.libraryName = this.$route.query.libraryName
 		}.bind(this)).catch(function (error) {
@@ -285,6 +299,7 @@ export default {
       formdatas: {
       	title:'中央储备粮实物检查工作底稿',
       	form:{
+      	  amount:'',
           enterprise: '',//被检查企业
           checkedTime: '',//被查时点
           realCheckedTime: '',//实际查库日
@@ -308,9 +323,9 @@ export default {
           realWater:'',//水分（%）
           realImpurity:'',//杂质（%） 
           //粮堆形状及基本尺寸
-          length:0,//长（m）：
-          wide:0,//宽（m）：
-          high:0,//高（m）：
+          length:'0.00',//长（m）：
+          wide:'0.00',//宽（m）：
+          high:'0.00',//高（m）：
           //1.计算粮堆体积
           measuredVolume:'',//粮堆测量体积(m3)	
           deductVolume:'',//需要扣除体积(m3)	
@@ -318,11 +333,11 @@ export default {
           //2.计算粮堆平均密度	
 //          标准容重器法
           // volume_weigh_bz:'',//粮食容重（g/l）
-          correctioFactor:1.01,//校正后修正系数
+          correctioFactor:'0.00',//校正后修正系数
           aveDensity:'',//粮堆平均密度（kg/m³）
 //          特制大容器法
           // unit_volume_weight_tz:'',//单位体积粮食重量（kg/m³）
-          correction_factor_tz:1.01,//校正后修正系数
+          correction_factor_tz:'0.00',//校正后修正系数
           // average_density_tz:'',//粮堆平均密度（kg/m³）
           //3.计算粮食数量
             unQuality:'',//测量计算数（kg）	

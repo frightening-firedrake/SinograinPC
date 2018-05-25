@@ -24,12 +24,12 @@
 
 			</el-form-item>
 			
-			<el-form-item label="选择备注" style="border-left:none;">
+			<el-form-item label="选择类型" style="border-left:none;">
 			    <el-autocomplete
 			      	class="remark-input"
 			      	v-model="remSelect"
 			     	:fetch-suggestions="querySearch"
-			      	placeholder="请填写备注"
+			      	placeholder="请填写类型"
 			    >
 			    </el-autocomplete>
 			</el-form-item>

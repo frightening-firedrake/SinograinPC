@@ -188,9 +188,10 @@ export default {
 //	获取搜索数据
   	searchingfor(searching,page){
   		page?page:1;
-  		this.searchText=searching;
+  		this.searchText=searching.indexOf('监')==0?searching.slice(1):searching;
+  		console.log(this.searchText);
   		var params = {};
-		params.sampleWordOrsampleNumLike = searching;
+		params.sampleWordOrsampleNumLike = this.searchText;
 		params.ruKuSampleState = 2
 		params.fenxiaoyangSampleState = 3
 //		console.log(this.breadcrumb.searching);
@@ -460,11 +461,18 @@ export default {
       },
       tabledatas:[],
       items: [
+//    {
+//      id: 1,
+//      prop:'sampleNo',
+//      label: "检验编号",
+////      status:true,
+////      sort:true
+//    },
       {
         id: 1,
-        prop:'sampleNo',
+        prop:'sampleNum',
         label: "检验编号",
-//      status:true,
+        status:true,
 //      sort:true
       },
       {

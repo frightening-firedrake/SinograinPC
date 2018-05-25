@@ -63,9 +63,9 @@ export default {
 		this.$router.push({name:"样品检测/分装任务列表/分装小样管理"})		
 	}else{
 		if(this.$route.params.sort=='玉米'){
-			this.checkAllList=["不完善颗粒","杂质","生霉粒","水分","测定记录","脂肪酸值","品尝评分","卫生","加工品质"];
+			this.checkAllList=["不完善颗粒","杂质","生霉粒","水分","测定记录","脂肪酸值","品尝评分","卫生指标","加工品质"];
 		}else if(this.$route.params.sort=='小麦'){
-			this.checkAllList=["不完善颗粒","杂质","生霉粒","水分","硬度","面筋吸水","品尝评分","卫生","加工品质"];
+			this.checkAllList=["不完善颗粒","杂质","生霉粒","水分","硬度","面筋吸水","品尝评分","卫生指标","加工品质"];
 		}
 	}
 

@@ -93,7 +93,8 @@ export default {
 		params.sampleNums = []
 		params.sampleIds = [];
 		this.formdatas.items.forEach((val)=>{
-			params.sampleNums.push(val.sampleNo)
+//			params.sampleNums.push(val.sampleNo)
+			params.sampleNums.push(val.sampleNum)
 			params.sampleIds.push(val.id)
 		})
 		

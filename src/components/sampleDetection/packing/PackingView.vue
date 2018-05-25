@@ -153,7 +153,7 @@ listdatas:{
 		label:'检验项目',
 	},
 	checkeds:'1,3,5',
-	checkAllList:["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生","加工品质"],
+	checkAllList:["不完善颗粒、杂质、生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生指标","加工品质"],
 	  messageShow:false,
 	  messages:{
 	  	type:'error',

@@ -13,6 +13,9 @@
 	float:left;
 	overflow: hidden;
 }
+.SelectChecklist .el-form>.el-form-item.full{
+	width:100%;
+}
 .SelectChecklist .el-form>.el-form-item .el-form-item__label {
     line-height: inherit;
     background-color: #fbfbfb;

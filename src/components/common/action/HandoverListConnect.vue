@@ -96,7 +96,8 @@
 		                        </el-col>
 		                        <el-col :span="20">
 		                            <el-col :span="18" class="classify_font">
-		                                <span>{{item.sampleNo?item.sampleNo:item}}</span>
+		                                <!--<span>{{item.sampleNo?item.sampleNo:item}}</span>-->
+		                                <span>监{{item.sampleNum?item.sampleNum:item}}</span>
 		                            </el-col>
 		                            <!--<el-col :span="8" class="">
 		                                <span>{{item.sampleWord}}</span>
@@ -135,7 +136,7 @@
 					    <el-checkbox label="6" class="classify_col">脂肪酸值（面筋吸水）</el-checkbox>
 					    <!--<el-checkbox label="4" class="classify_col">面筋吸水</el-checkbox>-->
 					    <el-checkbox label="7" class="classify_col">品尝评分</el-checkbox>
-					    <el-checkbox label="8" class="classify_col">卫生</el-checkbox>
+					    <el-checkbox label="8" class="classify_col">卫生指标</el-checkbox>
 					    <el-checkbox label="9" style="width:100%;" class="classify_col">加工品质</el-checkbox>
 					</el-checkbox-group>
                 </el-col>

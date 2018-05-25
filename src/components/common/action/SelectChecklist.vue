@@ -11,16 +11,22 @@
 
 			</el-form-item>
 			
-			<el-form-item label="选择备注" style="border-left:none;">
+			<el-form-item label="选择类型" style="border-left:none;">
 			    <el-autocomplete
 			      	class="remark-input"
 			      	v-model="remSelect"
 			     	:fetch-suggestions="querySearch"
-			      	placeholder="请填写备注"
+			      	placeholder="请填写类型·"
 			    >
 			    </el-autocomplete>
 			</el-form-item>
-			
+			<el-form-item label="检测状态" class="full" style="border-top:none;">
+			    <el-select v-model="isChecked" placeholder="请选择检测状态" @change="changeIsChecked">
+			        <el-option label="未检测" :value="2"></el-option>
+			        <el-option label="已检测" :value="3"></el-option>
+			        <el-option label="全部" :value="0"></el-option>
+			    </el-select>
+			</el-form-item>
 	    	<!--<el-form-item label="选择时间" style="border-top:none;width:100%;">
 	    		
 	    		
@@ -67,7 +73,7 @@
 				
 			  <el-checkbox-group v-model="checkedList" @change="checkedListChange">
 
-			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">{{item.sampleNo}}</el-checkbox>
+			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">监{{item.sampleNum}}</el-checkbox>
 
 			  		
 			    
@@ -130,8 +136,8 @@ export default {
     	checkedListFilter(){
 
 			return this.checkList.filter((item,index)=>{
-//				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
-				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
+//				return (this.isChecked?item.sampleState==this.isChecked:true)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
+				return (this.isChecked?item.sampleState==this.isChecked:true)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 			})
     	},
 
@@ -139,6 +145,10 @@ export default {
     methods: {  
 		checkedListChange(val){
 			console.log(val)
+		},
+		changeIsChecked(val){
+//			console.log(val,this.isChecked)
+//			this.$emit('changeIsChecked',val)
 		},
 //  	提交
     	onSubmit(formname) {
@@ -227,6 +237,7 @@ export default {
 			checkedList:[],
 //      	全部选中按钮
         	checkAll:false,
+        	isChecked:2,
 //      	筛选列表
 	  	  	restaurants: [{"value": "春季抽查"},{"value": "秋季普查"},{"value": "2017年度轮换验收"},{"value": "2018年度轮换验收"},{"value": "收购巡查"}],
         	
