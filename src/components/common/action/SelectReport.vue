@@ -34,6 +34,13 @@
 			    </el-autocomplete>
 			</el-form-item>
 			
+			<!--<el-form-item label="检测状态" class="full" style="border-top:none;">
+			    <el-select v-model="isChecked" placeholder="请选择检测状态" @change="changeIsChecked">
+			        <el-option label="未检测" :value="2"></el-option>
+			        <el-option label="已检测" :value="3"></el-option>
+			        <el-option label="全部" :value="0"></el-option>
+			    </el-select>
+			</el-form-item>-->
 			
 			
 		</el-form>
@@ -77,7 +84,7 @@
 				
 			  <el-checkbox-group v-model="checkedList" @change="checkedListChange">
 
-			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">{{item.sampleNo}}</el-checkbox>
+			  	<el-checkbox :label="item"  v-for="(item,index) in checkedListFilter" :key="item.id">监{{item.sampleNum}}</el-checkbox>
 
 			  		
 			    
@@ -145,7 +152,8 @@ export default {
     	checkedListFilter(){
 			return this.checkList.filter((item,index)=>{
 //				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
-				return (item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNo-0)&&((item.sampleNo-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
+				return (item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
+//				return (this.isChecked?item.sampleState==this.isChecked:true)&&(item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 			})
     	},
 
@@ -153,6 +161,10 @@ export default {
     methods: {  
 		checkedListChange(val){
 			console.log(val)
+		},
+		changeIsChecked(val){
+//			console.log(val,this.isChecked)
+//			this.$emit('changeIsChecked',val)
 		},
 //  	提交
     	onSubmit(formname) {
@@ -243,6 +255,7 @@ export default {
 
         return {
 			searching:'',
+			isChecked:2,
 			sort:'小麦',
 //			checkListUrl:'checklist',//		        被选中库点对应的样品地址
 //			checkList:[],

@@ -60,7 +60,7 @@
 					</template>
 					<template v-if="item.prop=='isDeal'">
 						<template v-if="scope.row[item.prop]==-1">
-							<span style="color:#fc6500;">待解决</span>
+							<span style="color:#fc6500;">待整改</span>
 						</template>
 						<template v-if="scope.row[item.prop]==1">
 							<span style="color:#999999;">已解决</span>

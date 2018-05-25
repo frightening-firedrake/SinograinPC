@@ -404,19 +404,25 @@ export default {
       },
       {
         id: 3,
-        prop:'isDeal',
-        label:"问题状态",
-        status:true,
-//      sort:true,
-      },
-      {
-        id: 4,
         prop:'position',
         label: "货位号",
 //      sort:true,
       },
       {
+        id: 4,
+        prop:'isDeal',
+        label:"整改情况",
+        status:true,
+//      sort:true,
+      },
+      {
         id: 5,
+        prop:'rummager',
+        label: "检查人员",
+//      sort:true,
+      },
+      {
+        id: 6,
         prop:'createTime',
         label: "创建时间",
 //      sort:true,

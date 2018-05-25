@@ -513,6 +513,12 @@ export default {
         label:"入库签名",
 //      sort:true,
       },
+      {
+        id: 8,
+        prop:'remark',
+        label:"备注",
+//      sort:true,
+      },
       ],
       actions:{
       	selection:false,
