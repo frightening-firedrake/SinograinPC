@@ -1,5 +1,5 @@
 <template>
-    <el-form ref="form" :inline-message="errorinline" class="sampling"  :model="formdatas.form" :label-width="labelWidth" style="position:relative;">
+    <el-form ref="form" :inline-message="errorinline" class="sampling"  :model="formdatas.form" :label-width="labelWidth" style="position:relative;border-bottom:1px solid #ccc;">
         <template>
             <p class="tableName">
             	{{formdatas.title}}
@@ -68,6 +68,28 @@
 				  <img width="100%" :src="dialogImageUrl" alt="">
 				</el-dialog>
 			</el-form-item>	
+			
+			<el-form-item v-if="item.isDeal!==-1" label="审批通过人：" class="disabled full">
+			    <el-input v-model="item.rummager" disabled></el-input>
+			</el-form-item>
+			<el-form-item v-if="item.isDeal!==-1" label="图片：" prop="images" class="images uploadedit">
+			    <el-upload
+				  disabled
+				  ref='upload'
+				  :limit='limit'
+				  action="/liquid/images"
+				  list-type="picture-card"
+				  :on-preview="handlePictureCardPreview"
+				  
+				  :file-list="item.images"
+				  :on-remove="handleRemove">
+				  <i class="el-icon-plus"></i>
+				</el-upload>
+				<el-dialog :visible.sync="dialogVisible" size="tiny">
+				  <img width="100%" :src="dialogImageUrl" alt="">
+				</el-dialog>
+			</el-form-item>	
+			
 			<el-form-item label="" class="full button" label-width="0">
 				<div class="btn">					
 					<el-button class="yes" type="primary" @click="pass(item.id)" :disabled="item.isDeal!==-1">该问题已解决</el-button>
@@ -165,7 +187,7 @@
 	form.sampling .el-form-item.empty{
 		height:2rem;
 		line-height:2rem;
-		border-bottom:1px solid #cccccc;
+		/*border-bottom:1px solid #cccccc;*/
 	}
 	form.sampling .el-form-item.empty .el-form-item__content{
 		height:2rem;

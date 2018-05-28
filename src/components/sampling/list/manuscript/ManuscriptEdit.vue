@@ -147,7 +147,8 @@ export default {
 			}
 	    }).then(function (response) {
         for (var key in response.data.rows[0]){
-        		if(key=='storageCapacity'||key=='storageWater'||key=='storageImpurity'||key=='realCapacity'||key=='realWater'||key=='realImpurity'){
+        		if(key=='storageWater'||key=='storageImpurity'||key=='realWater'||key=='realImpurity'){
+//      		if(key=='storageCapacity'||key=='storageWater'||key=='storageImpurity'||key=='realCapacity'||key=='realWater'||key=='realImpurity'){
         			if(response.data.rows[0][key]){
         				this.formdatas.form[key]=(response.data.rows[0][key]).toFixed(1);				
         			}else{        				

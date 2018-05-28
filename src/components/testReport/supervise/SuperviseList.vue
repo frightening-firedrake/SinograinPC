@@ -71,6 +71,7 @@ export default {
   	this.$root.eventHub.$on("viewlistitem",function(row){  
 //		console.log(id)
 		this.$router.push({path: '/index/TestReportManagement/SuperviseList/SuperviseShow',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
+//		this.$router.push({path: '/index/sampling/SRLibraryList/SafetyReportList/SafetyProblem',query:{id:row.id,libraryName:row.libraryName,position:row.position}})
   	}.bind(this));
   },
   destroy(){
@@ -429,7 +430,7 @@ export default {
       },
       ],
       actions:{
-      	noview:true,
+//    	noview:true,
       	selection:false,
       	number:true,
       	view:true,

@@ -333,13 +333,13 @@ export default {
 			var length = this.formdatas.form.length;
 			var high = this.formdatas.form.high;
 			var wide = this.formdatas.form.wide;
-			return this.jsdjg.measuredVolume = (length*high*wide).toFixed(2)
+			return this.jsdjg.measuredVolume = (length*high*wide).toFixed(1)
 		},
 		ldsjtj() { //粮堆实际体积
 			var length = this.formdatas.form.length;
 			var high = this.formdatas.form.high;
 			var wide = this.formdatas.form.wide;
-			return this.jsdjg.realVolume = (length*high*wide - this.formdatas.form.deductVolume).toFixed(2)
+			return this.jsdjg.realVolume = (length*high*wide - this.formdatas.form.deductVolume).toFixed(1)
 		},
 		bzldpjmd() { // 标准粮堆平均密度
 			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor).toFixed(1)
@@ -348,9 +348,9 @@ export default {
 //			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz).toFixed(2)
 		},
 		cljss() { //测量计算数（kg）
-			var length = this.formdatas.form.length;
-			var high = this.formdatas.form.high;
-			var wide = this.formdatas.form.wide;
+			var length = this.formdatas.form.length-0;
+			var high = this.formdatas.form.high-0;
+			var wide = this.formdatas.form.wide-0;
 			if(this.calculation_density == 1) {
 				return this.jsdjg.unQuality = Math.round((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)
 
