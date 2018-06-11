@@ -65,6 +65,30 @@
 				  <img width="100%" :src="dialogImageUrl" alt="">
 				</el-dialog>
 			</el-form-item>	
+			
+			<!--审批人部分-->
+			<el-form-item v-if="problem.isDeal!==-1" label="审批通过人：" class="disabled full">
+			    <el-input v-model="problem.rummager" disabled></el-input>
+			</el-form-item>
+			<el-form-item v-if="problem.isDeal!==-1" label="图片：" prop="images" class="images uploadedit">
+
+			    <el-upload
+				  disabled
+				  ref='upload'
+				  :limit='limit'
+				  action="/liquid/images"
+				  list-type="picture-card"
+				  :on-preview="handlePictureCardPreview"
+				  
+				  :file-list="problem.images"
+				  :on-remove="handleRemove">
+				  <i class="el-icon-plus"></i>
+				</el-upload>
+				<el-dialog :visible.sync="dialogVisible" size="tiny">
+				  <img width="100%" :src="dialogImageUrl" alt="">
+				</el-dialog>
+			</el-form-item>	
+			
 			<el-form-item label="" class="full button" label-width="0">
 				<div class="btn">					
 					<el-button class="yes" type="primary" @click="pass(problem.id)" :key="problem.id" :disabled="problem.isDeal!==-1">该问题已解决</el-button>

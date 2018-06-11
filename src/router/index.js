@@ -23,6 +23,10 @@ import ManuscriptEdit from '@/components/sampling/list/manuscript/ManuscriptEdit
 import SafetyReportCreate from '@/components/sampling/list/safetyReport/SafetyReportCreate.vue'
 import SafetyReportEdit from '@/components/sampling/list/safetyReport/SafetyReportEdit.vue'
 import SampleInList from '@/components/sampleManagement/sampleIn/SampleInList.vue'
+import warehouseManagement from '@/components/sampleManagement/sampleIn/warehouseManagement/warehouseManagement.vue'
+import sampleRoom from '@/components/sampleManagement/sampleIn/warehouseManagement/sampleRoom.vue'
+import sampleRegistration from '@/components/sampleManagement/sampleIn/sampleRegistration/sampleRegistration.vue'
+import registrationSelect from '@/components/sampleManagement/sampleIn/sampleRegistration/registrationSelect.vue'
 import SampleInEdit from '@/components/sampleManagement/sampleIn/SampleInEdit.vue'
 import SampleInCreate from '@/components/sampleManagement/sampleIn/SampleInCreate.vue'
 import HandoverList from '@/components/sampleManagement/handover/HandoverList.vue'
@@ -253,6 +257,33 @@ const routes= [
 //          name:"样品管理/样品入库列表/新建样品",
 //          component:SampleInCreate,
 //        },
+          {
+            path:"sampleManagement/warehouseManagement",
+            name:"样品管理/库房管理",
+            component:warehouseManagement,
+            meta: { needAuth: '样品入库列表' },
+          },
+          {
+            path:"sampleManagement/warehouseManagement/sampleRoom",
+            name:"样品管理/库房管理/样品室",
+            component:sampleRoom,
+            meta: { needAuth: '样品入库列表' },
+          },
+          {
+            path:"sampleManagement/sampleRegistration",
+            name:"样品管理/样品登记薄制作",
+            component:sampleRegistration,
+            meta: { needAuth: '样品入库列表' },
+          },
+          {
+            path:"sampleManagement/sampleRegistration/registrationSelect",
+            name:"样品管理/样品登记薄制作/检验样品",
+            component:registrationSelect,
+            meta: { needAuth: '样品入库列表' },
+          },
+          
+          
+          
           
           {
             path:"sampleManagement/handover",
@@ -513,7 +544,9 @@ router.beforeEach((to, from, next) => {
 		userAuth=userAuth.split(',');
 	  	if (!userAuth.includes(to.meta.needAuth)) {
 	  		console.log('没权限')
-	    	next({path: '/index/error403'})	  	
+	    	next({
+	    		path: '/index/error403'
+	    		})
 	  	}else{	  		
 	  		next()	  	
 	  	}

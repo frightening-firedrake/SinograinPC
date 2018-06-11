@@ -5,14 +5,12 @@
       <!--alert-->
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
+      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" @statusChange2="statusChange2" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" ></list-header>
       <!--表格-->
-      <sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
+      <sinograin-list class="list le" :tabledata="tabledatas"  :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
       <!--分页-->
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
-      <!--新建库典弹框-->
-      <sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
     </div>
 </template>
 
@@ -26,28 +24,31 @@ import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SinograinPagination from '@/components/common/action/Pagination.vue';
 import ListHeader from '@/components/common/action/ListHeader.vue';
-import SinograinModal from '@/components/common/action/Modal.vue';
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
-//本地测试要用下面import代码
-//import data from '@/util/mock';
-
-
 
 export default {
   components: {
-    SinograinList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader
+    SinograinList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,ListHeader
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
-	...mapGetters(["modal_id"]),
+	...mapGetters(["userName"]),
 	tabledatasFilter(){
 
-		if(this.filterStatus=="全部"){
+		if(this.filterStatus=="全部"&&this.filterStatus2=="全部"){
 			return this.tabledatas;
-		}else{
+		}else if(this.filterStatus2=="空闲"){
 			return this.tabledatas.filter((value,index)=>{
-				return value.sampleState==this.filterStatus
+				return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehousetotal)>=0)&&((value.warehouseUseNumber)/(value.warehousetotal)<0.4)
+			})
+		}else if(this.filterStatus2=="未满"){
+			return this.tabledatas.filter((value,index)=>{
+				return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehousetotal)>=0.4)&&((value.warehouseUseNumber)/(value.warehousetotal)<1)
+			})
+		}else if(this.filterStatus2=="已满"){
+			return this.tabledatas.filter((value,index)=>{
+				return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehousetotal)==1)
 			})
 		}
 	}
@@ -59,6 +60,8 @@ export default {
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
+    this.$root.eventHub.$off("editlistitem")
+    this.$root.eventHub.$off("printlistitem")
 //	监听列表删除事件
     this.$root.eventHub.$on('delelistitem',function(rowid,list){
     	this.tabledatas=this.tabledatas.filter(function(item){
@@ -69,9 +72,22 @@ export default {
     }.bind(this)); 	
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
+  		if(!this.$_ault_alert('sample:getById')){
+			return
+		}
 //		console.log(id)
-		this.$router.push({path: '/index/sampling/libraryList/samplingList/sampleShowList/samplingListEdit',query:{id:id}})
+		this.$router.push({path: '/index/sampleManagement/warehouseManagement/sampleRoom',query:{id:id}})
 		
+  	}.bind(this));
+  	//	监听列表点击编辑事件
+  	this.$root.eventHub.$on("editlistitem",function(id){  
+//		console.log(id)
+		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInEdit',query:{id:id}})
+		
+  	}.bind(this));
+  	//	监听列表点击打印事件
+  	this.$root.eventHub.$on("printlistitem",function(code){  
+		this.printitem(code);	
   	}.bind(this));
   },
   destroy(){
@@ -86,34 +102,35 @@ export default {
 		console.log(data);
 	},
 	statusChange(data){
-		this.filterStatus=data;			
+//		console.log(data)
+		this.filterStatus=data
+	},
+	statusChange2(data){
+		this.filterStatus2=data
 	},
 	createSampling(){
 //		console.log('createSampling');
-		this.$router.push({path: '/index/sampling/libraryList/samplingList/samplingListCreate'})
+		this.$router.push({path: '/index/sampling/samplingList/samplingListCreate'})
 	},
 	emptyCreate(){
-//		this.createSampling();
+
 	},
-//	打开新建弹框
+	//	扫码新建样品
+	scanCode(){
+
+	},
 	createlib(){
-		this.modalVisible=true;
-	},
-//	填入新建数据
-	createlibitem(unit,lib){
-		console.log(unit,lib);
-	},
-//	关闭新建弹框
-	dialogClose(){
-		this.modalVisible=false;
+		
 	},
 //	获取搜索数据
   	searchingfor(searching,page){
   		page?page:1;
-  		this.searchText=searching;
+  		this.searchText=searching.indexOf('监')==0?searching.slice(1):searching;
+  		console.log(this.searchText);
   		var params = {};
-  		params.pId = this.$route.query.pId;
-		params.sampleWordOrsampleNumLike = searching;
+		params.sampleWordOrsampleNumLike = this.searchText;
+		params.ruKuSampleState = 2
+		params.fenxiaoyangSampleState = 3
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
@@ -132,9 +149,8 @@ export default {
 			   params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-		  	this.tabledatas=response.data.rows;
+			this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
-		  	this.loading=false;
 
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -142,9 +158,11 @@ export default {
   	},
 //	获取列表数据方法
   	getlistdata(page){
-  		this.loading=true;
 		var params = {};
-		params.pId = this.$route.query.pId;
+		params.sampleWordOrsampleNumLike = '';
+		params.ruKuSampleState = 2
+		params.fenxiaoyangSampleState = 3
+  		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -159,15 +177,13 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
 			    page:page,
 			    rows:this.page.size,
-				params:JSON.stringify(params),
+				params:JSON.stringify(params)
 			}
-	    }).then(function (response) {
+	   	}).then(function (response) {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
-		  	this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -179,7 +195,6 @@ export default {
 			url: this.deleteURL,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
 			    id:id,
 			}
 	    }).then(function (response) {
@@ -209,37 +224,34 @@ export default {
   	getchecked(checkedId){
   		this.checkedId=checkedId;
   	},
-
+	titleEvent(){
+  		console.log('titleEvent');
+  	},
+  	getDateNow(){
+  		var date1=new Date()
+  		return date1.getFullYear()+'-'+(date1.getMonth()+1)+'-'+date1.getDate()
+  	},
   },
   data() {
     return {
       datalistURL: this.apiRoot + '/grain/sample/data',
-      searchURL:this.apiRoot + '/grain/sample/data',
+	  editURL: this.apiRoot + '/grain/sample/edit',
+	  searchURL:this.apiRoot + '/grain/sample/data',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
       checkedId:[],
-      list:"samplinglist",
-	  modalVisible:false,
-	  modal:{
-	  	title:'新建库点',
-		formdatas:[
-	  		{
-	  			label:"单位名称",
-	  			model:"unit",
-	  		},
-	  		{
-	  			label:"库点名称",
-	  			model:"lib",
-	  		},
-	  	],
-	  	submitText:'确定',
-	  },
+	  dataBySampleNo: {},
       breadcrumb:{
       	search:true,   
       	searching:'',
       },
+      subtitle:{
+      	btn:false,
+      	btntext:'',
+      },
       loading:true,
       filterStatus:'全部',
+      filterStatus2:'全部',
 //    分页数据
       page: {
         size: 10,
@@ -255,78 +267,69 @@ export default {
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：此页面只展示本库信息!',
+        title: '温馨提示：入库前请准备好条码打印机，以便于更换检验编号!',
         type: 'info'
       }],
 //    表格数据
       listHeader:{
       	createlib:false,
       	createSampling:false,
-      	date:true,
+      	date:false,
+      	scanCode:false,
       	status:true,
+      	class:'min',
       	statusitems:[
       		{label:'全部',text:'全部'},
-      		{label:-1,text:'未扦样'},
-      		{label:1,text:'已扦样'},
+      		{label:'1室',text:'1室'},
+      		{label:'2室',text:'2室'},
+      		{label:'3室',text:'3室'},
       	],
+      	status2:true,
+      	statusitems2:[
+      		{label:'全部',text:'全部'},
+      		{label:'空闲',text:'空闲'},
+      		{label:'未满',text:'未满'},
+      		{label:'已满',text:'已满'},
+      	],
+      	statusTitle:'选择样品室:',
+      	statusTitle2:'选择状态:',
       },
       tabledatas:[],
       items: [
       {
         id: 1,
-        prop:'sampleWord',
-        label: "扦样编号",
+        prop:'depot',
+        label: "样品室",
+//      status:true,
 //      sort:true
       },
       {
         id: 2,
         prop:'position',
-        label:"货位号",
-//      sort:true,
+        label: "柜号",
+//      sort:true
       },
       {
         id: 3,
-        prop:'sort',
-        label:"品种",
-//      sort:true,
-      },
-      {
-        id: 4,
-        prop:'sampleState',
+        prop:'warehouseState',
         label:"状态",
         status:true,
 //      sort:true,
       },
-//    {
-//      id: 5,
-//      prop:'originPlace',
-//      label:"产地",
-////      sort:true,
-//    },
-      {
-        id: 6,
-        prop:'gainTime',
-        label:"收获年度",
-//      sort:true,
-      },
-      {
-        id: 7,
-        prop:'barnTimes',
-        label:"入库时间",
-//      sort:true,
-      },
       ],
       actions:{
-//    	selection:true,
-      	number:true,
+      	selection:false,
+      	number:false,
       	view:true,
-      	edit:false,
+//    	edit:true,
+//    	show:true,
       	dele:false,
-      	manuscript:true,
-      	safetyReport:true,
-      	sort:'sampleWord',
-      }
+      	manuscript:false,
+      	safetyReport:false,
+//    	printSampleIn:true,
+      },
     }
   }
 }
 </script>
+

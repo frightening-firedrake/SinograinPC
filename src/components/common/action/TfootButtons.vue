@@ -15,9 +15,9 @@
 		</div>
 		<!--基础双按钮-->
 		<div class="btn-center" v-if="tfbtns.btnCenter">
-		    <el-button class="lbtn" :class="{no:tfbtns.btnCenter.doubleColor}" type="primary" @click="btnCenterNo">{{tfbtns.btnCenter.btnTextL?tfbtns.btnCenter.btnTextL:'不同意'}}</el-button>
-		    <el-button v-if="tfbtns.btnCenter.doubleColor" class="rbtn yes"  type="primary" @click="btnCenterYes" >{{tfbtns.btnCenter.btnTextR?tfbtns.btnCenter.btnTextR:'同  意'}}</el-button>
-		    <el-button v-else class="rbtn"  @click="btnCenterYes" >{{tfbtns.btnCenter.btnTextR?tfbtns.btnCenter.btnTextR:'同  意'}}</el-button>
+		    <el-button class="lbtn" :disabled="tfbtns.btnCenter.ldisabled" :class="{no:tfbtns.btnCenter.doubleColor}" type="primary" @click="btnCenterNo">{{tfbtns.btnCenter.btnTextL?tfbtns.btnCenter.btnTextL:'不同意'}}</el-button>
+		    <el-button  :disabled="tfbtns.btnCenter.rdisabled" v-if="tfbtns.btnCenter.doubleColor" class="rbtn yes"  type="primary" @click="btnCenterYes" >{{tfbtns.btnCenter.btnTextR?tfbtns.btnCenter.btnTextR:'同  意'}}</el-button>
+		    <el-button  :disabled="tfbtns.btnCenter.rdisabled" v-else class="rbtn"  @click="btnCenterYes" >{{tfbtns.btnCenter.btnTextR?tfbtns.btnCenter.btnTextR:'同  意'}}</el-button>
 	    </div>
 		<!--左按钮-->
 		<div class="btn-left btntfoot"  v-if="tfbtns.btnLeft" @click="btnLeft">
@@ -75,6 +75,10 @@
 	background-color: rgb(88,180,129);
 	border-color:rgb(88,180,129);
 }
+.btn-center button.lbtn.is-disabled,.btn-center button.lbtn.is-disabled:hover  {
+	background-color: #999999;
+	border-color:#999999;
+}
 .btn-center button.lbtn:hover {
 	background-color: rgba(88,180,129,0.8);
 	border-color:rgb(88,180,129);
@@ -85,6 +89,11 @@
 }
 .btn-center button.rbtn:hover {
 	background:rgba(88,180,129,0.1);
+}
+.btn-center button.rbtn.is-disabled,.btn-center button.rbtn.is-disabled:hover {
+	color: #999999;
+	border-color:#999999;
+	background:#fff;
 }
 .btn-center button.yes {
 	color: #ffffff;

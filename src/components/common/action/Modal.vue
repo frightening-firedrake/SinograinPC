@@ -2,7 +2,7 @@
 	<el-dialog :title="modal.title" :visible.sync="modalVisible" custom-class="createlib" :width="dialogWidth" @close="dialogClose">
 	  	<el-form :model="form" ref="modalform">
 	  		<template v-for="(item, index) in modal.formdatas">
-	  			<el-form-item v-if="!item.position&&item.type!=='textarea'" :label="item.label" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '内容不能为空'}]">
+	  			<el-form-item v-if="!item.position&&item.type=='input'" :label="item.label" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '内容不能为空'}]">
 			        <el-input v-model="form[item.model]" auto-complete="off" :disabled="item.disabled"></el-input>
 			    </el-form-item>
 			    <el-form-item class="position" v-if="item.position" :label="item.label"  :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}">
@@ -16,11 +16,16 @@
 			        	{{position_error_message}}
 			        </div>
 			    </el-form-item>
-			    <el-form-item v-if="!item.position&&item.type=='textarea'" class="textareaall" label="none" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '内容不能为空'}]">
+			    <el-form-item class="select" v-if="!item.position&&item.type=='select'" :label="item.label"  :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}">
+			        <el-select v-model="form[item.model]" placeholder="请选择" :disabled="item.disabled">
+				        <el-option v-for="item2 in item.selectitems" :label="item2" :value="item2" :key="item2"></el-option>    
+				    </el-select>
+			    </el-form-item>
+			    <el-form-item v-if="!item.position&&item.type=='textarea'" :label="item.label" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled,textareaall:item.textareaall}" :rules="[{ required: true, message: '内容不能为空'}]">
 			        <el-input
 					  	type="textarea"
 					  	:autosize="{ minRows: item.rows}"
-					  	:placeholder="item.label"
+					  	:placeholder="'请填写'+item.label"
 					  	:disabled="item.disabled"
 					  	v-model="form[item.model]">
 					</el-input>
@@ -108,7 +113,8 @@ export default {
         	this.position_error=false;
 			this.$refs[formname].validate((valid) => {
                 if (valid) {
-					this.$emit('createlibitem',this.form);
+                 		
+                	this.$emit('createlibitem',this.form,this.modal.title);
 					this.$emit('dialogClose')
 //					this.$refs['modalform'].resetFields();				
                 } else {
@@ -188,9 +194,11 @@ export default {
 }
 .createlib .el-dialog__body .textareaall .el-form-item__content{
 	margin:0!important;
+	border:none;
 }
 .createlib .el-dialog__body .textareaall .el-form-item__content .el-textarea__inner{
 	border-color:#dfdfdf!important;
+	border-width: 1px;
 }
 .createlib .textareaall .el-form-item__error{
 	top:17.5px;
@@ -199,13 +207,15 @@ export default {
 	/*line-height:0.5rem;*/
 	font-size:0.18rem;
 	color:#333333;
+	border-width: 0;
+	/*border:none;*/
+	padding:8px 15px;
 	/*height:auto;*/
 }
-
 .createlib .el-dialog__body .el-form-item__label{
 	line-height: 0.5rem;
 	background-color: #fbfbfb;
-	border-right:1px solid #dfdfdf;
+	/*border-right:1px solid #dfdfdf;*/
 	font-size:0.18rem;
 	color:#333333;
 }
@@ -217,7 +227,7 @@ export default {
 }
 .createlib .el-dialog__body .el-form-item__content{
 	line-height: 0.5rem;
-	
+	border-left:1px solid #dfdfdf;
 }
 .createlib .el-dialog__body .el-input input{
 	line-height:0.5rem;
@@ -296,5 +306,19 @@ export default {
 	padding-right:0;
 	padding-left:0;
 	font-size:0.16rem;
+}
+/*下拉*/
+.createlib .el-form-item.select .el-form-item__content .el-select{
+	/*padding-left:0.2rem;*/
+	margin-left:0.2rem;
+}
+.createlib .el-form-item.select .el-form-item__content .el-select .el-input input{
+	height:0.36rem!important;
+	width:2.75rem;
+	line-height:0.34rem;
+	border:solid  0.01rem #dfdfdf;
+	font-size:0.16rem;
+	background:#f2f2f2;
+	border-radius:0;
 }
 </style>

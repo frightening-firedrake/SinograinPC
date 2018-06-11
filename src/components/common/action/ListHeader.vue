@@ -1,13 +1,29 @@
 <template>
-	<div class="listHeader">
+	<div class="listHeader" :class="listHeader.class">
 		<div class="status" v-if="listHeader.status">
-			<p>状态:</p>
+			<p>
+				{{listHeader.statusTitle?listHeader.statusTitle:'状态:'}}
+			</p>
 			<div>
 			    <el-radio-group v-model="radio_status" text-color="white" fill="#ff4c78" @change="statusChange">
 				    <!--<el-radio-button label="全部"></el-radio-button>
 				    <el-radio-button label="未扦样"></el-radio-button>
 				    <el-radio-button label="已扦样"></el-radio-button>-->
 				    <el-radio-button v-for="item in listHeader.statusitems" :key="item.label" :label="item.label">{{item.text}}</el-radio-button>
+				    
+			    </el-radio-group>
+			</div>
+		</div>
+		<div class="status2" v-if="listHeader.status2">
+			<p>
+				{{listHeader.statusTitle2?listHeader.statusTitle2:'状态:'}}
+			</p>
+			<div>
+			    <el-radio-group v-model="radio_status2" text-color="white" fill="#1bb45f" @change="statusChange2">
+				    <!--<el-radio-button label="全部"></el-radio-button>
+				    <el-radio-button label="未扦样"></el-radio-button>
+				    <el-radio-button label="已扦样"></el-radio-button>-->
+				    <el-radio-button v-for="item in listHeader.statusitems2" :key="item.label" :label="item.label">{{item.text}}</el-radio-button>
 				    
 			    </el-radio-group>
 			</div>
@@ -91,7 +107,7 @@
 			</template>
 		</div>
 		<div class="dataSelete" v-if="listHeader.subtitle">
-			<p>{{title}}</p>
+			<p>{{listHeader.title?listHeader.title:title}}</p>
 		</div>
 		<div class="tableName" v-if="listHeader.tableNameShow">
 			<template v-if="listHeader.editModel">
@@ -182,13 +198,75 @@
 		margin-right:0.15rem;
 	}
 	div.listHeader div.status .el-radio-button__inner{
-		height:0.26rem;
+		/*height:0.26rem;*/
 		line-height:0.24rem;
 		border-radius:0.04rem;
 		padding:0 0.14rem;
 		border: solid 0.01rem #d5d5d5;
 		font-size:0.14rem;
 		color: #999999;
+		text-align: center;
+	}
+	div.listHeader.min div.status .el-radio-button__inner{
+		width:0.7rem;
+	}
+	/*状态2*/
+	div.listHeader div.status2{
+		float:left;
+		/*width:4rem;*/
+	}
+	div.listHeader div.status2 >p:before{
+		background:#1bb45f;
+	}
+	div.listHeader div.status2 >div{
+		float:left;
+		/*width:2.85rem;*/
+		line-height:0.54rem;
+	}
+	div.listHeader div.status2 >div .el-radio-group{
+		float:left;
+		margin-top:0.14rem;
+	}
+	div.listHeader div.status2 .el-radio-button{
+		height:0.26rem;
+		line-height:0.26rem;
+		border-radius:0.04rem;
+		margin-right:0.15rem;
+	}
+	div.listHeader div.status2 .el-radio-button__inner{
+		height:0.26rem;
+		line-height:0.24rem;
+		border-radius:0.04rem;
+		padding:0 0 0 0.2rem;
+		border: solid 0.01rem #d5d5d5;
+		font-size:0.14rem;
+		color: #999999;
+		text-align: center;
+		width:0.7rem;
+		position: relative;
+	}
+	div.listHeader div.status2 span.el-radio-button__inner:before{
+		content:'';
+		width:0.14rem;
+		height:0.14rem;
+		border-radius:50%;
+		background-color:#666666;
+		position:absolute;
+		top:50%;
+		left:0.06rem;
+		margin-top:-0.07rem;
+	}
+	div.listHeader div.status2 .el-radio-button:nth-of-type(2) span.el-radio-button__inner:before{
+		background-color:#38b63a;
+	}
+	div.listHeader div.status2 .el-radio-button:nth-of-type(3) span.el-radio-button__inner:before{
+		background-color:#e2b028;
+	}
+	div.listHeader div.status2 .el-radio-button:nth-of-type(4) span.el-radio-button__inner:before{
+		background-color:#c81212;
+	}
+	div.listHeader div.status2 .el-radio-button.is-active span.el-radio-button__inner:before{
+		background-color:white;
 	}
 	/*时间选择*/
 	div.listHeader div.dataSelete{
@@ -359,6 +437,7 @@ export default {
 	        },	
 	        date_select: '',
 	        radio_status:'全部',
+	        radio_status2:'全部',
 	        selectlib:'全部',
 	        selectlib2:'全部',
 	        selectTask:'全部',
@@ -395,6 +474,11 @@ export default {
 //  		console.log(this.radio_status)
 
     		this.$emit('statusChange',this.radio_status);
+    	},
+    	statusChange2(){
+//  		console.log(this.radio_status)
+
+    		this.$emit('statusChange2',this.radio_status2);
     	},
     	createSampling(){
 //  		console.log('createSampling');

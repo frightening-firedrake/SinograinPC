@@ -386,6 +386,7 @@ export default {
 	  			type:'textarea',
 	  			rows:3,
 	  			model:"reason",
+	  			textareaall:true,
 	  		},
 //	  		{
 //	  			label:"扦样编号:",

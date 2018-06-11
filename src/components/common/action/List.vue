@@ -101,6 +101,17 @@
 					<template v-if="item.prop=='libraryFullName'">
 						{{scope.row.pLibraryName}}—{{scope.row.libraryName}}
 					</template>
+					<template v-if="item.prop=='warehouseState'">
+						<template v-if="(scope.row.warehouseUseNumber/scope.row.warehousetotal>=0)&&(scope.row.warehouseUseNumber/scope.row.warehousetotal<=0.4)">
+							<span class="warehouseState" style="color:#38b63a;"><i style="background-color:#38b63a;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehousetotal}}</span>空闲
+						</template>
+						<template v-if="(scope.row.warehouseUseNumber/scope.row.warehousetotal)>=0.4&&(scope.row.warehouseUseNumber/scope.row.warehousetotal<=1)" >
+							<span class="warehouseState" style="color:#e2b028;"><i style="background-color:#e2b028;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehousetotal}}</span>未满
+						</template>
+						<template v-if="scope.row.warehouseUseNumber/scope.row.warehousetotal==1" >
+							<span class="warehouseState" style="color:#c81212;"><i style="background-color:#c81212;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehousetotal}}</span>已满
+						</template>
+					</template>
 				</template>
 			</el-table-column>
 		</template>
@@ -201,6 +212,26 @@
 		</template>
 	</el-table>
 </template>
+<style>
+.el-table .cell.el-tooltip span.warehouseState{
+	margin-right:2em;
+	font-size:inherit;
+	position:relative;
+	padding-left:1.5em;
+	color:#38b63a;
+}	
+.el-table .cell.el-tooltip span.warehouseState i{
+	position:absolute;
+	top:50%;
+	margin-top:-0.07rem;
+	width:0.14rem;
+	height:0.14rem;
+	border-radius: 50%;
+	background-color:#38b63a;
+	font-size:inherit;
+	left:0;
+}
+</style>
 <script>
 export default {
 	props: ['items', 'tabledata', 'actions', 'list', 'loading', 'librarylist', 'rowType'],

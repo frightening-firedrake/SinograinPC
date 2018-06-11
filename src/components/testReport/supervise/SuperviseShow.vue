@@ -9,7 +9,7 @@
       <!--表单-->
       <safety-form-pass :formdatas="formdatas" :problem="formdatas.problem" @problemStatusChange="problemStatusChange" @pass="pass" @addsafety="addsafety"></safety-form-pass> 
       <!--通知弹框-->
-      <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
+      <sinograin-upload-Modal v-if="modalVisible"  :modal="modal" :uploadPicURL="uploadPicURL" v-on:submitupload="submitupload" v-on:dialogClose="dialogClose"></sinograin-upload-Modal>
     </div>
 </template>
 
@@ -23,7 +23,7 @@ import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SafetyFormPass  from "@/components/common/action/SafetyFormPass"
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
-import SinograinMessage from "@/components/common/action/Message"
+import SinograinUploadModal from "@/components/common/action/UploadModal"
 
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
@@ -34,7 +34,7 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SafetyFormPass,SinograinMessage
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SafetyFormPass,SinograinUploadModal
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -157,20 +157,15 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-  	messageclick(type){
-  		if(type=="confirm"){
+	//	关闭新建弹框
+	dialogClose(){
+		this.modalVisible=false;
+	},
+  	submitupload(){
+  		var id=this.passProblemId;
+		this.passProblem(id)
+  	},
 
-			var id=this.passProblemId;
-			this.passProblem(id)
-//			console.log(id)
-	  		
-  		}else if(type=="error"){
-//			console.log(type)  			
-  		}
-  	},
-  	messageClose(){
-  		this.messageShow=false;
-  	},
 
 	titleEvent(){
   		console.log('titleEvent');
@@ -180,8 +175,8 @@ export default {
   	},
 //	问题通过处理事件
   	pass(id){
-		// console.log(id)
-		this.messageShow=true;
+		this.modalVisible=true;
+		console.log(this.modalVisible)
 		
 		this.passProblemId=id;
 
@@ -200,6 +195,8 @@ export default {
       dataURL: this.apiRoot + '/grain/sample/get',
 	  dataSafetyURL: this.apiRoot +  '/grain/safetyReport/get',
 	  editURL:  this.apiRoot + '/grain/safetyReport/edit',
+      uploadPicURL: this.apiRoot + '/grain/safetyReport/uploadPic',
+//	  uploadPicURL: this.apiRoot + '/grain/safetyReport/passimg',
       searchURL:'/liquid/role2/data/search',
       passURL: this.apiRoot + '/grain/safetyReport/edit',
       problemStatus:'all',
@@ -220,15 +217,30 @@ export default {
         type: 'info'
       }],
 //    通知弹窗
- 	  messageShow:false,
-	  messages:{
-	  	type:'confirm',
-	  	confirm:{
-	  		icon:'el-icon-success',
-	  		messageTittle:'确认此问题已解决?',
-	  		messageText:'此操作不可逆，请慎重操作',
-	  		buttonText:'确认',
-	  	},
+// 	  messageShow:false,
+//	  messages:{
+//	  	type:'confirm',
+//	  	confirm:{
+//	  		icon:'el-icon-success',
+//	  		messageTittle:'确认此问题已解决?',
+//	  		messageText:'此操作不可逆，请慎重操作',
+//	  		buttonText:'确认',
+//	  	},
+//	  },
+//	   提交通过信息
+	  modalVisible:false,
+	  modal:{
+	  	title:'该问题已解决证明',
+		formdatas:[
+	  		{
+	  			label:"审批通过人:",
+	  			model:"sptgr",
+				value: "",
+	  			type:'input',
+	  		},
+	  	],
+	  	adduploadprop:true,
+//	  	submitText:'入库',
 	  },
       formdatas: {
       	title:'监督检查',

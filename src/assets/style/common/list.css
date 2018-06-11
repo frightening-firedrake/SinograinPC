@@ -40,6 +40,9 @@
     font-weight:normal;
     cursor:pointer;
 }
+.el-main .list.nopointer .el-table__body-wrapper table tr{
+    cursor:default;
+}
 /*表格左右边颜色*/
 .el-main .list .el-table__body-wrapper,.el-main .list .el-table__header-wrapper{
 	border-left:1px solid #e6e7e7;

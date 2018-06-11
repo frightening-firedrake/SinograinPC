@@ -1,5 +1,5 @@
 <template>
-	<el-dialog :title="modal.title" :visible.sync="modalVisible" custom-class="createlib" :width="dialogWidth" @close="dialogClose">
+	<el-dialog :title="modal.title" :visible.sync="modalVisible" custom-class="uploadimg" :width="dialogWidth" @close="dialogClose">
 	  	<el-form :model="form" ref="modalform">
 	  		<template v-for="(item, index) in modal.formdatas">
 	  			<el-form-item v-if="item.type=='input'" :label="item.label" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '内容不能为空'}]">
@@ -16,7 +16,10 @@
 			    </el-form-item>
 	  		</template>
 			
-			<el-form-item label="图片：" prop="images" class="images">
+			<el-form-item label="图片：" prop="images" class="images" :label-width="formLabelWidth">
+				<div class="el-form-item__error" v-if="uploadimg_error">
+			        {{uploadimg_error_message}}
+			    </div>
 			    <el-upload
 				  	:action="uploadPicURL"
 				  	list-type="picture-card"
@@ -25,10 +28,10 @@
 				 	:limit='limit'
 				  	:on-preview="handlePictureCardPreview"
 				  	name="pictureFile"
-				  	:on-success="(response,file,fileList)=>{return imageUploadSuccess(response,file,fileList,index)}"
+				  	:on-success="(response,file,fileList)=>{return imageUploadSuccess(response,file,fileList,1)}"
 				  	:on-error="imageUploadError"
-				  	:file-list="item.images"
-				  	:before-remove="(file,fileList)=>{return handleRemove(file,fileList,index)}">
+				  	:file-list="images"
+				  	:before-remove="(file,fileList)=>{return handleRemove(file,fileList,1)}">
 				  	<i class="el-icon-plus"></i>
 				</el-upload>
 				<el-dialog :visible.sync="dialogVisible" size="tiny">
@@ -38,7 +41,7 @@
 			
 		</el-form>
 		<div slot="footer" class="dialog-footer center">
-		    <el-button class="yes" type="primary" @click="createlibitem('modalform')">{{modal.submitText?modal.submitText:'确 定'}}</el-button>
+		    <el-button class="yes" type="primary" @click="submit('modalform')">{{modal.submitText?modal.submitText:'确 定'}}</el-button>
 		    <el-button class="no" @click="dialogClose">取 消</el-button>
 	    </div>
 	</el-dialog>
@@ -49,10 +52,10 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
 export default {
     components:{ },
-    props: ['modal'],
+    props: ['modal',"uploadPicURL"],
     computed:{
 		...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask","isCollapse"]),
-		...mapGetters(["modal_id"]),
+		...mapGetters(["Token"]),
 	},
 	created(){
 		this.modal.formdatas.forEach((item,index)=>{
@@ -61,8 +64,8 @@ export default {
 	},
     data() {
         return {
-        	position_error:false,
-        	position_error_message:'',
+        	uploadimg_error:true,
+        	uploadimg_error_message:'',
         	dialogWidth:'6.2rem',
         	modalVisible: true,
 		    form:{
@@ -74,44 +77,26 @@ export default {
 	        dialogImageUrl: '',
 	        dialogVisible: false,
 	        disabled:true,
-	        imgbox:[
-//           	{images:[]},
+	        images:[
+
 	        ],
         }
     },
     methods:{
     	...mapMutations(['create_modal_id','is_mask','close_modal','hid_modal']),
   		...mapActions(['addAction']),
-    	createlibitem(formname){
-//  		this.modalVisible = false;
-			//这里缺一个表单验证
-//			var values=Object.values(this.form);
-//			console.log(values)
-//			if(values.length){
-//				this.$emit('createlibitem',this.form);
-//				this.$emit('dialogClose')
-////				this.$refs['modalform'].resetFields();				
-//			}else{
-//				return
-//			}
-
-			if(this.modal.addprop){
-				if(!this.form.depot){
-	        		this.position_error=true;
-	        		this.position_error_message="请选择样品室";
-	        		return
-	        	}
-	        	if(!this.form.counter){
-	        		this.position_error=true;
-	        		this.position_error_message="请填写几号柜";
+    	submit(formname){
+    		if(this.modal.adduploadprop){
+				if(this.images.length==0){
+	        		this.uploadimg_error=true;
+	        		this.uploadimg_error_message="请先上传图片";
 	        		return
 	        	}
 			}
-
-        	this.position_error=false;
+        	this.uploadimg_error=false;
 			this.$refs[formname].validate((valid) => {
                 if (valid) {
-					this.$emit('createlibitem',this.form);
+					this.$emit('submit',this.form);
 					this.$emit('dialogClose')
 //					this.$refs['modalform'].resetFields();				
                 } else {
@@ -123,7 +108,57 @@ export default {
     	dialogClose(){
 //  		this.$refs['modalform'].resetFields();
     		this.$emit('dialogClose')
-    	}
+    	},
+    	//      图片上传查看与删除
+	    handleRemove(file,fileList,index) {
+	        console.log(file, fileList,index);
+	        var index2;
+	    	fileList.forEach((value,listindex)=>{
+//	    		console.log(value.uid,file.uid)
+	    		if(value.uid==file.uid){
+	    			index2=listindex
+	    		}	    		
+	    	})
+	    	this.images.splice(index2,1);
+	    	
+//			this.$emit('changeProblems',this.problems);
+	    },
+	    handlePictureCardPreview(file, fileList) {
+	        this.dialogImageUrl = file.url;
+	        this.dialogVisible = true;
+	    },
+//	       回收图片地址
+	    imageUploadSuccess(response, file, fileList, index){
+	    	console.log('上传成功')
+//	    	console.log(response, file, fileList,index)
+	    	var index2;
+	    	fileList.forEach((value,listindex)=>{
+//	    		console.log(value.uid,file.uid)
+	    		if(value.uid==file.uid){
+	    			index2=listindex
+	    		}	    		
+	    	})
+			if(response.success){
+				var url=response.msg;
+//				var index1=index;
+//				console.log(url,index1,index2)
+				this.images[index2]=url
+//				this.$emit('changeProblems',this.problems);
+			}else{
+//				alert(response.msg)	
+				this.$message.error(response.msg);
+			}
+	    },
+		imageUploadError(err, file, fileList){
+			this.$message.error('上传失败！！！');
+		},
+//		//		初始imgbox
+//		createimgbox(){
+//			this.imgbox=[],
+//			this.formdatas.form.problems.forEach((value)=>{
+//				this.imgbox.push({images:[]})
+//			})
+//		}
     },
     mounted:function(){
 //		console.log(this.breadcrumb)
@@ -138,18 +173,18 @@ export default {
     border-radius:0.1rem;
 }
 /*头部*/
-.createlib .el-dialog__header{
+.uploadimg .el-dialog__header{
 	height: 0.6rem;
 	line-height: 0.6rem;
 	padding:0 0.33rem;
 	background-color: rgba(88, 180, 129, 0.8);
 	position:relative;	
 }
-.createlib .el-dialog__title{
+.uploadimg .el-dialog__title{
 	font-size:0.18rem;
 	color:rgba(2255,255,255,1);
 }
-.createlib .el-dialog__title:before{
+.uploadimg .el-dialog__title:before{
 	position:absolute;
 	content:'';
 	width:0.04rem;
@@ -158,21 +193,21 @@ export default {
 	left:0.2rem;
 	top:0.2rem;
 }
-.createlib .el-dialog__headerbtn{
+.uploadimg .el-dialog__headerbtn{
 	top:50%;
 	margin-top:-0.1rem;
 	right:0.3rem;
 	width:0.2rem;
 	height:0.2rem;
 }
-.createlib .el-dialog__headerbtn .el-dialog__close{
+.uploadimg .el-dialog__headerbtn .el-dialog__close{
 	color:#ffffff;
 	font-size:0.2rem;
 }
-.createlib .el-dialog__body{
+.uploadimg .el-dialog__body{
 	padding:0.45rem 0.35rem 0 0.48rem;
 }
-.createlib .el-dialog__body .el-form-item{
+.uploadimg .el-dialog__body .el-form-item{
 	/*height: 0.5rem;*/
 	line-height: 0.5rem;
 	background-color: #ffffff;
@@ -180,67 +215,68 @@ export default {
 	margin:0;
 	border-top:none;
 }
-.createlib .el-dialog__body .el-form-item:first-of-type{
+.uploadimg .el-dialog__body .el-form-item:first-of-type{
 	border-top:solid 1px #dfdfdf;
 }
-.createlib .el-dialog__body .el-form-item.textareaall{
+.uploadimg .el-dialog__body .el-form-item.textareaall{
 	border:none;
 }
-.createlib .el-dialog__body .textareaall .el-form-item__label{
+.uploadimg .el-dialog__body .textareaall .el-form-item__label{
 	display: none;
 }
-.createlib .el-dialog__body .textareaall .el-form-item__content{
+.uploadimg .el-dialog__body .textareaall .el-form-item__content{
 	margin:0!important;
 }
-.createlib .el-dialog__body .textareaall .el-form-item__content .el-textarea__inner{
+.uploadimg .el-dialog__body .textareaall .el-form-item__content .el-textarea__inner{
 	border-color:#dfdfdf!important;
 }
-.createlib .textareaall .el-form-item__error{
+.uploadimg .textareaall .el-form-item__error{
 	top:17.5px;
 }
-.createlib .el-dialog__body .el-textarea textarea{
+.uploadimg .el-dialog__body .el-textarea textarea{
 	/*line-height:0.5rem;*/
 	font-size:0.18rem;
 	color:#333333;
 	/*height:auto;*/
 }
 
-.createlib .el-dialog__body .el-form-item__label{
+.uploadimg .el-dialog__body .el-form-item__label{
 	line-height: 0.5rem;
 	background-color: #fbfbfb;
-	border-right:1px solid #dfdfdf;
+	/*border-right:1px solid #dfdfdf;*/
 	font-size:0.18rem;
 	color:#333333;
 }
-.createlib .el-dialog__body .el-form-item__label:before{
+.uploadimg .el-dialog__body .el-form-item__label:before{
 	display: none;
 }
-.createlib .el-dialog__body .el-form-item.disabled .el-form-item__label{
+.uploadimg .el-dialog__body .el-form-item.disabled .el-form-item__label{
 	color:#999999;
 }
-.createlib .el-dialog__body .el-form-item__content{
+.uploadimg .el-dialog__body .el-form-item__content{
 	line-height: 0.5rem;
+	border-left:1px solid #dfdfdf;
 	
 }
-.createlib .el-dialog__body .el-input input{
+.uploadimg .el-dialog__body .el-input input{
 	line-height:0.5rem;
 	border:none;
 	font-size:0.18rem;
 	color:#333333;
 	height:auto;
 }
-.createlib .el-dialog__body .el-form-item.disabled .el-input input{
+.uploadimg .el-dialog__body .el-form-item.disabled .el-input input{
 	background:#ffffff;
 	color:#999999;
 }
 /*底部*/
-.createlib .el-dialog__footer{
+.uploadimg .el-dialog__footer{
 	padding:0.43rem 0;
 }
-.createlib .dialog-footer.center{
+.uploadimg .dialog-footer.center{
 	text-align:center;
 }
-.createlib .dialog-footer button {
+.uploadimg .dialog-footer button {
     font-size: 0.18rem;
     padding: 0rem;
     line-height: 0.5rem;
@@ -249,36 +285,36 @@ export default {
     height:0.5rem;
     text-align: center;
 }
-.createlib .dialog-footer .el-button+.el-button{
+.uploadimg .dialog-footer .el-button+.el-button{
 	margin-left:0.57rem;
 }
-.createlib .dialog-footer button.yes {
+.uploadimg .dialog-footer button.yes {
 	background-color: rgb(88,180,129);
 	border-color:rgb(88,180,129);
 }
-.createlib .dialog-footer button.yes:hover {
+.uploadimg .dialog-footer button.yes:hover {
 	background-color: rgba(88,180,129,0.8);
 	border-color:#58b481;
 }
-.createlib .dialog-footer button.no {
+.uploadimg .dialog-footer button.no {
 	color: #58b481;
 	border-color:#58b481;
 }
-.createlib .dialog-footer button.no:hover {
+.uploadimg .dialog-footer button.no:hover {
 	background:rgba(88,180,129,0.1);
 }
 /*验证*/
-.createlib .el-form-item__error{
+.uploadimg .el-form-item__error{
 	left:auto;
 	right:0.1rem;
 	top:50%;
 	margin-top:-11px;
 }
 /*存放位置下拉*/
-.createlib .el-dialog__body .el-form-item.position .el-form-item__content .el-select{
+.uploadimg .el-dialog__body .el-form-item.position .el-form-item__content .el-select{
 	padding-left:0.2rem;
 }
-.createlib .el-dialog__body .el-form-item.position .el-form-item__content .el-select .el-input input{
+.uploadimg .el-dialog__body .el-form-item.position .el-form-item__content .el-select .el-input input{
 	height:0.36rem;
 	width:1.5rem;
 	line-height:0.34rem;
@@ -288,10 +324,10 @@ export default {
 	border-radius:0;
 }
 /*存放位置文本框*/
-.createlib .el-dialog__body .el-form-item.position .el-form-item__content>.el-input{
+.uploadimg .el-dialog__body .el-form-item.position .el-form-item__content>.el-input{
 	width:1.25rem;
 }
-.createlib .el-dialog__body .el-form-item.position .el-form-item__content>.el-input input{
+.uploadimg .el-dialog__body .el-form-item.position .el-form-item__content>.el-input input{
 	height:0.46rem;
 	line-height:0.46rem;
 	border:none;
@@ -299,5 +335,24 @@ export default {
 	padding-right:0;
 	padding-left:0;
 	font-size:0.16rem;
+}
+.uploadimg .el-form-item.images .el-form-item__content{
+	padding:20px 15px 0;
+}
+.uploadimg .el-form-item.images .el-form-item__content >div{
+	
+}
+.uploadimg .el-upload-list--picture-card .el-upload-list__item{
+	width:1.6rem;
+	height:1.1rem;
+}
+.uploadimg .el-upload--picture-card{
+	width:1.6rem;
+	height:1.1rem;
+	line-height:1.1rem;
+	margin-bottom:8px;
+}
+.uploadimg .el-upload--picture-card i{	
+	vertical-align:middle;
 }
 </style>

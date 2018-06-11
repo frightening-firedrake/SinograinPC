@@ -352,7 +352,8 @@ export default {
 			var high = this.formdatas.form.high-0;
 			var wide = this.formdatas.form.wide-0;
 			if(this.calculation_density == 1) {
-				return this.jsdjg.unQuality = Math.round((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)
+//				return this.jsdjg.unQuality = Math.round((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)
+				return this.jsdjg.unQuality = Math.round(this.ldsjtj*this.bzldpjmd)
 
 			} else if(this.calculation_density == 2) { 
 				return this.jsdjg.unQuality = Math.round((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz)
@@ -386,8 +387,9 @@ export default {
 			var high = this.formdatas.form.high;
 			var wide = this.formdatas.form.wide;
 			if(this.calculation_density == 1) {
-				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)
-			} else if(this.calculation_density == 2) { 
+//				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)
+				var cljss = Math.round(this.ldsjtj*this.bzldpjmd)
+			} else if(this.calculation_density == 2) {
 				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz)
 			}
 			//var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
@@ -404,7 +406,8 @@ export default {
 			var high = this.formdatas.form.high;
 			var wide = this.formdatas.form.wide;
 			if(this.calculation_density == 1) {
-				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)
+//				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor)
+				var cljss = Math.round(this.ldsjtj*this.bzldpjmd)
 			} else if(this.calculation_density == 2) { 
 				var cljss = ((length*high*wide - this.formdatas.form.deductVolume)*this.formdatas.form.realCapacity*this.formdatas.form.correction_factor_tz)
 			}

@@ -242,6 +242,22 @@ export default {
 					lid: 7
 				},
 				{
+					icon: 'icon-zhishicangku',
+					title: '库房管理',
+					linkto: '/index/sampleManagement/warehouseManagement',
+					level: 2,
+					pid: 6,
+					lid: 4
+				},
+				{
+					icon: 'icon-fanganzhizuo_huaban',
+					title: '样品登记薄制作',
+					linkto: '/index/sampleManagement/sampleRegistration',
+					level: 2,
+					pid: 6,
+					lid: 5
+				},
+				{
 					icon: 'icon-chuku',
 					title: '样品领取交接单',
 					linkto: '/index/sampleManagement/handover',
@@ -363,7 +379,7 @@ export default {
 					title: '添加库点',
 					level: 2,
 					pid: 22,
-					lid: 24,
+					lid: 25,
 					needAuth: 'InformationManagement',
 					
 				},
