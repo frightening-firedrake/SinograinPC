@@ -142,6 +142,7 @@ export default {
 						{
 							label: "库点名称",
 							model: "unit",
+							type:'input',
 						},
 						// {
 						// 	label:"添加库点",
@@ -222,6 +223,7 @@ export default {
 					{
 						label: "库点名称",
 						model: "lib",
+						type:'input',
 					},
 				],
 				submitText: '确定',

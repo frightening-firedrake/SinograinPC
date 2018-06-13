@@ -116,6 +116,7 @@ export default {
 					{
 						label: "直属库名称",
 						model: "unit",
+						type:'input',
 					},
 					// {
 					// 	label:"添加库点",
@@ -135,6 +136,7 @@ export default {
 					{
 						label: "添加名称",
 						model: "unit",
+						type:'input',
 					},
 				],
 				submitText: '确定',
@@ -197,10 +199,12 @@ export default {
 					{
 						label: "单位名称",
 						model: "unit",
+						type:'input',
 					},
 					{
 						label: "直属库名称",
 						model: "lib",
+						type:'input',
 					},
 				],
 				submitText: '确定',

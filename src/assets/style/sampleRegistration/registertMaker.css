@@ -7,10 +7,12 @@
 	margin-top:0;
 	border:1px solid #999;
 	border-radius:0.1rem 0.1rem 0 0;
+	border-color:#ccc;
 }
 .registertMaker .tbwrap{
 	border-left:1px solid #999;
 	border-right:1px solid #999;
+	border-color:#ccc;
 	
 }
 .registertMaker form p{
@@ -19,7 +21,7 @@
 .registertMaker .el-table::before{
 	display: none;
 }
-.trmwrap .tableHeader{
+.registertMaker .trmwrap .tableHeader{
 	height: 0.5rem;
 	text-align: center;
 	line-height: 0.5rem;
@@ -27,6 +29,8 @@
 	font-size:0.16rem;
 	color:#333333;
 	border:1px solid #dfdfdf;
+	border-color:#ccc;
+	
 }
 /*.tbwrap{
 	height:;
@@ -144,10 +148,11 @@
 	margin:0 -1px;
 	background-color:white;
 	border-top:1px solid #999;
+	border-color:#ccc;
 	/*border:1px solid #e6e7e7;*/
 	/*border-top:none;*/
 }
-.tableAddWrap .tableAdd {
+.registertMaker .tableAddWrap .tableAdd {
     float:right;
    	padding:0 0.1rem;
     height: 0.35rem;
@@ -162,14 +167,14 @@
     /*margin-right:17px;*/
     margin-top:-1px;
 }
-.tableAddWrap .tableAdd p{
+.registertMaker .tableAddWrap .tableAdd p{
     padding-left:0.35rem;
     background-repeat:no-repeat;
     background-position:left center;
     background-size:0.3rem 0.3rem;
     font-size:0.16rem;
 }
-.tableAddWrap .tableDel {
+.registertMaker .tableAddWrap .tableDel {
     float:right;
    	padding:0 0.1rem;
     height: 0.35rem;
@@ -184,7 +189,7 @@
     margin-right:0.1rem;
     margin-top:-1px;
 }
-.tableAddWrap .tableDel p{
+.registertMaker .tableAddWrap .tableDel p{
     padding-left:0.35rem;
     background-repeat:no-repeat;
     background-position:left center;
@@ -221,8 +226,10 @@
 }
 /*表格左右边颜色*/
 .el-main .registertMaker .el-table__body-wrapper,.el-main .registertMaker .el-table__header-wrapper{
-	border-left:1px solid #e6e7e7;
-	border-right:1px solid #e6e7e7;
+	/*border-left:1px solid #e6e7e7;
+	border-right:1px solid #e6e7e7;*/
+	border-color:#ccc;
+	
 }
 /*表头*/
 .el-main .registertMaker .el-table__header-wrapper table tr,.el-main .registertMaker .el-table__header-wrapper table tr th{
@@ -232,10 +239,14 @@
     height:0.5rem;
     border-color:#999;
     border-bottom-style:solid;
+	border-color:#ccc;
+    
 }
 /*表格颜色*/
 .el-main .registertMaker .el-table__body-wrapper table tr,.el-main .registertMaker .el-table__body-wrapper table tr th{
     background-color:#f6f9fa;
+	border-color:#ccc;
+    
 }
 /*列表补边*/
 .listpagewrap{
@@ -252,6 +263,8 @@
 	border-bottom:1px dashed #dfdfdf;
 	border-bottom-style:solid;
 	border-bottom-color:#999;
+	border-color:#ccc;
+	
 }
 .registertMaker .el-table__footer, .registertMaker .el-table__header{
 	width:100%!important;
@@ -276,9 +289,9 @@
 }*/
 .registertMaker .el-table__body-wrapper{
 	width:100%!important;
-	/*overflow:hidden;*/
+	overflow-x:hidden;
 	/*padding:1px;*/
-	min-height:5rem;
+	min-height:3.5rem;
 }
 .registertMaker .el-table__body tr{
 	width:100%!important;
@@ -302,7 +315,8 @@
 	border-color:#999;
 }
 .registertMaker td.last{
-	border-right:3 px solid #999;
+	/*border-right:3px solid #999;
+	border-color:#ccc;*/
 }
 .registertMaker div.cell{
     line-height:0.5rem;

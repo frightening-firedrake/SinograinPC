@@ -100,18 +100,20 @@ export default {
     methods: {
         getList() {
             this.region = null
-            this.$http({
-                method: 'post',
-                url: this.apiRoot + "/grain/library/data",
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                data: {
-                }
-            }).then(function(res) {
-                this.option = res.data.rows
-                // console.log(this.regionList)
-            }.bind(this)).catch(function(error) {
-                console.log(error);
-            }.bind(this));
+            this.point = null
+            
+//          this.$http({
+//              method: 'post',
+//              url: this.apiRoot + "/grain/library/getAll",
+//              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//              data: {
+//              }
+//          }).then(function(res) {
+//              this.option = res.data.rows
+//              // console.log(this.regionList)
+//          }.bind(this)).catch(function(error) {
+//              console.log(error);
+//          }.bind(this));
         },
         _select() {
             this.$emit("_select", { "regin": `${this.region}`, "point": `${this.point}`, "number": `${this.number}`, "sample": `${this.sample}` })

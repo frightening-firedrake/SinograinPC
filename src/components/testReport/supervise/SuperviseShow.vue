@@ -87,7 +87,16 @@ export default {
 				obj.url= this.apiRoot + "/grain/upload/picture/"+value2;
 				images.push(obj);
 			})
-			res0.images=images			
+//			循环审批图			
+			var images2=[]
+			var imagesbox2=res.approveImage.split(',');
+			imagesbox2.forEach((value2,index2)=>{
+				var obj={};
+				obj.url= this.apiRoot + "/grain/upload/picture/"+value2;
+				images2.push(obj);
+			})
+			res0.images=images;		
+			res0.images2=images2;		
 			this.formdatas.problem= res0
 		    this.formdatas.form.libraryName = this.$route.query.libraryName
 			this.formdatas.form.position = this.$route.query.position  
@@ -132,7 +141,12 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-	passProblem(id){
+	passProblem(id,form,images){
+		var params=form;
+			params.id=id;
+			params.isDeal=1;
+			params.approveImage=images.join(',');
+			console.log(params)
 		this.$http({
 		    method: 'post',
 			url: this.passURL,
@@ -145,10 +159,7 @@ export default {
 				return ret
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-			    id:id,
-				isDeal:1
-			}
+			data: params,
 	   }).then(function (response) {
 			  if(response.data.success) {
 				  this.formdatas.problem.isDeal=1	
@@ -161,9 +172,9 @@ export default {
 	dialogClose(){
 		this.modalVisible=false;
 	},
-  	submitupload(){
+  	submitupload(form,images){
   		var id=this.passProblemId;
-		this.passProblem(id)
+		this.passProblem(id,form,images)
   	},
 
 
@@ -230,11 +241,11 @@ export default {
 //	   提交通过信息
 	  modalVisible:false,
 	  modal:{
-	  	title:'该问题已解决证明',
+	  	title:'该问题已整改证明',
 		formdatas:[
 	  		{
 	  			label:"审批通过人:",
-	  			model:"sptgr",
+	  			model:"approver",
 				value: "",
 	  			type:'input',
 	  		},

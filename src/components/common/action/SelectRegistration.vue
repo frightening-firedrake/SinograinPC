@@ -41,7 +41,7 @@
  	    	</el-form-item>
 			
 			
-			<el-form-item label="选择类型" style="border-left:none;">
+			<el-form-item label="选择类型" class="full" style="border-top:none;">
 			    <el-autocomplete
 			      	class="remark-input"
 			      	v-model="remSelect"
@@ -59,7 +59,7 @@
 			    </el-select>
 			</el-form-item>-->
 			
-			
+			<div class="clear"></div>
 		</el-form>
 		<!--全选中处理-->
 		<p>

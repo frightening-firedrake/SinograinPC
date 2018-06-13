@@ -42,8 +42,9 @@
         }
     }
     .tableName {
-        border-radius: 0.1rem 0.1rem 0 0;
-        border-right: solid 1px #dfdfdf;
+        /*border-radius: 0.1rem 0.1rem 0 0;*/
+        border-right: solid 1px #ccc;
+        border-left: solid 1px #ccc;
         height: 0.6rem;
         line-height: 0.6rem;
         color: rgb(0, 0, 0);
@@ -58,6 +59,7 @@
     }
     .buttons {
         height: 0.55rem;
+        line-height:0.55rem;
         .el-radio-group {
             .el-radio-button {
                 width: 1.7rem;
@@ -596,6 +598,20 @@ export default {
                     width: 70,
                     //      sort:true,
                 },
+                {
+			        id: 44,
+			        prop:'inspectors',
+			        label:"检测人",
+			        pid:0,
+			//      sort:true,
+			    },
+			    {
+			        id: 45,
+			        prop:'inspectionTime',
+			        label:"检测时间",
+			        pid:0,
+			//      sort:true,
+			    },
             ],
             tfbtns: {
                 // btnCenter: {

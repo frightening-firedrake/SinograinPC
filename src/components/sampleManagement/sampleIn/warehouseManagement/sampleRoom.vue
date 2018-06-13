@@ -14,7 +14,7 @@
       <!--底部按钮们-->
       <tfoot-buttons :tfbtns="tfbtns" @tfootEvent="tfootEvent" ></tfoot-buttons>
       <!--弹框-->
-      <sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
+      <sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose" @modelSelectChange="modelSelectChange"></sinograin-modal>
     </div>
 </template>
 
@@ -249,12 +249,14 @@ export default {
 			  			type:'select',
 			  			selectitems:['1室','2室','3室'],
 			  			model:"reason",
+	  					value:'',
 			  		},
 			  		{
 			  			label:"选择柜号:",
 			  			type:'select',
 			  			selectitems:['1号柜','2号柜','3号柜','4号柜','5号柜','6号柜','7号柜','8号柜','9号柜','10号柜','11号柜'],
 			  			model:"reasonren",
+	  					value:'',		
 			  		},
 			  	],
 			  	submitText:'确定',
@@ -271,11 +273,13 @@ export default {
 			  			type:'textarea',
 			  			rows:3,
 			  			model:"reason2222",
+	  					value:'',
 			  		},
 			  		{
 			  			label:"处理人签名:",
 			  			type:'input',
 			  			model:"reasonren222",
+	  					value:'',			  			
 			  		},
 			  	],
 			  	submitText:'确定',
@@ -289,6 +293,10 @@ export default {
 		}else if(date=='btnOne'){
 
 		}
+	},
+//	弹框中的下拉框变化
+	modelSelectChange(val,model){
+		console.log(val,model)
 	},
 //	填入新建数据
 	createlibitem(form,title){
@@ -369,7 +377,7 @@ export default {
         id: 1,
         prop:'sampleNum',
         label: "检验编号",
-//      status:true,
+        status:true,
 //      sort:true
       },
       {
@@ -427,21 +435,7 @@ export default {
       },
       modalVisible:false,
 	  modal:{
-	  	title:'处理',
-		formdatas:[
-	  		{
-	  			label:"处理理由",
-	  			type:'textarea',
-	  			rows:3,
-	  			model:"reason",
-	  		},
-	  		{
-	  			label:"处理人签名",
-	  			type:'input',
-	  			model:"reasonren",
-	  		},
-	  	],
-	  	submitText:'确定',
+	  	
 	  },
     }
   }

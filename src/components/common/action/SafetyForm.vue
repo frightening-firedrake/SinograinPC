@@ -248,8 +248,9 @@ export default {
 			if(response.success){
 				var url=response.msg;
 				var index1=index;
-				console.log(url,index1,index2)
-				this.imgbox[index1].images[index2]=url
+//				console.log(url,index1,index2)
+				this.imgbox[index1].images[index2]=url;
+				console.log(this.imgbox)
 //				this.$emit('changeProblems',this.problems);
 			}else{
 //				alert(response.msg)	

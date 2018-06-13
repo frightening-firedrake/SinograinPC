@@ -9,7 +9,8 @@
       <!--表单-->
       <safety-form-edit :formdatas="formdatas" :problemFilter="problemFilter" @problemStatusChange="problemStatusChange" @pass="pass" @addsafety="addsafety"></safety-form-edit> 
       <!--通知弹框-->
-      <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
+      <!--<sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>-->
+      <sinograin-upload-Modal v-if="modalVisible"  :modal="modal" :uploadPicURL="uploadPicURL" v-on:submitupload="submitupload" v-on:dialogClose="dialogClose"></sinograin-upload-Modal>
     </div>
 </template>
 
@@ -24,6 +25,7 @@ import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SafetyFormEdit  from "@/components/common/action/SafetyFormEdit"
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 import SinograinMessage from "@/components/common/action/Message"
+import SinograinUploadModal from "@/components/common/action/UploadModal"
 
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
@@ -34,7 +36,7 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SafetyFormEdit,SinograinMessage
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SafetyFormEdit,SinograinMessage,SinograinUploadModal
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -104,6 +106,16 @@ export default {
 				})
 	
 				res0[index1].images=images
+				
+				var images2=[]
+				var imagesbox2=value1.approveImage.split(',');
+				imagesbox2.forEach((value2,index2)=>{
+					var obj={};
+					obj.url= this.apiRoot + "/grain/upload/picture/"+value2;
+					images2.push(obj);
+				})
+	
+				res0[index1].images2=images2
 			})
 			this.formdatas.problems = res0
 		    this.formdatas.form.libraryName = this.$route.query.libraryName
@@ -150,10 +162,15 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-	passProblem(id){
+	passProblem(id,form,images){
 		if(!this.$_ault_alert('safety:edit')){
 			return
 		}
+		var params=form;
+			params.id=id;
+			params.isDeal=1;
+			params.approveImage=images.join(',');
+			console.log(params)
 		this.$http({
 		    method: 'post',
 			url: this.passURL,
@@ -166,10 +183,7 @@ export default {
 				return ret
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-			    id:id,
-				isDeal:1
-			}
+			data:params,
 	    }).then(function (response) {
 		  	console.log(response)
 			  if(response.data.success) {
@@ -183,19 +197,27 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-  	messageclick(type){
-  		if(type=="confirm"){
-
-			var id=this.passProblemId;
-			this.passProblem(id)
-			console.log(id)
-	  		
-  		}else if(type=="error"){
-//			console.log(type)  			
-  		}
-  	},
-  	messageClose(){
-  		this.messageShow=false;
+//	messageclick(type){
+//		if(type=="confirm"){
+//
+//			var id=this.passProblemId;
+//			this.passProblem(id)
+//			console.log(id)
+//	  		
+//		}else if(type=="error"){
+////			console.log(type)  			
+//		}
+//	},
+//	messageClose(){
+//		this.messageShow=false;
+//	},
+//	关闭新建弹框
+	dialogClose(){
+		this.modalVisible=false;
+	},
+  	submitupload(form,images){
+  		var id=this.passProblemId;
+		this.passProblem(id,form,images)
   	},
 
 	titleEvent(){
@@ -207,7 +229,8 @@ export default {
 //	问题通过处理事件
   	pass(id){
 		// console.log(id)
-  		this.messageShow=true;
+//		this.messageShow=true;
+		this.modalVisible=true;
 		
   		this.passProblemId=id;
   	},
@@ -243,15 +266,30 @@ export default {
         type: 'info'
       }],
 //    通知弹窗
- 	  messageShow:false,
-	  messages:{
-	  	type:'confirm',
-	  	confirm:{
-	  		icon:'el-icon-success',
-	  		messageTittle:'确认此问题已解决?',
-	  		messageText:'此操作不可逆，请慎重操作',
-	  		buttonText:'确认',
-	  	},
+// 	  messageShow:false,
+//	  messages:{
+//	  	type:'confirm',
+//	  	confirm:{
+//	  		icon:'el-icon-success',
+//	  		messageTittle:'确认此问题已解决?',
+//	  		messageText:'此操作不可逆，请慎重操作',
+//	  		buttonText:'确认',
+//	  	},
+//	  },
+//	   提交通过信息
+	  modalVisible:false,
+	  modal:{
+	  	title:'该问题已整改证明',
+		formdatas:[
+	  		{
+	  			label:"审批通过人:",
+	  			model:"approver",
+				value: "",
+	  			type:'input',
+	  		},
+	  	],
+	  	adduploadprop:true,
+//	  	submitText:'入库',
 	  },
       formdatas: {
       	title:'监督检查',

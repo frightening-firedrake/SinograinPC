@@ -68,7 +68,7 @@
 			
 			<!--审批人部分-->
 			<el-form-item v-if="problem.isDeal!==-1" label="审批通过人：" class="disabled full">
-			    <el-input v-model="problem.rummager" disabled></el-input>
+			    <el-input v-model="problem.approver" disabled></el-input>
 			</el-form-item>
 			<el-form-item v-if="problem.isDeal!==-1" label="图片：" prop="images" class="images uploadedit">
 
@@ -80,7 +80,7 @@
 				  list-type="picture-card"
 				  :on-preview="handlePictureCardPreview"
 				  
-				  :file-list="problem.images"
+				  :file-list="problem.images2"
 				  :on-remove="handleRemove">
 				  <i class="el-icon-plus"></i>
 				</el-upload>
@@ -91,7 +91,7 @@
 			
 			<el-form-item label="" class="full button" label-width="0">
 				<div class="btn">					
-					<el-button class="yes" type="primary" @click="pass(problem.id)" :key="problem.id" :disabled="problem.isDeal!==-1">该问题已解决</el-button>
+					<el-button class="yes" type="primary" @click="pass(problem.id)" :key="problem.id" :disabled="problem.isDeal!==-1">该问题已整改</el-button>
 				</div>
 		    </el-form-item>
 		<!--</template>-->

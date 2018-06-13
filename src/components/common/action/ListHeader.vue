@@ -131,6 +131,9 @@
 		border: solid 1px #eaeaea;
 		border-bottom: none;
 	}
+	div.listHeader.deep{
+		border-color:#ccc;
+	}
 	/*标题*/
 	div.listHeader p{
 		float:left;

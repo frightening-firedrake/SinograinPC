@@ -389,7 +389,7 @@ export default {
 	  			model:"sampleNo",
 	  			disabled:true,
 	  			value:'',
-	  			type:'password'
+	  			type:'input',
 	  		},
 			// {
 	  		// 	label:"检验编号",
@@ -402,6 +402,7 @@ export default {
 	  			model:"storageTime",
 	  			disabled:true,
 	  			value:this.getDateNow(),
+	  			type:'input',
 	  		},
 	  		{
 	  			label:"存放位置:",
@@ -418,6 +419,7 @@ export default {
 	  			model:"autograph",
 				value: "",
 	  			disabled:true,
+	  			type:'input',
 	  		},
 	  	],
 	  	addprop:true,

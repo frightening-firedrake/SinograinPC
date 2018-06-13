@@ -285,6 +285,7 @@ export default {
 	  		{
 	  			label:"任务名称",
 	  			model:"taskName",
+	  			type:'input',
 	  		},
 	  	],
 	  	submitText:'确定',

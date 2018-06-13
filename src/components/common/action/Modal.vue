@@ -16,8 +16,8 @@
 			        	{{position_error_message}}
 			        </div>
 			    </el-form-item>
-			    <el-form-item class="select" v-if="!item.position&&item.type=='select'" :label="item.label"  :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}">
-			        <el-select v-model="form[item.model]" placeholder="请选择" :disabled="item.disabled">
+			    <el-form-item  class="select" v-if="!item.position&&item.type=='select'" :label="item.label"  :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}">
+			        <el-select v-model="form[item.model]" placeholder="请选择" :disabled="item.disabled" @change="function(val){return change(val,item.model)}">
 				        <el-option v-for="item2 in item.selectitems" :label="item2" :value="item2" :key="item2"></el-option>    
 				    </el-select>
 			    </el-form-item>
@@ -64,10 +64,20 @@ export default {
 		...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask","isCollapse"]),
 		...mapGetters(["modal_id"]),
 	},
+	beforeCreate(){
+//		console.log(this.$options.propsData)
+	},
 	created(){
+		console.log(this.form)
+		
 		this.modal.formdatas.forEach((item,index)=>{
-			this.form[item.model]=item.value
+			if(item.value){				
+				this.form[item.model]=item.value
+			}
 		})
+	},
+	mounted(){
+
 	},
     data() {
         return {
@@ -126,11 +136,12 @@ export default {
     	dialogClose(){
 //  		this.$refs['modalform'].resetFields();
     		this.$emit('dialogClose')
-    	}
-    },
-    mounted:function(){
-//		console.log(this.breadcrumb)
-    }
+    	},
+    	change(val,model){
+//  		console.log(val,model)
+            this.$emit('modelSelectChange',val,model);
+    	},
+   	},
     
 }
 </script>

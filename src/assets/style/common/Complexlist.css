@@ -33,15 +33,17 @@
     background: rgb(255, 255, 255);
     /*padding: 0px 0.45rem;*/
     border: 1px solid #e6e7e7;
-    border-color: #e6e7e7;
+    border-color: #ccc;
     max-height:8rem;
     overflow: auto;
 }
 .complex.el-table--border td,.complex.el-table--border th{
 	border-right:1px solid #e6e7e7;
+	border-color:#ccc;
 }
 .complex.el-table td, .complex.el-table th.is-leaf{
 	border-bottom:1px solid #e6e7e7;
+	border-color:#ccc;
 }
 /*列表行文字*/
 .el-main .complex .el-table__body-wrapper table tr{
@@ -131,6 +133,7 @@
     font-size: 0.18rem;
     color:#000000;
     height:0.5rem;
+    border-color:#ccc;
     /*line-height:0.68rem;*/
 }
 /*表格颜色*/
@@ -147,29 +150,30 @@
 	height:auto;
 }
 /*表格行线*/
-.complex .el-table td, .el-table th.is-leaf{
+.complex .el-table td,.complex .el-table th.is-leaf{
 	border-bottom:1px solid #dfdfdf;
+	border-color:#ccc;
 }
 .complex .el-table__footer, .complex .el-table__header{
-	width:100%!important;
+	/*width:100%!important;*/
 	/*margin:0 -1px;*/
 }
 .complex .el-table__body{
-	width:100%!important;
-	margin:0 -1px;
+	/*width:100%!important;*/
+	/*margin:0 -1px;*/
 }
 /*.complex .el-table::before{
 	display: none;
 }*/
 .complex .el-table__body-wrapper{
-	width:100%!important;
-	min-height:auto;
-	overflow-x: hidden;
+	/*width:100%!important;*/
+	/*min-height:auto;*/
+	/*overflow-x: hidden;*/
 	/*overflow:hidden;*/
 	/*padding:1px;*/
 }
 .complex .el-table__body tr,.complex .el-table__body tbody{
-	width:100%!important;
+	/*width:100%!important;*/
 	
 }
 /*.complex .el-table__row:hover{
@@ -222,8 +226,8 @@
 	border-bottom-color: #333;
 	/*border-bottom-color: #1bb45f;*/
 }
-.el-table--border::after, .el-table--group::after, .el-table::before{
-	/*display: none;*/
+.complex .el-table--border::after, .el-table--group::after, .el-table::before{
+	display: none;
 }
 /*表头文字对齐*/
 .complex tr >th:nth-last-child(2) div.cell{

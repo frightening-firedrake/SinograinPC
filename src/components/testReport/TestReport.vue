@@ -9,7 +9,7 @@
       <!--合格筛选--> 
       <!--<tabselect :hege="hege" :currentTab="currentTab" @hegeChange="hegeChange"></tabselect>--> 
       <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
+      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" class="deep"></list-header>
       <!--表格-->
       <sinograin-complex-list class="complex" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
       </sinograin-complex-list>
@@ -382,6 +382,13 @@ export default {
 	//      sort:true,
 	      },
 	      {
+	        id: 1001,
+	        prop:'originPlace',
+	        label:"产地",
+	        pid:100,
+	//      sort:true,
+	      },
+	      {
 	        id: 7,
 	        prop:'gainTime',
 	        label:"生产年份",
@@ -636,6 +643,20 @@ export default {
 	        pid:0,
 	//      sort:true,
 	      },
+	      {
+	        id: 43,
+	        prop:'inspectors',
+	        label:"检测人",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 44,
+	        prop:'inspectionTime',
+	        label:"检测时间",
+	        pid:0,
+	//      sort:true,
+	      },
 
 	  ],
 	  xiaomai:[
@@ -699,6 +720,13 @@ export default {
 	        id: 6,
 	        prop:'amount',
 	        label:"数量（吨）",
+	        pid:100,
+	//      sort:true,
+	      },
+	      {
+	        id: 1001,
+	        prop:'originPlace',
+	        label:"产地",
 	        pid:100,
 	//      sort:true,
 	      },
@@ -972,7 +1000,20 @@ export default {
 	        pid:0,
 	//      sort:true,
 	      },
-
+		  {
+	        id: 44,
+	        prop:'inspectors',
+	        label:"检测人",
+	        pid:0,
+	//      sort:true,
+	      },
+	      {
+	        id: 45,
+	        prop:'inspectionTime',
+	        label:"检测时间",
+	        pid:0,
+	//      sort:true,
+	      },
 	  ],
       actions:{
       	selection:false,
