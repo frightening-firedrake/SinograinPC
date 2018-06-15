@@ -442,6 +442,21 @@ export default {
                     //                  width: 70,
                     //      sort:true,
                 },
+                {
+			        id: 44,
+			        prop:'inspectors',
+			        label:"检测人",
+			        pid:0,
+			//      sort:true,
+                    width: 300,
+			    },
+			    {
+			        id: 45,
+			        prop:'inspectionTime',
+			        label:"检测时间",
+			        pid:0,
+			//      sort:true,
+			    },
                 
             ],
             // 小麦的表头
@@ -604,6 +619,7 @@ export default {
 			        label:"检测人",
 			        pid:0,
 			//      sort:true,
+                    width: 300,
 			    },
 			    {
 			        id: 45,

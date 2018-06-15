@@ -16,7 +16,7 @@
 			      	class="remark-input"
 			      	v-model="remSelect"
 			     	:fetch-suggestions="querySearch"
-			      	placeholder="请填写类型·"
+			      	placeholder="请填写类型"
 			    >
 			    </el-autocomplete>
 			</el-form-item>

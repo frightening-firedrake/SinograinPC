@@ -648,6 +648,7 @@ export default {
 	        prop:'inspectors',
 	        label:"检测人",
 	        pid:0,
+	        width:300,
 	//      sort:true,
 	      },
 	      {
@@ -1005,6 +1006,7 @@ export default {
 	        prop:'inspectors',
 	        label:"检测人",
 	        pid:0,
+	        width:"300",
 	//      sort:true,
 	      },
 	      {

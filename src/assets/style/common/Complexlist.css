@@ -20,8 +20,9 @@
     width: 0.038rem;
 }
 /*空数据容器*/
-.el-table__empty-block{
+.complex .el-table__empty-block{
 	width:100%!important;
+	height:3rem;
 }
 .el-main{
     /*padding: 0px 0.45rem;*/
@@ -36,6 +37,7 @@
     border-color: #ccc;
     max-height:8rem;
     overflow: auto;
+    min-height:5.5rem;
 }
 .complex.el-table--border td,.complex.el-table--border th{
 	border-right:1px solid #e6e7e7;

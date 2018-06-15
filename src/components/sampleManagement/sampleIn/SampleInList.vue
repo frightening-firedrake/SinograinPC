@@ -5,7 +5,7 @@
       <!--alert-->
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" ></list-header>
+      <list-header-more :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" @remChange="remChange"  @selectlibChange="selectlibChange"></list-header-more>
       <!--表格-->
       <sinograin-list class="list le" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
@@ -26,7 +26,7 @@ import SinograinList from '@/components/common/action/List.vue';
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SinograinPagination from '@/components/common/action/Pagination.vue';
-import ListHeader from '@/components/common/action/ListHeader.vue';
+import ListHeaderMore from '@/components/common/action/ListHeaderMore.vue';
 import SinograinModal from '@/components/common/action/Modal.vue';
 import SinograinMessage from "@/components/common/action/Message"
 import "@/assets/style/common/list.css"
@@ -42,7 +42,7 @@ let LODOP
 
 export default {
   components: {
-    SinograinList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader,SinograinMessage
+    SinograinList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeaderMore,SinograinMessage
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -63,6 +63,7 @@ export default {
   	this.modal.formdatas[3].value=this.userName;
 //  获取列表数据（第一页）
 	this.getlistdata(1)
+	this.getlibrarylist()
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
@@ -107,9 +108,21 @@ export default {
 	dateChange(data){
 		console.log(data);
 	},
+	remChange(remark){
+		console.log(remark)
+	},
 	statusChange(data){
 //		console.log(data)
 		this.filterStatus=data
+	},
+	//	筛选库
+	selectlibChange(libtype,selectLibraryId){
+		this.selectLibraryId=selectLibraryId;
+		this.libtype=libtype;
+//		console.log(this.libtype,this.selectLibraryId)
+//		this.filterlib=lib
+//		console.log(this.filterlib)
+//		this.getlistdata(1)
 	},
 	createSampling(){
 //		console.log('createSampling');
@@ -285,6 +298,31 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+  	getlibrarylist(){
+		var params = {};
+		params.pLibraryId = -1
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.librarylistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+//			    params: JSON.stringify(params)
+			}
+		   	}).then(function (response) {
+			  	this.listHeader.libraryList = response.data;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+	},
   	//	发送删除id
   	sendDeleteId(id){
 		this.$http({
@@ -374,6 +412,7 @@ export default {
       datalistURL: this.apiRoot + '/grain/sample/data',
 	  getSampleNoURL: this.apiRoot + '/grain/sample/getBySampleNo',
 	  editURL: this.apiRoot + '/grain/sample/edit',
+	  librarylistURL: this.apiRoot + '/grain/library/getAll',
 	  searchURL:this.apiRoot + '/grain/sample/data',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
@@ -457,10 +496,24 @@ export default {
       listHeader:{
       	createlib:false,
       	createSampling:false,
-      	status:false,
-      	date:true,
+      	date1:true,
+      	date1Title:'样品入库时间：',
+      	selectlib:true,
+      	libraryList:[],
       	scanCode:true,
+      	status:true,
+      	statusTitle:'存放状态：',
+      	statusitems:[
+      		{label:'全部',text:'全部'},
+      		{label:'未检测',text:'未检测'},
+      		{label:'已检测',text:'已检测'},
+      	],
+      	selectRem:true,
       },
+      libtype:'pLibrary',
+      selectLibraryId:'全部',
+      remark:'',
+      
       tabledatas:[],
       items: [
 //    {

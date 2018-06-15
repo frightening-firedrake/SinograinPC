@@ -3,7 +3,7 @@
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
       <!--alert-->
-      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
+      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" @statusChange2="statusChange2" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" ></list-header>
       <!--表格-->
@@ -343,7 +343,7 @@ export default {
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：入库前请准备好条码打印机，以便于更换检验编号!',
+        title: '温馨提示：样品处理支持多选，样品转移需记录每个样品转移后位置仅支持单选!',
         type: 'info'
       }],
 //    表格数据
