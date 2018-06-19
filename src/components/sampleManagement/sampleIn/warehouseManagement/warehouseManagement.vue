@@ -305,7 +305,7 @@ export default {
       },
       {
         id: 2,
-        prop:'position',
+        prop:'counter',
         label: "柜号",
 //      sort:true
       },

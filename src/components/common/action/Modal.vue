@@ -16,9 +16,9 @@
 			        	{{position_error_message}}
 			        </div>
 			    </el-form-item>
-			    <el-form-item  class="select" v-if="!item.position&&item.type=='select'" :label="item.label"  :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}">
+			    <el-form-item  class="select" v-if="!item.position&&item.type=='select'" :prop="item.model" :label="item.label"  :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '请选择'}]">
 			        <el-select v-model="form[item.model]" placeholder="请选择" :disabled="item.disabled" @change="function(val){return change(val,item.model)}">
-				        <el-option v-for="item2 in item.selectitems" :label="item2" :value="item2" :key="item2"></el-option>    
+				        <el-option v-for="item2 in item.selectitems" :label="item2.label" :value="item2.value" :key="item2.label"></el-option>    
 				    </el-select>
 			    </el-form-item>
 			    <el-form-item v-if="!item.position&&item.type=='textarea'" :label="item.label" :prop="item.model" :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled,textareaall:item.textareaall}" :rules="[{ required: true, message: '内容不能为空'}]">
@@ -68,7 +68,7 @@ export default {
 //		console.log(this.$options.propsData)
 	},
 	created(){
-		console.log(this.form)
+//		console.log(this.form)
 		
 		this.modal.formdatas.forEach((item,index)=>{
 			if(item.value){				
@@ -138,7 +138,21 @@ export default {
     		this.$emit('dialogClose')
     	},
     	change(val,model){
-//  		console.log(val,model)
+//  		console.log(val,model,this.form)
+			if(model=='depot'){
+				if(this.form['counter']){					
+					this.form['counter']='';
+				}
+				if(this.form['place']){					
+					this.form['place']='';
+				}
+			}else if(model=='counter'){
+				if(this.form['place']){					
+					this.form['place']='';
+				}
+			}else if(model=='place'){
+//				this.form['counter']=''
+			}
             this.$emit('modelSelectChange',val,model);
     	},
    	},

@@ -12,7 +12,7 @@
       <!--分页-->
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
       <!--新建库典弹框-->
-      <sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
+      <sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose" @modelSelectChange="modelSelectChange"></sinograin-modal>      	
       <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose" @getScanCode="getScanCode"></sinograin-message>
     </div>
 </template>
@@ -60,10 +60,13 @@ export default {
   },
   created(){
 //	console.log(this.$route.query)
-  	this.modal.formdatas[3].value=this.userName;
+  	this.modal.formdatas[5].value=this.userName;
 //  获取列表数据（第一页）
 	this.getlistdata(1)
 	this.getlibrarylist()
+	this.getdepotlist()
+	this.getcounterlist()
+	this.getplacelist()
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
@@ -146,6 +149,7 @@ export default {
 	},
 //	填入新建数据并点击确认
 	createlibitem(form){
+		
 		this.$http({
 		    method: 'post',
 			url: this.editURL,
@@ -161,14 +165,19 @@ export default {
 			data: {
 				id: this.dataBySampleNo.id,
 				storageTime: form.storageTime,
-				depot: form.depot,
-				counter: form.counter,
+//				depot: form.depot,
+//				counter: form.counter,
+				placeId: form.place,
 				autograph: form.autograph,
 				sampleState: 2
 			}
 	    }).then(function (response) {
 //			console.log(response)
 			if(response.data.success) {
+				//将已选柜子去掉
+				this.placeList=this.placeList.filter(function(item,index){
+					return item.id!==form.place
+				})
 				this.getlistdata(1);
 				this.$notify({
 		          	title: '入库成功',
@@ -323,6 +332,122 @@ export default {
 		    console.log(error);
 		}.bind(this));
 	},
+	//获取室信息
+	getdepotlist(){
+//		var params = {};
+//		params.pLibraryId = -1
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.depotlistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+//			    params: JSON.stringify(params)
+			}
+		   	}).then(function (response) {
+		   		response.data.forEach(function(item,index){
+		   			var obj={};
+		   			obj.id=item.id;
+		   			obj.label=item.depot;
+		   			obj.value=item.id;
+		   			this.depotList.push(obj);
+		   		}.bind(this))
+		   		this.modal.formdatas[2].selectitems=this.depotList;
+//			  	this.listHeader.libraryList = response.data;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+	},
+//获取柜子信息
+	getcounterlist(){
+//		var params = {};
+//		params.pLibraryId = -1
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.counterlistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+//			    params: JSON.stringify(params)
+			}
+		   	}).then(function (response) {
+		   		response.data.forEach(function(item,index){
+		   			var obj={};
+		   			obj.id=item.id;
+		   			obj.label=item.counter;
+		   			obj.pId=item.pId;
+		   			obj.value=item.id;
+		   			this.counterList.push(obj);
+		   		}.bind(this))
+//			  	this.listHeader.libraryList = response.data;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+	},
+//获取位置信息
+	getplacelist(){
+//		var params = {};
+//		params.pLibraryId = -1
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.placelistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+//			    params: JSON.stringify(params)
+			}
+		   	}).then(function (response) {
+		   		response.data.forEach(function(item,index){
+		   			if(item.isStorage==1){		   				
+		   				var obj={};
+		   				obj.id=item.id;
+		   				obj.pId=item.pId;
+		   				obj.label=item.place;
+		   				obj.value=item.id;
+		   				this.placeList.push(obj);
+		   			}
+		   		}.bind(this))
+//			  	this.listHeader.libraryList = response.data;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+	},
+//	弹框中的下拉框变化
+	modelSelectChange(val,model){
+//		console.log(val,model)
+		if(model=='depot'){
+			this.modal.formdatas[3].selectitems=this.counterList.filter((item,index)=>{return item.pId==val})
+			this.modal.formdatas[4].selectitems=[];
+		}else if(model=='counter'){
+			this.modal.formdatas[4].selectitems=this.placeList.filter((item,index)=>{return item.pId==val})
+		}else if(model=='place'){
+//			console.log(val)
+		}
+	},
   	//	发送删除id
   	sendDeleteId(id){
 		this.$http({
@@ -381,6 +506,8 @@ export default {
   			this.messageShow=false;
   		}else{  			
 			this.modal.formdatas[0].value=code;
+			this.modal.formdatas[3].selectitems=[];
+			this.modal.formdatas[4].selectitems=[];
 //			this.modal.formdatas[0].value=6000601005;
 //			this.messageShow=false;
 			this.getsample();
@@ -413,11 +540,17 @@ export default {
 	  getSampleNoURL: this.apiRoot + '/grain/sample/getBySampleNo',
 	  editURL: this.apiRoot + '/grain/sample/edit',
 	  librarylistURL: this.apiRoot + '/grain/library/getAll',
+	  depotlistURL: this.apiRoot + '/grain/warehouse/getAll',
+	  counterlistURL: this.apiRoot + '/grain/warehouseCounter/getAll',
+	  placelistURL: this.apiRoot + '/grain/warehouseCounterPlace/getAll',
 	  searchURL:this.apiRoot + '/grain/sample/data',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
       checkedId:[],
 	  dataBySampleNo: {},
+	  depotList:[],
+      counterList:[],
+      placeList:[],
       list:"samplinglist",
 	  modalVisible:false,
 	  modal:{
@@ -443,15 +576,36 @@ export default {
 	  			value:this.getDateNow(),
 	  			type:'input',
 	  		},
+//	  		{
+//	  			label:"存放位置:",
+//	  			position:true,
+//				model: "positions",
+//				value:'',
+////	  			model:"position",
+//	  			modelselect:"depot",
+//	  			modelinput:"counter",
+////	  			value:'朔水-9号仓-1号柜',
+//	  		},
 	  		{
-	  			label:"存放位置:",
-	  			position:true,
-				model: "positions",
+	  			label:"选择样品室:",
+	  			type:'select',
+	  			selectitems:[],
+	  			model:"depot",
 				value:'',
-//	  			model:"position",
-	  			modelselect:"depot",
-	  			modelinput:"counter",
-//	  			value:'朔水-9号仓-1号柜',
+	  		},
+	  		{
+	  			label:"选择柜号:",
+	  			type:'select',
+	  			selectitems:[],
+	  			model:"counter",
+				value:'',		
+	  		},
+	  		{
+	  			label:"选择位置:",
+	  			type:'select',
+	  			selectitems:[],
+	  			model:"place",
+				value:'',		
 	  		},
 	  		{
 	  			label:"入库签名:",
@@ -461,7 +615,7 @@ export default {
 	  			type:'input',
 	  		},
 	  	],
-	  	addprop:true,
+//	  	addprop:true,
 	  	submitText:'入库',
 	  },
       breadcrumb:{
@@ -502,7 +656,7 @@ export default {
       	libraryList:[],
       	scanCode:true,
       	status:true,
-      	statusTitle:'存放状态：',
+      	statusTitle:'检测状态：',
       	statusitems:[
       		{label:'全部',text:'全部'},
       		{label:'未检测',text:'未检测'},

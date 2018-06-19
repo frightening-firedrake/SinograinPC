@@ -240,7 +240,20 @@ export default {
   	//	表单底部触发事件btnCenterNo btnCenterYes btnLeft btnRight btnOne
 	tfootEvent(date){
 		console.log(date);
-		if(date=='btnCenterL'){			
+		if(date=='btnCenterL'){		
+			if(!this.checkedId.length){
+				this.$notify.error({
+		          	title: '错误提示',
+		          	message: '请先选择待转移样品！！！',
+		        });
+		        return
+			}else if(this.checkedId.length>1){
+				this.$notify.error({
+		          	title: '错误提示',
+		          	message: '转移样品仅支持单选！！！',
+		        });
+		        return
+			}
 			var modal={
 			  	title:'转移',
 				formdatas:[
@@ -248,14 +261,21 @@ export default {
 			  			label:"选择样品室:",
 			  			type:'select',
 			  			selectitems:['1室','2室','3室'],
-			  			model:"reason",
+			  			model:"dept",
 	  					value:'',
 			  		},
 			  		{
 			  			label:"选择柜号:",
 			  			type:'select',
 			  			selectitems:['1号柜','2号柜','3号柜','4号柜','5号柜','6号柜','7号柜','8号柜','9号柜','10号柜','11号柜'],
-			  			model:"reasonren",
+			  			model:"counter",
+	  					value:'',		
+			  		},
+			  		{
+			  			label:"选择位置:",
+			  			type:'select',
+			  			selectitems:['01','02','03','04','05','06','07','08','09','10','11'],
+			  			model:"place",
 	  					value:'',		
 			  		},
 			  	],
@@ -264,6 +284,13 @@ export default {
 			this.modal=modal;
 			this.modalVisible=true;
 		}else if(date=='btnCenterR'){
+			if(!this.checkedId.length){
+				this.$notify.error({
+		          	title: '错误提示',
+		          	message: '请先选择待处理样品！！！',
+		        });
+		        return
+			}
 			var modal={
 			  	title:'处理',
 
