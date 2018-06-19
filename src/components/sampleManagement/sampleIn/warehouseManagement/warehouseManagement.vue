@@ -71,12 +71,12 @@ export default {
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击查看事件
-  	this.$root.eventHub.$on("viewlistitem",function(id){  
+  	this.$root.eventHub.$on("viewlistitem",function(counterId){  
   		if(!this.$_ault_alert('sample:getById')){
 			return
 		}
 //		console.log(id)
-		this.$router.push({path: '/index/sampleManagement/warehouseManagement/sampleRoom',query:{id:id}})
+		this.$router.push({path: '/index/sampleManagement/warehouseManagement/sampleRoom',query:{counterId:counterId}})
 		
   	}.bind(this));
   	//	监听列表点击编辑事件
@@ -158,10 +158,10 @@ export default {
   	},
 //	获取列表数据方法
   	getlistdata(page){
-		var params = {};
-		params.sampleWordOrsampleNumLike = '';
-		params.ruKuSampleState = 2
-		params.fenxiaoyangSampleState = 3
+		// var params = {};
+		// params.sampleWordOrsampleNumLike = '';
+		// params.ruKuSampleState = 2
+		// params.fenxiaoyangSampleState = 3
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -179,7 +179,7 @@ export default {
 			data: {
 			    page:page,
 			    rows:this.page.size,
-				params:JSON.stringify(params)
+				// params:JSON.stringify(params)
 			}
 	   	}).then(function (response) {
 		  	this.tabledatas=response.data.rows;
@@ -234,7 +234,7 @@ export default {
   },
   data() {
     return {
-      datalistURL: this.apiRoot + '/grain/sample/data',
+      datalistURL: this.apiRoot + '/grain/warehouse/data',
 	  editURL: this.apiRoot + '/grain/sample/edit',
 	  searchURL:this.apiRoot + '/grain/sample/data',
       deleteURL:'/liquid/role2/data/delete',
