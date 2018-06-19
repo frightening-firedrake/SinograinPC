@@ -31,7 +31,7 @@ export default {
     SinograinBreadcrumb,SinograinOptionTitle,SampleRegistertMaker
   },
   computed:{
-
+	...mapGetters(["libraryName","Token"]),
   },
   created(){
 //	this.getlistdata(1);
@@ -153,7 +153,17 @@ export default {
 		this.$router.push({name:name,params:{ids:ids,title:this.formdatas.tableName,sort:sort}})
     },
     exportExcel(){
-    	
+    	var arr=[];
+    	this.tabledatas.forEach((item,index)=>{
+    		arr.push(item.sampleNo)
+    	})
+    	var sampleNos=arr.join(',')
+    	console.log(sampleNos)
+    	if(!this.$_ault_alert('register:export')){
+			return
+		}
+		var loadiframe=document.getElementById('fordownload');
+		loadiframe.src=this.exportExcelURL+'?sampleNos='+sampleNos+'&sessionid='+this.Token;
     },
     currentRowFun(currentRow){
 		this.currentRow=currentRow;
@@ -161,6 +171,7 @@ export default {
   },
   data() {
     return {
+      exportExcelURL: this.apiRoot + '/grain/sample/ExportRegister',
       datalistURL:'/liquid/role19/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
@@ -183,31 +194,28 @@ export default {
       	remark:'',
       },
       tabledatas:[
-	      {libraryName:'我是假数据',id:1},
-	      {libraryName:'我是假数据',id:2},
-	      {libraryName:'我是假数据',id:3},
-	      {libraryName:'我是假数据',id:4},
-	      {libraryName:'我是假数据',id:5},
-	      {libraryName:'我是假数据',id:6},
-
+	      
       ],
       items: [
 	      {
 	        id: 1,
 	        label: "检验编号",
-	        prop:'libraryName',
+	        prop:'sampleNum',
+	        status:true,
 	        pid:0,
 	      },
 	      {
 	        id: 2,
 	        label: "扦样编号",
-	        prop:'libraryName',
+	        prop:'sampleWord',
 	        pid:0,
 	      },
 	      {
 	        id: 3,
 	        label: "检验项目",
-	        prop:'libraryName',
+	        prop:'checkeds',
+	        width:'310',
+	        status:true,
 	        pid:0,
 	      },
 	      {
@@ -217,14 +225,14 @@ export default {
 	      },
 	      {
 	        id: 5,
-	        prop:'libraryName',
+	        prop:'autograph',
 	        label: "扦样人员",
 	        pid:4,
 	//      sort:true
 	      },
 	      {
 	        id: 6,
-	        prop:'libraryName',
+	        prop:'sampleTime',
 	        label:"时间",
 	        status:true,
 	        pid:4,
@@ -238,28 +246,28 @@ export default {
 	      },
 	      {
 	        id: 8,
-	        prop:'libraryName',
+	        prop:'null',
 	        label:"工作人员",
 	        pid:7,
 	//      sort:true,
 	      },
 	      {
 	        id: 9,
-	        prop:'libraryName',
+	        prop:'null',
 	        label:"时间",
 	        pid:7,
 	//      sort:true,
 	      },
 	      {
 	        id: 10,
-	        prop:'libraryName',
+	        prop:'zhaojishane',
 	        label:"存放位置",
 	        pid:0,
 	//      sort:true,
 	      },
 	      {
 	        id: 11,
-	        prop:'libraryName',
+	        prop:'remark',
 	        label:"备注",
 	        pid:0,
 	        class:'last',

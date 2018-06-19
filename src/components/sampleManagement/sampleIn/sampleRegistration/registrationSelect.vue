@@ -5,7 +5,7 @@
   	  <!--标题-->
   	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--提示-->
-      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
+      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
       <select-registration :taskList="taskList" :checkList="checkList" :checkedListAdd="checkedList" @getCheckedList="getCheckedList" @searchingfor="searchingfor"></select-registration> 
 
@@ -44,11 +44,11 @@ export default {
   },
   created(){
 //	console.log(this.$route.params)
-	this.getTaskList()
+//	this.getTaskList()
   	
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
-//	this.getsampledata();
+	this.getsampledata();
 	
   },
   destroy(){
@@ -81,9 +81,9 @@ export default {
 	    }).then(function (response) {
 //			console.log(response)
 		  	this.checkList=response.data.rows;
-		  	if(this.$route.params.formdatas){
-				this.checkedList=this.$route.params.tabledatas;
-			}
+//		  	if(this.$route.params.formdatas){
+//				this.checkedList=this.$route.params.tabledatas;
+//			}
 //		  	this.checkedList=response.data.rows;
 //	  		this.page.total=response.data.total;
 		}.bind(this)).catch(function (error) {
@@ -188,7 +188,7 @@ export default {
   },
   data() {
     return {
-      sampleURL:this.apiRoot + '/grain/sample/findSamplesByTask',
+      sampleURL:this.apiRoot + '/grain/sample/data',
 	  taskListURL:this.apiRoot + '/grain/task/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',

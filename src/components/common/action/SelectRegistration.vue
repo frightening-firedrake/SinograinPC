@@ -169,7 +169,7 @@ export default {
     	checkedListFilter(){
 			return this.checkList.filter((item,index)=>{
 //				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
-				return (item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
+				return (item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))&&((Date.parse(item.storageTime)>=this.datestart)&&(Date.parse(item.storageTime)<=this.dateend))
 //				return (this.isChecked?item.sampleState==this.isChecked:true)&&(item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 			})
     	},
@@ -268,9 +268,14 @@ export default {
 	  		this.checkedList=[];
 	  	},
 	  	dateChange(){
-
-     		console.log(this.date_select);
+			
+			this.datestart=Date.parse(this.date_select[0]);
+			this.dateend=Date.parse(this.date_select[1]);
+//			    datearr[2]=Date.parse("2018-06-15");
+//   		console.log(this.date_select);
+//   		console.log(this.datearr);
  //  		this.$emit('dateChange',this.date_select);
+//   		this.$emit('dateChange',datearr);
      	},
     },
     data() {
@@ -294,6 +299,8 @@ export default {
 			labelWidth:'1rem',
 		    remSelect:'',
 	        sampleNumRange:[],
+	        datestart:0,
+	        dateend:9999999999999,
 	        pickerOptions2: {
  		        shortcuts: [{
  		            text: '最近一周',

@@ -36,26 +36,32 @@
 			      <!--<el-table-column type="index" :index="indexMethod" v-if="actions.number"></el-table-column>-->
 			      <!--循环数据-->
 			   		<template v-for="item in items" v-if="item.pid==0">    
-			    		<el-table-column  show-overflow-tooltip :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
+			    		<el-table-column v-if="!item.status" show-overflow-tooltip :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
+				    		
 				    		<template v-for="item1 in items" v-if="item1.pid==item.id">    
 					    		<el-table-column show-overflow-tooltip :width="item1.width?item1.width:'auto'" :resizable="resizable"	 align="center" :key="item1.id" :label="item1.label" :sortable="item1.sort" :prop="item1.prop" :class-name="item1.class">
-						    		<template v-for="item2 in items" v-if="item2.pid==item1.id">    
-							    		<el-table-column show-overflow-tooltip :width="item2.width?item2.width:'auto'" :resizable="resizable"	 align="center" :key="item2.id" :label="item2.label" :sortable="item2.sort" :prop="item2.prop" :class-name="item2.class">
-								    		<template v-for="item3 in items" v-if="item3.pid==item2.id">    
-									    		<el-table-column show-overflow-tooltip :width="item3.width?item3.width:'auto'" :resizable="resizable"	 align="center" :key="item3.id" :label="item3.label" :sortable="item3.sort" :prop="item3.prop" :class-name="item3.class">
-									    			<template v-for="item4 in items" v-if="item4.pid==item3.id">    
-											    		<el-table-column show-overflow-tooltip :width="item4.width?item4.width:'auto'" :resizable="resizable"	 align="center" :key="item4.id" :label="item4.label" :sortable="item4.sort" :prop="item4.prop" :class-name="item4.class">
-											    		
-											    		</el-table-column>
-											   		</template>
-									    		</el-table-column>
-									   		</template>
-							    		</el-table-column>
-							   		</template>
+						    		
+						    		
 					    		</el-table-column>
 					   		</template>
 			    		</el-table-column>
+			    		
+				   		<el-table-column show-overflow-tooltip v-if="item.status" :width="item.width?item.width:'auto'" :resizable="resizable" align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
+							<template slot-scope="scope">
+								<template v-if="item.prop=='checkeds'">
+									{{findCheckeds(scope.row[item.prop])}}
+								</template>
+								<template v-if="item.prop=='sampleNum'">
+									监{{scope.row[item.prop]}}
+								</template>
+								<template v-if="item.prop=='smallSampleNum'">
+									监{{scope.row[item.prop]}}
+								</template>
+				   			</template>
+				    	</el-table-column>
+				    	
 			   		</template>
+			   		
 			   		<template slot="empty"> 
 			      		<!--<i class="iconfont icon-xinjian" @click=emptyCreate></i>-->
 			      		<!--<br />
@@ -131,6 +137,9 @@ export default {
 			this.$emit('remove',index,row.id,row)
 		},
 		findCheckeds(str){
+			if(!str){
+				return
+			}
 		  	var indexs=str.split(',');
 		  		indexs.sort((a,b)=>{return a-b;});
 		  	var checkList=["不完善颗粒","杂质","生霉粒","水分","硬度","脂肪酸值（面筋吸水）","品尝评分","卫生","加工品质"]
