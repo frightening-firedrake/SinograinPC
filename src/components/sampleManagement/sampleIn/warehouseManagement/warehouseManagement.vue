@@ -71,12 +71,12 @@ export default {
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击查看事件
-  	this.$root.eventHub.$on("viewlistitem",function(counterId){  
+  	this.$root.eventHub.$on("viewlistitem",function(id,row){  
   		if(!this.$_ault_alert('sample:getById')){
 			return
 		}
 //		console.log(id)
-		this.$router.push({path: '/index/sampleManagement/warehouseManagement/sampleRoom',query:{counterId:counterId}})
+		this.$router.push({path: '/index/sampleManagement/warehouseManagement/sampleRoom',query:{counterId:row.counterId}})
 		
   	}.bind(this));
   	//	监听列表点击编辑事件

@@ -164,10 +164,7 @@ export default {
   	},
 //	获取列表数据方法
   	getlistdata(page){
-		var params = {};
-		params.sampleWordOrsampleNumLike = '';
-		params.ruKuSampleState = 2
-		params.fenxiaoyangSampleState = 3
+		
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -183,13 +180,10 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    page:page,
-			    rows:this.page.size,
-				params:JSON.stringify(params)
+				counterId:this.$route.query.counterId,
 			}
 	   	}).then(function (response) {
-		  	this.tabledatas=response.data.rows;
-	  		this.page.total=response.data.total;
+		  	this.tabledatas=response.data;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -328,7 +322,32 @@ export default {
 //	填入新建数据
 	createlibitem(form,title){
 		console.log(form,title);
+		if(title=="转移") {
+			 this.zhuanyi(form);
+		} else if(title == "处理") { 
+			this.chuli(form);
+		}
 
+	},
+	//转移方法
+	zhuanyi(form) {
+		this.$http({
+		    method: 'post',
+			url: this.depotURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+	   	}).then(function (response) {
+		  	this.form=response.data;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
 	},
 //	关闭新建弹框
 	dialogClose(){
@@ -337,9 +356,12 @@ export default {
   },
   data() {
     return {
-      datalistURL: this.apiRoot + '/grain/sample/data',
+      datalistURL: this.apiRoot + '/grain/sample/getByCounterId',
 	  editURL: this.apiRoot + '/grain/sample/edit',
 	  searchURL:this.apiRoot + '/grain/sample/data',
+	  depotURL: this.apiRoot + '/grain/warehouse/getAll',
+	  counterURL: this.apiRoot + '/grain/warehouseCounter/getAll',
+	  placeURL: this.apiRoot + '/grain/warehouseCounterPlace/getAll',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
       checkedId:[],
@@ -409,7 +431,7 @@ export default {
       },
       {
         id: 2,
-        prop:'depot',
+        prop:'storage',
         label: "存放位置",
 //      status:true,
 //      sort:true
