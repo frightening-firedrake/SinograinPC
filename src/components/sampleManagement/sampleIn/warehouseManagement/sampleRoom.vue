@@ -395,7 +395,7 @@ export default {
 		if(title=="转移") {
 			this.zhuanyi(form);
 		} else if(title == "处理") { 
-//			this.chuli(form);
+			this.chuli(form);
 		}
 
 	},
@@ -436,6 +436,45 @@ export default {
 		    console.log(error);
 		}.bind(this));
 	},
+	//处理方法
+	chuli(form) {
+		var ids=this.checkedId.join(',')
+		this.$http({
+		    method: 'post',
+			url: this.chuliURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data:{
+				ids:ids,
+				dispose: form.dispose,
+				disposeReason:form.disposeReason,
+			},
+	   	}).then(function (response) {
+	   		console.log(response)
+			if(response.data.success){
+				// this.$notify({
+		        //   	title: '转移成功',
+		        //   	message: '转移样品成功！！！',
+		        //   	type: 'success'
+		       	// });
+		       	// this.getlistdata(1)
+			}else{
+				// this.$notify.error({
+		        //   	title: '错误提示',
+		        //   	message: '转移样品失败！！！',
+		        // });
+			}
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+	},
 //	关闭新建弹框
 	dialogClose(){
 		this.modalVisible=false;
@@ -450,7 +489,7 @@ export default {
 	  counterlistURL: this.apiRoot + '/grain/warehouseCounter/getAll',
 	  placelistURL: this.apiRoot + '/grain/warehouseCounterPlace/getAll',
 	  zhuanyiURL:this.apiRoot + '/grain/sample/editPlace',
-	  chuliURL:this.apiRoot + '/grain/warehouseCounterPlace/getAll',
+	  chuliURL:this.apiRoot + '/grain/sample/dispose',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
       checkedId:[],
