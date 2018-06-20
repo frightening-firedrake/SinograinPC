@@ -392,7 +392,7 @@ export default {
 				return
 			}
 			if (row.sampleState) {
-				this.$root.eventHub.$emit('viewlistitem', row.id, row.sampleState)
+				this.$root.eventHub.$emit('viewlistitem', row.id, row.sampleState,row)
 			} else if (row.regState) {
 				this.$root.eventHub.$emit('viewlistitem', row.id, row.regState)
 			} else if (row.isDeal) {

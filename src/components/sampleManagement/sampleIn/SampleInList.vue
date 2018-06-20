@@ -81,11 +81,21 @@ export default {
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击查看事件
-  	this.$root.eventHub.$on("viewlistitem",function(id){  
+  	this.$root.eventHub.$on("viewlistitem",function(id,sampleState,row){  
   		if(!this.$_ault_alert('sample:getById')){
 			return
 		}
-//		console.log(id)
+//		console.log(row.storage)
+		if(row.storage=='null--null--null'){
+			this.modal.title="请完善入库信息"
+			this.modal.formdatas[0].value=row.sampleNo;
+			this.dataBySampleNo=row;
+			this.modal.formdatas[3].selectitems=[];
+			this.modal.formdatas[4].selectitems=[];
+  			this.continuity=false;			
+  			this.modalVisible=true;
+			return
+		}
 		this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInEdit',query:{libid:id}})
 		
   	}.bind(this));
@@ -205,7 +215,9 @@ export default {
 	dialogClose(){
 		this.modalVisible=false;
 		//关闭入库框后打开扫描框
-		this.messageShow=true;
+		if(this.continuity){			
+			this.messageShow=true;
+		}
 	},
 //	获取搜索数据
   	searchingfor(searching,page){
@@ -300,7 +312,7 @@ export default {
 				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
-			console.log(response)
+//			console.log(response)
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
 		}.bind(this)).catch(function (error) {
@@ -502,12 +514,15 @@ export default {
   		this.messageShow=false;
   	},
   	getScanCode(code){
+		this.modal.title="入库";
+  		this.continuity=true;
   		if(!code){
   			this.messageShow=false;
   		}else{  			
 			this.modal.formdatas[0].value=code;
 			this.modal.formdatas[3].selectitems=[];
 			this.modal.formdatas[4].selectitems=[];
+			
 //			this.modal.formdatas[0].value=6000601005;
 //			this.messageShow=false;
 			this.getsample();
@@ -551,6 +566,7 @@ export default {
 	  depotList:[],
       counterList:[],
       placeList:[],
+      continuity:true,//连续入库开关
       list:"samplinglist",
 	  modalVisible:false,
 	  modal:{
