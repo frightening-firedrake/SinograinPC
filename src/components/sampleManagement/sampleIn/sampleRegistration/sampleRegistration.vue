@@ -260,7 +260,7 @@ export default {
 	      },
 	      {
 	        id: 10,
-	        prop:'zhaojishane',
+	        prop:'storage',
 	        label:"存放位置",
 	        pid:0,
 	//      sort:true,

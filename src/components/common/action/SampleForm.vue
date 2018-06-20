@@ -74,8 +74,10 @@
 		        	<el-date-picker type="date" placeholder="选择年度" v-model="formdatas.form.storageTime"></el-date-picker>
 		    	</el-form-item>
 			</el-form-item>
-			<el-form-item label="存放位置："  class="position">
-				<el-select v-model="formdatas.form.depot" placeholder="选择样品室">
+			<el-form-item label="存放位置："  prop="storage" v-bind:class="{disabled:disabled}">
+			    <el-input v-model="formdatas.form.storage" :disabled="disabled"></el-input>
+			<!--<el-form-item label="存放位置：" class="position">-->
+				<!--<el-select v-model="formdatas.form.depot" placeholder="选择样品室">
 			        <el-option label="样品1室" value="样品1室"></el-option>
 			        <el-option label="样品2室" value="样品2室"></el-option>
 			        <el-option label="样品3室" value="样品3室"></el-option>       
@@ -83,7 +85,8 @@
 			    <el-input v-model="formdatas.form.counter" placeholder="请填写几号柜"></el-input>
 			    <div class="el-form-item__error" v-if="position_error">
 		        	{{position_error_message}}
-		        </div>
+		        </div>-->
+		        
 			</el-form-item>
 			<el-form-item label="入库签名：" prop="autograph" >
 			    <el-input v-model="formdatas.form.autograph"></el-input>

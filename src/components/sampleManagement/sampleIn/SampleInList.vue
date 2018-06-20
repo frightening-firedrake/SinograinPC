@@ -698,9 +698,9 @@ export default {
       },
       {
         id: 4,
-        prop:'depot',
+        prop:'storage',
         label: "存放位置",
-        status:true,
+//      status:true,
 //      sort:true,
       },
       {
