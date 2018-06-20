@@ -102,14 +102,14 @@
 						{{scope.row.pLibraryName}}—{{scope.row.libraryName}}
 					</template>
 					<template v-if="item.prop=='warehouseState'">
-						<template v-if="(scope.row.warehouseUseNumber/scope.row.warehousetotal>=0)&&(scope.row.warehouseUseNumber/scope.row.warehousetotal<=0.4)">
-							<span class="warehouseState" style="color:#38b63a;"><i style="background-color:#38b63a;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehousetotal}}</span>空闲
+						<template v-if="(scope.row.warehouseUseNumber/scope.row.warehouseTotal>=0)&&(scope.row.warehouseUseNumber/scope.row.warehouseTotal<=0.4)">
+							<span class="warehouseState" style="color:#38b63a;"><i style="background-color:#38b63a;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehouseTotal}}</span>空闲
 						</template>
-						<template v-if="(scope.row.warehouseUseNumber/scope.row.warehousetotal)>=0.4&&(scope.row.warehouseUseNumber/scope.row.warehousetotal<=1)" >
-							<span class="warehouseState" style="color:#e2b028;"><i style="background-color:#e2b028;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehousetotal}}</span>未满
+						<template v-if="(scope.row.warehouseUseNumber/scope.row.warehouseTotal)>=0.4&&(scope.row.warehouseUseNumber/scope.row.warehouseTotal<=1)" >
+							<span class="warehouseState" style="color:#e2b028;"><i style="background-color:#e2b028;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehouseTotal}}</span>未满
 						</template>
-						<template v-if="scope.row.warehouseUseNumber/scope.row.warehousetotal==1" >
-							<span class="warehouseState" style="color:#c81212;"><i style="background-color:#c81212;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehousetotal}}</span>已满
+						<template v-if="scope.row.warehouseUseNumber/scope.row.warehouseTotal==1" >
+							<span class="warehouseState" style="color:#c81212;"><i style="background-color:#c81212;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehouseTotal}}</span>已满
 						</template>
 					</template>
 				</template>

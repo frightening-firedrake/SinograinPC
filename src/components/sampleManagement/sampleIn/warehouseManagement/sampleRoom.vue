@@ -63,6 +63,9 @@ export default {
 //	console.log(this.$route.query)
 //  获取列表数据（第一页）
 	this.getlistdata(1)
+	this.getdepotlist()
+	this.getcounterlist()
+	this.getplacelist()
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
@@ -248,34 +251,8 @@ export default {
 		        });
 		        return
 			}
-			var modal={
-			  	title:'转移',
-				formdatas:[
-			  		{
-			  			label:"选择样品室:",
-			  			type:'select',
-			  			selectitems:['1室','2室','3室'],
-			  			model:"dept",
-	  					value:'',
-			  		},
-			  		{
-			  			label:"选择柜号:",
-			  			type:'select',
-			  			selectitems:['1号柜','2号柜','3号柜','4号柜','5号柜','6号柜','7号柜','8号柜','9号柜','10号柜','11号柜'],
-			  			model:"counter",
-	  					value:'',		
-			  		},
-			  		{
-			  			label:"选择位置:",
-			  			type:'select',
-			  			selectitems:['01','02','03','04','05','06','07','08','09','10','11'],
-			  			model:"place",
-	  					value:'',		
-			  		},
-			  	],
-			  	submitText:'确定',
-			};
-			this.modal=modal;
+			
+			this.modal=this.modal1;
 			this.modalVisible=true;
 		}else if(date=='btnCenterR'){
 			if(!this.checkedId.length){
@@ -285,27 +262,8 @@ export default {
 		        });
 		        return
 			}
-			var modal={
-			  	title:'处理',
-
-				formdatas:[
-			  		{
-			  			label:"处理理由:",
-			  			type:'textarea',
-			  			rows:3,
-			  			model:"reason2222",
-	  					value:'',
-			  		},
-			  		{
-			  			label:"处理人签名:",
-			  			type:'input',
-			  			model:"reasonren222",
-	  					value:'',			  			
-			  		},
-			  	],
-			  	submitText:'确定',
-			};
-			this.modal=modal;
+			
+			this.modal=this.modal2;
 			this.modalVisible=true;
 		}else if(date=='btnLeft'){
 
@@ -315,25 +273,14 @@ export default {
 
 		}
 	},
-//	弹框中的下拉框变化
-	modelSelectChange(val,model){
-		console.log(val,model)
-	},
-//	填入新建数据
-	createlibitem(form,title){
-		console.log(form,title);
-		if(title=="转移") {
-			 this.zhuanyi(form);
-		} else if(title == "处理") { 
-			this.chuli(form);
-		}
-
-	},
-	//转移方法
-	zhuanyi(form) {
+//获取室信息
+	getdepotlist(){
+//		var params = {};
+//		params.pLibraryId = -1
+  		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
-			url: this.depotURL,
+			url: this.depotlistURL,
 			transformRequest: [function (data) {
 				// Do whatever you want to transform the data
 				let ret = ''
@@ -343,8 +290,145 @@ export default {
 				return ret
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+//			    params: JSON.stringify(params)
+			}
+		   	}).then(function (response) {
+		   		response.data.forEach(function(item,index){
+		   			var obj={};
+		   			obj.id=item.id;
+		   			obj.label=item.depot;
+		   			obj.value=item.id;
+		   			this.depotList.push(obj);
+		   		}.bind(this))
+		   		this.modal1.formdatas[0].selectitems=this.depotList;
+//			  	this.listHeader.libraryList = response.data;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+	},
+//获取柜子信息
+	getcounterlist(){
+//		var params = {};
+//		params.pLibraryId = -1
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.counterlistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+//			    params: JSON.stringify(params)
+			}
+		   	}).then(function (response) {
+		   		response.data.forEach(function(item,index){
+		   			var obj={};
+		   			obj.id=item.id;
+		   			obj.label=item.counter;
+		   			obj.pId=item.pId;
+		   			obj.value=item.id;
+		   			this.counterList.push(obj);
+		   		}.bind(this))
+//			  	this.listHeader.libraryList = response.data;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+	},
+//获取位置信息
+	getplacelist(){
+//		var params = {};
+//		params.pLibraryId = -1
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.placelistURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+//			    params: JSON.stringify(params)
+			}
+		   	}).then(function (response) {
+		   		response.data.forEach(function(item,index){
+		   			if(item.isStorage==1){		   				
+		   				var obj={};
+		   				obj.id=item.id;
+		   				obj.pId=item.pId;
+		   				obj.label=item.place;
+		   				obj.value=item.id;
+		   				this.placeList.push(obj);
+		   			}
+		   		}.bind(this))
+//			  	this.listHeader.libraryList = response.data;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+	},
+//	弹框中的下拉框变化
+	modelSelectChange(val,model){
+		console.log(val,model)
+		if(model=='depot'){
+			this.modal.formdatas[1].selectitems=this.counterList.filter((item,index)=>{return item.pId==val})
+			this.modal.formdatas[2].selectitems=[];
+		}else if(model=='counter'){
+			this.modal.formdatas[2].selectitems=this.placeList.filter((item,index)=>{return item.pId==val})
+		}else if(model=='place'){
+//			console.log(val)
+		}
+	},
+//	填入新建数据
+	createlibitem(form,title){
+		console.log(form,title);
+		if(title=="转移") {
+//			 this.zhuanyi(form);
+		} else if(title == "处理") { 
+//			this.chuli(form);
+		}
+
+	},
+	//转移方法
+	zhuanyi(form) {
+		this.$http({
+		    method: 'post',
+			url: this.zhuanyiURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data:{
+				
+			},
 	   	}).then(function (response) {
-		  	this.form=response.data;
+			if(response.success){
+				this.$notify({
+		          	title: '转移成功',
+		          	message: '转移样品成功！！！',
+		          	type: 'success'
+		       	});
+			}else{
+				this.$notify.error({
+		          	title: '错误提示',
+		          	message: '转移样品失败！！！',
+		        });
+			}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -359,12 +443,17 @@ export default {
       datalistURL: this.apiRoot + '/grain/sample/getByCounterId',
 	  editURL: this.apiRoot + '/grain/sample/edit',
 	  searchURL:this.apiRoot + '/grain/sample/data',
-	  depotURL: this.apiRoot + '/grain/warehouse/getAll',
-	  counterURL: this.apiRoot + '/grain/warehouseCounter/getAll',
-	  placeURL: this.apiRoot + '/grain/warehouseCounterPlace/getAll',
+	  depotlistURL: this.apiRoot + '/grain/warehouse/getAll',
+	  counterlistURL: this.apiRoot + '/grain/warehouseCounter/getAll',
+	  placelistURL: this.apiRoot + '/grain/warehouseCounterPlace/getAll',
+	  zhuanyiURL:this.apiRoot + '/grain/warehouseCounterPlace/getAll',
+	  chuliURL:this.apiRoot + '/grain/warehouseCounterPlace/getAll',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
       checkedId:[],
+      depotList:[],
+      counterList:[],
+      placeList:[],
 	  dataBySampleNo: {},
       breadcrumb:{
       	search:true,   
@@ -486,6 +575,53 @@ export default {
 	  modal:{
 	  	
 	  },
+		modal1:{
+		  	title:'转移',
+			formdatas:[
+		  		{
+		  			label:"选择样品室:",
+		  			type:'select',
+		  			selectitems:[],
+		  			model:"depot",
+					value:'',
+		  		},
+		  		{
+		  			label:"选择柜号:",
+		  			type:'select',
+		  			selectitems:[],
+		  			model:"counter",
+					value:'',		
+		  		},
+		  		{
+		  			label:"选择位置:",
+		  			type:'select',
+		  			selectitems:[],
+		  			model:"place",
+					value:'',		
+		  		},
+		  	],
+		  	submitText:'确定',
+		},
+		modal2:{
+		  	title:'处理',
+	
+			formdatas:[
+		  		{
+		  			label:"处理理由:",
+		  			type:'textarea',
+		  			rows:3,
+		  			model:"disposeReason",
+					value:'',
+		  		},
+		  		{
+		  			label:"处理人签名:",
+		  			type:'input',
+		  			model:"dispose",
+					value:'',			  			
+		  		},
+		  	],
+		  	submitText:'确定',
+		},
     }
   }
 }
