@@ -393,7 +393,7 @@ export default {
 	createlibitem(form,title){
 		console.log(form,title);
 		if(title=="转移") {
-//			 this.zhuanyi(form);
+			this.zhuanyi(form);
 		} else if(title == "处理") { 
 //			this.chuli(form);
 		}
@@ -414,7 +414,8 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data:{
-				
+				id: this.checkedId[0], 
+				placeId: form.place,
 			},
 	   	}).then(function (response) {
 			if(response.success){
@@ -446,7 +447,7 @@ export default {
 	  depotlistURL: this.apiRoot + '/grain/warehouse/getAll',
 	  counterlistURL: this.apiRoot + '/grain/warehouseCounter/getAll',
 	  placelistURL: this.apiRoot + '/grain/warehouseCounterPlace/getAll',
-	  zhuanyiURL:this.apiRoot + '/grain/warehouseCounterPlace/getAll',
+	  zhuanyiURL:this.apiRoot + '/grain/sample/editPlace',
 	  chuliURL:this.apiRoot + '/grain/warehouseCounterPlace/getAll',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
