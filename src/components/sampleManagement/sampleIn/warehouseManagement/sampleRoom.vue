@@ -60,6 +60,7 @@ export default {
 	}
   },
   created(){
+  	this.listHeader.title=this.$route.query.title;
 //	console.log(this.$route.query)
 //  获取列表数据（第一页）
 	this.getlistdata(1)
@@ -224,7 +225,8 @@ export default {
   		}
   	},
 //	获取多选框选中数据的id(这是一个数组)
-  	getchecked(checkedId){
+  	getchecked(checkedId,data){
+		this.checkedData=data;
   		this.checkedId=checkedId;
   	},
 	titleEvent(){
@@ -493,6 +495,7 @@ export default {
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
       checkedId:[],
+      checkedData:[],
       depotList:[],
       counterList:[],
       placeList:[],

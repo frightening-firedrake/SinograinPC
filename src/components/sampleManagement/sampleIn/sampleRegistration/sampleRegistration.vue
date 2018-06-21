@@ -153,16 +153,20 @@ export default {
 		this.$router.push({name:name,params:{ids:ids,title:this.formdatas.tableName,sort:sort}})
     },
     exportExcel(){
+    	if(!this.tabledatas.length){
+    		this.$alert('请先添加样品！！！','提示信息',{});
+    		return
+    	}
     	var arr=[];
     	this.tabledatas.forEach((item,index)=>{
     		arr.push(item.sampleNo)
     	})
     	var sampleNos=arr.join(',')
-    	console.log(sampleNos)
     	if(!this.$_ault_alert('register:export')){
 			return
 		}
 		var loadiframe=document.getElementById('fordownload');
+		console.log(this.exportExcelURL+'?sampleNos='+sampleNos+'&sessionid='+this.Token)
 		loadiframe.src=this.exportExcelURL+'?sampleNos='+sampleNos+'&sessionid='+this.Token;
     },
     currentRowFun(currentRow){

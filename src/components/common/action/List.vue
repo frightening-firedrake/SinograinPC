@@ -271,7 +271,7 @@ export default {
 			var checkedId = val.map(function(item) {
 				return item.id;
 			})
-			this.$emit('getchecked', checkedId)
+			this.$emit('getchecked', checkedId,val)
 		},
 		//  设置行类名
 		row_class_name(scope) {

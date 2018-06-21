@@ -76,7 +76,7 @@ export default {
 			return
 		}
 //		console.log(id)
-		this.$router.push({path: '/index/sampleManagement/warehouseManagement/sampleRoom',query:{counterId:row.counterId}})
+		this.$router.push({path: '/index/sampleManagement/warehouseManagement/sampleRoom',query:{counterId:row.counterId,title:row.depot+row.counter}})
 		
   	}.bind(this));
   	//	监听列表点击编辑事件
