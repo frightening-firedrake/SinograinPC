@@ -422,12 +422,13 @@ export default {
 	   	}).then(function (response) {
 	   		console.log(response)
 			if(response.data.success){
+				this.getlistdata(1)
+				this.getplacelist()
 				this.$notify({
 		          	title: '转移成功',
 		          	message: '转移样品成功！！！',
 		          	type: 'success'
 		       	});
-		       	this.getlistdata(1)
 			}else{
 				this.$notify.error({
 		          	title: '错误提示',

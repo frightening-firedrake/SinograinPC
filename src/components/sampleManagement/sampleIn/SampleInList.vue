@@ -189,6 +189,7 @@ export default {
 					return item.id!==form.place
 				})
 				this.getlistdata(1);
+				this.getplacelist();
 				this.$notify({
 		          	title: '入库成功',
 		          	message: '该样品已成功入库！！！',
