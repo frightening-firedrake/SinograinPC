@@ -364,6 +364,7 @@ export default {
 //			    params: JSON.stringify(params)
 			}
 		   	}).then(function (response) {
+		   		this.placeList=[];
 		   		response.data.forEach(function(item,index){
 		   			if(item.isStorage==1){		   				
 		   				var obj={};
@@ -381,7 +382,7 @@ export default {
 	},
 //	弹框中的下拉框变化
 	modelSelectChange(val,model){
-		console.log(val,model)
+//		console.log(val,model)
 		if(model=='depot'){
 			this.modal.formdatas[1].selectitems=this.counterList.filter((item,index)=>{return item.pId==val})
 			this.modal.formdatas[2].selectitems=[];
@@ -421,7 +422,7 @@ export default {
 				placeId: form.place,
 			},
 	   	}).then(function (response) {
-	   		console.log(response)
+//	   		console.log(response)
 			if(response.data.success){
 				this.getlistdata(1)
 				this.getplacelist()
@@ -645,6 +646,7 @@ export default {
 		  			selectitems:[],
 		  			model:"place",
 					value:'',		
+					empty:'已满',
 		  		},
 		  	],
 		  	submitText:'确定',

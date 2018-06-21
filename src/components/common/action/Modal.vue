@@ -17,7 +17,7 @@
 			        </div>
 			    </el-form-item>
 			    <el-form-item  class="select" v-if="!item.position&&item.type=='select'" :prop="item.model" :label="item.label"  :label-width="formLabelWidth"  v-bind:class="{disabled:item.disabled}" :rules="[{ required: true, message: '请选择'}]">
-			        <el-select v-model="form[item.model]" placeholder="请选择" :disabled="item.disabled" @change="function(val){return change(val,item.model)}">
+			        <el-select v-model="form[item.model]" placeholder="请选择" :disabled="item.disabled" @change="function(val){return change(val,item.model)}" :no-data-text="item.empty?item.empty:'无数据'">
 				        <el-option v-for="item2 in item.selectitems" :label="item2.label" :value="item2.value" :key="item2.id"></el-option>    
 				    </el-select>
 			    </el-form-item>

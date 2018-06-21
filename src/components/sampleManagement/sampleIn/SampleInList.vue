@@ -434,6 +434,7 @@ export default {
 //			    params: JSON.stringify(params)
 			}
 		   	}).then(function (response) {
+		   		this.placeList=[];
 		   		response.data.forEach(function(item,index){
 		   			if(item.isStorage==1){		   				
 		   				var obj={};
@@ -623,6 +624,7 @@ export default {
 	  			selectitems:[],
 	  			model:"place",
 				value:'',		
+				empty:'已满',
 	  		},
 	  		{
 	  			label:"入库签名:",
