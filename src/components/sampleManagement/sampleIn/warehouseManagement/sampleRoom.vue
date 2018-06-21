@@ -417,6 +417,7 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data:{
 				id: this.checkedId[0], 
+				oldPlaceId: this.checkedData[0].placeId,
 				placeId: form.place,
 			},
 	   	}).then(function (response) {
