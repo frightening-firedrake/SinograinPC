@@ -310,7 +310,7 @@ export default {
 			params.dateEnd=this.dateEnd
 		}
 		if(this.remark){
-			params.remark=this.remark
+			params.remarkLike=this.remark
 		}
 		if(this.filterStatus!=='全部'){
 			params.detectionState=this.filterStatus
