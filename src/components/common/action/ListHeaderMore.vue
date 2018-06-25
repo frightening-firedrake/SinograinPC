@@ -490,12 +490,13 @@ export default {
     methods:{
 //  	...mapMutations(['route_click']),
     	dateChange(){
-    		console.log(this.date_select);
+//  		console.log(this.date_select);
 			var datearr=[];
 			    datearr[0]=Date.parse(this.date_select[0]);
 			    datearr[1]=Date.parse(this.date_select[1]);
-			console.log(datearr)
-    		this.$emit('dateChange',this.date_select);
+//			console.log(datearr)
+//  		this.$emit('dateChange',this.date_select);
+    		this.$emit('dateChange',datearr);
     	},
     	selectlibChange1(){
 			this.selectlib2='全部';

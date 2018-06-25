@@ -44,6 +44,14 @@
 							<span style="color:#666666;">已入库</span>
 						</template>
 					</template>
+					<template v-if="item.prop=='detectionState'">
+						<template v-if="scope.row[item.prop]==1">
+							<span style="color:#fc6500;">未检测</span>
+						</template>
+						<template v-if="scope.row[item.prop]==2">
+							<span style="color:#999999;">已检测</span>
+						</template>
+					</template>
 					<template v-if="item.prop=='resourceType'">
 						<template v-if="scope.row[item.prop]==1">
 							<span style="color:#666666;">菜单</span>

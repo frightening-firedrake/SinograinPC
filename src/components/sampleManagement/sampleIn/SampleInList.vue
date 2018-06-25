@@ -118,15 +118,24 @@ export default {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
 //	列表头触发的事件
-	dateChange(data){
-		console.log(data);
+//	时间选择
+	dateChange(date){
+//		console.log(date);
+		this.dateStart=date[0];
+		this.dateEnd=date[1];
+		this.getlistdata(1)
 	},
+//	备注选择
 	remChange(remark){
-		console.log(remark)
+//		console.log(remark)
+		this.remark=remark
+		this.getlistdata(1)
 	},
+//	检验状态选择
 	statusChange(data){
-//		console.log(data)
+		console.log(data)
 		this.filterStatus=data
+		this.getlistdata(1)
 	},
 	//	筛选库
 	selectlibChange(libtype,selectLibraryId){
@@ -135,7 +144,7 @@ export default {
 //		console.log(this.libtype,this.selectLibraryId)
 //		this.filterlib=lib
 //		console.log(this.filterlib)
-//		this.getlistdata(1)
+		this.getlistdata(1)
 	},
 	createSampling(){
 //		console.log('createSampling');
@@ -189,7 +198,7 @@ export default {
 					return item.id!==form.place
 				})
 				this.getlistdata(1);
-				this.getplacelist();
+//				this.getplacelist();
 				this.$notify({
 		          	title: '入库成功',
 		          	message: '该样品已成功入库！！！',
@@ -290,8 +299,22 @@ export default {
   	getlistdata(page){
 		var params = {};
 		params.sampleWordOrsampleNumLike = '';
-		params.ruKuSampleState = 2
-		params.fenxiaoyangSampleState = 3
+		params.ruKuSampleState = 2;
+		params.fenxiaoyangSampleState = 3;
+
+		if(this.selectLibraryId!=='全部'){
+			params[this.libtype]=this.selectLibraryId
+		}
+		if(this.dateStart){
+			params.dateStart=this.dateStart
+			params.dateEnd=this.dateEnd
+		}
+		if(this.remark){
+			params.remark=this.remark
+		}
+		if(this.filterStatus!=='全部'){
+			params.detectionState=this.filterStatus
+		}
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -646,7 +669,7 @@ export default {
       	btntext:'',
       },
       loading:true,
-      filterStatus:'全部',
+      
 //    分页数据
       page: {
         size: 10,
@@ -678,15 +701,18 @@ export default {
       	statusTitle:'检测状态：',
       	statusitems:[
       		{label:'全部',text:'全部'},
-      		{label:'未检测',text:'未检测'},
-      		{label:'已检测',text:'已检测'},
+      		{label:1,text:'未检测'},
+      		{label:2,text:'已检测'},
       	],
       	selectRem:true,
       },
       libtype:'pLibrary',
       selectLibraryId:'全部',
-      remark:'',
-      
+//    remark:'',
+      filterStatus:'全部',//检验状态
+      dateStart:0,//开始时间
+      dateEnd:9999999999999999999999999,//结束时间
+      remark:'',//备注信息
       tabledatas:[],
       items: [
 //    {
@@ -724,8 +750,9 @@ export default {
       },
       {
         id: 5,
-        prop:'sampleState',
-        label:"存放状态",
+//      prop:'sampleState',
+        prop:'detectionState',
+        label:"检测状态",
         status:true,
 //      sort:true,
       },

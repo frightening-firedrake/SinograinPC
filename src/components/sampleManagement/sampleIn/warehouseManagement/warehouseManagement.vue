@@ -7,7 +7,7 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" @statusChange2="statusChange2" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" ></list-header>
       <!--表格-->
-      <sinograin-list class="list le" :tabledata="tabledatas"  :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
+      <sinograin-list class="list le" :tabledata="tabledatasFilter"  :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
       <!--分页-->
       <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
@@ -38,18 +38,38 @@ export default {
 
 		if(this.filterStatus=="全部"&&this.filterStatus2=="全部"){
 			return this.tabledatas;
-		}else if(this.filterStatus2=="空闲"){
-			return this.tabledatas.filter((value,index)=>{
-				return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehousetotal)>=0)&&((value.warehouseUseNumber)/(value.warehousetotal)<0.4)
-			})
-		}else if(this.filterStatus2=="未满"){
-			return this.tabledatas.filter((value,index)=>{
-				return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehousetotal)>=0.4)&&((value.warehouseUseNumber)/(value.warehousetotal)<1)
-			})
-		}else if(this.filterStatus2=="已满"){
-			return this.tabledatas.filter((value,index)=>{
-				return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehousetotal)==1)
-			})
+		}else if(this.filterStatus!=="全部"&&this.filterStatus2=="全部"){
+				return this.tabledatas.filter((value,index)=>{
+					return value.depot==this.filterStatus
+				})
+		}else if(this.filterStatus=="全部"&&this.filterStatus2!=="全部"){
+			if(this.filterStatus2=="空闲"){
+				return this.tabledatas.filter((value,index)=>{
+					return ((value.warehouseUseNumber)/(value.warehouseTotal)>=0)&&((value.warehouseUseNumber)/(value.warehouseTotal)<0.4)
+				})
+			}else if(this.filterStatus2=="未满"){
+				return this.tabledatas.filter((value,index)=>{
+					return ((value.warehouseUseNumber)/(value.warehouseTotal)>=0.4)&&((value.warehouseUseNumber)/(value.warehouseTotal)<1)
+				})
+			}else if(this.filterStatus2=="已满"){
+				return this.tabledatas.filter((value,index)=>{
+					return ((value.warehouseUseNumber)/(value.warehouseTotal)==1)
+				})
+			}
+		}else if(this.filterStatus!=="全部"&&this.filterStatus2!=="全部"){
+			if(this.filterStatus2=="空闲"){
+				return this.tabledatas.filter((value,index)=>{
+					return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehouseTotal)>=0)&&((value.warehouseUseNumber)/(value.warehouseTotal)<0.4)
+				})
+			}else if(this.filterStatus2=="未满"){
+				return this.tabledatas.filter((value,index)=>{
+					return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehouseTotal)>=0.4)&&((value.warehouseUseNumber)/(value.warehouseTotal)<1)
+				})
+			}else if(this.filterStatus2=="已满"){
+				return this.tabledatas.filter((value,index)=>{
+					return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehouseTotal)==1)
+				})
+			}
 		}
 	}
   },
@@ -106,6 +126,7 @@ export default {
 		this.filterStatus=data
 	},
 	statusChange2(data){
+//		console.log(data)
 		this.filterStatus2=data
 	},
 	createSampling(){
@@ -280,9 +301,9 @@ export default {
       	class:'min',
       	statusitems:[
       		{label:'全部',text:'全部'},
-      		{label:'1室',text:'1室'},
-      		{label:'2室',text:'2室'},
-      		{label:'3室',text:'3室'},
+      		{label:'样品一室',text:'1室'},
+      		{label:'样品二室',text:'2室'},
+      		{label:'样品三室',text:'3室'},
       	],
       	status2:true,
       	statusitems2:[
