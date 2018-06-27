@@ -143,7 +143,7 @@ export default {
 //				var index1=index;
 //				console.log(url,index1,index2)
 				this.images[index2]=url
-				console.log(this.images)
+//				console.log(this.images)
 //				this.$emit('changeProblems',this.problems);
 			}else{
 //				alert(response.msg)	

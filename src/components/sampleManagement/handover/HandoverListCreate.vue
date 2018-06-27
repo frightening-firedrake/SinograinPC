@@ -197,6 +197,7 @@ export default {
 	              label: "领取人",
 	              model: "receiptor",
 	              value:'',
+	              type:'input',
 	          },
 	      ],
 	      submitText: '提交',

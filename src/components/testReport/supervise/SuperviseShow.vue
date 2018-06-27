@@ -89,12 +89,14 @@ export default {
 			})
 //			循环审批图			
 			var images2=[]
-			var imagesbox2=res.approveImage.split(',');
-			imagesbox2.forEach((value2,index2)=>{
-				var obj={};
-				obj.url= this.apiRoot + "/grain/upload/picture/"+value2;
-				images2.push(obj);
-			})
+			if(res.approveImage){				
+				var imagesbox2=res.approveImage.split(',');
+				imagesbox2.forEach((value2,index2)=>{
+					var obj={};
+					obj.url= this.apiRoot + "/grain/upload/picture/"+value2;
+					images2.push(obj);
+				})
+			}
 			res0.images=images;		
 			res0.images2=images2;		
 			this.formdatas.problem= res0
@@ -146,7 +148,7 @@ export default {
 			params.id=id;
 			params.isDeal=1;
 			params.approveImage=images.join(',');
-			console.log(params)
+//			console.log(params)
 		this.$http({
 		    method: 'post',
 			url: this.passURL,
@@ -160,10 +162,11 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: params,
-	   }).then(function (response) {
-			  if(response.data.success) {
-				  this.formdatas.problem.isDeal=1	
-			  }
+	   	}).then(function (response) {
+			  	if(response.data.success) {
+//				  	this.formdatas.problem.isDeal=1;
+				  	this.getSafetyData()
+			  	}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

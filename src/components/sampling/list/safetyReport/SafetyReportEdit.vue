@@ -108,12 +108,14 @@ export default {
 				res0[index1].images=images
 				
 				var images2=[]
-				var imagesbox2=value1.approveImage.split(',');
-				imagesbox2.forEach((value2,index2)=>{
-					var obj={};
-					obj.url= this.apiRoot + "/grain/upload/picture/"+value2;
-					images2.push(obj);
-				})
+				if(value1.approveImage){					
+					var imagesbox2=value1.approveImage.split(',');
+					imagesbox2.forEach((value2,index2)=>{
+						var obj={};
+						obj.url= this.apiRoot + "/grain/upload/picture/"+value2;
+						images2.push(obj);
+					})
+				}
 	
 				res0[index1].images2=images2
 			})
@@ -187,11 +189,12 @@ export default {
 	    }).then(function (response) {
 		  	console.log(response)
 			  if(response.data.success) {
-				this.formdatas.problems.forEach((value)=>{
-					if(value.id==id){
-						value.isDeal=1;
-					}
-				})
+			  	this.getSafetyData()
+//				this.formdatas.problems.forEach((value)=>{
+//					if(value.id==id){
+//						value.isDeal=1;
+//					}
+//				})
 			  }
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -248,6 +251,7 @@ export default {
 	  editURL:  this.apiRoot + '/grain/safetyReport/edit',
       searchURL:'/liquid/role2/data/search',
       passURL: this.apiRoot + '/grain/safetyReport/edit',
+      uploadPicURL: this.apiRoot + '/grain/safetyReport/uploadPic',
       problemStatus:'all',
       passProblemId:'',
       checkedId:[],
