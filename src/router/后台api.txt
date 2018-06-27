@@ -186,3 +186,10 @@ zhifangsuanzhi:remove               删除脂肪酸值
 zhifangsuanzhi:edit                  修改脂肪酸值
 zhifangsuanzhi:save                 保存脂肪酸值
 
+库房管理
+sample:editPlace                      转移
+warehouse:list                 	          查看
+sample:dispose                 	          处理
+
+样品登记簿
+sample:ExportRegister                 导出

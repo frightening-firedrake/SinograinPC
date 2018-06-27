@@ -417,6 +417,7 @@ export default {
 				this.slideToggle();				
 			},100)
 		},
+//		原计划控制显示用的权限检测方法目前处于弃用状态
 		checkAuth(userAuth,needAuth){
 			if(!needAuth){
 				return true

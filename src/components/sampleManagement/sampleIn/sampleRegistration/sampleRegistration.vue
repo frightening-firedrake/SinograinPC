@@ -162,7 +162,7 @@ export default {
     		arr.push(item.sampleNo)
     	})
     	var sampleNos=arr.join(',')
-    	if(!this.$_ault_alert('register:export')){
+    	if(!this.$_ault_alert('sample:ExportRegister')){
 			return
 		}
 		var loadiframe=document.getElementById('fordownload');

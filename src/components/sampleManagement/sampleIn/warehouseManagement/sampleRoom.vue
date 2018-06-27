@@ -240,6 +240,9 @@ export default {
 	tfootEvent(date){
 		console.log(date);
 		if(date=='btnCenterL'){		
+			if(!this.$_ault_alert('sample:editPlace')){
+				return
+			}
 			if(!this.checkedId.length){
 				this.$notify.error({
 		          	title: '错误提示',
@@ -257,6 +260,9 @@ export default {
 			this.modal=this.modal1;
 			this.modalVisible=true;
 		}else if(date=='btnCenterR'){
+			if(!this.$_ault_alert('sample:dispose')){
+				return
+			}
 			if(!this.checkedId.length){
 				this.$notify.error({
 		          	title: '错误提示',
@@ -462,19 +468,19 @@ export default {
 				disposeReason:form.disposeReason,
 			},
 	   	}).then(function (response) {
-	   		console.log(response)
-			if(response.data.success){
-				// this.$notify({
-		        //   	title: '转移成功',
-		        //   	message: '转移样品成功！！！',
-		        //   	type: 'success'
-		       	// });
-		       	// this.getlistdata(1)
+	   		if(response.data.success){
+				this.getlistdata(1)
+				this.getplacelist()
+				this.$notify({
+		          	title: '处理成功',
+		          	message: '处理样品成功！！！',
+		          	type: 'success'
+		       	});
 			}else{
-				// this.$notify.error({
-		        //   	title: '错误提示',
-		        //   	message: '转移样品失败！！！',
-		        // });
+				this.$notify.error({
+		          	title: '错误提示',
+		          	message: '处理样品失败！！！',
+		        });
 			}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);

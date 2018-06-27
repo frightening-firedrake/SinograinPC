@@ -261,25 +261,25 @@ const routes= [
             path:"sampleManagement/warehouseManagement",
             name:"样品管理/库房管理",
             component:warehouseManagement,
-            meta: { needAuth: '样品入库列表' },
+            meta: { needAuth: '库房管理' },
           },
           {
             path:"sampleManagement/warehouseManagement/sampleRoom",
             name:"样品管理/库房管理/样品室",
             component:sampleRoom,
-            meta: { needAuth: '样品入库列表' },
+            meta: { needAuth: '库房管理' },
           },
           {
             path:"sampleManagement/sampleRegistration",
             name:"样品管理/样品登记薄制作",
             component:sampleRegistration,
-            meta: { needAuth: '样品入库列表' },
+            meta: { needAuth: '样品登记薄制作' },
           },
           {
             path:"sampleManagement/sampleRegistration/registrationSelect",
             name:"样品管理/样品登记薄制作/检验样品",
             component:registrationSelect,
-            meta: { needAuth: '样品入库列表' },
+//          meta: { needAuth: '样品入库列表' },
           },
           
           

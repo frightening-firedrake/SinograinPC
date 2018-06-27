@@ -92,7 +92,7 @@ export default {
     }.bind(this)); 	
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id,row){  
-  		if(!this.$_ault_alert('sample:getById')){
+  		if(!this.$_ault_alert('warehouse:list')){
 			return
 		}
 //		console.log(id)
