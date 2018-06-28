@@ -281,7 +281,7 @@ export default {
 //    }],
 	listdatas:{
 		titleLabel:'检验编号',
-		title:this.$route.params.code,
+		title:'监'+this.$route.params.code,
 		label:'检验项目',
 		buttonText:false,
 	},
