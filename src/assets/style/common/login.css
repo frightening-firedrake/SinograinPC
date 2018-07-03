@@ -88,6 +88,7 @@
  	height: 100%;
  	display: block;
  	padding-left: 0.74rem;
+ 	padding-right: 0;
  	border-radius: 0.05rem;
  	background-image: url("~static/images/login/fen1.jpg");
  	background-repeat: no-repeat;

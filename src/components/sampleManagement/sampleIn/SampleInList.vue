@@ -5,7 +5,7 @@
       <!--alert-->
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表格上的时间选框以及 创建-->
-      <list-header-more :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" @remChange="remChange"  @selectlibChange="selectlibChange"></list-header-more>
+      <list-header-more :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" @remChange="remChange"  @selectlibChange="selectlibChange" @createSampleNum="createSampleNum"></list-header-more>
       <!--表格-->
       <sinograin-list class="list le" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
@@ -156,6 +156,11 @@ export default {
 //	打开新建弹框
 	createlib(){
 		this.modalVisible=true;
+	},
+//	创建检验编号
+	createSampleNum(){
+//		console.log('createSampleNum')
+		this.$router.push({path: '/index/sampleManagement/sampleIn/createSampleInNum'})
 	},
 //	扫码新建样品
 	scanCode(){
@@ -697,6 +702,7 @@ export default {
       	selectlib:true,
       	libraryList:[],
       	scanCode:true,
+      	createSampleNum:true,
       	status:true,
       	statusTitle:'检测状态：',
       	statusitems:[
@@ -750,6 +756,13 @@ export default {
       },
       {
         id: 5,
+        prop:'sampleState',
+        label:"状态",
+        status:true,
+//      sort:true,
+      },
+      {
+        id: 6,
 //      prop:'sampleState',
         prop:'detectionState',
         label:"检测状态",
@@ -757,19 +770,19 @@ export default {
 //      sort:true,
       },
       {
-        id: 6,
+        id: 7,
         prop:'storageTime',
         label:"样品入库时间",
 //      sort:true,
       },
       {
-        id: 7,
+        id: 8,
         prop:'autograph',
         label:"入库签名",
 //      sort:true,
       },
       {
-        id: 8,
+        id: 9,
         prop:'remark',
         label:"备注",
 //      sort:true,

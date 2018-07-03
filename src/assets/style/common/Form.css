@@ -693,3 +693,24 @@ form.sampling .tableDel p{
     font-size:0.16rem;
     line-height: 0.35rem;
 }
+/*备注*/
+form.sampling .remark-input .el-input__inner{
+	/*height: 0.36rem;
+    width: 2.1rem;
+    line-height: 0.36rem;
+    border: solid 0.01rem #dfdfdf;
+    font-size: 0.16rem;
+    background: #f2f2f2;
+    border-radius: 0;
+    */
+    
+    height:0.36rem!important;
+	width:2.75rem;
+	line-height:0.34rem;
+	border:solid 0.01rem #dfdfdf;
+	font-size:0.16rem;
+	background:#f2f2f2;
+	border-radius:0;
+	margin-left:0.2rem;
+}
+	

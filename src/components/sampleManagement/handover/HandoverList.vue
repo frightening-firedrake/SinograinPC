@@ -5,14 +5,14 @@
 		<!--alert-->
 		<!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
 		<!--表格上的时间选框以及 创建-->
-		<list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:connect="connect"></list-header>
+      	<list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" @statusChange2="statusChange2" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" @connect='connect'></list-header>
 		<!--表格-->
 		<sinograin-list class="list" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate">
 		</sinograin-list>
 		<!--分页-->
 		<sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
 		<!--新建库典弹框-->
-      	<sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
+      	<sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose" @modelSelectChange="modelSelectChange"></sinograin-modal>      	
 	
 	</div>
 </template>
@@ -61,6 +61,7 @@ export default {
 		this.$root.eventHub.$off('delelistitem')
 		this.$root.eventHub.$off("viewlistitem")
 		this.$root.eventHub.$off("editlistitem")
+		this.$root.eventHub.$off("returnPerson")
 		//	监听列表删除事件
 		this.$root.eventHub.$on('delelistitem', function(rowid, list) {
 			this.tabledatas = this.tabledatas.filter(function(item) {
@@ -83,11 +84,20 @@ export default {
 //			console.log(id)
 			this.$router.push({ path: '/index/sampleManagement/handover/handoverListEdit', query: { id: id } })
 		}.bind(this));
+		//	监听列表点击归还事件
+		this.$root.eventHub.$on("returnPerson", function(id) {
+//			if(!this.$_ault_alert('handover:getById')){
+//				return
+//			}
+			this.returnId=id
+			this.modalVisible=true;
+		}.bind(this));
 	},
 	destroy() {
 		this.$root.eventHub.$off("viewlistitem")
 		this.$root.eventHub.$off('delelistitem')
 		this.$root.eventHub.$off("editlistitem")
+		this.$root.eventHub.$off("returnPerson")
 	},
 	methods: {
 		...mapMutations(['create_modal_id', 'is_mask', 'create_modal', 'close_modal']),
@@ -96,9 +106,15 @@ export default {
 		dateChange(data) {
 			console.log(data);
 		},
+		scanCode(){
+			
+		},
 		statusChange(data) {
-			//		console.log(data)
-			this.filterStatus = data
+			this.filterStatus = data;
+			this.getlistdata(1)
+		},
+		statusChange2(data) {
+			console.log(data)
 		},
 		createSampling() {
 			//		console.log('createSampling');
@@ -111,7 +127,7 @@ export default {
 		createlib() {
 			this.modalVisible = true;
 		},
-		//	扫码新建样品交接单
+		//	新建样品交接单
 		connect() {
 			if(!this.$_ault_alert('handover:save')){
 				return
@@ -119,8 +135,11 @@ export default {
 			this.$router.push({ path: '/index/sampleManagement/handover/handoverListCreate' })
 		},
 		//	填入新建数据
-		createlibitem(unit, lib) {
-			console.log(unit, lib);
+		createlibitem(form) {
+			console.log(form);
+		},
+		modelSelectChange(val,model){
+		
 		},
 		//	关闭新建弹框
 		dialogClose() {
@@ -132,6 +151,11 @@ export default {
 	  		this.searchText=searching;
 	  		var params = {};
 			params.nameLike = searching;
+			if(this.filterStatus==-1){
+				params.returnState=-1;
+			}else if(this.filterStatus==1){
+				params.returnState=1;	
+			}
 	//		console.log(this.breadcrumb.searching);
 	  		// 获取列表数据（第？页）
 			this.$http({
@@ -161,6 +185,15 @@ export default {
 		//	获取列表数据方法
 		getlistdata(page) {
 			this.loading = true;
+			var params = {};
+			if(this.filterStatus==-1){
+				params.returnState=-1;
+			}else if(this.filterStatus==1){
+				params.returnState=1;	
+			}
+			if(this.searchText){				
+				params.nameLike = this.searchText;
+			};
 			// 获取列表数据（第？页）
 			this.$http({
 				method: 'post',
@@ -176,6 +209,7 @@ export default {
 				data: {
 					page:page,
 			    	rows:this.page.size,
+				   	params:JSON.stringify(params)			    	
 				}
 			}).then(function(response) {
 				this.tabledatas = response.data.rows;
@@ -237,21 +271,20 @@ export default {
       		searchText:'',
 			checkedId: [],
 			list: "samplinglist",
-			modalVisible: false,
+			modalVisible:false,
 			modal:{
-		  	title:'新建库点',
+			  	title:'归还',
 				formdatas:[
-			  		{
-			  			label:"单位名称",
-			  			model:"unit",
-			  		},
-			  		{
-			  			label:"库点名称",
-			  			model:"lib",
-			  		},
-			  	],
-			  	submitText:'确定',
-		    },
+					{
+			  			label:"归还人:",
+			  			model:"returnPerson",
+//			  			disabled:true,
+			  			value:'',
+			  			type:'input',
+			  		},					
+			  	],		
+			  	submitText:'归还',
+			},
 			breadcrumb: {
 				search: true,
 				searching: '',
@@ -278,26 +311,34 @@ export default {
 				type: 'info'
 			}],
 			//    表格数据
-			listHeader: {
-				createlib: false,
-				createSampling: false,
-				status: false,
-				date:true,
-				scanCode: false,
+			listHeader:{
+		      	createlib:false,
+		      	createSampling:false,
+		      	date:false,
+		      	scanCode:false,
 				connect: true,
-			},
+		      	status:true,
+		      	statusitems:[
+		      		{label:'全部',text:'全部'},
+		      		{label:'-1',text:'已归还'},
+		      		{label:'1',text:'未归还'},
+		      	],
+		      	status2:false,
+		      	statusTitle:'交接单状态:',
+		      	statusTitle2:[],
+		    },
 			tabledatas: [],
 			items: [
-//				{
-//					id: 1,
-//					prop: 'name',
-//					label: "单位名称",
-//					sort: true
-//				},
+				{
+					id: 1,
+					prop: 'id',
+					label: "编号",
+					sort: true,
+				},
 				{
 					id: 2,
 					prop: 'name',
-					label: "样品领取交接单名称",
+					label: "名称",
 //					sort: true,
 				},
 				{
@@ -305,13 +346,34 @@ export default {
 					prop: 'checkeds',
 					label: "检验项目",
 					status:true,
+					width:350,
 //					sort: true,
 				},
 				{
 					id: 4,
+					prop: 'receiptor',
+					label: "领取人",
+//					sort: true,
+				},
+				{
+					id: 5,
 					prop: 'createTime',
-					label: "创建时间",
+					label: "领取时间",
 					sort: true,
+				},
+				{
+					id: 6,
+					prop: 'returnPerson',
+					label: "归还人",
+//					sort: true,
+					status:true,
+				},
+				{
+					id: 7,
+					prop: 'returnTime',
+					label: "归还时间",
+					sort: true,
+					status:true,
 				},
 			],
 			actions: {

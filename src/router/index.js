@@ -28,6 +28,7 @@ import sampleRoom from '@/components/sampleManagement/sampleIn/warehouseManageme
 import sampleRegistration from '@/components/sampleManagement/sampleIn/sampleRegistration/sampleRegistration.vue'
 import registrationSelect from '@/components/sampleManagement/sampleIn/sampleRegistration/registrationSelect.vue'
 import SampleInEdit from '@/components/sampleManagement/sampleIn/SampleInEdit.vue'
+import CreateSampleInNum from '@/components/sampleManagement/sampleIn/CreateSampleInNum.vue'
 import SampleInCreate from '@/components/sampleManagement/sampleIn/SampleInCreate.vue'
 import HandoverList from '@/components/sampleManagement/handover/HandoverList.vue'
 import HandoverListCreate from '@/components/sampleManagement/handover/HandoverListCreate.vue'
@@ -59,6 +60,9 @@ import ResourcesAdd from '@/components/authorityManagement/resources/ResourcesAd
 import ResourcesList from '@/components/authorityManagement/resources/ResourcesList.vue'
 import InformationAdd from '@/components/informationManagement/InformationAdd.vue'
 import Informationpoint from '@/components/informationManagement/Informationpoint.vue'
+import ContainerAdd from '@/components/informationManagement/ContainerAdd.vue'
+import PlaceAdd from '@/components/informationManagement/PlaceAdd.vue'
+import SampleRoomAdd from '@/components/informationManagement/SampleRoomAdd.vue'
 import SampleLibraryList from '@/components/sampling/list/SampleLibraryList.vue'
 import ExaminationLibrary from '@/components/sampling/list/ExaminationLibrary.vue'
 import SuperviseList from '@/components/testReport/supervise/SuperviseList.vue'
@@ -246,6 +250,11 @@ const routes= [
             name:"样品管理/样品入库列表",
             component:SampleInList,
             meta: { needAuth: '样品入库列表' },
+          },
+          {
+            path:"sampleManagement/sampleIn/createSampleInNum",
+            name:"样品管理/样品入库列表/创建检验编号",
+            component:CreateSampleInNum,
           },
           {
             path:"sampleManagement/sampleIn/sampleInEdit",
@@ -502,13 +511,29 @@ const routes= [
             path:"InformationManagement/Informationpoint",
             name:"信息管理/添加库点",
             meta: { needAuth: '添加库点' },
-            component:Informationpoint,
-
-           
+            component:Informationpoint,          
 //          beforeEnter: (to, from, next) => {
 //
 //		    }
           },
+          {
+            path:"InformationManagement/SampleRoomAdd",
+            name:"信息管理/添加样品室",
+            component:SampleRoomAdd,
+//          meta: { needAuth: '添加样品室' },
+          },
+          {
+            path:"InformationManagement/ContainerAdd",
+            name:"信息管理/添加柜子货架",
+//          meta: { needAuth: '添加柜子货架' },
+            component:ContainerAdd,         
+          },
+//        {
+//          path:"InformationManagement/PlaceAdd",
+//          name:"信息管理/添加货位数",
+////          meta: { needAuth: '添加货位数' },
+//          component:PlaceAdd,         
+//        },
 
       ]
     },

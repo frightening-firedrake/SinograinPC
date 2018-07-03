@@ -383,6 +383,30 @@ export default {
 					needAuth: 'InformationManagement',
 					
 				},
+				{
+					icon: 'icon-fangzi',
+					linkto: '/index/InformationManagement/SampleRoomAdd',
+					title: '添加样品室',
+					level: 2,
+					pid: 22,
+					lid: 26,
+				},
+				{
+					icon: 'icon-woshijiajuguizishounaxianxing',
+					linkto: '/index/InformationManagement/ContainerAdd',
+					title: '添加柜子货架',
+					level: 2,
+					pid: 22,
+					lid: 27,
+				},
+//				{
+//					icon: 'icon-iocn02001',
+//					linkto: '/index/InformationManagement/PlaceAdd',
+//					title: '添加货位数',
+//					level: 2,
+//					pid: 22,
+//					lid: 28,
+//				},
 
 			]
 

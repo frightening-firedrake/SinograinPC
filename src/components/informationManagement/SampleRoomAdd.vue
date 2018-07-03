@@ -45,9 +45,6 @@ export default {
 	methods: {
 		//	获取列表数据方法
 		getlistdata(page) {
-			let params = {
-				pLibraryId: "-1"
-			}
 			this.loading = true;
 			// 获取列表数据（第？页）
 			this.$http({
@@ -63,19 +60,13 @@ export default {
 					return ret
 				}],
 				data: {
-					params: JSON.stringify(params)
+//					params: JSON.stringify(params)
 				}
 			}).then(function(response) {
-				this.informations = response.data.filter((item)=>{
-					return item.pLibraryId==-1;
-				});
-				//		  	this.formdatas=response.data.formdatas;		  
-				//		  	this.tabledatas=response.data.rows;
-				//	  		this.page.total=response.data.total;
-
-				setTimeout(() => {
+				this.informations = response.data
+//				setTimeout(() => {
 					this.loading = false;
-				}, 1000)
+//				}, 1000)
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));
@@ -93,9 +84,9 @@ export default {
 				//			}
 			}).then(function(response) {
 				//		  	this.tabledatas=response.data.rows;
-				setTimeout(() => {
+//				setTimeout(() => {
 					this.loading = false;
-				}, 1000)
+//				}, 1000)
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));
@@ -111,12 +102,13 @@ export default {
 			}
 			this.informationType = type;
 			this.modal = {
-				title: '新建直属库',
+				title: '新建样品室',
 				formdatas: [
 					{
-						label: "直属库名称",
-						model: "unit",
+						label: "样品室名称",
+						model: "depot",
 						type:'input',
+						value:'',
 					},
 					// {
 					// 	label:"添加库点",
@@ -145,14 +137,15 @@ export default {
 		},
 		//	填入新建数据
 		createlibitem(data) {
-			var params = {
-				id: this.informations.length,
-				libraryName: data.unit
-			}
-			this.informations.push({ id: this.informations.length, libraryName: data.unit })
+
+//			var params = {
+//				id: this.informations.length,
+//				libraryName: data.unit
+//			}
+//			this.informations.push({ id: this.informations.length, libraryName: data.unit })
 			this.$http({
 				method: 'post',
-				url: this.apiRoot + "/grain/library/save",
+				url: addURL,
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				transformRequest: [function(data) {
 					// Do whatever you want to transform the data
@@ -186,8 +179,9 @@ export default {
 	},
 	data() {
 		return {
-			title: "直属库",
-			datalistURL: this.apiRoot + '/grain/library/getAll',
+			title: "样品室",
+			datalistURL:this.apiRoot + '/grain/warehouse/getAll',
+//			addURL:this.apiRoot + '/grain/library/getAll',
 			searchURL: this.apiRoot + '/liquid/role2/data/search',
 			deleteURL: this.apiRoot + '/liquid/role2/data/delete',
 			checkedId: [],

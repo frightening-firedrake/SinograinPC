@@ -43,6 +43,9 @@
 						<template v-if="scope.row[item.prop]==3">
 							<span style="color:#666666;">已入库</span>
 						</template>
+						<template v-if="scope.row[item.prop]==4">
+							<span style="color:#666666;">已处理</span>
+						</template>
 					</template>
 					<template v-if="item.prop=='detectionState'">
 						<template v-if="scope.row[item.prop]==1">
@@ -119,6 +122,12 @@
 						<template v-if="scope.row.warehouseUseNumber/scope.row.warehouseTotal==1" >
 							<span class="warehouseState" style="color:#c81212;"><i style="background-color:#c81212;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehouseTotal}}</span>已满
 						</template>
+					</template>
+					<template v-if="item.prop=='returnPerson'">
+						<button class="print" @click.stop="returnPerson(scope.$index, scope.row,scope)">{{scope.row.returnPerson?scope.row.returnPerson:'尚未归还'}}</button>
+					</template>
+					<template v-if="item.prop=='returnTime'">
+						<button class="print" @click.stop="returnPerson(scope.$index, scope.row,scope)">{{scope.row.returnTime?scope.row.returnTime:'尚未归还'}}</button>
 					</template>
 				</template>
 			</el-table-column>
@@ -411,6 +420,14 @@ export default {
 		},
 		notAllowed() {
 			return false;
+		},
+		returnPerson(index, row, scope) {
+//			console.log(index, row, scope)
+			if(row.returnState==1){
+				return
+			}else{				
+				this.$root.eventHub.$emit('returnPerson', row.id)
+			}
 		},
 	}
 }

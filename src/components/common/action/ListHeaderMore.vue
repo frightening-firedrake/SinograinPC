@@ -84,6 +84,15 @@
 					</span>					
 				</div>
 			</template>
+			<br />
+			<template v-if="listHeader.createSampleNum">				
+				<div class="createSampleNum" @click="createSampleNum">
+					<span>
+						<i class="iconfont icon-lurubaogao"></i>
+						创建检验编号
+					</span>					
+				</div>
+			</template>
 		</div>
 		<br />
 		<!--下拉选择库点筛选-->
@@ -150,6 +159,7 @@
 		border-radius: 0.1rem 0.1rem 0 0;
 		border: solid 1px #eaeaea;
 		border-bottom: none;
+		position:relative;
 	}
 	div.listHeaderMore.deep{
 		border-color:#ccc;
@@ -175,9 +185,12 @@
 	/*按钮*/
 	div.listHeaderMore div.btns{
 		height:100%;
-		float:right;
+		/*float:right;*/
 		/*margin-right:0.13rem;*/
 		padding:0.11rem;
+		position:absolute;
+		right:0;
+		top:0;
 	}
 	div.listHeaderMore div.btns div.create{
 		float:left;
@@ -331,7 +344,7 @@
 	div.listHeaderMore div.btns .scanCode{
 		float:left;
 		height:0.4rem;
-		line-height: 0.33rem;
+		line-height: 0.34rem;
 		margin-left:0.3rem;
 		font-size: 0.24rem;
 		cursor: pointer;
@@ -351,6 +364,34 @@
 	div.listHeaderMore div.btns .scanCode i{
 		color:#ffffff;
 		font-size:0.24rem;
+	}
+	/*创建检验编号按钮*/
+	div.listHeaderMore div.btns .createSampleNum{
+		float:left;
+		height:0.4rem;
+		line-height: 0.32rem;
+		margin-left:0.3rem;
+		font-size: 0.21rem;
+		cursor: pointer;
+		background-color: #FFF;
+		border:1px solid #58b481;
+		border-radius: 0.05rem;
+		box-sizing: border-box;
+		padding:0.04rem;
+		color:#58b481;
+		margin-top:-0.04rem;
+	}
+	div.listHeaderMore div.btns .createSampleNum span{
+		border:1px solid #FFFFFF;
+		border-radius:0.04rem;
+		padding:0 0.075rem;
+		font-weight: 500;
+	}
+	div.listHeaderMore div.btns .createSampleNum i{
+		color:#58b481;
+		font-size:0.24rem;
+		padding: 0 0.043rem;
+		vertical-align: middle;
 	}
 	/*表单标题*/
 	div.listHeaderMore div.tableName{
@@ -540,6 +581,9 @@ export default {
     	},
     	scanCode(){
     		this.$emit('scanCode');
+    	},
+    	createSampleNum(){
+    		this.$emit('createSampleNum');
     	},
 		connect(){
 			this.$emit("connect")

@@ -407,7 +407,7 @@ export default {
       	show:true,
       	manuscript:false,
       	safetyReport:false,
-      	sort:'smallSampleNum',
+//    	sort:'smallSampleNum',
       },
       messageShow:false,
 	  messages:{

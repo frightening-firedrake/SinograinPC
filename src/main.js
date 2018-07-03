@@ -8,12 +8,13 @@ import 'element-ui/lib/theme-chalk/display.css'
 import store from './store/index'
 import axios from 'axios'
 import router from './router/index'
+//import 'vue2-animate/dist/vue2-animate.min.css';
 
 Vue.use(ElementUI);
-//Vue.prototype.apiRoot = 'http://m.ityyedu.com
-Vue.prototype.apiRoot = 'http://192.168.1.233:8083'//deng
+//Vue.prototype.apiRoot = 'http://m.ityyedu.com'
+//Vue.prototype.apiRoot = 'http://192.168.1.233:8083'//deng
 //Vue.prototype.apiRoot = 'http://192.168.1.230:80'//xuan
-//Vue.prototype.apiRoot = 'http://192.168.1.232:8083'//bo
+Vue.prototype.apiRoot = 'http://192.168.1.232:8080'//bo
 //Vue.prototype.apiRoot = 'http://192.168.1.176:8082'
 //Vue.prototype.apiRoot = 'http://192.168.1.221:80'
 //axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';

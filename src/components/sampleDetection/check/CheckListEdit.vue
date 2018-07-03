@@ -331,7 +331,7 @@ export default {
 		for(var key in jsdjg){
 			this.formdatas[this.checktype][key]=jsdjg[key]
 		}	
-		console.log(this.editUrl)
+//		console.log(this.editUrl)
 		this.save()
 	},
 	save(){

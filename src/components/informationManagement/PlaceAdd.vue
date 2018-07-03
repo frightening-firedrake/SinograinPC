@@ -219,18 +219,18 @@ export default {
 			}],
 			informationType: '',
 			informations: [
-//				{
-//					title: '库',
-//					items: [
-//						{},
-//					],
-//				},
-//				{
-//					title: '品种',
-//					items: [
-//						{},
-//					],
-//				},
+				{
+					title: '库',
+					items: [
+						{},
+					],
+				},
+				{
+					title: '品种',
+					items: [
+						{},
+					],
+				},
 			],
 		}
 	}

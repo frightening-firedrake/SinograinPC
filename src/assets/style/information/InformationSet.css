@@ -63,6 +63,7 @@
 	font-size:0.16rem;
 	color:#333333;
 	border:1px solid #dfdfdf;
+	background-color:#ffe7b8;
 }
 .imsetwrap .tbwrap{
 	/*height:;*/
@@ -114,6 +115,10 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
+.tbwrap .warehouseTotal{
+	border-left:1px solid #dfdfdf;
+	text-align: center;
+}
 .tbwrap .action:after{
 	content: "";
 	position:absolute;
@@ -132,9 +137,9 @@
 	border-bottom:1px solid #dfdfdf;
 	border-left:1px solid #dfdfdf;
 }
-.tbwrap .item:last-child{
+/*.tbwrap .item:last-child{
 	border-right:1px solid #dfdfdf;
-}
+}*/
 .tbwrap .item .index{
 	border-right:1px solid #dfdfdf;
 }

@@ -222,7 +222,9 @@ export default {
                     this.iskey = "Wheat"
                     this.items = this.Wheat
                 }
-                this.tabledatas = res.data
+                this.tabledatas = res.data.filter((value,index)=>{
+                	return (value.otherState==-1)&&(value.detectionState==2)
+                })
                 this.tabledatas.forEach((i,v)=>{
                     i.sampleNum = "监"+i.sampleNum
                 })

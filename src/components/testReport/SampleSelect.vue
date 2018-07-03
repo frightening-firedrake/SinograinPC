@@ -144,7 +144,8 @@ export default {
 //		console.log(searching)
   		this.searching=searching;
   		var params={};
-  		params.taskName=searching
+  		params.taskName=searching;
+  		params.detectionState=2;
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -204,7 +205,7 @@ export default {
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：填写任务名称后按下回车键可获取到任务相关样品检验编号!',
+        title: '温馨提示：选择任务名称后可获取到相关任务中已检测完成的样品检验编号!',
         type: 'info'
       }],
       checkList:[],
