@@ -146,15 +146,43 @@
         </div>
       </div>
       </div>
-     <!--<div id='printbuttom' class="leading_out" @click="print()">
-        <span>打印样品领取交接单</span>
-      </div>-->
-    
+     	<div class="hoverReturn">
+		    <el-button class="hoverReturnBtn" type="primary" @click="hoverReturn">归还</el-button>
+      </div>
+      <sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose" @modelSelectChange="modelSelectChange"></sinograin-modal>      	
+    	
   </div>
 </template>
 
 <style>
-
+.hoverReturn{
+	text-align: center;
+} 
+.hoverReturn button {
+    font-size: 0.18rem;
+    padding: 0rem;
+    line-height: 0.5rem;
+    border-radius: 0.1rem;
+    width:1.3rem;
+    height:0.5rem;
+    text-align: center;
+    margin-top:1rem;
+}
+.hoverReturn .el-button+.el-button{
+	margin-left:0.3rem;
+}
+.hoverReturn button.hoverReturnBtn {
+	background-color: rgb(88,180,129);
+	border-color:rgb(88,180,129);
+}
+.hoverReturn button.hoverReturnBtn.is-disabled,.hoverReturn button.hoverReturnBtn.is-disabled:hover  {
+	background-color: #999999;
+	border-color:#999999;
+}
+.hoverReturn button.hoverReturnBtn:hover {
+	background-color: rgba(88,180,129,0.8);
+	border-color:rgb(88,180,129);
+}
 </style>
 
 <script>
@@ -162,6 +190,7 @@
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
+import SinograinModal from '@/components/common/action/Modal.vue';
 //这里是打印控件
 import {getLodop} from 'static/lodop/LodopFuncs'
 let LODOP
@@ -177,7 +206,7 @@ import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 
 export default {
   components: {
-    SinograinPrompt, SinograinBreadcrumb, SinograinOptionTitle
+    SinograinPrompt, SinograinBreadcrumb, SinograinOptionTitle, SinograinModal
   },
   computed: {
     ...mapState(["modal_id_number", "viewdata", "editdata", "aultdata", "messions", "mask"]),
@@ -186,6 +215,9 @@ export default {
     	var length=0;
     	if(this.formdatas.testItemList.length%2){    		
     		length=2-this.formdatas.testItemList.length%2;
+    	}
+    	if(!this.formdatas.testItemList.length){    		
+    		length=2;
     	}
     	var item={checkNum:undefined}
     	var arr=[]
@@ -314,7 +346,7 @@ export default {
         console.log(error);
       }.bind(this));
     },
-	titleEvent(){
+		titleEvent(){
   		console.log('titleEvent');
   	},
   	findCheckeds(str){
@@ -327,6 +359,20 @@ export default {
 	  	})
 	  	return res.join('，')
 	  },
+	  //	填入新建数据
+		createlibitem(form) {
+			console.log(form);
+		},
+		modelSelectChange(val,model){
+		
+		},
+		//	关闭新建弹框
+		dialogClose() {
+			this.modalVisible = false;
+		},
+		hoverReturn(){
+			this.modalVisible = true;
+		},
   },
   filters: {
    data:function (input) {
@@ -363,17 +409,31 @@ export default {
       }],
       formdatas: {
       	name:'',
-        sort:'玉米',//品种
-        nid:20,//编号
-        testList:'检验质量、品质全项目指标',//检测项目
+        sort:'',//品种
+        nid:'',//编号
+        testList:'',//检测项目
         //检测样品
         testItemList:[
    
         ],
-        remarks:'分两份不完善粒平行小样，其他按国标法分样。',
-        gly:'张海星',
-        time:'2017-03-07',
-      }
+        remarks:'',
+        gly:'',
+        time:'',
+      },
+      modalVisible:false,
+			modal:{
+			  title:'归还',
+				formdatas:[
+					{
+			  			label:"归还人签名:",
+			  			model:"returnPerson",
+//			  			disabled:true,
+			  			value:'',
+			  			type:'input',
+			  		},					
+			  	],		
+			  	submitText:'确认',
+			},
     }
   }
 }

@@ -191,6 +191,9 @@ export default {
     	if(this.formdatas.testItemList.length%4){    		
     		length=4-this.formdatas.testItemList.length%4;
     	}
+    	if(!this.formdatas.testItemList.length){    		
+    		length=4;
+    	}
 //  	var length=4-this.formdatas.testItemList.length%4;
     	var item={checkNum:undefined}
     	var arr=[]
@@ -368,16 +371,16 @@ export default {
       }],
       formdatas: {
       	name:'',
-        sort:'玉米',//品种
-        nid:20,//编号
-        testList:'检验质量、品质全项目指标',//检测项目
+        sort:'',//品种
+        nid:'',//编号
+        testList:'',//检测项目
         //检测样品
         testItemList:[
    
         ],
-        remarks:'分两份不完善粒平行小样，其他按国标法分样。',
-        gly:'张海星',
-        time:'2017-03-07',
+        remarks:'',
+        gly:'',
+        time:'',
       }
     }
   }
