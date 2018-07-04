@@ -15,8 +15,8 @@
         </div>
 		<!--表单-->
 		<!--<information-set :informations="informations" @addinformation="addinformationLib" :title="title" :inforSelect="inforselect"></information-set>-->
-		<information-set3 :informations="counterInformations" :title="informationTitle[0]" @addinformation="addinformation0"></information-set3> 
-		<information-set3 :informations="placeInformations" :title="informationTitle[1]" @addinformation="addinformation1"></information-set3> 
+		<information-set3 :informations="counterInformationsguizi" :title="informationTitle[0]" @addinformation="addinformation0"></information-set3> 
+		<information-set3 :informations="counterInformationshuojia" :title="informationTitle[1]" @addinformation="addinformation1"></information-set3> 
 		<!--输入弹框-->
 		<sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
 	</div>
@@ -45,24 +45,34 @@ export default {
 		SinograinBreadcrumb, SinograinOptionTitle, InformationSet3, SinograinPrompt, SinograinModal
 	},
 	computed: {
-		counterInformations(){
+		counterInformationsguizi(){
 
 			if(this.point){					
 				return this.informations0.filter((value,index)=>{
-							return value.pId==this.point
+							return value.pId==this.point&&value.type==1
 						})
 			}else{
 				return [];
 			}
 		},
-		placeInformations(){
+		counterInformationshuojia(){
 			if(this.point){	
 				return this.informations1.filter((value,index)=>{
-							return value.pId==this.point
+							return value.pId==this.point&&value.type==2
 						})
 			}else{
 				return [];
 			}
+		},
+		findDepot(){
+			var sample;
+			sample=this.pointList.filter((value,index)=>{
+				return value.id==this.point
+			})
+			if(sample.length){				
+				return sample[0].depot
+			}
+			return '';
 		},
 	},
 	created() {
@@ -132,9 +142,9 @@ export default {
 //					return 
 //				})
 
-					this.informations0=response.data.filter((value,index)=>{
-						return value.pId==this.point
-					})
+//					this.informations0=response.data.filter((value,index)=>{
+//						return value.pId==this.point
+//					})
 					this.informations0=response.data
 					this.informations1=response.data
 
@@ -159,6 +169,13 @@ export default {
 					title: '新建柜子',
 					formdatas: [
 						{
+							label: "样品室",
+							model: "depot",
+							type:'input',
+							value:this.findDepot,
+							disabled:true,
+						},
+						{
 							label: "柜子名称",
 							model: "counter",
 							type:'input',
@@ -166,7 +183,7 @@ export default {
 						},
 						{
 							label: "位置数量",
-							model: "place",
+							model: "warehouseTotal",
 							type:'input',
 							value:'',
 						},
@@ -177,7 +194,7 @@ export default {
 			}else{
 				// alert("请先选择直属库")
 				this.$notify.error({
-					title:"警告",
+					title:"提示",
 					message:"请先选择样品室"
 				})
 			}
@@ -193,6 +210,13 @@ export default {
 					title: '新建货架',
 					formdatas: [
 						{
+							label: "样品室",
+							model: "depot",
+							type:'input',
+							value:this.findDepot,
+							disabled:true,
+						},
+						{
 							label: "货架名称",
 							model: "counter",
 							type:'input',
@@ -200,7 +224,7 @@ export default {
 						},
 						{
 							label: "位置数量",
-							model: "place",
+							model: "warehouseTotal",
 							type:'input',
 							value:'',
 						},
@@ -211,22 +235,23 @@ export default {
 			}else{
 				// alert("请先选择直属库")
 				this.$notify.error({
-					title:"警告",
+					title:"提示",
 					message:"请先选择样品室"
 				})
 			}
 			
 		},
 		//	填入新建数据
-		createlibitem(data) {
-//			var params = {
-//				id: this.informations.length,
-//				libraryName: data.unit
-//			}
-//			this.informations.push({ id: this.informations.length, formName: data.unit })
+		createlibitem(data,title) {
+			var type='';
+			if(title=='新建柜子'){
+				type=1
+			}else if(title=='新建货架'){
+				type=2
+			}
 			this.$http({
 				method: 'post',
-				url: addURL,
+				url: this.addURL,
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				transformRequest: [function(data) {
 					// Do whatever you want to transform the data
@@ -237,11 +262,10 @@ export default {
 					return ret
 				}],
 				data: {
-//
-//					formName:data.unit,
-//                  libraryId:this.point
-//                  libraryName: data.unit,
-//					pLibraryId: this.point,
+                    pId:this.point,
+                    counter: data.counter,
+                    type:type,
+                    warehouseTotal:data.warehouseTotal,
 				}
 			}).then(function(response) {
 				//		  	this.tabledatas=response.data.rows;
@@ -250,16 +274,12 @@ export default {
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));
-			// this.getlistdata(1)
-			// }else if(this.informationType=="品种"){
-			// 	console.log(data);
-			// 	this.informations[1].items.push({id:'',sampleNumber:data.unit})
-			// }
 		},
 		//	关闭新建弹框
 		dialogClose() {
 			this.modalVisible = false;
 		},
+		
 	},
 	data() {
 		return {
@@ -272,22 +292,14 @@ export default {
 			depotlistURL: this.apiRoot + '/grain/warehouse/getAll',
 	  		counterlistURL: this.apiRoot + '/grain/warehouseCounter/getAll',
 	  		placelistURL: this.apiRoot + '/grain/warehouseCounterPlace/getAll',
-//			addtURL: this.apiRoot + '/grain/warehouse/getAll',
+			addURL: this.apiRoot + '/grain/warehouseCounter/save',
 			searchURL: this.apiRoot + '/liquid/role2/data/search',
 			deleteURL: this.apiRoot + '/liquid/role2/data/delete',
 			checkedId: [],
 			createlibVisible: false,
 			modalVisible: false,
 			modal: {
-				title: '新建库点',
-				formdatas: [
-					{
-						label: "库点名称",
-						model: "lib",
-						type:'input',
-					},
-				],
-				submitText: '确定',
+		
 			},
 			breadcrumb: {
 				search: false,

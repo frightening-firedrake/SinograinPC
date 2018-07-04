@@ -181,8 +181,11 @@ export default {
 	        errorinline:false,
 	        disabled:false,
             rules: {
+            	sort:[
+                    {validator:validateText,trigger:'change'}
+            	],
                 remark:[
-                    {validator:validateText,trigger:'blur'}
+                    {validator:validateText,trigger:'change'}
                 ],
 //              position:[
 //                  {validator:validateText,trigger:'blur'}
@@ -366,7 +369,7 @@ export default {
 	  	},
 	  	remarkChange(val){
 //	  		console.log(val)
-	  		this.$refs['form'].validateField('remark')
+//	  		this.$refs['form'].validateField('remark')
 //	  		this.remSelect=val.value
 //	  		this.$emit('remChange',this.remSelect)
 	  	},

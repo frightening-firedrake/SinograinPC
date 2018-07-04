@@ -145,7 +145,7 @@ export default {
 //			this.informations.push({ id: this.informations.length, libraryName: data.unit })
 			this.$http({
 				method: 'post',
-				url: addURL,
+				url: this.addURL,
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				transformRequest: [function(data) {
 					// Do whatever you want to transform the data
@@ -156,9 +156,7 @@ export default {
 					return ret
 				}],
 				data: {
-
-					libraryName: data.unit,
-					pLibraryId: -1,
+					depot: data.depot,
 				}
 			}).then(function(response) {
 				//		  	this.tabledatas=response.data.rows;
@@ -181,7 +179,7 @@ export default {
 		return {
 			title: "样品室",
 			datalistURL:this.apiRoot + '/grain/warehouse/getAll',
-//			addURL:this.apiRoot + '/grain/library/getAll',
+			addURL:this.apiRoot + '/grain/warehouse/save',
 			searchURL: this.apiRoot + '/liquid/role2/data/search',
 			deleteURL: this.apiRoot + '/liquid/role2/data/delete',
 			checkedId: [],

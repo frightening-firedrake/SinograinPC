@@ -266,6 +266,14 @@ export default {
 					lid: 8
 				},
 				{
+					icon: 'icon-fanhui2',
+					title: '归还样品及交接单',
+					linkto: '/index/sampleManagement/handoverReturn',
+					level: 2,
+					pid: 6,
+					lid: 25
+				},
+				{
 					icon: 'icon-shiyan',
 					title: '样品检测',
 					linkto: '',
@@ -379,7 +387,7 @@ export default {
 					title: '添加库点',
 					level: 2,
 					pid: 22,
-					lid: 25,
+					lid: 26,
 					needAuth: 'InformationManagement',
 					
 				},
@@ -389,7 +397,7 @@ export default {
 					title: '添加样品室',
 					level: 2,
 					pid: 22,
-					lid: 26,
+					lid: 27,
 				},
 				{
 					icon: 'icon-woshijiajuguizishounaxianxing',
@@ -397,7 +405,7 @@ export default {
 					title: '添加柜子货架',
 					level: 2,
 					pid: 22,
-					lid: 27,
+					lid: 28,
 				},
 //				{
 //					icon: 'icon-iocn02001',

@@ -31,6 +31,8 @@ import SampleInEdit from '@/components/sampleManagement/sampleIn/SampleInEdit.vu
 import CreateSampleInNum from '@/components/sampleManagement/sampleIn/CreateSampleInNum.vue'
 import SampleInCreate from '@/components/sampleManagement/sampleIn/SampleInCreate.vue'
 import HandoverList from '@/components/sampleManagement/handover/HandoverList.vue'
+import HandoverReturn from '@/components/sampleManagement/handover/HandoverReturn.vue'
+import HandoverShow from '@/components/sampleManagement/handover/HandoverShow.vue'
 import HandoverListCreate from '@/components/sampleManagement/handover/HandoverListCreate.vue'
 import HandoverListCreateSelect from '@/components/sampleManagement/handover/HandoverListCreateSelect.vue'
 import HandoverListView from '@/components/sampleManagement/handover/HandoverListView.vue'
@@ -290,10 +292,7 @@ const routes= [
             component:registrationSelect,
 //          meta: { needAuth: '样品入库列表' },
           },
-          
-          
-          
-          
+
           {
             path:"sampleManagement/handover",
             name:"样品管理/样品领取交接单",
@@ -334,6 +333,17 @@ const routes= [
             path:"sampleManagement/handover/handoverListEdit/handoverListEditSelect",
             name:"样品管理/样品领取交接单/编辑样品领取交接单/选择样品编号",
             component:HandoverListEditSelect,
+          },
+          {
+            path:"sampleManagement/handoverReturn",
+            name:"样品管理/归还样品及交接单",
+            component:HandoverReturn,
+            meta: { needAuth: '样品领取交接单' },
+          },
+          {
+            path:"sampleManagement/handoverReturn/handoverShow",
+            name:"样品管理/归还样品及交接单/交接单样品详情",
+            component:HandoverShow,
           },
 //         样品检测
  		  {

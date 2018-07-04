@@ -55,6 +55,14 @@
 							<span style="color:#999999;">已检测</span>
 						</template>
 					</template>
+					<template v-if="item.prop=='returnState'">
+						<template v-if="scope.row[item.prop]==-1">
+							<span style="color:#fc6500;">未归还</span>
+						</template>
+						<template v-if="scope.row[item.prop]==1">
+							<span style="color:#999999;">已归还</span>
+						</template>
+					</template>
 					<template v-if="item.prop=='resourceType'">
 						<template v-if="scope.row[item.prop]==1">
 							<span style="color:#666666;">菜单</span>

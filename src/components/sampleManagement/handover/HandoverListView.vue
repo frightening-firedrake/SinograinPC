@@ -187,7 +187,11 @@ export default {
     ...mapState(["modal_id_number", "viewdata", "editdata", "aultdata", "messions", "mask"]),
     ...mapGetters(["userName"]),
     testItemListadd(){
-    	var length=4-this.formdatas.testItemList.length%4;
+    	var length=0;
+    	if(this.formdatas.testItemList.length%4){    		
+    		length=4-this.formdatas.testItemList.length%4;
+    	}
+//  	var length=4-this.formdatas.testItemList.length%4;
     	var item={checkNum:undefined}
     	var arr=[]
     	if(length){

@@ -76,7 +76,7 @@ export default {
 				return
 			}
 			//		console.log(id)
-			this.$router.push({ path: '/index/sampleManagement/handover/handoverListView', query: { id: id } })
+			this.$router.push({ path: '/index/sampleManagement/handoverReturn/handoverShow', query: { id: id } })
 
 		}.bind(this));
 		//监听列表点击编辑事件
@@ -87,7 +87,7 @@ export default {
 		//	监听列表点击归还事件
 		this.$root.eventHub.$on("returnPerson", function(id) {
 //			if(!this.$_ault_alert('handover:getById')){
-				return
+//				return
 //			}
 			this.returnId=id
 			this.modalVisible=true;
@@ -316,8 +316,8 @@ export default {
 		      	createSampling:false,
 		      	date:false,
 		      	scanCode:false,
-				connect: true,
-//		      	status:true,
+//				connect: true,
+		      	status:true,
 		      	statusitems:[
 		      		{label:'全部',text:'全部'},
 		      		{label:'-1',text:'已归还'},
@@ -341,19 +341,26 @@ export default {
 					label: "样品领取交接单",
 //					sort: true,
 				},
-				{
-					id: 3,
-					prop: 'checkeds',
-					label: "检验项目",
-					status:true,
-					width:350,
-//					sort: true,
-				},
+//				{
+//					id: 3,
+//					prop: 'checkeds',
+//					label: "检验项目",
+//					status:true,
+//					width:350,
+////					sort: true,
+//				},
+//				{
+//					id: 4,
+//					prop: 'receiptor',
+//					label: "领取人",
+////					sort: true,
+//				},
 				{
 					id: 4,
-					prop: 'receiptor',
-					label: "领取人",
-//					sort: true,
+					prop: 'returnState',
+					label: "状态",
+					sort: true,
+					status:true,
 				},
 				{
 					id: 5,
@@ -361,20 +368,21 @@ export default {
 					label: "领取时间",
 					sort: true,
 				},
-				{
-					id: 6,
-					prop: 'returnPerson',
-					label: "归还人",
+//				{
+//					id: 6,
+//					prop: 'returnPerson',
+//					label: "归还人",
+////					sort: true,
+//					status:true,
+//				},
+//				{
+//					id: 7,
+//					prop: 'returnTime',
+//					label: "归还时间",
 //					sort: true,
-					status:true,
-				},
-				{
-					id: 7,
-					prop: 'returnTime',
-					label: "归还时间",
-					sort: true,
-					status:true,
-				},
+//					status:true,
+//				},
+				
 			],
 			actions: {
 				selection: false,
