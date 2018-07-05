@@ -166,7 +166,7 @@ export default {
 			return
 		}
 		var loadiframe=document.getElementById('fordownload');
-		console.log(this.exportExcelURL+'?sampleNos='+sampleNos+'&sessionid='+this.Token)
+//		console.log(this.exportExcelURL+'?sampleNos='+sampleNos+'&sessionid='+this.Token)
 		loadiframe.src=this.exportExcelURL+'?sampleNos='+sampleNos+'&sessionid='+this.Token;
     },
     currentRowFun(currentRow){

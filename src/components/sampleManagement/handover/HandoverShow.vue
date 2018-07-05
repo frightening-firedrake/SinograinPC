@@ -34,7 +34,7 @@
                 <span>序号</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
-                <span>检验编号</span>
+                <span>扦样编号</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
                 <span>存放位置</span>
@@ -45,7 +45,7 @@
                 <span>序号</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
-                <span>检验编号</span>
+                <span>扦样编号</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
                 <span>存放位置</span>

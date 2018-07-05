@@ -71,7 +71,7 @@
 			
 			
 			<div class="tableAddWrap">				
-				<div  class="editModelWrap">
+				<!--<div  class="editModelWrap">
 					<div class="tableAdd"  @click="tableAdd">
 						<p style="background-image:url('static/images/sys/create.png');">					
 							新增样品
@@ -82,7 +82,7 @@
 							删除表格当前行
 						</p>
 					</div>
-				</div>
+				</div>-->
 			</div>
 
 			
