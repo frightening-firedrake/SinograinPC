@@ -58,10 +58,10 @@
                 <span>{{index+1}}</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
-                <span>6000301005</span>
+                <span>{{item.sampleNo}}</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
-                <span>样品一室--3号柜--36</span>
+                <span>{{item.storage}}</span>
               </el-col>
             </el-col>
             <el-col style="" :span="12" v-for="(item,index) in testItemListadd" class='loopBorder' :key="index+99" style="border-top:1px solid #dfdfdf;">
@@ -316,7 +316,8 @@ export default {
       	this.formdatas.nid=response.data.id;//编号
 //    	this.formdatas.sort='麦子';//品种
       	this.formdatas.name=response.data.name;//品种
-      	this.formdatas.testItemList=response.data.sampleNums.split(',');//检测样品
+      	this.formdatas.testItemList=response.data.samples;//检测样品
+      	// this.formdatas.testItemList=response.data.sampleNums.split(',');//检测样品
       	this.formdatas.testItemList.sort();//检测样品排序
 //      this.formdatas = response.data;
         //		  	this.tabledatas=response.data.rows;
@@ -389,7 +390,7 @@ export default {
   },
   data() {
     return {
-      datalistURL: this.apiRoot +'/grain/handover/get',
+      datalistURL: this.apiRoot +'/grain/handover/getStorage',
       searchURL: '/liquid/role2/data/search',
       deleteURL: '/liquid/role2/data/delete',
       checkedId: [],
