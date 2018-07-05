@@ -317,6 +317,7 @@ export default {
 //    	this.formdatas.sort='麦子';//品种
       	this.formdatas.name=response.data.name;//品种
       	this.formdatas.testItemList=response.data.samples;//检测样品
+      	this.sampleNums=response.data.sampleNums;//检测样品
       	// this.formdatas.testItemList=response.data.sampleNums.split(',');//检测样品
       	this.formdatas.testItemList.sort();//检测样品排序
 //      this.formdatas = response.data;
@@ -363,7 +364,32 @@ export default {
 	  //	填入新建数据
 		createlibitem(form) {
 			console.log(form);
+      this.guihuan(form);
 		},
+    guihuan(form) {
+        this.$http({
+          method: 'post',
+          url: this.huiGuiUrl,
+          transformRequest: [function (data) {
+            let ret = ''
+            for (let it in data) {
+            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+            }
+            return ret
+				  }],
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          data: {
+              id: this.$route.query.id,
+              returnPerson: form.returnPerson,
+              returnState: 1,
+              sampleNums: this.sampleNums
+          }
+        }).then(function(response) {
+          
+        }.bind(this)).catch(function(error) {
+          console.log(error);
+        }.bind(this));
+    },
 		modelSelectChange(val,model){
 		
 		},
@@ -391,10 +417,12 @@ export default {
   data() {
     return {
       datalistURL: this.apiRoot +'/grain/handover/getStorage',
+      huiGuiUrl: this.apiRoot + '/grain/handover/huiGui',
       searchURL: '/liquid/role2/data/search',
       deleteURL: '/liquid/role2/data/delete',
       checkedId: [],
       createlibVisible: false,
+      sampleNums:'',
       breadcrumb: {
         search: false,
         searching: '',
