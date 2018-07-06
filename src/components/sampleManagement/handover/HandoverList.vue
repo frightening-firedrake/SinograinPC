@@ -334,6 +334,7 @@ export default {
 					prop: 'id',
 					label: "编号",
 					sort: true,
+					status:true,
 				},
 				{
 					id: 2,

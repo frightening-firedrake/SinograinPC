@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		<div class="dataSelete" v-if="listHeader.date1">			
-			<p>创建时间:</p>
+			<p>{{listHeader.date1Title?listHeader.date1Title:'创建时间:'}}</p>
 			<div>
 			    <el-date-picker
 			    size='mini'
@@ -41,9 +41,42 @@
 			    range-separator="—"
 			    start-placeholder="开始日期"
 			    end-placeholder="结束日期"
-			    :picker-options="pickerOptions2"
 			    @change="dateChange"
 			    >
+			    </el-date-picker>
+			</div>
+		</div>
+		<div class="dataSelete" v-if="listHeader.dateonyear">			
+			<p>{{listHeader.dateonyearTitle?listHeader.dateonyearTitle:'创建时间:'}}</p>
+			<div>
+				
+			    <el-date-picker
+			    size='mini'
+			    :clearable='false'
+			    v-model="date_select"
+			    type="daterange"
+			    align="right"
+			    unlink-panels
+			    range-separator="—"
+			    start-placeholder="开始日期"
+			    end-placeholder="结束日期"
+			    value-format="yyyy-MM-dd"
+			    @change="dateChange2"
+			    >
+			    </el-date-picker>
+			</div>
+		</div>
+		<div class="dataSelete year" v-if="listHeader.dateonlyyear">			
+			<p>{{listHeader.dateonlyyearTitle?listHeader.dateonlyyearTitle:'创建时间:'}}</p>
+			<div>			
+			    <el-date-picker
+			      size='mini'
+			      :clearable='false'
+			      v-model="date_select"
+			      type="year"
+			      @change="dateChange2"
+			      value-format="yyyy"
+			      placeholder="选择年份">
 			    </el-date-picker>
 			</div>
 		</div>
@@ -300,12 +333,25 @@
 		color: #58b481;
 		font-size:0.2rem;
 		padding:0 0.15rem;
+		display:inline-flex;
 	}
 	div.listHeader .el-range-editor.is-active, div.listHeader .el-range-editor.is-active:hover{
 		border-color:#58b481;
 	}
 	div.listHeader .el-date-editor .el-range-separator{
 		padding:0;
+	}
+	div.listHeader .year .el-input--mini .el-input__inner{
+		border:none;
+		line-height: inherit;
+		height:100%;
+		font-size:0.14rem;
+	}
+	div.listHeader .year .el-input__prefix{
+		line-height: 20px;
+	}
+	div.listHeader .year .el-icon-date{
+		line-height: 20px;
 	}
 	/*扫码按钮*/
 	div.listHeader div.btns .scanCode{
@@ -456,8 +502,12 @@ export default {
 			var datearr=[];
 			    datearr[0]=Date.parse(this.date_select[0]);
 			    datearr[1]=Date.parse(this.date_select[1]);
-			console.log(datearr)
+//			console.log(datearr)
 //  		this.$emit('dateChange',this.date_select);
+    	},
+    	dateChange2(){
+//  		console.log(this.date_select);
+    		this.$emit('dateChange',this.date_select);
     	},
     	selectlibChange1(){
 			this.selectlib2='全部';

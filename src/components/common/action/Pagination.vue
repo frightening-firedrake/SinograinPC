@@ -2,7 +2,7 @@
 <div class="block tfoot">
 	<div class="tfoot_btns" v-if='page.tfootbtns.btns'>
 		<p v-if='page.tfootbtns.leading_out' class='leading_out' @click="leading_out_checked">
-			<span>导出excel表</span>		
+			<span>导出EXCEL表格</span>		
 		</p>
 
    		<p v-if='page.tfootbtns.connect' class='leading_out' @click="handoverPrint">

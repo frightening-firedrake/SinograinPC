@@ -14,9 +14,9 @@
 		</el-form>
 
 		<div class="tbwrap">
+<!--			height="4.5rem"-->
 			<el-table 
 			  	class="borderTable"
-			  	height="4.5rem"
 			  	ref="TableHeader" 
 			  	tooltip-effect="dark" 
 			  	style="width: 100%" 
@@ -70,8 +70,8 @@
 			</el-table>	
 			
 			
-			<div class="tableAddWrap">				
-				<!--<div  class="editModelWrap">
+			<!--<div class="tableAddWrap">				
+				<div  class="editModelWrap">
 					<div class="tableAdd"  @click="tableAdd">
 						<p style="background-image:url('static/images/sys/create.png');">					
 							新增样品
@@ -82,16 +82,16 @@
 							删除表格当前行
 						</p>
 					</div>
-				</div>-->
-			</div>
+				</div>
+			</div>-->
 
 			
 		</div>
-		<div class="bottom">
+		<!--<div class="bottom">
 			<div class="create" @click="exportExcel">
 				<span>导出EXCEL表格</span>
 			</div>
-		</div>
+		</div>-->
     </div>
 </template>
 

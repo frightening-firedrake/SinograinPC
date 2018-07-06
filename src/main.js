@@ -16,7 +16,7 @@ Vue.use(ElementUI);
 //Vue.prototype.apiRoot = 'http://192.168.1.230:80'//xuan
 Vue.prototype.apiRoot = 'http://192.168.1.232:8080'//bo
 //Vue.prototype.apiRoot = 'http://192.168.1.176:8082'
-//Vue.prototype.apiRoot = 'http://192.168.1.221:80'
+//Vue.prototype.apiRoot = 'http://192.168.1.231:8083'//kun
 //axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 //axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
 //axios.defaults.withCredentials=true;

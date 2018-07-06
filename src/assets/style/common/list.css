@@ -105,6 +105,9 @@
     cursor:pointer;
     outline:none;
 }
+.el-main .list .el-table__body-wrapper td .cell button{
+    color:#666;
+}
 .el-main .list .el-table__body-wrapper td .cell button.input{
     color:#e37f1d;
 }

@@ -309,7 +309,7 @@ export default {
   data() {
     return {
       datalistURL: this.apiRoot +  '/grain/smallSample/data',
-      checkURL:this.apiRoot +'/grain/sample/getBySampleNum',
+      checkURL:this.apiRoot +'/grain/sample/getBySampleNo',
       searchURL:this.apiRoot +  '/grain/smallSample/data',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',

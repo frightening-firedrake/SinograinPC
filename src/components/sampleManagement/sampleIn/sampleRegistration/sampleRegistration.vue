@@ -3,21 +3,35 @@
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
   	  <!--标题-->
-  	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
+  	  <sinograin-option-title class="nomargin" :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
+      
+      <list-header class="noborder" :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" @statusChange2="statusChange2" ></list-header>
+      	
       <!--表单-->
       <sample-registert-maker class="registertMaker" :tabledata="tabledatas" :items="items" :actions="actions" :loading="loading" :formdatas="formdatas" @exportExcel='exportExcel' @addRow='addRow' @delRow='delRow' @currentRow='currentRowFun'></sample-registert-maker> 
-
+      <sinograin-pagination class="noborder" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
+	  
     </div>
 </template>
 
 <style>
+	.registertMaker .tbwrap{
+		border-bottom:1px solid #ccc;
+	}
+	.noborder{
+		border:none!important;
+	}
+	.nomargin{
+		margin:0!important;
+	}
 </style>
-
 <script>
 
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SinograinOptionTitle from "@/components/common/action/OptionTitle";
 import SampleRegistertMaker  from "@/components/common/action/SampleRegistertMaker";
+import ListHeader from '@/components/common/action/ListHeader.vue';
+import SinograinPagination from '@/components/common/action/Pagination.vue';
 
 import "@/assets/style/testReport/TestReportMaker.css"
 //import "@/assets/style/common/list.css"
@@ -28,17 +42,18 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
 export default {
   components: {
-    SinograinBreadcrumb,SinograinOptionTitle,SampleRegistertMaker
+    SinograinBreadcrumb,SinograinOptionTitle,SampleRegistertMaker,ListHeader,SinograinPagination
   },
   computed:{
 	...mapGetters(["libraryName","Token"]),
   },
   created(){
-//	this.getlistdata(1);
+//	this.getlistdata();
+	this.getsampledata(1);
 //	console.log(this.$route.params)
-	if(this.$route.params.tabledatas){
-		this.tabledatas=this.$route.params.tabledatas;
-	}
+//	if(this.$route.params.tabledatas){
+//		this.tabledatas=this.$route.params.tabledatas;
+//	}
   },
   destroy(){
 
@@ -73,9 +88,55 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+  	getsampledata(page){
+//		var params={};
+//		params.sampleState=2
+  		var params={};
+//		params.sampleWordOrsampleNumLike='';
+//		if(!this.IsChecked){  			
+  			params.ruSampleState=2;
+  			params.fenSampleState=3;
+			params.chuliSampleState=4;
+//			params.storageTime=this.storageTimeIn;
+			params.storageTimeLike=this.storageTimeIn;
+//			params.sampleNoLike=this.searchText;
+			params.sampleWordOrsampleNumOrsampleNoLike=this.searchText;
+  		this.loading=false;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.sampleURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				params:JSON.stringify(params),
+				page:page,
+			    rows:this.page.size,
+			}
+	    }).then(function (response) {
+//			console.log(response)
+		  	this.tabledatas=response.data.rows;
+//		  	if(this.$route.params.formdatas){
+//				this.checkedList=this.$route.params.tabledatas;
+//			}
+//		  	this.checkedList=response.data.rows;
+	  		this.page.total=response.data.total;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
 //	获取搜索数据
   	searchingfor(searching){
-  		console.log(searching);
+  		this.searchText=searching;
+  		this.getsampledata(1);
+//		console.log(searching);
   	},
 	titleEvent(){
   		console.log('titleEvent');
@@ -153,8 +214,10 @@ export default {
 		this.$router.push({name:name,params:{ids:ids,title:this.formdatas.tableName,sort:sort}})
     },
     exportExcel(){
-    	if(!this.tabledatas.length){
-    		this.$alert('请先添加样品！！！','提示信息',{});
+//  	if(!this.tabledatas.length){
+    	if(!this.storageTimeIn){
+//  		this.$alert('请先添加样品！！！','提示信息',{});
+    		this.$alert('请先选择入库年份！！！','提示信息',{});
     		return
     	}
     	var arr=[];
@@ -172,20 +235,53 @@ export default {
     currentRowFun(currentRow){
 		this.currentRow=currentRow;
 	},
+	//	列表头触发的事件
+		dateChange(data) {
+			console.log(data);
+			this.storageTimeIn=data
+			this.getsampledata(1);
+		},
+		statusChange(data) {
+//			this.filterStatus = data;
+//			this.getlistdata(1)
+		},
+		statusChange2(data) {
+//			console.log(data)
+		},
+		//	获取分页点击事件中及当前页码
+    getCurrentPage(currentPage){
+		if(this.searchText){			
+			this.searchingfor(this.searchText,currentPage)
+		}else{			
+			this.getsampledata(currentPage)
+		}
+	},
+//	映射分页触发的事件
+  	paginationEvent(actiontype){
+  		if(actiontype=='leading_out'){
+//			console.log('leading_out')
+			this.exportExcel()
+  		}else if(actiontype=='refresh'){
+  			// 获取列表数据（第一页）
+			this.getsampledata(1)			
+  		}
+  	},
   },
   data() {
     return {
       exportExcelURL: this.apiRoot + '/grain/sample/ExportRegister',
+      sampleURL:this.apiRoot + '/grain/sample/data',
       datalistURL:'/liquid/role19/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
+      storageTimeIn:'',
       checkedId:[],
 	  createlibVisible:false,
       searchText:'',
       currentRow:'',
       loading:false,
       breadcrumb:{
-      	search:false,   
+      	search:true,   
       	searching:'',
       },
       subtitle:{
@@ -200,6 +296,36 @@ export default {
       tabledatas:[
 	      
       ],
+      listHeader:{
+	      	createlib:false,
+	      	createSampling:false,
+	      	dateonlyyear:true,
+	      	dateonlyyearTitle:'入库年份：',
+	      	scanCode:false,
+			connect: false,
+	      	status:false,
+	      	statusitems:[
+	      		{label:'全部',text:'全部'},
+	      		{label:'-1',text:'已归还'},
+	      		{label:'1',text:'未归还'},
+	      	],
+	      	status2:false,
+	      	statusTitle:'交接单状态:',
+	      	statusTitle2:[],
+	  },
+	  //    分页数据
+      page: {
+        size: 6,
+        total: 0,
+        currentPage: 1,
+        show:true,       
+        tfootbtns:{
+        	btns:true,//是否添加按钮组
+        	leading_out:true,//导出按钮
+        	refresh:false,//刷新按钮
+        	delete:false, //删除按钮            	
+        }
+      },
       items: [
 	      {
 	        id: 1,
