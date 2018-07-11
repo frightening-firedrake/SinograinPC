@@ -141,10 +141,8 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-          		id: this.$route.query.libid,
+        id: this.$route.query.libid,
 				storageTime: this.formdatas.form.storageTime,
-				depot: this.formdatas.form.depot,
-				counter: this.formdatas.form.counter,
 				autograph:this.formdatas.form.autograph,
 			}
 	    }).then(function (response) {

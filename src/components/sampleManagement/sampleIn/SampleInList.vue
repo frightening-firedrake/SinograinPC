@@ -188,12 +188,8 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 				id: this.dataBySampleNo.id,
-				storageTime: form.storageTime,
-//				depot: form.depot,
-//				counter: form.counter,
 				placeId: form.place,
 				autograph: form.autograph,
-				sampleState: 2
 			}
 	    }).then(function (response) {
 //			console.log(response)
@@ -583,7 +579,7 @@ export default {
     return {
       datalistURL: this.apiRoot + '/grain/sample/data',
 	  getSampleNoURL: this.apiRoot + '/grain/sample/getBySampleNo',
-	  editURL: this.apiRoot + '/grain/sample/edit',
+	  editURL: this.apiRoot + '/grain/sample/saveRukuXinxi',
 	  librarylistURL: this.apiRoot + '/grain/library/getAll',
 	  depotlistURL: this.apiRoot + '/grain/warehouse/getAll',
 	  counterlistURL: this.apiRoot + '/grain/warehouseCounter/getAll',
