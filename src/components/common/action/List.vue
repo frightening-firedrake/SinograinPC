@@ -124,7 +124,7 @@
 						<template v-if="(scope.row.warehouseUseNumber/scope.row.warehouseTotal>=0)&&(scope.row.warehouseUseNumber/scope.row.warehouseTotal<=0.4)">
 							<span class="warehouseState" style="color:#38b63a;"><i style="background-color:#38b63a;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehouseTotal}}</span>空闲
 						</template>
-						<template v-if="(scope.row.warehouseUseNumber/scope.row.warehouseTotal)>=0.4&&(scope.row.warehouseUseNumber/scope.row.warehouseTotal<=1)" >
+						<template v-if="(scope.row.warehouseUseNumber/scope.row.warehouseTotal)>=0.4&&(scope.row.warehouseUseNumber/scope.row.warehouseTotal<1)" >
 							<span class="warehouseState" style="color:#e2b028;"><i style="background-color:#e2b028;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehouseTotal}}</span>未满
 						</template>
 						<template v-if="scope.row.warehouseUseNumber/scope.row.warehouseTotal==1" >
@@ -138,7 +138,7 @@
 						<button :class="{print:!scope.row.returnPerson}" @click.stop="returnPerson(scope.$index, scope.row,scope)">{{scope.row.returnTime?scope.row.returnTime:'尚未归还'}}</button>
 					</template>
 					<template v-if="item.prop=='id'">
-						<template v-if="scope.row[item.prop]>10">
+						<template v-if="scope.row[item.prop]>=10">
 							{{scope.row[item.prop]}}
 						</template>
 						<template v-if="scope.row[item.prop]<10">
@@ -415,7 +415,7 @@ export default {
 			var res;
 			if (obj.sort == '玉米') {
 				res = checkList1[index - 1];
-			} else if (obj.sort == '小麦') {
+			} else if (obj.sort == '小麦') {//测定记录
 				res = checkList2[index - 1];
 			}
 			return res;

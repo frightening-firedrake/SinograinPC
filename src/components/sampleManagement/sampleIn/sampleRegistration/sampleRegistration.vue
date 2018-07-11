@@ -220,17 +220,17 @@ export default {
     		this.$alert('请先选择入库年份！！！','提示信息',{});
     		return
     	}
-    	var arr=[];
-    	this.tabledatas.forEach((item,index)=>{
-    		arr.push(item.sampleNo)
-    	})
-    	var sampleNos=arr.join(',')
+//  	var arr=[];
+//  	this.tabledatas.forEach((item,index)=>{
+//  		arr.push(item.sampleNo)
+//  	})
+//  	var sampleNos=arr.join(',')
     	if(!this.$_ault_alert('sample:ExportRegister')){
 			return
 		}
 		var loadiframe=document.getElementById('fordownload');
-//		console.log(this.exportExcelURL+'?sampleNos='+sampleNos+'&sessionid='+this.Token)
-		loadiframe.src=this.exportExcelURL+'?sampleNos='+sampleNos+'&sessionid='+this.Token;
+		console.log(this.exportExcelURL+'?storageTime='+this.storageTimeIn+'&sessionid='+this.Token)
+		loadiframe.src=this.exportExcelURL+'?storageTime='+this.storageTimeIn+'&sessionid='+this.Token;
     },
     currentRowFun(currentRow){
 		this.currentRow=currentRow;
@@ -250,11 +250,11 @@ export default {
 		},
 		//	获取分页点击事件中及当前页码
     getCurrentPage(currentPage){
-		if(this.searchText){			
-			this.searchingfor(this.searchText,currentPage)
-		}else{			
+//		if(this.searchText){			
+//			this.searchingfor(this.searchText,currentPage)
+//		}else{			
 			this.getsampledata(currentPage)
-		}
+//		}
 	},
 //	映射分页触发的事件
   	paginationEvent(actiontype){

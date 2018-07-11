@@ -43,13 +43,13 @@ export default {
 	...mapGetters(["modal_id"]),
 	tabledatasFilter(){
 
-		if(this.filterStatus=="全部"){
+//		if(this.filterStatus=="全部"){
 			return this.tabledatas;
-		}else{
-			return this.tabledatas.filter((value,index)=>{
-				return value.sampleState==this.filterStatus
-			})
-		}
+//		}else{
+//			return this.tabledatas.filter((value,index)=>{
+//				return value.sampleState==this.filterStatus
+//			})
+//		}
 	}
   },
   created(){
@@ -86,7 +86,14 @@ export default {
 		console.log(data);
 	},
 	statusChange(data){
-		this.filterStatus=data;			
+
+		if(data=="全部"){
+			this.filterStatus='';		
+		}else{
+			this.filterStatus=data;		
+		}
+		this.getlistdata(1)
+	  	this.page.currentPage=1;
 	},
 	createSampling(){
 //		console.log('createSampling');
@@ -145,6 +152,11 @@ export default {
   		this.loading=true;
 		var params = {};
 		params.pId = this.$route.query.pId;
+		if(this.filterStatus==1){
+			params.noSampleState=-1;
+		}else{			
+			params.sampleState=this.filterStatus;
+		}
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -239,7 +251,8 @@ export default {
       	searching:'',
       },
       loading:true,
-      filterStatus:'全部',
+//    filterStatus:'全部',
+      filterStatus:'',
 //    分页数据
       page: {
         size: 10,

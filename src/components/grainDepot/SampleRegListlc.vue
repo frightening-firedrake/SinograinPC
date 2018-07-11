@@ -43,13 +43,13 @@ export default {
 	...mapGetters(["modal_id"]),
 	tabledatasFilter(){
 
-		if(this.filterStatus=="all"){
+//		if(this.filterStatus=="all"){
 			return this.tabledatas;
-		}else{
-			return this.tabledatas.filter((value,index)=>{
-				return value.regState==this.filterStatus
-			})
-		}
+//		}else{
+//			return this.tabledatas.filter((value,index)=>{
+//				return value.regState==this.filterStatus
+//			})
+//		}
 	}
   },
   created(){
@@ -88,7 +88,14 @@ export default {
 		console.log(data);
 	},
 	statusChange(data){		
-		this.filterStatus=data;
+		if(data=="全部"){
+			this.filterStatus='';
+		}else{
+			this.filterStatus=data;
+		}
+//		console.log(this.filterStatus)
+		this.getlistdata(1)
+	  	this.page.currentPage=1;		
 	},
 	createSampling(){
 //		console.log('createSampling');
@@ -141,6 +148,8 @@ export default {
   	},
 //	获取列表数据方法
   	getlistdata(page){
+  		var params={};
+		params.regState=this.filterStatus;
   		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -159,6 +168,7 @@ export default {
 			    listName: this.list,
 			    page:page,
 			    rows:this.page.size,
+			    params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
@@ -257,7 +267,8 @@ export default {
       	searching:'',
       },
       loading:true,
-      filterStatus:'all',
+//    filterStatus:'all',
+      filterStatus:'',
 //    分页数据
       page: {
         size: 10,
@@ -283,7 +294,7 @@ export default {
       	status:true,
       	date:true,
       	statusitems:[
-      		{label:'all',text:'全部'},
+      		{label:'全部',text:'全部'},
       		{label:-1,text:'待审核'},
       		{label:1,text:'未同意'},
       		{label:2,text:'已同意'},

@@ -15,7 +15,7 @@
             <p style="">{{formdatas.name}}</p>
           </div>
           <div class="hand_view_tab_num" style="">
-            <p style="">编号:{{formdatas.nid>10?formdatas.nid:'0'+formdatas.nid}}</p>
+            <p style="">编号:{{formdatas.nid>=10?formdatas.nid:'0'+formdatas.nid}}</p>
           </div>
           <el-row style="" class="hand_view_tab_content">
             <el-col style="" :span="24" class="hand_view_tab_content_font">
