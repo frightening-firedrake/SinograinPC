@@ -15,7 +15,7 @@
             <p style="">{{formdatas.name}}</p>
           </div>
           <div class="hand_view_tab_num" style="">
-            <p style="">编号:{{formdatas.nid>10?formdatas.nid:'0'+formdatas.nid}}</p>
+            <p style="">编号:{{formdatas.nid>=10?formdatas.nid:'0'+formdatas.nid}}</p>
           </div>
           <!--<el-row style="" class="hand_view_tab_content">
             <el-col style="" :span="24" class="hand_view_tab_content_font">
@@ -147,7 +147,7 @@
       </div>
       </div>
      	<div class="hoverReturn">
-		    <el-button class="hoverReturnBtn" type="primary" @click="hoverReturn">归还</el-button>
+		    <el-button v-if="returnState==-1" class="hoverReturnBtn" type="primary" @click="hoverReturn">归还</el-button>
       </div>
       <sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose" @modelSelectChange="modelSelectChange"></sinograin-modal>      	
     	
@@ -320,6 +320,7 @@ export default {
       	this.sampleNums=response.data.sampleNums;//检测样品
       	// this.formdatas.testItemList=response.data.sampleNums.split(',');//检测样品
       	this.formdatas.testItemList.sort();//检测样品排序
+      	this.returnState=response.data.returnState;
 //      this.formdatas = response.data;
         //		  	this.tabledatas=response.data.rows;
         //	  		this.page.total=response.data.total;
@@ -367,26 +368,32 @@ export default {
       this.guihuan(form);
 		},
     guihuan(form) {
+
         this.$http({
           method: 'post',
-          url: this.huiGuiUrl,
+          url:this.guihuanURL,
           transformRequest: [function (data) {
-            let ret = ''
-            for (let it in data) {
-            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-            }
-            return ret
-				  }],
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					let ret = ''
+					for (let it in data) {
+					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					}
+					return ret
+				}],
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           data: {
               id: this.$route.query.id,
               returnPerson: form.returnPerson,
               returnState: 1,
-              sampleNums: this.sampleNums
-          }
+              sampleNums: this.sampleNums,
+          },
         }).then(function(response) {
+
+          	if(response.data.success){
+          		this.$router.go(-1);
+          	}
           
         }.bind(this)).catch(function(error) {
+
           console.log(error);
         }.bind(this));
     },
@@ -417,11 +424,12 @@ export default {
   data() {
     return {
       datalistURL: this.apiRoot +'/grain/handover/getStorage',
-      huiGuiUrl: this.apiRoot + '/grain/handover/huiGui',
+      guihuanURL: this.apiRoot+'/grain/handover/guiHuan',
       searchURL: '/liquid/role2/data/search',
       deleteURL: '/liquid/role2/data/delete',
       checkedId: [],
       createlibVisible: false,
+      returnState:-1,
       sampleNums:'',
       breadcrumb: {
         search: false,

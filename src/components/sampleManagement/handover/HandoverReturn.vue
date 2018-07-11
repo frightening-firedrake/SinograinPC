@@ -112,6 +112,7 @@ export default {
 		statusChange(data) {
 			this.filterStatus = data;
 			this.getlistdata(1)
+	  		this.page.currentPage=1;
 		},
 		statusChange2(data) {
 			console.log(data)
@@ -150,7 +151,7 @@ export default {
 	  		page?page:1;
 	  		this.searchText=searching;
 	  		var params = {};
-			params.nameLike = searching;
+			params.nameLikeOrId = searching;
 			if(this.filterStatus==-1){
 				params.returnState=-1;
 			}else if(this.filterStatus==1){
@@ -192,7 +193,7 @@ export default {
 				params.returnState=1;	
 			}
 			if(this.searchText){				
-				params.nameLike = this.searchText;
+				params.nameLikeOrId = this.searchText;
 			};
 			// 获取列表数据（第？页）
 			this.$http({
@@ -320,8 +321,8 @@ export default {
 		      	status:true,
 		      	statusitems:[
 		      		{label:'全部',text:'全部'},
-		      		{label:'-1',text:'已归还'},
-		      		{label:'1',text:'未归还'},
+		      		{label:'-1',text:'未归还'},
+		      		{label:'1',text:'已归还'},
 		      	],
 		      	status2:false,
 		      	statusTitle:'交接单状态:',

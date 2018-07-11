@@ -262,6 +262,8 @@ export default {
 			}else if(this.$route.query.checkPoint==8){
 				this.checktype='dscd';
 
+			}else{
+				this.checktype='cdjl';
 			}			
 		}else if(this.$route.query.sort=="玉米"){
 			if(this.$route.query.checkPoint==1||this.$route.query.checkPoint==2||this.$route.query.checkPoint==3){
@@ -282,7 +284,9 @@ export default {
 			}else if(this.$route.query.checkPoint==8){
 				this.checktype='dscd';
 
-			}	
+			}else{
+				this.checktype='cdjl';
+			}		
 		}
 		this.saveUrlcomputed()
 		if(this.$route.query.smallSampleNum){

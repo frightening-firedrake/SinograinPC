@@ -279,25 +279,25 @@
 }
 /*工作底稿与安全报告*/
 .viewManuscript:hover{
-	color:#2d5bb8;
+	color:#2d5bb8!important;
 	text-decoration: underline;
 }
 .createManuscript{
-	color:#58b481;
+	color:#58b481!important;
 }
 .createManuscript:hover{
-	color:#58b481;
+	color:#58b481!important;
 	text-decoration: underline;
 }
 .viewSafetyReport:hover{
-	color:#2d5bb8;
+	color:#2d5bb8!important;
 	text-decoration: underline;
 }
 .createSafetyReport{
-	color:#2dd2ff;
+	color:#2dd2ff!important;
 }
 .createSafetyReport:hover{
-	color:#2dd2ff;
+	color:#2dd2ff!important;
 	text-decoration: underline;
 }
 /*当类表数据为空时的新建按钮*/

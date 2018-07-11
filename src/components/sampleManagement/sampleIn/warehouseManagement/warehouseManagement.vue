@@ -35,42 +35,42 @@ export default {
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
 	...mapGetters(["userName"]),
 	tabledatasFilter(){
-
-		if(this.filterStatus=="全部"&&this.filterStatus2=="全部"){
 			return this.tabledatas;
-		}else if(this.filterStatus!=="全部"&&this.filterStatus2=="全部"){
-				return this.tabledatas.filter((value,index)=>{
-					return value.depot==this.filterStatus
-				})
-		}else if(this.filterStatus=="全部"&&this.filterStatus2!=="全部"){
-			if(this.filterStatus2=="空闲"){
-				return this.tabledatas.filter((value,index)=>{
-					return ((value.warehouseUseNumber)/(value.warehouseTotal)>=0)&&((value.warehouseUseNumber)/(value.warehouseTotal)<0.4)
-				})
-			}else if(this.filterStatus2=="未满"){
-				return this.tabledatas.filter((value,index)=>{
-					return ((value.warehouseUseNumber)/(value.warehouseTotal)>=0.4)&&((value.warehouseUseNumber)/(value.warehouseTotal)<1)
-				})
-			}else if(this.filterStatus2=="已满"){
-				return this.tabledatas.filter((value,index)=>{
-					return ((value.warehouseUseNumber)/(value.warehouseTotal)==1)
-				})
-			}
-		}else if(this.filterStatus!=="全部"&&this.filterStatus2!=="全部"){
-			if(this.filterStatus2=="空闲"){
-				return this.tabledatas.filter((value,index)=>{
-					return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehouseTotal)>=0)&&((value.warehouseUseNumber)/(value.warehouseTotal)<0.4)
-				})
-			}else if(this.filterStatus2=="未满"){
-				return this.tabledatas.filter((value,index)=>{
-					return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehouseTotal)>=0.4)&&((value.warehouseUseNumber)/(value.warehouseTotal)<1)
-				})
-			}else if(this.filterStatus2=="已满"){
-				return this.tabledatas.filter((value,index)=>{
-					return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehouseTotal)==1)
-				})
-			}
-		}
+//		if(this.filterStatus=="全部"&&this.filterStatus2=="全部"){
+//			return this.tabledatas;
+//		}else if(this.filterStatus!=="全部"&&this.filterStatus2=="全部"){
+//				return this.tabledatas.filter((value,index)=>{
+//					return value.depot==this.filterStatus
+//				})
+//		}else if(this.filterStatus=="全部"&&this.filterStatus2!=="全部"){
+//			if(this.filterStatus2=="空闲"){
+//				return this.tabledatas.filter((value,index)=>{
+//					return ((value.warehouseUseNumber)/(value.warehouseTotal)>=0)&&((value.warehouseUseNumber)/(value.warehouseTotal)<0.4)
+//				})
+//			}else if(this.filterStatus2=="未满"){
+//				return this.tabledatas.filter((value,index)=>{
+//					return ((value.warehouseUseNumber)/(value.warehouseTotal)>=0.4)&&((value.warehouseUseNumber)/(value.warehouseTotal)<1)
+//				})
+//			}else if(this.filterStatus2=="已满"){
+//				return this.tabledatas.filter((value,index)=>{
+//					return ((value.warehouseUseNumber)/(value.warehouseTotal)==1)
+//				})
+//			}
+//		}else if(this.filterStatus!=="全部"&&this.filterStatus2!=="全部"){
+//			if(this.filterStatus2=="空闲"){
+//				return this.tabledatas.filter((value,index)=>{
+//					return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehouseTotal)>=0)&&((value.warehouseUseNumber)/(value.warehouseTotal)<0.4)
+//				})
+//			}else if(this.filterStatus2=="未满"){
+//				return this.tabledatas.filter((value,index)=>{
+//					return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehouseTotal)>=0.4)&&((value.warehouseUseNumber)/(value.warehouseTotal)<1)
+//				})
+//			}else if(this.filterStatus2=="已满"){
+//				return this.tabledatas.filter((value,index)=>{
+//					return value.depot==this.filterStatus&&((value.warehouseUseNumber)/(value.warehouseTotal)==1)
+//				})
+//			}
+//		}
 	}
   },
   created(){
@@ -123,11 +123,25 @@ export default {
 	},
 	statusChange(data){
 //		console.log(data)
-		this.filterStatus=data
+
+		if(data=='全部'){
+			this.filterStatus='';		
+		}else{
+			this.filterStatus=data			
+		}
+		this.getlistdata(1);
+	  	this.page.currentPage=1;
 	},
 	statusChange2(data){
 //		console.log(data)
-		this.filterStatus2=data
+//		this.filterStatus2=data
+		if(data=='全部'){
+			this.filterStatus2='';		
+		}else{
+			this.filterStatus2=data			
+		}
+		this.getlistdata(1);
+	  	this.page.currentPage=1;
 	},
 	createSampling(){
 //		console.log('createSampling');
@@ -146,41 +160,15 @@ export default {
 //	获取搜索数据
   	searchingfor(searching,page){
   		page?page:1;
-  		this.searchText=searching.indexOf('监')==0?searching.slice(1):searching;
-  		console.log(this.searchText);
-  		var params = {};
-		params.sampleWordOrsampleNumLike = this.searchText;
-		params.ruKuSampleState = 2
-		params.fenxiaoyangSampleState = 3
-//		console.log(this.breadcrumb.searching);
-  		// 获取列表数据（第？页）
-		this.$http({
-		    method: 'post',
-			url: this.searchURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-			   params:JSON.stringify(params)
-			}
-	    }).then(function (response) {
-			this.tabledatas=response.data.rows;
-	  		this.page.total=response.data.total;
-
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
+  		this.searchText=searching;
+  		this.getlistdata(page)
   	},
 //	获取列表数据方法
   	getlistdata(page){
-		// var params = {};
-		// params.sampleWordOrsampleNumLike = '';
+		var params = {};
+		params.depot=this.filterStatus,
+		params.warehouseState=this.filterStatus2,
+		params.counter = this.searchText;
 		// params.ruKuSampleState = 2
 		// params.fenxiaoyangSampleState = 3
   		this.loading=false;
@@ -200,7 +188,7 @@ export default {
 			data: {
 			    page:page,
 			    rows:this.page.size,
-				// params:JSON.stringify(params)
+				params:JSON.stringify(params)
 			}
 	   	}).then(function (response) {
 		  	this.tabledatas=response.data.rows;
@@ -271,8 +259,8 @@ export default {
       	btntext:'',
       },
       loading:true,
-      filterStatus:'全部',
-      filterStatus2:'全部',
+      filterStatus:'',
+      filterStatus2:'',
 //    分页数据
       page: {
         size: 10,

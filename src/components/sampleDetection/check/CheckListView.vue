@@ -263,7 +263,8 @@ export default {
 
 			}else if(data.checkPoint==8){
 				this.checktype='dscd';
-
+			}else{
+				this.checktype='cdjl';
 			}			
 		}else if(data.sort=="玉米"){
 			if(data.checkPoint==1||data.checkPoint==2||data.checkPoint==3){
@@ -283,7 +284,8 @@ export default {
 
 			}else if(data.checkPoint==8){
 				this.checktype='dscd';
-
+			}else{
+				this.checktype='cdjl';
 			}	
 		}
 		this.Urlcomputed()

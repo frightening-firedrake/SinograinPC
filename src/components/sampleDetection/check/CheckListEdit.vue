@@ -173,7 +173,7 @@ export default {
     
   },
   created(){
-	console.log(this.$route.query)
+//	console.log(this.$route.query)
 //  获取列表数据（第一页）
 //	this.getlistdata()
 	this.setform(this.$route.query)
@@ -263,8 +263,9 @@ export default {
 
 			}else if(data.checkPoint==8){
 				this.checktype='dscd';
-
-			}			
+			}else{
+				this.checktype='cdjl';
+			}				
 		}else if(data.sort=="玉米"){
 			if(data.checkPoint==1||data.checkPoint==2||data.checkPoint==3){
 				this.checktype='bwsl';
@@ -283,8 +284,9 @@ export default {
 
 			}else if(data.checkPoint==8){
 				this.checktype='dscd';
-
-			}	
+			}else{
+				this.checktype='cdjl';
+			}		
 		}
 		this.Urlcomputed()
 		if(this.$route.query.smallSampleNum){

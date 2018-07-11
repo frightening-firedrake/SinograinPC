@@ -1098,23 +1098,28 @@ export default {
 	dayangzazhihanliang_1(){
 		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
 		if(!isNaN(dayangzazhihanliang_1)){
-			return this.jsdjg.dayangzazhihanliang_1 = dayangzazhihanliang_1.toFixed(1);		
+//			return this.jsdjg.dayangzazhihanliang_1 = dayangzazhihanliang_1.toFixed(1);	
+			return this.jsdjg.dayangzazhihanliang_1 = this.round(dayangzazhihanliang_1,1);		
 		}
 		return this.jsdjg.dayangzazhihanliang_1='';
 	},
 	dayangzazhihanliang_2(){
 		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
 		if(!isNaN(dayangzazhihanliang_2)){
-			return this.jsdjg.dayangzazhihanliang_2 = dayangzazhihanliang_2.toFixed(1);		
+//			return this.jsdjg.dayangzazhihanliang_2 = dayangzazhihanliang_2.toFixed(1);		
+			return this.jsdjg.dayangzazhihanliang_2 = this.round(dayangzazhihanliang_2,1);		
 		}
 		return this.jsdjg.dayangzazhihanliang_2='';
 	},
 	dayangzazhihanliang_pingjunzhi(){
-		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
-		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+//		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+		var dayangzazhihanliang_1=this.dayangzazhihanliang_1-0;
+//		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+		var dayangzazhihanliang_2=this.dayangzazhihanliang_2-0;
 		var dayangzazhihanliang_pingjunzhi=(dayangzazhihanliang_1+dayangzazhihanliang_2)/2
 		if(!isNaN(dayangzazhihanliang_pingjunzhi)){
-			return this.jsdjg.dayangzazhihanliang_pingjunzhi = dayangzazhihanliang_pingjunzhi.toFixed(1);		
+//			return this.jsdjg.dayangzazhihanliang_pingjunzhi = dayangzazhihanliang_pingjunzhi.toFixed(1);		
+			return this.jsdjg.dayangzazhihanliang_pingjunzhi = this.round(dayangzazhihanliang_pingjunzhi,1);		
 		}
 		return this.jsdjg.dayangzazhihanliang_pingjunzhi='';
 	},
@@ -1282,8 +1287,35 @@ export default {
 //		}else{			
 			this.$emit('submit',this.jsdjg)
 //		}
-	}
-
+	},
+	round(num, digit){
+	    var ratio = Math.pow(10, digit),
+	        _num = num * ratio,//倍数
+	        mod = _num % 1,//指定位置后小数
+	        integer = Math.floor(_num);//指定位向下取整
+//	        console.log(mod,integer)
+	    if(Math.floor(num)== num){
+	    	var str=num+'.';
+	        for (var i=0;i<digit;i++){
+				str+='0'
+			}
+	        return str
+	    }else if(mod > 0.5){
+	        return ((integer + 1) / ratio).toFixed(digit);
+	    }else if(mod < 0.5){
+	    	if(integer / ratio==0){
+	        	var str='0.';
+		        for (var i=0;i<digit;i++){
+					str+='0'
+				}
+		        return str
+	    	}else{
+	        	return (integer / ratio).toFixed(digit);
+	    	}
+	    }else{
+	        return ((integer % 2 === 0 ? integer : integer + 1) / ratio).toFixed(digit);
+	    }
+	},
   },
   data() {
     return {
