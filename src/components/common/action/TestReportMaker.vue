@@ -99,7 +99,7 @@
 			        </template>
 			</el-table>	
 			<div class="tableAddWrap">				
-				<div  class="editModelWrap">
+				<div  class="editModelWrap" style="border-top: 1px solid #e6e7e7;">
 					<div class="tableAdd"  @click="tableAdd">
 						<p style="background-image:url('static/images/sys/create.png');">					
 							新增样品

@@ -282,9 +282,9 @@ const routes= [
           },
           {
             path:"sampleManagement/sampleRegistration",
-            name:"样品管理/样品登记薄制作",
+            name:"样品管理/样品登记薄",
             component:sampleRegistration,
-            meta: { needAuth: '样品登记薄制作' },
+            meta: { needAuth: '样品登记薄' },
           },
           {
             path:"sampleManagement/sampleRegistration/registrationSelect",

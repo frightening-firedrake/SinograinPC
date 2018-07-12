@@ -185,9 +185,12 @@ export default {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
 				counterId:this.$route.query.counterId,
+//				page:page,
+//			    rows:this.page.size,
 			}
 	   	}).then(function (response) {
 		  	this.tabledatas=response.data;
+//	  		this.page.total=response.data.total;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

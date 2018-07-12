@@ -251,7 +251,7 @@ export default {
 				},
 				{
 					icon: 'icon-fanganzhizuo_huaban',
-					title: '样品登记薄制作',
+					title: '样品登记薄',
 					linkto: '/index/sampleManagement/sampleRegistration',
 					level: 2,
 					pid: 6,

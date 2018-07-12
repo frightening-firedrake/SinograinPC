@@ -54,6 +54,7 @@
     .chart {
         overflow: hidden;
         display: inline-block;
+        float: right;
         width: 49.9%;
         height: 5.53rem;
         .chartonly {

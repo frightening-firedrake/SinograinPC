@@ -50,7 +50,7 @@
         color: rgb(0, 0, 0);
         font-size: 0.2rem;
         background-color: rgba(242, 242, 242, 1);
-        padding-left: 0.4rem;
+        /*padding-left: 0.4rem;*/
         text-align: center;
     }
     .option_title {
