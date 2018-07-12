@@ -243,8 +243,8 @@ export default {
   computed:{
 	pinchangpingfenzhi(){
 		var pinchangpingfenzhi = this.formdatas.wotouqiwei*1 + this.formdatas.wotouseze*1+ this.formdatas.waiguanxingzhuang*1+ this.formdatas.neibuxingzhuang*1+ this.formdatas.ziwei*1
-		if(pinchangpingfenzhi!==0){
-			return this.jsdjg.pinchangpingfenzhi = pinchangpingfenzhi;		
+		if(pinchangpingfenzhi!==0&&!isNaN(pinchangpingfenzhi)){
+			return this.jsdjg.pinchangpingfenzhi = this.round(pinchangpingfenzhi,0);		
 		}
 		return this.jsdjg.pinchangpingfenzhi='';
 	},
@@ -287,11 +287,18 @@ export default {
 	        mod = _num % 1,//指定位置后小数
 	        integer = Math.floor(_num);//指定位向下取整
 //	        console.log(mod,integer)
-	    if(Math.floor(num)== num){
-	    	var str=num+'.';
-	        for (var i=0;i<digit;i++){
-				str+='0'
-			}
+	    if(num===''){
+	        return ''
+	    }else if(Math.floor(num)== num){
+	    	var str;
+	    	if(digit==0){
+	    		str=num;
+	    	}else{
+		    	str=num+'.';
+		        for (var i=0;i<digit;i++){
+					str+='0'
+				}
+	    	}
 	        return str
 	    }else if(mod > 0.5){
 	        return ((integer + 1) / ratio).toFixed(digit);

@@ -808,23 +808,25 @@ export default {
 	zhifangsuanzhi_1(){
 		var zhifangsuanzhi_1 = (this.formdatas.koh_rongyeyongliang_1-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_1*(100-this.formdatas.shiyangshuifen))*100;
 		if(!isNaN(zhifangsuanzhi_1)){
-			return this.jsdjg.zhifangsuanzhi_1 = zhifangsuanzhi_1.toFixed(1);		
+			return this.jsdjg.zhifangsuanzhi_1 = this.round(zhifangsuanzhi_1,1);		
 		}
 		return this.jsdjg.zhifangsuanzhi_1='';
 	},
 	zhifangsuanzhi_2(){
 		var zhifangsuanzhi_2 = (this.formdatas.koh_rongyeyongliang_2-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_2*(100-this.formdatas.shiyangshuifen))*100;
 		if(!isNaN(zhifangsuanzhi_2)){
-			return this.jsdjg.zhifangsuanzhi_2 = zhifangsuanzhi_2.toFixed(1);		
+			return this.jsdjg.zhifangsuanzhi_2 = this.round(zhifangsuanzhi_2,1);		
 		}
 		return this.jsdjg.zhifangsuanzhi_2='';
 	},
 	pingjunzhi() { 
-		var zhifangsuanzhi_1 = (this.formdatas.koh_rongyeyongliang_1-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_1*(100-this.formdatas.shiyangshuifen))*100;
-		var zhifangsuanzhi_2 = (this.formdatas.koh_rongyeyongliang_2-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_2*(100-this.formdatas.shiyangshuifen))*100;
+//		var zhifangsuanzhi_1 = (this.formdatas.koh_rongyeyongliang_1-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_1*(100-this.formdatas.shiyangshuifen))*100;
+		var zhifangsuanzhi_1 = this.zhifangsuanzhi_1*1;
+//		var zhifangsuanzhi_2 = (this.formdatas.koh_rongyeyongliang_2-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_2*(100-this.formdatas.shiyangshuifen))*100;
+		var zhifangsuanzhi_2 = this.zhifangsuanzhi_2*1;
 		var pingjunzhi=(zhifangsuanzhi_1+zhifangsuanzhi_2)/2;
 		if(!isNaN(pingjunzhi)){
-			return this.jsdjg.pingjunzhi = pingjunzhi.toFixed(1);		
+			return this.jsdjg.pingjunzhi = this.round(pingjunzhi,1);		
 		}
 		return this.jsdjg.pingjunzhi='';
 	},
@@ -866,11 +868,18 @@ export default {
 	        mod = _num % 1,//指定位置后小数
 	        integer = Math.floor(_num);//指定位向下取整
 //	        console.log(mod,integer)
-	    if(Math.floor(num)== num){
-	    	var str=num+'.';
-	        for (var i=0;i<digit;i++){
-				str+='0'
-			}
+	    if(num===''){
+	        return ''
+	    }else if(Math.floor(num)== num){
+	    	var str;
+	    	if(digit==0){
+	    		str=num;
+	    	}else{
+		    	str=num+'.';
+		        for (var i=0;i<digit;i++){
+					str+='0'
+				}
+	    	}
 	        return str
 	    }else if(mod > 0.5){
 	        return ((integer + 1) / ratio).toFixed(digit);

@@ -1358,31 +1358,31 @@ export default {
 	},
 	outudushu_pingjunzhi(){
 		var outudushu_pingjunzhi = (this.formdatas.outudushu_1*1 + this.formdatas.outudushu_2*1)/2
-		if(outudushu_pingjunzhi==0){
+		if(outudushu_pingjunzhi==0||isNaN(outudushu_pingjunzhi)){
 			outudushu_pingjunzhi=''
 		}
-		return this.jsdjg.outudushu_pingjunzhi = outudushu_pingjunzhi
+		return this.jsdjg.outudushu_pingjunzhi = this.round(outudushu_pingjunzhi,1)
 	}, 
 	huangqumeidusu_pingjunzhi(){
 		var huangqumeidusu_pingjunzhi = (this.formdatas.huangqumeidusu_1*1 + this.formdatas.huangqumeidusu_2*1)/2
-		if(huangqumeidusu_pingjunzhi==0){
+		if(huangqumeidusu_pingjunzhi==0||isNaN(huangqumeidusu_pingjunzhi)){
 			huangqumeidusu_pingjunzhi=''
 		}
-		return this.jsdjg.huangqumeidusu_pingjunzhi = huangqumeidusu_pingjunzhi
+		return this.jsdjg.huangqumeidusu_pingjunzhi = this.round(huangqumeidusu_pingjunzhi,1)
 	},
 	yumichimeixitong_pingjunzhi(){
 		var yumichimeixitong_pingjunzhi = (this.formdatas.yumichimeixitong_1*1 + this.formdatas.yumichimeixitong_2*1)/2
-		if(yumichimeixitong_pingjunzhi==0){
+		if(yumichimeixitong_pingjunzhi==0||isNaN(yumichimeixitong_pingjunzhi)){
 			yumichimeixitong_pingjunzhi=''
 		}
-		return this.jsdjg.yumichimeixitong_pingjunzhi = yumichimeixitong_pingjunzhi
+		return this.jsdjg.yumichimeixitong_pingjunzhi = this.round(yumichimeixitong_pingjunzhi,1)
 	},
 	zhequmeidusu_pingjunzhi(){
 		var zhequmeidusu_pingjunzhi = (this.formdatas.zhequmeidusu_1*1 + this.formdatas.zhequmeidusu_2*1)/2
-		if(zhequmeidusu_pingjunzhi==0){
+		if(zhequmeidusu_pingjunzhi==0||isNaN(zhequmeidusu_pingjunzhi)){
 			zhequmeidusu_pingjunzhi=''
 		}
-		return this.jsdjg.zhequmeidusu_pingjunzhi = zhequmeidusu_pingjunzhi
+		return this.jsdjg.zhequmeidusu_pingjunzhi = this.round(zhequmeidusu_pingjunzhi,1)
 	},
     codeUrl(){
     	return this.apiRoot +'/grain/upload/smaBarcode/'+this.formdatas.smallSamplePic
@@ -1422,11 +1422,18 @@ export default {
 	        mod = _num % 1,//指定位置后小数
 	        integer = Math.floor(_num);//指定位向下取整
 //	        console.log(mod,integer)
-	    if(Math.floor(num)== num){
-	    	var str=num+'.';
-	        for (var i=0;i<digit;i++){
-				str+='0'
-			}
+	    if(num===''){
+	        return ''
+	    }else if(Math.floor(num)== num){
+	    	var str;
+	    	if(digit==0){
+	    		str=num;
+	    	}else{
+		    	str=num+'.';
+		        for (var i=0;i<digit;i++){
+					str+='0'
+				}
+	    	}
 	        return str
 	    }else if(mod > 0.5){
 	        return ((integer + 1) / ratio).toFixed(digit);

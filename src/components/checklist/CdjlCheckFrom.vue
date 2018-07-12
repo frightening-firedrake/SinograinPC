@@ -1534,98 +1534,98 @@ export default {
 		if(rongzhong_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			rongzhong_pingjunzhi='';
 		}
-		return this.jsdjg.rongzhong_pingjunzhi = this.round(rongzhong_pingjunzhi,0)
+		return this.jsdjg.rongzhong_pingjunzhi = this.round(rongzhong_pingjunzhi,0);
 	},
 	sezeqiwei_pingjunzhi(){
 		var sezeqiwei_pingjunzhi = (this.formdatas.sezeqiwei_1*1  + this.formdatas.sezeqiwei_2*1 )/2
-		if(sezeqiwei_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
+		if(sezeqiwei_pingjunzhi==0||isNaN(sezeqiwei_pingjunzhi)){
 			sezeqiwei_pingjunzhi='';
 		}
-		return this.jsdjg.sezeqiwei_pingjunzhi = sezeqiwei_pingjunzhi
+		return this.jsdjg.sezeqiwei_pingjunzhi = this.round(sezeqiwei_pingjunzhi,1);
 	},
 	yingduzhishu_pingjunzhi(){
 		var yingduzhishu_pingjunzhi = (this.formdatas.yingduzhishu_1*1 + this.formdatas.yingduzhishu_2*1)/2
-		if(yingduzhishu_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
+		if(yingduzhishu_pingjunzhi==0||isNaN(yingduzhishu_pingjunzhi)){
 			yingduzhishu_pingjunzhi='';
 		}
-		return this.jsdjg.yingduzhishu_pingjunzhi = yingduzhishu_pingjunzhi
+		return this.jsdjg.yingduzhishu_pingjunzhi = this.round(yingduzhishu_pingjunzhi,1);
 	},
 	pise_pingjunzhi(){
 		var pise_pingjunzhi = (this.formdatas.pise_1*1 + this.formdatas.pise_2*1)/2
-		if(pise_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
+		if(pise_pingjunzhi==0||isNaN(pise_pingjunzhi)){
 			pise_pingjunzhi='';
 		}
-		return this.jsdjg.pise_pingjunzhi = pise_pingjunzhi
+		return this.jsdjg.pise_pingjunzhi = this.round(pise_pingjunzhi,1);
 	},
 	shuifen_pingjunzhi(){
 		var shuifen_pingjunzhi = (this.formdatas.shuifen_1*1 + this.formdatas.shuifen_2*1)/2
-		if(shuifen_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
+		if(shuifen_pingjunzhi==0||isNaN(shuifen_pingjunzhi)){
 			shuifen_pingjunzhi='';
 		}
-		return this.jsdjg.shuifen_pingjunzhi = shuifen_pingjunzhi
+		return this.jsdjg.shuifen_pingjunzhi = this.round(shuifen_pingjunzhi,1);
 	},
 	dainfen_pingjunzhi(){
 		var dainfen_pingjunzhi = (this.formdatas.dainfen_1*1 + this.formdatas.dainfen_2*1)/2
-		if(dainfen_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
+		if(dainfen_pingjunzhi==0||isNaN(dainfen_pingjunzhi)){
 			dainfen_pingjunzhi='';
 		}
-		return this.jsdjg.dainfen_pingjunzhi = dainfen_pingjunzhi
+		return this.jsdjg.dainfen_pingjunzhi = this.round(dainfen_pingjunzhi,1);
 	},
 	zhifang_pingjunzhi(){
 		var zhifang_pingjunzhi = (this.formdatas.zhifang_1*1 + this.formdatas.zhifang_2*1)/2
-		if(zhifang_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
+		if(zhifang_pingjunzhi==0||isNaN(zhifang_pingjunzhi)){
 			zhifang_pingjunzhi='';
 		}
-		return this.jsdjg.zhifang_pingjunzhi = zhifang_pingjunzhi
+		return this.jsdjg.zhifang_pingjunzhi = this.round(zhifang_pingjunzhi,1);
 	},
 	danbai_pingjunzhi(){
 		var danbai_pingjunzhi = (this.formdatas.danbai_1*1 + this.formdatas.danbai_2*1)/2
-		if(danbai_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
+		if(danbai_pingjunzhi==0||isNaN(danbai_pingjunzhi)){
 			danbai_pingjunzhi='';
 		}
-		return this.jsdjg.danbai_pingjunzhi = danbai_pingjunzhi
+		return this.jsdjg.danbai_pingjunzhi = this.round(danbai_pingjunzhi,1);
 	},
 	shimianjin_pingjunzhi(){
 		var shimianjin_pingjunzhi = (this.formdatas.shimianjin_1*1 + this.formdatas.shimianjin_2*1)/2
-		if(shimianjin_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
+		if(shimianjin_pingjunzhi==0||isNaN(shimianjin_pingjunzhi)){
 			shimianjin_pingjunzhi='';
 		}
-		return this.jsdjg.shimianjin_pingjunzhi = shimianjin_pingjunzhi
+		return this.jsdjg.shimianjin_pingjunzhi = this.round(shimianjin_pingjunzhi,1);
 	},
 	chenjiangzhi_pingjunzhi(){
 		var chenjiangzhi_pingjunzhi = (this.formdatas.chenjiangzhi_1*1 + this.formdatas.chenjiangzhi_2*1)/2
-		if(chenjiangzhi_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
+		if(chenjiangzhi_pingjunzhi==0||isNaN(chenjiangzhi_pingjunzhi)){
 			chenjiangzhi_pingjunzhi='';
 		}
-		return this.jsdjg.chenjiangzhi_pingjunzhi = chenjiangzhi_pingjunzhi
+		return this.jsdjg.chenjiangzhi_pingjunzhi = this.round(chenjiangzhi_pingjunzhi,1);
 	},
 	lashenchangdu_pingjunzhi(){
 		var lashenchangdu_pingjunzhi = (this.formdatas.lashenchangdu_1*1 + this.formdatas.lashenchangdu_2*1)/2
-		if(lashenchangdu_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
+		if(lashenchangdu_pingjunzhi==0||isNaN(lashenchangdu_pingjunzhi)){
 			lashenchangdu_pingjunzhi='';
 		}
-		return this.jsdjg.lashenchangdu_pingjunzhi = lashenchangdu_pingjunzhi
+		return this.jsdjg.lashenchangdu_pingjunzhi = this.round(lashenchangdu_pingjunzhi,1);
 	},
 	wendingshijian_pingjunzhi(){
 		var wendingshijian_pingjunzhi = (this.formdatas.wendingshijian_1*1 + this.formdatas.wendingshijian_2*1)/2
-		if(wendingshijian_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
+		if(wendingshijian_pingjunzhi==0||isNaN(wendingshijian_pingjunzhi)){
 			wendingshijian_pingjunzhi='';
 		}
-		return this.jsdjg.wendingshijian_pingjunzhi = wendingshijian_pingjunzhi
+		return this.jsdjg.wendingshijian_pingjunzhi = this.round(wendingshijian_pingjunzhi,1);
 	},
 	xishuilv_pingjunzhi(){
 		var xishuilv_pingjunzhi = (this.formdatas.xishuilv_1*1 + this.formdatas.xishuilv_2*1)/2
-		if(xishuilv_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
+		if(xishuilv_pingjunzhi==0||isNaN(xishuilv_pingjunzhi)){
 			xishuilv_pingjunzhi='';
 		}
-		return this.jsdjg.xishuilv_pingjunzhi = xishuilv_pingjunzhi
+		return this.jsdjg.xishuilv_pingjunzhi = this.round(xishuilv_pingjunzhi,1);
 	},
 	xingchengshijian_pingjunzhi(){
 		var xingchengshijian_pingjunzhi = (this.formdatas.xingchengshijian_1*1 + this.formdatas.xingchengshijian_2*1)/2
-		if(xingchengshijian_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
+		if(xingchengshijian_pingjunzhi==0||isNaN(xingchengshijian_pingjunzhi)){
 			xingchengshijian_pingjunzhi='';
 		}
-		return this.jsdjg.xingchengshijian_pingjunzhi = xingchengshijian_pingjunzhi
+		return this.jsdjg.xingchengshijian_pingjunzhi = this.round(xingchengshijian_pingjunzhi,1);
 	},
     codeUrl(){
     	return this.apiRoot +'/grain/upload/smaBarcode/'+this.formdatas.smallSamplePic
@@ -1665,12 +1665,19 @@ export default {
 	        _num = num * ratio,//倍数
 	        mod = _num % 1,//指定位置后小数
 	        integer = Math.floor(_num);//指定位向下取整
-//	        console.log(mod,integer)
-	    if(Math.floor(num)== num){
-	    	var str=num+'.';
-	        for (var i=0;i<digit;i++){
-				str+='0'
-			}
+//	        console.log(num,_num,mod,integer)
+	    if(num===''){
+	        return ''
+	    }else if(Math.floor(num)== num){
+	    	var str;
+	    	if(digit==0){
+	    		str=num;
+	    	}else{
+		    	str=num+'.';
+		        for (var i=0;i<digit;i++){
+					str+='0'
+				}
+	    	}
 	        return str
 	    }else if(mod > 0.5){
 	        return ((integer + 1) / ratio).toFixed(digit);

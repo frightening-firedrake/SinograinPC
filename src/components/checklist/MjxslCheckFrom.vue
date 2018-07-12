@@ -485,7 +485,7 @@
 						<tr class="zw-tr">
 							<td class="zw-td" rowspan="1" colspan="2" style="border-width: 1px 1px 1px 1.33333px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 55.3333px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1.32813px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">平均值</span></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">平均值干面筋质量m2(g)</span></p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -597,7 +597,7 @@ export default {
 		var mianjinxishuiliang_1 = ((this.formdatas.shimianjinzhiliang_1 - this.formdatas.ganmianjinzhiliang_1)/this.formdatas.ganmianjinzhiliang_1)*100
 //		return this.jsdjg.mianjinxishuiliang_1 = mianjinxishuiliang_1.toFixed(2)
 		if(!isNaN(mianjinxishuiliang_1)){
-			return this.jsdjg.mianjinxishuiliang_1 = mianjinxishuiliang_1.toFixed(2);		
+			return this.jsdjg.mianjinxishuiliang_1 = this.round(mianjinxishuiliang_1,0);		
 		}
 		return this.jsdjg.mianjinxishuiliang_1='';
 	},
@@ -605,19 +605,20 @@ export default {
 		var mianjinxishuiliang_2 = ((this.formdatas.shimianjinzhiliang_2 - this.formdatas.ganmianjinzhiliang_2)/this.formdatas.ganmianjinzhiliang_2)*100
 //		return this.jsdjg.mianjinxishuiliang_2 = mianjinxishuiliang_2.toFixed(2)
 		if(!isNaN(mianjinxishuiliang_2)){
-			return this.jsdjg.mianjinxishuiliang_2 = mianjinxishuiliang_2.toFixed(2);		
+			return this.jsdjg.mianjinxishuiliang_2 = this.round(mianjinxishuiliang_2,0);		
 		}
 		return this.jsdjg.mianjinxishuiliang_2='';
 	},
 	pingjunzhiganmianjinzhiliang(){
-		var pingjunzhiganmianjinzhiliang = (((this.formdatas.shimianjinzhiliang_1 - this.formdatas.ganmianjinzhiliang_1)/this.formdatas.ganmianjinzhiliang_1)*100 + ((this.formdatas.shimianjinzhiliang_2 - this.formdatas.ganmianjinzhiliang_2)/this.formdatas.ganmianjinzhiliang_2)*100)/2
+//		var pingjunzhiganmianjinzhiliang = (((this.formdatas.shimianjinzhiliang_1 - this.formdatas.ganmianjinzhiliang_1)/this.formdatas.ganmianjinzhiliang_1)*100 + ((this.formdatas.shimianjinzhiliang_2 - this.formdatas.ganmianjinzhiliang_2)/this.formdatas.ganmianjinzhiliang_2)*100)/2
+		var pingjunzhiganmianjinzhiliang = ((this.formdatas.ganmianjinzhiliang_1-0)+(this.formdatas.ganmianjinzhiliang_2-0))/2
 //		if(!pingjunzhiganmianjinzhiliang){
 //			return 0
 //		}else{
 //			return  pingjunzhiganmianjinzhiliang.toFixed(2)
 //		}
 		if(!isNaN(pingjunzhiganmianjinzhiliang)){
-			return this.jsdjg.pingjunzhiganmianjinzhiliang = pingjunzhiganmianjinzhiliang.toFixed(2);		
+			return this.jsdjg.pingjunzhiganmianjinzhiliang = this.round(pingjunzhiganmianjinzhiliang,0);		
 		}
 		return this.jsdjg.pingjunzhiganmianjinzhiliang='';
 	},
@@ -662,12 +663,19 @@ export default {
 	        _num = num * ratio,//倍数
 	        mod = _num % 1,//指定位置后小数
 	        integer = Math.floor(_num);//指定位向下取整
-//	        console.log(mod,integer)
-	    if(Math.floor(num)== num){
-	    	var str=num+'.';
-	        for (var i=0;i<digit;i++){
-				str+='0'
-			}
+//	        console.log(num,mod,integer)
+	    if(num===''){
+	        return ''
+	    }else if(Math.floor(num)== num){
+	    	var str;
+	    	if(digit==0){
+	    		str=num;
+	    	}else{
+		    	str=num+'.';
+		        for (var i=0;i<digit;i++){
+					str+='0'
+				}
+	    	}
 	        return str
 	    }else if(mod > 0.5){
 	        return ((integer + 1) / ratio).toFixed(digit);
