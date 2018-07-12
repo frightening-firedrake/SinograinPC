@@ -480,7 +480,35 @@ export default {
 		}else{			
 			this.$emit('submit',this.jsdjg)
 		}
-	}
+	},
+	round(num, digit){
+	    var ratio = Math.pow(10, digit),
+	        _num = num * ratio,//倍数
+	        mod = _num % 1,//指定位置后小数
+	        integer = Math.floor(_num);//指定位向下取整
+//	        console.log(mod,integer)
+	    if(Math.floor(num)== num){
+	    	var str=num+'.';
+	        for (var i=0;i<digit;i++){
+				str+='0'
+			}
+	        return str
+	    }else if(mod > 0.5){
+	        return ((integer + 1) / ratio).toFixed(digit);
+	    }else if(mod < 0.5){
+	    	if(integer / ratio==0){
+	        	var str='0.';
+		        for (var i=0;i<digit;i++){
+					str+='0'
+				}
+		        return str
+	    	}else{
+	        	return (integer / ratio).toFixed(digit);
+	    	}
+	    }else{
+	        return ((integer % 2 === 0 ? integer : integer + 1) / ratio).toFixed(digit);
+	    }
+	},
 
   },
   data() {

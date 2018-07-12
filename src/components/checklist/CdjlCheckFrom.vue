@@ -1531,98 +1531,98 @@ export default {
 	},
 	rongzhong_pingjunzhi(){
 		var rongzhong_pingjunzhi = (this.formdatas.rongzhong_1*1 + this.formdatas.rongzhong_2*1)/2
-		if(rongzhong_pingjunzhi==0){
+		if(rongzhong_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			rongzhong_pingjunzhi='';
 		}
-		return this.jsdjg.rongzhong_pingjunzhi = rongzhong_pingjunzhi
+		return this.jsdjg.rongzhong_pingjunzhi = this.round(rongzhong_pingjunzhi,0)
 	},
 	sezeqiwei_pingjunzhi(){
 		var sezeqiwei_pingjunzhi = (this.formdatas.sezeqiwei_1*1  + this.formdatas.sezeqiwei_2*1 )/2
-		if(sezeqiwei_pingjunzhi==0){
+		if(sezeqiwei_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			sezeqiwei_pingjunzhi='';
 		}
 		return this.jsdjg.sezeqiwei_pingjunzhi = sezeqiwei_pingjunzhi
 	},
 	yingduzhishu_pingjunzhi(){
 		var yingduzhishu_pingjunzhi = (this.formdatas.yingduzhishu_1*1 + this.formdatas.yingduzhishu_2*1)/2
-		if(yingduzhishu_pingjunzhi==0){
+		if(yingduzhishu_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			yingduzhishu_pingjunzhi='';
 		}
 		return this.jsdjg.yingduzhishu_pingjunzhi = yingduzhishu_pingjunzhi
 	},
 	pise_pingjunzhi(){
 		var pise_pingjunzhi = (this.formdatas.pise_1*1 + this.formdatas.pise_2*1)/2
-		if(pise_pingjunzhi==0){
+		if(pise_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			pise_pingjunzhi='';
 		}
 		return this.jsdjg.pise_pingjunzhi = pise_pingjunzhi
 	},
 	shuifen_pingjunzhi(){
 		var shuifen_pingjunzhi = (this.formdatas.shuifen_1*1 + this.formdatas.shuifen_2*1)/2
-		if(shuifen_pingjunzhi==0){
+		if(shuifen_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			shuifen_pingjunzhi='';
 		}
 		return this.jsdjg.shuifen_pingjunzhi = shuifen_pingjunzhi
 	},
 	dainfen_pingjunzhi(){
 		var dainfen_pingjunzhi = (this.formdatas.dainfen_1*1 + this.formdatas.dainfen_2*1)/2
-		if(dainfen_pingjunzhi==0){
+		if(dainfen_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			dainfen_pingjunzhi='';
 		}
 		return this.jsdjg.dainfen_pingjunzhi = dainfen_pingjunzhi
 	},
 	zhifang_pingjunzhi(){
 		var zhifang_pingjunzhi = (this.formdatas.zhifang_1*1 + this.formdatas.zhifang_2*1)/2
-		if(zhifang_pingjunzhi==0){
+		if(zhifang_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			zhifang_pingjunzhi='';
 		}
 		return this.jsdjg.zhifang_pingjunzhi = zhifang_pingjunzhi
 	},
 	danbai_pingjunzhi(){
 		var danbai_pingjunzhi = (this.formdatas.danbai_1*1 + this.formdatas.danbai_2*1)/2
-		if(danbai_pingjunzhi==0){
+		if(danbai_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			danbai_pingjunzhi='';
 		}
 		return this.jsdjg.danbai_pingjunzhi = danbai_pingjunzhi
 	},
 	shimianjin_pingjunzhi(){
 		var shimianjin_pingjunzhi = (this.formdatas.shimianjin_1*1 + this.formdatas.shimianjin_2*1)/2
-		if(shimianjin_pingjunzhi==0){
+		if(shimianjin_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			shimianjin_pingjunzhi='';
 		}
 		return this.jsdjg.shimianjin_pingjunzhi = shimianjin_pingjunzhi
 	},
 	chenjiangzhi_pingjunzhi(){
 		var chenjiangzhi_pingjunzhi = (this.formdatas.chenjiangzhi_1*1 + this.formdatas.chenjiangzhi_2*1)/2
-		if(chenjiangzhi_pingjunzhi==0){
+		if(chenjiangzhi_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			chenjiangzhi_pingjunzhi='';
 		}
 		return this.jsdjg.chenjiangzhi_pingjunzhi = chenjiangzhi_pingjunzhi
 	},
 	lashenchangdu_pingjunzhi(){
 		var lashenchangdu_pingjunzhi = (this.formdatas.lashenchangdu_1*1 + this.formdatas.lashenchangdu_2*1)/2
-		if(lashenchangdu_pingjunzhi==0){
+		if(lashenchangdu_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			lashenchangdu_pingjunzhi='';
 		}
 		return this.jsdjg.lashenchangdu_pingjunzhi = lashenchangdu_pingjunzhi
 	},
 	wendingshijian_pingjunzhi(){
 		var wendingshijian_pingjunzhi = (this.formdatas.wendingshijian_1*1 + this.formdatas.wendingshijian_2*1)/2
-		if(wendingshijian_pingjunzhi==0){
+		if(wendingshijian_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			wendingshijian_pingjunzhi='';
 		}
 		return this.jsdjg.wendingshijian_pingjunzhi = wendingshijian_pingjunzhi
 	},
 	xishuilv_pingjunzhi(){
 		var xishuilv_pingjunzhi = (this.formdatas.xishuilv_1*1 + this.formdatas.xishuilv_2*1)/2
-		if(xishuilv_pingjunzhi==0){
+		if(xishuilv_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			xishuilv_pingjunzhi='';
 		}
 		return this.jsdjg.xishuilv_pingjunzhi = xishuilv_pingjunzhi
 	},
 	xingchengshijian_pingjunzhi(){
 		var xingchengshijian_pingjunzhi = (this.formdatas.xingchengshijian_1*1 + this.formdatas.xingchengshijian_2*1)/2
-		if(xingchengshijian_pingjunzhi==0){
+		if(xingchengshijian_pingjunzhi==0||isNaN(rongzhong_pingjunzhi)){
 			xingchengshijian_pingjunzhi='';
 		}
 		return this.jsdjg.xingchengshijian_pingjunzhi = xingchengshijian_pingjunzhi
@@ -1659,7 +1659,35 @@ export default {
 		}else{			
 			this.$emit('submit',this.jsdjg)
 		}
-	}
+	},
+	round(num, digit){
+	    var ratio = Math.pow(10, digit),
+	        _num = num * ratio,//倍数
+	        mod = _num % 1,//指定位置后小数
+	        integer = Math.floor(_num);//指定位向下取整
+//	        console.log(mod,integer)
+	    if(Math.floor(num)== num){
+	    	var str=num+'.';
+	        for (var i=0;i<digit;i++){
+				str+='0'
+			}
+	        return str
+	    }else if(mod > 0.5){
+	        return ((integer + 1) / ratio).toFixed(digit);
+	    }else if(mod < 0.5){
+	    	if(integer / ratio==0){
+	        	var str='0.';
+		        for (var i=0;i<digit;i++){
+					str+='0'
+				}
+		        return str
+	    	}else{
+	        	return (integer / ratio).toFixed(digit);
+	    	}
+	    }else{
+	        return ((integer % 2 === 0 ? integer : integer + 1) / ratio).toFixed(digit);
+	    }
+	},
 
   },
   data() {
