@@ -163,6 +163,7 @@
 		border-radius: 0.1rem 0.1rem 0 0;
 		border: solid 1px #eaeaea;
 		border-bottom: none;
+		margin-top: 0.05rem;
 	}
 	div.listHeader.deep{
 		border-color:#ccc;

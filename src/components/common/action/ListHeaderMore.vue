@@ -160,6 +160,7 @@
 		border: solid 1px #eaeaea;
 		border-bottom: none;
 		position:relative;
+		margin-top: 0.05rem;
 	}
 	div.listHeaderMore.deep{
 		border-color:#ccc;
