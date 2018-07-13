@@ -1,5 +1,8 @@
 <template>
 	<div class="listHeader" :class="listHeader.class">
+		<div class="dataSelete" v-if="listHeader.subtitle">
+			<p>{{listHeader.title?listHeader.title:title}}</p>
+		</div>
 		<div class="status" v-if="listHeader.status">
 			<p>
 				{{listHeader.statusTitle?listHeader.statusTitle:'状态:'}}
@@ -104,6 +107,21 @@
 				</el-select>
 			</div>
 		</div>
+		<!--备注信息筛选-->
+		<div class="dataSelete remark" v-if="listHeader.remark">			
+			<p>备注信息:</p>
+			<div>
+			    <el-autocomplete
+			      	class="remark-input"
+			      	v-model="remSelect"
+			     	:fetch-suggestions="querySearch"
+			      	placeholder="请填写类型"
+			      	@select="remarkChange"
+			      	select-when-unmatched
+			    >
+			    </el-autocomplete>
+			</div>
+		</div>
 		<div class="btns">
 			<template v-if="listHeader.createlib">				
 				<div class="create" @click="createlib" style="background-image:url('static/images/sys/create.png');">
@@ -139,9 +157,7 @@
 				</div>
 			</template>
 		</div>
-		<div class="dataSelete" v-if="listHeader.subtitle">
-			<p>{{listHeader.title?listHeader.title:title}}</p>
-		</div>
+		
 		<div class="tableName" v-if="listHeader.tableNameShow">
 			<template v-if="listHeader.editModel">
 				<label for="">
@@ -254,6 +270,9 @@
 	}
 	div.listHeader div.status2 >p:before{
 		background:#1bb45f;
+	}
+	div.listHeader div.dataSelete.remark >p:before{
+		background:rgb(252, 101, 0);
 	}
 	div.listHeader div.status2 >div{
 		float:left;
@@ -446,6 +465,16 @@
 	.headerSelectlib1{
 		text-align:center;
 	}
+	div.listHeader .remark-input .el-input__inner{
+	    height:0.36rem!important;
+		width:2.75rem;
+		line-height:0.34rem;
+		border:solid 0.01rem #dfdfdf;
+		font-size:0.16rem;
+		background:#f2f2f2;
+		border-radius:0;
+		/*margin-left:0.2rem;*/
+	}
 </style>
 <script>
 //import SinograinModal from '@/components/common/action/Modal.vue';
@@ -491,6 +520,9 @@ export default {
 	        selectlib:'全部',
 	        selectlib2:'全部',
 	        selectTask:'全部',
+		    remSelect:'',
+//		   	 筛选列表
+	  	  	restaurants: [{"value": "春季抽查"},{"value": "秋季普查"},{"value": "2017年度轮换验收"},{"value": "2018年度轮换验收"},{"value": "收购巡查"}],
         };
     },
     created(){
@@ -555,7 +587,22 @@ export default {
     	},
 		connect(){
 			this.$emit("connect")
-		}
+		},
+		querySearch(queryString, cb){
+	        var restaurants = this.restaurants;
+	        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+	        // 调用 callback 返回建议列表的数据
+	        cb(results);
+		},
+		createFilter(queryString) {
+	    	return (restaurant) => {
+	      		return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+	    	};
+	  	},
+	  	remarkChange(val){
+	  		this.remSelect=val.value
+	  		this.$emit('remChange',this.remSelect)
+	  	},
     },
     computed: {
 	    subtitle(){

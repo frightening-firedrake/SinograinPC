@@ -5,9 +5,10 @@
       <!--alert-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" @statusChange2="statusChange2" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" ></list-header>
+      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" @statusChange2="statusChange2" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" @remChange="remChange"></list-header>
       <!--表格-->
-      <sinograin-list class="list nopointer" :tabledata="tabledatas"  :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
+      <!--<sinograin-list class="list nopointer" :tabledata="tabledatas"  :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" >--> 
+      <sinograin-list class="list" :tabledata="tabledatas"  :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
       <!--分页-->
       <!--<sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
@@ -119,6 +120,11 @@ export default {
 	statusChange2(data){
 		this.filterStatus2=data
 	},
+	remChange(remark){
+		this.remark=remark;
+		this.getlistdata(1);
+	  	this.page.currentPage=1;
+	},
 	createSampling(){
 //		console.log('createSampling');
 		this.$router.push({path: '/index/sampling/samplingList/samplingListCreate'})
@@ -171,6 +177,7 @@ export default {
   	getlistdata(page){
 		var params = {};
 		params.counterId = this.$route.query.counterId;
+		params.remark = this.remark;
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -244,7 +251,7 @@ export default {
   	},
   	//	表单底部触发事件btnCenterNo btnCenterYes btnLeft btnRight btnOne
 	tfootEvent(date){
-		console.log(date);
+//		console.log(date);
 		if(date=='btnCenterL'){		
 			if(!this.$_ault_alert('sample:editPlace')){
 				return
@@ -509,6 +516,7 @@ export default {
 	  chuliURL:this.apiRoot + '/grain/sample/dispose',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
+      remark:'',
       checkedId:[],
       checkedData:[],
       depotList:[],
@@ -516,7 +524,7 @@ export default {
       placeList:[],
 	  dataBySampleNo: {},
       breadcrumb:{
-      	search:true,   
+//    	search:true,   
       	searching:'',
       },
       subtitle:{
@@ -541,7 +549,7 @@ export default {
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：样品处理支持多选，样品转移需记录每个样品转移后位置仅支持单选!',
+        title: '温馨提示：样品处理支持多选，样品转移需记录每个样品转移后位置仅支持单选!   输入备注信息按回车键可筛选相关样品信息！',
         type: 'info'
       }],
 //    表格数据
@@ -552,6 +560,7 @@ export default {
       	createSampling:false,
       	date:false,
       	scanCode:false,
+      	remark:true,
 //    	status:true,
       	statusitems:[
       		{label:'全部',text:'全部'},
