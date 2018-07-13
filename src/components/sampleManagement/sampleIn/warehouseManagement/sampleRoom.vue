@@ -86,7 +86,8 @@ export default {
 			return
 		}
 //		console.log(id)
-		this.$router.push({path: '/index/sampleManagement/warehouseManagement/sampleRoom',query:{libid:id}})
+
+		this.$router.push({path: '/index/sampleManagement/warehouseManagement/sampleRoom/SampleInView',query:{id:id}})
 		
   	}.bind(this));
   	//	监听列表点击编辑事件
@@ -596,7 +597,13 @@ export default {
 //      status:true,
 //      sort:true
       },
-
+	  {
+        id: 5,
+        prop:'remark',
+        label: "备注",
+//      status:true,
+//      sort:true
+      },
       ],
       actions:{
       	selection:true,
@@ -604,7 +611,7 @@ export default {
       	view:false,
 //    	edit:true,
 //    	show:true,
-		noview:true,
+//		noview:true,
       	dele:false,
       	manuscript:false,
       	safetyReport:false,

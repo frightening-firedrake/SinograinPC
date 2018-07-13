@@ -28,6 +28,7 @@ import sampleRoom from '@/components/sampleManagement/sampleIn/warehouseManageme
 import sampleRegistration from '@/components/sampleManagement/sampleIn/sampleRegistration/sampleRegistration.vue'
 import registrationSelect from '@/components/sampleManagement/sampleIn/sampleRegistration/registrationSelect.vue'
 import SampleInEdit from '@/components/sampleManagement/sampleIn/SampleInEdit.vue'
+import SampleInView from '@/components/sampleManagement/sampleIn/SampleInView.vue'
 import CreateSampleInNum from '@/components/sampleManagement/sampleIn/CreateSampleInNum.vue'
 import SampleInCreate from '@/components/sampleManagement/sampleIn/SampleInCreate.vue'
 import HandoverList from '@/components/sampleManagement/handover/HandoverList.vue'
@@ -263,6 +264,7 @@ const routes= [
             name:"样品管理/样品入库列表/查看样品",
             component:SampleInEdit,
           },
+         
 //        {
 //          path:"sampleManagement/sampleIn/sampleInCreate",
 //          name:"样品管理/样品入库列表/新建样品",
@@ -278,6 +280,12 @@ const routes= [
             path:"sampleManagement/warehouseManagement/sampleRoom",
             name:"样品管理/库房管理/样品室",
             component:sampleRoom,
+            meta: { needAuth: '库房管理' },
+          },
+          {
+            path:"sampleManagement/warehouseManagement/sampleRoom/SampleInView",
+            name:"样品管理/库房管理/样品室/查看样品",
+            component:SampleInView,
             meta: { needAuth: '库房管理' },
           },
           {

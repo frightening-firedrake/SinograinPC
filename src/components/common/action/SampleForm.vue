@@ -69,9 +69,9 @@
 			<el-form-item label="存放状态：" prop="storageStatus"  v-bind:class="{disabled:disabled}">
 			    <el-input v-model="samplestate" :disabled="disabled"></el-input>
 			</el-form-item>
-			<el-form-item label="样品入库时间：" prop="sampleInTime" >
+			<el-form-item label="样品入库时间：" prop="sampleInTime" v-bind:class="{disabled:formdatas.readonly}">
 		    	<el-form-item>
-		        	<el-date-picker type="date" placeholder="选择年度" v-model="formdatas.form.storageTime"></el-date-picker>
+		        	<el-date-picker type="date" placeholder="选择年度" v-model="formdatas.form.storageTime" :disabled="formdatas.readonly"></el-date-picker>
 		    	</el-form-item>
 			</el-form-item>
 			<el-form-item label="存放位置："  prop="storage" v-bind:class="{disabled:disabled}">
@@ -88,13 +88,13 @@
 		        </div>-->
 		        
 			</el-form-item>
-			<el-form-item label="入库签名：" prop="autograph" >
-			    <el-input v-model="formdatas.form.autograph"></el-input>
+			<el-form-item label="入库签名：" prop="autograph" v-bind:class="{disabled:formdatas.readonly}">
+			    <el-input v-model="formdatas.form.autograph" :disabled="formdatas.readonly"></el-input>
 			</el-form-item>
         
         <div class="btns">
-            <el-button class="yes" type="primary" @click="onSubmit('form')">{{formdatas.submitText?formdatas.submitText:'确定'}}</el-button>
-            <el-button class="no" @click="cancel('form')">取消</el-button>
+            <el-button v-if="!formdatas.readonly" class="yes" type="primary" @click="onSubmit('form')">{{formdatas.submitText?formdatas.submitText:'确定'}}</el-button>
+            <el-button class="no" @click="cancel('form')">{{formdatas.readonly?'返回':'取消'}}</el-button>
         </div>
         
         <div class="clear"></div>
