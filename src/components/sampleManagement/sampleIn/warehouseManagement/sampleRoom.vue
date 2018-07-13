@@ -169,7 +169,8 @@ export default {
   	},
 //	获取列表数据方法
   	getlistdata(page){
-		
+		var params = {};
+		params.counterId = this.$route.query.counterId;
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -185,7 +186,8 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				counterId:this.$route.query.counterId,
+				params: JSON.stringify(params),
+				// counterId:this.$route.query.counterId,
 //				page:page,
 //			    rows:this.page.size,
 			}
