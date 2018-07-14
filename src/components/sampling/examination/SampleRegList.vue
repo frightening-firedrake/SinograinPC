@@ -137,6 +137,7 @@ export default {
   		var params = {};
   		params.pLibraryId = this.$route.query.pLibraryId;
 		params.regState = -1;
+		params.type = -1;
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,

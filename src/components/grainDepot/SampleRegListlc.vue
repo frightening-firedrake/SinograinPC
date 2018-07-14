@@ -150,6 +150,7 @@ export default {
   	getlistdata(page){
   		var params={};
 		params.regState=this.filterStatus;
+		params.type=-1;
   		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({

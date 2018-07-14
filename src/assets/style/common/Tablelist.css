@@ -160,6 +160,9 @@
 /*.tablelist .el-table::before{
 	display: none;
 }*/
+.temporary.tablelist .el-table__body-wrapper{
+	min-height:0rem;	
+}
 .tablelist .el-table__body-wrapper{
 	width:100%!important;
 	overflow-x: hidden;
@@ -294,6 +297,9 @@
 .el-table__empty-block{
 	height:5rem;
 	/*line-height:5rem;*/
+}
+.temporary .el-table__empty-block{
+	height:auto;
 }
 .el-table__empty-text{
 	font-size:0.2rem;

@@ -698,7 +698,7 @@ export default {
       	selectlib:true,
       	libraryList:[],
       	scanCode:true,
-      	createSampleNum:true,
+//    	createSampleNum:true,
       	status:true,
       	statusTitle:'检测状态：',
       	statusitems:[

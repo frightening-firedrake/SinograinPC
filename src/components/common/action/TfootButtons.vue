@@ -4,7 +4,7 @@
 		<div v-if="tfbtns.editModel" class="editModelWrap">
 			<div class="tableAdd"  @click="tableAdd">
 				<p style="background-image:url('static/images/sys/create.png');">					
-					新增一行表格
+					{{tfbtns.addbtnText?tfbtns.addbtnText:'新增一行表格'}}
 				</p>
 			</div>
 			<div class="tableDel"  @click="tableDel">
@@ -53,7 +53,7 @@
 	height:1.25rem;
 	position:relative;
 	border:1px solid #e6e7e7;
-	border-top:none;
+	/*border-top:none;*/
 }
 .btn-center{
 	text-align: center;

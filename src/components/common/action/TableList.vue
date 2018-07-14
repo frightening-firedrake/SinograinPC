@@ -1,13 +1,14 @@
 <template>
+<!--	:max-height="maxHeight"-->
   <el-table 
   	ref="multipleTable" 
   	tooltip-effect="dark" 
   	style="width: 100%" 
   	:data="tabledata" 
   	border
-  	:max-height="maxHeight"
+  	highlight-current-row
   	@selection-change="handleSelectionChange" 
-
+		@current-change="currentChange"
   	v-loading="loading"
   	:row-class-name="row_class_name"
     element-loading-customClass="table_loading"
@@ -189,6 +190,9 @@ export default {
 	  	if(pitem.length){	  		
 	  		return pitem[0].libraryName;
 	  	}
+	  },
+	  currentChange(currentRow, oldCurrentRow){
+	  	this.$emit("currentRow",currentRow)
 	  },
 	}
 }

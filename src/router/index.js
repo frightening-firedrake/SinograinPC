@@ -23,6 +23,10 @@ import ManuscriptEdit from '@/components/sampling/list/manuscript/ManuscriptEdit
 import SafetyReportCreate from '@/components/sampling/list/safetyReport/SafetyReportCreate.vue'
 import SafetyReportEdit from '@/components/sampling/list/safetyReport/SafetyReportEdit.vue'
 import SampleInList from '@/components/sampleManagement/sampleIn/SampleInList.vue'
+import TemporaryRegistration from '@/components/sampleManagement/sampleIn/temporaryRegistration/TemporaryRegistration.vue'
+import TemporaryRegistrationCreate from '@/components/sampleManagement/sampleIn/temporaryRegistration/TemporaryRegistrationCreate.vue'
+import TemporaryRegistrationView from '@/components/sampleManagement/sampleIn/temporaryRegistration/TemporaryRegistrationView.vue'
+import TemporarySampleSelect from '@/components/sampleManagement/sampleIn/temporaryRegistration/TemporarySampleSelect.vue'
 import warehouseManagement from '@/components/sampleManagement/sampleIn/warehouseManagement/warehouseManagement.vue'
 import sampleRoom from '@/components/sampleManagement/sampleIn/warehouseManagement/sampleRoom.vue'
 import sampleRegistration from '@/components/sampleManagement/sampleIn/sampleRegistration/sampleRegistration.vue'
@@ -264,7 +268,31 @@ const routes= [
             name:"样品管理/样品入库列表/查看样品",
             component:SampleInEdit,
           },
-         
+          
+          {
+            path:"sampleManagement/temporaryRegistration",
+            name:"样品管理/临时扦样登记表",
+            component:TemporaryRegistration,
+//          meta: { needAuth: '临时扦样登记表' },
+          },
+          {
+            path:"sampleManagement/temporaryRegistration/temporaryRegistrationCreate",
+            name:"样品管理/临时扦样登记表/新建临时扦样登记表",
+            component:TemporaryRegistrationCreate,
+//          meta: { needAuth: '临时扦样登记表' },
+          },
+          {
+            path:"sampleManagement/temporaryRegistration/temporaryRegistrationCreate/temporarySampleSelect",
+            name:"样品管理/临时扦样登记表/新建临时扦样登记表/添加临时样品信息",
+            component:TemporarySampleSelect,
+//          meta: { needAuth: '临时扦样登记表' },
+          },
+          {
+            path:"sampleManagement/temporaryRegistration/temporaryRegistrationView",
+            name:"样品管理/临时扦样登记表/查看临时扦样登记表",
+            component:TemporaryRegistrationView,
+//          meta: { needAuth: '临时扦样登记表' },
+          },
 //        {
 //          path:"sampleManagement/sampleIn/sampleInCreate",
 //          name:"样品管理/样品入库列表/新建样品",

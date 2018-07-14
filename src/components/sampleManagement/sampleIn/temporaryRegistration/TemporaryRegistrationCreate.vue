@@ -9,14 +9,12 @@
       <!--标题-->
       <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader"  v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
+      <list-header :listHeader="listHeader"  v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" ></list-header>
       <!--表格-->
-      <sinograin-table-list-edit-model class="tablelist editmodel" :librarylist="librarylist" @getLibraryId="getLibraryId" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" @currentRow="currentRowFun"> 
-      </sinograin-table-list-edit-model>
+      <sinograin-table-list class="tablelist temporary" @currentRow="currentRowFun" :librarylist="librarylist" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate"> 
+      </sinograin-table-list>
       <!--分页-->
       <!--<sinograin-pagination style="border:none;" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
-      <!--弹框-->
-      <!--<sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>-->      	
       <!--底部按钮们-->
       <tfoot-buttons :tfbtns="tfbtns" @tfootEvent="tfootEvent" ></tfoot-buttons>
       <!--<el-button v-permission-click="{auth:'register:edit2',fun:authtest}">测试自定义指令按钮</el-button>-->
@@ -28,7 +26,7 @@
 </style>
 
 <script>
-import SinograinTableListEditModel from '@/components/common/action/TableListEditModel.vue';
+import SinograinTableList from '@/components/common/action/TableList.vue';
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SinograinPagination from '@/components/common/action/Pagination.vue';
@@ -46,7 +44,7 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
 export default {
   components: {
-    SinograinTableListEditModel,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader,SinograinOptionTitle,TfootButtons
+    SinograinTableList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader,SinograinOptionTitle,TfootButtons
   },
   computed:{
 	...mapState([]),
@@ -62,19 +60,20 @@ export default {
 		}
 	},
 	resetpage(){
-		if(this.$route.query.state==3){
-		}else{
-			this.tabledatas=[];
-			this.listHeader.tableName='';
-		}
+//		if(this.$route.query.state==3){
+//		}else{
+//			this.tabledatas=[];
+//			this.listHeader.tableName='';
+//		}
 	}
   },
   created(){
-//	console.log(this.$route.query)
-	this.getlibrarylist()
-//  获取列表数据（第一页）
-	if(this.$route.query.state==3){
-		 this.getlistdata(1)
+//	console.log(this.$route.params)
+	if(this.$route.params.tabledatas){
+//		console.log('有数据了')
+		
+		this.listHeader.tableName=this.$route.params.tableName;
+		this.tabledatas=this.$route.params.tabledatas;
 	}
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
@@ -116,18 +115,7 @@ export default {
 	emptyCreate(){
 //		this.createSampling();
 	},
-//	打开新建弹框
-	createlib(){
-		this.modalVisible=true;
-	},
-//	填入新建数据
-	createlibitem(unit,lib){
-		console.log(unit,lib);
-	},
-//	关闭新建弹框
-	dialogClose(){
-		this.modalVisible=false;
-	},
+
 //	获取搜索数据
   	searchingfor(searching){
   		console.log(searching);
@@ -151,60 +139,8 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-//	获取库列表
-  	getlibrarylist(){
-		this.$http({
-		    method: 'post',
-			url: this.librarylistURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-				
-			}
-	    }).then(function (response) {
-		  	this.librarylist = response.data;
 
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
-  	},
-//	获取列表数据方法
-  	getlistdata(page){
-		 var params = {}
-		 params.pId = this.$route.query.pId
-  		this.loading=false;
-  		// 获取列表数据（第？页）
-		this.$http({
-		    method: 'post',
-			url: this.datalistURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-				params: JSON.stringify(params)
-			}
-	    }).then(function (response) {
-		  	response.data.rows.sort((a,b)=>{return a.id-b.id})
-		  	this.tabledatas=response.data.rows;
-			this.listHeader.tableName=response.data.rows[0].formName
-			this.libraryName2=response.data.rows[0].libraryId
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
-  	},
+
 //	删除行
 	deleteRow(row) {
 	    this.$confirm('此操作将永久删除该'+"扦样信息"+', 是否继续?', '提示', {
@@ -213,7 +149,10 @@ export default {
 	      type: 'warning'
 	    }).then(() => {
 	    	if(row.id){
-	    		this.editDelete(row.id)    		    		
+//	    		this.editDelete(row.id)    
+	    		this.tabledatas=this.tabledatas.filter(function(item){
+	    			return item.id!==row.id;
+	    		})
 	    	}else{
 	    		this.tabledatas=this.tabledatas.filter(function(item){
 	    			return item.addId!==row.addId;
@@ -260,20 +199,7 @@ export default {
 		    console.log(error);
 		}.bind(this));
 	},
-//	获取分页点击事件中及当前页码
-    getCurrentPage(currentPage){
-//		console.log(currentPage)
-		this.getlistdata(currentPage)
-	},
-//	映射分页触发的事件
-  	paginationEvent(actiontype){
-  		if(actiontype=='leading_out'){
-  			console.log('leading_out')
-  		}else if(actiontype=='refresh'){
-  			// 获取列表数据（第一页）
-			this.getlistdata(1)			
-  		}
-  	},
+
 //	获取多选框选中数据的id(这是一个数组)
   	getchecked(checkedId){
   		this.checkedId=checkedId;
@@ -284,122 +210,35 @@ export default {
   	uncomplate(msg){
   		 this.$alert(msg,'提示信息',{});
   	},
-// 编辑扦样
-	editdata(regState) {
-		if(!this.$_ault_alert('sample:saveAll')){
-			return
-		}
-		if(!this.listHeader.tableName) {
-			var msg="请先填写表名，再尝试提交！"
-			this.uncomplate(msg)
-			return
-		}
-		var sample =[];
-		this.tabledatas.forEach((value,index)=>{
-			var item={};		
-			item.id= value.id;
-			item.barnTime= Date.parse(value.barnTime);
-			item.sort= value.sort;
-			item.quality= value.quality;
-			item.amount= value.amount;
-			item.originPlace= value.originPlace;
-			item.gainTime= value.gainTime;
-			item.position= value.position;
-			// item.updateTime= value.updateTime;
-			// item.sampleTime= value.samplingdate;
-			item.remark= value.remark;
-			sample.push(item);
-			for(var key in item){
-				if(item[key] !== 0 && !item[key]){
-					this.isEmpty=true;
-					break
-				}else{
-					this.isEmpty=false;
-				}
-			}
-		})
-		if(sample.length==0) {
-			var msg="请填写表信息，再尝试提交！"
-			this.uncomplate(msg)
-			return
-		}
-		if(this.isEmpty){
-			var msg="请完善表内空信息，再尝试提交！"
-			this.uncomplate(msg)
-			return
-		}
 
-    				
-  		// 提交扦样列表
-		this.$http({
-		    method: 'post',
-			url: this.editURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-				id: this.$route.query.pId,
-				formName: this.listHeader.tableName,
-				sample: JSON.stringify(sample),
-				regState: regState,
-				libraryId: this.libraryName2,
-				type:-1,			
-			},
-	    }).then(function (response) {
-		  this.$router.push({path: '/index/grainDepot/sampleRegListlc'})
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
-	},
 	savedata(regState){
-		if(!this.$_ault_alert('sample:saveAll')){
-			return
-		}
+//		if(!this.$_ault_alert('sample:saveAll')){
+//			return
+//		}
 		if(!this.listHeader.tableName) {
 			var msg="请先填写表名，再尝试提交！"
 			this.uncomplate(msg)
 			return
 		}
 		var sample =[];
-		this.tabledatas.forEach((value,index)=>{
-			var item={};		
-			item.sort= value.sort;
-			item.barnTime= Date.parse(value.barnTime);
-			item.quality= value.quality;
-			item.amount= value.amount;
-			item.originPlace= value.originPlace;
-			item.gainTime= value.gainTime;
-			item.position= value.position;
-			// item.updateTime= value.updateTime;
-			// item.sampleTime= value.samplingdate;
-			item.remark= value.remark;
-			sample.push(item);
-			for(var key in item){
-				if(!item[key]){
-					this.isEmpty=true;
-					break
-				}else{
-					this.isEmpty=false;
-				}
-			}
-		})
+
+		sample =this.tabledatas;
+//		this.tabledatas.forEach((value,index)=>{
+//			
+//		})
 		if(sample.length==0) {
 			var msg="请填写表信息，再尝试提交！"
 			this.uncomplate(msg)
 			return
 		}
-		if(this.isEmpty){
-			var msg="请完善表内空信息，再尝试提交！"
-			this.uncomplate(msg)
-			return
-		}
-			console.log(sample)
+		var libraryId=this.tabledatas[0].libraryId;
+		
+//		if(this.isEmpty){
+//			var msg="请完善表内空信息，再尝试提交！"
+//			this.uncomplate(msg)
+//			return
+//		}
+
 //		console.log(sample[0].barnTime,)
 		// 提交扦样列表
 		this.$http({
@@ -418,11 +257,11 @@ export default {
 				formName: this.listHeader.tableName,
 				sample: JSON.stringify(sample),
 				regState: regState,
-				libraryId: this.libraryName2,
-				type:-1,
+				libraryId: libraryId,
+				type:1,
 			},
 	    }).then(function (response) {
-		  this.$router.push({path: '/index/grainDepot/sampleRegListlc'})
+//		  this.$router.push({path: '/index/sampleManagement/temporaryRegistration'})
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -431,54 +270,17 @@ export default {
 	tfootEvent(date){
 		console.log(date);
 		if(date=='btnCenterL'){
-			if(this.$route.query.state==3){
-		 		this.editdata(-1)
-			}else {
-				this.savedata(-1)	
-			}
+			this.savedata(2)	
 		}else if(date=='btnCenterR'){
-			if(this.$route.query.state==3){
-				this.editdata(3)
-			}else {
-				this.savedata(3)	
-			}
+			this.$router.go(-1)
 		}else if(date=='btnLeft'){
 
 		}else if(date=='btnRight'){
 
 		}else if(date=='btnOne'){		
-			this.savedata()	
-			
+
 		}else if(date=='tableAdd'){
-//			权限判断旧方法啊
-//			if (!this.$_has('register:edit')) {
-//				this.$notify.error({
-//		          	title: '错误',
-//		          	message: '你没有权限进行此项操作！！！'
-//		        });
-//				return
-//	    	}
-			
-			this.rowid++;
-			var newdata={
-				id:0,
-		        libraryId: '',//被查库点
-		        barnTime:'',//入库时间
-		        sort: '',//品种
-		        quality: 'ZC',//性质
-		        amount: '',//代表数量
-		        position:'',
-		        originPlace: '',//产地
-		        gainTime: '',//收货年度
-		        // updateTime: "",
-		        samplingSign: "",
-		        sampleInSignWidth: "",
-		        // samplingdate: '',//扦样日期
-		        remark: '',//备注
-		        rowType:"扦样信息",//删除用
-		        addId:this.rowid,//本地删除新建行时用到的标识
-	        }
-			this.tabledatas.push(newdata);
+			this.new_sample()
 		}else if(date=="tableDel"){
 			if(this.currentRow){
 				this.deleteRow(this.currentRow)
@@ -495,6 +297,14 @@ export default {
 	authtest(){
 		alert("权限测试通过！！！")
 	},
+	new_sample(){
+		var name=this.$route.name+'/添加临时样品信息';
+		var params={tableName:this.listHeader.tableName,tabledatas:this.tabledatas}
+//		if(this.$route.params.searching){
+//			params.searching=this.$route.params.searching
+//		}
+		this.$router.push({name:name,params})
+    },
   },
   data() {
     return {
@@ -564,6 +374,7 @@ export default {
       	date:false,
       	tableNameShow:true,
       	tableName:'',
+      	tableNameTitle:'临时扦样登记表名称：',
       	editModel:true,
       },
       tabledatas:[],
@@ -576,7 +387,7 @@ export default {
 //       },
       {
         id: 2,
-        prop:'libraryPid',
+        prop:'pLibraryName',
         label:"被查直属库",
 //      sort:true,
 //      width:80,
@@ -634,36 +445,12 @@ export default {
 //      sort:true,
       },
       {
-        id: 100,
+        id: 10,
         prop:'barnTime',
         label:"入库时间",
         width:150,
 //      sort:true,
       },
-//       {
-//         id: 9,
-//         prop:'updateTime',
-//         label:"入库时间",
-// //      sort:true,
-//       },
-//    {
-//      id: 10,
-//      prop:'samplingSign',
-//      label:"扦样人员签字",
-////      sort:true,
-//    },
-//    {
-//      id: 11,
-//      prop:'sampleInSignWidth',
-//      label:"现场人员签字",
-////      sort:true,
-//    },
-//       {
-//         id: 12,
-//         prop:'samplingdate',
-//         label:"扦样日期",
-// //      sort:true,
-//       },
       {
         id: 13,
         prop:'remark',
@@ -684,8 +471,8 @@ export default {
       },
       tfbtns:{
       	btnCenter:{
-			btnTextL:'申请扦样',
-			btnTextR:'保存',
+			btnTextL:'保存',
+			btnTextR:'取消',
 		},
 //		btnLeft:{
 //			btnText:'导出Excel表格',
@@ -697,6 +484,7 @@ export default {
 //			btnText:'生成扦样登记表',
 //		},     	
 		editModel:true,
+		addbtnText:'添加临时样品信息',
       },
       currentRow:null,
     }

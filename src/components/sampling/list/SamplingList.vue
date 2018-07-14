@@ -103,6 +103,7 @@ export default {
   		var params = {};
   		params.pLibraryId = this.$route.query.libraryId;
 		params.regState = 2;
+		params.type = -1;
 		params.formNameLike = searching;
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
@@ -135,6 +136,7 @@ export default {
 		var params = {}
 		params.pLibraryId = this.$route.query.libraryId;
 		params.regState = 2;
+		params.type = -1;
   		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({

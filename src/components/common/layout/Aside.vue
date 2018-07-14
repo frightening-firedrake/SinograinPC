@@ -242,6 +242,14 @@ export default {
 					lid: 7
 				},
 				{
+					icon: 'icon-linshi',
+					title: '临时扦样登记表',
+					linkto: '/index/sampleManagement/temporaryRegistration',
+					level: 2,
+					pid: 6,
+					lid: 28
+				},
+				{
 					icon: 'icon-zhishicangku',
 					title: '库房管理',
 					linkto: '/index/sampleManagement/warehouseManagement',
@@ -405,7 +413,7 @@ export default {
 					title: '添加柜子货架',
 					level: 2,
 					pid: 22,
-					lid: 28,
+					lid: 29,
 				},
 //				{
 //					icon: 'icon-iocn02001',

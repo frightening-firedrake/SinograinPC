@@ -148,6 +148,11 @@
 					{{listHeader.autH}}
 				</div>
 			</template>
+			<template v-if="listHeader.addbtn">				
+				<div class="create" @click="addbtn" style="background-image:url('static/images/sys/create.png');">
+					{{listHeader.addbtn}}
+				</div>
+			</template>
 			<template v-if="listHeader.scanCode">				
 				<div class="scanCode" @click="scanCode">
 					<span>
@@ -161,7 +166,7 @@
 		<div class="tableName" v-if="listHeader.tableNameShow">
 			<template v-if="listHeader.editModel">
 				<label for="">
-					扦样登记表名称：
+					{{listHeader.tableNameTitle?listHeader.tableNameTitle:'扦样登记表名称：'}}
 					<input type="text" v-model="listHeader.tableName" />
 				</label>
 			</template>
@@ -577,6 +582,9 @@ export default {
     	createAut(){
 //  		console.log('createSampling');
     		this.$emit('createAut');
+    	},
+    	addbtn(){
+    		this.$emit('addbtn');	
     	},
     	createlib(){
 //  		console.log('createlib');
