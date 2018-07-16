@@ -44,7 +44,7 @@ export default {
   },
   created(){
 //	console.log(this.$route.params)
-//	this.getTaskList()
+	this.getTaskList()
   	
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
@@ -134,7 +134,8 @@ export default {
 //			    params: JSON.stringify(params)
 			}
 	   }).then(function (response) {
-		  	this.taskList = response.data.rows;
+		  	this.taskList = response.data;
+//		  	console.log(this.taskList)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -179,11 +180,15 @@ export default {
 	titleEvent(){
   		console.log('titleEvent');
   	},
-  	getCheckedList(checkedList){
+  	getCheckedList(checkedList,pLibraryId,libraryId){
   		var path=this.$route.name
   		var end=path.lastIndexOf('/');
   		path=path.slice(0,end);
-		this.$router.push({name: path,params: {tableName:this.$route.params.tableName,tabledatas:checkedList}})
+  		var library={
+  			pLibraryId:pLibraryId,
+  			libraryId:libraryId
+  		}
+		this.$router.push({name: path,params: {tableName:this.$route.params.tableName,tabledatas:checkedList,library:library}})
 //		this.$router.push({name: path,params: {formdatas:this.$route.params.formdatas,tabledatas:checkedList,searching:this.searching}})
   	},
   },
@@ -191,7 +196,7 @@ export default {
     return {
       sampleURL:this.apiRoot + '/grain/sample/temporaryData',
 //    sampleURL:this.apiRoot + '/grain/sample/findSamplesByTask',
-	  taskListURL:this.apiRoot + '/grain/task/data',
+	  taskListURL:this.apiRoot + '/grain/library/getAll',//库列表占用了一下任务列表。。。
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
@@ -206,7 +211,7 @@ export default {
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：选择任务名称后可获取到相关任务中已检测完成的样品检验编号!',
+        title: '温馨提示：选择直属库名及库点名称后可获取到相关样品检验编号!',
         type: 'info'
       }],
       checkList:[],

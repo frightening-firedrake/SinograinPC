@@ -300,9 +300,9 @@ export default {
 	new_sample(){
 		var name=this.$route.name+'/添加临时样品信息';
 		var params={tableName:this.listHeader.tableName,tabledatas:this.tabledatas}
-//		if(this.$route.params.searching){
-//			params.searching=this.$route.params.searching
-//		}
+		if(this.$route.params.library){
+			params.library=this.$route.params.library
+		}
 		this.$router.push({name:name,params})
     },
   },

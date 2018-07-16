@@ -1,11 +1,16 @@
 <template>
     <div class="SelectChecklist">
     	<el-form ref="form" :model="form" :label-width="labelWidth" label-position="left">
-	    	<!--<el-form-item label="任务名称" style="border-bottom:none;">
-	    		<el-select v-model="searching" placeholder="请选择任务名称" @change="searchingfor">
-			        <el-option v-for="item in taskList" :label="item.taskName" :value="item.taskName" :key="item.id"></el-option>
+	    	<el-form-item label="直属库名" style="border-bottom:none;">
+	    		<el-select v-model="pLibraryId" placeholder="请选择直属库名称" @change="pLibraryIdchange">
+			        <el-option v-for="item in pLibraryList" :label="item.libraryName" :value="item.id" :key="item.id"></el-option>
 			    </el-select>
-	    	</el-form-item>-->
+	    	</el-form-item>
+	    	<el-form-item label="库点名称" style="border-left:none;border-bottom:none;">
+	    		<el-select v-model="libraryId" placeholder="请选择库点名称" @change="libraryIdchange">
+			        <el-option v-for="item in libraryList" :label="item.libraryName" :value="item.id" :key="item.id"></el-option>
+			    </el-select>
+	    	</el-form-item>
 	    	<el-form-item label="选择品种" style="border-bottom:none;">
 			    <el-select v-model="sort" placeholder="请选择品种" @change="changeSort">
 			        <el-option label="玉米" value="玉米"></el-option>
@@ -31,6 +36,7 @@
 				</template>
 
 			</el-form-item>
+			
 			
 			
 			
@@ -108,9 +114,10 @@ export default {
     props: ["checkedListAdd","checkList","taskList"],
 //  props: ["checkList"],
     created(){
-    	if(this.$route.params.searching){
-			this.searching=this.$route.params.searching
-			this.searchingfor()
+    	if(this.$route.params.library){
+			this.libraryId=this.$route.params.library.libraryId;
+			this.pLibraryId=this.$route.params.library.pLibraryId;
+//			this.searchingfor()
 		}
 //		this.checkedList=this.checkedListAdd;
 //  	if(this.$route.params.formdatas){
@@ -130,6 +137,7 @@ export default {
     },
     computed:{
     	listready(){
+//  		console.log(this.taskList)
     		if(this.checkList.length&&this.$route.params.tabledatas){
     			var checkNums=this.$route.params.tabledatas.map((val)=>{
     				return val.sampleNum?val.sampleNum:val;
@@ -149,12 +157,30 @@ export default {
 //  			return true
 //  		}
 //  	},
+		pLibraryList(){
+			return this.taskList.filter((item,index)=>{
+				return item.pLibraryId==-1;
+			})
+		},
+		libraryList(){
+//			if(this.pLibraryId){
+				return this.taskList.filter((item,index)=>{
+					return item.pLibraryId==this.pLibraryId;
+				})
+//			}else{
+//				
+//			}
+			
+		},
     	checkedListFilter(){
+    		if(!this.libraryId){
+    			return [];
+    		}
 //  		console.log(this.checkList)
 			return this.checkList.filter((item,index)=>{
 //				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 //				return (item.detectionState==2)&&(item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
-				return (item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
+				return (item.libraryId==this.libraryId)&&(item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 //				return (this.isChecked?item.sampleState==this.isChecked:true)&&(item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 			})
     	},
@@ -173,7 +199,7 @@ export default {
 //			通过
             if (this.checkedList.length) {
 //                  alert('submit!');
-                    this.$emit('getCheckedList',this.checkedList)
+                    this.$emit('getCheckedList',this.checkedList,this.pLibraryId,this.libraryId)
 //				console.log(this.checkedList)
 //				window.history.go(-1)
 //			未通过
@@ -189,7 +215,7 @@ export default {
             }
         },
         cancel(formname) {
-            this.$emit('getCheckedList',this.checkedList)
+            this.$emit('getCheckedList',this.checkedList,this.pLibraryId,this.libraryId)
         	
 //          console.log('取消!');
 //			this.$refs[formname].resetFields();
@@ -247,16 +273,24 @@ export default {
 	    },
 //	    任务搜索
 	  	searchingfor(){
-	  		this.$emit('searchingfor',this.searching)
+//	  		this.$emit('searchingfor',this.searching)
 	  	},
 	  	changeSort(){
 	  		this.checkedList=[];
+	  	},
+	  	pLibraryIdchange(val){
+//	  		console.log(val)
+	  		this.libraryId='';
+	  	},
+	  	libraryIdchange(val){
+//	  		console.log(val)
+			this.checkedList=[];
 	  	},
     },
     data() {
 
         return {
-			searching:'',
+			searching:12,
 			isChecked:2,
 			sort:'小麦',
 //			checkListUrl:'checklist',//		        被选中库点对应的样品地址
@@ -274,6 +308,8 @@ export default {
 			labelWidth:'1rem',
 		    remSelect:'',
 	        sampleNumRange:[],
+	        libraryId:'',
+	        pLibraryId:'',
         }
     },
 }

@@ -12,11 +12,11 @@ import router from './router/index'
 
 Vue.use(ElementUI);
 //Vue.prototype.apiRoot = 'http://m.ityyedu.com'
-//Vue.prototype.apiRoot = 'http://192.168.1.233:8083'//deng
+//Vue.prototype.apiRoot = 'http://192.168.1.233:8080'//deng
 //Vue.prototype.apiRoot = 'http://192.168.1.230:80'//xuan
-Vue.prototype.apiRoot = 'http://192.168.1.232:8080'//bo
+//Vue.prototype.apiRoot = 'http://192.168.1.232:8080'//bo
 //Vue.prototype.apiRoot = 'http://192.168.1.176:8082'
-//Vue.prototype.apiRoot = 'http://192.168.1.231:8083'//kun
+Vue.prototype.apiRoot = 'http://192.168.1.231:8083'//kun
 //axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 //axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
 //axios.defaults.withCredentials=true;
@@ -35,7 +35,27 @@ axios.interceptors.request.use(function (response) {
 //axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.interceptors.response.use(function (response) {
 //  console.log('全局的拦截测试，好简单')
-//	console.log(response)
+//	console.log(response.data.code==1000000)
+	if(response.data.code==1000000){
+
+//		console.log(store.state.userName)
+		store.state.libraryName='';
+		store.state.libraryId='';
+		store.state.userName='';
+		store.state.userId='';
+		store.state.userAuth='';
+		sessionStorage.removeItem('libraryId');
+		sessionStorage.removeItem('libraryName');
+		sessionStorage.removeItem('userName');
+		sessionStorage.removeItem('userId');
+		sessionStorage.removeItem('userAuth');
+		sessionStorage.removeItem('Token');
+		sessionStorage.removeItem('permissions');
+		sessionStorage.removeItem('breadcrumbHistory');
+//		console.log(store.state.userName)
+		app.$router.push({ path: '/login'});
+		
+	}
 	if(response.data.access=='unauthorized'){
 		app.$notify.error({
           	title: '错误',
