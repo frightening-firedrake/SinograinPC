@@ -116,8 +116,10 @@ const routes= [
             redirect: 'grainDepot/createSampleReglc',
           },
           {
-            path:"grainDepot/createSampleReglc",
-            name:"粮库管理/新建扦样登记表",
+//          path:"grainDepot/createSampleReglc",
+//          name:"粮库管理/新建扦样登记表",
+            path:"grainDepot/sampleRegListlc/createSampleReglc",
+            name:"粮库管理/扦样登记列表/新建扦样登记表",
             component:CreateSampleReglc,
             meta: { needAuth: '新建扦样登记表' },
           },

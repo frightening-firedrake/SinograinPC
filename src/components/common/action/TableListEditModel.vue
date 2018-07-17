@@ -148,12 +148,14 @@
 }
 </style>
 <script>
+import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
   props: ['items', 'tabledata','actions','list','loading','librarylist'],
   created(){
-  	
+
   },
   computed:{
+  	...mapGetters(["remarkses"]),
   	maxHeight(){
   		return 320;
   	},
@@ -178,7 +180,7 @@ export default {
 //    libraryPid:'',
 	    libraryName2:'',
 //	    备注列表
-	    restaurants: [{"value": "春季抽查"},{"value": "秋季普查"},{"value": "2017年度轮换验收"},{"value": "2018年度轮换验收"},{"value": "收购巡查"}],
+//	    restaurants:this.remarkses(),
     }
   },
   mounted: function() {
@@ -266,7 +268,7 @@ export default {
 	  	this.$emit('emptyCreate');
 	  },
 	  querySearch(queryString, cb) {
-        var restaurants = this.restaurants;
+        var restaurants = this.remarkses;
         var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
         // 调用 callback 返回建议列表的数据
         cb(results);

@@ -110,6 +110,7 @@
 import "@/assets/style/common/SelectChecklist.css";
 //本地测试要用下面import代码
 //import data from '@/util/mock';
+import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
     props: ["checkedListAdd","checkList","taskList"],
 //  props: ["checkList"],
@@ -136,6 +137,7 @@ export default {
 //		console.log(this.formdatas)
     },
     computed:{
+  		...mapGetters(["remarkses"]),
     	listready(){
 //  		console.log(this.taskList)
     		if(this.checkList.length&&this.$route.params.tabledatas){
@@ -188,7 +190,7 @@ export default {
     },
     methods: {  
 		checkedListChange(val){
-			console.log(val)
+//			console.log(val)
 		},
 		changeIsChecked(val){
 //			console.log(val,this.isChecked)
@@ -261,7 +263,7 @@ export default {
         	}
         },
         querySearch(queryString, cb){
-	        var restaurants = this.restaurants;
+	        var restaurants = this.remarkses;
 	        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
 	        // 调用 callback 返回建议列表的数据
 	        cb(results);
@@ -299,7 +301,7 @@ export default {
 //      	全部选中按钮
         	checkAll:false,
 //      	筛选列表
-	  	  	restaurants: [{"value": "春季抽查"},{"value": "秋季普查"},{"value": "2017年度轮换验收"},{"value": "2018年度轮换验收"},{"value": "收购巡查"}],
+//	  	  	restaurants: [{"value": "春季抽查"},{"value": "秋季普查"},{"value": "2017年度轮换验收"},{"value": "2018年度轮换验收"},{"value": "收购巡查"}],
         	
 //      	表单数据
         	form:{

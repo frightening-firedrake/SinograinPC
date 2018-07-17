@@ -62,7 +62,7 @@ export default {
 		}
 	},
 	resetpage(){
-		if(this.$route.query.state==3){
+		if(this.$route.query.pId){
 		}else{
 			this.tabledatas=[];
 			this.listHeader.tableName='';
@@ -73,7 +73,7 @@ export default {
 //	console.log(this.$route.query)
 	this.getlibrarylist()
 //  获取列表数据（第一页）
-	if(this.$route.query.state==3){
+	if(this.$route.query.pId){
 		 this.getlistdata(1)
 	}
 //	移除监听事件
@@ -213,7 +213,13 @@ export default {
 	      type: 'warning'
 	    }).then(() => {
 	    	if(row.id){
-	    		this.editDelete(row.id)    		    		
+	    		if(this.$route.query.state==2){
+	    			this.tabledatas=this.tabledatas.filter(function(item){
+		    			return item.id!==row.id;
+		    		})
+	    		}else{	    			
+	    			this.editDelete(row.id)    		    		
+	    		}
 	    	}else{
 	    		this.tabledatas=this.tabledatas.filter(function(item){
 	    			return item.addId!==row.addId;
@@ -329,7 +335,7 @@ export default {
 			return
 		}
 
-    				
+    	this.tfbtns.loading=true;			
   		// 提交扦样列表
 		this.$http({
 		    method: 'post',
@@ -351,8 +357,9 @@ export default {
 				libraryId: this.libraryName2,
 				type:-1,			
 			},
-	    }).then(function (response) {
-		  this.$router.push({path: '/index/grainDepot/sampleRegListlc'})
+	   	}).then(function (response) {		
+		  	this.$router.go(-1);
+//		  	this.$router.push({path: '/index/grainDepot/sampleRegListlc'})
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -399,8 +406,9 @@ export default {
 			this.uncomplate(msg)
 			return
 		}
-			console.log(sample)
+//			console.log(sample)
 //		console.log(sample[0].barnTime,)
+    	this.tfbtns.loading=true;			
 		// 提交扦样列表
 		this.$http({
 		    method: 'post',
@@ -421,8 +429,9 @@ export default {
 				libraryId: this.libraryName2,
 				type:-1,
 			},
-	    }).then(function (response) {
-		  this.$router.push({path: '/index/grainDepot/sampleRegListlc'})
+	   	}).then(function (response) {
+		  	this.$router.go(-1);
+//		  	this.$router.push({path: '/index/grainDepot/sampleRegListlc'})
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -683,6 +692,7 @@ export default {
       	safetyReport:false,
       },
       tfbtns:{
+      	loading:false,
       	btnCenter:{
 			btnTextL:'申请扦样',
 			btnTextR:'保存',

@@ -7,7 +7,7 @@
 				<img :src="user.avater" alt="">
 			</div>
 			<div class="userinfo">
-				<h3>扦样员
+				<h3>{{roleName?roleName:"扦样员"}}
 					<span>({{userName?userName:"未登录"}})</span>
 				</h3>
 				<p>
@@ -121,7 +121,7 @@ export default {
 	},
 	computed:{
 		...mapState(["isCollapse"]),
-		...mapGetters(["modal_id","libraryId","libraryName","userName","userAuth"]),
+		...mapGetters(["modal_id","libraryId","libraryName","userName","userAuth","roleName"]),
 		activePath(){
 			var path=this.$route.path.split('/');
 			var zpath=path[0]
@@ -157,14 +157,14 @@ export default {
 					needAuth: 'grainDepot',
 				},
 
-				{
-					icon: 'icon-xinjian',
-					title: '新建扦样登记表',
-					linkto: '/index/grainDepot/createSampleReglc',
-					level: 2,
-					pid: 12,
-					lid: 13
-				},
+//				{
+//					icon: 'icon-xinjian',
+//					title: '新建扦样登记表',
+//					linkto: '/index/grainDepot/createSampleReglc',
+//					level: 2,
+//					pid: 12,
+//					lid: 13
+//				},
 				{
 					icon: 'icon-shenqingshenpi',
 					title: '扦样登记列表',

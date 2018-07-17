@@ -99,6 +99,7 @@ export default {
 		})
 		
   		this.loading=false;
+  		this.formdatas.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -205,6 +206,7 @@ export default {
 	  receiptor:'',
       formdatas: {
   		title:'样品领取交接单',//标题
+  		loading:false,
         form:{            	
         	name:'',//交接单名称
         	manager:this.userName,//管理员名

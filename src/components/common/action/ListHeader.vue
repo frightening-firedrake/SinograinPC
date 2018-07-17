@@ -527,7 +527,7 @@ export default {
 	        selectTask:'全部',
 		    remSelect:'',
 //		   	 筛选列表
-	  	  	restaurants: [{"value": "春季抽查"},{"value": "秋季普查"},{"value": "2017年度轮换验收"},{"value": "2018年度轮换验收"},{"value": "收购巡查"}],
+//	  	  	restaurants: [{"value": "春季抽查"},{"value": "秋季普查"},{"value": "2017年度轮换验收"},{"value": "2018年度轮换验收"},{"value": "收购巡查"}],
         };
     },
     created(){
@@ -541,7 +541,7 @@ export default {
 			    datearr[0]=Date.parse(this.date_select[0]);
 			    datearr[1]=Date.parse(this.date_select[1]);
 //			console.log(datearr)
-//  		this.$emit('dateChange',this.date_select);
+    		this.$emit('dateChange',this.date_select);
     	},
     	dateChange2(){
 //  		console.log(this.date_select);
@@ -597,7 +597,7 @@ export default {
 			this.$emit("connect")
 		},
 		querySearch(queryString, cb){
-	        var restaurants = this.restaurants;
+	        var restaurants = this.remarkses;
 	        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
 	        // 调用 callback 返回建议列表的数据
 	        cb(results);
@@ -613,6 +613,7 @@ export default {
 	  	},
     },
     computed: {
+  		...mapGetters(["remarkses"]),
 	    subtitle(){
 	    	return this.listHeader.subtitle;
 //          const route = this.$route.name.split("/")

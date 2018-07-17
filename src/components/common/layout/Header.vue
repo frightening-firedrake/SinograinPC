@@ -40,7 +40,7 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
 	computed:{
 		...mapState([]),
-		...mapGetters(["libraryId","libraryName","userName"]),
+		...mapGetters(["libraryId","libraryName","userName","roleName"]),
   	},
   	methods:{
   		...mapMutations(['logout']),

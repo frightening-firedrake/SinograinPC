@@ -3,9 +3,9 @@
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
       <!--alert-->
-      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
+      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
+      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" @addbtn="addbtn"></list-header>
       <!--表格-->
       <sinograin-list class="list" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" :rowType="rowType"> 
       </sinograin-list>
@@ -58,6 +58,7 @@ export default {
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
+    this.$root.eventHub.$off("repeat")
 //	监听列表删除事件
     this.$root.eventHub.$on('delelistitem',function(rowid,list){
     	if(!this.$_ault_alert('register:remove')){
@@ -75,17 +76,31 @@ export default {
 			this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleReglc',query:{pId:id,state:state}})
 		}
   	}.bind(this));
+//	监听重复申请事件
+  	this.$root.eventHub.$on("repeat",function(id,state){  
+//		console.log(id)
+//		if(state==3){			
+//			this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleDraft',query:{pId:id,state:state}})
+//		}else{
+//			this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleReglc',query:{pId:id,state:state}})
+//		}
+		this.$router.push({path: '/index/grainDepot/sampleRegListlc/createSampleReglc',query:{pId:id,state:state}})
+  	}.bind(this));
   },
   destroy(){
   	this.$root.eventHub.$off("viewlistitem")
   	this.$root.eventHub.$off('delelistitem')
+    this.$root.eventHub.$off("repeat")
   },
   methods: {
   	...mapMutations(['create_modal_id','is_mask','create_modal','close_modal']),
   	...mapActions(['addAction']),
 //	列表头触发的事件
-	dateChange(data){
-		console.log(data);
+	dateChange(date){
+		console.log(date);
+		this.dateStart=date[0];
+		this.dateEnd=date[1];
+		this.getlistdata(1)
 	},
 	statusChange(data){		
 		if(data=="全部"){
@@ -100,6 +115,9 @@ export default {
 	createSampling(){
 //		console.log('createSampling');
 		this.$router.push({path: '/index/sampling/libraryList/samplingList/samplingListCreate'})
+	},
+	addbtn(){
+		this.$router.push({path: '/index/grainDepot/sampleRegListlc/createSampleReglc'})
 	},
 	emptyCreate(){
 //		this.createlib();
@@ -119,37 +137,44 @@ export default {
 //	获取搜索数据
   	searchingfor(searching,page){
   		page?page:1;
-  		console.log(searching,page);
+  		this.searchText=searching;
+  		this.getlistdata(page)
+//		console.log(searching,page);
   		// 获取列表数据（第？页）
-		this.$http({
-		    method: 'post',
-			url: this.searchURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-			    listName: this.list,
-			    page:page,
-			    pageSize:this.page.size,
-			    name_like:searching,
-			}
-	    }).then(function (response) {
-		  	this.tabledatas=response.data.rows;
-	  		this.loading=false;
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
+//		this.$http({
+//		    method: 'post',
+//			url: this.searchURL,
+//			transformRequest: [function (data) {
+//				// Do whatever you want to transform the data
+//				let ret = ''
+//				for (let it in data) {
+//				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+//				}
+//				return ret
+//			}],
+//			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+//			data: {
+//			    listName: this.list,
+//			    page:page,
+//			    pageSize:this.page.size,
+//			    name_like:searching,
+//			}
+//	    }).then(function (response) {
+//		  	this.tabledatas=response.data.rows;
+//	  		this.loading=false;
+//		}.bind(this)).catch(function (error) {
+//		    console.log(error);
+//		}.bind(this));
   	},
 //	获取列表数据方法
   	getlistdata(page){
   		var params={};
 		params.regState=this.filterStatus;
+		params.formNameLike=this.searchText;
+		if(this.dateStart){
+			params.dateStart=this.dateStart
+			params.dateEnd=this.dateEnd
+		}
 		params.type=-1;
   		this.loading=true;
   		// 获取列表数据（第？页）
@@ -246,6 +271,9 @@ export default {
       searchURL:this.apiRoot + '/grain/register/data',
       deleteURL:this.apiRoot + '/grain/register/remove',
       checkedId:[],
+  	  searchText:'',
+  	  dateStart:0,//开始时间
+      dateEnd:9999999999999999999999999,//结束时间
 	  list:"librarylist",
 	  modalVisible:false,
 	  rowType:'扦样登记表',
@@ -264,7 +292,7 @@ export default {
 	  	submitText:'确定',
 	  },
       breadcrumb:{
-      	search:false,   
+      	search:true,   
       	searching:'',
       },
       loading:true,
@@ -285,7 +313,7 @@ export default {
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：此页面只展示本库信息!',
+        title: '温馨提示：可输入扦样登记表名称搜索相关信息!',
         type: 'info'
       }],
 //    表格数据
@@ -293,7 +321,9 @@ export default {
       	createlib:false,
       	createSampling:false,
       	status:true,
-      	date:true,
+      	date1:true,
+      	addbtn:'新建扦样登记表',
+      	date1Title:'创建日期:',
       	statusitems:[
       		{label:'全部',text:'全部'},
       		{label:-1,text:'待审核'},
@@ -327,7 +357,7 @@ export default {
       {
         id: 4,
         prop:'createTime',
-        label:"申请日期",
+        label:"创建日期",
         sort:true,
       },
       ],
@@ -340,6 +370,7 @@ export default {
       	dele:false,
       	deleCaogao:true,
       	show:true,
+      	repeat:true,
       }
     }
   }

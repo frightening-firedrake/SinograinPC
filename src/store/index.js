@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 const state = {
 	userName:'',//用户名
+	roleName:'',//用户角色
 	userId:'',//用户id
 	userAuth:'',//用户权限逗号隔开的字符串
 	permissions:'',//用户可操作按钮逗号隔开的字符串
@@ -14,7 +15,7 @@ const state = {
 	libraryNames:[],//库点组
 	qualitys:['ZC','ZD','LC','SP','TD'],//性质组
 	sorts:['小麦','玉米','食用油'],//品种组
-	remarkses:['春季普查','秋季普查','2017-2018轮换年度','收购寻查','其他'],//备注组
+	remarkses:[{"value": "春季抽查"},{"value": "秋季普查"},{"value": "2017年度轮换验收"},{"value": "2018年度轮换验收"},{"value": "收购巡查"},{"value": "出库巡查"}],//备注组
 	tests:['水分','容重','杂质','不完善颗粒','硬质','品尝评分','卫生指标','加工品质','(玉米)生霉粒','(玉米)脂肪酸值','(小麦)矿物含量','(小麦)面筋吸水量'],//质检组
 	mask:false,//自定义的遮罩层控制选项
 	modal_id_number:1000,
@@ -29,6 +30,9 @@ const state = {
 const getters = {
     modal_id:function(state){
         return 'Modal'+state.modal_id_number;
+    },
+    remarkses:function(state){
+        return state.remarkses;
     },
     breadcrumbHistory:function(state){
     	if(state.breadcrumbHistory.length){
@@ -56,6 +60,13 @@ const getters = {
     		return state.userName;    		
     	}else{
     		return sessionStorage.getItem("userName");
+    	}
+    },
+    roleName:function(state){
+    	if(state.roleName){
+    		return state.roleName;    		
+    	}else{
+    		return sessionStorage.getItem("roleName");
     	}
     },
     userAuth:function(state){
@@ -135,6 +146,7 @@ const mutations = {
 		state.userId=payload.userId;
 		state.userAuth=payload.userAuth;
 		state.Token=payload.Token;
+		state.roleName=payload.roleName;
 		state.permissions=payload.permissions;
 		sessionStorage.setItem('libraryId', payload.libraryId);
 		sessionStorage.setItem('libraryName', payload.libraryName);
@@ -143,6 +155,7 @@ const mutations = {
 		sessionStorage.setItem('userAuth', payload.userAuth);
 		sessionStorage.setItem('Token', payload.Token);
 		sessionStorage.setItem('permissions', payload.permissions);
+		sessionStorage.setItem('roleName', payload.roleName);
 	},
 	logout(state){
 		state.libraryName='';
@@ -150,6 +163,7 @@ const mutations = {
 		state.userName='';
 		state.userId='';
 		state.userAuth='';
+		state.roleName='';
 		sessionStorage.removeItem('libraryId');
 		sessionStorage.removeItem('libraryName');
 		sessionStorage.removeItem('userName');
@@ -158,6 +172,7 @@ const mutations = {
 		sessionStorage.removeItem('Token');
 		sessionStorage.removeItem('permissions');
 		sessionStorage.removeItem('breadcrumbHistory');
+		sessionStorage.removeItem('roleName');
 	},
 	setBaseMsg(state,payload){
 		state.libraryNames=payload.libraryNames;

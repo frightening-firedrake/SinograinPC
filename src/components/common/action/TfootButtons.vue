@@ -15,9 +15,9 @@
 		</div>
 		<!--基础双按钮-->
 		<div class="btn-center" v-if="tfbtns.btnCenter">
-		    <el-button class="lbtn" :disabled="tfbtns.btnCenter.ldisabled" :class="{no:tfbtns.btnCenter.doubleColor}" type="primary" @click="btnCenterNo">{{tfbtns.btnCenter.btnTextL?tfbtns.btnCenter.btnTextL:'不同意'}}</el-button>
-		    <el-button  :disabled="tfbtns.btnCenter.rdisabled" v-if="tfbtns.btnCenter.doubleColor" class="rbtn yes"  type="primary" @click="btnCenterYes" >{{tfbtns.btnCenter.btnTextR?tfbtns.btnCenter.btnTextR:'同  意'}}</el-button>
-		    <el-button  :disabled="tfbtns.btnCenter.rdisabled" v-else class="rbtn"  @click="btnCenterYes" >{{tfbtns.btnCenter.btnTextR?tfbtns.btnCenter.btnTextR:'同  意'}}</el-button>
+		    <el-button class="lbtn" :loading="tfbtns.loading" :disabled="tfbtns.btnCenter.ldisabled" :class="{no:tfbtns.btnCenter.doubleColor}" type="primary" @click="btnCenterNo">{{tfbtns.btnCenter.btnTextL?tfbtns.btnCenter.btnTextL:'不同意'}}</el-button>
+		    <el-button :loading="tfbtns.loading" :disabled="tfbtns.btnCenter.rdisabled" v-if="tfbtns.btnCenter.doubleColor" class="rbtn yes"  type="primary" @click="btnCenterYes" >{{tfbtns.btnCenter.btnTextR?tfbtns.btnCenter.btnTextR:'同  意'}}</el-button>
+		    <el-button :loading="tfbtns.loading" :disabled="tfbtns.btnCenter.rdisabled" v-else class="rbtn"  @click="btnCenterYes" >{{tfbtns.btnCenter.btnTextR?tfbtns.btnCenter.btnTextR:'同  意'}}</el-button>
 	    </div>
 		<!--左按钮-->
 		<div class="btn-left btntfoot"  v-if="tfbtns.btnLeft" @click="btnLeft">
@@ -32,7 +32,8 @@
 			</span>					
 		</div>
 		<!--中单按钮-->
-		<div class="btn-one btntfoot"  v-if="tfbtns.btnOne" @click="btnOne">
+		<div class="btn-one btntfoot" :class="{btnloading:tfbtns.loading}" v-if="tfbtns.btnOne" @click="btnOne">
+			<i v-if="tfbtns.loading" class="el-icon-loading"></i>
 			<span>
 				{{tfbtns.btnOne.btnText}}
 			</span>					
@@ -193,6 +194,9 @@
     background-position:left center;
     background-size:0.3rem 0.6rem;
     font-size:0.16rem;
+}
+.btnloading{
+	pointer-events:none;
 }
 </style>
 <script>

@@ -102,6 +102,7 @@
 
 <script>
 import "@/assets/style/common/SelectChecklist.css";
+import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 //本地测试要用下面import代码
 //import data from '@/util/mock';
 export default {
@@ -129,6 +130,7 @@ export default {
 //		console.log(this.formdatas)
     },
     computed:{
+  		...mapGetters(["remarkses"]),
     	listready(){
     		if(this.checkList.length&&this.$route.params.formdatas){
     			var checkNums=this.$route.params.tabledatas.map((val)=>{
@@ -233,7 +235,7 @@ export default {
         	}
         },
         querySearch(queryString, cb){
-	        var restaurants = this.restaurants;
+	        var restaurants = this.remarkses;
 	        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
 	        // 调用 callback 返回建议列表的数据
 	        cb(results);

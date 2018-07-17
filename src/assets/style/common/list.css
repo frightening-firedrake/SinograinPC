@@ -133,6 +133,9 @@
 .el-main .list .el-table__body-wrapper td .cell button.auth{
     color:#e17f00;
 }
+.el-main .list .el-table__body-wrapper td .cell button.repeat{
+	color:#2380FF;
+}
 /*表头*/
 .el-main .list .el-table__header-wrapper table tr,.el-main .list .el-table__header-wrapper table tr th{
     background-color:#ffe7b8;

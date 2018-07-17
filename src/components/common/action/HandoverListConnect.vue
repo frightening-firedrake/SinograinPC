@@ -141,13 +141,19 @@
 					</el-checkbox-group>
                 </el-col>
             </el-row>
-            <div class="leading_out" v-on:click="onSubmit('form')">
+            <div class="leading_out" :class="{btnloading:formdatas.loading}" v-on:click="onSubmit('form')">
+				<!--<i v-if="formdatas.loading" class="el-icon-loading"></i>-->	
                 <span>生成样品领取交接单</span>
             </div>
         </el-form>
 
     </div>
 </template>
+<style>
+	.btnloading{
+		pointer-events:none;
+	}
+</style>
 <script>
 import "@/assets/style/common/HandoverConnect.css"
 

@@ -214,10 +214,15 @@
 					<button v-if="!$_ault_alert('all:edit')" class="undele" @click.stop="notAllowed()">编辑</button>
 					<button v-else class="edit" @click.stop="handleEdit(scope.$index, scope.row)">编辑</button>
 				</template>
-				<!--是否包含删除操作-->
+				<!--重新申请操作-->
 				<template v-if="actions.deleCaogao">
 					<button v-if="scope.row.regState==3" class="dele" @click.stop="handleDele(scope.$index, scope.row)">删除</button>
 					<button v-else class="undele" @click.stop="notAllowed()">删除</button>
+				</template>
+				<!--是否包含删除操作-->
+				<template v-if="actions.repeat">
+					<button v-if="scope.row.regState==2" class="repeat" @click.stop="repeat(scope.$index, scope.row,scope)">再次申请</button>
+					<button v-else class="undele" @click.stop="notAllowed()">再次申请</button>
 				</template>
 				<!--是否包含删除操作-->
 				<template v-if="actions.dele">
@@ -353,6 +358,18 @@ export default {
 			} else {
 				this.$root.eventHub.$emit('viewlistitem', row.id)
 			}
+		},
+		repeat(index, row, scope) {
+//			if (row.sampleState) {
+//				this.$root.eventHub.$emit('viewlistitem', row.id, row.sampleState)
+//			} else if (row.regState) {
+//				this.$root.eventHub.$emit('viewlistitem', row.id, row.regState)
+//			} else if (row.isDeal) {
+//				this.$root.eventHub.$emit('viewlistitem', row)
+//			} else {
+//				this.$root.eventHub.$emit('viewlistitem', row.id)
+//			}
+			this.$root.eventHub.$emit('repeat', row.id, row.regState)
 		},
 		handleEdit(index, row) {
 			//	  	console.log(index,row,this.list);
