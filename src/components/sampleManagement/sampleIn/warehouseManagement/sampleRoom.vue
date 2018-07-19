@@ -597,14 +597,14 @@ export default {
       {
         id: 3,
         prop:'autograph',
-        label: "入库签名",
+        label: "样品签收",
 //      status:true,
 //      sort:true
       },
       {
         id: 4,
         prop:'storageTime',
-        label: "入库时间",
+        label: "储存时间",
 //      status:true,
 //      sort:true
       },

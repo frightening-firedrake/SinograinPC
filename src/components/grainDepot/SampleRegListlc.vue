@@ -356,6 +356,13 @@ export default {
       },
       {
         id: 4,
+        prop:'proposer',
+        label: "申请人",
+//      status:true,
+//      sort:true,
+      },
+      {
+        id: 5,
         prop:'createTime',
         label:"创建日期",
         sort:true,

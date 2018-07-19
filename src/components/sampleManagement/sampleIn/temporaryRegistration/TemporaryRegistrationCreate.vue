@@ -298,7 +298,7 @@ export default {
 		alert("权限测试通过！！！")
 	},
 	new_sample(){
-		var name=this.$route.name+'/添加临时样品信息';
+		var name=this.$route.name+'/添加送样样品信息';
 		var params={tableName:this.listHeader.tableName,tabledatas:this.tabledatas}
 		if(this.$route.params.library){
 			params.library=this.$route.params.library
@@ -374,7 +374,7 @@ export default {
       	date:false,
       	tableNameShow:true,
       	tableName:'',
-      	tableNameTitle:'临时扦样登记表名称：',
+      	tableNameTitle:'送样检验登记表名称：',
       	editModel:true,
       },
       tabledatas:[],
@@ -484,7 +484,7 @@ export default {
 //			btnText:'生成扦样登记表',
 //		},     	
 		editModel:true,
-		addbtnText:'添加临时样品信息',
+		addbtnText:'添加送样样品信息',
       },
       currentRow:null,
     }

@@ -304,7 +304,7 @@ export default {
 			}],
 			//    表格数据
 			listHeader:{
-		      	addbtn:'新建临时扦样登记表',
+		      	addbtn:'新建送样检验登记表',
 //		      	status:true,
 		      	statusitems:[
 		      		{label:'全部',text:'全部'},

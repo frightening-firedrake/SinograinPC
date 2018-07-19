@@ -235,7 +235,7 @@ export default {
 				},
 				{
 					icon: 'icon-ruku',
-					title: '样品入库列表',
+					title: '样品储存列表',
 					linkto: '/index/sampleManagement/sampleIn',
 					level: 2,
 					pid: 6,
@@ -243,7 +243,7 @@ export default {
 				},
 				{
 					icon: 'icon-linshi',
-					title: '临时扦样登记表',
+					title: '送样检验登记表',
 					linkto: '/index/sampleManagement/temporaryRegistration',
 					level: 2,
 					pid: 6,
@@ -251,7 +251,7 @@ export default {
 				},
 				{
 					icon: 'icon-zhishicangku',
-					title: '库房管理',
+					title: '样品储存管理',
 					linkto: '/index/sampleManagement/warehouseManagement',
 					level: 2,
 					pid: 6,

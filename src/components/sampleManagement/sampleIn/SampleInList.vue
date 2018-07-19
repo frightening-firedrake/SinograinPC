@@ -651,7 +651,7 @@ export default {
 				empty:'已满',
 	  		},
 	  		{
-	  			label:"入库签名:",
+	  			label:"样品签收:",
 	  			model:"autograph",
 				value: "",
 	  			disabled:true,
@@ -768,13 +768,13 @@ export default {
       {
         id: 7,
         prop:'storageTime',
-        label:"样品入库时间",
+        label:"储存时间",
 //      sort:true,
       },
       {
         id: 8,
         prop:'autograph',
-        label:"入库签名",
+        label:"样品签收",
 //      sort:true,
       },
       {

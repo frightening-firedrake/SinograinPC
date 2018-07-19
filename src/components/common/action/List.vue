@@ -38,10 +38,10 @@
 							<span style="color:#999999;">已扦样</span>
 						</template>
 						<template v-if="scope.row[item.prop]==2">
-							<span style="color:#666666;">已入库</span>
+							<span style="color:#666666;">已储存</span>
 						</template>
 						<template v-if="scope.row[item.prop]==3">
-							<span style="color:#666666;">已入库</span>
+							<span style="color:#666666;">已分小样</span>
 						</template>
 						<template v-if="scope.row[item.prop]==4">
 							<span style="color:#666666;">已处理</span>

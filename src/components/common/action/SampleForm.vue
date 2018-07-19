@@ -12,7 +12,7 @@
 		</el-form-item>
 		<!--<el-form-item label="扦样编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">-->
 		<el-form-item label="检验编号：" prop="sampleNo" v-bind:class="{disabled:disabled}">
-		    <el-input v-model="formdatas.form.sampleNo" :disabled="disabled"></el-input>
+		    <el-input v-model="formdatas.form.sampleNum" :disabled="disabled"></el-input>
 		</el-form-item>
 		<!--<el-form-item label="货位号：" prop="position" v-bind:class="{disabled:disabled}" >
 		    <el-input v-model="formdatas.form.depot" :disabled="disabled"></el-input>
@@ -69,7 +69,7 @@
 			<el-form-item label="存放状态：" prop="storageStatus"  v-bind:class="{disabled:disabled}">
 			    <el-input v-model="samplestate" :disabled="disabled"></el-input>
 			</el-form-item>
-			<el-form-item label="样品入库时间：" prop="sampleInTime" v-bind:class="{disabled:formdatas.readonly}">
+			<el-form-item label="储存时间：" prop="sampleInTime" v-bind:class="{disabled:formdatas.readonly}">
 		    	<el-form-item>
 		        	<el-date-picker type="date" placeholder="选择年度" v-model="formdatas.form.storageTime" :disabled="formdatas.readonly"></el-date-picker>
 		    	</el-form-item>
@@ -88,7 +88,7 @@
 		        </div>-->
 		        
 			</el-form-item>
-			<el-form-item label="入库签名：" prop="autograph" v-bind:class="{disabled:formdatas.readonly}">
+			<el-form-item label="样品签收：" prop="autograph" v-bind:class="{disabled:formdatas.readonly}">
 			    <el-input v-model="formdatas.form.autograph" :disabled="formdatas.readonly"></el-input>
 			</el-form-item>
         
@@ -118,9 +118,11 @@ export default {
     		}else if(this.formdatas.form.sampleState==1){
     			return "已扦样";
     		}else if(this.formdatas.form.sampleState==2){
-    			return "已入库";
+    			return "已储存";
     		}else if(this.formdatas.form.sampleState==3){
     			return "已分小样";
+    		}else if(this.formdatas.form.sampleState==4){
+    			return "已处理";
     		}
     	},
     	code(){

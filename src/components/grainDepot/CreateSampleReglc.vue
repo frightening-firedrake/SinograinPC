@@ -50,7 +50,7 @@ export default {
   },
   computed:{
 	...mapState([]),
-	...mapGetters(["modal_id","libraryName","libraryId"]),
+	...mapGetters(["userId","libraryName","libraryId"]),
 	tabledatasFilter(){
 
 		if(this.filterStatus=="全部"){
@@ -355,7 +355,8 @@ export default {
 				sample: JSON.stringify(sample),
 				regState: regState,
 				libraryId: this.libraryName2,
-				type:-1,			
+				type:-1,	
+				tableUser:this.userId,
 			},
 	   	}).then(function (response) {		
 		  	this.$router.go(-1);
@@ -428,6 +429,7 @@ export default {
 				regState: regState,
 				libraryId: this.libraryName2,
 				type:-1,
+				tableUser:this.userId,
 			},
 	   	}).then(function (response) {
 		  	this.$router.go(-1);
