@@ -12,14 +12,16 @@
  	width: 12rem;
  	height: 6rem;
  	margin: 0 auto;
- 	margin-top: 2rem;
+ 	/*margin-top: 2rem;*/
+ 	top:50%;
+ 	margin-top:-3rem;
  	position: relative;
  	/*background-size:cover;*/
  }
  
  @media screen and (max-width: 1367px) {
  	.login .login_box {
- 		margin-top: 1.7rem;
+ 		/*margin-top: 1.7rem;*/
  	}
  }
  
