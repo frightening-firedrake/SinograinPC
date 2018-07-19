@@ -149,9 +149,11 @@
         </div>
       </div>
       </div>
-     <div id='printbuttom' class="leading_out" @click="print()">
+     <!--<div id='printbuttom' class="leading_out" @click="print()">-->
+     <div id='printbuttom' class="leading_out" @click="leading_out()">
      <!--<div class="leading_out" @click="lodopPrint()">-->
-        <span>打印样品领取交接单</span>
+        <!--<span>打印样品领取交接单</span>-->
+        <span>导出样品领取交接单</span>
       </div>
     
   </div>
@@ -185,7 +187,7 @@ export default {
   },
   computed: {
     ...mapState(["modal_id_number", "viewdata", "editdata", "aultdata", "messions", "mask"]),
-    ...mapGetters(["userName"]),
+    ...mapGetters(["Token"]),
     testItemListadd(){
     	var length=0;
     	if(this.formdatas.testItemList.length%4){    		
@@ -264,6 +266,14 @@ export default {
     		LODOP.PREVIEW(); 
 //			  LODOP.PRINT(); 
 
+    },
+    leading_out(){
+//  		if(!this.$_ault_alert('register:export')){
+//					return
+//				}
+				var id=this.$route.query.id;
+				var loadiframe=document.getElementById('fordownload');
+				loadiframe.src=this.exportExcelURL+'?id='+id+'&sessionid='+this.Token;
     },
     //	获取列表数据方法
     getlistdata(page) {
@@ -352,6 +362,7 @@ export default {
   data() {
     return {
       datalistURL: this.apiRoot +'/grain/handover/get',
+      exportExcelURL: this.apiRoot +'/grain/handover/expotHandover',
       searchURL: '/liquid/role2/data/search',
       deleteURL: '/liquid/role2/data/delete',
       checkedId: [],
