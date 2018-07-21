@@ -111,6 +111,9 @@
 .el-main .list .el-table__body-wrapper td .cell button.input{
     color:#e37f1d;
 }
+.el-main .list .el-table__body-wrapper td .cell button.exportExcel{
+    color:#58b481;
+}
 .el-main .list .el-table__body-wrapper td .cell button.view{
     color: #58b481;
 }

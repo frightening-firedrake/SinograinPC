@@ -1,5 +1,20 @@
 <template>
-	<el-table ref="multipleTable" tooltip-effect="light" style="width: 100%" :data="tabledata" @selection-change="handleSelectionChange" :default-sort="{prop: actions.sort, order: 'ascending'}" v-loading="loading" :row-class-name="row_class_name" element-loading-customClass="table_loading" element-loading-text="loading..." element-loading-spinner="el-icon-loading" element-loading-background="rgba(255,255,255, 0.8)" @row-click="rowClick">
+	<el-table ref="multipleTable" 
+		tooltip-effect="light" 
+		style="width: 100%"  
+		:data="tabledata" 
+		@selection-change="handleSelectionChange" 
+		:default-sort="{prop: actions.sort, order: 'ascending'}" 
+		v-loading="loading" 
+		:row-class-name="row_class_name" 
+		element-loading-customClass="table_loading" 
+		element-loading-text="loading..." 
+		element-loading-spinner="el-icon-loading" 
+		element-loading-background="rgba(255,255,255, 0.8)" 
+		:height="actions.height?actions.height:'auto'"
+		@row-click="rowClick">
+<!--		height='scrollHeight'-->
+<!--		max-height='3rem'-->
 		<!--是否包含多选框-->
 		<template v-if="actions.selection">
 			<el-table-column :resizable="resizable" align="center" type="selection" class-name="tableAction">
@@ -149,6 +164,45 @@
 			</el-table-column>
 		</template>
 
+
+		<!--是否包含工作底稿-->
+		<template v-if="actions.colorcheck">
+			<el-table-column :resizable="resizable" align="center" label="检验项目" class-name="tableAction" width="650">
+				<template slot-scope="scope">
+					<p :class="actions.colorcheckclass">	
+						<!--<span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)}}</span>-->
+						<template v-if="check(scope.row.checkeds,1)">							
+							<span class="colorcheck1">不完善颗粒</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=1?',':''}}
+						</template>
+						<template v-if="check(scope.row.checkeds,2)">
+							<span class="colorcheck2">杂质</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=2?',':''}}
+						</template>
+						<template v-if="check(scope.row.checkeds,3)">
+							<span class="colorcheck3">生霉粒</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=3?',':''}}
+						</template>
+						<template v-if="check(scope.row.checkeds,4)">
+							<span class="colorcheck4">水分</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=4?',':''}}
+						</template>
+						<template v-if="check(scope.row.checkeds,5)">
+							<span class="colorcheck5">硬度</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=5?',':''}}
+						</template>
+						<template v-if="check(scope.row.checkeds,6)">
+							<span class="colorcheck6">脂肪酸值（面筋吸水量）</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=6?',':''}}
+						</template>
+						<template v-if="check(scope.row.checkeds,7)">
+							<span class="colorcheck7">品尝评分</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=7?',':''}}
+						</template>
+						<template v-if="check(scope.row.checkeds,8)">
+							<span class="colorcheck8">卫生指标</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=8?',':''}}
+						</template>
+						<template v-if="check(scope.row.checkeds,9)">
+							<span class="colorcheck9">加工品质</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=9?',':''}}
+						</template>	
+					</p>
+				</template>
+			</el-table-column>
+		</template>
+
 		<!--是否包含通知信息-->
 		<template v-if="actions.message">
 			<el-table-column :resizable="resizable" align="center" label="新消息通知" class-name="tableAction">
@@ -196,12 +250,18 @@
 				</template>
 			</el-table-column>
 		</template>
+		
+		
 
 		<el-table-column v-if="actions.show" :resizable="resizable" align="center" label="操作" class-name="tableAction">
 			<template slot-scope="scope">
 				<!--是否包含查看操作-->
 				<template v-if="actions.input">
 					<button class="input" @click.stop="handleInput(scope.$index, scope.row,scope)">录入</button>
+				</template>
+				<!--是否包含导出操作-->
+				<template v-if="actions.exportExcel">
+					<button class="exportExcel" @click.stop="handleExportExcel(scope.$index, scope.row,scope)">导出Excel表格</button>
 				</template>
 				<!--是否包含查看操作-->
 				<template v-if="actions.view1">
@@ -226,7 +286,8 @@
 				</template>
 				<!--是否包含删除操作-->
 				<template v-if="actions.dele">
-					<button class="dele" @click.stop="handleDele(scope.$index, scope.row)">删除</button>
+					<button v-if="!actions.nodele" class="dele" @click.stop="handleDele(scope.$index, scope.row)">删除</button>
+					<button v-else class="undele" @click.stop="notAllowed()">删除</button>
 				</template>
 				<!--是否包含授权操作-->
 				<template v-if="actions.auth">
@@ -269,6 +330,9 @@
 	font-size:inherit;
 	left:0;
 }
+.colorcheck1 >.colorcheck1,.colorcheck2 >.colorcheck2,.colorcheck3 >.colorcheck3,.colorcheck4 >.colorcheck4,.colorcheck5 >.colorcheck5,.colorcheck6 >.colorcheck6,.colorcheck7 >.colorcheck7,.colorcheck8 >.colorcheck8,.colorcheck9 >.colorcheck9{
+	color:#2973b7;
+}
 </style>
 <script>
 export default {
@@ -288,6 +352,13 @@ export default {
 	computed:{
 		checkPointEdit(){
 			return this.$_ault_alert('all:edit')
+		},
+		scrollHeight(){
+			if(!this.actions.height){
+				return "auto";
+			}else{
+				return this.actions.height;
+			}
 		}
 	},
 	methods: {
@@ -346,6 +417,11 @@ export default {
 			//		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
 			this.$root.eventHub.$emit('inputlistitem', row.id)
 		},
+		handleExportExcel(index, row, scope) {
+			//	  	console.log(index,row);
+			//		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
+			this.$root.eventHub.$emit('exportExcel', row.id)
+		},
 		handleView(index, row, scope) {
 			//	  	console.log(index,row);query:{id:row.id,libraryName:row.libraryName,position:row.position}}
 			//		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
@@ -377,22 +453,22 @@ export default {
 		},
 
 		handleDele(index, row) {
-			this.$confirm('此操作将永久删除该' + this.rowType + ', 是否继续?', '提示', {
-				confirmButtonText: '确定',
-				cancelButtonText: '取消',
-				type: 'warning'
-			}).then(() => {
-				this.$root.eventHub.$emit('delelistitem', row.id, this.list);
+//			this.$confirm('此操作将永久删除该' + this.rowType + ', 是否继续?', '提示', {
+//				confirmButtonText: '确定',
+//				cancelButtonText: '取消',
+//				type: 'warning'
+//			}).then(() => {
+				this.$root.eventHub.$emit('delelistitem', row.id);
 				//	      this.$message({
 				//	        type: 'success',
 				//	        message: '删除成功!'
 				//	      });
-			}).catch(() => {
-				this.$message({
-					type: 'info',
-					message: '已取消删除'
-				});
-			});
+//			}).catch(() => {
+//				this.$message({
+//					type: 'info',
+//					message: '已取消删除'
+//				});
+//			});
 		},
 		handleAuth(index, row) {
 			//	  	console.log(index,row,this.list);
@@ -420,10 +496,13 @@ export default {
 			indexs.sort((a, b) => { return a - b; });
 			var checkList = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "脂肪酸值（面筋吸水量）", "品尝评分", "卫生指标", "加工品质"]
 			var res = [];
+//			var colorres='';
 			indexs.forEach((item) => {
 				res.push(checkList[item - 1])
+//				colorres+='<span>'+checkList[item - 1]+'</span>'
 			})
 			return res.join('，')
+//			return colorres
 		},
 		findCheckPoint(obj) {
 			var checkList1 = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "脂肪酸值", "品尝评分", "卫生指标", "加工品质"]
@@ -462,6 +541,11 @@ export default {
 				this.$root.eventHub.$emit('returnPerson', row.id)
 			}
 		},
+		check(checkstr,num){
+			var checklist=checkstr.split(',');
+			num=String(num);
+			return checklist.includes(num)
+		}
 	}
 }
 

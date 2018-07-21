@@ -356,7 +356,7 @@ export default {
 				regState: regState,
 				libraryId: this.libraryName2,
 				type:-1,	
-				tableUser:this.userId,
+				tableUserId:this.userId,
 			},
 	   	}).then(function (response) {		
 		  	this.$router.go(-1);
@@ -429,7 +429,7 @@ export default {
 				regState: regState,
 				libraryId: this.libraryName2,
 				type:-1,
-				tableUser:this.userId,
+				tableUserId:this.userId,
 			},
 	   	}).then(function (response) {
 		  	this.$router.go(-1);

@@ -292,12 +292,20 @@ export default {
 
 				{
 					icon: 'icon-subcontractor',
-					title: '分装任务列表',
+					title: '任务列表',
 					linkto: '/index/sampleDetection/packingTaskList',
 					level: 2,
 					pid: 9,
 					lid: 10
 				},
+				{
+					icon: 'icon-jiance',
+					title: '样品确认单列表',
+					linkto: '/index/sampleDetection/confirmationList',
+					level: 2,
+					pid: 9,
+					lid: 29
+				},	
 				{
 					icon: 'icon-jianyandan',
 					title: '样品检验单',
@@ -413,7 +421,7 @@ export default {
 					title: '添加柜子货架',
 					level: 2,
 					pid: 22,
-					lid: 29,
+					lid: 30,
 				},
 //				{
 //					icon: 'icon-iocn02001',

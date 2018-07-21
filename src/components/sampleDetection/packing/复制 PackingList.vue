@@ -5,29 +5,21 @@
       <!--alert-->
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表格上的时间选框以及 创建-->
-      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" @addbtn="addbtn"></list-header>
+      <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" ></list-header>
       <!--表格-->
-      <sinograin-list class="list nopointer packing" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
+      <sinograin-list class="list" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
       <!--分页-->
-      <!--<sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
+      <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
       <!--新建库典弹框-->
-      <!--<sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>-->      	
-      <!--<sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose" @getScanCode="getScanCode"></sinograin-message>-->
-      <!--底部按钮们-->
-      <tfoot-buttons :tfbtns="tfbtns" @tfootEvent="tfootEvent" ></tfoot-buttons>
+      <sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>      	
+      <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose" @getScanCode="getScanCode"></sinograin-message>
+    
     </div>
 </template>
 
 <style>
-	.listpagewrap .packing .el-table__body-wrapper{
-		overflow-y:auto;
-	}
-	/*整表滚动*/
-	/*.listpagewrap .packing{
-		overflow-y:auto;
-		overflow-x:hidden;
-	}*/
+	
 </style>
 
 <script>
@@ -38,7 +30,6 @@ import SinograinPagination from '@/components/common/action/Pagination.vue';
 import ListHeader from '@/components/common/action/ListHeader.vue';
 import SinograinModal from '@/components/common/action/Modal.vue';
 import SinograinMessage from "@/components/common/action/Message"
-import TfootButtons from '@/components/common/action/TfootButtons.vue';
 import "@/assets/style/common/list.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
@@ -52,7 +43,7 @@ let LODOP
 
 export default {
   components: {
-    SinograinList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader,SinograinMessage,TfootButtons
+    SinograinList,SinograinPrompt,SinograinPagination,SinograinBreadcrumb,SinograinModal,ListHeader,SinograinMessage
   },
   computed:{
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
@@ -71,33 +62,17 @@ export default {
   created(){
 //	console.log(this.$route.query)
 //  获取列表数据（第一页）
-//	this.getlistdata(1)
+	this.getlistdata(1)
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
     this.$root.eventHub.$off("printlistitem")
 //	监听列表删除事件
     this.$root.eventHub.$on('delelistitem',function(rowid,list){
-    	
-    		this.$confirm('此操作将删除该样品, 是否继续?', '提示', {
-				confirmButtonText: '确定',
-				cancelButtonText: '取消',
-				type: 'warning'
-			}).then(() => {
-				this.tabledatas=this.tabledatas.filter(function(item){
-		    		return item.id!==rowid;
-		    	})
-		      	this.$message({
-		        	type: 'success',
-		        	message: '删除成功!'
-		      	});
-			}).catch(() => {
-				this.$message({
-					type: 'info',
-					message: '已取消删除'
-				});
-			});
-//  	this.sendDeleteId(rowid);
+    	this.tabledatas=this.tabledatas.filter(function(item){
+    		return item.id!==rowid;
+    	})
+    	this.sendDeleteId(rowid);
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击查看事件
@@ -123,19 +98,9 @@ export default {
 	dateChange(data){
 		console.log(data);
 	},
-	addbtn(){
-		this.$router.push({path: '/index/sampling/samplingList/samplingListCreate'})
-		var name=this.$route.name+'/添加检验样品';
-		var params={tabledatas:this.tabledatas}
-		if(this.$route.params.searching){
-			params.searching=this.$route.params.searching
-		}
-		this.$router.push({name:name,params})
-	},
 	statusChange(data){
 //		console.log(data)
 		this.filterStatus=data
-		this.actions.colorcheckclass='colorcheck'+data;
 	},
 	createSampling(){
 //		console.log('createSampling');
@@ -167,47 +132,40 @@ export default {
 	},
 //	获取搜索数据
   	searchingfor(searching,page){
-		page?page:1;
-		if(!searching){
-			return [];
-		}
-//		if()
-		this.tabledatas=this.tabledatas.filter((value,index)=>{
-			return value.sampleNum.indexOf(searching)>-1
-		});
-//		this.searchText=searching;
-//		var params = {};
-//		params.sampleNoOrSmallSampleNumLike = searching;
-////		console.log(this.breadcrumb.searching);
-//		// 获取列表数据（第？页）
-//		this.$http({
-//		    method: 'post',
-//			url: this.searchURL,
-//			transformRequest: [function (data) {
-//				// Do whatever you want to transform the data
-//				let ret = ''
-//				for (let it in data) {
-//				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-//				}
-//				return ret
-//			}],
-//			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-//			data: {
-//				page:page,
-//			    rows:this.page.size,
-//			   	params:JSON.stringify(params)
-//			}
-//	    }).then(function (response) {
-//		  	this.tabledatas=response.data.rows;
-//			this.page.total = response.data.total;
-//		}.bind(this)).catch(function (error) {
-//		    console.log(error);
-//		}.bind(this));
+  		page?page:1;
+  		this.searchText=searching;
+  		var params = {};
+		params.sampleNoOrSmallSampleNumLike = searching;
+//		console.log(this.breadcrumb.searching);
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.searchURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				page:page,
+			    rows:this.page.size,
+			   	params:JSON.stringify(params)
+			}
+	    }).then(function (response) {
+		  	this.tabledatas=response.data.rows;
+			this.page.total = response.data.total;
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
   	},
 	
 //	获取列表数据方法
   	getlistdata(page){
-  		this.loading=true;
+  		this.loading=false;
   		var params={};
   		params.taskId=this.$route.query.id;
   		// 获取列表数据（第？页）
@@ -224,9 +182,9 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-//			    listName: this.list,
-//			    page:page,
-//			    rows:this.page.size,
+			    listName: this.list,
+			    page:page,
+			    rows:this.page.size,
 			    params:JSON.stringify(params),
 			}
 	    }).then(function (response) {
@@ -346,24 +304,7 @@ export default {
 //  			LODOP.PREVIEW(); 
 		LODOP.PRINT(); 
 
-	},
-	//	表单底部触发事件btnCenterNo btnCenterYes btnLeft btnRight btnOne
-	tfootEvent(date){
-		console.log(date);
-		if(date=='btnCenterL'){
-			
-//			this.$router.go(-1)
-		}else if(date=='btnCenterR'){
-
-//			this.$router.go(-1)
-		}else if(date=='btnLeft'){
-
-		}else if(date=='btnRight'){
-			console.log('提交样品')
-		}else if(date=='btnOne'){
-
-		}
-	},
+	}
   },
   data() {
     return {
@@ -393,8 +334,7 @@ export default {
       	search:true,   
       	searching:'',
       },
-      loading:false,
-//    loading:true,
+      loading:true,
       filterStatus:'全部',
 //    分页数据
       page: {
@@ -418,42 +358,11 @@ export default {
       listHeader:{
       	createlib:false,
       	createSampling:false,
-      	status:true,
-      	statusTitle:'检测项目：',
-      	statusitems:[
-      		{label:'全部',text:'全部'},
-      		{label:1,text:'不完善粒'},
-      		{label:2,text:'杂质'},
-      		{label:3,text:'生霉粒'},
-      		{label:4,text:'水分'},
-      		{label:5,text:'硬度'},
-      		{label:6,text:'脂肪酸值(面筋吸水量)'},
-      		{label:7,text:'品尝评分'},
-      		{label:8,text:'卫生指标'},
-      		{label:9,text:'加工品质'},
-      	],
+      	status:false,
       	date:true,
-//    	scanCode:true,
-		addbtn:'添加检验样品',
+      	scanCode:true,
       },
-      tabledatas:[
-      	{sampleNum:'201800101',checkeds:'1,2,3,5,6',id:1},
-      	{sampleNum:'201800102',checkeds:'1,2,3,5,6',id:2},
-      	{sampleNum:'201800103',checkeds:'1,2,3,5,6',id:3},
-      	{sampleNum:'201800104',checkeds:'1,2,3,5,6',id:4},
-      	{sampleNum:'201800105',checkeds:'1,2,3,5,6',id:5},
-      	{sampleNum:'201800106',checkeds:'1,2,3,5,6',id:6},
-      	{sampleNum:'201800107',checkeds:'1,2,3,5,6',id:7},
-      	{sampleNum:'201800108',checkeds:'1,2,3,5,6',id:8},
-      	{sampleNum:'201800109',checkeds:'1,2,3,5,6',id:9},
-      	{sampleNum:'201800110',checkeds:'1,2,3,5,6',id:10},
-      	{sampleNum:'201800111',checkeds:'1,2,3,5,6',id:11},
-      	{sampleNum:'201800112',checkeds:'1,2,3,5,6',id:12},
-      	{sampleNum:'201800113',checkeds:'1,2,3,5,6',id:13},
-      	{sampleNum:'201800114',checkeds:'1,2,3,5,6',id:14},
-      	{sampleNum:'201800115',checkeds:'1,2,3,5,6',id:15},
-      	{sampleNum:'201800116',checkeds:'1,2,3,5,6',id:16},
-      ],
+      tabledatas:[],
       items: [
       {
         id: 1,
@@ -461,20 +370,19 @@ export default {
 //      prop:'sampleNo',
         label: "检验编号",
 		status:true,
-		width:200,
       },
-//    {
-//      id: 2,
-//      prop:'smallSampleNum',
-//      label: "小样编号",
-//		status:true,
-//    },
-//    {
-//      id: 3,
-//      prop:'checkPoint',
-//      label:"检验项目",
-//		status:true,
-//    },
+      {
+        id: 2,
+        prop:'smallSampleNum',
+        label: "小样编号",
+		status:true,
+      },
+      {
+        id: 3,
+        prop:'checkPoint',
+        label:"检验项目",
+		status:true,
+      },
 //    {
 //      id: 4,
 //      prop:'printTimes',
@@ -491,17 +399,14 @@ export default {
       actions:{
       	noview:true,
       	selection:false,
-      	number:true,
+      	number:false,
       	view:false,
       	edit:false,
-      	dele:true,
-//    	print:true,
+      	dele:false,
+      	print:true,
       	show:true,
       	manuscript:false,
       	safetyReport:false,
-      	colorcheck:true,
-      	colorcheckclass:'colorcheck',
-      	height:'5.7rem',
 //    	sort:'smallSampleNum',
       },
       messageShow:false,
@@ -524,23 +429,6 @@ export default {
 	  		messageText:'请您耐心等待，正在打印中...',
 	  	},
 	  },
-	  tfbtns:{
-//    	btnCenter:{
-//			btnTextL:'不同意',
-//			btnTextR:'同意',
-//			doubleColor:true,
-//		},
-//		btnLeft:{
-//			btnText:'导出Excel表格',
-//		},
-		btnRight:{
-			btnText:'提交检验样品',
-		},
-//		btnOne:{
-//			btnText:'导出Excel表格',
-//		},   
-		borderTop:true,
-      },
     }
   }
 }

@@ -47,7 +47,10 @@ import PackingTaskList from '@/components/sampleDetection/packing/PackingTaskLis
 import PackingList from '@/components/sampleDetection/packing/PackingList.vue'
 import PackingView from '@/components/sampleDetection/packing/PackingView.vue'
 import PackingPrint from '@/components/sampleDetection/packing/PackingPrint.vue'
+import PackingSelect from '@/components/sampleDetection/packing/PackingSelect.vue'
 import CheckList from '@/components/sampleDetection/check/CheckList.vue'
+import confirmationList from '@/components/sampleDetection/confirmation/ConfirmationList.vue'
+
 import CheckView from '@/components/sampleDetection/check/CheckListView.vue'
 import CheckEdit from '@/components/sampleDetection/check/CheckListEdit.vue'
 import CheckCreate from '@/components/sampleDetection/check/CheckListCreate.vue'
@@ -322,7 +325,7 @@ const routes= [
             path:"sampleManagement/sampleRegistration",
             name:"样品管理/样品登记薄",
             component:sampleRegistration,
-            meta: { needAuth: '样品登记薄' },
+//          meta: { needAuth: '样品登记薄' },
           },
           {
             path:"sampleManagement/sampleRegistration/registrationSelect",
@@ -392,14 +395,22 @@ const routes= [
           },
           {
             path:"sampleDetection/packingTaskList",
-            name:"样品检测/分装任务列表",
+//          name:"样品检测/分装任务列表",
+            name:"样品检测/任务列表",
             component:PackingTaskList,
             meta: { needAuth: '分装任务列表' },
           },
           {
             path:"sampleDetection/packingTaskList/packingList",
-            name:"样品检测/分装任务列表/分装小样管理",
+//          name:"样品检测/分装任务列表/分装小样管理",
+            name:"样品检测/任务列表/任务样品管理",
             component:PackingList,
+          },
+          {
+            path:"sampleDetection/packingTaskList/packingList/packingSelect",
+//          name:"样品检测/分装任务列表/分装小样管理",
+            name:"样品检测/任务列表/任务样品管理/添加检验样品",
+            component:PackingSelect,
           },
           {
             path:"sampleDetection/packingTaskList/packingList/packingView",
@@ -410,6 +421,13 @@ const routes= [
             path:"sampleDetection/packingTaskList/packingList/packingPrint",
             name:"样品检测/分装任务列表/分装小样管理/打印条码",
             component:PackingPrint,
+          },
+          
+          {
+            path:"sampleDetection/confirmationList",
+            name:"样品检测/样品确认单列表",
+            component:confirmationList,
+//          meta: { needAuth: '样品确认单列表' },
           },
           
           {

@@ -1,5 +1,5 @@
 <template>
-	<div class="tfootbtns" :class="{editModel:tfbtns.editModel}">
+	<div class="tfootbtns" :class="{'editModel':tfbtns.editModel,'borderTop':tfbtns.borderTop}">
 		<!--editModel表格添加一行按钮-->
 		<div v-if="tfbtns.editModel" class="editModelWrap">
 			<div class="tableAdd"  @click="tableAdd">
@@ -46,6 +46,9 @@
 	background:#ffffff;
 	position:relative;
 	text-align: center;
+}
+.tfootbtns.borderTop{
+	border-top:1px solid #e6e7e7;
 }
 .tfootbtns.editModel{
 	height:2rem;
