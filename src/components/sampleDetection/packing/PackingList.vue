@@ -7,7 +7,7 @@
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" @addbtn="addbtn"></list-header>
       <!--表格-->
-      <sinograin-list class="list nopointer packing" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
+      <sinograin-list class="list nopointer packing" :tabledata="tabledatasFilter" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
       <!--分页-->
       <!--<sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>-->
@@ -60,18 +60,39 @@ export default {
 	tabledatasFilter(){
 
 		if(this.filterStatus=="全部"){
-			return this.tabledatas;
+			if(this.searchText){
+				return 	this.tabledatas.filter((value,index)=>{
+							return value.sampleNum.indexOf(this.searchText)>-1
+						});
+			}else{				
+				return this.tabledatas;
+			}
 		}else{
-			return this.tabledatas.filter((value,index)=>{
-				return value.status==this.filterStatus
-			})
+			if(this.searchText){
+				return 	this.tabledatas.filter((value,index)=>{
+							var arr=value.checkeds.split(',')
+							return (arr.includes(this.filterStatus))&&(value.sampleNum.indexOf(this.searchText)>-1)
+						});
+			}else{				
+				return 	this.tabledatas.filter((value,index)=>{
+							var arr=value.checkeds.split(',')
+							return arr.includes(this.filterStatus)
+						});;
+			}
+//			return this.tabledatas.filter((value,index)=>{
+//				return value.status==this.filterStatus
+//			})
 		}
 	}
   },
   created(){
+  	if(this.$route.params.tabledatas){
+  		this.tabledatas=this.$route.params.tabledatas;
+  	}else{  		
+  		this.getlistdata(1)
+  	}
 //	console.log(this.$route.query)
 //  获取列表数据（第一页）
-//	this.getlistdata(1)
 //	移除监听事件
     this.$root.eventHub.$off('delelistitem')
     this.$root.eventHub.$off("viewlistitem")
@@ -124,7 +145,7 @@ export default {
 		console.log(data);
 	},
 	addbtn(){
-		this.$router.push({path: '/index/sampling/samplingList/samplingListCreate'})
+//		this.$router.push({path: '/index/sampling/samplingList/samplingListCreate'})
 		var name=this.$route.name+'/添加检验样品';
 		var params={tabledatas:this.tabledatas}
 		if(this.$route.params.searching){
@@ -134,7 +155,7 @@ export default {
 	},
 	statusChange(data){
 //		console.log(data)
-		this.filterStatus=data
+		this.filterStatus=data.toString();
 		this.actions.colorcheckclass='colorcheck'+data;
 	},
 	createSampling(){
@@ -168,13 +189,11 @@ export default {
 //	获取搜索数据
   	searchingfor(searching,page){
 		page?page:1;
-		if(!searching){
-			return [];
-		}
-//		if()
-		this.tabledatas=this.tabledatas.filter((value,index)=>{
-			return value.sampleNum.indexOf(searching)>-1
-		});
+//		if(!searching){
+//			return this.tabledatas;
+//		}
+		this.searchText=searching.indexOf('监')==0?searching.slice(1):searching;
+		console.log(this.searchText)
 //		this.searchText=searching;
 //		var params = {};
 //		params.sampleNoOrSmallSampleNumLike = searching;
@@ -231,8 +250,18 @@ export default {
 			}
 	    }).then(function (response) {
 //			console.log(response)
-			this.tabledatas = response.data.rows;
-			this.page.total = response.data.total;
+			if(response.data.rows.length){				
+				this.tabledatas = response.data.rows;
+				this.listHeader.addbtn=false;
+				this.actions.nodele=true;
+				this.tfbtns.btnRight=false;
+			}else{
+				this.listHeader.addbtn='添加检验样品';
+				this.actions.nodele=false;
+				this.tfbtns.btnRight={};
+				this.tfbtns.btnRight.btnText='提交检验样品';
+			}
+//			this.page.total = response.data.total;
 			this.loading = false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -364,6 +393,50 @@ export default {
 
 		}
 	},
+	//	领取方法
+  	handover(){
+//		if(!this.$_ault_alert('handover:save')){
+//			return
+//		}
+		var params = {};
+		params.checkeds = this.formdatas.checkList.sort().join(',');
+		params.name = this.formdatas.form.name;
+		params.remark = this.formdatas.form.remarks;
+		params.receiptor =this.receiptor;
+		params.userId = this.userId;
+		params.sampleAdmin = this.formdatas.form.manager;
+		params.sampleNums = []
+		params.sampleIds = [];
+		this.formdatas.items.forEach((val)=>{
+//			params.sampleNums.push(val.sampleNo)
+			params.sampleNums.push(val.sampleNum)
+			params.sampleIds.push(val.id)
+		})
+		
+  		this.loading=false;
+  		this.formdatas.loading=true;
+  		// 获取列表数据（第？页）
+		this.$http({
+		    method: 'post',
+			url: this.handoverURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: params,
+	    }).then(function (response) {
+	    	if(response.data.success){	    		
+	    		this.$router.push({ path: this.viewPath,query:{id:response.data.id} })
+	    	}
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
   },
   data() {
     return {
@@ -422,7 +495,7 @@ export default {
       	statusTitle:'检测项目：',
       	statusitems:[
       		{label:'全部',text:'全部'},
-      		{label:1,text:'不完善粒'},
+      		{label:1,text:'不完善颗粒'},
       		{label:2,text:'杂质'},
       		{label:3,text:'生霉粒'},
       		{label:4,text:'水分'},
@@ -437,14 +510,14 @@ export default {
 		addbtn:'添加检验样品',
       },
       tabledatas:[
-      	{sampleNum:'201800101',checkeds:'1,2,3,5,6',id:1},
-      	{sampleNum:'201800102',checkeds:'1,2,3,5,6',id:2},
-      	{sampleNum:'201800103',checkeds:'1,2,3,5,6',id:3},
-      	{sampleNum:'201800104',checkeds:'1,2,3,5,6',id:4},
+      	{sampleNum:'201800101',checkeds:'6',id:1},
+      	{sampleNum:'201800102',checkeds:'5',id:2},
+      	{sampleNum:'201800103',checkeds:'4',id:3},
+      	{sampleNum:'201800104',checkeds:'3',id:4},
       	{sampleNum:'201800105',checkeds:'1,2,3,5,6',id:5},
       	{sampleNum:'201800106',checkeds:'1,2,3,5,6',id:6},
-      	{sampleNum:'201800107',checkeds:'1,2,3,5,6',id:7},
-      	{sampleNum:'201800108',checkeds:'1,2,3,5,6',id:8},
+      	{sampleNum:'201800107',checkeds:'1,2,3',id:7},
+      	{sampleNum:'201800108',checkeds:'5,6',id:8},
       	{sampleNum:'201800109',checkeds:'1,2,3,5,6',id:9},
       	{sampleNum:'201800110',checkeds:'1,2,3,5,6',id:10},
       	{sampleNum:'201800111',checkeds:'1,2,3,5,6',id:11},

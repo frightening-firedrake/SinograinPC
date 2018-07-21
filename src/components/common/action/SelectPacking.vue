@@ -1,19 +1,19 @@
 <template>
     <div class="SelectChecklist">
     	<el-form ref="form" :model="form" :label-width="labelWidth" label-position="left">
-	    	<el-form-item label="任务名称" style="border-bottom:none;">
-	    		 <!--<el-input class="searching" v-model="searching" @keyup.native.enter='searchingfor'></el-input>-->
-	    		 <!--<input type="text" v-model="searching" @keyup.enter='searchingfor' />-->
+	    	<!--<el-form-item label="任务名称" style="border-bottom:none;">
+	    		 <el-input class="searching" v-model="searching" @keyup.native.enter='searchingfor'></el-input>
+	    		 <input type="text" v-model="searching" @keyup.enter='searchingfor' />
 	    		<el-select v-model="searching" placeholder="请选择任务名称" @change="searchingfor">
 			        <el-option v-for="item in taskList" :label="item.taskName" :value="item.taskName" :key="item.id"></el-option>
 			    </el-select>
-	    	</el-form-item>
-	    	<el-form-item label="选择品种" style="border-bottom:none;border-left:none;">
+	    	</el-form-item>-->
+	    	<!--<el-form-item label="选择品种" style="border-bottom:none;border-left:none;">
 			    <el-select v-model="sort" placeholder="请选择品种" @change="changeSort">
 			        <el-option label="玉米" value="玉米"></el-option>
 			        <el-option label="小麦" value="小麦"></el-option>
 			    </el-select>
-			</el-form-item>
+			</el-form-item>-->
 	    	<el-form-item label="编号范围">
 			    <template>
 		    <el-input class="sampleNumRange" v-model="sampleNumRange[0]" placeholder="起始编号数字" style="margin-left:1em;"></el-input>
@@ -132,7 +132,7 @@ export default {
     computed:{
   		...mapGetters(["remarkses"]),
     	listready(){
-    		if(this.checkList.length&&this.$route.params.formdatas){
+    		if(this.checkList.length&&this.$route.params.tabledatas){
     			var checkNums=this.$route.params.tabledatas.map((val)=>{
     				return val.sampleNum?val.sampleNum:val;
     			})

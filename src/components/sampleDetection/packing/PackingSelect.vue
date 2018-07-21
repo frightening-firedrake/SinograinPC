@@ -5,9 +5,9 @@
   	  <!--标题-->
   	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--提示-->
-      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
+      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表单-->
-      <select-report :taskList="taskList" :checkList="checkList" :checkedListAdd="checkedList" @getCheckedList="getCheckedList" @searchingfor="searchingfor"></select-report> 
+      <select-packing :taskList="taskList" :checkList="checkList" :checkedListAdd="checkedList" @getCheckedList="getCheckedList" @searchingfor="searchingfor"></select-packing> 
 
     </div>
 </template>
@@ -21,7 +21,7 @@
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 
-import SelectReport  from "@/components/common/action/SelectReport"
+import SelectPacking  from "@/components/common/action/SelectPacking"
 
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 
@@ -35,7 +35,7 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SelectReport
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SelectPacking
 
   },
   computed:{
@@ -44,11 +44,11 @@ export default {
   },
   created(){
 //	console.log(this.$route.params)
-	this.getTaskList()
+//	this.getTaskList()
   	
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
-//	this.getsampledata();
+	this.getsampledata();
 	
   },
   destroy(){
@@ -60,7 +60,15 @@ export default {
 //	获取列表数据方法
   	getsampledata(){
   		var params={};
-  		params.sampleState=2
+  		params.sampleWordOrsampleNumLike='';
+//		if(!this.IsChecked){  			
+  			params.ruKuSampleState=2;
+  			params.fenxiaoyangSampleState=3;
+//		}else if(this.IsChecked==2){
+//			params.ruKuSampleState=2;
+//		}else if(this.IsChecked==3){
+//			params.fenxiaoyangSampleState=3;			
+//		}
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -81,7 +89,7 @@ export default {
 	    }).then(function (response) {
 //			console.log(response)
 		  	this.checkList=response.data.rows;
-		  	if(this.$route.params.formdatas){
+		  	if(this.$route.params.tabledatas.length){
 				this.checkedList=this.$route.params.tabledatas;
 			}
 //		  	this.checkedList=response.data.rows;
@@ -184,12 +192,13 @@ export default {
   		var end=path.lastIndexOf('/');
   		path=path.slice(0,end);
 
-		this.$router.push({name: path,params: {formdatas:this.$route.params.formdatas,tabledatas:checkedList,searching:this.searching}})
+//		this.$router.push({name: path,params: {formdatas:this.$route.params.formdatas,tabledatas:checkedList,searching:this.searching}})
+		this.$router.push({name: path,params: {tabledatas:checkedList}})
   	},
   },
   data() {
     return {
-      sampleURL:this.apiRoot + '/grain/sample/findSamplesByTask',
+      sampleURL:this.apiRoot + '/grain/sample/data',
 	  taskListURL:this.apiRoot + '/grain/task/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
