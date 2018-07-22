@@ -103,9 +103,12 @@ export default {
     		}else if(this.formdatas.form.sampleState==1){
     			return "已扦样";
     		}else if(this.formdatas.form.sampleState==2){
-    			return "已入库";
+    			return "已储存";
     		}else if(this.formdatas.form.sampleState==3){
-    			return "已分小样";
+//  			return "已分小样";
+    			return "已储存";
+    		}else if(this.formdatas.form.sampleState==4){
+    			return "已处理";
     		}
     	},
 //  	code(){

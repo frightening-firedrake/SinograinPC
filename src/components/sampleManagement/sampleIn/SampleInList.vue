@@ -87,7 +87,7 @@ export default {
 		}
 //		console.log(row.storage)
 		if(row.storage=='null--null--null'){
-			this.modal.title="请完善入库信息"
+			this.modal.title="请完善储存信息"
 			this.modal.formdatas[0].value=row.sampleNo;
 			this.dataBySampleNo=row;
 			this.modal.formdatas[3].selectitems=[];
@@ -201,31 +201,31 @@ export default {
 				this.getlistdata(1);
 //				this.getplacelist();
 				this.$notify({
-		          	title: '入库成功',
-		          	message: '该样品已成功入库！！！',
+		          	title: '储存成功',
+		          	message: '该样品已成功储存！！！',
 		          	type: 'success'
 		        });
 //		        this.printCodeBar(this.modal.formdatas[0].value)
 			}else{
 				this.$notify.error({
-		          	title: '入库失败',
-		          	message: '请重新核对入库信息！！！',
+		          	title: '储存失败',
+		          	message: '请重新核对储存信息！！！',
 		        });
 			}
 		}.bind(this)).catch(function (error) {
 //		    console.log(error);
 		    this.$notify.error({
-	          	title: '入库失败',
-	          	message: '请重新核对入库信息！！！',
+	          	title: '储存失败',
+	          	message: '请重新核对储存信息！！！',
 	        });
 		}.bind(this));
 		// this.$router.push({path: '/index/sampleManagement/sampleIn/sampleInCreate', params: {'position': form.position,'sampleInName': form.sampleInName} })
-		// this.$router.push({name: "样品管理/样品入库列表/新建样品", params: {'yangpinshi': form.yangpinshi,'gui': form.gui,'sampleInSign': form.sampleInSign,'sampleNumber': form.sampleNumber} })
+		// this.$router.push({name: "样品管理/样品储存列表/新建样品", params: {'yangpinshi': form.yangpinshi,'gui': form.gui,'sampleInSign': form.sampleInSign,'sampleNumber': form.sampleNumber} })
 	},
 //	关闭新建弹框
 	dialogClose(){
 		this.modalVisible=false;
-		//关闭入库框后打开扫描框
+		//关闭储存框后打开扫描框
 		if(this.continuity){			
 			this.messageShow=true;
 		}
@@ -540,7 +540,7 @@ export default {
   		this.messageShow=false;
   	},
   	getScanCode(code){
-		this.modal.title="入库";
+		this.modal.title="储存";
   		this.continuity=true;
   		if(!code){
   			this.messageShow=false;
@@ -592,11 +592,11 @@ export default {
 	  depotList:[],
       counterList:[],
       placeList:[],
-      continuity:true,//连续入库开关
+      continuity:true,//连续储存开关
       list:"samplinglist",
 	  modalVisible:false,
 	  modal:{
-	  	title:'入库',
+	  	title:'储存',
 		formdatas:[
 			{
 	  			label:"扦样编号:",
@@ -612,7 +612,7 @@ export default {
 	  		// 	value:'',
 	  		// },
 	  		{
-	  			label:"样品入库时间:",
+	  			label:"储存时间:",
 	  			model:"storageTime",
 	  			disabled:true,
 	  			value:this.getDateNow(),
@@ -659,7 +659,7 @@ export default {
 	  		},
 	  	],
 //	  	addprop:true,
-	  	submitText:'入库',
+	  	submitText:'储存',
 	  },
       breadcrumb:{
       	search:true,   
@@ -686,7 +686,7 @@ export default {
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：入库前请准备好条码打印机，以便于更换检验编号!',
+        title: '温馨提示：储存前请准备好条码打印机，以便于更换检验编号!',
         type: 'info'
       }],
 //    表格数据
@@ -694,7 +694,7 @@ export default {
       	createlib:false,
       	createSampling:false,
       	date1:true,
-      	date1Title:'样品入库时间：',
+      	date1Title:'储存时间：',
       	selectlib:true,
       	libraryList:[],
       	scanCode:true,
@@ -805,8 +805,8 @@ export default {
 	  	},
 	  	success:{
 	  		icon:'el-icon-success',
-	  		messageTittle:'该样品已入库',
-	  		messageText:'可点击编辑按钮修改入库信息！',
+	  		messageTittle:'该样品已储存',
+	  		messageText:'可点击编辑按钮修改储存信息！',
 	  		buttonText:'查看',
 	  	},
 	  	loading:{

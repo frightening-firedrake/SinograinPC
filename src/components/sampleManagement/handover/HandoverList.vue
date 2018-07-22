@@ -340,7 +340,7 @@ export default {
 				{
 					id: 2,
 					prop: 'name',
-					label: "样品领取交接单",
+					label: "样品领取交接单名称",
 //					sort: true,
 				},
 				{
@@ -363,20 +363,20 @@ export default {
 					label: "领取时间",
 					sort: true,
 				},
-				{
-					id: 6,
-					prop: 'returnPerson',
-					label: "归还人",
+//				{
+//					id: 6,
+//					prop: 'returnPerson',
+//					label: "归还人",
+////					sort: true,
+//					status:true,
+//				},
+//				{
+//					id: 7,
+//					prop: 'returnTime',
+//					label: "归还时间",
 //					sort: true,
-					status:true,
-				},
-				{
-					id: 7,
-					prop: 'returnTime',
-					label: "归还时间",
-					sort: true,
-					status:true,
-				},
+//					status:true,
+//				},
 			],
 			actions: {
 				selection: false,

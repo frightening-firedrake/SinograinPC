@@ -64,6 +64,7 @@ export default {
 //		if(!this.IsChecked){  			
   			params.ruKuSampleState=2;
   			params.fenxiaoyangSampleState=3;
+  			params.sort=this.$route.params.formdatas.form.sort;
 //		}else if(this.IsChecked==2){
 //			params.ruKuSampleState=2;
 //		}else if(this.IsChecked==3){
