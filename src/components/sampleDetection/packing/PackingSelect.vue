@@ -191,9 +191,10 @@ export default {
   		var path=this.$route.name
   		var end=path.lastIndexOf('/');
   		path=path.slice(0,end);
-
+		var params={tabledatas:checkedList};
+		params.id=this.$route.params.id
 //		this.$router.push({name: path,params: {formdatas:this.$route.params.formdatas,tabledatas:checkedList,searching:this.searching}})
-		this.$router.push({name: path,params: {tabledatas:checkedList}})
+		this.$router.push({name: path,params})
   	},
   },
   data() {

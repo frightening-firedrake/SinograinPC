@@ -88,9 +88,12 @@ export default {
   created(){
   	if(this.$route.params.tabledatas){
   		this.tabledatas=this.$route.params.tabledatas;
+		this.taskId=this.$route.params.id
   	}else{  		
+		this.taskId=this.$route.query.id
   		this.getlistdata(1)
   	}
+	console.log(this.taskId)
 //	console.log(this.$route.query)
 //  获取列表数据（第一页）
 //	移除监听事件
@@ -147,7 +150,8 @@ export default {
 	addbtn(){
 //		this.$router.push({path: '/index/sampling/samplingList/samplingListCreate'})
 		var name=this.$route.name+'/添加检验样品';
-		var params={tabledatas:this.tabledatas}
+		var params={tabledatas:this.tabledatas};
+		params.id=this.taskId
 		if(this.$route.params.searching){
 			params.searching=this.$route.params.searching
 		}
@@ -376,6 +380,34 @@ export default {
 		LODOP.PRINT(); 
 
 	},
+	submit() {
+		var ids = [];
+		for(var i=0; i<this.tabledatas.length;i++) {
+			console.log(this.tabledatas[i].id);
+			ids.push(this.tabledatas[i].id);
+		}
+		this.$http({
+		    method: 'post',
+			url: this.submitURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				ids:ids,
+				taskId:this.taskId
+			}
+	    }).then(function (response) {
+			
+		}.bind(this)).catch(function (error) {
+
+		}.bind(this));
+	},
 	//	表单底部触发事件btnCenterNo btnCenterYes btnLeft btnRight btnOne
 	tfootEvent(date){
 		console.log(date);
@@ -389,6 +421,7 @@ export default {
 
 		}else if(date=='btnRight'){
 			console.log('提交样品')
+			this.submit();
 		}else if(date=='btnOne'){
 
 		}
@@ -440,11 +473,13 @@ export default {
   },
   data() {
     return {
-      datalistURL: this.apiRoot +  '/grain/smallSample/data',
+      datalistURL: this.apiRoot +  '/grain/sample/data',
       checkURL:this.apiRoot +'/grain/sample/getBySampleNo',
       searchURL:this.apiRoot +  '/grain/smallSample/data',
+	  submitURL:this.apiRoot + '/grain/sample/putIntoTask',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
+	  taskId:'',
       checkedId:[],
       list:"samplinglist",
 	  modalVisible:false,
@@ -510,22 +545,22 @@ export default {
 		addbtn:'添加检验样品',
       },
       tabledatas:[
-      	{sampleNum:'201800101',checkeds:'6',id:1},
-      	{sampleNum:'201800102',checkeds:'5',id:2},
-      	{sampleNum:'201800103',checkeds:'4',id:3},
-      	{sampleNum:'201800104',checkeds:'3',id:4},
-      	{sampleNum:'201800105',checkeds:'1,2,3,5,6',id:5},
-      	{sampleNum:'201800106',checkeds:'1,2,3,5,6',id:6},
-      	{sampleNum:'201800107',checkeds:'1,2,3',id:7},
-      	{sampleNum:'201800108',checkeds:'5,6',id:8},
-      	{sampleNum:'201800109',checkeds:'1,2,3,5,6',id:9},
-      	{sampleNum:'201800110',checkeds:'1,2,3,5,6',id:10},
-      	{sampleNum:'201800111',checkeds:'1,2,3,5,6',id:11},
-      	{sampleNum:'201800112',checkeds:'1,2,3,5,6',id:12},
-      	{sampleNum:'201800113',checkeds:'1,2,3,5,6',id:13},
-      	{sampleNum:'201800114',checkeds:'1,2,3,5,6',id:14},
-      	{sampleNum:'201800115',checkeds:'1,2,3,5,6',id:15},
-      	{sampleNum:'201800116',checkeds:'1,2,3,5,6',id:16},
+      	// {sampleNum:'201800101',checkeds:'6',id:1},
+      	// {sampleNum:'201800102',checkeds:'5',id:2},
+      	// {sampleNum:'201800103',checkeds:'4',id:3},
+      	// {sampleNum:'201800104',checkeds:'3',id:4},
+      	// {sampleNum:'201800105',checkeds:'1,2,3,5,6',id:5},
+      	// {sampleNum:'201800106',checkeds:'1,2,3,5,6',id:6},
+      	// {sampleNum:'201800107',checkeds:'1,2,3',id:7},
+      	// {sampleNum:'201800108',checkeds:'5,6',id:8},
+      	// {sampleNum:'201800109',checkeds:'1,2,3,5,6',id:9},
+      	// {sampleNum:'201800110',checkeds:'1,2,3,5,6',id:10},
+      	// {sampleNum:'201800111',checkeds:'1,2,3,5,6',id:11},
+      	// {sampleNum:'201800112',checkeds:'1,2,3,5,6',id:12},
+      	// {sampleNum:'201800113',checkeds:'1,2,3,5,6',id:13},
+      	// {sampleNum:'201800114',checkeds:'1,2,3,5,6',id:14},
+      	// {sampleNum:'201800115',checkeds:'1,2,3,5,6',id:15},
+      	// {sampleNum:'201800116',checkeds:'1,2,3,5,6',id:16},
       ],
       items: [
       {
