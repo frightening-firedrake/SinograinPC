@@ -231,8 +231,8 @@ export default {
 //	获取列表数据方法
   	getlistdata(page){
   		this.loading=true;
-  		var params={};
-  		params.taskId=this.$route.query.id;
+  		// var params={};
+  		// params.taskId=this.$route.query.id;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -250,12 +250,13 @@ export default {
 //			    listName: this.list,
 //			    page:page,
 //			    rows:this.page.size,
-			    params:JSON.stringify(params),
+			    // params:JSON.stringify(params),
+				taskId:this.$route.query.id
 			}
 	    }).then(function (response) {
-//			console.log(response)
-			if(response.data.rows.length){				
-				this.tabledatas = response.data.rows;
+			console.log(response)
+			if(response.data.length){				
+				this.tabledatas = response.data;
 				this.listHeader.addbtn=false;
 				this.actions.nodele=true;
 				this.tfbtns.btnRight=false;
@@ -473,7 +474,7 @@ export default {
   },
   data() {
     return {
-      datalistURL: this.apiRoot +  '/grain/sample/data',
+      datalistURL: this.apiRoot +  '/grain/sample/getByTaskId',
       checkURL:this.apiRoot +'/grain/sample/getBySampleNo',
       searchURL:this.apiRoot +  '/grain/smallSample/data',
 	  submitURL:this.apiRoot + '/grain/sample/putIntoTask',
