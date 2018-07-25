@@ -61,7 +61,6 @@
                 <el-col :span="8">
                     <el-col :span="6">
                         <p>监20180098</p>
-                        <div class="clear" style="cleat:both"></div>
                     </el-col>
                     <el-col :span="6">
                         <el-form-item>
@@ -78,7 +77,6 @@
                 <el-col :span="8">
                     <el-col :span="6">
                         <p>监20180098</p>
-                        <div class="clear" style="cleat:both"></div>
                     </el-col>
                     <el-col :span="6">
                         <el-form-item>
@@ -95,7 +93,6 @@
                 <el-col :span="8">
                     <el-col :span="6">
                         <p>监20180098</p>
-                        <div class="clear" style="cleat:both"></div>
                     </el-col>
                     <el-col :span="6">
                         <el-form-item>
@@ -342,7 +339,7 @@ export default {
 
         },
         addstample(){
-           this.$router.push({ path: '/index/sampleDetection/confirmationdetails/comfirmationentry/addsample' })
+           this.$router.push({ path: '/index/sampleDetection/confirmationList/confirmationdetails/comfirmationentry/addsample' })
         },
         statusChange() {
             if (this.entryflag == 2) {

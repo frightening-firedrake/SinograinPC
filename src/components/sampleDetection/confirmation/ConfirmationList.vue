@@ -77,7 +77,7 @@ export default {
 //			}
 			//		console.log(id)
 //			this.$router.push({ path: '/index/sampleManagement/handover/handoverListView', query: { id: id } })
-			this.$router.push({path: '/index/sampleDetection/confirmationdetails',query:{pId:id,state:state}})
+			this.$router.push({path: '/index/sampleDetection/confirmationList/confirmationdetails',query:{pId:id,state:state}})
 		}.bind(this));
 		//监听列表点击编辑事件
 		this.$root.eventHub.$on('editlistitem',function(id){
@@ -141,7 +141,7 @@ export default {
 		createlibitem(form) { 	
 			console.log(form);
 			var checkPoint=form.checkPoint
-			this.$router.push({ path: '/index/sampleDetection/confirmationdetails/comfirmationentry',query:{checkPoint:checkPoint}})			
+			this.$router.push({ path: '/index/sampleDetection/confirmationList/confirmationdetails/comfirmationentry',query:{checkPoint:checkPoint}})			
 		},
 		modelSelectChange(val,model){
 		

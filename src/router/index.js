@@ -431,18 +431,18 @@ const routes = [{
                 //          meta: { needAuth: '样品确认单列表' },
             },
             {
-                path: "sampleDetection/confirmationdetails",
+                path: "sampleDetection/confirmationList/confirmationdetails",
                 name: "样品检测/样品确认单列表/样品确认单详情页",
                 component: confirmationsdetails,
                 // meta:{needAuth:'样品确认单详情页'}
             },
             {
-                path: "sampleDetection/confirmationdetails/comfirmationentry",
+                path: "sampleDetection/confirmationList/confirmationdetails/comfirmationentry",
                 name: "样品检测/样品确认单列表/录入样品检测数据",
                 component: comfirmationentry,
             },
             {
-                path: "sampleDetection/confirmationdetails/comfirmationentry/addsample",
+                path: "sampleDetection/confirmationList/confirmationdetails/comfirmationentry/addsample",
                 name: "样品检测/样品确认单列表/录入样品检测数据/添加检验编号",
                 component: addsample,
             },
