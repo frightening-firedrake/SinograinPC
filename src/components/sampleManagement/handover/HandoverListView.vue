@@ -18,11 +18,11 @@
             <p style="">编号:{{formdatas.nid>=10?formdatas.nid:'0'+formdatas.nid}}</p>
           </div>
           <el-row style="" class="hand_view_tab_content">
-            <el-col style="" :span="24" class="hand_view_tab_content_font">
-              <el-col style="" :span="2">
+            <el-col style="height:auto;background-color:#fbfbfb;border-left:1px solid #dfdfdf;" :span="24" class="hand_view_tab_content_font">
+              <el-col style="border-left:none;margin-left: -1px" :span="2">
                 <span>检验项目:</span>
               </el-col>
-              <el-col style="" :span="20">
+              <el-col style="background-color:#fff;padding:0 5%;" :span="22">
                 <span>{{formdatas.testList}}</span>
               </el-col>
             </el-col>
@@ -134,7 +134,8 @@
               	
               	</el-col>
               	<el-col style="" :span="10">
-              			样品管理员：{{userName}}
+              			<!--样品管理员：{{userName}}-->
+              			样品管理员：
               	</el-col>
               	<el-col style="" :span="2">
               	
@@ -160,7 +161,9 @@
 </template>
 
 <style>
-
+.doubleHeight{
+	line-height: 1.2rem;
+}
 </style>
 
 <script>
@@ -209,7 +212,7 @@ export default {
     		return arr   		
     	}
     	
-    }
+    },
   },
   created() {
     console.log(this.$route.query)
@@ -338,7 +341,7 @@ export default {
   	findCheckeds(str){
 	  	var indexs=str.split(',');
 	  	indexs.sort((a,b)=>{return a-b;});
-	  	var checkList=["不完善颗粒","杂质","生霉粒","水分","硬度","脂肪酸值(面筋吸水量)","品尝评分","卫生","加工品质"]
+	  	var checkList=["容重","水分","杂质(矿物质)","不完善粒(生霉粒)","色泽气味(质量指标)","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)","重金属(铅、镉、汞、砷)"]
 	  	var res=[];
 	  	indexs.forEach((item)=>{
 	  		res.push(checkList[item-1])

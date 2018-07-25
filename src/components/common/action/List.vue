@@ -56,7 +56,8 @@
 							<span style="color:#666666;">已储存</span>
 						</template>
 						<template v-if="scope.row[item.prop]==3">
-							<span style="color:#666666;">已分小样</span>
+							<!--<span style="color:#666666;">已分小样</span>-->
+							<span style="color:#666666;">已储存</span>
 						</template>
 						<template v-if="scope.row[item.prop]==4">
 							<span style="color:#666666;">已处理</span>

@@ -211,6 +211,7 @@ export default {
         	name:'',//交接单名称
         	manager:this.userName,//管理员名
         	remarks:'',//备注信息
+        	sort:'小麦',//品种
         },
         checkList:[],//检验项目数组
 //      检验样品数组
