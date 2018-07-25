@@ -493,17 +493,26 @@ export default {
 			}
 		},
 		findCheckeds(str) {
-			var indexs = str.split(',');
-			indexs.sort((a, b) => { return a - b; });
-			var checkList = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "脂肪酸值（面筋吸水量）", "品尝评分", "卫生指标", "加工品质"]
-			var res = [];
-//			var colorres='';
-			indexs.forEach((item) => {
-				res.push(checkList[item - 1])
-//				colorres+='<span>'+checkList[item - 1]+'</span>'
-			})
-			return res.join('，')
-//			return colorres
+			var checkList=["容重","水分","杂质(矿物质)","不完善粒(生霉粒)","色泽气味(质量指标)","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)","重金属(铅、镉、汞、砷)"];	
+	  		var res=[];
+	  		var indexs=str.split(',');
+		  	indexs.forEach((item)=>{
+		  		if(item){
+		  			res.push(checkList[item-1])
+		  		}	
+		  	})
+		  	var restr=res.join(',');
+	  		if(restr=="容重,水分,杂质(矿物质),不完善粒(生霉粒),色泽气味(质量指标),面筋吸水量,品尝评分值,色泽气味(储存品质指标),真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮),重金属(铅、镉、汞、砷)"){
+	  			return '全项目指标';
+	  		}else if(restr=="容重,水分,杂质(矿物质),不完善粒(生霉粒),色泽气味(质量指标),脂肪酸值,品尝评分值,色泽气味(储存品质指标),真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮),重金属(铅、镉、汞、砷)"){
+	  			return '全项目指标';
+	  		}else{
+	  			restr=restr.replace(/容重,水分,杂质\(矿物质\),不完善粒\(生霉粒\),色泽气味\(质量指标\)/, "质量指标全项目")
+	  			restr=restr.replace(/面筋吸水量,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
+	  			restr=restr.replace(/脂肪酸值,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
+	  			restr=restr.replace(/真菌毒素\(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮\),重金属\(铅、镉、汞、砷\)/, "食品卫生指标全项目")
+	  			return restr
+	  		}
 		},
 		findCheckPoint(obj) {
 			var checkList1 = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "脂肪酸值", "品尝评分", "卫生指标", "加工品质"]

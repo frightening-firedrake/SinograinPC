@@ -84,7 +84,8 @@ export default {
 			return
 		}
 		var params = {};
-		params.checkeds = this.formdatas.checkList.sort().join(',');
+//		params.checkeds = this.formdatas.checkList.sort().join(',');
+		params.checkeds = this.formdatas.checkList.join(',');
 		params.name = this.formdatas.form.name;
 		params.remark = this.formdatas.form.remarks;
 		params.receiptor =this.receiptor;
