@@ -12,9 +12,9 @@
         <div class="hand_view_tab" style="">
           <div class="hand_view_tab_title" style="">
             <!--<p>{{formdatas.sort}}样品领取交接单</p>-->
-            <p style="">{{formdatas.name}}</p>
+            <p style="">{{formdatas.name?formdatas.name:'样品归还单'}}</p>
           </div>
-          <div class="hand_view_tab_num" style="">
+          <div class="hand_view_tab_num" style="" v-if="formdatas.nid">
             <p style="">编号:{{formdatas.nid>=10?formdatas.nid:'0'+formdatas.nid}}</p>
           </div>
           <!--<el-row style="" class="hand_view_tab_content">
@@ -30,48 +30,92 @@
           <el-row style="background-color:#fbfbfb;" class="hand_view_tabbody">
             
             <el-col style="" :span="12">
-              <el-col style="" :span="4">
+              <el-col style="" :span="2">
                 <span>序号</span>
               </el-col>
-              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
-                <span>扦样编号</span>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
+                <span>检验编号</span>
               </el-col>
-              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
                 <span>存放位置</span>
+              </el-col>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
+                <span>归还人</span>
+              </el-col>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="4">
+                <span>操作</span>
               </el-col>
             </el-col>
             <el-col style="" :span="12">
-              <el-col style="" :span="4">
+              <el-col style="" :span="2">
                 <span>序号</span>
               </el-col>
-              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
-                <span>扦样编号</span>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
+                <span>检验编号</span>
               </el-col>
-              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
                 <span>存放位置</span>
+              </el-col>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
+                <span>归还人</span>
+              </el-col>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="4">
+                <span>操作</span>
               </el-col>
             </el-col>
           </el-row>
           <el-row class="hand_view_tabbody" style="border-top:none;">
-            <el-col :span="12" v-for="(item,index) in formdatas.testItemList" class='loopBorder' :key="index" style="border-top:1px solid #dfdfdf;">
-              <el-col style="" :span="4">
+            <el-col :span="12" v-for="(item,index) in formdatas.items" class='loopBorder' :key="index" style="border-top:1px solid #dfdfdf;">
+              <el-col style="" :span="2">
                 <span>{{index+1}}</span>
               </el-col>
-              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
-                <span>{{item.sampleNo}}</span>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
+                <span>{{item.sampleNum}}</span>
               </el-col>
-              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
                 <span>{{item.storage}}</span>
               </el-col>
-            </el-col>
-            <el-col style="" :span="12" v-for="(item,index) in testItemListadd" class='loopBorder' :key="index+99" style="border-top:1px solid #dfdfdf;">
-              <el-col style="" :span="4">
-                <span>{{index+formdatas.testItemList.length+1}}</span>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
+                <span>{{item.storage}}</span>
               </el-col>
-              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;background:white;" :span="4" >
+                <!--<span class="delbtn" @click=delSample(item.id)>删除</span>-->
+                <span class="delbtn" v-if="item.returnState==-1">删除</span>
+                <span class="delbtn2" v-if="item.returnState!=-1">删除</span>
+              </el-col>
+            </el-col>
+            <el-col style="" :span="12"  class='loopBorder' style="border-top:1px solid #dfdfdf;">
+              <el-col style="" :span="2">
+                <span>{{formdatas.items.length+1}}</span>
+              </el-col>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
+                <!--<span class="addbtn" @click=addSample>+检验编号</span>-->
                 <span>&nbsp;</span>
               </el-col>
-              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="10">
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
+                <span>&nbsp;</span>
+              </el-col>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
+                <span>&nbsp;</span>
+              </el-col>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;background:white;" :span="4">
+                <span>&nbsp;</span>
+              </el-col>
+            </el-col>
+            <el-col style="" :span="12" v-if="!formdatas.items.length%2" class='loopBorder' style="border-top:1px solid #dfdfdf;">
+              <el-col style="" :span="2">
+                <span>{{formdatas.items.length+2}}</span>
+              </el-col>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
+                <span>&nbsp;</span>
+              </el-col>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
+                <span>&nbsp;</span>
+              </el-col>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
+                <span>&nbsp;</span>
+              </el-col>
+              <el-col style="border-left:1px solid #dfdfdf;text-align: center;background:white;" :span="4">
                 <span>&nbsp;</span>
               </el-col>
             </el-col>
@@ -147,7 +191,7 @@
       </div>
       </div>
      	<div class="hoverReturn">
-		    <el-button v-if="returnState==-1" class="hoverReturnBtn" type="primary" @click="hoverReturn">归还</el-button>
+		    <el-button class="hoverReturnBtn" type="primary" @click="hoverReturn">确认还单</el-button>
       </div>
       <sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose" @modelSelectChange="modelSelectChange"></sinograin-modal>      	
     	
@@ -160,13 +204,14 @@
 } 
 .hoverReturn button {
     font-size: 0.18rem;
-    padding: 0rem;
+    padding: 0 0.15rem;
     line-height: 0.5rem;
     border-radius: 0.1rem;
-    width:1.3rem;
+    min-width:1.3rem;
+    width:auto;
     height:0.5rem;
     text-align: center;
-    margin-top:1rem;
+    margin-top:0.7rem;
 }
 .hoverReturn .el-button+.el-button{
 	margin-left:0.3rem;
@@ -211,33 +256,28 @@ export default {
   computed: {
     ...mapState(["modal_id_number", "viewdata", "editdata", "aultdata", "messions", "mask"]),
     ...mapGetters(["userName"]),
-    testItemListadd(){
-    	var length=0;
-    	if(this.formdatas.testItemList.length%2){    		
-    		length=2-this.formdatas.testItemList.length%2;
-    	}
-    	if(!this.formdatas.testItemList.length){    		
-    		length=2;
+    itemsadd(){
+    	var length=2;
+    	if(this.formdatas.items.length%2){    		
+    		length=1;
+    	}else{
+    		length=2;    		
     	}
     	var item={checkNum:undefined}
     	var arr=[]
-    	if(length){
 		    for (var i=0;i<length;i++){
 					arr.push(item)
 				}
 			  return arr
-    		
-    	}else{
-    		return arr   		
-    	}
-    	
     }
   },
   created() {
-    console.log(this.$route.query)
+//  console.log(this.$route.query)
     //  获取列表数据（第一页）
     this.getlistdata(1)
-
+		if(this.$route.params.formdatas){
+			this.formdatas=this.$route.params.formdatas
+		}
   },
   destroy() {
 
@@ -309,17 +349,17 @@ export default {
   			}
       }).then(function(response) {
 //    	console.log(response.data)
-      	this.formdatas.remarks=response.data.remark;//备注
+//    	this.formdatas.remarks=response.data.remark;//备注
 //    	this.formdatas.gly="管理员"
-      	this.formdatas.time=response.data.updateTime;//领取时间
-      	this.formdatas.testList=this.findCheckeds(response.data.checkeds);//检测项目
+//    	this.formdatas.time=response.data.updateTime;//领取时间
+//    	this.formdatas.testList=this.findCheckeds(response.data.checkeds);//检测项目
       	this.formdatas.nid=response.data.id;//编号
 //    	this.formdatas.sort='麦子';//品种
-      	this.formdatas.name=response.data.name;//品种
-      	this.formdatas.testItemList=response.data.samples;//检测样品
+//    	this.formdatas.name=response.data.name;//品种
+      	this.formdatas.items=response.data.samples;//检测样品
       	this.sampleNums=response.data.sampleNums;//检测样品
-      	// this.formdatas.testItemList=response.data.sampleNums.split(',');//检测样品
-      	this.formdatas.testItemList.sort();//检测样品排序
+      	// this.formdatas.items=response.data.sampleNums.split(',');//检测样品
+      	this.formdatas.items.sort();//检测样品排序
       	this.returnState=response.data.returnState;
 //      this.formdatas = response.data;
         //		  	this.tabledatas=response.data.rows;
@@ -349,29 +389,55 @@ export default {
         console.log(error);
       }.bind(this));
     },
+    delSample(id){
+    	this.$confirm('此操作将删除该样品, 是否继续?', '提示', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'warning'
+			}).then(() => {
+				this.formdatas.items=this.formdatas.items.filter((value,index)=>{
+	    		return value.id!==id
+	    	})
+		      	this.$message({
+		        	type: 'success',
+		        	message: '删除成功!'
+		      	});
+			}).catch(() => {
+				this.$message({
+					type: 'info',
+					message: '已取消删除'
+				});
+			});
+    	
+    },
+    addSample(){
+    	var path=this.$route.name+'/添加检验编号'
+			this.$router.push({name: path,params: {formdatas:this.formdatas}})
+    },
 		titleEvent(){
   		console.log('titleEvent');
   	},
-  	findCheckeds(str){
-	  	var indexs=str.split(',');
-	  	indexs.sort((a,b)=>{return a-b;});
-	  	var checkList=["不完善颗粒","杂质","生霉粒","水分","硬度","脂肪酸值(面筋吸水量)","品尝评分","卫生","加工品质"]
-	  	var res=[];
-	  	indexs.forEach((item)=>{
-	  		res.push(checkList[item-1])
-	  	})
-	  	return res.join('，')
-	  },
+//	findCheckeds(str){
+//	  	var indexs=str.split(',');
+//	  	indexs.sort((a,b)=>{return a-b;});
+//	  	var checkList=["不完善颗粒","杂质","生霉粒","水分","硬度","脂肪酸值(面筋吸水量)","品尝评分","卫生","加工品质"]
+//	  	var res=[];
+//	  	indexs.forEach((item)=>{
+//	  		res.push(checkList[item-1])
+//	  	})
+//	  	return res.join('，')
+//	  },
 	  //	填入新建数据
 		createlibitem(form) {
 			console.log(form);
-      this.guihuan(form);
+//    this.guihuanadd(form);
+      this.$router.push({path:'/index/sampleManagement/returnSamples'});
 		},
-    guihuan(form) {
+    guihuanadd(form) {
 
         this.$http({
           method: 'post',
-          url:this.guihuanURL,
+          url:this.guihuanaddURL,
           transformRequest: [function (data) {
 					let ret = ''
 					for (let it in data) {
@@ -381,7 +447,7 @@ export default {
 				}],
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           data: {
-              id: this.$route.query.id,
+//            id: this.$route.query.id,
               returnPerson: form.returnPerson,
               returnState: 1,
               sampleNums: this.sampleNums,
@@ -389,7 +455,7 @@ export default {
         }).then(function(response) {
 
           	if(response.data.success){
-          		this.$router.go(-1);
+          		this.$router.push({path:'/index/sampleManagement/returnSamples'});
           	}
           
         }.bind(this)).catch(function(error) {
@@ -405,7 +471,11 @@ export default {
 			this.modalVisible = false;
 		},
 		hoverReturn(){
-			this.modalVisible = true;
+//			if(!this.formdatas.items.length){
+//				this.$alert('请添加检验编号','提示信息',{type: 'warning'});
+//				return
+//			}
+//			this.modalVisible = true;
 		},
   },
   filters: {
@@ -424,7 +494,7 @@ export default {
   data() {
     return {
       datalistURL: this.apiRoot +'/grain/handover/getStorage',
-      guihuanURL: this.apiRoot+'/grain/handover/guiHuan',
+//    guihuanaddURL: this.apiRoot+'/grain/handover/guiHuan',
       searchURL: '/liquid/role2/data/search',
       deleteURL: '/liquid/role2/data/delete',
       checkedId: [],
@@ -445,24 +515,24 @@ export default {
         type: 'info'
       }],
       formdatas: {
-      	name:'',
-        sort:'',//品种
+//    	name:'',
+//      sort:'',//品种
         nid:'',//编号
-        testList:'',//检测项目
+//      testList:'',//检测项目
         //检测样品
-        testItemList:[
+        items:[
    
         ],
-        remarks:'',
-        gly:'',
-        time:'',
+//      remarks:'',
+//      gly:'',
+//      time:'',
       },
       modalVisible:false,
 			modal:{
-			  title:'归还',
+			  title:'填写归还人',
 				formdatas:[
 					{
-			  			label:"归还人签名:",
+			  			label:"填写归还人:",
 			  			model:"returnPerson",
 //			  			disabled:true,
 			  			value:'',

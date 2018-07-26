@@ -34,7 +34,7 @@
                 <span>序号</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
-                <span>扦样编号</span>
+                <span>检验编号</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
                 <span>存放位置</span>
@@ -51,7 +51,7 @@
                 <span>序号</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
-                <span>扦样编号</span>
+                <span>检验编号</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
                 <span>存放位置</span>
@@ -65,12 +65,12 @@
             </el-col>
           </el-row>
           <el-row class="hand_view_tabbody" style="border-top:none;">
-            <el-col :span="12" v-for="(item,index) in formdatas.testItemList" class='loopBorder' :key="index" style="border-top:1px solid #dfdfdf;">
+            <el-col :span="12" v-for="(item,index) in formdatas.items" class='loopBorder' :key="index" style="border-top:1px solid #dfdfdf;">
               <el-col style="" :span="2">
                 <span>{{index+1}}</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
-                <span>{{item.sampleNo}}</span>
+                <span>{{item.sampleNum}}</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
                 <span>{{item.storage}}</span>
@@ -81,12 +81,12 @@
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;background:white;" :span="4" >
                 <span class="delbtn" @click=delSample(item.id)>删除</span>
                 <!--<span class="delbtn" v-if="item.returnState==-1">删除</span>-->
-                <span class="delbtn2" v-if="item.returnState!=-1">删除</span>
+                <!--<span class="delbtn2" v-if="item.returnState!=-1">删除</span>-->
               </el-col>
             </el-col>
             <el-col style="" :span="12"  class='loopBorder' style="border-top:1px solid #dfdfdf;">
               <el-col style="" :span="2">
-                <span>{{formdatas.testItemList.length+1}}</span>
+                <span>{{formdatas.items.length+1}}</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
                 <span class="addbtn" @click=addSample>+检验编号</span>
@@ -101,9 +101,9 @@
                 <span>&nbsp;</span>
               </el-col>
             </el-col>
-            <el-col style="" :span="12" v-if="!formdatas.testItemList.length%2" class='loopBorder' style="border-top:1px solid #dfdfdf;">
+            <el-col style="" :span="12" v-if="!formdatas.items.length%2" class='loopBorder' style="border-top:1px solid #dfdfdf;">
               <el-col style="" :span="2">
-                <span>{{formdatas.testItemList.length+2}}</span>
+                <span>{{formdatas.items.length+2}}</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
                 <span>&nbsp;</span>
@@ -255,9 +255,9 @@ export default {
   computed: {
     ...mapState(["modal_id_number", "viewdata", "editdata", "aultdata", "messions", "mask"]),
     ...mapGetters(["userName"]),
-    testItemListadd(){
+    itemsadd(){
     	var length=2;
-    	if(this.formdatas.testItemList.length%2){    		
+    	if(this.formdatas.items.length%2){    		
     		length=1;
     	}else{
     		length=2;    		
@@ -271,10 +271,12 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.query)
+//  console.log(this.$route.query)
     //  获取列表数据（第一页）
-    this.getlistdata(1)
-
+//  this.getlistdata(1)
+		if(this.$route.params.formdatas){
+			this.formdatas=this.$route.params.formdatas
+		}
   },
   destroy() {
 
@@ -353,10 +355,10 @@ export default {
       	this.formdatas.nid=response.data.id;//编号
 //    	this.formdatas.sort='麦子';//品种
 //    	this.formdatas.name=response.data.name;//品种
-      	this.formdatas.testItemList=response.data.samples;//检测样品
+      	this.formdatas.items=response.data.samples;//检测样品
       	this.sampleNums=response.data.sampleNums;//检测样品
-      	// this.formdatas.testItemList=response.data.sampleNums.split(',');//检测样品
-      	this.formdatas.testItemList.sort();//检测样品排序
+      	// this.formdatas.items=response.data.sampleNums.split(',');//检测样品
+      	this.formdatas.items.sort();//检测样品排序
       	this.returnState=response.data.returnState;
 //      this.formdatas = response.data;
         //		  	this.tabledatas=response.data.rows;
@@ -387,10 +389,29 @@ export default {
       }.bind(this));
     },
     delSample(id){
+    	this.$confirm('此操作将删除该样品, 是否继续?', '提示', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'warning'
+			}).then(() => {
+				this.formdatas.items=this.formdatas.items.filter((value,index)=>{
+	    		return value.id!==id
+	    	})
+		      	this.$message({
+		        	type: 'success',
+		        	message: '删除成功!'
+		      	});
+			}).catch(() => {
+				this.$message({
+					type: 'info',
+					message: '已取消删除'
+				});
+			});
     	
     },
     addSample(){
-    	
+    	var path=this.$route.name+'/添加检验编号'
+			this.$router.push({name: path,params: {formdatas:this.formdatas}})
     },
 		titleEvent(){
   		console.log('titleEvent');
@@ -449,8 +470,8 @@ export default {
 			this.modalVisible = false;
 		},
 		hoverReturn(){
-			if(!this.formdatas.testItemList.length){
-				this.$alert('请添加检验编号','提示信息',{});
+			if(!this.formdatas.items.length){
+				this.$alert('请添加检验编号','提示信息',{type: 'warning'});
 				return
 			}
 			this.modalVisible = true;
@@ -493,17 +514,17 @@ export default {
         type: 'info'
       }],
       formdatas: {
-      	name:'',
-        sort:'',//品种
+//    	name:'',
+//      sort:'',//品种
         nid:'',//编号
-        testList:'',//检测项目
+//      testList:'',//检测项目
         //检测样品
-        testItemList:[
+        items:[
    
         ],
-        remarks:'',
-        gly:'',
-        time:'',
+//      remarks:'',
+//      gly:'',
+//      time:'',
       },
       modalVisible:false,
 			modal:{

@@ -140,6 +140,14 @@ export default {
     			this.checkedList=this.checkList.filter((item)=>{
     				return checkNums.includes(item.sampleNum)
     			})
+    		}else if(this.checkList.length&&this.$route.params.formdatas){
+    			var checkNums=this.$route.params.formdatas.items.map((val)=>{
+    				return val.sampleNum?val.sampleNum:val;
+    			})
+    			this.sort=this.checkList[0].sort
+    			this.checkedList=this.checkList.filter((item)=>{
+    				return checkNums.includes(item.sampleNum)
+    			})
     		}else{
     			
     		}
