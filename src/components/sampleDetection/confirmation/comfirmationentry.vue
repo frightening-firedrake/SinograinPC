@@ -339,7 +339,7 @@ export default {
 
         },
         addstample(){
-           this.$router.push({ path: '/index/sampleDetection/confirmationList/confirmationdetails/comfirmationentry/addsample' })
+           this.$router.push({ path: '/index/sampleDetection/confirmationList/confirmationdetails/comfirmationentry/addsample',query:{checkPoint:this.$route.query.checkPoint}})
         },
         statusChange() {
             if (this.entryflag == 2) {

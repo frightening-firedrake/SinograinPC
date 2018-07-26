@@ -93,7 +93,7 @@ export default {
     created() {
         //	console.log(this.$route.params)
         this.getTaskList()
-
+        this.getSampleList()
         //  获取列表数据（第一页）
         //	this.getlistdata(1)
         //	this.getsampledata();
@@ -103,7 +103,8 @@ export default {
         checkedListFilter() {
             return this.checkList.filter((item, index) => {
                 //				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
-                return (item.detectionState == 2) && (item.sort == this.sort) && (this.remSelect ? item.remark.indexOf(this.remSelect) > -1 : true) && ((this.sampleNumRange[0] ? this.sampleNumRange[0] - 0 : 0) < (item.sampleNum - 0) && ((item.sampleNum - 0) < (this.sampleNumRange[1] ? (this.sampleNumRange[1] - 0) : 100000000000000000)))
+                // return (item.detectionState == 2) && (item.sort == this.sort) && (this.remSelect ? item.remark.indexOf(this.remSelect) > -1 : true) && ((this.sampleNumRange[0] ? this.sampleNumRange[0] - 0 : 0) < (item.sampleNum - 0) && ((item.sampleNum - 0) < (this.sampleNumRange[1] ? (this.sampleNumRange[1] - 0) : 100000000000000000)))
+                return   (this.remSelect ? item.remark.indexOf(this.remSelect) > -1 : true) && ((this.sampleNumRange[0] ? this.sampleNumRange[0] - 0 : 0) < (item.sampleNum - 0) && ((item.sampleNum - 0) < (this.sampleNumRange[1] ? (this.sampleNumRange[1] - 0) : 100000000000000000)))
                 //				return (this.isChecked?item.sampleState==this.isChecked:true)&&(item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
             })
         },
@@ -123,6 +124,7 @@ export default {
     },
     data() {
         return {
+            sampleListURL:this.apiRoot + '/grain/handover/getSampleByCheckPoint',
             checkAll: "",
             breadcrumb: {
                 search: true,
@@ -185,9 +187,37 @@ export default {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 data: {
                     //			    params: JSON.stringify(params)
+                    checkPoint: this.$route.query.checkPoint
                 }
             }).then(function(response) {
-                this.taskList = response.data.rows;
+                this.taskList = response.data;
+            }.bind(this)).catch(function(error) {
+                console.log(error);
+            }.bind(this));
+        },
+        // 获取样品列表
+        getSampleList() {
+            //		var params = {};
+            //		params.pLibraryId = -1
+            // 获取列表数据（第？页）
+            this.$http({
+                method: 'post',
+                url: this.sampleListURL,
+                transformRequest: [function(data) {
+                    // Do whatever you want to transform the data
+                    let ret = ''
+                    for (let it in data) {
+                        ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                    }
+                    return ret
+                }],
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                data: {
+                    //			    params: JSON.stringify(params)
+                    checkPoint: this.$route.query.checkPoint
+                }
+            }).then(function(response) {
+              this.checkList = response.data;
             }.bind(this)).catch(function(error) {
                 console.log(error);
             }.bind(this));
