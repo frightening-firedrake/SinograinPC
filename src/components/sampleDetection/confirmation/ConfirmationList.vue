@@ -71,13 +71,13 @@ export default {
 			//  	console.log(rowid,list);
 		}.bind(this));
 		//	监听列表点击查看事件
-		this.$root.eventHub.$on("viewlistitem", function(id,state) {
+		this.$root.eventHub.$on("viewlistitem", function(id) {
 //			if(!this.$_ault_alert('handover:getById')){
 //				return
 //			}
-			//		console.log(id)
+//					console.log(id,state)
 //			this.$router.push({ path: '/index/sampleManagement/handover/handoverListView', query: { id: id } })
-			this.$router.push({path: '/index/sampleDetection/confirmationList/confirmationdetails',query:{pId:id,state:state}})
+			this.$router.push({path: '/index/sampleDetection/confirmationList/confirmationdetails',query:{id:id}})
 		}.bind(this));
 		//监听列表点击编辑事件
 		this.$root.eventHub.$on('editlistitem',function(id){
@@ -285,15 +285,18 @@ export default {
 			  			value:'',
 			  			type:'select',
 			  			selectitems:[
-			  				{label:'不完善粒',value:'1',id:'1'},
-			  				{label:'杂质',value:'2',id:'2'},
-			  				{label:'生霉粒',value:'3',id:'3'},
-			  				{label:'水分',value:'4',id:'4'},
-			  				{label:'硬度',value:'5',id:'5'},
-			  				{label:'脂肪酸值(面筋吸水量)',value:'6',id:'6'},
-			  				{label:'品尝评分',value:'7',id:'7'},
-			  				{label:'卫生指标',value:'8',id:'8'},
-			  				{label:'加工品质',value:'9',id:'9'},
+			  				{label:'容重',value:'1',id:'1'},
+			  				{label:'水分',value:'2',id:'2'},
+			  				{label:'杂质(矿物质)',value:'3',id:'3'},
+			  				{label:'不完善粒(生霉粒)',value:'4',id:'4'},
+			  				{label:'色泽气味(质量指标)',value:'5',id:'5'},
+			  				{label:'面筋吸水量',value:'6',id:'6'},
+			  				{label:'脂肪酸值',value:'7',id:'7'},
+			  				{label:'品尝评分值',value:'8',id:'8'},
+			  				{label:'色泽气味(储存品质指标)',value:'9',id:'9'},
+//			  				{label:'真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)',value:'10',id:'10'},
+			  				{label:'真菌毒素',value:'10',id:'10'},
+			  				{label:'重金属(铅、镉、汞、砷)',value:'11',id:'11'},
 			  			],
 			  		},					
 			  	],		

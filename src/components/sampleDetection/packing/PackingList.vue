@@ -251,10 +251,10 @@ export default {
 //			    page:page,
 //			    rows:this.page.size,
 			    // params:JSON.stringify(params),
-				taskId:this.$route.query.id
+				taskId:this.taskId
 			}
 	    }).then(function (response) {
-			console.log(response)
+//			console.log(response)
 			if(response.data.length){				
 				this.tabledatas = response.data;
 				this.listHeader.addbtn=false;
@@ -382,9 +382,12 @@ export default {
 
 	},
 	submit() {
+		if(!this.tabledatas.length){
+			this.$alert('请先添加检验样品','提示信息',{type: 'warning'});
+		}
 		var ids = [];
 		for(var i=0; i<this.tabledatas.length;i++) {
-			console.log(this.tabledatas[i].id);
+//			console.log(this.tabledatas[i].id);
 			ids.push(this.tabledatas[i].id);
 		}
 		this.$http({
@@ -421,7 +424,7 @@ export default {
 		}else if(date=='btnLeft'){
 
 		}else if(date=='btnRight'){
-			console.log('提交样品')
+
 			this.submit();
 		}else if(date=='btnOne'){
 
@@ -549,22 +552,7 @@ export default {
 		addbtn:'添加检验样品',
       },
       tabledatas:[
-        	 {sampleNum:'201800101',checkeds:'6',id:1},
-        	 {sampleNum:'201800102',checkeds:'5',id:2},
-        	 {sampleNum:'201800103',checkeds:'4',id:3},
-        	 {sampleNum:'201800104',checkeds:'3',id:4},
-        	 {sampleNum:'201800105',checkeds:'1,2,3,5,6',id:5},
-        	 {sampleNum:'201800106',checkeds:'1,2,3,5,6',id:6},
-        	 {sampleNum:'201800107',checkeds:'1,2,3',id:7},
-        	 {sampleNum:'201800108',checkeds:'5,6',id:8},
-        	 {sampleNum:'201800109',checkeds:'1,2,3,5,6',id:9},
-        	 {sampleNum:'201800110',checkeds:'1,2,3,5,6',id:10},
-        	 {sampleNum:'201800111',checkeds:'1,2,3,5,6',id:11},
-        	 {sampleNum:'201800112',checkeds:'1,2,3,5,6',id:12},
-        	 {sampleNum:'201800113',checkeds:'1,2,3,5,6',id:13},
-        	 {sampleNum:'201800114',checkeds:'1,2,3,5,6',id:14},
-        	 {sampleNum:'201800115',checkeds:'1,2,3,5,6',id:15},
-        	 {sampleNum:'201800116',checkeds:'1,2,3,5,6',id:16},
+        
       ],
       items: [
       {

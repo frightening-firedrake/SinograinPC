@@ -146,7 +146,7 @@
         <div class="filein" v-else-if="entryflag==2">
             <div class="filein_box">
                 <img src="static/images/comfirmationentry/filein.png" />
-                <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" multiple :show-file-list="false">
+                <el-upload class="upload-demo" :action="uploadURL" :headers="{'Authorization':Token}" multiple :show-file-list="false">
                     <el-button size="small" type="primary">导入文件</el-button>
                 </el-upload>
             </div>
@@ -319,10 +319,12 @@
 <script>
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SinograinOptionTitle from "@/components/common/action/OptionTitle";
+import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
     components: { SinograinBreadcrumb, SinograinOptionTitle },
     data() {
         return {
+        	uploadURL:this.apiRoot + '/grain/import/importExcel',
             entryflag: 1,
             breadcrumb: {
                 search: true,
@@ -348,6 +350,10 @@ export default {
                 this.entryflag = 2
             }
         }
+    },
+    computed:{
+		...mapGetters(["Token"]),
+    	
     }
 }
 </script>
