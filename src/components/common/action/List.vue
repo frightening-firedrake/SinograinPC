@@ -73,7 +73,7 @@
 					</template>
 					<template v-if="item.prop=='returnState'">
 						<template v-if="scope.row[item.prop]==-1">
-							<span style="color:#fc6500;">未归还</span>
+							<span style="color:#fc6500;">待归还</span>
 						</template>
 						<template v-if="scope.row[item.prop]==1">
 							<span style="color:#999999;">已归还</span>
@@ -153,7 +153,7 @@
 					<template v-if="item.prop=='returnTime'">
 						<button :class="{print:!scope.row.returnPerson}" @click.stop="returnPerson(scope.$index, scope.row,scope)">{{scope.row.returnTime?scope.row.returnTime:'尚未归还'}}</button>
 					</template>
-					<template v-if="item.prop=='id'">
+					<template v-if="item.prop=='id'&&item.label!='归还单编号'">
 						<template v-if="scope.row[item.prop]>=10">
 							{{scope.row[item.prop]}}
 						</template>
@@ -161,44 +161,64 @@
 							{{'0'+scope.row[item.prop]}}
 						</template>
 					</template>
+					<template v-if="item.prop=='id'&&item.label=='归还单编号'">
+						<template v-if="scope.row[item.prop]>=1000">
+							{{scope.row[item.prop]}}
+						</template>
+						<template v-if="(scope.row[item.prop]<1000)&&(scope.row[item.prop]>100)">
+							{{'00'+scope.row[item.prop]}}
+						</template>
+						<template v-if="(scope.row[item.prop]<100)&&(scope.row[item.prop]>10)">
+							{{'00'+scope.row[item.prop]}}
+						</template>
+						<template v-if="scope.row[item.prop]<10">
+							{{'000'+scope.row[item.prop]}}
+						</template>
+					</template>
 				</template>
 			</el-table-column>
 		</template>
 
 
-		<!--是否包含工作底稿-->
+		<!--是否包含变色检验项-->
 		<template v-if="actions.colorcheck">
 			<el-table-column :resizable="resizable" align="center" label="检验项目" class-name="tableAction" width="650">
 				<template slot-scope="scope">
 					<p :class="actions.colorcheckclass">	
 						<!--<span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)}}</span>-->
 						<template v-if="check(scope.row.checkeds,1)">							
-							<span class="colorcheck1">不完善颗粒</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=1?',':''}}
+							<span class="colorcheck1">容重</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=1?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,2)">
-							<span class="colorcheck2">杂质</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=2?',':''}}
+							<span class="colorcheck2">水分</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=2?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,3)">
-							<span class="colorcheck3">生霉粒</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=3?',':''}}
+							<span class="colorcheck3">杂质(矿物质)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=3?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,4)">
-							<span class="colorcheck4">水分</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=4?',':''}}
+							<span class="colorcheck4">不完善粒(生霉粒)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=4?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,5)">
-							<span class="colorcheck5">硬度</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=5?',':''}}
+							<span class="colorcheck5">色泽气味(质量指标)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=5?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,6)">
-							<span class="colorcheck6">脂肪酸值（面筋吸水量）</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=6?',':''}}
+							<span class="colorcheck6">面筋吸水量</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=6?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,7)">
-							<span class="colorcheck7">品尝评分</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=7?',':''}}
+							<span class="colorcheck7">脂肪酸值</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=7?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,8)">
-							<span class="colorcheck8">卫生指标</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=8?',':''}}
+							<span class="colorcheck8">品尝评分值</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=8?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,9)">
-							<span class="colorcheck9">加工品质</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=9?',':''}}
+							<span class="colorcheck9">色泽气味(储存品质指标)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=9?',':''}}
 						</template>	
+						<template v-if="check(scope.row.checkeds,10)">
+							<span class="colorcheck10">真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=10?',':''}}
+						</template>	
+						<template v-if="check(scope.row.checkeds,11)">
+							<span class="colorcheck11">重金属(铅、镉、汞、砷)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=11?',':''}}
+						</template>		
 					</p>
 				</template>
 			</el-table-column>
@@ -507,10 +527,14 @@ export default {
 	  		}else if(restr=="容重,水分,杂质(矿物质),不完善粒(生霉粒),色泽气味(质量指标),脂肪酸值,品尝评分值,色泽气味(储存品质指标),真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮),重金属(铅、镉、汞、砷)"){
 	  			return '全项目指标';
 	  		}else{
-	  			restr=restr.replace(/容重,水分,杂质\(矿物质\),不完善粒\(生霉粒\),色泽气味\(质量指标\)/, "质量指标全项目")
-	  			restr=restr.replace(/面筋吸水量,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
-	  			restr=restr.replace(/脂肪酸值,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
-	  			restr=restr.replace(/真菌毒素\(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮\),重金属\(铅、镉、汞、砷\)/, "食品卫生指标全项目")
+//	  			restr=restr.replace(/容重,水分,杂质\(矿物质\),不完善粒\(生霉粒\),色泽气味\(质量指标\)/, "质量指标全项目")
+//	  			restr=restr.replace(/面筋吸水量,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
+//	  			restr=restr.replace(/脂肪酸值,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
+//	  			restr=restr.replace(/真菌毒素\(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮\),重金属\(铅、镉、汞、砷\)/, "食品卫生指标全项目")
+				restr=restr.replace("容重,水分,杂质(矿物质),不完善粒(生霉粒),色泽气味(质量指标)", "质量指标全项目")
+	  			restr=restr.replace("面筋吸水量,品尝评分值,色泽气味(储存品质指标)", "储存品质指标全项目")
+	  			restr=restr.replace("脂肪酸值,品尝评分值,色泽气味(储存品质指标)", "储存品质指标全项目")
+	  			restr=restr.replace("真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮),重金属(铅、镉、汞、砷)", "食品卫生指标全项目")
 	  			return restr
 	  		}
 		},

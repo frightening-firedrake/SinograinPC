@@ -242,12 +242,13 @@
 	}
 	div.listHeader div.status >div{
 		float:left;
-		/*width:2.85rem;*/
+		max-width:11.5rem;
 		line-height:0.54rem;
 	}
 	div.listHeader div.status >div .el-radio-group{
 		float:left;
-		margin-top:0.14rem;
+		/*margin-top:0.14rem;*/
+		line-height: 0.54rem;
 	}
 	div.listHeader div.status .el-radio-button{
 		height:0.26rem;
@@ -479,6 +480,10 @@
 		background:#f2f2f2;
 		border-radius:0;
 		/*margin-left:0.2rem;*/
+	}
+	/*检测项目那个超长超恶心的筛选*/
+	div.listHeader.checks{
+		height: 1.08rem;
 	}
 </style>
 <script>

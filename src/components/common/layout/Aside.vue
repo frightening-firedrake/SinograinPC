@@ -275,8 +275,8 @@ export default {
 				},
 				{
 					icon: 'icon-fanhui2',
-					title: '归还样品及交接单',
-					linkto: '/index/sampleManagement/handoverReturn',
+					title: '样品归还',
+					linkto: '/index/sampleManagement/returnSamples',
 					level: 2,
 					pid: 6,
 					lid: 25

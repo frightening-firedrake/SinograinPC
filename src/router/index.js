@@ -43,6 +43,10 @@ import HandoverListCreateSelect from '@/components/sampleManagement/handover/Han
 import HandoverListView from '@/components/sampleManagement/handover/HandoverListView.vue'
 import HandoverListEdit from '@/components/sampleManagement/handover/HandoverListEdit.vue'
 import HandoverListEditSelect from '@/components/sampleManagement/handover/HandoverListEditSelect.vue'
+import returnSamples from '@/components/sampleManagement/returnSamples/returnSamples.vue'
+import returnSamplesList from '@/components/sampleManagement/returnSamples/returnSamplesList.vue'
+import returnSamplesListAdd from '@/components/sampleManagement/returnSamples/returnSamplesListAdd.vue'
+import returnSamplesListAddSample from '@/components/sampleManagement/returnSamples/returnSamplesListAddSample.vue'
 import PackingTaskList from '@/components/sampleDetection/packing/PackingTaskList.vue'
 import PackingList from '@/components/sampleDetection/packing/PackingList.vue'
 import PackingView from '@/components/sampleDetection/packing/PackingView.vue'
@@ -53,7 +57,6 @@ import confirmationList from '@/components/sampleDetection/confirmation/Confirma
 import confirmationsdetails from '@/components/sampleDetection/confirmation/Comfirmationdetails.vue'
 import comfirmationentry from "@/components/sampleDetection/confirmation/comfirmationentry.vue"
 import addsample from "@/components/sampleDetection/confirmation/addSample.vue"
-
 import CheckView from '@/components/sampleDetection/check/CheckListView.vue'
 import CheckEdit from '@/components/sampleDetection/check/CheckListEdit.vue'
 import CheckCreate from '@/components/sampleDetection/check/CheckListCreate.vue'
@@ -376,16 +379,38 @@ const routes = [{
                 name: "样品管理/样品领取交接单/编辑样品领取交接单/选择样品编号",
                 component: HandoverListEditSelect,
             },
-            {
-                path: "sampleManagement/handoverReturn",
-                name: "样品管理/归还样品及交接单",
-                component: HandoverReturn,
-                meta: { needAuth: '样品领取交接单' },
+//          {
+////              path: "sampleManagement/handoverReturn",
+//              path: "sampleManagement/sampleReturn",
+//              name: "样品管理/样品归还",
+//              component: HandoverReturn,
+////              meta: { needAuth: '样品归还' },
+//          },
+//          {
+//              path: "sampleManagement/handoverReturn/handoverShow",
+//              name: "样品管理/样品归还/交接单样品详情",
+//              component: HandoverShow,
+//          },
+			{
+                path: "sampleManagement/returnSamples",
+                name: "样品管理/样品归还",
+                component: returnSamples,
+//              meta: { needAuth: '样品归还' },
             },
             {
-                path: "sampleManagement/handoverReturn/handoverShow",
-                name: "样品管理/归还样品及交接单/交接单样品详情",
-                component: HandoverShow,
+                path: "sampleManagement/returnSamples/returnSamplesList",
+                name: "样品管理/样品归还/样品归还单",
+                component: returnSamplesList,
+            },
+            {
+                path: "sampleManagement/returnSamples/returnSamplesListAdd",
+                name: "样品管理/样品归还/新建归还单",
+                component: returnSamplesListAdd,
+            },
+            {
+                path: "sampleManagement/returnSamples/returnSamplesListAdd/returnSamplesListAddSample",
+                name: "样品管理/样品归还/新建归还单/添加检验编号",
+                component: returnSamplesListAddSample,
             },
             //         样品检测
             {
