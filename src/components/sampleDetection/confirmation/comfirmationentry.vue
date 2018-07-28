@@ -231,10 +231,16 @@
                 
             </div>
         </div>
-        <div id='printbuttom' class="leading_out entry_out" v-if="entryflag==1">
+        <div class="leading_out entry_out" v-if="entryflag==1">
             <!--<div class="leading_out" @click="lodopPrint()">-->
             <!--<span>打印样品领取交接单</span>-->
             <span>提交检测数据</span>
+        </div>
+        <div class="leading_out entry_out" v-if="entryflag==2&&tabledatas2.length">
+            <span>提交检测数据</span>
+        </div>
+        <div style="margin-right:0.4rem;" class="leading_out white entry_out" v-if="entryflag==2&&tabledatas2.length">
+            <span>重新导入</span>
         </div>
     </div>
 </template>
@@ -479,6 +485,10 @@ export default {
     },
     created(){
     	this.setUploadURL();
+    	if(this.$route.params.tabledatas){    		
+    		this.tabledatas=this.$route.params.tabledatas;
+    	}
+    	
     },
     data() {
         return {
@@ -490,19 +500,19 @@ export default {
             double:false,
             daoru:false,
             breadcrumb: {
-                search: true,
+                search: false,
                 searching: '',
             },
             subtitle: {
-            	name:'录入'+this.$route.query.sort+'检测数据',
+            	name:'录入'+this.$route.params.sort+'检测数据',
                 btn: false,
                 btntext: '',
             },
             tabledatas:[
-            	{sampleNum:2018010001,res:'我是数据',res2:'我是数据2',fzr:'李建波',id:1},
-            	{sampleNum:2018010002,res:'我是模拟数据',res2:'我是数据2',fzr:'李建波',id:2},
-            	{sampleNum:2018010009,res:'我是假数据',res2:'我是数据2',fzr:'李建波',id:3},
-            	{sampleNum:2018010011,res:'我也不是真数据',res2:'我是数据2',fzr:'李建波',id:4},
+//          	{sampleNum:2018010001,res:'我是数据',res2:'我是数据2',fzr:'李建波',id:1},
+//          	{sampleNum:2018010002,res:'我是模拟数据',res2:'我是数据2',fzr:'李建波',id:2},
+//          	{sampleNum:2018010009,res:'我是假数据',res2:'我是数据2',fzr:'李建波',id:3},
+//          	{sampleNum:2018010011,res:'我也不是真数据',res2:'我是数据2',fzr:'李建波',id:4},
             ],
             tabledatas2:[
             	{sampleNum:2018010001,res:'我是数据',res2:'我是数据2',fzr:'李建波',id:1},
@@ -514,17 +524,32 @@ export default {
     },
     methods: {
 		findCheckPoint() {
-			var num=this.$route.query.checkPoint;
+			var num=this.$route.params.checkPoint;
+			var sort=this.$route.params.sort;
 //			var checkList=["容重","水分","杂质(矿物质)","不完善粒(生霉粒)","色泽气味(质量指标)","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)","重金属(铅、镉、汞、砷)"];	
-			var checkList=["容重","水分","杂质(矿物质)","不完善粒(生霉粒)","色泽气味(质量)","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(品质)","真菌毒素","重金属"];	
+			var checkList1=["容重","水分","杂质","不完善粒(生霉粒)","色泽气味(质量)","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(品质)","真菌毒素","重金属"];	
+			var checkList2=["容重","水分","杂质(矿物质)","不完善粒","色泽气味(质量)","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(品质)","真菌毒素","重金属"];	
 //  		uploadURL
-    		return checkList[num-1]
+			if(sort=='玉米'){
+				return checkList1[num-1]
+			}else{
+				return checkList2[num-1]
+			}
 		},
         searchingfor() {
 
         },
         addstample(){
-           this.$router.push({ path: '/index/sampleDetection/confirmationList/confirmationdetails/comfirmationentry/addsample',query:{checkPoint:this.$route.query.checkPoint}})
+        	var params={};
+        		params.checkPoint=this.$route.params.checkPoint;
+        		params.sort=this.$route.params.sort;
+        		params.tabledatas=this.tabledatas;
+        		if(this.$route.params.searching){
+					params.searching=this.$route.params.searching
+				}
+    		var path=this.$route.name+'/添加检验编号'
+           	this.$router.push({ name: path,params:params})
+//         this.$router.push({ path: '/index/sampleDetection/confirmationList/comfirmationentry/addsample',query:{checkPoint:this.$route.params.checkPoint}})
         },
         statusChange() {
 //          if (this.entryflag == 2) {
@@ -578,34 +603,45 @@ export default {
 			loadiframe.src=this.downloadURL+'?sessionid='+this.Token;
         },
         setUploadURL(){
-    		var num=this.$route.query.checkPoint;
-    		var sort=this.$route.query.sort;
+    		var num=this.$route.params.checkPoint;
+    		var sort=this.$route.params.sort;
     		if(num==2){
     			this.daoru=false;
            		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelSF';
-    			this.downloadURL=this.apiRoot + '/grain/import/downloadSF';
+    			this.downloadURL=this.apiRoot + '/grain/export/downloadSF';
+    		}else if(num==3){
+    			if(sort=="玉米"){
+    				this.double=false;
+//  				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLYM';    			
+//  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLYM';
+    			}else{
+    				this.double=true;
+//  				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLXM';    			
+//  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLXM';
+    			}
+    			this.daoru=false;
     		}else if(num==4){
     			if(sort=="玉米"){
            			this.double=true;
     				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLYM';    			
-    				this.downloadURL=this.apiRoot + '/grain/import/downloadBWSLYM';
+    				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLYM';
     			}else{
            			this.double=false;
     				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLXM';    			
-    				this.downloadURL=this.apiRoot + '/grain/import/downloadBWSLXM';
+    				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLXM';
     			}
     			this.daoru=true;
     		}else if(num==6){
     			this.daoru=false;
            		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelMJXS'; 			
-    			this.downloadURL=this.apiRoot + '/grain/import/downloadMJXS';
+    			this.downloadURL=this.apiRoot + '/grain/export/downloadMJXS';
     		}else if(num==7){
     			this.daoru=false;
            		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelZFSZ';    			
-    			this.downloadURL=this.apiRoot + '/grain/import/downloadZFSZ';
+    			this.downloadURL=this.apiRoot + '/grain/export/downloadZFSZ';
     		}else{
     			this.daoru=false;
            		this.double=false;

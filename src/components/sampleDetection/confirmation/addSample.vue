@@ -7,7 +7,7 @@
       <!--提示-->
       <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表单-->
-      <select-report :taskList="taskList" :checkList="checkList" :checkedListAdd="checkedList" @getCheckedList="getCheckedList" @searchingfor="searchingfor"></select-report> 
+      <select-confirmation :taskList="taskList" :checkList="checkList" :checkedListAdd="checkedList" @getCheckedList="getCheckedList" @searchingfor="searchingfor"></select-confirmation> 
 
     </div>
 </template>
@@ -21,7 +21,7 @@
 import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 
-import SelectReport  from "@/components/common/action/SelectReport"
+import SelectConfirmation  from "@/components/common/action/SelectConfirmation"
 
 import SinograinOptionTitle from "@/components/common/action/OptionTitle"
 
@@ -35,7 +35,7 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
 export default {
   components: {
-    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SelectReport
+    SinograinPrompt,SinograinBreadcrumb,SinograinOptionTitle,SelectConfirmation
 
   },
   computed:{
@@ -81,7 +81,7 @@ export default {
 	    }).then(function (response) {
 //			console.log(response)
 		  	this.checkList=response.data.rows;
-		  	if(this.$route.params.formdatas){
+		  	if(this.$route.params.tabledatas){
 				this.checkedList=this.$route.params.tabledatas;
 			}
 //		  	this.checkedList=response.data.rows;
@@ -145,7 +145,7 @@ export default {
   		this.searching=searching;
   		var params={};
   		params.taskName=searching;
-  		params.detectionState=2;
+  		params.checkPoint=this.$route.params.checkPoint;
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -167,7 +167,7 @@ export default {
 	    }).then(function (response) {
 //			console.log(response)
 		  	this.checkList=response.data;
-		  	if(this.$route.params.formdatas){
+		  	if(this.$route.params.tabledatas){
 				this.checkedList=this.$route.params.tabledatas;
 			}
 //		  	this.checkedList=response.data.rows;
@@ -183,8 +183,12 @@ export default {
   		var path=this.$route.name
   		var end=path.lastIndexOf('/');
   		path=path.slice(0,end);
-
-		this.$router.push({name: path,params: {formdatas:this.$route.params.formdatas,tabledatas:checkedList,searching:this.searching}})
+		var params={};
+		params.tabledatas=checkedList;
+		params.searching=this.searching;
+		params.sort=this.$route.params.sort;
+		params.checkPoint=this.$route.params.checkPoint;
+		this.$router.push({name: path,params:params})
   	},
   },
   data() {

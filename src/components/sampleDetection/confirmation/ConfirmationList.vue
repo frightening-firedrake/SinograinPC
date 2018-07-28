@@ -140,9 +140,14 @@ export default {
 		//	录入样品检验按钮弹框确认后
 		createlibitem(form) { 	
 //			console.log(form);
-			var checkPoint=form.checkPoint;
-			var sort=form.sort;
-			this.$router.push({ path: '/index/sampleDetection/confirmationList/confirmationdetails/comfirmationentry',query:{checkPoint:checkPoint,sort:sort}})			
+//			var checkPoint=form.checkPoint;
+//			var sort=form.sort;
+//			this.$router.push({ path: '/index/sampleDetection/confirmationList/comfirmationentry',params:{checkPoint:checkPoint,sort:sort}})			
+			var params={};
+        		params.checkPoint=form.checkPoint;
+        		params.sort=form.sort;
+    		var path=this.$route.name+'/录入样品检测数据'
+           	this.$router.push({ name: path,params:params})
 		},
 		modelSelectChange(val,model){
 		
@@ -309,7 +314,7 @@ export default {
 			  			selectitems:[
 			  				{label:'小麦',value:'小麦',id:'1'},
 			  				{label:'玉米',value:'玉米',id:'2'},
-			  				{label:'食用油',value:'食用油',id:'3'},
+//			  				{label:'食用油',value:'食用油',id:'3'},
 			  			],
 			  		},
 			  	],		

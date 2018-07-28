@@ -462,12 +462,12 @@ const routes = [{
                 // meta:{needAuth:'样品确认单详情页'}
             },
             {
-                path: "sampleDetection/confirmationList/confirmationdetails/comfirmationentry",
+                path: "sampleDetection/confirmationList/comfirmationentry",
                 name: "样品检测/样品确认单列表/录入样品检测数据",
                 component: comfirmationentry,
             },
             {
-                path: "sampleDetection/confirmationList/confirmationdetails/comfirmationentry/addsample",
+                path: "sampleDetection/confirmationList/comfirmationentry/addsample",
                 name: "样品检测/样品确认单列表/录入样品检测数据/添加检验编号",
                 component: addsample,
             },
