@@ -139,9 +139,10 @@ export default {
 		},
 		//	录入样品检验按钮弹框确认后
 		createlibitem(form) { 	
-			console.log(form);
-			var checkPoint=form.checkPoint
-			this.$router.push({ path: '/index/sampleDetection/confirmationList/confirmationdetails/comfirmationentry',query:{checkPoint:checkPoint}})			
+//			console.log(form);
+			var checkPoint=form.checkPoint;
+			var sort=form.sort;
+			this.$router.push({ path: '/index/sampleDetection/confirmationList/confirmationdetails/comfirmationentry',query:{checkPoint:checkPoint,sort:sort}})			
 		},
 		modelSelectChange(val,model){
 		
@@ -298,7 +299,19 @@ export default {
 			  				{label:'真菌毒素',value:'10',id:'10'},
 			  				{label:'重金属(铅、镉、汞、砷)',value:'11',id:'11'},
 			  			],
-			  		},					
+			  		},
+			  		{
+			  			label:"选择品种:",
+			  			model:"sort",
+//			  			disabled:true,
+			  			value:'',
+			  			type:'select',
+			  			selectitems:[
+			  				{label:'小麦',value:'小麦',id:'1'},
+			  				{label:'玉米',value:'玉米',id:'2'},
+			  				{label:'食用油',value:'食用油',id:'3'},
+			  			],
+			  		},
 			  	],		
 			  	submitText:'确认',
 			},

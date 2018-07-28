@@ -80,8 +80,8 @@
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;background:white;" :span="4" >
                 <!--<span class="delbtn" @click=delSample(item.id)>删除</span>-->
-                <span class="delbtn" v-if="item.returnState==-1">删除</span>
-                <span class="delbtn2" v-if="item.returnState!=-1">删除</span>
+                <span class="delbtn" v-if="isreturn" @click=delSample(item.id)>删除</span>
+                <span class="delbtn2" v-if="!isreturn">删除</span>
               </el-col>
             </el-col>
             <el-col style="" :span="12"  class='loopBorder' style="border-top:1px solid #dfdfdf;">
@@ -272,7 +272,7 @@ export default {
     }
   },
   created() {
-//  console.log(this.$route.query)
+    console.log(this.$route.query)
     //  获取列表数据（第一页）
     this.getlistdata(1)
 		if(this.$route.params.formdatas){
@@ -392,18 +392,23 @@ export default {
       }.bind(this));
     },
     delSample(id){
-    	this.$confirm('此操作将删除该样品, 是否继续?', '提示', {
+    	var msg='此操作将删除该样品, 是否继续?';
+    	if(this.formdatas.items.length==1){
+    			msg='删除此样品归还单将一并删除, 是否继续?';
+    	}
+    	this.$confirm(msg, '提示', {
 				confirmButtonText: '确定',
 				cancelButtonText: '取消',
 				type: 'warning'
 			}).then(() => {
-				this.formdatas.items=this.formdatas.items.filter((value,index)=>{
-	    		return value.id!==id
-	    	})
-		      	this.$message({
-		        	type: 'success',
-		        	message: '删除成功!'
-		      	});
+				this.delReturnSample(id)
+//				this.formdatas.items=this.formdatas.items.filter((value,index)=>{
+//	    		return value.id!==id
+//	    	})
+//		      	this.$message({
+//		        	type: 'success',
+//		        	message: '删除成功!'
+//		      	});
 			}).catch(() => {
 				this.$message({
 					type: 'info',
@@ -411,6 +416,36 @@ export default {
 				});
 			});
     	
+    },
+    delReturnSample(id){
+    		this.$http({
+          	method: 'post',
+          	url:this.deleteURL,
+          	transformRequest: [function (data) {
+								let ret = ''
+								for (let it in data) {
+								ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+								}
+							return ret
+						}],
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          data: {
+              sampleId: id,
+  						id:this.$route.query.id
+          },
+        }).then(function(response) {
+          	if(response.data.success){
+          			this.formdatas.items=this.formdatas.items.filter((value,index)=>{
+					    			return value.id!==id
+					    	})
+				      	this.$message({
+				        		type: 'success',
+				        		message: '删除成功!'
+				      	});
+          	}         
+        }.bind(this)).catch(function(error) {
+          	console.log(error);
+        }.bind(this));
     },
     addSample(){
     	var path=this.$route.name+'/添加检验编号'
@@ -502,7 +537,7 @@ export default {
       datalistURL: this.apiRoot +'/grain/returnSingle/getStorage',
       guihuanaddURL: this.apiRoot+'/grain/returnSingle/guihuan',
       searchURL: '/liquid/role2/data/search',
-      deleteURL: '/liquid/role2/data/delete',
+      deleteURL:  this.apiRoot+'/grain/returnSingle/delete',
       isreturn:true,
       checkedId: [],
       createlibVisible: false,

@@ -19,50 +19,52 @@
           </div>-->
           <el-row style="" class="hand_view_tab_content">
             <el-col style="height:auto;background-color:#fbfbfb;border-left:1px solid #dfdfdf;" :span="24" class="hand_view_tab_content_font">
-              <el-col style="border-left:none;margin-left: -1px" :span="2">
+              <el-col style="border-left:none;margin-left: -1px;text-align: center;" :span="3">
                 <span>检验编号:</span>
               </el-col>
-              <el-col style="background-color:#fff;padding:0 5%;" :span="22">
-                <span>{{formdatas.testList}}</span>
+              <el-col style="background-color:#fff;padding:0 2%;border-left: 1px solid #dfdfdf;" :span="21">
+                <span>{{sampleNum}}</span>
               </el-col>
             </el-col>
           </el-row>
           <el-row style="background-color:#fbfbfb;" class="hand_view_tabbody">
-            <el-col style="" :span="6">
-              <el-col style="" :span="8">
-                <span>序号</span>
+            <el-col style="" :span="8">
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>检验项目</span>
               </el-col>
-              <el-col style="" :span="16">
-                <span>检验编号</span>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>检测结果</span>
               </el-col>
-            </el-col>
-            <el-col style=""  :span="6">
-              <el-col style="" :span="8">
-                <span>序号</span>
-              </el-col>
-              <el-col  style="" :span="16">
-                <span>检验编号</span>
+              <el-col style="" :span="6">
+                <span>负责人</span>
               </el-col>
             </el-col>
-            <el-col style="" :span="6">
-              <el-col style="" :span="8">
-                <span>序号</span>
+           <el-col style="" :span="8">
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>检验项目</span>
               </el-col>
-              <el-col style="" :span="16">
-                <span>检验编号</span>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>检测结果</span>
               </el-col>
-            </el-col>
-            <el-col style="" :span="6">
-              <el-col style="" :span="8">
-                <span>序号</span>
-              </el-col>
-              <el-col style="" :span="16">
-                <span>检验编号</span>
+              <el-col style="" :span="6">
+                <span>负责人</span>
               </el-col>
             </el-col>
+            <el-col style="" :span="8">
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>检验项目</span>
+              </el-col>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>检测结果</span>
+              </el-col>
+              <el-col style="" :span="6">
+                <span>负责人</span>
+              </el-col>
+            </el-col>
+            
           </el-row>
           <el-row class="hand_view_tabbody" style="border-top:none;">
-            <el-col :span="6" v-for="(item,index) in formdatas.testItemList" class='loopBorder' :key="index" style="border-top:1px solid #dfdfdf;">
+            <!--<el-col :span="6" v-for="(item,index) in formdatas.testItemList" class='loopBorder' :key="index" style="border-top:1px solid #dfdfdf;">
               <el-col style="" :span="8">
                 <span>{{index+1}}</span>
               </el-col>
@@ -77,7 +79,141 @@
               <el-col style="" :span="16">
                 <span>&nbsp;</span>
               </el-col>
+            </el-col>-->
+            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>不完善粒</span>
+              </el-col>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>未检测</span>
+              </el-col>
+              <el-col style="" :span="6">
+                <span>admin</span>
+              </el-col>
             </el-col>
+            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>不完善粒</span>
+              </el-col>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>未检测</span>
+              </el-col>
+              <el-col style="" :span="6">
+                <span>admin</span>
+              </el-col>
+            </el-col>
+            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>不完善粒</span>
+              </el-col>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>未检测</span>
+              </el-col>
+              <el-col style="" :span="6">
+                <span>admin</span>
+              </el-col>
+            </el-col>
+            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>不完善粒</span>
+              </el-col>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>未检测</span>
+              </el-col>
+              <el-col style="" :span="6">
+                <span>admin</span>
+              </el-col>
+            </el-col>
+            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>不完善粒</span>
+              </el-col>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>未检测</span>
+              </el-col>
+              <el-col style="" :span="6">
+                <span>admin</span>
+              </el-col>
+            </el-col>
+            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>不完善粒</span>
+              </el-col>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>未检测</span>
+              </el-col>
+              <el-col style="" :span="6">
+                <span>admin</span>
+              </el-col>
+            </el-col>
+            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>不完善粒</span>
+              </el-col>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>未检测</span>
+              </el-col>
+              <el-col style="" :span="6">
+                <span>admin</span>
+              </el-col>
+            </el-col>
+            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>不完善粒</span>
+              </el-col>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>未检测</span>
+              </el-col>
+              <el-col style="" :span="6">
+                <span>admin</span>
+              </el-col>
+            </el-col>
+            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>不完善粒</span>
+              </el-col>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>未检测</span>
+              </el-col>
+              <el-col style="" :span="6">
+                <span>admin</span>
+              </el-col>
+            </el-col>
+            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>不完善粒</span>
+              </el-col>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>未检测</span>
+              </el-col>
+              <el-col style="" :span="6">
+                <span>admin</span>
+              </el-col>
+            </el-col>
+            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>不完善粒</span>
+              </el-col>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>未检测</span>
+              </el-col>
+              <el-col style="" :span="6">
+                <span>admin</span>
+              </el-col>
+            </el-col>
+            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>&nbsp;</span>
+              </el-col>
+              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+                <span>&nbsp;</span>
+              </el-col>
+              <el-col style="" :span="6">
+                <span>&nbsp;</span>
+              </el-col>
+            </el-col>
+            
+            
             
           </el-row>
 
@@ -88,10 +224,10 @@
       </div>
       </div>
      <!--<div id='printbuttom' class="leading_out" @click="print()">-->
-     <div id='printbuttom' class="leading_out" @click="leading_out()">
+     <div id='printbuttom' class="leading_out right" @click="leading_out()">
      <!--<div class="leading_out" @click="lodopPrint()">-->
         <!--<span>打印样品领取交接单</span>-->
-        <span>导出样品领取交接单</span>
+        <span>导出Excel表格</span>
       </div>
     
   </div>

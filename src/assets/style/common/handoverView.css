@@ -299,6 +299,9 @@
     padding: 0.04rem;
     color: #ffffff;
 }
+.leading_out.right{
+ 	float:right;
+}
  .leading_out span{
    	border: 1px solid #FFFFFF;
     border-radius: 0.04rem;

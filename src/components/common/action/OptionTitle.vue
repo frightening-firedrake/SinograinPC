@@ -1,7 +1,7 @@
 <template>
     <div class="option_title">
         <div class="option_title_name">
-            <p>{{Route}}</p>
+            <p>{{title.name?title.name:Route}}</p>
         </div>
         <div class="titlebtn" v-if="title.btn" @click="titlebtn">
 			<span>

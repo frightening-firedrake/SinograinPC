@@ -67,4 +67,10 @@
   	/*transform: translateX(10px);*/
   	opacity: 0;
 }
+.el-popper[x-placement^=bottom] .popper__arrow{
+	left: 20px!important;
+}
+.el-popper[x-placement^=top] .popper__arrow{
+	left: 20px!important;
+}
 </style>
