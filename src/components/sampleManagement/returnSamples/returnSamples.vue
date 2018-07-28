@@ -187,14 +187,7 @@ export default {
 		getlistdata(page) {
 			this.loading = true;
 			var params = {};
-			if(this.filterStatus==-1){
-				params.returnState=-1;
-			}else if(this.filterStatus==1){
-				params.returnState=1;	
-			}
-			if(this.searchText){				
-				params.nameLikeOrId = this.searchText;
-			};
+			
 			// 获取列表数据（第？页）
 			this.$http({
 				method: 'post',
@@ -266,7 +259,7 @@ export default {
 	},
 	data() {
 		return {
-			datalistURL: this.apiRoot +'/grain/handover/data',
+			datalistURL: this.apiRoot +'/grain/returnSingle/data',
 			searchURL: this.apiRoot +'/grain/handover/data',
 			deleteURL: '/liquid/role2/data/delete',
       		searchText:'',
@@ -341,7 +334,7 @@ export default {
 				},
 				{
 					id: 2,
-					prop: 'number',
+					prop: 'returnSampleNumber',
 					label: "归还样品数量",
 //					sort: true,
 				},

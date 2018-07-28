@@ -76,7 +76,7 @@
                 <span>{{item.storage}}</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
-                <span>{{item.storage}}</span>
+                <span>{{userName}}</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;background:white;" :span="4" >
                 <span class="delbtn" @click=delSample(item.id)>删除</span>
@@ -271,6 +271,7 @@ export default {
     }
   },
   created() {
+    this.modal.formdatas[0].value=this.userName
 //  console.log(this.$route.query)
     //  获取列表数据（第一页）
 //  this.getlistdata(1)
@@ -429,11 +430,15 @@ export default {
 	  //	填入新建数据
 		createlibitem(form) {
 			console.log(form);
-//    this.guihuanadd(form);
-      this.$router.push({path:'/index/sampleManagement/returnSamples'});
+   this.guihuanadd(form);
+      // this.$router.push({path:'/index/sampleManagement/returnSamples'});
 		},
     guihuanadd(form) {
-
+        var sampleIds=[];
+        this.formdatas.items.forEach((value,index)=>{
+          sampleIds.push(value.id)
+        })
+        sampleIds.join(',')
         this.$http({
           method: 'post',
           url:this.guihuanaddURL,
@@ -448,8 +453,8 @@ export default {
           data: {
 //            id: this.$route.query.id,
               returnPerson: form.returnPerson,
-              returnState: 1,
-              sampleNums: this.sampleNums,
+              sampleIds:sampleIds,
+              // sampleNums: this.sampleNums,
           },
         }).then(function(response) {
 
@@ -493,7 +498,7 @@ export default {
   data() {
     return {
       datalistURL: this.apiRoot +'/grain/handover/getStorage',
-//    guihuanaddURL: this.apiRoot+'/grain/handover/guiHuan',
+      guihuanaddURL: this.apiRoot+'/grain/returnSingle/save',
       searchURL: '/liquid/role2/data/search',
       deleteURL: '/liquid/role2/data/delete',
       checkedId: [],
@@ -534,7 +539,7 @@ export default {
 			  			label:"填写归还人:",
 			  			model:"returnPerson",
 //			  			disabled:true,
-			  			value:'',
+			  			value:"",
 			  			type:'input',
 			  		},					
 			  	],		

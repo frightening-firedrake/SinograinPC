@@ -76,7 +76,7 @@
                 <span>{{item.storage}}</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
-                <span>{{item.storage}}</span>
+                <span>{{formdatas.returnPerson}}</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;background:white;" :span="4" >
                 <!--<span class="delbtn" @click=delSample(item.id)>删除</span>-->
@@ -191,7 +191,7 @@
       </div>
       </div>
      	<div class="hoverReturn">
-		    <el-button class="hoverReturnBtn" type="primary" @click="hoverReturn">确认还单</el-button>
+		    <el-button v-if="isreturn" class="hoverReturnBtn" type="primary" @click="hoverReturn">确认还单</el-button>
       </div>
       <sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose" @modelSelectChange="modelSelectChange"></sinograin-modal>      	
     	
@@ -348,6 +348,7 @@ export default {
   					id:this.$route.query.id
   			}
       }).then(function(response) {
+        this.isreturn=response.data.returnState==-1?true:false;
 //    	console.log(response.data)
 //    	this.formdatas.remarks=response.data.remark;//备注
 //    	this.formdatas.gly="管理员"
@@ -357,6 +358,7 @@ export default {
 //    	this.formdatas.sort='麦子';//品种
 //    	this.formdatas.name=response.data.name;//品种
       	this.formdatas.items=response.data.samples;//检测样品
+        this.formdatas.returnPerson=response.data.returnPerson;
       	this.sampleNums=response.data.sampleNums;//检测样品
       	// this.formdatas.items=response.data.sampleNums.split(',');//检测样品
       	this.formdatas.items.sort();//检测样品排序
@@ -430,11 +432,15 @@ export default {
 	  //	填入新建数据
 		createlibitem(form) {
 			console.log(form);
-//    this.guihuanadd(form);
-      this.$router.push({path:'/index/sampleManagement/returnSamples'});
+    // this.guihuanadd(form);
+      // this.$router.push({path:'/index/sampleManagement/returnSamples'});
 		},
-    guihuanadd(form) {
-
+    getDateNow(){
+  		var date1=new Date()
+  		return date1.getFullYear()+'-'+(date1.getMonth()+1)+'-'+date1.getDate()
+  	},
+    guihuanadd() {
+        // var returnTime = new Date();
         this.$http({
           method: 'post',
           url:this.guihuanaddURL,
@@ -447,10 +453,9 @@ export default {
 				}],
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           data: {
-//            id: this.$route.query.id,
-              returnPerson: form.returnPerson,
+              id: this.$route.query.id,
               returnState: 1,
-              sampleNums: this.sampleNums,
+              // returnTime: returnTime,
           },
         }).then(function(response) {
 
@@ -471,6 +476,7 @@ export default {
 			this.modalVisible = false;
 		},
 		hoverReturn(){
+      this.guihuanadd();
 //			if(!this.formdatas.items.length){
 //				this.$alert('请添加检验编号','提示信息',{type: 'warning'});
 //				return
@@ -493,10 +499,11 @@ export default {
   },
   data() {
     return {
-      datalistURL: this.apiRoot +'/grain/handover/getStorage',
-//    guihuanaddURL: this.apiRoot+'/grain/handover/guiHuan',
+      datalistURL: this.apiRoot +'/grain/returnSingle/getStorage',
+      guihuanaddURL: this.apiRoot+'/grain/returnSingle/guihuan',
       searchURL: '/liquid/role2/data/search',
       deleteURL: '/liquid/role2/data/delete',
+      isreturn:true,
       checkedId: [],
       createlibVisible: false,
       returnState:-1,
@@ -519,6 +526,7 @@ export default {
 //      sort:'',//品种
         nid:'',//编号
 //      testList:'',//检测项目
+        returnPerson:'',
         //检测样品
         items:[
    
