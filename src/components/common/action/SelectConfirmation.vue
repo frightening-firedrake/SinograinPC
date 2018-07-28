@@ -133,11 +133,13 @@ export default {
     computed:{
   		...mapGetters(["remarkses"]),
     	listready(){
+//  		查询检验编号生成数组like [20180215,20182546]
     		if(this.checkList.length&&this.$route.params.tabledatas){
     			var checkNums=this.$route.params.tabledatas.map((val)=>{
     				return val.sampleNum?val.sampleNum:val;
     			})
-
+//				console.log(checkNums)
+//				过滤数组设置选中项目
     			this.checkedList=this.checkList.filter((item)=>{
     				return checkNums.includes(item.sampleNum)
     			})

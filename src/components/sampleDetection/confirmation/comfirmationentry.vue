@@ -240,7 +240,10 @@
             <span>提交检测数据</span>
         </div>
         <div style="margin-right:0.4rem;" class="leading_out white entry_out" v-if="entryflag==2&&tabledatas2.length">
-            <span>重新导入</span>
+            <!--<span>重新导入</span>-->
+            <el-upload class="importbtn" :action="uploadURL" :headers="{'Authorization':Token}" multiple :show-file-list="false">
+		       	重新导入
+		    </el-upload>
         </div>
     </div>
 </template>
@@ -473,6 +476,20 @@
 .double.el-input{
     width: 47%!important;
 }
+.importbtn{
+	border: 1px solid #58b481;
+    line-height:0.25rem;
+    border-radius: 0.04rem;
+    padding: 0 0.2rem;
+    font-weight: 500;
+    text-align:center;
+    width:100%;
+    height:100%;
+    display:block;
+}
+.importbtn .el-upload:focus{
+	color:inherit;
+}
 </style>
 <script>
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
@@ -515,10 +532,10 @@ export default {
 //          	{sampleNum:2018010011,res:'我也不是真数据',res2:'我是数据2',fzr:'李建波',id:4},
             ],
             tabledatas2:[
-            	{sampleNum:2018010001,res:'我是数据',res2:'我是数据2',fzr:'李建波',id:1},
-            	{sampleNum:2018010002,res:'我是模拟数据',res2:'我是数据2',fzr:'李建波',id:2},
-            	{sampleNum:2018010009,res:'我是假数据',res2:'我是数据2',fzr:'李建波',id:3},
-            	{sampleNum:2018010011,res:'我也不是真数据',res2:'我是数据2',fzr:'李建波',id:4},
+//          	{sampleNum:2018010001,res:'我是数据',res2:'我是数据2',fzr:'李建波',id:1},
+//          	{sampleNum:2018010002,res:'我是模拟数据',res2:'我是数据2',fzr:'李建波',id:2},
+//          	{sampleNum:2018010009,res:'我是假数据',res2:'我是数据2',fzr:'李建波',id:3},
+//          	{sampleNum:2018010011,res:'我也不是真数据',res2:'我是数据2',fzr:'李建波',id:4},
             ],
         }
     },

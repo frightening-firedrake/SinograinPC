@@ -306,14 +306,14 @@ export default {
 					pid: 9,
 					lid: 29
 				},	
-				{
-					icon: 'icon-jianyandan',
-					title: '样品检验单',
-					linkto: '/index/sampleDetection/checkList',
-					level: 2,
-					pid: 9,
-					lid: 11
-				},				
+//				{
+//					icon: 'icon-jianyandan',
+//					title: '样品检验单',
+//					linkto: '/index/sampleDetection/checkList',
+//					level: 2,
+//					pid: 9,
+//					lid: 11
+//				},				
 				{
 					icon: 'icon-baobiaoguanli',
 					title: '检测报表管理',
