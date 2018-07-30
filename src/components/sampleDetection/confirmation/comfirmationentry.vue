@@ -64,9 +64,9 @@
                     </el-col>
                     <el-col :span="8" style="border-bottom:none;">
                         <!--<el-form-item>-->
-                            <el-input v-if="!double" class="import_input" v-model="item.res"></el-input>
-                            <el-input v-if="double" style="padding-right:0;" class="import_input double" v-model="item.res"></el-input>
-                            <el-input v-if="double" style="padding-left:0;" class="import_input double" v-model="item.res2"></el-input>
+                            <el-input v-if="!double" class="import_input" v-model="item.result"></el-input>
+                            <el-input v-if="double" style="padding-right:0;" class="import_input double" v-model="item.result"></el-input>
+                            <el-input v-if="double" style="padding-left:0;" class="import_input double" v-model="item.result2"></el-input>
                         <!--</el-form-item>-->
                     </el-col>
                     <el-col :span="5">
@@ -163,9 +163,9 @@
                     </el-col>
                     <el-col :span="8" style="border-bottom:none;">
                         <!--<el-form-item>-->
-                            <el-input v-if="!double" class="import_input" v-model="item.res"></el-input>
-                            <el-input v-if="double" style="padding-right:0;" class="import_input double" v-model="item.res"></el-input>
-                            <el-input v-if="double" style="padding-left:0;" class="import_input double" v-model="item.res2"></el-input>
+                            <el-input v-if="!double" class="import_input" v-model="item.result"></el-input>
+                            <el-input v-if="double" style="padding-right:0;" class="import_input double" v-model="item.result"></el-input>
+                            <el-input v-if="double" style="padding-left:0;" class="import_input double" v-model="item.result2"></el-input>
                             
                         <!--</el-form-item>-->
                     </el-col>
@@ -231,7 +231,7 @@
                 
             </div>
         </div>
-        <div class="leading_out entry_out" v-if="entryflag==1">
+        <div class="leading_out entry_out" @click="submit" v-if="entryflag==1">
             <!--<div class="leading_out" @click="lodopPrint()">-->
             <!--<span>打印样品领取交接单</span>-->
             <span>提交检测数据</span>
@@ -499,12 +499,18 @@ export default {
     components: { SinograinBreadcrumb, SinograinOptionTitle },
     computed:{
 		...mapGetters(["Token","userName"]),
+		tabledatasEdit(){
+			
+		}
     },
     created(){
     	this.setUploadURL();
     	if(this.$route.params.tabledatas){    		
     		this.tabledatas=this.$route.params.tabledatas;
     	}
+    	if(!this.$route.params.sort){
+			this.$router.push({name:"样品检测/样品确认单列表"})		
+		}
     	
     },
     data() {
@@ -512,10 +518,14 @@ export default {
         	importicon:'static/images/comfirmationentry/importicon.png',
         	importicon2:'static/images/comfirmationentry/importicon2.png',
         	uploadURL:'',
-        	downloadURL:'',
+        	downloadURL:this.apiRoot + '/grain/download/downloadTemplate',
+        	submitURL:this.apiRoot +'/grain/testItem/save',
             entryflag: 1,
             double:false,
             daoru:false,
+            checkPoint:'',
+            sort:'',
+            templateName:'',
             breadcrumb: {
                 search: false,
                 searching: '',
@@ -526,16 +536,16 @@ export default {
                 btntext: '',
             },
             tabledatas:[
-//          	{sampleNum:2018010001,res:'我是数据',res2:'我是数据2',fzr:'李建波',id:1},
-//          	{sampleNum:2018010002,res:'我是模拟数据',res2:'我是数据2',fzr:'李建波',id:2},
-//          	{sampleNum:2018010009,res:'我是假数据',res2:'我是数据2',fzr:'李建波',id:3},
-//          	{sampleNum:2018010011,res:'我也不是真数据',res2:'我是数据2',fzr:'李建波',id:4},
+//          	{sampleNum:2018010001,result:'我是数据',result2:'我是数据2',fzr:'李建波',id:1},
+//          	{sampleNum:2018010002,result:'我是模拟数据',result2:'我是数据2',fzr:'李建波',id:2},
+//          	{sampleNum:2018010009,result:'我是假数据',result2:'我是数据2',fzr:'李建波',id:3},
+//          	{sampleNum:2018010011,result:'我也不是真数据',result2:'我是数据2',fzr:'李建波',id:4},
             ],
             tabledatas2:[
-//          	{sampleNum:2018010001,res:'我是数据',res2:'我是数据2',fzr:'李建波',id:1},
-//          	{sampleNum:2018010002,res:'我是模拟数据',res2:'我是数据2',fzr:'李建波',id:2},
-//          	{sampleNum:2018010009,res:'我是假数据',res2:'我是数据2',fzr:'李建波',id:3},
-//          	{sampleNum:2018010011,res:'我也不是真数据',res2:'我是数据2',fzr:'李建波',id:4},
+//          	{sampleNum:2018010001,result:'我是数据',result2:'我是数据2',fzr:'李建波',id:1},
+//          	{sampleNum:2018010002,result:'我是模拟数据',result2:'我是数据2',fzr:'李建波',id:2},
+//          	{sampleNum:2018010009,result:'我是假数据',result2:'我是数据2',fzr:'李建波',id:3},
+//          	{sampleNum:2018010011,result:'我也不是真数据',result2:'我是数据2',fzr:'李建波',id:4},
             ],
         }
     },
@@ -616,17 +626,21 @@ export default {
 			});      	
         },
         download(){
+        	
         	var loadiframe=document.getElementById('fordownload');
-			loadiframe.src=this.downloadURL+'?sessionid='+this.Token;
+			loadiframe.src=this.downloadURL+'?fileName='+this.templateName+'&sessionid='+this.Token;
         },
         setUploadURL(){
     		var num=this.$route.params.checkPoint;
     		var sort=this.$route.params.sort;
+    		this.checkPoint=num;
+    		this.sort=sort;
     		if(num==2){
-    			this.daoru=false;
+    			this.daoru=true;
            		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelSF';
-    			this.downloadURL=this.apiRoot + '/grain/export/downloadSF';
+    			this.templateName='水分模板'
+//  			this.downloadURL=this.apiRoot + '/grain/export/downloadSF';
     		}else if(num==3){
     			if(sort=="玉米"){
     				this.double=false;
@@ -642,30 +656,108 @@ export default {
     			if(sort=="玉米"){
            			this.double=true;
     				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLYM';    			
-    				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLYM';
+    				this.templateName='不完善粒（玉米）模板'
+//  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLYM';
     			}else{
            			this.double=false;
     				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLXM';    			
-    				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLXM';
+    				this.templateName='不完善粒（小麦）模板'
+//  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLXM';
     			}
     			this.daoru=true;
     		}else if(num==6){
-    			this.daoru=false;
+    			this.daoru=true;
            		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelMJXS'; 			
-    			this.downloadURL=this.apiRoot + '/grain/export/downloadMJXS';
+    			this.templateName='面筋吸水量模板'
+//  			this.downloadURL=this.apiRoot + '/grain/export/downloadMJXS';
     		}else if(num==7){
-    			this.daoru=false;
+    			this.daoru=true;
            		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelZFSZ';    			
-    			this.downloadURL=this.apiRoot + '/grain/export/downloadZFSZ';
+    			this.templateName='脂肪酸值模板'
+//  			this.downloadURL=this.apiRoot + '/grain/export/downloadZFSZ';
     		}else{
     			this.daoru=false;
            		this.double=false;
     			this.uploadURL='';
     			this.downloadURL='';
     		}
-    	}
+    	},
+    	submit(){
+    		if(!this.tabledatas.length){
+				this.$alert('请添加检验编号','提示信息',{type: 'warning'});
+				return
+			}
+    		var data;
+    		if(this.checkPoint==3&&this.sort=='小麦'){
+    			data=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.1';
+	    			obj.sampleId=value.id;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			var data2=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.2';
+	    			obj.sampleId=value.id;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data2)
+    		}else if(this.checkPoint==4&&this.sort=='玉米'){
+    			data=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.1';
+	    			obj.sampleId=value.id;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			var data2=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.2';
+	    			obj.sampleId=value.id;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data2)
+    		}else{
+    			data=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint;
+	    			obj.sampleId=value.id;
+	    			obj.result=value.result;
+		    		obj.principal=this.userName;
+	    			return obj
+	    		})
+    		}
+    		
+    		this.$http({
+				method: 'post',
+				url: this.submitURL,
+				transformRequest: [function (data) {
+					let ret = ''
+					for (let it in data) {
+					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					}
+					return ret
+				}],
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				data: {
+				   	params:JSON.stringify(data)			    	
+				}
+			}).then(function(response) {
+
+			}.bind(this)).catch(function(error) {
+				console.log(error);
+			}.bind(this));
+	
+    	},
     },
    
 }

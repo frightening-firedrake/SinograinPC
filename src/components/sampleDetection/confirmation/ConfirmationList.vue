@@ -56,7 +56,7 @@ export default {
 	created() {
 //		console.log(this.$route.query)
 		//  获取列表数据（第一页）
-//		this.getlistdata(1)//对接时使用，暂时不启用用的假数据
+		this.getlistdata(1)//对接时使用，暂时不启用用的假数据
 		//	移除监听事件
 		this.$root.eventHub.$off('delelistitem')
 		this.$root.eventHub.$off("viewlistitem")
@@ -150,7 +150,34 @@ export default {
            	this.$router.push({ name: path,params:params})
 		},
 		modelSelectChange(val,model){
-		
+			console.log(val,model)
+			if(model=='sort'&&val=='玉米'){
+				this.modal.formdatas[1].selectitems=[
+			  				{label:'容重',value:'1',id:'1'},
+			  				{label:'水分',value:'2',id:'2'},
+			  				{label:'杂质',value:'3',id:'3'},
+			  				{label:'不完善粒(生霉粒)',value:'4',id:'4'},
+			  				{label:'色泽气味(质量指标)',value:'5',id:'5'},
+			  				{label:'脂肪酸值',value:'7',id:'7'},
+			  				{label:'品尝评分值',value:'8',id:'8'},
+			  				{label:'色泽气味(储存品质指标)',value:'9',id:'9'},
+			  				{label:'真菌毒素',value:'10',id:'10'},
+			  				{label:'重金属(铅、镉、汞、砷)',value:'11',id:'11'},
+			  			];
+			}else if(model=='sort'&&val=='小麦'){
+				this.modal.formdatas[1].selectitems=[
+			  				{label:'容重',value:'1',id:'1'},
+			  				{label:'水分',value:'2',id:'2'},
+			  				{label:'杂质(矿物质)',value:'3',id:'3'},
+			  				{label:'不完善粒',value:'4',id:'4'},
+			  				{label:'色泽气味(质量指标)',value:'5',id:'5'},
+			  				{label:'面筋吸水量',value:'6',id:'6'},
+			  				{label:'品尝评分值',value:'8',id:'8'},
+			  				{label:'色泽气味(储存品质指标)',value:'9',id:'9'},
+			  				{label:'真菌毒素',value:'10',id:'10'},
+			  				{label:'重金属(铅、镉、汞、砷)',value:'11',id:'11'},
+			  			];
+			}
 		},
 		//	关闭新建弹框
 		dialogClose() {
@@ -191,10 +218,13 @@ export default {
 		//	获取列表数据方法
 		getlistdata(page) {
 			this.loading = true;
-			var params = {};
-			params.type = 1;			
+			var data={};
+			data.page=page;
+			data.rows=this.page.size;
+			var params = {};			
 			if(this.searchText){				
-				params.formNameLike = this.searchText;
+				params.sampleNumLike = this.searchText;
+				data.params=JSON.stringify(params);
 			};
 			// 获取列表数据（第？页）
 			this.$http({
@@ -208,11 +238,7 @@ export default {
 					return ret
 				}],
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				data: {
-					page:page,
-			    	rows:this.page.size,
-				   	params:JSON.stringify(params)			    	
-				}
+				data: data,
 			}).then(function(response) {
 				this.tabledatas = response.data.rows;
 				this.page.total = response.data.total;
@@ -273,7 +299,7 @@ export default {
 	},
 	data() {
 		return {
-			datalistURL: this.apiRoot +'/grain/register/data',
+			datalistURL: this.apiRoot +'/grain/testItem/data',
 			searchURL: this.apiRoot +'/grain/register/data',
 	  		exportExcelURL: this.apiRoot + '',
 			deleteURL: '/liquid/role2/data/delete',
@@ -285,27 +311,6 @@ export default {
 			  	title:'选择检验项目',
 				formdatas:[
 					{
-			  			label:"选择检验项目:",
-			  			model:"checkPoint",
-//			  			disabled:true,
-			  			value:'',
-			  			type:'select',
-			  			selectitems:[
-			  				{label:'容重',value:'1',id:'1'},
-			  				{label:'水分',value:'2',id:'2'},
-			  				{label:'杂质(矿物质)',value:'3',id:'3'},
-			  				{label:'不完善粒(生霉粒)',value:'4',id:'4'},
-			  				{label:'色泽气味(质量指标)',value:'5',id:'5'},
-			  				{label:'面筋吸水量',value:'6',id:'6'},
-			  				{label:'脂肪酸值',value:'7',id:'7'},
-			  				{label:'品尝评分值',value:'8',id:'8'},
-			  				{label:'色泽气味(储存品质指标)',value:'9',id:'9'},
-//			  				{label:'真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)',value:'10',id:'10'},
-			  				{label:'真菌毒素',value:'10',id:'10'},
-			  				{label:'重金属(铅、镉、汞、砷)',value:'11',id:'11'},
-			  			],
-			  		},
-			  		{
 			  			label:"选择品种:",
 			  			model:"sort",
 //			  			disabled:true,
@@ -317,6 +322,28 @@ export default {
 //			  				{label:'食用油',value:'食用油',id:'3'},
 			  			],
 			  		},
+					{
+			  			label:"选择检验项目:",
+			  			model:"checkPoint",
+//			  			disabled:true,
+			  			value:'',
+			  			type:'select',
+			  			selectitems:[
+//			  				{label:'容重',value:'1',id:'1'},
+//			  				{label:'水分',value:'2',id:'2'},
+//			  				{label:'杂质(矿物质)',value:'3',id:'3'},
+//			  				{label:'不完善粒(生霉粒)',value:'4',id:'4'},
+//			  				{label:'色泽气味(质量指标)',value:'5',id:'5'},
+//			  				{label:'面筋吸水量',value:'6',id:'6'},
+//			  				{label:'脂肪酸值',value:'7',id:'7'},
+//			  				{label:'品尝评分值',value:'8',id:'8'},
+//			  				{label:'色泽气味(储存品质指标)',value:'9',id:'9'},
+////			  				{label:'真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)',value:'10',id:'10'},
+//			  				{label:'真菌毒素',value:'10',id:'10'},
+//			  				{label:'重金属(铅、镉、汞、砷)',value:'11',id:'11'},
+			  			],
+			  		},
+			  		
 			  	],		
 			  	submitText:'确认',
 			},
@@ -359,16 +386,16 @@ export default {
 		      	statusTitle2:[],
 		    },
 			tabledatas: [
-				{sampleNum:'201800101',checkeds:'1,2,5,6',id:1},
-		      	{sampleNum:'201800102',checkeds:'1,2,3,5,6',id:2},
-		      	{sampleNum:'201800103',checkeds:'1,2,3,5,6',id:3},
-		      	{sampleNum:'201800104',checkeds:'1,2,3,6',id:4},
-		      	{sampleNum:'201800105',checkeds:'1,2,3,5,6',id:5},
-		      	{sampleNum:'201800106',checkeds:'1,2,3,5,6',id:6},
-		      	{sampleNum:'201800107',checkeds:'1,2,3,5,6,7',id:7},
-		      	{sampleNum:'201800108',checkeds:'1,2,3,5,6',id:8},
-		      	{sampleNum:'201800109',checkeds:'1,2,3,5,6',id:9},
-		      	{sampleNum:'201800110',checkeds:'2,3,5,6',id:10},
+//				{sampleNum:'201800101',checkeds:'1,2,5,6',id:1},
+//		      	{sampleNum:'201800102',checkeds:'1,2,3,5,6',id:2},
+//		      	{sampleNum:'201800103',checkeds:'1,2,3,5,6',id:3},
+//		      	{sampleNum:'201800104',checkeds:'1,2,3,6',id:4},
+//		      	{sampleNum:'201800105',checkeds:'1,2,3,5,6',id:5},
+//		      	{sampleNum:'201800106',checkeds:'1,2,3,5,6',id:6},
+//		      	{sampleNum:'201800107',checkeds:'1,2,3,5,6,7',id:7},
+//		      	{sampleNum:'201800108',checkeds:'1,2,3,5,6',id:8},
+//		      	{sampleNum:'201800109',checkeds:'1,2,3,5,6',id:9},
+//		      	{sampleNum:'201800110',checkeds:'2,3,5,6',id:10},
 			],
 			items: [
 				{

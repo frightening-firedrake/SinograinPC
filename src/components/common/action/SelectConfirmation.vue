@@ -135,6 +135,15 @@ export default {
     	listready(){
 //  		查询检验编号生成数组like [20180215,20182546]
     		if(this.checkList.length&&this.$route.params.tabledatas){
+//  			写个方法把result填进去
+				this.$route.params.tabledatas.forEach((value)=>{
+					var index=this.checkList.findIndex((value2)=>{
+						return value2.id==value.id
+					})
+					this.checkList[index].result=value.result;
+					this.checkList[index].result2=value.result2;
+				})
+    			
     			var checkNums=this.$route.params.tabledatas.map((val)=>{
     				return val.sampleNum?val.sampleNum:val;
     			})

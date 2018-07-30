@@ -49,7 +49,9 @@ export default {
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
 //	this.getsampledata();
-	
+	if(!this.$route.params.sort){
+		this.$router.push({name:"样品检测/样品确认单列表"})		
+	}
   },
   destroy(){
 
@@ -165,11 +167,20 @@ export default {
 				taskName:searching
 			}
 	    }).then(function (response) {
-//			console.log(response)
-		  	this.checkList=response.data;
-		  	if(this.$route.params.tabledatas){
-				this.checkedList=this.$route.params.tabledatas;
-			}
+//			console.log(response.data)
+		  	response.data.forEach((value)=>{
+		  		value.result=''
+		  		value.result2=''
+		  		value.result3=''
+		  		value.result4=''
+		  		value.result5=''
+		  	});
+//		  	console.log(response.data)
+		  	this.checkList=response.data
+//		  	console.log(this.checkList)
+//		  	if(this.$route.params.tabledatas){
+//				this.checkedList=this.$route.params.tabledatas;
+//			}
 //		  	this.checkedList=response.data.rows;
 //	  		this.page.total=response.data.total;
 		}.bind(this)).catch(function (error) {

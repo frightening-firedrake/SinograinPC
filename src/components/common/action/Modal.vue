@@ -152,6 +152,10 @@ export default {
 				}
 			}else if(model=='place'){
 //				this.form['counter']=''
+			}else if(model=='sort'){
+				if(this.form['checkPoint']){					
+					this.form['checkPoint']='';
+				}
 			}
             this.$emit('modelSelectChange',val,model);
     	},
