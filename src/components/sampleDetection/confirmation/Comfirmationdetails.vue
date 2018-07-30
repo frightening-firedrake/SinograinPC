@@ -290,7 +290,7 @@ export default {
   created() {
 //  console.log(this.$route.query)
     //  获取列表数据（第一页）
-//  this.getlistdata(1)
+    this.getlistdata(1)
 
   },
   destroy() {
@@ -347,9 +347,10 @@ export default {
 //  		if(!this.$_ault_alert('register:export')){
 //					return
 //				}
-				var id=this.$route.query.id;
+//				var id=this.$route.query.id;
+				var id=this.sampleId;
 				var loadiframe=document.getElementById('fordownload');
-				loadiframe.src=this.exportExcelURL+'?id='+id+'&sessionid='+this.Token;
+				loadiframe.src=this.exportExcelURL+'?sampleId='+id+'&sessionid='+this.Token;
     },
     //	获取列表数据方法
     getlistdata(page) {
@@ -370,6 +371,7 @@ export default {
   					id:this.$route.query.id
   			}
       }).then(function(response) {
+      	this.sampleId=response.data.sampleId
 //    	console.log(response.data)
 
 
@@ -453,11 +455,12 @@ export default {
   },
   data() {
     return {
-      datalistURL: this.apiRoot +'/grain/handover/get',
+      datalistURL: this.apiRoot +'/grain/testItem/get',
 	  	exportExcelURL: this.apiRoot + '/grain/testItem/expotHandover',
       searchURL: '/liquid/role2/data/search',
       deleteURL: '/liquid/role2/data/delete',
       checkedId: [],
+      sampleId:'',
       createlibVisible: false,
       breadcrumb: {
         search: false,

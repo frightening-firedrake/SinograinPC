@@ -441,7 +441,7 @@ export default {
 		handleExportExcel(index, row, scope) {
 			//	  	console.log(index,row);
 			//		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
-			this.$root.eventHub.$emit('exportExcel', row.id)
+			this.$root.eventHub.$emit('exportExcel', row.id,row)
 		},
 		handleView(index, row, scope) {
 			//	  	console.log(index,row);query:{id:row.id,libraryName:row.libraryName,position:row.position}}
@@ -453,7 +453,7 @@ export default {
 			} else if (row.isDeal) {
 				this.$root.eventHub.$emit('viewlistitem', row)
 			} else {
-				this.$root.eventHub.$emit('viewlistitem', row.id)
+				this.$root.eventHub.$emit('viewlistitem', row.id,row)
 			}
 		},
 		repeat(index, row, scope) {

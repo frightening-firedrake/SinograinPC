@@ -44,11 +44,13 @@ export default {
   },
   created(){
 //	console.log(this.$route.params)
+	this.checkPoint=this.$route.params.checkPoint
+	this.sort=this.$route.params.sort
 	this.getTaskList()
   	
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
-//	this.getsampledata();
+	this.getsampledata();
 	if(!this.$route.params.sort){
 		this.$router.push({name:"样品检测/样品确认单列表"})		
 	}
@@ -62,12 +64,13 @@ export default {
 //	获取列表数据方法
   	getsampledata(){
   		var params={};
-  		params.sampleState=2
-  		this.loading=false;
+  		params.sort=this.sort;
+  		params.checkPoint=this.checkPoint;
+  		this.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
-			url: this.sampleURL,
+			url: this.dataURL,
 			transformRequest: [function (data) {
 				// Do whatever you want to transform the data
 				let ret = ''
@@ -78,14 +81,24 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				params:JSON.stringify(params)
+//				params:JSON.stringify(params)
+				sort:this.sort,
+				testItem:this.checkPoint,
 			}
 	    }).then(function (response) {
+  			this.loading=false;
 //			console.log(response)
-		  	this.checkList=response.data.rows;
-		  	if(this.$route.params.tabledatas){
-				this.checkedList=this.$route.params.tabledatas;
-			}
+			response.data.forEach((value)=>{
+		  		value.result=''
+		  		value.result2=''
+		  		value.result3=''
+		  		value.result4=''
+		  		value.result5=''
+		  	});
+		  	this.checkList=response.data;
+//		  	if(this.$route.params.tabledatas){
+//				this.checkedList=this.$route.params.tabledatas;
+//			}
 //		  	this.checkedList=response.data.rows;
 //	  		this.page.total=response.data.total;
 		}.bind(this)).catch(function (error) {
@@ -204,11 +217,14 @@ export default {
   },
   data() {
     return {
+      dataURL:this.apiRoot+'/grain/testItem/getSampleBySortAndTestItem',
       sampleURL:this.apiRoot + '/grain/sample/findSamplesByTask',
 	  taskListURL:this.apiRoot + '/grain/task/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
+      checkPoint:'',
+      sort:'',
 	  createlibVisible:false,
       breadcrumb:{
       	search:false,   

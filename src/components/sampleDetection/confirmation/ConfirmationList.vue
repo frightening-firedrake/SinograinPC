@@ -71,12 +71,13 @@ export default {
 			//  	console.log(rowid,list);
 		}.bind(this));
 		//	监听列表点击查看事件
-		this.$root.eventHub.$on("viewlistitem", function(id) {
+		this.$root.eventHub.$on("viewlistitem", function(id,row) {
 //			if(!this.$_ault_alert('handover:getById')){
 //				return
 //			}
 //					console.log(id,state)
 //			this.$router.push({ path: '/index/sampleManagement/handover/handoverListView', query: { id: id } })
+//			this.$router.push({path: '/index/sampleDetection/confirmationList/confirmationdetails',query:{id:row.sampleId}})
 			this.$router.push({path: '/index/sampleDetection/confirmationList/confirmationdetails',query:{id:id}})
 		}.bind(this));
 		//监听列表点击编辑事件
@@ -85,11 +86,11 @@ export default {
 			this.$router.push({ path: '/index/sampleManagement/handover/handoverListEdit', query: { id: id } })
 		}.bind(this));
 		//	监听列表点击导出事件
-		this.$root.eventHub.$on("exportExcel", function(id) {
+		this.$root.eventHub.$on("exportExcel", function(id,row) {
 //			if(!this.$_ault_alert('handover:getById')){
 //				return
 //			}
-			this.exportExcel(id)
+			this.exportExcel(row.sampleId)
 //			this.returnId=id
 //			this.modalVisible=true;
 		}.bind(this));
@@ -294,7 +295,7 @@ export default {
 //				return
 //			}
 			var loadiframe=document.getElementById('fordownload');
-			loadiframe.src=this.exportExcelURL+'?id='+id+'&sessionid='+this.Token;
+			loadiframe.src=this.exportExcelURL+'?sampleId='+id+'&sessionid='+this.Token;
 		}
 	},
 	data() {
