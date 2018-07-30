@@ -301,7 +301,7 @@ export default {
 		return {
 			datalistURL: this.apiRoot +'/grain/testItem/data',
 			searchURL: this.apiRoot +'/grain/register/data',
-	  		exportExcelURL: this.apiRoot + '',
+	  		exportExcelURL: this.apiRoot + '/grain/testItem/expotHandover',
 			deleteURL: '/liquid/role2/data/delete',
       		searchText:'',
 			checkedId: [],
