@@ -12,7 +12,7 @@
         <div class="hand_view_tab" style="">
           <div class="hand_view_tab_title" style="">
             <!--<p>{{formdatas.sort}}样品领取交接单</p>-->
-            <p style="">样品确认单</p>
+            <p style="">{{this.sort?this.sort:''}}样品确认单</p>
           </div>
           <!--<div class="hand_view_tab_num" style="">
             <p style="">编号:{{formdatas.nid>=10?formdatas.nid:'0'+formdatas.nid}}</p>
@@ -80,128 +80,31 @@
                 <span>&nbsp;</span>
               </el-col>
             </el-col>-->
-            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+            <el-col v-for="(item,index) in checkedList" style="border-top:1px solid #dfdfdf;background:white;" :key="item.testItem" :span="8" class='loopBorder'>
               <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>不完善粒</span>
+                <span>{{item.testName}}</span>
               </el-col>
               <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>未检测</span>
+                <span v-if="!item.result" style="color:#007c36;">待检测</span>
+                <span v-if="item.result" style="color:#2380FF;">{{item.result}}</span>
               </el-col>
               <el-col style="" :span="6">
-                <span>admin</span>
+                <span style="color:#999;">{{item.principal}}</span>
               </el-col>
             </el-col>
-            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+           
+            <el-col v-if="checkedList.length%3!=0" style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
               <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>不完善粒</span>
+                <span>&nbsp;</span>
               </el-col>
               <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>未检测</span>
+                <span>&nbsp;</span>
               </el-col>
               <el-col style="" :span="6">
-                <span>admin</span>
+                <span>&nbsp;</span>
               </el-col>
             </el-col>
-            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>不完善粒</span>
-              </el-col>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>未检测</span>
-              </el-col>
-              <el-col style="" :span="6">
-                <span>admin</span>
-              </el-col>
-            </el-col>
-            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>不完善粒</span>
-              </el-col>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>未检测</span>
-              </el-col>
-              <el-col style="" :span="6">
-                <span>admin</span>
-              </el-col>
-            </el-col>
-            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>不完善粒</span>
-              </el-col>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>未检测</span>
-              </el-col>
-              <el-col style="" :span="6">
-                <span>admin</span>
-              </el-col>
-            </el-col>
-            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>不完善粒</span>
-              </el-col>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>未检测</span>
-              </el-col>
-              <el-col style="" :span="6">
-                <span>admin</span>
-              </el-col>
-            </el-col>
-            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>不完善粒</span>
-              </el-col>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>未检测</span>
-              </el-col>
-              <el-col style="" :span="6">
-                <span>admin</span>
-              </el-col>
-            </el-col>
-            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>不完善粒</span>
-              </el-col>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>未检测</span>
-              </el-col>
-              <el-col style="" :span="6">
-                <span>admin</span>
-              </el-col>
-            </el-col>
-            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>不完善粒</span>
-              </el-col>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>未检测</span>
-              </el-col>
-              <el-col style="" :span="6">
-                <span>admin</span>
-              </el-col>
-            </el-col>
-            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>不完善粒</span>
-              </el-col>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>未检测</span>
-              </el-col>
-              <el-col style="" :span="6">
-                <span>admin</span>
-              </el-col>
-            </el-col>
-            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>不完善粒</span>
-              </el-col>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
-                <span>未检测</span>
-              </el-col>
-              <el-col style="" :span="6">
-                <span>admin</span>
-              </el-col>
-            </el-col>
-            <el-col style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
+            <el-col v-if="checkedList.length%3==1" style="border-top:1px solid #dfdfdf;background:white;" :span="8" class='loopBorder'>
               <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
                 <span>&nbsp;</span>
               </el-col>
@@ -371,6 +274,34 @@ export default {
   					sampleId:this.$route.query.id
   			}
       }).then(function(response) {
+      	this.sampleNum='监'+response.data[0].sampleNum;
+      	this.sort=response.data[0].sort;
+      	if(response.data[0].checkeds){
+      		var checkeds=response.data[0].checkeds;
+      		var results=response.data;
+      		var sort=response.data[0].sort;
+      		if(sort=='玉米'){
+      			checkeds=checkeds.replace("4", "4.1,4.2")
+      			checkeds=checkeds.replace("3", "3.1")
+      		}else if(sort=="小麦"){
+      			checkeds=checkeds.replace("4", "4.1")
+      			checkeds=checkeds.replace("3", "3.1,3.2")
+      		}
+      		checkeds=checkeds.split(',');
+      		checkeds=checkeds.sort((a,b)=>{
+      			return a-b
+      		});
+      		this.checkedList=this.checkedList.filter((value,index)=>{
+      			results.forEach((value2)=>{
+      				if(value2.testItem==value.testItem){
+      					value.result=value2.result
+      					value.principal=value2.principal
+      				}
+      			})
+      			return checkeds.includes(value.testItem);
+      		})
+      	}
+//    	console.log()
 //    	this.sampleId=response.data.sampleId
 //    	console.log(response.data)
 
@@ -475,9 +406,24 @@ export default {
         title: '温馨提示：此页面灰色字为不可编辑状态!',
         type: 'info'
       }],
-
-			sampleNum:'监201800102005',
-			
+			sampleNum:'',
+			sort:'',
+			checkedList:[
+					{testName:'容重',testItem:'1',result:'',principal:''},
+					{testName:'水分',testItem:'2',result:'',principal:''},
+					{testName:'杂质',testItem:'3.1',result:'',principal:''},
+					{testName:'矿物质',testItem:'3.2',result:'',principal:''},
+					{testName:'不完善粒',testItem:'4.1',result:'',principal:''},
+					{testName:'生霉粒',testItem:'4.2',result:'',principal:''},
+					{testName:'色泽气味(质量)',testItem:'5',result:'',principal:''},
+					{testName:'面筋吸水量',testItem:'6',result:'',principal:''},
+					{testName:'脂肪酸值',testItem:'7',result:'',principal:''},
+					{testName:'品尝评分值',testItem:'8',result:'',principal:''},
+					{testName:'色泽气味(储存)',testItem:'9',result:'',principal:''},
+					{testName:'真菌毒素',testItem:'10',result:'',principal:''},
+					{testName:'重金属',testItem:'11',result:'',principal:''},
+			],
+//	  "真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)","重金属(铅、镉、汞、砷)"	
     	
     }
   }

@@ -8,13 +8,8 @@
 			        <el-option v-for="item in taskList" :label="item.taskName" :value="item.taskName" :key="item.id"></el-option>
 			    </el-select>
 	    	</el-form-item>-->
-	    	<!--<el-form-item label="选择品种" style="border-bottom:none;border-left:none;">
-			    <el-select v-model="sort" placeholder="请选择品种" @change="changeSort">
-			        <el-option label="玉米" value="玉米"></el-option>
-			        <el-option label="小麦" value="小麦"></el-option>
-			    </el-select>
-			</el-form-item>-->
-	    	<el-form-item label="编号范围">
+	    	
+	    	<el-form-item label="编号范围" style="border-bottom:none;">
 			    <template>
 		    <el-input class="sampleNumRange" v-model="sampleNumRange[0]" placeholder="起始编号数字" style="margin-left:1em;"></el-input>
 		    <span style="font-size:0.16rem;"> 至 </span>
@@ -24,7 +19,14 @@
 
 			</el-form-item>
 			
-			<el-form-item label="选择类型" style="border-left:none;">
+			<el-form-item label="选择品种" style="border-bottom:none;border-left:none;">
+			    <el-select v-model="sort" placeholder="请选择品种" @change="changeSort">
+			        <el-option label="玉米" value="玉米"></el-option>
+			        <el-option label="小麦" value="小麦"></el-option>
+			    </el-select>
+			</el-form-item>
+			
+			<el-form-item label="选择类型"  class="full" style="">
 			    <el-autocomplete
 			      	class="remark-input"
 			      	v-model="remSelect"
@@ -163,7 +165,7 @@ export default {
 			return this.checkList.filter((item,index)=>{
 //				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 				// return (item.detectionState==2)&&(item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
-				return (this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
+				return (item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 //				return (this.isChecked?item.sampleState==this.isChecked:true)&&(item.sort==this.sort)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 			})
     	},

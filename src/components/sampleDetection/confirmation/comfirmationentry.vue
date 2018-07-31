@@ -216,7 +216,7 @@
 	                <p class="message">请点击“导入文件”按钮导入文件</p>
             		<div class="btnswrap">
             			<span class="btnl" @click="download">下载模板</span>
-            			<el-upload class="btnr" :action="uploadURL" :headers="{'Authorization':Token}" multiple :show-file-list="false">
+            			<el-upload class="btnr" :action="uploadURL" :headers="{'Authorization':Token}"  :show-file-list="false">
 		                                     导入文件
 		                </el-upload>
             		</div>
@@ -525,6 +525,7 @@ export default {
             daoru:false,
             checkPoint:'',
             sort:'',
+            complete:true,
             templateName:'',
             breadcrumb: {
                 search: false,
@@ -689,8 +690,10 @@ export default {
 				this.$alert('请添加检验编号','提示信息',{type: 'warning'});
 				return
 			}
+    		
+    		
     		var data;
-    		if(this.checkPoint==3&&this.sort=='小麦'){
+    		if(this.checkPoint==3){
     			data=this.tabledatas.map((value)=>{
 	    			var obj={};
 	    			obj.testItem=this.checkPoint+'.1';
@@ -699,16 +702,18 @@ export default {
 	    			obj.principal=this.userName;
 	    			return obj
 	    		})
-    			var data2=this.tabledatas.map((value)=>{
-	    			var obj={};
-	    			obj.testItem=this.checkPoint+'.2';
-	    			obj.sampleId=value.id;
-	    			obj.result=value.result;
-	    			obj.principal=this.userName;
-	    			return obj
-	    		})
-    			data=data.concat(data2)
-    		}else if(this.checkPoint==4&&this.sort=='玉米'){
+    			if(this.sort=='小麦'){    				
+	    			var data2=this.tabledatas.map((value)=>{
+		    			var obj={};
+		    			obj.testItem=this.checkPoint+'.2';
+		    			obj.sampleId=value.id;
+		    			obj.result=value.result2;
+		    			obj.principal=this.userName;
+		    			return obj
+		    		})
+	    			data=data.concat(data2)
+    			}
+    		}else if(this.checkPoint==4){
     			data=this.tabledatas.map((value)=>{
 	    			var obj={};
 	    			obj.testItem=this.checkPoint+'.1';
@@ -717,15 +722,17 @@ export default {
 	    			obj.principal=this.userName;
 	    			return obj
 	    		})
-    			var data2=this.tabledatas.map((value)=>{
-	    			var obj={};
-	    			obj.testItem=this.checkPoint+'.2';
-	    			obj.sampleId=value.id;
-	    			obj.result=value.result;
-	    			obj.principal=this.userName;
-	    			return obj
-	    		})
-    			data=data.concat(data2)
+    			if(this.sort=='玉米'){
+	    			var data2=this.tabledatas.map((value)=>{
+		    			var obj={};
+		    			obj.testItem=this.checkPoint+'.2';
+		    			obj.sampleId=value.id;
+		    			obj.result=value.result2;
+		    			obj.principal=this.userName;
+		    			return obj
+		    		})
+	    			data=data.concat(data2)    				
+    			}
     		}else{
     			data=this.tabledatas.map((value)=>{
 	    			var obj={};
@@ -736,7 +743,18 @@ export default {
 	    			return obj
 	    		})
     		}
+			this.complete=true;
     		
+    		data.forEach((value)=>{
+    			if(!value.result){
+					this.complete=false;
+//					break;
+				}
+    		})
+    		if(!this.complete){
+				this.$alert('请完善检验结果！！！','提示信息',{type: 'warning'});
+    			return
+    		}
     		this.$http({
 				method: 'post',
 				url: this.submitURL,
@@ -752,7 +770,9 @@ export default {
 				   	params:JSON.stringify(data)			    	
 				}
 			}).then(function(response) {
-
+				if(response.data.success){
+					this.$router.push({name:'样品检测/样品确认单列表'})
+				}
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));
