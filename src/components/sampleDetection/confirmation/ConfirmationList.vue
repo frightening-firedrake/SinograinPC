@@ -77,8 +77,8 @@ export default {
 //			}
 //					console.log(id,state)
 //			this.$router.push({ path: '/index/sampleManagement/handover/handoverListView', query: { id: id } })
-//			this.$router.push({path: '/index/sampleDetection/confirmationList/confirmationdetails',query:{id:row.sampleId}})
-			this.$router.push({path: '/index/sampleDetection/confirmationList/confirmationdetails',query:{id:id}})
+			this.$router.push({path: '/index/sampleDetection/confirmationList/confirmationdetails',query:{id:row.sampleId}})
+//			this.$router.push({path: '/index/sampleDetection/confirmationList/confirmationdetails',query:{id:id}})
 		}.bind(this));
 		//监听列表点击编辑事件
 		this.$root.eventHub.$on('editlistitem',function(id){

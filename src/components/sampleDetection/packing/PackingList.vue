@@ -407,6 +407,9 @@ export default {
 				taskId:this.taskId
 			}
 	    }).then(function (response) {
+	    	if(response.data.success){
+	    		this.$router.push({name:'样品检测/任务列表'})
+	    	}
 			
 		}.bind(this)).catch(function (error) {
 

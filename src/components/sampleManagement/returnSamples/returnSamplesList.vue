@@ -537,7 +537,7 @@ export default {
       datalistURL: this.apiRoot +'/grain/returnSingle/getStorage',
       guihuanaddURL: this.apiRoot+'/grain/returnSingle/guihuan',
       searchURL: '/liquid/role2/data/search',
-      deleteURL:  this.apiRoot+'/grain/returnSingle/delete',
+      deleteURL:  this.apiRoot+'/grain/returnSingle/removeSampleId',
       isreturn:true,
       checkedId: [],
       createlibVisible: false,

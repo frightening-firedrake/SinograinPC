@@ -347,8 +347,8 @@ export default {
 //  		if(!this.$_ault_alert('register:export')){
 //					return
 //				}
-//				var id=this.$route.query.id;
-				var id=this.sampleId;
+				var id=this.$route.query.id;
+//				var id=this.sampleId;
 				var loadiframe=document.getElementById('fordownload');
 				loadiframe.src=this.exportExcelURL+'?sampleId='+id+'&sessionid='+this.Token;
     },
@@ -368,10 +368,10 @@ export default {
 				}],
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
   			data: {
-  					id:this.$route.query.id
+  					sampleId:this.$route.query.id
   			}
       }).then(function(response) {
-      	this.sampleId=response.data.sampleId
+//    	this.sampleId=response.data.sampleId
 //    	console.log(response.data)
 
 
@@ -455,7 +455,7 @@ export default {
   },
   data() {
     return {
-      datalistURL: this.apiRoot +'/grain/testItem/get',
+      datalistURL: this.apiRoot +'/grain/testItem/getResult',
 	  	exportExcelURL: this.apiRoot + '/grain/testItem/expotHandover',
       searchURL: '/liquid/role2/data/search',
       deleteURL: '/liquid/role2/data/delete',
