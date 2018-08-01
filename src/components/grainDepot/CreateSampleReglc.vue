@@ -472,6 +472,7 @@ export default {
 			
 			this.rowid++;
 			var newdata={
+//				pLibraryId:'3',
 				id:0,
 		        libraryId: '',//被查库点
 		        barnTime:'',//入库时间
@@ -498,6 +499,7 @@ export default {
 		}
 	},
 	currentRowFun(currentRow){
+		console.log(currentRow)
 		this.currentRow=currentRow;
 	},
 	getLibraryId(id){

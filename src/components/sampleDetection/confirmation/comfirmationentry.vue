@@ -216,7 +216,12 @@
 	                <p class="message">请点击“导入文件”按钮导入文件</p>
             		<div class="btnswrap">
             			<span class="btnl" @click="download">下载模板</span>
-            			<el-upload class="btnr" :action="uploadURL" :headers="{'Authorization':Token}"  :show-file-list="false">
+            			<el-upload class="btnr" 
+            				:action="uploadURL" 
+            				:headers="{'Authorization':Token}"  
+            				:show-file-list="false"
+				  			:on-success="readdata"				
+            				>
 		                                     导入文件
 		                </el-upload>
             		</div>
@@ -526,6 +531,8 @@ export default {
             checkPoint:'',
             sort:'',
             complete:true,
+            datamap1:'',
+            datamap2:'',
             templateName:'',
             breadcrumb: {
                 search: false,
@@ -640,17 +647,21 @@ export default {
     			this.daoru=true;
            		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelSF';
-    			this.templateName='水分模板'
+    			this.templateName='水分模板';
+    			this.datamap1='pingjunzhi';
 //  			this.downloadURL=this.apiRoot + '/grain/export/downloadSF';
     		}else if(num==3){
     			if(sort=="玉米"){
     				this.double=false;
 //  				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLYM';    			
 //  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLYM';
+    				this.datamap1='';
     			}else{
     				this.double=true;
 //  				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLXM';    			
 //  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLXM';
+    				this.datamap1='';
+    				this.datamap2='';
     			}
     			this.daoru=false;
     		}else if(num==4){
@@ -659,11 +670,14 @@ export default {
     				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLYM';    			
     				this.templateName='不完善粒（玉米）模板'
 //  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLYM';
+    				this.datamap1='buwanshanli_pingjunzhi';
+    				this.datamap2='shengmeili_pingjunzhi';
     			}else{
            			this.double=false;
     				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLXM';    			
     				this.templateName='不完善粒（小麦）模板'
 //  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLXM';
+    				this.datamap1='buwanshanli_pingjunzhi';
     			}
     			this.daoru=true;
     		}else if(num==6){
@@ -672,17 +686,20 @@ export default {
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelMJXS'; 			
     			this.templateName='面筋吸水量模板'
 //  			this.downloadURL=this.apiRoot + '/grain/export/downloadMJXS';
+    			this.datamap1='pingjunzhi_ganmianjinzhiliang';
     		}else if(num==7){
     			this.daoru=true;
            		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelZFSZ';    			
     			this.templateName='脂肪酸值模板'
 //  			this.downloadURL=this.apiRoot + '/grain/export/downloadZFSZ';
+    			this.datamap1='pingjunzhi';
     		}else{
     			this.daoru=false;
            		this.double=false;
     			this.uploadURL='';
     			this.downloadURL='';
+    			this.datamap1='';
     		}
     	},
     	submit(){
@@ -777,6 +794,27 @@ export default {
 				console.log(error);
 			}.bind(this));
 	
+    	},
+//  	读取导入数据的方法，字段乱七八糟的好恶心，我先去吐会儿。。。
+    	readdata(response,file,fileList){
+
+    		if(!this.datamap1){
+    			return
+    		}
+    		var mapfiled1=this.datamap1;
+    		var mapfiled2=this.datamap2;
+    		var rawdata=response.filter((value)=>{
+    			return value.sampleNum
+    		})
+    		var data=rawdata.map((value)=>{
+    			var obj={};
+    			obj.sampleNum=value.sampleNum.startsWith('监')?value.sampleNum.slice(1):value.sampleNum;
+    			obj[mapfiled1]=value[mapfiled1];
+//  			obj.id=value.sampleNum;
+    			obj.principal=this.userName;
+	    		return obj
+    		})
+    		console.log(data)
     	},
     },
    
