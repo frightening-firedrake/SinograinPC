@@ -561,7 +561,7 @@ export default {
   	printitem(code){
 		this.messageShow=true;
 		this.messages.type="loading";
-		this.printCodeBar(code)
+		this.printCodeBar(code);
 	},
   	printCodeBar(code){
 		LODOP = getLodop();
@@ -789,11 +789,11 @@ export default {
       	number:false,
       	view:false,
 //    	edit:true,
-//    	show:true,
+      	show:true,
       	dele:false,
       	manuscript:false,
       	safetyReport:false,
-//    	printSampleIn:true,
+      	printSampleIn:true,
       },
       messageShow:false,
 	  messages:{
