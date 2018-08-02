@@ -29,7 +29,7 @@
 	float:right;
 	margin-top:0.07rem;
 	height:0.4rem;
-	line-height: 0.33rem;
+	line-height: 0.34rem;
 	/*margin:0 0 0 0.3rem;*/
 	font-size: 0.24rem;
 	cursor: pointer;
@@ -44,4 +44,7 @@
 	border-radius:0.04rem;
 	padding:0 0.2rem;
 	font-weight: 500;
+}
+.option_title .el-upload:focus{
+	color:inherit;
 }

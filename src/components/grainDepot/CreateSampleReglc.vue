@@ -7,7 +7,7 @@
       <!--alert-->
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--标题-->
-      <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
+      <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent" @readdata="readdata"></sinograin-option-title>		
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader"  v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" ></list-header>
       <!--表格-->
@@ -287,6 +287,9 @@ export default {
 	titleEvent(){
   		console.log('titleEvent');
   	},
+  	readdata(res){
+  		console.log(res)
+  	},
   	uncomplate(msg){
   		 this.$alert(msg,'提示信息',{});
   	},
@@ -546,8 +549,10 @@ export default {
       },
       subtitle:{
 
-      	btn:false,
-//    	btntext:'打印样品检验单',
+//    	btn:true,
+//    	btntext:'导入Excel',
+      	importbtn:'导入模板数据',
+      	importURL:this.apiRoot + '/grain/import/importExcelRegister',
       },
       loading:false,
       filterStatus:'全部',
