@@ -10,16 +10,16 @@
 	       		<div class="inputwrap2">
 	       			<div class="inputwrap3">       				
 	       				<span class="el-icon-search"></span>
-	       				<input id="AdvancedSearch" type="text" placeholder="请输入检验编号"  />	
+	       				<input id="AdvancedSearch" v-model="searchText" type="text" placeholder="请输入检验编号" @change="searchChange"  @focus="focus" @blur="blur"/>	
 	       			</div>
 	       		</div>
 	       	</div>
 	    </div>
 		
-	    <div class="resultList" :style="{width:listWidth}">
+	    <div v-show="listShow" class="resultList" :style="{width:listWidth}">
 	       	<ul>
-	       		<li v-for="(item,index) in resultList" :key="item.id">
-	       			{{likeColorFull(item.sampleNum)}}
+	       		<li v-for="(item,index) in resultList" :key="item.id" v-html="likeColorFull(item.sampleNum)" @click="selectKeyWord(item.sampleNum)">
+
 	       		</li>
 	       	</ul>
 	    </div>
@@ -125,10 +125,9 @@
 	top:3.1rem;
 	left:0.78rem;
 	background:#fff;
-	height:1rem;
+	height:auto;
 	border: solid 1px #e6e7e8;
 	border-radius:0.05rem;
-	padding-left:0.46rem;
 }
 .AdvancedSearchWrap .resultList:before{
 	content: '';
@@ -156,17 +155,29 @@
 }
 .AdvancedSearchWrap .resultList ul{
 	display: block;
+	padding:0.08rem 0;
+	background-color:#fff;
+	height:auto;
 }
-b{
-	color:#e7023a;
-	font-size:inherit;
+.AdvancedSearchWrap .resultList ul li{
+	cursor:pointer;
+	display: block;
+	padding:0 0 0 0.46rem;
+	background-color:#fff;
+	height:0.46rem;
+	line-height:0.46rem;
+	color:#666666;
+	font-size:0.18rem;
+}
+.AdvancedSearchWrap .resultList ul li:hover{
+	background-color:#f6f7fb;
 }
 </style>
 <script>
 import "@/assets/style/common/Option_title.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
-	props:['searchText','resultList'],
+	props:['resultList'],
 	created(){
 
 	},
@@ -179,9 +190,6 @@ export default {
 
     },
     methods:{
-		searchChange(){
-			this.$emit('searchChange');
-		},
 		searchingfor(){
 			this.$emit('searchingfor');
 		},
@@ -190,12 +198,30 @@ export default {
 			if(!this.searchText){
 				return sampleNum;
 			}
-			return sampleNum.replace(this.searchText,'<b>'+this.searchText+'</b>');
-		}
+			return sampleNum.replace(this.searchText,"<span style='color:#e7023a;'>"+this.searchText+"</span>");
+		},
+		selectKeyWord(num){
+			console.log('监'+num)
+			this.searchText='监'+num;
+		},
+		blur(){
+			setTimeout(function(){				
+				this.listShow=false;
+			}.bind(this),300)
+		},
+		focus(){
+			this.listShow=true;
+		},
+		searchChange(){
+//			this.$emit('searchChange');
+			
+		},
 	},
     data() {
 	    return {
 	      	listWidth:'',
+	      	searchText:'',
+	      	listShow:false,
 	    }
 	},
 }

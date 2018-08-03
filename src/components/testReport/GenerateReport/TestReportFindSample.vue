@@ -10,7 +10,7 @@
 		<!--背景-->
 		<div class="searchbg">
 			<p>检验报告制作</p>
-			<advanced-search :resultList="resultList" :searchText="searchText" @searchChange="searchChange" @searchingfor="searchingfor"></advanced-search>
+			<advanced-search :resultList="resultList"  @searchChange="searchChange" @searchingfor="searchingfor"></advanced-search>
 		</div>
 		<!--新建库典弹框-->
       	<sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose" @modelSelectChange="modelSelectChange"></sinograin-modal>      	
@@ -22,7 +22,7 @@
 .searchbg{
 	width:auto;
 	margin-top:0.25rem;
-	background-color:#fff;
+	background-color:#ecf3ef;
 	border:1px solid #dfdfdf;
 	border-radius:0.1rem 0.1rem 0 0;
 	height:5.7rem;
@@ -197,13 +197,6 @@ export default {
       			{id:3,sampleNum:'20180101023'},
       			{id:4,sampleNum:'20180101024'},
       			{id:5,sampleNum:'20180101025'},
-      			{id:6,sampleNum:'20180101026'},
-      			{id:7,sampleNum:'20180101027'},
-      			{id:8,sampleNum:'20180101028'},
-      			{id:9,sampleNum:'20180101029'},
-      			{id:10,sampleNum:'20180101020'},
-      			{id:11,sampleNum:'20180101031'},
-      			{id:12,sampleNum:'20180101032'},
       		],
 			modalVisible:false,
 			modal:{
