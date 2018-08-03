@@ -81,6 +81,8 @@ import PlaceAdd from '@/components/informationManagement/PlaceAdd.vue'
 import SampleRoomAdd from '@/components/informationManagement/SampleRoomAdd.vue'
 import SampleLibraryList from '@/components/sampling/list/SampleLibraryList.vue'
 import ExaminationLibrary from '@/components/sampling/list/ExaminationLibrary.vue'
+import TestReportFindSample from '@/components/testReport/GenerateReport/TestReportFindSample.vue'
+import GenerateReport from '@/components/testReport/GenerateReport/GenerateReport.vue'
 import SuperviseList from '@/components/testReport/supervise/SuperviseList.vue'
 import SuperviseShow from '@/components/testReport/supervise/SuperviseShow.vue'
 import QualityAcceptance from '@/components/testReport/QualityAcceptance.vue'
@@ -515,6 +517,18 @@ const routes = [{
                 name: "检测报表管理/样品检测报表制作/样品检测报表详情",
                 component: TestReport,
             },
+            {
+                path: "TestReportManagement/TestReportFindSample",
+                name: "检测报表管理/检验报告制作",
+                component: TestReportFindSample,
+//              meta: { needAuth: '检验报告制作' },
+            },
+            {
+                path: "TestReportManagement/TestReportFindSample/GenerateReport",
+                name: "检测报表管理/检验报告制作/生成检验报告",
+                component: GenerateReport,
+            },
+            
             {
                 path: "TestReportManagement/SuperviseList",
                 name: "检测报表管理/监督检查报告",

@@ -569,7 +569,7 @@ export default {
 		LODOP.PRINT_INIT("打印条码");
 		LODOP.SET_PRINTER_INDEX("Godex G530");  
 		LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
-		LODOP.ADD_PRINT_BARCODE(3,30,232,115,'Codabar',code);
+		LODOP.ADD_PRINT_BARCODE(3,35,225,115,'Codabar',code);
 //  			LODOP.PREVIEW(); 
 		LODOP.PRINT(); 
 
@@ -794,6 +794,7 @@ export default {
       	manuscript:false,
       	safetyReport:false,
       	printSampleIn:true,
+//    	sort:'sampleNum',
       },
       messageShow:false,
 	  messages:{

@@ -636,7 +636,8 @@ export default {
         download(){
         	
         	var loadiframe=document.getElementById('fordownload');
-			loadiframe.src=this.downloadURL+'?fileName='+this.templateName+'&sessionid='+this.Token;
+//			loadiframe.src=this.downloadURL+'?fileName='+this.templateName+'&sessionid='+this.Token;
+			loadiframe.src=this.downloadURL+this.templateName+'?sessionid='+this.Token;
         },
         setUploadURL(){
     		var num=this.$route.params.checkPoint;
@@ -647,7 +648,8 @@ export default {
     			this.daoru=true;
            		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelSF';
-    			this.templateName='水分模板';
+//  			this.templateName='水分模板';
+    			this.templateName='SF';
     			this.datamap1='pingjunzhi';
 //  			this.downloadURL=this.apiRoot + '/grain/export/downloadSF';
     		}else if(num==3){
@@ -668,14 +670,16 @@ export default {
     			if(sort=="玉米"){
            			this.double=true;
     				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLYM';    			
-    				this.templateName='不完善粒（玉米）模板'
+//  				this.templateName='不完善粒（玉米）模板'
+    				this.templateName='BWSLYM'
 //  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLYM';
     				this.datamap1='buwanshanli_pingjunzhi';
     				this.datamap2='shengmeili_pingjunzhi';
     			}else{
            			this.double=false;
     				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLXM';    			
-    				this.templateName='不完善粒（小麦）模板'
+//  				this.templateName='不完善粒（小麦）模板'
+    				this.templateName='BWSLXM'
 //  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLXM';
     				this.datamap1='buwanshanli_pingjunzhi';
     			}
@@ -684,14 +688,16 @@ export default {
     			this.daoru=true;
            		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelMJXS'; 			
-    			this.templateName='面筋吸水量模板'
+//  			this.templateName='面筋吸水量模板'
+    			this.templateName='MJXSL'
 //  			this.downloadURL=this.apiRoot + '/grain/export/downloadMJXS';
     			this.datamap1='pingjunzhi_ganmianjinzhiliang';
     		}else if(num==7){
     			this.daoru=true;
            		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelZFSZ';    			
-    			this.templateName='脂肪酸值模板'
+//  			this.templateName='脂肪酸值模板'
+    			this.templateName='ZFSZ'
 //  			this.downloadURL=this.apiRoot + '/grain/export/downloadZFSZ';
     			this.datamap1='pingjunzhi';
     		}else{

@@ -331,6 +331,14 @@ export default {
 					lid: 16
 				},
 				{
+					icon: 'icon-baogao1',
+					title: '检测报告制作',
+					linkto: '/index/TestReportManagement/TestReportFindSample',
+					level: 2,
+					pid: 15,
+					lid: 30,
+				},
+				{
 					icon: 'icon-jiandukaohe',
 					title: '监督检查报告',
 					linkto: '/index/TestReportManagement/SuperviseList',
@@ -421,7 +429,7 @@ export default {
 					title: '添加柜子货架',
 					level: 2,
 					pid: 22,
-					lid: 30,
+					lid: 31,
 				},
 //				{
 //					icon: 'icon-iocn02001',
