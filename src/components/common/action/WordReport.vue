@@ -99,7 +99,7 @@
 	height:940px;
 	/*margin:auto;*/
 	background-color:#fff;
-	font-size:100px;
+	/*font-size:100px;*/
 	text-align: center;
 	padding-top:50px;
 }
