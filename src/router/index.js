@@ -95,7 +95,7 @@ Vue.use(Router)
 const routes = [{
         path: '/',
         redirect: '/login',
-        //    redirect: '/index',//暂时屏蔽掉了登录与首页直接列表页开始
+//      redirect: '/index',//暂时屏蔽掉了登录与首页直接列表页开始
         name: '',
     },
     {
@@ -671,7 +671,7 @@ router.beforeEach((to, from, next) => {
     if (!userAuth && to.path !== '/login') {
         console.log('没登陆')
         next({
-            path: '/login',
+            path: '/login',//离线时屏蔽
             //query: { redirect: to.fullPath }// 考虑登录成功之后可以根据query中的内容跳转回原来的路由(页面)
         })
     } else if (userAuth && to.path == '/index') {

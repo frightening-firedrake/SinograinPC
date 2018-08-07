@@ -4,7 +4,7 @@
 	       	<div class="bg" style="background-image:url(static/images/sys/searchbg.png)"></div>
 	       	<p>——粮食是关系人民福祉，关乎民族未来的长远大计</p>
 	       	<div class="inputwrap">
-	       		<div class="searchbtn">
+	       		<div class="searchbtn" @click="searchingfor">
 	       			<span>生成检验报告</span>
 	       		</div>
 	       		<div class="inputwrap2">
@@ -174,7 +174,7 @@
 }
 </style>
 <script>
-import "@/assets/style/common/Option_title.css"
+
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
 	props:['resultList'],
@@ -191,7 +191,14 @@ export default {
     },
     methods:{
 		searchingfor(){
-			this.$emit('searchingfor');
+			if(!this.searchText){
+				this.$notify.error({
+		          	title: '错误',
+		          	message: '请填写检验编号！！！',
+		        });
+				return
+			}
+			this.$emit('searchingfor',this.searchText);
 		},
 		likeColorFull(Num){
 			var sampleNum='监'+Num;

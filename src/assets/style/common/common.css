@@ -65,9 +65,10 @@ label{
 	}
 }
 
-/*@font-face {font-family: "icon";
-  src:url(../fonts/font-awesome3.2.1/font/fontawesome-webfont.woff)
-}*/
+@font-face {font-family: "仿宋_GB2312";
+  src:url(~static/font/仿宋_GB2312.ttf)
+}
+
 i{
   font-family:icon;
   font-size:0.14rem;

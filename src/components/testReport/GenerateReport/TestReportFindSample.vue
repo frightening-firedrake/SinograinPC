@@ -109,10 +109,13 @@ export default {
 			
 		},
 		//	获取搜索数据
-		searchingfor(searching,page){
-	  		page?page:1;
-	  		this.searchText=searching;
-	  		this.getlistdata(page)
+		searchingfor(searching){
+			console.log(searching)
+			
+			searching=searching.startsWith('监')?searching.slice(1):searching;
+			console.log(searching)
+			this.$router.push({ path: '/index/TestReportManagement/TestReportFindSample/GenerateReport', query: { sampleNum: searching } })
+			
 //	  		var params = {};
 //			params.nameLikeOrId = searching;
 //	  		// 获取列表数据（第？页）

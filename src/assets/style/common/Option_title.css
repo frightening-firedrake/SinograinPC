@@ -38,6 +38,7 @@
 	box-sizing: border-box;
 	padding:0.04rem;
 	color:#ffffff;
+	margin-left:0.2rem;
 }
 .option_title div.titlebtn span{
 	border:1px solid #FFFFFF;

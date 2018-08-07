@@ -182,7 +182,8 @@
 
 		<!--是否包含变色检验项-->
 		<template v-if="actions.colorcheck">
-			<el-table-column :resizable="resizable" align="center" label="检验项目" class-name="tableAction" width="650">
+			<!--<el-table-column :resizable="resizable" align="center" label="检验项目" class-name="tableAction" width="650">-->
+			<el-table-column :resizable="resizable" align="center" label="检验项目" class-name="tableAction">
 				<template slot-scope="scope">
 					<p :class="actions.colorcheckclass">	
 						<!--<span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)}}</span>-->
@@ -274,7 +275,7 @@
 		
 		
 
-		<el-table-column v-if="actions.show" :resizable="resizable" align="center" label="操作" class-name="tableAction">
+		<el-table-column v-if="actions.show" :resizable="resizable" align="center" label="操作" class-name="tableAction" :width="actions.actionWidth?actions.actionWidth:'auto'">
 			<template slot-scope="scope">
 				<!--是否包含查看操作-->
 				<template v-if="actions.input">
@@ -295,14 +296,15 @@
 					<button v-if="!$_ault_alert('all:edit')" class="undele" @click.stop="notAllowed()">编辑</button>
 					<button v-else class="edit" @click.stop="handleEdit(scope.$index, scope.row)">编辑</button>
 				</template>
-				<!--重新申请操作-->
+				<!--删除操作-->
 				<template v-if="actions.deleCaogao">
 					<button v-if="scope.row.regState==3" class="dele" @click.stop="handleDele(scope.$index, scope.row)">删除</button>
 					<button v-else class="undele" @click.stop="notAllowed()">删除</button>
 				</template>
-				<!--是否包含删除操作-->
+				<!--是否包含重新申请操作-->
 				<template v-if="actions.repeat">
-					<button v-if="scope.row.regState==2" class="repeat" @click.stop="repeat(scope.$index, scope.row,scope)">再次申请</button>
+					<!--<button  class="repeat" @click.stop="repeat(scope.$index, scope.row,scope)">再次申请</button>-->
+					<button v-if="scope.row.regState==1||scope.row.regState==2" class="repeat" @click.stop="repeat(scope.$index, scope.row,scope)">再次申请</button>
 					<button v-else class="undele" @click.stop="notAllowed()">再次申请</button>
 				</template>
 				<!--是否包含删除操作-->
@@ -579,6 +581,9 @@ export default {
 			}
 		},
 		check(checkstr,num){
+			if(!checkstr){
+				return false
+			}
 			var checklist=checkstr.split(',');
 			num=String(num);
 			return checklist.includes(num)

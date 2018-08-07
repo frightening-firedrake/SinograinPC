@@ -60,10 +60,11 @@ export default {
 //	获取列表数据方法
   	getsampledata(){
   		var params={};
-  		params.sampleWordOrsampleNumLike='';
+//		params.sampleWordOrsampleNumLike='';
 //		if(!this.IsChecked){  			
-  			params.ruKuSampleState=2;
-  			params.fenxiaoyangSampleState=3;
+//			params.ruKuSampleState=2;
+//			params.fenxiaoyangSampleState=3;
+  			params.sampleState=3;
 //		}else if(this.IsChecked==2){
 //			params.ruKuSampleState=2;
 //		}else if(this.IsChecked==3){

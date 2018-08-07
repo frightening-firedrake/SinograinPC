@@ -50,7 +50,7 @@ export default {
   },
   computed:{
 	...mapState([]),
-	...mapGetters(["userId","libraryName","libraryId"]),
+	...mapGetters(["userId","libraryName","libraryId","Token"]),
 	tabledatasFilter(){
 
 		if(this.filterStatus=="全部"){
@@ -285,13 +285,48 @@ export default {
   		this.checkedId=checkedId;
   	},
 	titleEvent(){
-  		console.log('titleEvent');
+//		console.log('titleEvent');
+//		if(!this.$_ault_alert('register:export')){
+//			return
+//		}
+		var loadiframe=document.getElementById('fordownload');
+		loadiframe.src=this.exportExcelURL+'?sessionid='+this.Token;
   	},
   	readdata(res){
-  		console.log(res)
+  		if(!res){
+  			var msg="模板文件导入失败，请重新下载模板！"
+			this.uncomplate(msg)
+			return
+  		}
+  		this.tabledatas=[];
+  		res.forEach((value,index)=>{
+  			if(value.sort){
+  				this.rowid++;
+				var newdata={
+					pLibraryId:'',
+					libraryName: '',//被查库点
+					id:0,
+			        barnTime:value.barnTime,//入库时间
+			        sort: value.sort,//品种
+			        quality: value.quality,//性质
+			        amount: value.amount,//代表数量
+			        position:value.position,
+			        originPlace: value.originPlace,//产地
+			        gainTime: value.gainTime,//收货年度
+			        // updateTime: "",
+			        samplingSign: "",
+			        sampleInSignWidth: "",
+			        // samplingdate: '',//扦样日期
+			        remark: value.remark,//备注
+			        rowType:"扦样信息",//删除用
+			        addId:this.rowid,//本地删除新建行时用到的标识
+		        }
+				this.tabledatas.push(newdata);
+  			}
+  		})
   	},
   	uncomplate(msg){
-  		 this.$alert(msg,'提示信息',{});
+  		 this.$alert(msg,'提示信息',{type: 'warning'});
   	},
 // 编辑扦样
 	editdata(regState) {
@@ -410,6 +445,11 @@ export default {
 			this.uncomplate(msg)
 			return
 		}
+		if(!this.libraryName2){
+			var msg="请选择被查库点信息，再尝试提交！"
+			this.uncomplate(msg)
+			return
+		}
 //			console.log(sample)
 //		console.log(sample[0].barnTime,)
     	this.tfbtns.loading=true;			
@@ -477,6 +517,8 @@ export default {
 			var newdata={
 //				pLibraryId:'3',
 				id:0,
+				pLibraryId:'',
+				libraryName: '',//被查库点
 		        libraryId: '',//被查库点
 		        barnTime:'',//入库时间
 		        sort: '',//品种
@@ -516,6 +558,8 @@ export default {
     return {
       isEmpty:false,
       rowid:999,//临时id
+      
+      exportExcelURL: this.apiRoot + '/grain/download/downloadTemplateRegister',//下载模板
       deleteURL: this.apiRoot + '/grain/sample/remove',//草稿删除
       datalistURL: this.apiRoot + '/grain/sample/data',//获取草稿地址
 	  librarylistURL: this.apiRoot + '/grain/library/getAll',//获取库列表
@@ -549,8 +593,8 @@ export default {
       },
       subtitle:{
 
-//    	btn:true,
-//    	btntext:'导入Excel',
+      	btn:true,
+      	btntext:'下载模板',
       	importbtn:'导入模板数据',
       	importURL:this.apiRoot + '/grain/import/importExcelRegister',
       },

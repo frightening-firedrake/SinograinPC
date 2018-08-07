@@ -194,7 +194,7 @@ export default {
     tree:{
    		label:'用户授权：',
 //	    defaultCheckedKeys:[1,2,3,4,5,6,8,15,16,17,18],//默认选中的key id
-      	checkStrictly:false,//分割了上下父子选中关系
+      	checkStrictly:true,//分割了上下父子选中关系
         data: [],
         defaultProps: {
             children: 'children',

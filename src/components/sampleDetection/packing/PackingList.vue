@@ -605,6 +605,7 @@ export default {
       	colorcheck:true,
       	colorcheckclass:'colorcheck',
       	height:'5.7rem',
+      	actionWidth:'170',
 //    	sort:'smallSampleNum',
       },
       messageShow:false,

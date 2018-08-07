@@ -71,6 +71,7 @@ export default {
 	    	var res=response.data;
 	    	res.sampleNum="监"+res.sampleNum;
 		  	this.formdatas.form=res;
+		  	this.formdatas.title=res.formName;
 //		  	res.pLibraryName='';
 //				this.getlibrarydata()
 		}.bind(this)).catch(function (error) {

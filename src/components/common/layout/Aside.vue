@@ -7,8 +7,10 @@
 				<img :src="user.avater" alt="">
 			</div>
 			<div class="userinfo">
-				<h3>{{roleName?roleName:"扦样员"}}
-					<span>({{userName?userName:"未登录"}})</span>
+				<!--<h3>{{roleName?roleName:"扦样员"}}-->
+<!--					<span>({{userName?userName:"未登录"}})</span>-->
+				<h3>
+					<span>{{userName?userName:"未登录"}}</span>
 				</h3>
 				<p>
 					<template v-if="userName">
