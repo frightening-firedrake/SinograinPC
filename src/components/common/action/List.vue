@@ -71,6 +71,16 @@
 							<span style="color:#999999;">已检测</span>
 						</template>
 					</template>
+					<template v-if="item.prop=='state'">
+						<template v-if="scope.row[item.prop]==-1">
+							<span style="color:#fc6500;">未归还</span>
+						</template><template v-if="scope.row[item.prop]==1">
+							<span style="color:#fc6500;">应归还</span>
+						</template>
+						<template v-if="scope.row[item.prop]==2">
+							<span style="color:#999999;">已归还</span>
+						</template>
+					</template>
 					<template v-if="item.prop=='returnState'">
 						<template v-if="scope.row[item.prop]==-1">
 							<span style="color:#fc6500;">待归还</span>

@@ -64,10 +64,10 @@ label{
 		font-size:100px;
 	}
 }
-
+/*
 @font-face {font-family: "_GB2312";
-  src:url(~static/font/仿宋_GB2312.ttf)
-}
+  src:url(仿宋_GB2312.ttf)
+}*/
 
 i{
   font-family:icon;

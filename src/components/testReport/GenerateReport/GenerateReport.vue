@@ -8,7 +8,7 @@
     	<sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>
 		<!--高级搜索-->
 		<!--背景-->
-		<word-report></word-report>
+		<word-report :sort="sort" :pagedatas="pagedatas"></word-report>
 		<!--新建库典弹框-->
       	<sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose" @modelSelectChange="modelSelectChange"></sinograin-modal>      	
 	
@@ -188,7 +188,7 @@ export default {
 			searchURL: this.apiRoot +'/grain/register/data',
 	  		exportExcelURL: this.apiRoot + '/grain/testItem/expotHandover',
 			deleteURL: '/liquid/role2/data/delete',
-      		
+      		sort:'小麦',
 			modalVisible:false,
 			modal:{
 			  	title:'选择检验项目',
@@ -234,6 +234,9 @@ export default {
 				title: '温馨提示：此页面只展示本库信息!',
 				type: 'info'
 			}],
+			pagedatas:{
+				
+			},
 		}
 	}
 }

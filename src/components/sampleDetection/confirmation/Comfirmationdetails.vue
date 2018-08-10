@@ -6,11 +6,14 @@
     <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>
     <div id="print" >
       <div class="handover_view" style="width:100%;">
+      	<div class="codewrap" >
+			<img class="codeimg" :src="code" alt="" />
+      	</div>
         <!--<div class="hand_view_title" style="width:100%;height:0.45rem;text-align:center;line-height:0.45rem;font-size:0.24rem;color:#333333;">
           <span>山西中储粮粮食质检中心</span>
         </div>-->
         <div class="hand_view_tab" style="">
-          <div class="hand_view_tab_title" style="">
+          <div class="hand_view_tab_title" style="border-radius: 0;">
             <!--<p>{{formdatas.sort}}样品领取交接单</p>-->
             <p style="">{{this.sort?this.sort:''}}样品确认单</p>
           </div>
@@ -189,6 +192,9 @@ export default {
     	}
     	
     },
+    code(){
+		return  this.apiRoot +'/grain/upload/barcode/'+this.checkedList[0].samplePic;
+	},
   },
   created() {
 //  console.log(this.$route.query)
@@ -283,9 +289,13 @@ export default {
       		if(sort=='玉米'){
       			checkeds=checkeds.replace("4", "4.1,4.2")
       			checkeds=checkeds.replace("3", "3.1")
+      			checkeds=checkeds.replace("10", "10.1,10.2,10.3,10.4")
+      			checkeds=checkeds.replace("11", "11.1,11.2,11.3")
       		}else if(sort=="小麦"){
       			checkeds=checkeds.replace("4", "4.1")
       			checkeds=checkeds.replace("3", "3.1,3.2")
+      			checkeds=checkeds.replace("10", "10.1,10.2,10.3,10.4")
+      			checkeds=checkeds.replace("11", "11.1,11.2,11.3")
       		}
       		checkeds=checkeds.split(',');
       		checkeds=checkeds.sort((a,b)=>{
@@ -420,8 +430,14 @@ export default {
 					{testName:'脂肪酸值',testItem:'7',result:'',principal:''},
 					{testName:'品尝评分值',testItem:'8',result:'',principal:''},
 					{testName:'色泽气味(储存)',testItem:'9',result:'',principal:''},
-					{testName:'真菌毒素',testItem:'10',result:'',principal:''},
-					{testName:'重金属',testItem:'11',result:'',principal:''},
+					{testName:'真菌毒素(黄曲霉毒素B1)',testItem:'10.1',result:'',principal:''},
+					{testName:'真菌毒素(脱氧雪腐)',testItem:'10.2',result:'',principal:''},
+					{testName:'真菌毒素(镰刀菌烯醇)',testItem:'10.3',result:'',principal:''},
+					{testName:'真菌毒素(玉米赤霉烯酮)',testItem:'10.4',result:'',principal:''},
+					{testName:'重金属(铅)',testItem:'11.1',result:'',principal:''},
+					{testName:'重金属(镉)',testItem:'11.2',result:'',principal:''},
+					{testName:'重金属(汞)',testItem:'11.3',result:'',principal:''},
+					{testName:'重金属(砷)',testItem:'11.4',result:'',principal:''},
 			],
 //	  "真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)","重金属(铅、镉、汞、砷)"	
     	

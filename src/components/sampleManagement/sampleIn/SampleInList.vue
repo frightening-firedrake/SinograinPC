@@ -254,7 +254,9 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			   params:JSON.stringify(params)
+				page:page,
+			    rows:this.page.size,
+			   	params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
 			this.tabledatas=response.data.rows;
@@ -700,7 +702,7 @@ export default {
       	scanCode:true,
 //    	createSampleNum:true,
       	status:true,
-      	statusTitle:'检测状态：',
+      	statusTitle:'检验状态：',
       	statusitems:[
       		{label:'全部',text:'全部'},
       		{label:1,text:'未检测'},
@@ -761,7 +763,7 @@ export default {
         id: 6,
 //      prop:'sampleState',
         prop:'detectionState',
-        label:"检测状态",
+        label:"检验状态",
         status:true,
 //      sort:true,
       },

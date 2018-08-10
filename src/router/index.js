@@ -87,6 +87,7 @@ import SuperviseList from '@/components/testReport/supervise/SuperviseList.vue'
 import SuperviseShow from '@/components/testReport/supervise/SuperviseShow.vue'
 import QualityAcceptance from '@/components/testReport/QualityAcceptance.vue'
 import error403 from '@/components/error/error403.vue'
+import devtest from '@/components/devtest/devtest.vue'
 
 
 
@@ -103,6 +104,11 @@ const routes = [{
         name: '登陆',
         component: Login,
     },
+//  {
+//      path: '/devtest',
+//      name: '测试用页面临时模拟请求用',
+//      component: devtest,
+//  },
     {
         path: '/index',
         component: Layout,

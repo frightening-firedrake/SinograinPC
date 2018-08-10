@@ -34,8 +34,8 @@
 			    </el-autocomplete>
 			</el-form-item>
 			
-			<!--<el-form-item label="检测状态" class="full" style="border-top:none;">
-			    <el-select v-model="isChecked" placeholder="请选择检测状态" @change="changeIsChecked">
+			<!--<el-form-item label="检验状态" class="full" style="border-top:none;">
+			    <el-select v-model="isChecked" placeholder="请选择检验状态" @change="changeIsChecked">
 			        <el-option label="未检测" :value="2"></el-option>
 			        <el-option label="已检测" :value="3"></el-option>
 			        <el-option label="全部" :value="0"></el-option>

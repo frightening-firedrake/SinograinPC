@@ -121,6 +121,7 @@
 	font-family:inherit;
 	border:none;
 	outline: none;
+	background-color:white;
 	text-align: center;
 }
 .wordTextarea{
@@ -150,7 +151,7 @@ export default {
 	components: {
 		WordReportPage1,WordReportPage2,WordReportPage3YM,WordReportPage3XM,WordReportPage4YM,WordReportPage4XM,
 	},
-	props:[],
+	props:["sort","pagedatas"],
 	created(){
 
 	},
@@ -194,7 +195,7 @@ export default {
 	},
     data() {
 	    return {
-	    	sort:'小麦',
+
 	      	page:1,
 	      	pagedata1:{
 	      		

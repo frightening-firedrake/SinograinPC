@@ -41,7 +41,7 @@ export default {
 	},
 	computed: {
 		...mapState(["modal_id_number", "viewdata", "editdata", "aultdata", "messions", "mask"]),
-		...mapGetters(["modal_id"]),
+		...mapGetters(["Token"]),
 		tabledatasFilter() {
 
 			if (this.filterStatus == "全部") {
@@ -57,6 +57,8 @@ export default {
 //		console.log(this.$route.query)
 		//  获取列表数据（第一页）
 		this.getlistdata(1)//对接时使用，暂时不启用用的假数据
+		this.getTaskList()//获取任务列表
+		
 		//	移除监听事件
 		this.$root.eventHub.$off('delelistitem')
 		this.$root.eventHub.$off("viewlistitem")
@@ -135,6 +137,8 @@ export default {
 //			if(!this.$_ault_alert('handover:save')){
 //				return
 //			}
+//			this.createlibitem(1);//没后台时用的
+			
 			this.modalVisible=true;
 			// this.$router.push({ path: '/index/sampleManagement/temporaryRegistration/temporaryRegistrationCreate' })
 		},
@@ -147,13 +151,18 @@ export default {
 			var params={};
         		params.checkPoint=form.checkPoint;
         		params.sort=form.sort;
+        		params.taskName=form.taskName;    		
+        		//  	麻蛋老没后台写点假数据吧
+//				params.checkPoint=10;
+//				params.sort='小麦';
+//				params.taskName='这就编不出来了'; 
     		var path=this.$route.name+'/录入样品检测数据'
            	this.$router.push({ name: path,params:params})
 		},
 		modelSelectChange(val,model){
 			console.log(val,model)
 			if(model=='sort'&&val=='玉米'){
-				this.modal.formdatas[1].selectitems=[
+				this.modal.formdatas[2].selectitems=[
 			  				{label:'容重',value:'1',id:'1'},
 			  				{label:'水分',value:'2',id:'2'},
 			  				{label:'杂质',value:'3',id:'3'},
@@ -166,7 +175,7 @@ export default {
 			  				{label:'重金属(铅、镉、汞、砷)',value:'11',id:'11'},
 			  			];
 			}else if(model=='sort'&&val=='小麦'){
-				this.modal.formdatas[1].selectitems=[
+				this.modal.formdatas[2].selectitems=[
 			  				{label:'容重',value:'1',id:'1'},
 			  				{label:'水分',value:'2',id:'2'},
 			  				{label:'杂质(矿物质)',value:'3',id:'3'},
@@ -249,6 +258,38 @@ export default {
 				console.log(error);
 			}.bind(this));
 		},
+		//	获取任务列表
+	  	getTaskList(){
+	//		var params = {};
+	//		params.pLibraryId = -1
+	  		// 获取列表数据（第？页）
+			this.$http({
+			    method: 'post',
+				url: this.taskListURL,
+				transformRequest: [function (data) {
+					// Do whatever you want to transform the data
+					let ret = ''
+					for (let it in data) {
+					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					}
+					return ret
+				}],
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				data: {
+	//			    params: JSON.stringify(params)
+				}
+		  	}).then(function (response) {
+				this.modal.formdatas[0].selectitems=response.data.rows.map((value,index)=>{
+					var obj={};
+					obj.label=value.taskName;
+					obj.value=value.taskName;
+					obj.id=value.id;
+					return obj;
+				})	
+			}.bind(this)).catch(function (error) {
+			    console.log(error);
+			}.bind(this));
+	  	},
 		//	发送删除id
 		sendDeleteId(id) {
 			this.$http({
@@ -300,8 +341,9 @@ export default {
 	},
 	data() {
 		return {
-			datalistURL: this.apiRoot +'/grain/testItem/data',
+			datalistURL: this.apiRoot +'/grain/testItem/findTestItem',
 			searchURL: this.apiRoot +'/grain/register/data',
+	  		taskListURL:this.apiRoot + '/grain/task/data',
 	  		exportExcelURL: this.apiRoot + '/grain/testItem/expotHandover',
 			deleteURL: '/liquid/role2/data/delete',
       		searchText:'',
@@ -311,6 +353,17 @@ export default {
 			modal:{
 			  	title:'选择检验项目',
 				formdatas:[
+					{
+			  			label:"选择任务:",
+			  			model:"taskName",
+//			  			disabled:true,
+			  			value:'',
+			  			type:'select',
+			  			selectitems:[
+			  				
+//			  				{label:'食用油',value:'食用油',id:'3'},
+			  			],
+			  		},
 					{
 			  			label:"选择品种:",
 			  			model:"sort",
@@ -410,6 +463,13 @@ export default {
 					id: 2,
 					prop: 'checkeds',
 					label: "检验项目",
+//					sort: true,
+					status:true,
+				},
+				{
+					id:3,
+					prop: 'state',
+					label: "状态",
 //					sort: true,
 					status:true,
 				},

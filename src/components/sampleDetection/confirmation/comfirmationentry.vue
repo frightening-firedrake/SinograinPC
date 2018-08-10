@@ -14,200 +14,281 @@
         <!--列表实例-->
         <el-form class="entryform" v-if="entryflag==1">
         <el-row class="entrt">
-            <el-col :span="8">
-                <el-col :span="6">
+            <el-col :span="colwidth[rescol].samplewidth" class="samplewidth">
+                <el-col :span="colwidth[rescol].col1" class="col1">
                     <p>检验编号</p>
                 </el-col>
-                <el-col :span="8" style="border-bottom:none;">
-                    <p>{{this.findCheckPoint()}}</p>
+                <el-col :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
+                    <p v-if="rescol==0">{{this.findCheckPoint()}}</p>
+                    <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'杂质':'不完善粒'}}</p>
+                    <p v-if="rescol==2">{{暂无准确数据}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'黄曲霉毒素B1':'其中：铅'}}</p>
                 </el-col>
-                <el-col :span="5">
+                <el-col v-if="rescol>0" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
+                    <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'其中：矿物质':'其中：生霉粒'}}</p>
+                	<p v-if="rescol==2">{{暂无准确数据}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'脱氧雪腐':'其中：镉'}}</p>
+                </el-col>
+                <el-col v-if="rescol>1" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
+                    <p v-if="rescol==2">{{暂无准确数据}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'镰刀菌烯醇':'其中：汞'}}</p>
+                </el-col>
+                <el-col v-if="rescol>2" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'玉米赤霉烯酮':'其中：砷'}}</p>
+                </el-col>
+                <el-col :span="colwidth[rescol].col3" class="col3">
                     <p>负责人</p>
                 </el-col>
-                <el-col :span="5">
+                <el-col :span="colwidth[rescol].col3"  class="col4">
                     <p>操作</p>
                 </el-col>
             </el-col>
-            <el-col :span="8">
-                <el-col :span="6">
+            
+            <el-col v-if="rescol<2" :span="colwidth[rescol].samplewidth" class="samplewidth">
+                <el-col :span="colwidth[rescol].col1" class="col1">
                     <p>检验编号</p>
                 </el-col>
-                <el-col :span="8" style="border-bottom:none;">
-                    <p>{{this.findCheckPoint()}}</p>
+                <el-col :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
+                    <p v-if="rescol==0">{{this.findCheckPoint()}}</p>
+                    <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'杂质':'不完善粒'}}</p>
                 </el-col>
-                <el-col :span="5">
+                <el-col v-if="rescol>0" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
+                    <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'其中：矿物质':'其中：生霉粒'}}</p>
+                </el-col>
+                
+                <el-col :span="colwidth[rescol].col3" class="col3">
                     <p>负责人</p>
                 </el-col>
-                <el-col :span="5">
+                <el-col :span="colwidth[rescol].col3"  class="col4">
                     <p>操作</p>
                 </el-col>
             </el-col>
-            <el-col :span="8">
-                <el-col :span="6">
+            
+            <el-col v-if="rescol<1" :span="colwidth[rescol].samplewidth" class="samplewidth">
+                <el-col :span="colwidth[rescol].col1" class="col1">
                     <p>检验编号</p>
                 </el-col>
-                <el-col :span="8" style="border-bottom:none;">
+                <el-col :span="colwidth[rescol].col2" class="col2" style="border-bottom:none;">
                     <p>{{this.findCheckPoint()}}</p>
                 </el-col>
-                <el-col :span="5">
+                <el-col :span="colwidth[rescol].col3" class="col3">
                     <p>负责人</p>
                 </el-col>
-                <el-col :span="5">
+                <el-col :span="colwidth[rescol].col3" class="col4">
                     <p>操作</p>
                 </el-col>
             </el-col>
+            
         </el-row>
             <el-row style="border-right:none;">
-                <el-col :span="8" v-for="(item,index) in tabledatas" :key="item.id" style="border-right:1px solid rgb(230, 231, 231);">
-                    <el-col :span="6" style="border-left:none;">
+                <el-col class="samplewidth" :span="colwidth[rescol].samplewidth" v-for="(item,index) in tabledatas" :key="item.id" style="border-right:1px solid rgb(230, 231, 231);">
+                    <el-col class="col1" :span="colwidth[rescol].col1" style="border-left:none;">
                         <p>监{{item.sampleNum}}</p>
                     </el-col>
-                    <el-col :span="8" style="border-bottom:none;">
-                        <!--<el-form-item>-->
-                            <el-input v-if="!double" class="import_input" v-model="item.result"></el-input>
-                            <el-input v-if="double" style="padding-right:0;" class="import_input double" v-model="item.result"></el-input>
-                            <el-input v-if="double" style="padding-left:0;" class="import_input double" v-model="item.result2"></el-input>
-                        <!--</el-form-item>-->
+                    <el-col class="col2" :span="colwidth[rescol].col2" style="border-bottom:none;">
+                        <el-input class="import_input" v-model="item.result"></el-input>
                     </el-col>
-                    <el-col :span="5">
+                    <el-col v-if="rescol>0" class="col2" :span="colwidth[rescol].col2" style="border-bottom:none;">
+                        <el-input class="import_input" v-model="item.result2"></el-input>
+                    </el-col>
+                    <el-col v-if="rescol>1" class="col2" :span="colwidth[rescol].col2" style="border-bottom:none;">
+                        <el-input class="import_input" v-model="item.result3"></el-input>
+                    </el-col>
+                    <el-col v-if="rescol>2" class="col2" :span="colwidth[rescol].col2" style="border-bottom:none;">
+                        <el-input class="import_input" v-model="item.result4"></el-input>
+                    </el-col>
+                    <el-col class="col3" :span="colwidth[rescol].col3">
                         <p>{{userName}}</p>
                     </el-col>
-                    <el-col :span="5">
+                    <el-col class="col4" :span="colwidth[rescol].col3">
                         <a @click="deleSample(item.id)">删除</a>
                     </el-col>
                 </el-col>
                 
-                <el-col :span="8" style="border-right:1px solid rgb(230, 231, 231);">
-                    <el-col :span="6" style="border-left:none;">
+                <el-col class="samplewidth" :span="colwidth[rescol].samplewidth" style="border-right:1px solid rgb(230, 231, 231);">
+                    <el-col class="col1" :span="colwidth[rescol].col1" style="border-left:none;">
                         <a class="add" @click="addstample">+检验编号</a>
                     </el-col>
-                    <el-col :span="8" style="border-bottom:none;">
+                    <el-col class="col2" :span="colwidth[rescol].col2" style="border-bottom:none;">
                     </el-col>
-                    <el-col :span="5">
+                    <el-col v-if="rescol>0" class="col2" :span="colwidth[rescol].col2" style="border-bottom:none;">
                     </el-col>
-                    <el-col :span="5">
+                    <el-col v-if="rescol>1" class="col2" :span="colwidth[rescol].col2" style="border-bottom:none;">
                     </el-col>
-                </el-col>
-                <el-col v-if="tabledatas.length%3<2" :span="8" style="border-right:1px solid rgb(230, 231, 231);">
-                    <el-col :span="6" style="border-left:none;">
+                    <el-col v-if="rescol>2" class="col2" :span="colwidth[rescol].col2" style="border-bottom:none;">
                     </el-col>
-                    <el-col :span="8" style="border-bottom:none;">
+                    <el-col class="col3" :span="colwidth[rescol].col3">
                     </el-col>
-                    <el-col :span="5">
-                    </el-col>
-                    <el-col :span="5">
+                    <el-col class="col4" :span="colwidth[rescol].col3">
                     </el-col>
                 </el-col>
-                <el-col v-if="tabledatas.length%3==0" :span="8" style="border-right:1px solid rgb(230, 231, 231);">
-                    <el-col :span="6" style="border-left:none;">
+                
+                <el-col class="samplewidth" v-if="tabledatas.length%3<2&&rescol==0" :span="8" style="border-right:1px solid rgb(230, 231, 231);">
+                    <el-col class="col1" :span="6" style="border-left:none;">
                     </el-col>
-                    <el-col :span="8" style="border-bottom:none;">
+                    <el-col class="col2" :span="8" style="border-bottom:none;">
                     </el-col>
-                    <el-col :span="5">
+                    <el-col class="col3" :span="5">
                     </el-col>
-                    <el-col :span="5">
+                    <el-col class="col4" :span="5">
                     </el-col>
                 </el-col>
+                <el-col class="samplewidth" v-if="tabledatas.length%3==0&&rescol==0" :span="8" style="border-right:1px solid rgb(230, 231, 231);">
+                    <el-col class="col1" :span="6" style="border-left:none;">
+                    </el-col>
+                    <el-col class="col2" :span="8" style="border-bottom:none;">
+                    </el-col>
+                    <el-col class="col3" :span="5">
+                    </el-col>
+                    <el-col class="col4" :span="5">
+                    </el-col>
+                </el-col>
+                
+                <el-col class="samplewidth" v-if="tabledatas.length%2==0&&rescol==1" :span="12" style="border-right:1px solid rgb(230, 231, 231);">
+                    <el-col class="col1" :span="4" style="border-left:none;">
+                    </el-col>
+                    <el-col class="col2" :span="6" style="border-bottom:none;">
+                    </el-col>
+                    <el-col class="col2" :span="6" style="border-bottom:none;">
+                    </el-col>
+                    <el-col class="col3" :span="4">
+                    </el-col>
+                    <el-col class="col4" :span="4">
+                    </el-col>
+                </el-col>
+                
             </el-row>
         </el-form>
         <div class="filein entryform" v-else-if="entryflag==2">
         	
         	<el-row class="entrt">
-            <el-col :span="8">
-                <el-col :span="6">
+            <el-col :span="colwidth[rescol].samplewidth" class="samplewidth">
+                <el-col :span="colwidth[rescol].col1" class="col1">
                     <p>检验编号</p>
                 </el-col>
-                <el-col :span="8" style="border-bottom:none;">
-                    <p>{{this.findCheckPoint()}}</p>
+                <el-col :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
+                    <p v-if="rescol==0">{{this.findCheckPoint()}}</p>
+                    <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'杂质':'不完善粒'}}</p>
+                    <p v-if="rescol==2">{{暂无准确数据}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'黄曲霉毒素B1':'其中：铅'}}</p>
                 </el-col>
-                <el-col :span="5">
+                <el-col v-if="rescol>0" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
+                    <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'其中：矿物质':'其中：生霉粒'}}</p>
+                	<p v-if="rescol==2">{{暂无准确数据}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'脱氧雪腐':'其中：镉'}}</p>
+                </el-col>
+                <el-col v-if="rescol>1" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
+                    <p v-if="rescol==2">{{暂无准确数据}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'镰刀菌烯醇':'其中：汞'}}</p>
+                </el-col>
+                <el-col v-if="rescol>2" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'玉米赤霉烯酮':'其中：砷'}}</p>
+                </el-col>
+                <el-col :span="colwidth[rescol].col3" class="col3">
                     <p>负责人</p>
                 </el-col>
-                <el-col :span="5">
+                <el-col :span="colwidth[rescol].col3"  class="col4">
                     <p>操作</p>
                 </el-col>
             </el-col>
-            <el-col :span="8">
-                <el-col :span="6">
+            
+            <el-col v-if="rescol<2" :span="colwidth[rescol].samplewidth" class="samplewidth">
+                <el-col :span="colwidth[rescol].col1" class="col1">
                     <p>检验编号</p>
                 </el-col>
-                <el-col :span="8" style="border-bottom:none;">
-                    <p>{{this.findCheckPoint()}}</p>
+                <el-col :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
+                    <p v-if="rescol==0">{{this.findCheckPoint()}}</p>
+                    <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'杂质':'不完善粒'}}</p>
                 </el-col>
-                <el-col :span="5">
+                <el-col v-if="rescol>0" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
+                    <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'其中：矿物质':'其中：生霉粒'}}</p>
+                </el-col>
+                
+                <el-col :span="colwidth[rescol].col3" class="col3">
                     <p>负责人</p>
                 </el-col>
-                <el-col :span="5">
+                <el-col :span="colwidth[rescol].col3"  class="col4">
                     <p>操作</p>
                 </el-col>
             </el-col>
-            <el-col :span="8">
-                <el-col :span="6">
+            
+            <el-col v-if="rescol<1" :span="colwidth[rescol].samplewidth" class="samplewidth">
+                <el-col :span="colwidth[rescol].col1" class="col1">
                     <p>检验编号</p>
                 </el-col>
-                <el-col :span="8" style="border-bottom:none;">
+                <el-col :span="colwidth[rescol].col2" class="col2" style="border-bottom:none;">
                     <p>{{this.findCheckPoint()}}</p>
                 </el-col>
-                <el-col :span="5">
+                <el-col :span="colwidth[rescol].col3" class="col3">
                     <p>负责人</p>
                 </el-col>
-                <el-col :span="5">
+                <el-col :span="colwidth[rescol].col3" class="col4">
                     <p>操作</p>
                 </el-col>
             </el-col>
+            
         </el-row>
             <el-row style="border-right:none;">
-                <el-col :span="8" v-for="(item,index) in tabledatas2" :key="item.id" style="border-right:1px solid rgb(230, 231, 231);">
-                    <el-col :span="6" style="border-left:none;">
+                <el-col class="samplewidth" :span="colwidth[rescol].samplewidth" v-for="(item,index) in tabledatas2" :key="item.id" style="border-right:1px solid rgb(230, 231, 231);">
+                    <el-col class="col1" :span="colwidth[rescol].col1" style="border-left:none;">
                         <p>监{{item.sampleNum}}</p>
                     </el-col>
-                    <el-col :span="8" style="border-bottom:none;">
-                        <!--<el-form-item>-->
-                            <el-input v-if="!double" class="import_input" v-model="item.result"></el-input>
-                            <el-input v-if="double" style="padding-right:0;" class="import_input double" v-model="item.result"></el-input>
-                            <el-input v-if="double" style="padding-left:0;" class="import_input double" v-model="item.result2"></el-input>
-                            
-                        <!--</el-form-item>-->
+                    <el-col class="col2" :span="colwidth[rescol].col2" style="border-bottom:none;">
+                        <el-input class="import_input" v-model="item.result"></el-input>
                     </el-col>
-                    <el-col :span="5">
+                    <el-col v-if="rescol>0" class="col2" :span="colwidth[rescol].col2" style="border-bottom:none;">
+                        <el-input class="import_input" v-model="item.result2"></el-input>
+                    </el-col>
+                    <el-col v-if="rescol>1" class="col2" :span="colwidth[rescol].col2" style="border-bottom:none;">
+                        <el-input class="import_input" v-model="item.result3"></el-input>
+                    </el-col>
+                    <el-col v-if="rescol>2" class="col2" :span="colwidth[rescol].col2" style="border-bottom:none;">
+                        <el-input class="import_input" v-model="item.result4"></el-input>
+                    </el-col>
+                    <el-col class="col3" :span="colwidth[rescol].col3">
                         <p>{{userName}}</p>
                     </el-col>
-                    <el-col :span="5">
-                        <a @click="deleSample2(item.id)">删除</a>
+                    <el-col class="col4" :span="colwidth[rescol].col3">
+                        <a @click="deleSample2(item.sampleNum)">删除</a>
                     </el-col>
                 </el-col>
                 
-                <!--<el-col :span="8" style="border-right:1px solid rgb(230, 231, 231);">
-                    <el-col :span="6" style="border-left:none;">
-                        <a class="add" @click="addstample">+检验编号</a>
+                
+                
+                <el-col class="samplewidth" v-if="tabledatas2.length%3>0&&rescol==0" :span="8" style="border-right:1px solid rgb(230, 231, 231);">
+                    <el-col class="col1" :span="6" style="border-left:none;">
                     </el-col>
-                    <el-col :span="8">
+                    <el-col class="col2" :span="8" style="border-bottom:none;">
                     </el-col>
-                    <el-col :span="5">
+                    <el-col class="col3" :span="5">
                     </el-col>
-                    <el-col :span="5">
-                    </el-col>
-                </el-col>-->
-                <el-col v-if="tabledatas2.length%3!=0" :span="8" style="border-right:1px solid rgb(230, 231, 231);">
-                    <el-col :span="6" style="border-left:none;">
-                    </el-col>
-                    <el-col :span="8" style="border-bottom:none;">
-                    </el-col>
-                    <el-col :span="5">
-                    </el-col>
-                    <el-col :span="5">
+                    <el-col class="col4" :span="5">
                     </el-col>
                 </el-col>
-                <el-col v-if="tabledatas2.length%3==1" :span="8" style="border-right:1px solid rgb(230, 231, 231);">
-                    <el-col :span="6" style="border-left:none;">
+                <el-col class="samplewidth" v-if="tabledatas2.length%3==1&&rescol==0" :span="8" style="border-right:1px solid rgb(230, 231, 231);">
+                    <el-col class="col1" :span="6" style="border-left:none;">
                     </el-col>
-                    <el-col :span="8" style="border-bottom:none;">
+                    <el-col class="col2" :span="8" style="border-bottom:none;">
                     </el-col>
-                    <el-col :span="5">
+                    <el-col class="col3" :span="5">
                     </el-col>
-                    <el-col :span="5">
+                    <el-col class="col4" :span="5">
                     </el-col>
                 </el-col>
+                
+                <el-col class="samplewidth" v-if="tabledatas2.length%2==1&&rescol==1" :span="12" style="border-right:1px solid rgb(230, 231, 231);">
+                    <el-col class="col1" :span="4" style="border-left:none;">
+                    </el-col>
+                    <el-col class="col2" :span="6" style="border-bottom:none;">
+                    </el-col>
+                    <el-col class="col2" :span="6" style="border-bottom:none;">
+                    </el-col>
+                    <el-col class="col3" :span="4">
+                    </el-col>
+                    <el-col class="col4" :span="4">
+                    </el-col>
+                </el-col>
+                
             </el-row>
         	
             <div class="filein_box" v-if="!tabledatas2.length">
@@ -241,14 +322,19 @@
             <!--<span>打印样品领取交接单</span>-->
             <span>提交检测数据</span>
         </div>
-        <div class="leading_out entry_out" v-if="entryflag==2&&tabledatas2.length">
+        <div class="leading_out entry_out" @click="submitimport" v-if="entryflag==2&&tabledatas2.length">
             <span>提交检测数据</span>
         </div>
         <div style="margin-right:0.4rem;" class="leading_out white entry_out" v-if="entryflag==2&&tabledatas2.length">
             <!--<span>重新导入</span>-->
-            <el-upload class="importbtn" :action="uploadURL" :headers="{'Authorization':Token}" multiple :show-file-list="false">
-		       	重新导入
-		    </el-upload>
+            <el-upload class="importbtn" 
+				:action="uploadURL" 
+				:headers="{'Authorization':Token}"  
+				:show-file-list="false"
+	  			:on-success="readdata"				
+				>
+                                 重新导入
+            </el-upload>
         </div>
     </div>
 </template>
@@ -257,7 +343,7 @@
     .entrt {
         /*padding-right:0.18rem;*/
         background-color: #ffe7b8;
-        .el-col-8 {
+        .samplewidth {
             line-height: 0.5rem;
             text-align: center;
             height: 0.5rem;
@@ -369,7 +455,7 @@
         .el-row {
             height: 0.5rem;
             border-right: 1px solid #e6e7e7;
-            .el-col-8 {
+            .samplewidth {
                 border-bottom: 1px solid #e6e7e7;
                 height: 0.5rem;
                 &:first-child{
@@ -377,7 +463,7 @@
                         border-left:none;
                     }
                 }
-                .el-col-6,.el-col-8,.el-col-5 {
+                .col1,.col2,.col3,.col4 {
                     height: 0.5rem;
                     text-align: center;
                     line-height: 0.5rem;
@@ -516,6 +602,15 @@ export default {
     	if(!this.$route.params.sort){
 			this.$router.push({name:"样品检测/样品确认单列表"})		
 		}
+    	if(this.$route.params.checkPoint==3&&this.$route.params.sort=='小麦'){
+			this.rescol=1;	
+		}
+    	if(this.$route.params.checkPoint==4&&this.$route.params.sort=='玉米'){
+			this.rescol=1;	
+		}
+    	if(this.$route.params.checkPoint==10||this.$route.params.checkPoint==11){
+			this.rescol=3;	
+		}
     	
     },
     data() {
@@ -539,22 +634,26 @@ export default {
                 searching: '',
             },
             subtitle: {
-            	name:'录入'+this.$route.params.sort+'检测数据',
+            	name:'录入'+this.$route.params.sort+this.findCheckPoint()+'检测数据',
                 btn: false,
                 btntext: '',
             },
             tabledatas:[
 //          	{sampleNum:2018010001,result:'我是数据',result2:'我是数据2',fzr:'李建波',id:1},
-//          	{sampleNum:2018010002,result:'我是模拟数据',result2:'我是数据2',fzr:'李建波',id:2},
-//          	{sampleNum:2018010009,result:'我是假数据',result2:'我是数据2',fzr:'李建波',id:3},
-//          	{sampleNum:2018010011,result:'我也不是真数据',result2:'我是数据2',fzr:'李建波',id:4},
+
             ],
             tabledatas2:[
-//          	{sampleNum:2018010001,result:'我是数据',result2:'我是数据2',fzr:'李建波',id:1},
-//          	{sampleNum:2018010002,result:'我是模拟数据',result2:'我是数据2',fzr:'李建波',id:2},
-//          	{sampleNum:2018010009,result:'我是假数据',result2:'我是数据2',fzr:'李建波',id:3},
-//          	{sampleNum:2018010011,result:'我也不是真数据',result2:'我是数据2',fzr:'李建波',id:4},
+
             ],
+//          计划写个控制列宽分列显示的对象
+			colwidth:[
+				{samplewidth:8,col1:6,col2:8,col3:5},
+				{samplewidth:12,col1:4,col2:6,col3:4},
+				{samplewidth:24,col1:3,col2:5,col3:3},
+				{samplewidth:24,col1:4,col2:4,col3:2},
+			],
+//			默认为0
+			rescol:0,
         }
     },
     methods: {
@@ -567,8 +666,10 @@ export default {
 //  		uploadURL
 			if(sort=='玉米'){
 				return checkList1[num-1]
-			}else{
+			}else if(sort=='小麦'){
 				return checkList2[num-1]
+			}else{
+				return '未获取到品种信息'
 			}
 		},
         searchingfor() {
@@ -578,10 +679,11 @@ export default {
         	var params={};
         		params.checkPoint=this.$route.params.checkPoint;
         		params.sort=this.$route.params.sort;
+        		params.searching=this.$route.params.taskName?this.$route.params.taskName:this.$route.params.searching;
         		params.tabledatas=this.tabledatas;
-        		if(this.$route.params.searching){
-					params.searching=this.$route.params.searching
-				}
+//      		if(this.$route.params.searching){
+//					params.searching=this.$route.params.searching
+//				}
     		var path=this.$route.name+'/添加检验编号'
            	this.$router.push({ name: path,params:params})
 //         this.$router.push({ path: '/index/sampleDetection/confirmationList/comfirmationentry/addsample',query:{checkPoint:this.$route.params.checkPoint}})
@@ -613,14 +715,14 @@ export default {
 				});
 			});      	
         },
-        deleSample2(id){
+        deleSample2(sampleNum){
         	this.$confirm('此操作将删除该样品, 是否继续?', '提示', {
 				confirmButtonText: '确定',
 				cancelButtonText: '取消',
 				type: 'warning'
 			}).then(() => {
 				this.tabledatas2=this.tabledatas2.filter((value,index)=>{
-	        		return value.id!==id;
+	        		return value.sampleNum!==sampleNum;
 	        	})
 		      	this.$message({
 		        	type: 'success',
@@ -720,7 +822,8 @@ export default {
     			data=this.tabledatas.map((value)=>{
 	    			var obj={};
 	    			obj.testItem=this.checkPoint+'.1';
-	    			obj.sampleId=value.id;
+//	    			obj.sampleId=value.id;
+    				obj.sampleNum=value.sampleNum;
 	    			obj.result=value.result;
 	    			obj.principal=this.userName;
 	    			return obj
@@ -729,7 +832,8 @@ export default {
 	    			var data2=this.tabledatas.map((value)=>{
 		    			var obj={};
 		    			obj.testItem=this.checkPoint+'.2';
-		    			obj.sampleId=value.id;
+//		    			obj.sampleId=value.id;
+    					obj.sampleNum=value.sampleNum;
 		    			obj.result=value.result2;
 		    			obj.principal=this.userName;
 		    			return obj
@@ -740,7 +844,8 @@ export default {
     			data=this.tabledatas.map((value)=>{
 	    			var obj={};
 	    			obj.testItem=this.checkPoint+'.1';
-	    			obj.sampleId=value.id;
+//	    			obj.sampleId=value.id;
+    				obj.sampleNum=value.sampleNum;
 	    			obj.result=value.result;
 	    			obj.principal=this.userName;
 	    			return obj
@@ -749,18 +854,64 @@ export default {
 	    			var data2=this.tabledatas.map((value)=>{
 		    			var obj={};
 		    			obj.testItem=this.checkPoint+'.2';
-		    			obj.sampleId=value.id;
+//		    			obj.sampleId=value.id;
+    					obj.sampleNum=value.sampleNum;
 		    			obj.result=value.result2;
 		    			obj.principal=this.userName;
 		    			return obj
 		    		})
 	    			data=data.concat(data2)    				
     			}
+    		}else if(this.checkPoint==10||this.checkPoint==11){
+    			data=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.1';
+//	    			obj.sampleId=value.id;
+    				obj.sampleNum=value.sampleNum;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+
+    			var data2=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.2';
+//	    			obj.sampleId=value.id;
+    				obj.sampleNum=value.sampleNum;
+	    			obj.result=value.result2;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data2)  
+    			
+    			var data3=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.3';
+//	    			obj.sampleId=value.id;
+    				obj.sampleNum=value.sampleNum;
+	    			obj.result=value.result3;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data3)
+    			
+    			var data4=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.4';
+//	    			obj.sampleId=value.id;
+    				obj.sampleNum=value.sampleNum;
+	    			obj.result=value.result4;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data4)
+
     		}else{
     			data=this.tabledatas.map((value)=>{
 	    			var obj={};
 	    			obj.testItem=this.checkPoint;
-	    			obj.sampleId=value.id;
+//	    			obj.sampleId=value.id;
+    				obj.sampleNum=value.sampleNum;
 	    			obj.result=value.result;
 		    		obj.principal=this.userName;
 	    			return obj
@@ -807,7 +958,7 @@ export default {
     		if(!this.datamap1){
     			return
     		}
-    		var mapfiled1=this.datamap1;
+    		var mapfiled1=this.datamap1;//
     		var mapfiled2=this.datamap2;
     		var rawdata=response.filter((value)=>{
     			return value.sampleNum
@@ -815,12 +966,158 @@ export default {
     		var data=rawdata.map((value)=>{
     			var obj={};
     			obj.sampleNum=value.sampleNum.startsWith('监')?value.sampleNum.slice(1):value.sampleNum;
-    			obj[mapfiled1]=value[mapfiled1];
+    			obj.result=value[mapfiled1];
+    			if(mapfiled2){
+    				obj.result2=value[mapfiled2];   				
+    			}
 //  			obj.id=value.sampleNum;
     			obj.principal=this.userName;
 	    		return obj
     		})
     		console.log(data)
+    		this.tabledatas2=data
+    	},
+    	submitimport(){
+    		if(!this.tabledatas2.length){
+				this.$alert('请先导入模板数据','提示信息',{type: 'warning'});
+				return
+			}
+    		
+    		
+    		var data;
+    		if(this.checkPoint==3){
+    			data=this.tabledatas2.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.1';
+//	    			obj.sampleId=value.id;
+	    			obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			if(this.sort=='小麦'){    				
+	    			var data2=this.tabledatas2.map((value)=>{
+		    			var obj={};
+		    			obj.testItem=this.checkPoint+'.2';
+//		    			obj.sampleId=value.id;
+	    				obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+		    			obj.result=value.result2;
+		    			obj.principal=this.userName;
+		    			return obj
+		    		})
+	    			data=data.concat(data2)
+    			}
+    		}else if(this.checkPoint==4){
+    			data=this.tabledatas2.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.1';
+//	    			obj.sampleId=value.id;
+	    			obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			if(this.sort=='玉米'){
+	    			var data2=this.tabledatas2.map((value)=>{
+		    			var obj={};
+		    			obj.testItem=this.checkPoint+'.2';
+//		    			obj.sampleId=value.id;
+	    				obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+		    			obj.result=value.result2;
+		    			obj.principal=this.userName;
+		    			return obj
+		    		})
+	    			data=data.concat(data2)    				
+    			}
+    		}else if(this.checkPoint==10||this.checkPoint==11){
+    			data=this.tabledatas2.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.1';
+//	    			obj.sampleId=value.id;
+	    			obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+
+    			var data2=this.tabledatas2.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.2';
+//	    			obj.sampleId=value.id;
+	    			obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+	    			obj.result=value.result2;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data2)  
+    			
+    			var data3=this.tabledatas2.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.3';
+//	    			obj.sampleId=value.id;
+	    			obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+	    			obj.result=value.result3;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data3)
+    			
+    			var data4=this.tabledatas2.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.4';
+//	    			obj.sampleId=value.id;
+	    			obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+	    			obj.result=value.result4;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data4)
+
+    		}else{
+    			data=this.tabledatas2.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint;
+//	    			obj.sampleId=value.id;
+	    			obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+	    			obj.result=value.result;
+		    		obj.principal=this.userName;
+	    			return obj
+	    		})
+    		}
+			this.complete=true;
+    		
+    		data.forEach((value)=>{
+    			if(!value.result){
+					this.complete=false;
+//					break;
+				}
+    		})
+    		if(!this.complete){
+				this.$alert('请完善检验结果！！！','提示信息',{type: 'warning'});
+    			return
+    		}
+    		this.$http({
+				method: 'post',
+				url: this.submitURL,
+				transformRequest: [function (data) {
+					let ret = ''
+					for (let it in data) {
+					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					}
+					return ret
+				}],
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				data: {
+				   	params:JSON.stringify(data)			    	
+				}
+			}).then(function(response) {
+				if(response.data.success){
+					this.$router.push({name:'样品检测/样品确认单列表'})
+				}
+			}.bind(this)).catch(function(error) {
+				console.log(error);
+			}.bind(this));
+	
     	},
     },
    

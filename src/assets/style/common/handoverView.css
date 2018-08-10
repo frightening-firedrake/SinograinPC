@@ -1,5 +1,6 @@
 .handover_view{
     width:100%;
+    position:relative;
     /*border-right:1px solid #dfdfdf;*/
     /*border-bottom:1px solid #dfdfdf; */
     /*padding-bottom:0.2rem;*/
@@ -91,12 +92,12 @@
     border-right:1px solid #dfdfdf;
     
 }
-.handover_view .hand_view_tab .hand_view_tabbody .el-col-8,.el-col-4{
+.handover_view .hand_view_tab .hand_view_tabbody .el-col-8,.handover_view .hand_view_tab .hand_view_tabbody .el-col-4{
     text-align:center;
     background-color:#fbfbfb;
     border-left:1px solid #dfdfdf;
 }
-.handover_view .hand_view_tab .hand_view_tabbody .el-col-8,.el-col-4,.el-col-16,.el-col-20 span{
+.handover_view .hand_view_tab .hand_view_tabbody .el-col-8,.handover_view .hand_view_tab .hand_view_tabbody .el-col-4,.handover_view .hand_view_tab .hand_view_tabbody .el-col-16,.handover_view .hand_view_tab .hand_view_tabbody .el-col-20 span{
     font-size:0.16rem;
 }
 .handover_view .hand_view_tab .hand_view_tabbody .el-col-16,.handover_view .hand_view_tab .hand_view_tabbody .el-col-20{
@@ -262,7 +263,7 @@
 .blackBorder .handover_view .hand_view_tab .hand_view_tabbody .el-col-8,.blackBorder .handover_view .hand_view_tab .hand_view_tabbody .el-col-4{
     border-color:black;
 }
-.handover_view .hand_view_tab .hand_view_tabbody .el-col-8,.el-col-4,.el-col-16,.el-col-20 span{
+.handover_view .hand_view_tab .hand_view_tabbody .el-col-8,.handover_view .hand_view_tab .hand_view_tabbody .el-col-4,.handover_view .hand_view_tab .hand_view_tabbody .el-col-16,.handover_view .hand_view_tab .hand_view_tabbody .el-col-20 span{
     font-size:0.16rem;
 }
 .handover_view .hand_view_tab .hand_view_tabbody .el-col-16,.handover_view .hand_view_tab .hand_view_tabbody .el-col-20{
@@ -333,4 +334,23 @@
 .handover_view .addbtn{
 	cursor:pointer;
 	color:#58b481;
+}
+.handover_view .codewrap{
+	position:absolute;
+	right:0;
+	top:0;
+	height:1.24rem;
+	width:20.9%;
+	z-index: 66;
+	background:#fff;
+	border:1px solid #dfdfdf;
+}
+.handover_view .codewrap img{
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-;
+	margin-left:-;
+	width:;
+	height:;
 }

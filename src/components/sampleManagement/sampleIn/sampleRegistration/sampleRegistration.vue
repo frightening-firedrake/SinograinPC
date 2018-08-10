@@ -217,7 +217,7 @@ export default {
 //  	if(!this.tabledatas.length){
     	if(!this.storageTimeIn){
 //  		this.$alert('请先添加样品！！！','提示信息',{});
-    		this.$alert('请先选择入库年份！！！','提示信息',{});
+    		this.$alert('请先选择样品储存年度！！！','提示信息',{});
     		return
     	}
 //  	var arr=[];
@@ -300,7 +300,7 @@ export default {
 	      	createlib:false,
 	      	createSampling:false,
 	      	dateonlyyear:true,
-	      	dateonlyyearTitle:'入库年份：',
+	      	dateonlyyearTitle:'样品储存年度：',
 	      	scanCode:false,
 			connect: false,
 	      	status:false,
@@ -363,7 +363,7 @@ export default {
 	      {
 	        id: 6,
 	        prop:'sampleTime',
-	        label:"时间",
+	        label:"扦样时间",
 	        status:true,
 	        pid:4,
 	//      sort:true,

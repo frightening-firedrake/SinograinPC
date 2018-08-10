@@ -4,7 +4,7 @@
 	    	<el-form-item label="任务名称" style="border-bottom:none;">
 	    		 <!--<el-input class="searching" v-model="searching" @keyup.native.enter='searchingfor'></el-input>-->
 	    		 <!--<input type="text" v-model="searching" @keyup.enter='searchingfor' />-->
-	    		<el-select v-model="searching" placeholder="请选择任务名称" @change="searchingfor">
+	    		<el-select v-model="searching" placeholder="请选择任务名称" disabled @change="searchingfor">
 			        <el-option v-for="item in taskList" :label="item.taskName" :value="item.taskName" :key="item.id"></el-option>
 			    </el-select>
 	    	</el-form-item>
@@ -34,8 +34,8 @@
 			    </el-autocomplete>
 			</el-form-item>
 			
-			<!--<el-form-item label="检测状态" class="full" style="border-top:none;">
-			    <el-select v-model="isChecked" placeholder="请选择检测状态" @change="changeIsChecked">
+			<!--<el-form-item label="检验状态" class="full" style="border-top:none;">
+			    <el-select v-model="isChecked" placeholder="请选择检验状态" @change="changeIsChecked">
 			        <el-option label="未检测" :value="2"></el-option>
 			        <el-option label="已检测" :value="3"></el-option>
 			        <el-option label="全部" :value="0"></el-option>
@@ -142,6 +142,9 @@ export default {
 					})
 					this.checkList[index].result=value.result;
 					this.checkList[index].result2=value.result2;
+					this.checkList[index].result3=value.result3;
+					this.checkList[index].result4=value.result4;
+					this.checkList[index].result5=value.result5;
 				})
     			
     			var checkNums=this.$route.params.tabledatas.map((val)=>{
