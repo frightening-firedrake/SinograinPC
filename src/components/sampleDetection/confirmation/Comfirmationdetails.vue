@@ -397,7 +397,7 @@ export default {
   data() {
     return {
       datalistURL: this.apiRoot +'/grain/testItem/getResult',
-	  	exportExcelURL: this.apiRoot + '/grain/testItem/expotHandover',
+	  	exportExcelURL: this.apiRoot + '/grain/testItem/exportWordTestItem',
       searchURL: '/liquid/role2/data/search',
       deleteURL: '/liquid/role2/data/delete',
       checkedId: [],
