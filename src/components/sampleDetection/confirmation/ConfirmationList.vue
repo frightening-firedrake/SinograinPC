@@ -344,7 +344,8 @@ export default {
 			datalistURL: this.apiRoot +'/grain/testItem/findTestItem',
 			searchURL: this.apiRoot +'/grain/register/data',
 	  		taskListURL:this.apiRoot + '/grain/task/data',
-	  		exportExcelURL: this.apiRoot + '/grain/testItem/expotHandover',
+//	  		exportExcelURL: this.apiRoot + '/grain/testItem/expotHandover',
+	  		exportExcelURL: this.apiRoot + '/grain/testItem/exportWordTestItem',
 			deleteURL: '/liquid/role2/data/delete',
       		searchText:'',
 			checkedId: [],
@@ -485,6 +486,7 @@ export default {
 				safetyReport: false,
 				show:true,
 				exportExcel:true,
+				exporttitle:'导出Word文档',
 			}
 		}
 	}

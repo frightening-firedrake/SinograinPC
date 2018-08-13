@@ -293,7 +293,7 @@
 				</template>
 				<!--是否包含导出操作-->
 				<template v-if="actions.exportExcel">
-					<button class="exportExcel" @click.stop="handleExportExcel(scope.$index, scope.row,scope)">导出Excel表格</button>
+					<button class="exportExcel" @click.stop="handleExportExcel(scope.$index, scope.row,scope)">{{actions.exporttitle?actions.exporttitle:'导出Excel表格'}}</button>
 				</template>
 				<!--是否包含查看操作-->
 				<template v-if="actions.view1">

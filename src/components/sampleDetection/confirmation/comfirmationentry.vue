@@ -946,6 +946,11 @@ export default {
 			}).then(function(response) {
 				if(response.data.success){
 					this.$router.push({name:'样品检测/样品确认单列表'})
+				}else{
+					this.$notify.error({
+			          	title: '录入失败',
+			          	message: '请重新核对检验数据！！！',
+			        });
 				}
 			}.bind(this)).catch(function(error) {
 				console.log(error);
@@ -1113,6 +1118,11 @@ export default {
 			}).then(function(response) {
 				if(response.data.success){
 					this.$router.push({name:'样品检测/样品确认单列表'})
+				}else{
+					this.$notify.error({
+			          	title: '录入失败',
+			          	message: '请重新核对检验编号！！！',
+			        });
 				}
 			}.bind(this)).catch(function(error) {
 				console.log(error);

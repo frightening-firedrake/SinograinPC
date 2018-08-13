@@ -133,7 +133,7 @@
      <div id='printbuttom' class="leading_out right" @click="leading_out()">
      <!--<div class="leading_out" @click="lodopPrint()">-->
         <!--<span>打印样品领取交接单</span>-->
-        <span>导出Excel表格</span>
+        <span>导出Word文档</span>
       </div>
     
   </div>
