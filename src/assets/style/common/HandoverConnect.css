@@ -130,10 +130,10 @@
     overflow-x: visible;*/
     height:0.5rem;
 }
-.connect_form .project_details .classify_num .classify_hao:nth-last-child(2){
+.connect_form .project_details .classify_num .classify_hao{
     position:relative;
 }
-.connect_form .project_details .classify_num .classify_hao:nth-last-child(2):after{
+.connect_form .project_details .classify_num .classify_hao:after{
     content:"";
 	position:absolute;
 	width:1px;
@@ -197,6 +197,9 @@
     color:#e87373;
     border-left:none;
     cursor:pointer;
+}
+.connect_form .project_details  .classify_num .operation.del{
+    
 }
 .connect_form .classify_font .new_sample{
     color:#58b481;

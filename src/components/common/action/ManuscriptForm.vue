@@ -169,10 +169,26 @@
 			</div>
 		</div>
 		<div class="right">
+			<div class="cover_left">
+				<div></div>
+			</div>	
+					
+				<el-form-item label="粮堆形状及基本尺寸" prop="shape"  class="">
+				 	<el-select v-model="shape" placeholder="选择粮堆形状">
+				        <el-option label="长方体" value="长方体"></el-option>
+				        <el-option label="圆柱体" value="圆柱体"></el-option>
+				        <el-option label="长方截锥体" value="长方截锥体"></el-option>
+						<el-option label="其他" value="其他"></el-option>
+				    </el-select>
+				</el-form-item>
+				
+				<div class="clear"></div>
 			<div class="padding">
-				<div class="fromrow">
-					粮堆形状及基本尺寸
-				</div>
+				<!--<div class="fromrow">
+					粮堆形状及基本尺寸 
+				</div>-->
+				
+				
 				<div class="imgbox" style="background-image:url('static/images/sys/box.jpg')">
 					
 				</div>
@@ -495,6 +511,7 @@ export default {
 		jsdjg:{//计算的结果
 
 		},
+		shape:'长方体',
 		librarylist:[],
 //      dyear:new Date(2017),
         calculation_density:"1",//计算密度方法

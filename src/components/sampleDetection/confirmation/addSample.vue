@@ -84,6 +84,7 @@ export default {
 //				params:JSON.stringify(params)
 				sort:this.sort,
 				testItem:this.checkPoint,
+				taskName:this.$route.params.searching,
 			}
 	    }).then(function (response) {
   			this.loading=false;
@@ -209,7 +210,7 @@ export default {
   		path=path.slice(0,end);
 		var params={};
 		params.tabledatas=checkedList;
-		params.searching=this.searching;
+		params.searching==this.$route.params.searching;
 		params.sort=this.$route.params.sort;
 		params.checkPoint=this.$route.params.checkPoint;
 		this.$router.push({name: path,params:params})

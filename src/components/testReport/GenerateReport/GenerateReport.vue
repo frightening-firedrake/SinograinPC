@@ -62,7 +62,8 @@ export default {
 		
 	},
 	created() {
-//		console.log(this.$route.query)
+		console.log(this.$route.query)
+		this.sort=this.$route.query.sort
 		//  获取列表数据（第一页）
 //		this.getlistdata(1)//对接时使用，暂时不启用用的假数据
 		

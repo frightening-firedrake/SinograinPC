@@ -19,22 +19,22 @@
                     <p>检验编号</p>
                 </el-col>
                 <el-col :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
-                    <p v-if="rescol==0" :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()}}</p>
+                    <p v-if="rescol==0">{{this.findCheckPoint()}}</p>
                     <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'杂质':'不完善粒'}}</p>
                     <p v-if="rescol==2">{{暂无准确数据}}</p>
-                    <p v-if="rescol==3" :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()=='真菌毒素'?'黄曲霉毒素B1':'其中：铅'}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'黄曲霉毒素B1':'其中：铅'}}</p>
                 </el-col>
                 <el-col v-if="rescol>0" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
                     <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'其中：矿物质':'其中：生霉粒'}}</p>
                 	<p v-if="rescol==2">{{暂无准确数据}}</p>
-                    <p v-if="rescol==3" :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()=='真菌毒素'?'脱氧雪腐':'其中：镉'}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'脱氧雪腐':'其中：镉'}}</p>
                 </el-col>
                 <el-col v-if="rescol>1" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
                     <p v-if="rescol==2">{{暂无准确数据}}</p>
-                    <p v-if="rescol==3" :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()=='真菌毒素'?'镰刀菌烯醇':'其中：汞'}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'镰刀菌烯醇':'其中：汞'}}</p>
                 </el-col>
                 <el-col v-if="rescol>2" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
-                    <p v-if="rescol==3" :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()=='真菌毒素'?'玉米赤霉烯酮':'其中：砷'}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'玉米赤霉烯酮':'其中：砷'}}</p>
                 </el-col>
                 <el-col :span="colwidth[rescol].col3" class="col3">
                     <p>负责人</p>
@@ -49,7 +49,7 @@
                     <p>检验编号</p>
                 </el-col>
                 <el-col :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
-                    <p v-if="rescol==0" :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()}}</p>
+                    <p v-if="rescol==0">{{this.findCheckPoint()}}</p>
                     <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'杂质':'不完善粒'}}</p>
                 </el-col>
                 <el-col v-if="rescol>0" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
@@ -69,7 +69,7 @@
                     <p>检验编号</p>
                 </el-col>
                 <el-col :span="colwidth[rescol].col2" class="col2" style="border-bottom:none;">
-                    <p :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()}}</p>
+                    <p>{{this.findCheckPoint()}}</p>
                 </el-col>
                 <el-col :span="colwidth[rescol].col3" class="col3">
                     <p>负责人</p>
@@ -167,22 +167,22 @@
                     <p>检验编号</p>
                 </el-col>
                 <el-col :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
-                    <p v-if="rescol==0" :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()}}</p>
+                    <p v-if="rescol==0">{{this.findCheckPoint()}}</p>
                     <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'杂质':'不完善粒'}}</p>
                     <p v-if="rescol==2">{{暂无准确数据}}</p>
-                    <p v-if="rescol==3" :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()=='真菌毒素'?'黄曲霉毒素B1':'其中：铅'}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'黄曲霉毒素B1':'其中：铅'}}</p>
                 </el-col>
                 <el-col v-if="rescol>0" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
                     <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'其中：矿物质':'其中：生霉粒'}}</p>
                 	<p v-if="rescol==2">{{暂无准确数据}}</p>
-                    <p v-if="rescol==3" :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()=='真菌毒素'?'脱氧雪腐':'其中：镉'}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'脱氧雪腐':'其中：镉'}}</p>
                 </el-col>
                 <el-col v-if="rescol>1" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
                     <p v-if="rescol==2">{{暂无准确数据}}</p>
-                    <p v-if="rescol==3" :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()=='真菌毒素'?'镰刀菌烯醇':'其中：汞'}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'镰刀菌烯醇':'其中：汞'}}</p>
                 </el-col>
                 <el-col v-if="rescol>2" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
-                    <p v-if="rescol==3" :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()=='真菌毒素'?'玉米赤霉烯酮':'其中：砷'}}</p>
+                    <p v-if="rescol==3">{{this.findCheckPoint()=='真菌毒素'?'玉米赤霉烯酮':'其中：砷'}}</p>
                 </el-col>
                 <el-col :span="colwidth[rescol].col3" class="col3">
                     <p>负责人</p>
@@ -197,7 +197,7 @@
                     <p>检验编号</p>
                 </el-col>
                 <el-col :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
-                    <p v-if="rescol==0" :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()}}</p>
+                    <p v-if="rescol==0">{{this.findCheckPoint()}}</p>
                     <p v-if="rescol==1">{{this.$route.params.sort=='小麦'?'杂质':'不完善粒'}}</p>
                 </el-col>
                 <el-col v-if="rescol>0" :span="colwidth[rescol].col2"  class="col2" style="border-bottom:none;">
@@ -217,7 +217,7 @@
                     <p>检验编号</p>
                 </el-col>
                 <el-col :span="colwidth[rescol].col2" class="col2" style="border-bottom:none;">
-                    <p :title="this.findCheckPoint()" class="textoverflow" >{{this.findCheckPoint()}}</p>
+                    <p>{{this.findCheckPoint()}}</p>
                 </el-col>
                 <el-col :span="colwidth[rescol].col3" class="col3">
                     <p>负责人</p>
@@ -581,12 +581,6 @@
 .importbtn .el-upload:focus{
 	color:inherit;
 }
-.textoverflow{
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	
-}
 </style>
 <script>
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
@@ -608,16 +602,15 @@ export default {
     	if(!this.$route.params.sort){
 			this.$router.push({name:"样品检测/样品确认单列表"})		
 		}
-//  	修改列数时候用到
-//  	if(this.$route.params.checkPoint==3&&this.$route.params.sort=='小麦'){
-//			this.rescol=1;	
-//		}
-//  	if(this.$route.params.checkPoint==4&&this.$route.params.sort=='玉米'){
-//			this.rescol=1;	
-//		}
-//  	if(this.$route.params.checkPoint==10||this.$route.params.checkPoint==11){
-//			this.rescol=3;	
-//		}
+    	if(this.$route.params.checkPoint==3&&this.$route.params.sort=='小麦'){
+			this.rescol=1;	
+		}
+    	if(this.$route.params.checkPoint==4&&this.$route.params.sort=='玉米'){
+			this.rescol=1;	
+		}
+    	if(this.$route.params.checkPoint==10||this.$route.params.checkPoint==11){
+			this.rescol=3;	
+		}
     	
     },
     data() {
@@ -667,20 +660,14 @@ export default {
 		findCheckPoint() {
 			var num=this.$route.params.checkPoint;
 			var sort=this.$route.params.sort;
-			var checkList=["容重","水分","杂质","矿物质","不完善粒","生霉粒","色泽气味(质量指标)","硬度指数","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1)","真菌毒素(脱氧雪腐镰刀菌烯醇)","真菌毒素(玉米赤霉烯酮)","重金属(铅)","重金属(镉)","重金属(汞)","重金属(砷)"];	
-//			玉米
-//			var checkList1=["容重","水分","杂质","矿物质","不完善粒","生霉粒","色泽气味(质量指标)","硬度指数","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1)","真菌毒素(脱氧雪腐镰刀菌烯醇)","真菌毒素(玉米赤霉烯酮)","重金属(铅)","重金属(镉)","重金属(汞)","重金属(砷)"];	
-//			小麦
-//			var checkList2=["容重","水分","杂质","矿物质","不完善粒","生霉粒","色泽气味(质量指标)","硬度指数","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1)","真菌毒素(脱氧雪腐镰刀菌烯醇)","真菌毒素(玉米赤霉烯酮)","重金属(铅)","重金属(镉)","重金属(汞)","重金属(砷)"];
-
-
+//			var checkList=["容重","水分","杂质(矿物质)","不完善粒(生霉粒)","色泽气味(质量指标)","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)","重金属(铅、镉、汞、砷)"];	
+			var checkList1=["容重","水分","杂质","不完善粒(生霉粒)","色泽气味(质量)","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(品质)","真菌毒素","重金属"];	
+			var checkList2=["容重","水分","杂质(矿物质)","不完善粒","色泽气味(质量)","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(品质)","真菌毒素","重金属"];	
 //  		uploadURL
 			if(sort=='玉米'){
-//				return checkList1[num-1]
-				return checkList[num-1]
+				return checkList1[num-1]
 			}else if(sort=='小麦'){
-//				return checkList2[num-1]
-				return checkList[num-1]
+				return checkList2[num-1]
 			}else{
 				return '未获取到品种信息'
 			}
@@ -761,85 +748,63 @@ export default {
     		this.sort=sort;
     		if(num==2){
     			this.daoru=true;
+           		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelSF';
+//  			this.templateName='水分模板';
     			this.templateName='SF';
     			this.datamap1='pingjunzhi';
-    		}else if(num==5){
-    			if(sort=="玉米"){
-    				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLYM';    			
-    				this.templateName='BWSLYM'
-    				this.datamap1='buwanshanli_pingjunzhi';
-    			}else if(sort=="小麦"){
-    				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLXM';    			
-    				this.templateName='BWSLXM'
-    				this.datamap1='buwanshanli_pingjunzhi';
-    			}
-    			this.daoru=true;
-    		}else if(num==6){
-    			this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLYM';    			
-    			this.templateName='BWSLYM'
-    			this.datamap1='shengmeili_pingjunzhi';
-    			this.daoru=true;
-    		}else if(num==9){
-    			this.daoru=true;
-    			this.uploadURL=this.apiRoot + '/grain/import/importExcelMJXS'; 			
-    			this.templateName='MJXSL'
-    			this.datamap1='pingjunzhi_ganmianjinzhiliang';
-    		}else if(num==10){
-    			this.daoru=true;
-    			this.uploadURL=this.apiRoot + '/grain/import/importExcelZFSZ';    			
-    			this.templateName='ZFSZ'
-    			this.datamap1='pingjunzhi';
-    		}else{
-    			this.daoru=false;
-    			this.uploadURL='';
-    			this.downloadURL='';
-    			this.datamap1='';
-    		}
-    	},
-//  	备份方法
-		setUploadURL22222(){
-    		var num=this.$route.params.checkPoint;
-    		var sort=this.$route.params.sort;
-    		this.checkPoint=num;
-    		this.sort=sort;
-    		if(num==2){
-    			this.daoru=true;
-    			this.uploadURL=this.apiRoot + '/grain/import/importExcelSF';
-    			this.templateName='SF';
-    			this.datamap1='pingjunzhi';
+//  			this.downloadURL=this.apiRoot + '/grain/export/downloadSF';
     		}else if(num==3){
     			if(sort=="玉米"){
+    				this.double=false;
+//  				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLYM';    			
+//  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLYM';
     				this.datamap1='';
     			}else{
+    				this.double=true;
+//  				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLXM';    			
+//  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLXM';
     				this.datamap1='';
     				this.datamap2='';
     			}
     			this.daoru=false;
     		}else if(num==4){
     			if(sort=="玉米"){
+           			this.double=true;
     				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLYM';    			
+//  				this.templateName='不完善粒（玉米）模板'
     				this.templateName='BWSLYM'
+//  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLYM';
     				this.datamap1='buwanshanli_pingjunzhi';
     				this.datamap2='shengmeili_pingjunzhi';
     			}else{
+           			this.double=false;
     				this.uploadURL=this.apiRoot + '/grain/import/importExcelBWSLXM';    			
+//  				this.templateName='不完善粒（小麦）模板'
     				this.templateName='BWSLXM'
+//  				this.downloadURL=this.apiRoot + '/grain/export/downloadBWSLXM';
     				this.datamap1='buwanshanli_pingjunzhi';
     			}
     			this.daoru=true;
     		}else if(num==6){
     			this.daoru=true;
+           		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelMJXS'; 			
+//  			this.templateName='面筋吸水量模板'
     			this.templateName='MJXSL'
+//  			this.downloadURL=this.apiRoot + '/grain/export/downloadMJXS';
     			this.datamap1='pingjunzhi_ganmianjinzhiliang';
     		}else if(num==7){
     			this.daoru=true;
+           		this.double=false;
     			this.uploadURL=this.apiRoot + '/grain/import/importExcelZFSZ';    			
+//  			this.templateName='脂肪酸值模板'
     			this.templateName='ZFSZ'
+//  			this.downloadURL=this.apiRoot + '/grain/export/downloadZFSZ';
     			this.datamap1='pingjunzhi';
     		}else{
     			this.daoru=false;
+           		this.double=false;
     			this.uploadURL='';
     			this.downloadURL='';
     			this.datamap1='';
@@ -853,7 +818,95 @@ export default {
     		
     		
     		var data;
-    		
+    		if(this.checkPoint==3){
+    			data=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.1';
+//	    			obj.sampleId=value.id;
+    				obj.sampleNum=value.sampleNum;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			if(this.sort=='小麦'){    				
+	    			var data2=this.tabledatas.map((value)=>{
+		    			var obj={};
+		    			obj.testItem=this.checkPoint+'.2';
+//		    			obj.sampleId=value.id;
+    					obj.sampleNum=value.sampleNum;
+		    			obj.result=value.result2;
+		    			obj.principal=this.userName;
+		    			return obj
+		    		})
+	    			data=data.concat(data2)
+    			}
+    		}else if(this.checkPoint==4){
+    			data=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.1';
+//	    			obj.sampleId=value.id;
+    				obj.sampleNum=value.sampleNum;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			if(this.sort=='玉米'){
+	    			var data2=this.tabledatas.map((value)=>{
+		    			var obj={};
+		    			obj.testItem=this.checkPoint+'.2';
+//		    			obj.sampleId=value.id;
+    					obj.sampleNum=value.sampleNum;
+		    			obj.result=value.result2;
+		    			obj.principal=this.userName;
+		    			return obj
+		    		})
+	    			data=data.concat(data2)    				
+    			}
+    		}else if(this.checkPoint==10||this.checkPoint==11){
+    			data=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.1';
+//	    			obj.sampleId=value.id;
+    				obj.sampleNum=value.sampleNum;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+
+    			var data2=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.2';
+//	    			obj.sampleId=value.id;
+    				obj.sampleNum=value.sampleNum;
+	    			obj.result=value.result2;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data2)  
+    			
+    			var data3=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.3';
+//	    			obj.sampleId=value.id;
+    				obj.sampleNum=value.sampleNum;
+	    			obj.result=value.result3;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data3)
+    			
+    			var data4=this.tabledatas.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.4';
+//	    			obj.sampleId=value.id;
+    				obj.sampleNum=value.sampleNum;
+	    			obj.result=value.result4;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data4)
+
+    		}else{
     			data=this.tabledatas.map((value)=>{
 	    			var obj={};
 	    			obj.testItem=this.checkPoint;
@@ -863,7 +916,7 @@ export default {
 		    		obj.principal=this.userName;
 	    			return obj
 	    		})
-    		
+    		}
 			this.complete=true;
     		
     		data.forEach((value)=>{
@@ -937,6 +990,95 @@ export default {
     		
     		
     		var data;
+    		if(this.checkPoint==3){
+    			data=this.tabledatas2.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.1';
+//	    			obj.sampleId=value.id;
+	    			obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			if(this.sort=='小麦'){    				
+	    			var data2=this.tabledatas2.map((value)=>{
+		    			var obj={};
+		    			obj.testItem=this.checkPoint+'.2';
+//		    			obj.sampleId=value.id;
+	    				obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+		    			obj.result=value.result2;
+		    			obj.principal=this.userName;
+		    			return obj
+		    		})
+	    			data=data.concat(data2)
+    			}
+    		}else if(this.checkPoint==4){
+    			data=this.tabledatas2.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.1';
+//	    			obj.sampleId=value.id;
+	    			obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			if(this.sort=='玉米'){
+	    			var data2=this.tabledatas2.map((value)=>{
+		    			var obj={};
+		    			obj.testItem=this.checkPoint+'.2';
+//		    			obj.sampleId=value.id;
+	    				obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+		    			obj.result=value.result2;
+		    			obj.principal=this.userName;
+		    			return obj
+		    		})
+	    			data=data.concat(data2)    				
+    			}
+    		}else if(this.checkPoint==10||this.checkPoint==11){
+    			data=this.tabledatas2.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.1';
+//	    			obj.sampleId=value.id;
+	    			obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+	    			obj.result=value.result;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+
+    			var data2=this.tabledatas2.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.2';
+//	    			obj.sampleId=value.id;
+	    			obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+	    			obj.result=value.result2;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data2)  
+    			
+    			var data3=this.tabledatas2.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.3';
+//	    			obj.sampleId=value.id;
+	    			obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+	    			obj.result=value.result3;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data3)
+    			
+    			var data4=this.tabledatas2.map((value)=>{
+	    			var obj={};
+	    			obj.testItem=this.checkPoint+'.4';
+//	    			obj.sampleId=value.id;
+	    			obj.sampleNum=value.sampleNum.indexOf('监')!==-1?value.sampleNum.slice(1):value.sampleNum;
+	    			obj.result=value.result4;
+	    			obj.principal=this.userName;
+	    			return obj
+	    		})
+    			data=data.concat(data4)
+
+    		}else{
     			data=this.tabledatas2.map((value)=>{
 	    			var obj={};
 	    			obj.testItem=this.checkPoint;
@@ -946,7 +1088,7 @@ export default {
 		    		obj.principal=this.userName;
 	    			return obj
 	    		})
-    		
+    		}
 			this.complete=true;
     		
     		data.forEach((value)=>{

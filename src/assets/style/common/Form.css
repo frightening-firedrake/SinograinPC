@@ -409,7 +409,7 @@ form.sampling .right>div.padding{
 form.sampling .merge_title_3{
 	width:2rem;
 	float:left;
-	line-height: 1.44rem;
+	line-height: 1.5rem;
     background-color: #fbfbfb;
     font-size: 0.16rem;
     text-align: right;
@@ -540,6 +540,9 @@ form.sampling .el-form-item.small .el-form-item__content input{
 	float:left;
 	padding-left:2rem;
 	height:0.5rem;
+}
+.cover_left+.el-form-item{
+	border-left:solid 1px rgba(0,0,0,0);
 }
 .cover_left>div{
 	height:0.5rem;

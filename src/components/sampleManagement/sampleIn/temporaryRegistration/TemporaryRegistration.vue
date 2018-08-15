@@ -207,7 +207,7 @@ export default {
 				this.tabledatas = response.data.rows;
 				this.page.total = response.data.total;
 				this.loading = false;
-
+	  			this.page.currentPage=page;
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));

@@ -10,7 +10,7 @@
 	       		<div class="inputwrap2">
 	       			<div class="inputwrap3">       				
 	       				<span class="el-icon-search"></span>
-	       				<input id="AdvancedSearch" v-model="searchText" type="text" placeholder="请输入检验编号" @change="searchChange"  @focus="focus" @blur="blur"/>	
+	       				<input id="AdvancedSearch" v-model="searchText" type="text" placeholder="请输入检验编号" @keydown="searchChange"  @focus="focus" @blur="blur"/>	
 	       			</div>
 	       		</div>
 	       	</div>
@@ -18,7 +18,7 @@
 		
 	    <div v-show="listShow" class="resultList" :style="{width:listWidth}">
 	       	<ul>
-	       		<li v-for="(item,index) in resultList" :key="item.id" v-html="likeColorFull(item.sampleNum)" @click="selectKeyWord(item.sampleNum)">
+	       		<li v-for="(item,index) in resultListfilter" :key="item.id" v-html="likeColorFull(item.sampleNum)" @click="selectKeyWord(item.sampleNum)">
 
 	       		</li>
 	       	</ul>
@@ -158,6 +158,7 @@
 	padding:0.08rem 0;
 	background-color:#fff;
 	height:auto;
+	min-height:0.46rem;
 }
 .AdvancedSearchWrap .resultList ul li{
 	cursor:pointer;
@@ -186,7 +187,23 @@ export default {
 	},
     computed:{
 		...mapGetters(["Token","userName"]),
-		
+		resultListfilter(){
+			var res=[]
+			var searchText=this.searchText.startsWith('监')?this.searchText.slice(1):this.searchText;
+			if(!this.searchText){
+				return [];
+			}
+			var result=this.resultList.filter((value,index)=>{
+				return value.sampleNum.indexOf(searchText)!=-1;
+			})
+			for(var i=0;i<result.length;i++){
+				res.push(result[i]);
+				if(i==5){
+					break
+				}
+			}
+			return res
+		},
 
     },
     methods:{
@@ -217,11 +234,20 @@ export default {
 			}.bind(this),300)
 		},
 		focus(){
+//			console.log(this.resultListfilter)
+//			if(!this.resultListfilter.length){
+//				this.listShow=false;
+//			}
 			this.listShow=true;
 		},
-		searchChange(){
-//			this.$emit('searchChange');
-			
+		searchChange(val){
+//			console.log(val)
+////			this.$emit('searchChange');
+//			if(!this.resultListfilter.length){
+//				this.listShow=false;
+//			}else{				
+//				this.listShow=true;
+//			}
 		},
 	},
     data() {

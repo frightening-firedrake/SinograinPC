@@ -67,7 +67,7 @@ export default {
 	created() {
 //		console.log(this.$route.query)
 		//  获取列表数据（第一页）
-//		this.getlistdata(1)//对接时使用，暂时不启用用的假数据
+		this.getlistdata(1)//对接时使用，暂时不启用用的假数据
 		
 	},
 	methods: {
@@ -110,50 +110,65 @@ export default {
 		},
 		//	获取搜索数据
 		searchingfor(searching){
-			console.log(searching)
+//			console.log(searching)
 			
 			searching=searching.startsWith('监')?searching.slice(1):searching;
-			console.log(searching)
-			this.$router.push({ path: '/index/TestReportManagement/TestReportFindSample/GenerateReport', query: { sampleNum: searching } })
+//			console.log(searching)
+//			this.$router.push({ path: '/index/TestReportManagement/TestReportFindSample/GenerateReport', query: { sampleNum: searching } })
 			
-//	  		var params = {};
-//			params.nameLikeOrId = searching;
-//	  		// 获取列表数据（第？页）
-//			this.$http({
-//			    method: 'post',
-//				url: this.searchURL,
-//				transformRequest: [function (data) {
-//					// Do whatever you want to transform the data
-//					let ret = ''
-//					for (let it in data) {
-//					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-//					}
-//					return ret
-//				}],
-//				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-//				data: {
+	  		var params = {};
+			params.sampleNum = searching;
+	  		// 获取列表数据（第？页）
+			this.$http({
+			    method: 'post',
+				url: this.searchURL,
+				transformRequest: [function (data) {
+					// Do whatever you want to transform the data
+					let ret = ''
+					for (let it in data) {
+					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					}
+					return ret
+				}],
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				data: {
+					sampleNum:searching,
 //				   params:JSON.stringify(params)
-//				}
-//		    }).then(function (response) {
-//			 	this.tabledatas = response.data.rows;
-//				this.page.total = response.data.total;
-//				this.loading = false;
-//	
-//			}.bind(this)).catch(function (error) {
-//			    console.log(error);
-//			}.bind(this));
+				}
+		    }).then(function (response) {
+			 	if(!response.data){
+			 		this.$notify.error({
+			          	title: '错误',
+			          	message: '未找到该检验编号样品！！！',
+			        });
+					return
+			 	}else{
+			 		if(response.data.detectionState==2){
+						this.$router.push({ path: '/index/TestReportManagement/TestReportFindSample/GenerateReport', query: { sort:response.data.sort,sampleNum: searching } })
+			 		}else{
+			 			this.$notify.error({
+				          	title: '错误',
+				          	message: '该样品尚未完成全部检验项目！！！',
+				        });
+						return
+			 		}
+			 	}
+			}.bind(this)).catch(function (error) {
+			    console.log(error);
+			}.bind(this));
 	  	},
 		//	获取列表数据方法
 		getlistdata(page) {
-			this.loading = true;
+
 			var data={};
-			data.page=page;
-			data.rows=this.page.size;
-			var params = {};			
-			if(this.searchText){				
-				params.sampleNumLike = this.searchText;
-				data.params=JSON.stringify(params);
-			};
+			data.detectionState=2;
+//			data.page=page;
+//			data.rows=this.page.size;
+//			var params = {};			
+//			if(this.searchText){				
+//				params.sampleNumLike = this.searchText;
+//				data.params=JSON.stringify(params);
+//			};
 			// 获取列表数据（第？页）
 			this.$http({
 				method: 'post',
@@ -168,10 +183,10 @@ export default {
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				data: data,
 			}).then(function(response) {
-				this.tabledatas = response.data.rows;
-				this.page.total = response.data.total;
-				this.loading = false;
-
+//				this.resultList=response.data.map((value,index)=>{
+//					return value.sampleNum
+//				})
+				this.resultList=response.data
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));
@@ -189,17 +204,17 @@ export default {
 	},
 	data() {
 		return {
-			datalistURL: this.apiRoot +'/grain/testItem/data',
-			searchURL: this.apiRoot +'/grain/register/data',
+			datalistURL: this.apiRoot +'/grain/sample/findByDetectionState',
+			searchURL: this.apiRoot +'/grain/sample/findBysampleNumMobile',
 	  		exportExcelURL: this.apiRoot + '/grain/testItem/expotHandover',
 			deleteURL: '/liquid/role2/data/delete',
       		searchText:'',
       		resultList:[
-      			{id:1,sampleNum:'20180101021'},
-      			{id:2,sampleNum:'20180101022'},
-      			{id:3,sampleNum:'20180101023'},
-      			{id:4,sampleNum:'20180101024'},
-      			{id:5,sampleNum:'20180101025'},
+//    			{id:1,sampleNum:'20180101021'},
+//    			{id:2,sampleNum:'20180101022'},
+//    			{id:3,sampleNum:'20180101023'},
+//    			{id:4,sampleNum:'20180101024'},
+//    			{id:5,sampleNum:'20180101025'},
       		],
 			modalVisible:false,
 			modal:{

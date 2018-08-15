@@ -103,8 +103,11 @@ export default {
 		...mapMutations(['create_modal_id', 'is_mask', 'create_modal', 'close_modal']),
 		...mapActions(['addAction']),
 		//	列表头触发的事件
-		dateChange(data) {
-			console.log(data);
+		dateChange(date) {
+			console.log(date);
+			this.dateStart=date[0];
+			this.dateEnd=date[1];
+			this.getlistdata(1)
 		},
 		scanCode(){
 			
@@ -112,7 +115,7 @@ export default {
 		statusChange(data) {
 			this.filterStatus = data;
 			this.getlistdata(1)
-	  		this.page.currentPage=1;
+//	  		this.page.currentPage=1;
 		},
 		statusChange2(data) {
 			console.log(data)
@@ -150,44 +153,57 @@ export default {
 		searchingfor(searching,page){
 	  		page?page:1;
 	  		this.searchText=searching;
-	  		var params = {};
-			params.nameLikeOrId = searching;
-			if(this.filterStatus==-1){
-				params.returnState=-1;
-			}else if(this.filterStatus==1){
-				params.returnState=1;	
-			}
-	//		console.log(this.breadcrumb.searching);
-	  		// 获取列表数据（第？页）
-			this.$http({
-			    method: 'post',
-				url: this.searchURL,
-				transformRequest: [function (data) {
-					// Do whatever you want to transform the data
-					let ret = ''
-					for (let it in data) {
-					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-					}
-					return ret
-				}],
-				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-				data: {
-				   params:JSON.stringify(params)
-				}
-		    }).then(function (response) {
-			 	this.tabledatas = response.data.rows;
-				this.page.total = response.data.total;
-				this.loading = false;
-	
-			}.bind(this)).catch(function (error) {
-			    console.log(error);
-			}.bind(this));
+	  		this.getlistdata(page)
+//	  		var params = {};
+//			params.idAndReturnPerson = searching;
+//			if(this.filterStatus!=='全部'){
+//				params.returnState=this.filterStatus
+//			}
+//			if(this.dateStart){
+//				params.dateStart=this.dateStart
+//				params.dateEnd=this.dateEnd
+//			}
+//	//		console.log(this.breadcrumb.searching);
+//	  		// 获取列表数据（第？页）
+//			this.$http({
+//			    method: 'post',
+//				url: this.searchURL,
+//				transformRequest: [function (data) {
+//					// Do whatever you want to transform the data
+//					let ret = ''
+//					for (let it in data) {
+//					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+//					}
+//					return ret
+//				}],
+//				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+//				data: {
+//				   params:JSON.stringify(params)
+//				}
+//		    }).then(function (response) {
+//			 	this.tabledatas = response.data.rows;
+//				this.page.total = response.data.total;
+//				this.loading = false;
+//				
+//			}.bind(this)).catch(function (error) {
+//			    console.log(error);
+//			}.bind(this));
 	  	},
 		//	获取列表数据方法
 		getlistdata(page) {
 			this.loading = true;
 			var params = {};
-			
+			if(this.searchText){
+				params.idAndReturnPerson = this.searchText;
+			}
+			if(this.dateStart){
+				params.dateStart=this.dateStart
+				params.dateEnd=this.dateEnd
+			}
+	
+			if(this.filterStatus!=='全部'){
+				params.returnState=this.filterStatus
+			}
 			// 获取列表数据（第？页）
 			this.$http({
 				method: 'post',
@@ -209,7 +225,7 @@ export default {
 				this.tabledatas = response.data.rows;
 				this.page.total = response.data.total;
 				this.loading = false;
-
+	  			this.page.currentPage=page;
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));
@@ -260,8 +276,10 @@ export default {
 	data() {
 		return {
 			datalistURL: this.apiRoot +'/grain/returnSingle/data',
-			searchURL: this.apiRoot +'/grain/handover/data',
+			searchURL: this.apiRoot +'/grain/returnSingle/data',
 			deleteURL: '/liquid/role2/data/delete',
+			dateStart:0,//开始时间
+      		dateEnd:9999999999999999999999999,//结束时间
       		searchText:'',
 			checkedId: [],
 			list: "samplinglist",

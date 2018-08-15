@@ -109,6 +109,7 @@ export default {
     props: ["checkedListAdd","checkList","taskList"],
 //  props: ["checkList"],
     created(){
+    	console.log(this.$route.params)
     	this.sort=this.$route.params.sort
     	if(this.$route.params.searching){
 			this.searching=this.$route.params.searching

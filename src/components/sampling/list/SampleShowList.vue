@@ -93,7 +93,7 @@ export default {
 			this.filterStatus=data;		
 		}
 		this.getlistdata(1)
-	  	this.page.currentPage=1;
+//	  	this.page.currentPage=1;
 	},
 	createSampling(){
 //		console.log('createSampling');
@@ -142,7 +142,7 @@ export default {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
 		  	this.loading=false;
-
+	  		this.page.currentPage=page;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -180,6 +180,7 @@ export default {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
 		  	this.loading=false;
+	  		this.page.currentPage=page;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

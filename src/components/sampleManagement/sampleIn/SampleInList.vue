@@ -124,6 +124,7 @@ export default {
 		this.dateStart=date[0];
 		this.dateEnd=date[1];
 		this.getlistdata(1)
+		
 	},
 //	备注选择
 	remChange(remark){
@@ -261,7 +262,7 @@ export default {
 	    }).then(function (response) {
 			this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
-
+	  		this.page.currentPage=page;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -342,6 +343,7 @@ export default {
 //			console.log(response)
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
+	  		this.page.currentPage=page;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

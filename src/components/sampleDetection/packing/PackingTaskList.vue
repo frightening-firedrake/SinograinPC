@@ -172,11 +172,13 @@ export default {
 			data: {
 				page:page,
 			    rows:this.page.size,
-			   params:JSON.stringify(params)
+			   	params:JSON.stringify(params)
 			}
-	    }).then(function (response) {
-		  	this.tabledatas=response.data.rows;
-
+	   }).then(function (response) {
+	  		this.tabledatas = response.data.rows;
+			this.page.total = response.data.total;
+	  		this.page.currentPage=page;
+			this.loading = false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -206,6 +208,7 @@ export default {
 	   }).then(function (response) {
 			this.tabledatas = response.data.rows;
 			this.page.total = response.data.total;
+	  		this.page.currentPage=page;
 			this.loading = false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);

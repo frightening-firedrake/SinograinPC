@@ -132,7 +132,10 @@
 						{{scope.row['depot']+scope.row['counter']}}
 					</template>
 					<template v-if="item.prop=='checkeds'">
-						{{findCheckeds(scope.row[item.prop])}}
+						{{findCheckeds(scope.row[item.prop],scope.row['sort'])}}
+					</template>
+					<template v-if="item.prop=='colorCheckeds'">
+						<div v-html="colorCheckeds(scope.row['checkeds'],scope.row['sort'])"></div>
 					</template>
 					<template v-if="item.prop=='sampleNum'">
 						监{{scope.row[item.prop]}}
@@ -204,32 +207,61 @@
 							<span class="colorcheck2">水分</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=2?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,3)">
-							<span class="colorcheck3">杂质(矿物质)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=3?',':''}}
+							<span class="colorcheck3">杂质</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=3?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,4)">
-							<span class="colorcheck4">不完善粒(生霉粒)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=4?',':''}}
+							<span class="colorcheck3">矿物质</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=4?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,5)">
-							<span class="colorcheck5">色泽气味(质量指标)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=5?',':''}}
+							<span class="colorcheck4">不完善粒</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=5?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,6)">
-							<span class="colorcheck6">面筋吸水量</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=6?',':''}}
+							<span class="colorcheck4">生霉粒</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=6?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,7)">
-							<span class="colorcheck7">脂肪酸值</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=7?',':''}}
+							<span class="colorcheck5">色泽气味(质量指标)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=7?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,8)">
-							<span class="colorcheck8">品尝评分值</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=8?',':''}}
+							<span class="colorcheck6">硬度指数</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=8?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,9)">
-							<span class="colorcheck9">色泽气味(储存品质指标)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=9?',':''}}
-						</template>	
+							<span class="colorcheck6">面筋吸水量</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=9?',':''}}
+						</template>
 						<template v-if="check(scope.row.checkeds,10)">
-							<span class="colorcheck10">真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=10?',':''}}
-						</template>	
+							<span class="colorcheck7">脂肪酸值</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=10?',':''}}
+						</template>
 						<template v-if="check(scope.row.checkeds,11)">
-							<span class="colorcheck11">重金属(铅、镉、汞、砷)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=11?',':''}}
-						</template>		
+							<span class="colorcheck8">品尝评分值</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=11?',':''}}
+						</template>
+						<template v-if="check(scope.row.checkeds,12)">
+							<span class="colorcheck9">色泽气味(储存品质指标)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=12?',':''}}
+						</template>	
+						<template v-if="check(scope.row.checkeds,13)">
+							<span class="colorcheck10">真菌毒素(黄曲霉毒素B1)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=13?',':''}}
+						</template>	
+						<template v-if="check(scope.row.checkeds,14)">
+							<span class="colorcheck10">真菌毒素(脱氧雪腐镰刀菌烯醇)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=14?',':''}}
+						</template>	
+						<template v-if="check(scope.row.checkeds,15)">
+							<span class="colorcheck10">真菌毒素(玉米赤霉烯酮)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=15?',':''}}
+						</template>	
+						<template v-if="check(scope.row.checkeds,16)">
+							<span class="colorcheck11">重金属(铅)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=16?',':''}}
+						</template>	
+						<template v-if="check(scope.row.checkeds,17)">
+							<span class="colorcheck11">重金属(镉)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=17?',':''}}
+						</template>	
+						<template v-if="check(scope.row.checkeds,18)">
+							<span class="colorcheck11">重金属(汞)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=18?',':''}}
+						</template>	
+						<template v-if="check(scope.row.checkeds,19)">
+							<span class="colorcheck11">重金属(砷)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=19?',':''}}
+						</template>	
+						
+						
+						
+
+						
 					</p>
 				</template>
 			</el-table-column>
@@ -523,9 +555,10 @@ export default {
 			if (pitem.length) {
 				return pitem[0].libraryName;
 			}
-		},
-		findCheckeds(str) {
-			var checkList=["容重","水分","杂质(矿物质)","不完善粒(生霉粒)","色泽气味(质量指标)","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)","重金属(铅、镉、汞、砷)"];	
+		},	
+		colorCheckeds(str,sort) {
+//			console.log(this.actions.searchText,str,sort)
+			var checkList=["容重","水分","杂质","矿物质","不完善粒","生霉粒","色泽气味(质量指标)","硬度指数","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1)","真菌毒素(脱氧雪腐镰刀菌烯醇)","真菌毒素(玉米赤霉烯酮)","重金属(铅)","重金属(镉)","重金属(汞)","重金属(砷)"];	
 	  		var res=[];
 	  		var indexs=str.split(',');
 	  		indexs=indexs.sort((a,b)=>{
@@ -537,19 +570,41 @@ export default {
 		  		}	
 		  	})
 		  	var restr=res.join(',');
-	  		if(restr=="容重,水分,杂质(矿物质),不完善粒(生霉粒),色泽气味(质量指标),面筋吸水量,品尝评分值,色泽气味(储存品质指标),真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮),重金属(铅、镉、汞、砷)"){
+			restr=restr.replace(this.actions.searchText, "<span style='color:#e7023a;'>"+this.actions.searchText+"</span>")					
+			return restr;
+					
+		},
+		findCheckeds(str,sort) {
+			var checkList=["容重","水分","杂质","矿物质","不完善粒","生霉粒","色泽气味(质量指标)","硬度指数","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1)","真菌毒素(脱氧雪腐镰刀菌烯醇)","真菌毒素(玉米赤霉烯酮)","重金属(铅)","重金属(镉)","重金属(汞)","重金属(砷)"];	
+	  		var res=[];
+	  		var indexs=str.split(',');
+	  		indexs=indexs.sort((a,b)=>{
+	  			return a-b
+	  		})
+		  	indexs.forEach((item)=>{
+		  		if(item){
+		  			res.push(checkList[item-1])
+		  		}	
+		  	})
+		  	var restr=res.join(',');
+	  		if(restr=="容重,水分,杂质,矿物质,不完善粒,色泽气味(质量指标),硬度指数,面筋吸水量,品尝评分值,色泽气味(储存品质指标),真菌毒素(脱氧雪腐镰刀菌烯醇),重金属(铅),重金属(镉),重金属(汞),重金属(砷)"){
 	  			return '全项目指标';
-	  		}else if(restr=="容重,水分,杂质(矿物质),不完善粒(生霉粒),色泽气味(质量指标),脂肪酸值,品尝评分值,色泽气味(储存品质指标),真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮),重金属(铅、镉、汞、砷)"){
+	  		}else if(restr=="容重,水分,杂质,不完善粒,生霉粒,色泽气味(质量指标),脂肪酸值,品尝评分值,色泽气味(储存品质指标),真菌毒素(黄曲霉毒素B1),真菌毒素(脱氧雪腐镰刀菌烯醇),真菌毒素(玉米赤霉烯酮),重金属(铅),重金属(镉),重金属(汞),重金属(砷)"){
 	  			return '全项目指标';
 	  		}else{
 //	  			restr=restr.replace(/容重,水分,杂质\(矿物质\),不完善粒\(生霉粒\),色泽气味\(质量指标\)/, "质量指标全项目")
 //	  			restr=restr.replace(/面筋吸水量,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
 //	  			restr=restr.replace(/脂肪酸值,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
 //	  			restr=restr.replace(/真菌毒素\(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮\),重金属\(铅、镉、汞、砷\)/, "食品卫生指标全项目")
-				restr=restr.replace("容重,水分,杂质(矿物质),不完善粒(生霉粒),色泽气味(质量指标)", "质量指标全项目")
-	  			restr=restr.replace("面筋吸水量,品尝评分值,色泽气味(储存品质指标)", "储存品质指标全项目")
-	  			restr=restr.replace("脂肪酸值,品尝评分值,色泽气味(储存品质指标)", "储存品质指标全项目")
-	  			restr=restr.replace("真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮),重金属(铅、镉、汞、砷)", "食品卫生指标全项目")
+				if(sort=='小麦'){
+					restr=restr.replace("容重,水分,杂质,矿物质,不完善粒,色泽气味(质量指标),硬度指数", "质量指标全项目")					
+					restr=restr.replace("面筋吸水量,品尝评分值,色泽气味(储存品质指标)", "储存品质指标全项目")
+					restr=restr.replace("真菌毒素(脱氧雪腐镰刀菌烯醇),重金属(铅),重金属(镉),重金属(汞),重金属(砷)", "食品卫生指标全项目")
+				}else if(sort=='玉米'){
+					restr=restr.replace("容重,水分,杂质,不完善粒,生霉粒,色泽气味(质量指标)", "质量指标全项目")					
+					restr=restr.replace("脂肪酸值,品尝评分值,色泽气味(储存品质指标)", "储存品质指标全项目")
+					restr=restr.replace("真菌毒素(黄曲霉毒素B1),真菌毒素(脱氧雪腐镰刀菌烯醇),真菌毒素(玉米赤霉烯酮),重金属(铅),重金属(镉),重金属(汞),重金属(砷)", "食品卫生指标全项目")
+				}
 	  			return restr
 	  		}
 		},

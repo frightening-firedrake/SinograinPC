@@ -84,7 +84,7 @@
               </el-col>
             </el-col>-->
             <el-col v-for="(item,index) in checkedList" style="border-top:1px solid #dfdfdf;background:white;" :key="item.testItem" :span="8" class='loopBorder'>
-              <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
+              <el-col :title="item.testName" class="textoverflow" style="border-right: 1px solid #dfdfdf;" :span="9">
                 <span>{{item.testName}}</span>
               </el-col>
               <el-col style="border-right: 1px solid #dfdfdf;" :span="9">
@@ -142,6 +142,11 @@
 <style>
 .doubleHeight{
 	line-height: 1.2rem;
+}
+.textoverflow{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 </style>
 
@@ -286,17 +291,17 @@ export default {
       		var checkeds=response.data[0].checkeds;
       		var results=response.data;
       		var sort=response.data[0].sort;
-      		if(sort=='玉米'){
-      			checkeds=checkeds.replace("4", "4.1,4.2")
-      			checkeds=checkeds.replace("3", "3.1")
-      			checkeds=checkeds.replace("10", "10.1,10.2,10.3,10.4")
-      			checkeds=checkeds.replace("11", "11.1,11.2,11.3")
-      		}else if(sort=="小麦"){
-      			checkeds=checkeds.replace("4", "4.1")
-      			checkeds=checkeds.replace("3", "3.1,3.2")
-      			checkeds=checkeds.replace("10", "10.1,10.2,10.3,10.4")
-      			checkeds=checkeds.replace("11", "11.1,11.2,11.3")
-      		}
+//    		if(sort=='玉米'){
+//    			checkeds=checkeds.replace("4", "4.1,4.2")
+//    			checkeds=checkeds.replace("3", "3.1")
+//    			checkeds=checkeds.replace("10", "10.1,10.2,10.3,10.4")
+//    			checkeds=checkeds.replace("11", "11.1,11.2,11.3")
+//    		}else if(sort=="小麦"){
+//    			checkeds=checkeds.replace("4", "4.1")
+//    			checkeds=checkeds.replace("3", "3.1,3.2")
+//    			checkeds=checkeds.replace("10", "10.1,10.2,10.3,10.4")
+//    			checkeds=checkeds.replace("11", "11.1,11.2,11.3")
+//    		}
       		checkeds=checkeds.split(',');
       		checkeds=checkeds.sort((a,b)=>{
       			return a-b
@@ -421,23 +426,23 @@ export default {
 			checkedList:[
 					{testName:'容重',testItem:'1',result:'',principal:''},
 					{testName:'水分',testItem:'2',result:'',principal:''},
-					{testName:'杂质',testItem:'3.1',result:'',principal:''},
-					{testName:'矿物质',testItem:'3.2',result:'',principal:''},
-					{testName:'不完善粒',testItem:'4.1',result:'',principal:''},
-					{testName:'生霉粒',testItem:'4.2',result:'',principal:''},
-					{testName:'色泽气味(质量)',testItem:'5',result:'',principal:''},
-					{testName:'面筋吸水量',testItem:'6',result:'',principal:''},
-					{testName:'脂肪酸值',testItem:'7',result:'',principal:''},
-					{testName:'品尝评分值',testItem:'8',result:'',principal:''},
-					{testName:'色泽气味(储存)',testItem:'9',result:'',principal:''},
-					{testName:'真菌毒素(黄曲霉毒素B1)',testItem:'10.1',result:'',principal:''},
-					{testName:'真菌毒素(脱氧雪腐)',testItem:'10.2',result:'',principal:''},
-					{testName:'真菌毒素(镰刀菌烯醇)',testItem:'10.3',result:'',principal:''},
-					{testName:'真菌毒素(玉米赤霉烯酮)',testItem:'10.4',result:'',principal:''},
-					{testName:'重金属(铅)',testItem:'11.1',result:'',principal:''},
-					{testName:'重金属(镉)',testItem:'11.2',result:'',principal:''},
-					{testName:'重金属(汞)',testItem:'11.3',result:'',principal:''},
-					{testName:'重金属(砷)',testItem:'11.4',result:'',principal:''},
+					{testName:'杂质',testItem:'3',result:'',principal:''},
+					{testName:'矿物质',testItem:'4',result:'',principal:''},
+					{testName:'不完善粒',testItem:'5',result:'',principal:''},
+					{testName:'生霉粒',testItem:'6',result:'',principal:''},
+					{testName:'色泽气味(质量)',testItem:'7',result:'',principal:''},
+					{testName:'硬度指数',testItem:'8',result:'',principal:''},
+					{testName:'面筋吸水量',testItem:'9',result:'',principal:''},
+					{testName:'脂肪酸值',testItem:'10',result:'',principal:''},
+					{testName:'品尝评分值',testItem:'11',result:'',principal:''},
+					{testName:'色泽气味(储存)',testItem:'12',result:'',principal:''},
+					{testName:'真菌毒素(黄曲霉毒素B1)',testItem:'13',result:'',principal:''},
+					{testName:'真菌毒素(脱氧雪腐镰刀菌烯醇)',testItem:'14',result:'',principal:''},
+					{testName:'真菌毒素(玉米赤霉烯酮)',testItem:'15',result:'',principal:''},
+					{testName:'重金属(铅)',testItem:'16',result:'',principal:''},
+					{testName:'重金属(镉)',testItem:'17',result:'',principal:''},
+					{testName:'重金属(汞)',testItem:'18',result:'',principal:''},
+					{testName:'重金属(砷)',testItem:'19',result:'',principal:''},
 			],
 //	  "真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)","重金属(铅、镉、汞、砷)"	
     	

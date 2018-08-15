@@ -130,7 +130,7 @@ export default {
 			this.filterStatus=data			
 		}
 		this.getlistdata(1);
-	  	this.page.currentPage=1;
+//	  	this.page.currentPage=1;
 	},
 	statusChange2(data){
 //		console.log(data)
@@ -141,7 +141,7 @@ export default {
 			this.filterStatus2=data			
 		}
 		this.getlistdata(1);
-	  	this.page.currentPage=1;
+//	  	this.page.currentPage=1;
 	},
 	createSampling(){
 //		console.log('createSampling');
@@ -193,6 +193,7 @@ export default {
 	   	}).then(function (response) {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
+	  		this.page.currentPage=page;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));

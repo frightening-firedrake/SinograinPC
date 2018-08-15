@@ -127,6 +127,7 @@ export default {
 //				this.checkedList=this.$route.params.tabledatas;
 //			}
 //		  	this.checkedList=response.data.rows;
+	  		this.page.currentPage=page;
 	  		this.page.total=response.data.total;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);

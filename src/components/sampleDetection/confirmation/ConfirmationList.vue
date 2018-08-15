@@ -166,26 +166,44 @@ export default {
 			  				{label:'容重',value:'1',id:'1'},
 			  				{label:'水分',value:'2',id:'2'},
 			  				{label:'杂质',value:'3',id:'3'},
-			  				{label:'不完善粒(生霉粒)',value:'4',id:'4'},
-			  				{label:'色泽气味(质量指标)',value:'5',id:'5'},
-			  				{label:'脂肪酸值',value:'7',id:'7'},
-			  				{label:'品尝评分值',value:'8',id:'8'},
-			  				{label:'色泽气味(储存品质指标)',value:'9',id:'9'},
-			  				{label:'真菌毒素',value:'10',id:'10'},
-			  				{label:'重金属(铅、镉、汞、砷)',value:'11',id:'11'},
+//			  				{label:'矿物质',value:'4',id:'4'},
+			  				{label:'不完善粒',value:'5',id:'5'},
+			  				{label:'生霉粒',value:'6',id:'6'},
+			  				{label:'色泽气味(质量指标)',value:'7',id:'7'},
+//			  				{label:'硬度指数',value:'8',id:'8'},
+//			  				{label:'面筋吸水量',value:'9',id:'9'},
+			  				{label:'脂肪酸值',value:'10',id:'10'},
+			  				{label:'品尝评分值',value:'11',id:'11'},
+			  				{label:'色泽气味(储存品质指标)',value:'12',id:'12'},
+			  				{label:'真菌毒素(黄曲霉毒素B1)',value:'13',id:'13'},
+			  				{label:'真菌毒素(脱氧雪腐镰刀菌烯醇)',value:'14',id:'14'},
+			  				{label:'真菌毒素(玉米赤霉烯酮)',value:'15',id:'15'},
+			  				{label:'重金属(铅)',value:'16',id:'16'},
+			  				{label:'重金属(镉)',value:'17',id:'17'},
+			  				{label:'重金属(汞)',value:'18',id:'18'},
+			  				{label:'重金属(砷)',value:'19',id:'19'},
 			  			];
 			}else if(model=='sort'&&val=='小麦'){
 				this.modal.formdatas[2].selectitems=[
 			  				{label:'容重',value:'1',id:'1'},
 			  				{label:'水分',value:'2',id:'2'},
-			  				{label:'杂质(矿物质)',value:'3',id:'3'},
-			  				{label:'不完善粒',value:'4',id:'4'},
-			  				{label:'色泽气味(质量指标)',value:'5',id:'5'},
-			  				{label:'面筋吸水量',value:'6',id:'6'},
-			  				{label:'品尝评分值',value:'8',id:'8'},
-			  				{label:'色泽气味(储存品质指标)',value:'9',id:'9'},
-			  				{label:'真菌毒素',value:'10',id:'10'},
-			  				{label:'重金属(铅、镉、汞、砷)',value:'11',id:'11'},
+			  				{label:'杂质',value:'3',id:'3'},
+			  				{label:'矿物质',value:'4',id:'4'},
+			  				{label:'不完善粒',value:'5',id:'5'},
+//			  				{label:'生霉粒',value:'6',id:'6'},
+			  				{label:'色泽气味(质量指标)',value:'7',id:'7'},
+			  				{label:'硬度指数',value:'8',id:'8'},
+			  				{label:'面筋吸水量',value:'9',id:'9'},
+//			  				{label:'脂肪酸值',value:'10',id:'10'},
+			  				{label:'品尝评分值',value:'11',id:'11'},
+			  				{label:'色泽气味(储存品质指标)',value:'12',id:'12'},
+//			  				{label:'真菌毒素(黄曲霉毒素B1)',value:'13',id:'13'},
+			  				{label:'真菌毒素(脱氧雪腐镰刀菌烯醇)',value:'14',id:'14'},
+//			  				{label:'真菌毒素(玉米赤霉烯酮)',value:'15',id:'15'},
+			  				{label:'重金属(铅)',value:'16',id:'16'},
+			  				{label:'重金属(镉)',value:'17',id:'17'},
+			  				{label:'重金属(汞)',value:'18',id:'18'},
+			  				{label:'重金属(砷)',value:'19',id:'19'},
 			  			];
 			}
 		},
@@ -253,7 +271,7 @@ export default {
 				this.tabledatas = response.data.rows;
 				this.page.total = response.data.total;
 				this.loading = false;
-
+	  			this.page.currentPage=page;
 			}.bind(this)).catch(function(error) {
 				console.log(error);
 			}.bind(this));

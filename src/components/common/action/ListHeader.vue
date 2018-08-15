@@ -483,7 +483,7 @@
 	}
 	/*检测项目那个超长超恶心的筛选*/
 	div.listHeader.checks{
-		height: 1.08rem;
+		height: 1.62rem;
 	}
 </style>
 <script>

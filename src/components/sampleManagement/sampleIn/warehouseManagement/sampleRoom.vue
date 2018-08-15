@@ -123,7 +123,7 @@ export default {
 	remChange(remark){
 		this.remark=remark;
 		this.getlistdata(1);
-	  	this.page.currentPage=1;
+//	  	this.page.currentPage=1;
 	},
 	createSampling(){
 //		console.log('createSampling');
@@ -200,6 +200,7 @@ export default {
 			}
 	   	}).then(function (response) {
 		  	this.tabledatas=response.data;
+//	  		this.page.currentPage=page;
 //	  		this.page.total=response.data.total;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);

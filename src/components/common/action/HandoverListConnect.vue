@@ -113,7 +113,7 @@
 		                            <!--<el-col :span="8" class="">
 		                                <span>{{item.sampleWord}}</span>
 		                            </el-col>-->
-		                            <el-col :span="6" class="operation">
+		                            <el-col :span="6" class="operation del">
 		                                <span @click="deleteItem(index,item)">删除</span>
 		                            </el-col>
 		                        </el-col>
@@ -266,10 +266,10 @@ export default {
         return {
         	data1: [{
           		id: 111,
-          		label: '全指标',
+          		label: '全指标(小麦)',
           		children: [{
             		id: 222,
-            		label: '质量指标',
+            		label: '质量指标(小麦)',
             		children: [{
               			id: 1,
               			label: '容重'
@@ -278,51 +278,75 @@ export default {
               			label: '水分'
             		},{
               			id: 3,
-              			label: '杂质(矿物质)'
+              			label: '杂质'
             		},{
               			id: 4,
-              			label: '不完善粒(生霉粒)'
+              			label: '矿物质'
             		},{
               			id: 5,
+              			label: '不完善粒'
+//          		},{
+//            			id: 6,
+//            			label: '生霉粒'
+            		},{
+              			id: 7,
               			label: '色泽气味(质量指标)'
+            		},{
+              			id: 8,
+              			label: '硬度指数'
             		},]
          		 },{
             		id: 333,
             		label: '储存品质指标(小麦)',
             		children: [
             		{
-              			id: 6,
+              			id: 9,
               			label: '面筋吸水量'
             		},
 //          		{
-//            			id: 7,
+//            			id: 10,
 //            			label: '脂肪酸值'
 //          		},
             		{
-              			id: 8,
+              			id: 11,
               			label: '品尝评分值'
             		},{
-              			id: 9,
+              			id: 12,
               			label: '色泽气味(储存品质指标)'
             		}]
          		 },{
             		id: 444,
-            		label: '食品卫生指标',
+            		label: '食品卫生指标(小麦)',
             		children: [{
-              			id: 10,
-              			label: '真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)'
-            		}, {
-              			id: 11,
-              			label: '重金属(铅、镉、汞、砷)'
+//            			id: 13,
+//            			label: '真菌毒素(黄曲霉毒素B1)'
+//          		},{
+              			id: 14,
+              			label: '真菌毒素(脱氧雪腐镰刀菌烯醇)'
+//          		},{
+//            			id: 15,
+//            			label: '真菌毒素(玉米赤霉烯酮)'
+            		},{
+              			id: 16,
+              			label: '重金属(铅)'
+            		},{
+              			id: 17,
+              			label: '重金属(镉)'
+            		},{
+              			id: 18,
+              			label: '重金属(汞)'
+            		},{
+              			id: 19,
+              			label: '重金属(砷)'
             		}]
          		 }]
         	}],
 			data2: [{
           		id: 111,
-          		label: '全指标',
+          		label: '全指标(玉米)',
           		children: [{
             		id: 222,
-            		label: '质量指标',
+            		label: '质量指标(玉米)',
             		children: [{
               			id: 1,
               			label: '容重'
@@ -331,42 +355,66 @@ export default {
               			label: '水分'
             		},{
               			id: 3,
-              			label: '杂质(矿物质)'
+              			label: '杂质'
             		},{
-              			id: 4,
-              			label: '不完善粒(生霉粒)'
-            		},{
+//            			id: 4,
+//            			label: '矿物质'
+//          		},{
               			id: 5,
+              			label: '不完善粒'
+            		},{
+              			id: 6,
+              			label: '生霉粒'
+            		},{
+              			id: 7,
               			label: '色泽气味(质量指标)'
+//          		},{
+//            			id: 8,
+//            			label: '硬度指数'
             		},]
          		 },{
             		id: 333,
             		label: '储存品质指标(玉米)',
             		children: [
 //          		{
-//            			id: 6,
+//            			id: 9,
 //            			label: '面筋吸水量'
 //          		},
             		{
-              			id: 7,
+              			id: 10,
               			label: '脂肪酸值'
             		},
             		{
-              			id: 8,
+              			id: 11,
               			label: '品尝评分值'
             		},{
-              			id: 9,
+              			id: 12,
               			label: '色泽气味(储存品质指标)'
             		}]
          		 },{
             		id: 444,
-            		label: '食品卫生指标',
+            		label: '食品卫生指标(玉米)',
             		children: [{
-              			id: 10,
-              			label: '真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)'
-            		}, {
-              			id: 11,
-              			label: '重金属(铅、镉、汞、砷)'
+              			id: 13,
+              			label: '真菌毒素(黄曲霉毒素B1)'
+            		},{
+              			id: 14,
+              			label: '真菌毒素(脱氧雪腐镰刀菌烯醇)'
+            		},{
+              			id: 15,
+              			label: '真菌毒素(玉米赤霉烯酮)'
+            		},{
+              			id: 16,
+              			label: '重金属(铅)'
+            		},{
+              			id: 17,
+              			label: '重金属(镉)'
+            		},{
+              			id: 18,
+              			label: '重金属(汞)'
+            		},{
+              			id: 19,
+              			label: '重金属(砷)'
             		}]
          		 }]
         	}],

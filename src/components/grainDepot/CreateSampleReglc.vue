@@ -298,6 +298,7 @@ export default {
 			this.uncomplate(msg)
 			return
   		}
+  		console.log(res)
   		this.tabledatas=[];
   		res.forEach((value,index)=>{
   			if(value.sort){
@@ -307,6 +308,11 @@ export default {
 					libraryName: '',//被查库点
 					id:0,
 			        barnTime:value.barnTime,//入库时间
+			        
+			        sampleWord:value.sampleWord,//扦样编号文字
+			        autograph:value.autograph,//扦样人员
+			        sampleTime:value.sampleTime,//扦样时间
+			        
 			        sort: value.sort,//品种
 			        quality: value.quality,//性质
 			        amount: value.amount,//代表数量
@@ -481,6 +487,87 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
+  	savedataS(){
+		if(!this.$_ault_alert('sample:saveAll')){
+			return
+		}
+		if(!this.listHeader.tableName) {
+			var msg="请先填写表名，再尝试提交！"
+			this.uncomplate(msg)
+			return
+		}
+		var sample =[];
+		this.tabledatas.forEach((value,index)=>{
+			var item={};		
+			item.sampleWord=value.sampleWord;//扦样编号文字
+	        item.autograph=value.autograph;//扦样人员
+	        item.sampleTime=Date.parse(value.sampleTime);//扦样时间
+	        item.sort= value.sort;
+			item.barnTime= Date.parse(value.barnTime);
+			item.quality= value.quality;
+			item.amount= value.amount;
+			item.originPlace= value.originPlace;
+			item.gainTime= value.gainTime;
+			item.position= value.position;
+			// item.updateTime= value.updateTime;
+			// item.sampleTime= value.samplingdate;
+			item.remark= value.remark;
+			sample.push(item);
+			for(var key in item){
+				if(!item[key]){
+					this.isEmpty=true;
+					break
+				}else{
+					this.isEmpty=false;
+				}
+			}
+		})
+		if(sample.length==0) {
+			var msg="请填写表信息，再尝试提交！"
+			this.uncomplate(msg)
+			return
+		}
+		if(this.isEmpty){
+			var msg="请完善表内空信息，再尝试提交！"
+			this.uncomplate(msg)
+			return
+		}
+		if(!this.libraryName2){
+			var msg="请选择被查库点信息，再尝试提交！"
+			this.uncomplate(msg)
+			return
+		}
+//			console.log(sample)
+//		console.log(sample[0].barnTime,)
+    	this.tfbtns.loading=true;			
+		// 提交扦样列表
+		this.$http({
+		    method: 'post',
+			url: this.saveSURL,
+			transformRequest: [function (data) {
+				// Do whatever you want to transform the data
+				let ret = ''
+				for (let it in data) {
+				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret
+			}],
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: {
+				formName: this.listHeader.tableName,
+				sample: JSON.stringify(sample),
+				regState: 2,
+				libraryId: this.libraryName2,
+				type:-1,
+				tableUserId:this.userId,
+			},
+	   	}).then(function (response) {
+		  	this.$router.go(-1);
+//		  	this.$router.push({path: '/index/grainDepot/sampleRegListlc'})
+		}.bind(this)).catch(function (error) {
+		    console.log(error);
+		}.bind(this));
+  	},
 //	表单底部触发事件btnCenterNo btnCenterYes btnLeft btnRight btnOne
 	tfootEvent(date){
 		console.log(date);
@@ -490,6 +577,8 @@ export default {
 			}else {
 				this.savedata(-1)	
 			}
+		}else if(date=='btnCenterS'){
+				this.savedataS()	
 		}else if(date=='btnCenterR'){
 			if(this.$route.query.state==3){
 				this.editdata(3)
@@ -563,8 +652,9 @@ export default {
       deleteURL: this.apiRoot + '/grain/sample/remove',//草稿删除
       datalistURL: this.apiRoot + '/grain/sample/data',//获取草稿地址
 	  librarylistURL: this.apiRoot + '/grain/library/getAll',//获取库列表
-      saveURL: this.apiRoot + '/grain/sample/saveAll',//草稿保存地址
-      sampleURL: this.apiRoot + '/grain/register/edit',//申请扦样地址
+      saveURL: this.apiRoot + '/grain/sample/saveAll',//申请扦样地址草稿保存地址
+      saveSURL: this.apiRoot + '/grain/sample/temporarySaveAll',//直接扦样地址
+      sampleURL: this.apiRoot + '/grain/register/edit',//干嘛用的我忘了
 	  editURL: this.apiRoot + '/grain/sample/saveOrEditAll',
       searchURL:'/liquid/role2/data/search',
       libraryName2:'',
@@ -749,6 +839,7 @@ export default {
       	btnCenter:{
 			btnTextL:'申请扦样',
 			btnTextR:'保存',
+			btnTextS:'直接扦样',
 		},
 //		btnLeft:{
 //			btnText:'导出Excel表格',

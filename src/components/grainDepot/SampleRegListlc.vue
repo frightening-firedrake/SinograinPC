@@ -110,7 +110,7 @@ export default {
 		}
 //		console.log(this.filterStatus)
 		this.getlistdata(1)
-	  	this.page.currentPage=1;		
+//	  	this.page.currentPage=1;		
 	},
 	createSampling(){
 //		console.log('createSampling');
@@ -199,6 +199,7 @@ export default {
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
+	  		this.page.currentPage=page;			  		
 		  	this.loading=false;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
