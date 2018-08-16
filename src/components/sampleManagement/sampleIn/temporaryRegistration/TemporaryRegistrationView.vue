@@ -500,6 +500,7 @@ export default {
       	safetyReport:false,
       },
       tfbtns:{
+      	borderTop:true,
 //    	btnCenter:{
 //			btnTextL:'申请扦样',
 //			btnTextR:'保存',

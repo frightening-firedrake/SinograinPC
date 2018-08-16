@@ -346,11 +346,15 @@
 	border:1px solid #dfdfdf;
 }
 .handover_view .codewrap img{
-	position:absolute;
+	/*position:absolute;
 	top:50%;
 	left:50%;
-	margin-top:-;
-	margin-left:-;
-	width:;
-	height:;
+
+	margin-top:-0.62rem;
+	margin-left:-87px;
+	width:174px;*/
+	height:1rem;
+	width:auto;
+	margin:0.12rem auto;
+	display: block;
 }

@@ -227,7 +227,7 @@ export default {
 //			
 //		})
 		if(sample.length==0) {
-			var msg="请填写表信息，再尝试提交！"
+			var msg="请填添加样品，再尝试提交！"
 			this.uncomplate(msg)
 			return
 		}
@@ -238,7 +238,8 @@ export default {
 //			this.uncomplate(msg)
 //			return
 //		}
-
+    	this.tfbtns.loading=true;		
+    	console.log(this.tfbtns.loading)
 //		console.log(sample[0].barnTime,)
 		// 提交扦样列表
 		this.$http({
@@ -261,7 +262,19 @@ export default {
 				type:1,
 			},
 	    }).then(function (response) {
-//		  this.$router.push({path: '/index/sampleManagement/temporaryRegistration'})
+	    	if(response.data.success){
+	    		this.$notify({
+		          	title: '操作成功',
+		          	message: '送样检验登记表新建成功！！！',
+		          	type: 'success'
+		        });
+		       	this.$router.push({path: '/index/sampleManagement/temporaryRegistration'})
+	    	}else{
+	    		this.$notify.error({
+		          	title: '储存失败',
+		          	message: '送样检验登记表新建失败！！！',
+		        });
+	    	}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -470,6 +483,7 @@ export default {
       	safetyReport:false,
       },
       tfbtns:{
+      	loading:false,
       	btnCenter:{
 			btnTextL:'保存',
 			btnTextR:'取消',

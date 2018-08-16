@@ -249,6 +249,16 @@ export default {
 			return
 		}
   		var loadiframe=document.getElementById('fordownload');
+  		var shape=this.formdatas.form.shape;
+  		if(shape=='长方体'){
+			this.exportExcelURL=this.exportExcelURL1
+    	}else if(shape=='圆柱体'){
+			this.exportExcelURL=this.exportExcelURL2
+    	}else if(shape=='长方截锥体'){
+			this.exportExcelURL=this.exportExcelURL3
+    	}else if(shape=='其他'){
+			this.exportExcelURL=this.exportExcelURL4
+    	}
 		loadiframe.src=this.exportExcelURL+'?id='+id+'&sessionid='+this.Token;
 //		window.open(this.exportExcelURL+'?id='+id+'&sessionid='+this.Token,"_blank");
 		
@@ -284,7 +294,11 @@ export default {
   },
   data() {
     return {
-      exportExcelURL: this.apiRoot + '/grain/manuscript/exportExcel',
+      exportExcelURL: '',//导出接口
+      exportExcelURL1: this.apiRoot + '/grain/manuscript/exportExcelCFT',//长方体
+      exportExcelURL2: this.apiRoot + '/grain/manuscript/exportExcelYZT',//圆柱体
+      exportExcelURL3: this.apiRoot + '/grain/manuscript/exportExcelCFJZT',//长方截锥体
+      exportExcelURL4: this.apiRoot + '/grain/manuscript/exportExcelQT',//其他
       datalistURL: this.apiRoot + '/grain/manuscript/data',
       editURL:  this.apiRoot + '/grain/manuscript/edit',
       sampleURL: this.apiRoot + '/grain/sample/get',

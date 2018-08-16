@@ -25,7 +25,7 @@
               <el-col style="border-left:none;margin-left: -1px;text-align: center;" :span="3">
                 <span>检验编号:</span>
               </el-col>
-              <el-col style="background-color:#fff;padding:0 2%;border-left: 1px solid #dfdfdf;" :span="21">
+              <el-col style="font-size:0.16rem; background-color:#fff;padding:0 2%;border-left: 1px solid #dfdfdf;" :span="21">
                 <span>{{sampleNum}}</span>
               </el-col>
             </el-col>
@@ -198,7 +198,8 @@ export default {
     	
     },
     code(){
-		return  this.apiRoot +'/grain/upload/barcode/'+this.checkedList[0].samplePic;
+//  	console.log(this.checkedList)
+		return  this.apiRoot +'/grain/upload/barcode/'+this.sampleNumPic;
 	},
   },
   created() {
@@ -291,6 +292,7 @@ export default {
       		var checkeds=response.data[0].checkeds;
       		var results=response.data;
       		var sort=response.data[0].sort;
+      		this.sampleNumPic=response.data[0].sampleNumPic;
 //    		if(sort=='玉米'){
 //    			checkeds=checkeds.replace("4", "4.1,4.2")
 //    			checkeds=checkeds.replace("3", "3.1")
@@ -311,6 +313,7 @@ export default {
       				if(value2.testItem==value.testItem){
       					value.result=value2.result
       					value.principal=value2.principal
+//    					value.sampleNumPic=value2.sampleNumPic
       				}
       			})
       			return checkeds.includes(value.testItem);
@@ -407,6 +410,7 @@ export default {
       deleteURL: '/liquid/role2/data/delete',
       checkedId: [],
       sampleId:'',
+      sampleNumPic:'',
       createlibVisible: false,
       breadcrumb: {
         search: false,

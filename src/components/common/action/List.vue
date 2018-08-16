@@ -11,8 +11,8 @@
 		element-loading-text="loading..." 
 		element-loading-spinner="el-icon-loading" 
 		element-loading-background="rgba(255,255,255, 0.8)" 
-		:height="actions.height?actions.height:'auto'"
 		@row-click="rowClick">
+<!--		:height="actions.height?actions.height:'auto'"-->
 <!--		height='scrollHeight'-->
 <!--		max-height='3rem'-->
 		<!--是否包含多选框-->

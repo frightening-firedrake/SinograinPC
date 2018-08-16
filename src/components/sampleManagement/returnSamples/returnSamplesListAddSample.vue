@@ -65,6 +65,7 @@ export default {
   			// params.ruKuSampleState=2;
   			// params.fenxiaoyangSampleState=3;
   			params.sampleState=3;
+			params.detectionState=2;
 //		}else if(this.IsChecked==2){
 //			params.ruKuSampleState=2;
 //		}else if(this.IsChecked==3){

@@ -248,8 +248,8 @@
 					<el-form-item key="其他1" label="高1（m）：" prop="high" class="small"  style="border-left: solid 1px #dfdfdf;">
 					    <el-input v-model.number="formdatas.form.high" ></el-input>
 					</el-form-item>
-					<el-form-item key="其他2" label="高2（m）：" prop="high_2 " class="small"  :rules="[{ required: true, message: '请输入', trigger: 'blur' }]">
-					    <el-input v-model.number="formdatas.form.high_2 " ></el-input>
+					<el-form-item key="其他2222" label="高2（m）：" prop="high_2" class="small"  :rules="[{ required: true, message: '请输入', trigger: 'blur' }]">
+					    <el-input v-model.number="formdatas.form.high_2" ></el-input>
 					</el-form-item>
 					<el-form-item key="其他6" label=""  class="small">
 					    <!--<el-input v-model.number="formdatas.form.high"></el-input>-->
@@ -413,7 +413,7 @@ export default {
         	var high_2 = this.formdatas.form.high_2-0;
         	
         	
-        	console.log(shape)
+
         	if(shape=='长方体'){
 				return this.jsdjg.measuredVolume = (length*high*wide).toFixed(1)     		
         	}else if(shape=='圆柱体'){
@@ -455,6 +455,7 @@ export default {
 		// },
 		// bgzrsh() { //保管自然损耗
 		// 	var date = new Date();
+//		var date=new Date(this.formdatas.form.realCheckedTime);
 		// 	var year = date.getFullYear();
 			
 		// 	if(year==this.formdatas.form.gainTime){
@@ -467,7 +468,8 @@ export default {
 		sum() { //合计
 		//var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
 			var sfjl = this.formdatas.form.lossWater - 0;
-			var date = new Date();
+//			var date = new Date();
+			var date=new Date(this.formdatas.form.realCheckedTime);
 			var year = date.getFullYear();
 			//var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
 			var bgzrsh = this.formdatas.form.lossNature - 0;
@@ -485,7 +487,8 @@ export default {
 			}
 			//var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
 			var sfjl = this.formdatas.form.lossWater - 0;
-			var date = new Date();
+//			var date = new Date();
+			var date=new Date(this.formdatas.form.realCheckedTime);
 			var year = date.getFullYear();
 			//var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
 			var bgzrsh = this.formdatas.form.lossNature - 0;
@@ -504,7 +507,8 @@ export default {
 			}
 			//var sfjl = this.formdatas.form.grainQuality*(this.formdatas.form.storageWater-this.formdatas.form.realWater)/(1-this.formdatas.form.realWater);
 			var sfjl = this.formdatas.form.lossWater - 0;
-			var date = new Date();
+//			var date = new Date();
+			var date=new Date(this.formdatas.form.realCheckedTime);
 			var year = date.getFullYear();
 			//var bgzrsh = this.formdatas.form.grainQuality*0.002*(year-this.formdatas.form.gainTime);
 			var bgzrsh = this.formdatas.form.lossNature - 0;
@@ -771,7 +775,7 @@ export default {
 //      	this[path[0]][path[1]][path[2]]=res;       	
         },
         changeShape(val){
-//      	console.log(val)
+//      	console.log(this.formdatas.form.high_2)
         	this.$refs['form'].clearValidate()
         	this.formdatas.form.high="0.00";
         	this.formdatas.form.length="0.00";
