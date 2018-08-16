@@ -93,6 +93,13 @@ export default {
             custodian: this.formdatas.form.custodian,//保管责任人
             leader: this.formdatas.form.leader,//被检查企业负责人
             barnType: this.formdatas.form.barnType,//仓房类型
+//          新加形状等
+            shape: this.formdatas.form.shape,//形状
+			topS:this.formdatas.form.topS,//上底面积
+			bottomS:this.formdatas.form.bottomS,//下底面积
+			diameter:this.formdatas.form.diameter,//直径
+			length_2:this.formdatas.form.length_2,//长度2
+			high_2:this.formdatas.form.high_2,//宽度
           }
   		this.loading=true;
       //保存数据
@@ -224,6 +231,13 @@ export default {
       formdatas: {
       	title:'中央储备粮实物检查工作底稿',
       	form:{
+      	  shape:'长方体',
+      	  topS:'0.00',//上底面积
+		  bottomS:'0.00',//下底面积
+		  diameter:'0.00',//直径
+		  length_2:'0.00',//长度2
+		  high_2:'0.00',//宽度
+		  
       	  amount:'',
           enterprise: '',//被检查企业
           checkedTime: '',//被查时点

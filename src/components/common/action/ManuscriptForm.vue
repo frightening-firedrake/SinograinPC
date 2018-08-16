@@ -122,13 +122,13 @@
 				<div class="fromrow">
 					1.计算粮堆体积
 				</div>
-				<el-form-item label="粮堆测量体积(m3)" prop="measuredVolume" >
+				<el-form-item label="粮堆测量体积(m³)" prop="measuredVolume" >
 				    <el-input v-model="ldcltj" disabled></el-input>
 				</el-form-item>
-				<el-form-item label="需要扣除体积(m3)" prop="deductVolume" >
+				<el-form-item label="需要扣除体积(m³)" prop="deductVolume" >
 				    <el-input v-model.number="formdatas.form.deductVolume"></el-input>
 				</el-form-item>
-				<el-form-item label="粮堆实际体积(m3)" prop="realVolume" >
+				<el-form-item label="粮堆实际体积(m³)" prop="realVolume" >
 				    <el-input v-model="ldsjtj" disabled></el-input>
 				</el-form-item>
 				<div class="fromrow">
@@ -174,7 +174,7 @@
 			</div>	
 					
 				<el-form-item label="粮堆形状及基本尺寸" prop="shape"  class="">
-				 	<el-select v-model="shape" placeholder="选择粮堆形状">
+				 	<el-select v-model="formdatas.form.shape" placeholder="选择粮堆形状" @change="changeShape">
 				        <el-option label="长方体" value="长方体"></el-option>
 				        <el-option label="圆柱体" value="圆柱体"></el-option>
 				        <el-option label="长方截锥体" value="长方截锥体"></el-option>
@@ -189,20 +189,73 @@
 				</div>-->
 				
 				
-				<div class="imgbox" style="background-image:url('static/images/sys/box.jpg')">
+				<div v-if="formdatas.form.shape=='长方体'" class="imgbox" style="background-image:url('static/images/sys/box1.png')"></div>
+				<div v-if="formdatas.form.shape=='圆柱体'" class="imgbox" style="background-image:url('static/images/sys/box2.png')"></div>
+				<div v-if="formdatas.form.shape=='长方截锥体'" class="imgbox" style="background-image:url('static/images/sys/box3.png')"></div>
+				<div v-if="formdatas.form.shape=='其他'" class="imgbox" style="height:4rem; background-image:url('static/images/sys/box4.png')"></div>
 					
-				</div>
-				<el-form-item label="长（m）：" prop="length" class="small"  style="border-left: solid 1px #dfdfdf;">
-				    <el-input v-model.number="formdatas.form.length" ></el-input>
-				</el-form-item>
-				<el-form-item label="宽（m）：" prop="wide" class="small" >
-				    <el-input v-model.number="formdatas.form.wide" @change="changeNum('formdatas.form.wide')"></el-input>
-				</el-form-item>
-				<el-form-item label="高（m）：" prop="high" class="small">
-				    <el-input v-model.number="formdatas.form.high"></el-input>
-				</el-form-item>	
-				<div class="clear"></div>
+				<template v-if="formdatas.form.shape=='长方体'">
+					<el-form-item key="长方体1" label="长（m）：" prop="length" class="small"  style="border-left: solid 1px #dfdfdf;">
+					    <el-input v-model.number="formdatas.form.length" ></el-input>
+					</el-form-item>
+					<el-form-item key="长方体2" label="宽（m）：" prop="wide" class="small" >
+					    <el-input v-model.number="formdatas.form.wide" @change="changeNum('formdatas.form.wide')"></el-input>
+					</el-form-item>
+					<el-form-item key="长方体3" label="高（m）：" prop="high" class="small">
+					    <el-input v-model.number="formdatas.form.high"></el-input>
+					</el-form-item>	
+					<div class="clear"></div>					
+				</template>
 				
+				<template v-if="formdatas.form.shape=='圆柱体'">
+					<el-form-item key="圆柱体1" label="直径（m）：" prop="diameter"  class="small"  style="width:50%; border-left: solid 1px #dfdfdf;" :rules="[{ required: true, message: '请输入', trigger: 'blur' }]">
+					    <el-input v-model.number="formdatas.form.diameter" ></el-input>
+					</el-form-item>
+					<el-form-item key="圆柱体2" label="高（m）：" prop="high" class="small" style="width:50%;" >
+					    <el-input v-model.number="formdatas.form.high" ></el-input>
+					</el-form-item>
+					<div class="clear"></div>					
+				</template>
+				
+				<template v-if="formdatas.form.shape=='长方截锥体'">
+					<el-form-item key="长方截锥体1" label="S1（m²）：" prop="topS" class="small"  style="border-left: solid 1px #dfdfdf;" :rules="[{ required: true, message: '请输入', trigger: 'blur' }]">
+					    <el-input v-model.number="formdatas.form.topS" ></el-input>
+					</el-form-item>
+					<el-form-item key="长方截锥体2" label="S2（m²）：" prop="bottomS" class="small"  :rules="[{ required: true, message: '请输入', trigger: 'blur' }]">
+					    <el-input v-model.number="formdatas.form.bottomS" ></el-input>
+					</el-form-item>
+					<el-form-item key="长方截锥体3" label="高（m）：" prop="high" class="small">
+					    <el-input v-model.number="formdatas.form.high"></el-input>
+					</el-form-item>	
+					<div class="clear"></div>					
+				</template>
+				
+				<template v-if="formdatas.form.shape=='其他'">
+					
+					
+					<el-form-item key="其他4" label="长1（m）：" prop="length" class="small"  style="border-left: solid 1px #dfdfdf;">
+					    <el-input v-model.number="formdatas.form.length" ></el-input>
+					</el-form-item>
+					<el-form-item key="其他5" label="长2（m）：" prop="length_2" class="small"  :rules="[{ required: true, message: '请输入', trigger: 'blur' }]">
+					    <el-input v-model.number="formdatas.form.length_2"></el-input>
+					</el-form-item>
+					
+					<el-form-item key="其他3" label="宽（m）：" prop="wide" class="small">
+					    <el-input v-model.number="formdatas.form.wide"></el-input>
+					</el-form-item>	
+					<div class="clear"></div>	
+					
+					<el-form-item key="其他1" label="高1（m）：" prop="high" class="small"  style="border-left: solid 1px #dfdfdf;">
+					    <el-input v-model.number="formdatas.form.high" ></el-input>
+					</el-form-item>
+					<el-form-item key="其他2" label="高2（m）：" prop="high_2 " class="small"  :rules="[{ required: true, message: '请输入', trigger: 'blur' }]">
+					    <el-input v-model.number="formdatas.form.high_2 " ></el-input>
+					</el-form-item>
+					<el-form-item key="其他6" label=""  class="small">
+					    <!--<el-input v-model.number="formdatas.form.high"></el-input>-->
+					</el-form-item>	
+					<div class="clear"></div>
+				</template>
 			</div>		
 		</div>
 		<div class="clear"></div>
@@ -325,7 +378,7 @@
 		9.差数＝保管账数量－检查计算数；差率＝差数/保管账数量×100％。								
 		10.差率在±3％以内的，认定账实相符，保管账数量即为粮食实际数量。								
 		11.账实不符原因可另附说明。								
-		12.表中以kg、g/l为单位的栏目保留整数，以kg/m3、％为单位的保留1位小数，修正系数以及长、宽、高数值保留2位小数。								
+		12.表中以kg、g/l为单位的栏目保留整数，以kg/m³、％为单位的保留1位小数，修正系数以及长、宽、高数值保留2位小数。								
 
         	</pre>
         </div>
@@ -346,16 +399,38 @@ export default {
     },
     computed:{
 		ldcltj() {//粮堆测量体积
-			var length = this.formdatas.form.length;
-			var high = this.formdatas.form.high;
-			var wide = this.formdatas.form.wide;
-			return this.jsdjg.measuredVolume = (length*high*wide).toFixed(1)
+			var shape = this.formdatas.form.shape;
+			
+			
+			var length = this.formdatas.form.length-0;
+			var high = this.formdatas.form.high-0;
+			var wide = this.formdatas.form.wide-0;
+			
+        	var topS = this.formdatas.form.topS-0;
+        	var bottomS = this.formdatas.form.bottomS-0;
+        	var diameter = this.formdatas.form.diameter-0;
+        	var length_2 = this.formdatas.form.length_2-0;
+        	var high_2 = this.formdatas.form.high_2-0;
+        	
+        	
+        	console.log(shape)
+        	if(shape=='长方体'){
+				return this.jsdjg.measuredVolume = (length*high*wide).toFixed(1)     		
+        	}else if(shape=='圆柱体'){
+        		return this.jsdjg.measuredVolume = (3.14*diameter*diameter/4*high).toFixed(1)     		
+        	}else if(shape=='长方截锥体'){
+        		return this.jsdjg.measuredVolume = ((topS+bottomS+Math.sqrt(topS*bottomS))*high/3).toFixed(1)     		
+        	}else if(shape=='其他'){
+        		return this.jsdjg.measuredVolume = (length*high*wide+(high+high_2)*length_2/2).toFixed(1)     		
+        	}
+        	
+
 		},
 		ldsjtj() { //粮堆实际体积
 			var length = this.formdatas.form.length;
 			var high = this.formdatas.form.high;
 			var wide = this.formdatas.form.wide;
-			return this.jsdjg.realVolume = (length*high*wide - this.formdatas.form.deductVolume).toFixed(1)
+			return this.jsdjg.realVolume = (this.ldcltj - this.formdatas.form.deductVolume).toFixed(1)
 		},
 		bzldpjmd() { // 标准粮堆平均密度
 			return this.jsdjg.aveDensity = (this.formdatas.form.realCapacity*this.formdatas.form.correctioFactor).toFixed(1)
@@ -694,6 +769,18 @@ export default {
 //      	var toFixed=value.toFixed(2);
 //      	var res=parseFloat(toFixed);
 //      	this[path[0]][path[1]][path[2]]=res;       	
+        },
+        changeShape(val){
+//      	console.log(val)
+        	this.$refs['form'].clearValidate()
+        	this.formdatas.form.high="0.00";
+        	this.formdatas.form.length="0.00";
+        	this.formdatas.form.wide="0.00";
+        	this.formdatas.form.topS="0.00";
+        	this.formdatas.form.bottomS="0.00";
+        	this.formdatas.form.diameter="0.00";
+        	this.formdatas.form.length_2="0.00";
+        	this.formdatas.form.high_2="0.00";
         },
     }
 
