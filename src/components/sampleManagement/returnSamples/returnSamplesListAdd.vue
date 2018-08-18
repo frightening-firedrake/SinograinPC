@@ -40,7 +40,7 @@
                 <span>存放位置</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
-                <span>归还人</span>
+                <span>发起人</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="4">
                 <span>操作</span>
@@ -57,7 +57,7 @@
                 <span>存放位置</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
-                <span>归还人</span>
+                <span>发起人</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="4">
                 <span>操作</span>
@@ -73,7 +73,7 @@
                 <span>{{item.sampleNum}}</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
-                <span>{{item.storage}}</span>
+                <span>{{item.storage?item.storage:'&nbsp'}}</span>
               </el-col>
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;" :span="6">
                 <span>{{userName}}</span>
@@ -101,7 +101,7 @@
                 <span>&nbsp;</span>
               </el-col>
             </el-col>
-            <el-col style="" :span="12" v-if="!formdatas.items.length%2" class='loopBorder' style="border-top:1px solid #dfdfdf;">
+            <el-col style="" :span="12" v-if="formdatas.items.length%2==0" class='loopBorder' style="border-top:1px solid #dfdfdf;">
               <el-col style="" :span="2">
                 <span>{{formdatas.items.length+2}}</span>
               </el-col>
@@ -429,8 +429,8 @@ export default {
 //	  },
 	  //	填入新建数据
 		createlibitem(form) {
-			console.log(form);
-   this.guihuanadd(form);
+//			console.log(form);
+   		this.guihuanadd(form);
       // this.$router.push({path:'/index/sampleManagement/returnSamples'});
 		},
     guihuanadd(form) {
@@ -453,6 +453,7 @@ export default {
           data: {
 //            id: this.$route.query.id,
               returnPerson: form.returnPerson,
+              initiator: this.userName,
               sampleIds:sampleIds,
               // sampleNums: this.sampleNums,
           },

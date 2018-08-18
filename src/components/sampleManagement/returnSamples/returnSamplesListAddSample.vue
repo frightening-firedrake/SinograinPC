@@ -60,7 +60,7 @@ export default {
 //	获取列表数据方法
   	getsampledata(){
   		var params={};
-  		params.sampleWordOrsampleNumLike='';
+//		params.sampleWordOrsampleNumLike='';
 //		if(!this.IsChecked){  			
   			// params.ruKuSampleState=2;
   			// params.fenxiaoyangSampleState=3;
@@ -90,7 +90,7 @@ export default {
 			}
 	    }).then(function (response) {
 //			console.log(response)
-		  	this.checkList=response.data.rows;
+		  	this.checkList=response.data;
 		  	if(this.$route.params.formdatas){
 				this.checkedList=this.$route.params.formdatas.items;
 			}
@@ -203,7 +203,8 @@ export default {
   },
   data() {
     return {
-      sampleURL:this.apiRoot + '/grain/sample/data',
+//    sampleURL:this.apiRoot + '/grain/sample/data',
+      sampleURL:this.apiRoot + '/grain/sample/findReturnSingle',
 	  taskListURL:this.apiRoot + '/grain/task/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',

@@ -358,6 +358,14 @@ export default {
 				},
 				{
 					id: 3,
+					prop: 'initiator',
+					label: "发起人",
+//					status:true,
+//					width:350,
+//					sort: true,
+				},
+				{
+					id: 4,
 					prop: 'returnPerson',
 					label: "归还人",
 //					status:true,

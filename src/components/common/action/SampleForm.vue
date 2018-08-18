@@ -127,7 +127,8 @@ export default {
     		}
     	},
     	code(){
-    		return  this.apiRoot +'/grain/upload/barcode/'+this.formdatas.form.samplePic;
+//  		return  this.apiRoot +'/grain/upload/barcode/'+this.formdatas.form.samplePic;
+    		return  this.apiRoot +'/grain/upload/barcode/'+this.formdatas.form.sampleNumPic;
     	},
     },
     data() {

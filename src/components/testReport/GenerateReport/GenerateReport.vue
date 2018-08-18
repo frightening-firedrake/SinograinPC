@@ -65,7 +65,7 @@ export default {
 		console.log(this.$route.query)
 		this.sort=this.$route.query.sort
 		//  获取列表数据（第一页）
-//		this.getlistdata(1)//对接时使用，暂时不启用用的假数据
+		this.getlistdata(1)//对接时使用，暂时不启用用的假数据
 		
 	},
 	methods: {
@@ -141,15 +141,16 @@ export default {
 	  	},
 		//	获取列表数据方法
 		getlistdata(page) {
-			this.loading = true;
+
 			var data={};
-			data.page=page;
-			data.rows=this.page.size;
-			var params = {};			
-			if(this.searchText){				
-				params.sampleNumLike = this.searchText;
-				data.params=JSON.stringify(params);
-			};
+			data.sampleNum=this.$route.query.sampleNum;
+//			data.page=page;
+//			data.rows=this.page.size;
+//			var params = {};			
+//			if(this.searchText){				
+//				params.sampleNumLike = this.searchText;
+//				data.params=JSON.stringify(params);
+//			};
 			// 获取列表数据（第？页）
 			this.$http({
 				method: 'post',
@@ -164,9 +165,7 @@ export default {
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				data: data,
 			}).then(function(response) {
-				this.tabledatas = response.data.rows;
-				this.page.total = response.data.total;
-				this.loading = false;
+				
 
 			}.bind(this)).catch(function(error) {
 				console.log(error);
@@ -185,7 +184,7 @@ export default {
 	},
 	data() {
 		return {
-			datalistURL: this.apiRoot +'/grain/testItem/data',
+			datalistURL: this.apiRoot +'/grain/sample/findSampleReport',
 			searchURL: this.apiRoot +'/grain/register/data',
 	  		exportExcelURL: this.apiRoot + '/grain/testItem/expotHandover',
 			deleteURL: '/liquid/role2/data/delete',

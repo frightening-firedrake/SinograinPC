@@ -84,7 +84,7 @@
                 <span class="delbtn2" v-if="!isreturn">删除</span>
               </el-col>
             </el-col>
-            <el-col style="" :span="12"  class='loopBorder' style="border-top:1px solid #dfdfdf;">
+            <el-col style="" :span="12" v-if="!formdatas.items.length%2" class='loopBorder' style="border-top:1px solid #dfdfdf;">
               <el-col style="" :span="2">
                 <span>{{formdatas.items.length+1}}</span>
               </el-col>
@@ -102,7 +102,7 @@
                 <span>&nbsp;</span>
               </el-col>
             </el-col>
-            <el-col style="" :span="12" v-if="!formdatas.items.length%2" class='loopBorder' style="border-top:1px solid #dfdfdf;">
+            <!--<el-col style="" :span="12" v-if="!formdatas.items.length%2" class='loopBorder' style="border-top:1px solid #dfdfdf;">
               <el-col style="" :span="2">
                 <span>{{formdatas.items.length+2}}</span>
               </el-col>
@@ -118,7 +118,7 @@
               <el-col style="border-left:1px solid #dfdfdf;text-align: center;background:white;" :span="4">
                 <span>&nbsp;</span>
               </el-col>
-            </el-col>
+            </el-col>-->
             
           </el-row>
 
@@ -191,7 +191,7 @@
       </div>
       </div>
      	<div class="hoverReturn">
-		    <el-button v-if="isreturn" class="hoverReturnBtn" type="primary" @click="hoverReturn">确认还单</el-button>
+		    <el-button v-if="isreturn" class="hoverReturnBtn" type="primary" @click="hoverReturn">确认归还</el-button>
       </div>
       <sinograin-modal v-if="modalVisible"  :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose" @modelSelectChange="modelSelectChange"></sinograin-modal>      	
     	
