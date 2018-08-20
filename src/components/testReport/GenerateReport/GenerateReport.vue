@@ -165,7 +165,7 @@ export default {
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				data: data,
 			}).then(function(response) {
-				
+				this.pagedatas=response.data
 
 			}.bind(this)).catch(function(error) {
 				console.log(error);
