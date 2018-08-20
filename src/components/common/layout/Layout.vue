@@ -23,6 +23,7 @@
 			</el-main>
 		</el-container>
 		<iframe id="fordownload" style="display:none"></iframe>
+		<iframe id="fordownload2" style="display:none"></iframe>
       	<!--<div>{{viewdata}}</div>-->
 	</el-container>
 </template>

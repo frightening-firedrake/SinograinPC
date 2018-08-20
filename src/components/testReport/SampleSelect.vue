@@ -166,7 +166,9 @@ export default {
 			}
 	    }).then(function (response) {
 //			console.log(response)
-		  	this.checkList=response.data;
+		  	this.checkList=response.data.sort((a,b)=>{
+		  		return a.sampleNum-b.sampleNum;
+		  	});
 		  	if(this.$route.params.formdatas){
 				this.checkedList=this.$route.params.tabledatas;
 			}

@@ -65,7 +65,7 @@ export default {
   			// params.ruKuSampleState=2;
   			// params.fenxiaoyangSampleState=3;
   			params.sampleState=3;
-			params.detectionState=2;
+//			params.detectionState=2;
 //		}else if(this.IsChecked==2){
 //			params.ruKuSampleState=2;
 //		}else if(this.IsChecked==3){
@@ -90,7 +90,9 @@ export default {
 			}
 	    }).then(function (response) {
 //			console.log(response)
-		  	this.checkList=response.data;
+		  	this.checkList=response.data.sort((a,b)=>{
+		  		return a.sampleNum-b.sampleNum;
+		  	});
 		  	if(this.$route.params.formdatas){
 				this.checkedList=this.$route.params.formdatas.items;
 			}

@@ -379,7 +379,7 @@ export default {
 ////					sort: true,
 //				},
 				{
-					id: 4,
+					id: 5,
 					prop: 'returnState',
 					label: "归还状态",
 					sort: true,
@@ -399,7 +399,7 @@ export default {
 //					status:true,
 //				},
 				{
-					id: 7,
+					id: 6,
 					prop: 'returnTime',
 					label: "归还时间",
 					sort: true,

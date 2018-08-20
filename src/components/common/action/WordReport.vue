@@ -211,45 +211,55 @@ export default {
 		},
 		pagedata4(){
 			var pagedata={};
-			
 			pagedata.rongzhongbiaozhunyaoqiu='≥750';
 			pagedata.rongzhongjiancejieguo=this.findResult(this.pagedatas.testItems,1);
-			pagedata.rongzhongdanxiangpingjia=this.findResult(this.pagedatas.testItems,1)>=750?'合格':'不合格';
+			pagedata.rongzhongdanxiangpingjia=this.findResult(this.pagedatas.testItems,1)>=750?'达标':'不达标';
 			pagedata.buwanshanlibiaozhunyaoqiu='≤8.0';
-			pagedata.buwanshanlijiancejieguo=this.findResult(this.pagedatas.testItems,1);
-			pagedata.buwanshanlidanxiangpingjia=this.findResult(this.pagedatas.testItems,1)<=8?'合格':'不合格';
+			pagedata.buwanshanlijiancejieguo=this.findResult(this.pagedatas.testItems,5);
+			pagedata.buwanshanlidanxiangpingjia=this.findResult(this.pagedatas.testItems,5)<=8?'达标':'不达标';
 			pagedata.zazhizongliangbiaozhunyaoqiu='≤1.0';
-			pagedata.zazhizongliangjiancejieguo=this.findResult(this.pagedatas.testItems,1);
-			pagedata.zazhizongliangdanxiangpingjia=this.findResult(this.pagedatas.testItems,1)<=1?'合格':'不合格';
+			pagedata.zazhizongliangjiancejieguo=this.findResult(this.pagedatas.testItems,3);
+			pagedata.zazhizongliangdanxiangpingjia=this.findResult(this.pagedatas.testItems,3)<=1?'达标':'不达标';
 			pagedata.zazhikuangwuzhibiaozhunyaoqiu='≤0.5';
-			pagedata.zazhikuangwuzhijiancejieguo=this.findResult(this.pagedatas.testItems,1);
-			pagedata.zazhikuangwuzhidanxiangpingjia=this.findResult(this.pagedatas.testItems,1)<=0.5?'合格':'不合格';
+			pagedata.zazhikuangwuzhijiancejieguo=this.findResult(this.pagedatas.testItems,4);
+			pagedata.zazhikuangwuzhidanxiangpingjia=this.findResult(this.pagedatas.testItems,4)<=0.5?'达标':'不达标';
 			pagedata.shuifenbiaozhunyaoqiu='≤12.5';
-			pagedata.shuifenjiancejieguo=this.findResult(this.pagedatas.testItems,1);
-			pagedata.shuifendanxiangpingjia=this.findResult(this.pagedatas.testItems,1)<=12.5?'合格':'不合格';
+			pagedata.shuifenjiancejieguo=this.findResult(this.pagedatas.testItems,2);
+			pagedata.shuifendanxiangpingjia=this.findResult(this.pagedatas.testItems,2)<=12.5?'达标':'不达标';
 			
 			pagedata.yingduzhishu_1_biaozhunyaoqiu='≥60';
       		pagedata.yingduzhishu_2_biaozhunyaoqiu='＞45～＜60';
       		pagedata.yingduzhishu_3_biaozhunyaoqiu='≤45';
-			pagedata.yingduzhishujiancejieguo=this.findResult(this.pagedatas.testItems,1);
-			pagedata.yingduzhishudanxiangpingjia=this.findResult(this.pagedatas.testItems,1)<=45?'软质小麦':this.findResult(this.pagedatas.testItems,1)>=60?'硬质小麦':'混合小麦';
+			pagedata.yingduzhishujiancejieguo=this.findResult(this.pagedatas.testItems,8);
+			pagedata.yingduzhishudanxiangpingjia=this.findResult(this.pagedatas.testItems,8)<=45?'软质小麦':this.findResult(this.pagedatas.testItems,1)>=60?'硬质小麦':'混合小麦';
 
 	      	pagedata.sezeqiweibiaozhunyaoqiu='正常';
-      		pagedata.sezeqiweijiancejieguo='测试数据22';
-      		pagedata.sezeqiweidanxiangpingjia='测试数据23';
+      		pagedata.sezeqiweijiancejieguo=this.findResult(this.pagedatas.testItems,7);
+			pagedata.sezeqiweidanxiangpingjia=this.findResult(this.pagedatas.testItems,7)?'正常':'不正常';
+			
       		pagedata.mianjinxishui_yicun='≥180';
       		pagedata.mianjinxishui_qingdubuyicun='＜180';
       		pagedata.mianjinxishui_zhongdubuyicun='--';
-      		pagedata.mianjinxishui_jianyanjieguo='测试数据27';
+
+      		pagedata.mianjinxishui_jianyanjieguo=this.findResult(this.pagedatas.testItems,9);
       		pagedata.pinchangpinfen_yicun='≥70';
       		pagedata.pinchangpinfen_qingdubuyicun='≥60且＜70';
       		pagedata.pinchangpinfen_zhongdubuyicun='＜60';
-      		pagedata.pinchangpinfen_jianyanjieguo='测试数据31';     		
+
+      		pagedata.pinchangpinfen_jianyanjieguo=this.findResult(this.pagedatas.testItems,11);
       		pagedata.sezeqiwei_yicun='正常';
       		pagedata.sezeqiwei_qingdubuyicun='正常';
       		pagedata.sezeqiwei_zhongdubuyicun='基本正常';
-      		pagedata.sezeqiwei_jianyanjieguo='测试数据35';
-      		pagedata.jieguopanding='测试数据36';
+
+      		pagedata.sezeqiwei_jianyanjieguo=this.findResult(this.pagedatas.testItems,12);
+      		
+      		if(this.findResult(this.pagedatas.testItems,11)<60||this.findResult(this.pagedatas.testItems,12)=='基本正常'){
+      			pagedata.jieguopanding='重度不宜存';      			
+      		}else if(this.findResult(this.pagedatas.testItems,9)>=180&&this.findResult(this.pagedatas.testItems,11)>=70){
+      			pagedata.jieguopanding='宜存';      			
+      		}else{
+      			pagedata.jieguopanding='轻度不宜存';      			
+      		}
 			return pagedata
 		},
     },
@@ -269,6 +279,9 @@ export default {
 			}
 		},
 		findCheckeds(str,sort) {
+			if(!str){
+				return
+			}
 			var checkList=["容重","水分","杂质","矿物质","不完善粒","生霉粒","色泽气味(质量指标)","硬度指数","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1)","真菌毒素(脱氧雪腐镰刀菌烯醇)","真菌毒素(玉米赤霉烯酮)","重金属(铅)","重金属(镉)","重金属(汞)","重金属(砷)"];	
 	  		var res=[];
 	  		var indexs=str.split(',');
@@ -299,13 +312,17 @@ export default {
 	  		}
 		},
 		findResult(testItems,num){
+			if(!testItems){
+				return
+			}
 			var testItem=testItems.filter((value)=>{
 				return value.testItem==num
 			})
+			console.log(testItem)
 			if(!testItem.length){
-				return 
+				return '未检测'
 			}
-			return testItem.result			
+			return testItem[0].result			
 		},
 	},
     data() {

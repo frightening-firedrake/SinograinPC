@@ -561,7 +561,7 @@
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 41.568px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
-								<div class="zw-cell-container" style="position: relative; padding-right: 7.2px; padding-left: 7.2px;">
+								<div class="zw-cell-container" style="position: relative; padding-right: 0px; padding-left: 0px;">
 									<p style="margin: 0px; line-height: 1; text-align: center; font-family: 仿宋_GB2312,calibri, carlito, sans-serif; color: rgb(0, 0, 0); font-size: 10pt; padding-bottom: 0px;"><span style="font-family: 仿宋_GB2312,calibri, carlito, sans-serif; color: rgb(0, 0, 0); font-size: 12pt; font-variant: normal; text-decoration: none; letter-spacing: 0pt; font-weight: normal; vertical-align: baseline; font-style: normal; background-color: rgba(0, 0, 0, 0);"><input class="wordInput" readonly v-model="pagedata.pinchangpinfen_qingdubuyicun" type="text" /></span></p>
 								</div>
 							</td>
@@ -646,7 +646,7 @@
 //import "@/assets/style/common/Option_title.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
-//	props:['pagedata'],
+	props:['pagedata'],
 	created(){
 
 	},
@@ -667,44 +667,44 @@ export default {
 //	      	sort:'小麦',
 //	      	unit:'中央储备粮洪洞直属库',
 //	      	check:'监督检查',
-	      	pagedata:{
-	      		rongzhongbiaozhunyaoqiu:'测试数据1',
-	      		rongzhongjiancejieguo:'测试数据2',
-	      		rongzhongdanxiangpingjia:'测试数据3',
-	      		buwanshanlibiaozhunyaoqiu:'测试数据4',
-	      		buwanshanlijiancejieguo:'测试数据5',
-	      		buwanshanlidanxiangpingjia:'测试数据6',
-	      		zazhizongliangbiaozhunyaoqiu:'测试数据7',
-	      		zazhizongliangjiancejieguo:'测试数据8',
-	      		zazhizongliangdanxiangpingjia:'测试数据9',
-	      		zazhikuangwuzhibiaozhunyaoqiu:'测试数据10',
-	      		zazhikuangwuzhijiancejieguo:'测试数据11',
-	      		zazhikuangwuzhidanxiangpingjia:'测试数据12',
-	      		shuifenbiaozhunyaoqiu:'测试数据13',
-	      		shuifenjiancejieguo:'测试数据14',
-	      		shuifendanxiangpingjia:'测试数据15',
-	      		yingduzhishu_1_biaozhunyaoqiu:'测试数据16',
-	      		yingduzhishu_2_biaozhunyaoqiu:'测试数据17',
-	      		yingduzhishu_3_biaozhunyaoqiu:'测试数据18',
-	      		yingduzhishujiancejieguo:'测试数据19',
-	      		yingduzhishudanxiangpingjia:'测试数据20',
-	      		sezeqiweibiaozhunyaoqiu:'测试数据21',
-	      		sezeqiweijiancejieguo:'测试数据22',
-	      		sezeqiweidanxiangpingjia:'测试数据23',
-	      		mianjinxishui_yicun:'测试数据24',
-	      		mianjinxishui_qingdubuyicun:'测试数据25',
-	      		mianjinxishui_zhongdubuyicun:'测试数据26',
-	      		mianjinxishui_jianyanjieguo:'测试数据27',
-	      		pinchangpinfen_yicun:'测试数据28',
-	      		pinchangpinfen_qingdubuyicun:'测试数据29',
-	      		pinchangpinfen_zhongdubuyicun:'测试数据30',
-	      		pinchangpinfen_jianyanjieguo:'测试数据31',      		
-	      		sezeqiwei_yicun:'测试数据32',
-	      		sezeqiwei_qingdubuyicun:'测试数据33',
-	      		sezeqiwei_zhongdubuyicun:'测试数据34',
-	      		sezeqiwei_jianyanjieguo:'测试数据35',
-	      		jieguopanding:'测试数据36',
-	      	}
+//	      	pagedata:{
+//	      		rongzhongbiaozhunyaoqiu:'测试数据1',
+//	      		rongzhongjiancejieguo:'测试数据2',
+//	      		rongzhongdanxiangpingjia:'测试数据3',
+//	      		buwanshanlibiaozhunyaoqiu:'测试数据4',
+//	      		buwanshanlijiancejieguo:'测试数据5',
+//	      		buwanshanlidanxiangpingjia:'测试数据6',
+//	      		zazhizongliangbiaozhunyaoqiu:'测试数据7',
+//	      		zazhizongliangjiancejieguo:'测试数据8',
+//	      		zazhizongliangdanxiangpingjia:'测试数据9',
+//	      		zazhikuangwuzhibiaozhunyaoqiu:'测试数据10',
+//	      		zazhikuangwuzhijiancejieguo:'测试数据11',
+//	      		zazhikuangwuzhidanxiangpingjia:'测试数据12',
+//	      		shuifenbiaozhunyaoqiu:'测试数据13',
+//	      		shuifenjiancejieguo:'测试数据14',
+//	      		shuifendanxiangpingjia:'测试数据15',
+//	      		yingduzhishu_1_biaozhunyaoqiu:'测试数据16',
+//	      		yingduzhishu_2_biaozhunyaoqiu:'测试数据17',
+//	      		yingduzhishu_3_biaozhunyaoqiu:'测试数据18',
+//	      		yingduzhishujiancejieguo:'测试数据19',
+//	      		yingduzhishudanxiangpingjia:'测试数据20',
+//	      		sezeqiweibiaozhunyaoqiu:'测试数据21',
+//	      		sezeqiweijiancejieguo:'测试数据22',
+//	      		sezeqiweidanxiangpingjia:'测试数据23',
+//	      		mianjinxishui_yicun:'测试数据24',
+//	      		mianjinxishui_qingdubuyicun:'测试数据25',
+//	      		mianjinxishui_zhongdubuyicun:'测试数据26',
+//	      		mianjinxishui_jianyanjieguo:'测试数据27',
+//	      		pinchangpinfen_yicun:'测试数据28',
+//	      		pinchangpinfen_qingdubuyicun:'测试数据29',
+//	      		pinchangpinfen_zhongdubuyicun:'测试数据30',
+//	      		pinchangpinfen_jianyanjieguo:'测试数据31',      		
+//	      		sezeqiwei_yicun:'测试数据32',
+//	      		sezeqiwei_qingdubuyicun:'测试数据33',
+//	      		sezeqiwei_zhongdubuyicun:'测试数据34',
+//	      		sezeqiwei_jianyanjieguo:'测试数据35',
+//	      		jieguopanding:'测试数据36',
+//	      	}
 	    }
 	},
 }

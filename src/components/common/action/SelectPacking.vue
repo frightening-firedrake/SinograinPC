@@ -184,6 +184,9 @@ export default {
 //			通过
             if (this.checkedList.length) {
 //                  alert('submit!');
+				this.checkedList=this.checkedList.sort((a,b)=>{
+			  		return a.sampleNum-b.sampleNum;
+			  	});
                     this.$emit('getCheckedList',this.checkedList)
 //				console.log(this.checkedList)
 //				window.history.go(-1)

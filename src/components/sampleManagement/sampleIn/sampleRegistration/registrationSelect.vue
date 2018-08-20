@@ -85,7 +85,9 @@ export default {
 			}
 	    }).then(function (response) {
 //			console.log(response)
-		  	this.checkList=response.data.rows;
+		  	this.checkList=response.data.rows.sort((a,b)=>{
+		  		return a.sampleNum-b.sampleNum;
+		  	});
 //		  	if(this.$route.params.formdatas){
 //				this.checkedList=this.$route.params.tabledatas;
 //			}

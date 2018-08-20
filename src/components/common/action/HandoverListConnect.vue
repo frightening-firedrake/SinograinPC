@@ -211,7 +211,7 @@ export default {
 
     props: ["formdatas"],
     created(){
-    	console.log(this.formdatas.checkList)
+//  	console.log(this.formdatas.checkList)
     },
     computed:{
     	treeData(){

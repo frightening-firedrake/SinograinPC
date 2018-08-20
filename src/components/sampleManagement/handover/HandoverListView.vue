@@ -276,7 +276,9 @@ export default {
 //				}
 				var id=this.$route.query.id;
 				var loadiframe=document.getElementById('fordownload');
+				var loadiframe2=document.getElementById('fordownload2');
 				loadiframe.src=this.exportExcelURL+'?id='+id+'&sessionid='+this.Token;
+				loadiframe2.src=this.exportExcelURL2+'?id='+id+'&sessionid='+this.Token;
     },
     //	获取列表数据方法
     getlistdata(page) {
@@ -391,6 +393,7 @@ export default {
     return {
       datalistURL: this.apiRoot +'/grain/handover/get',
       exportExcelURL: this.apiRoot +'/grain/handover/expotHandover',
+      exportExcelURL2: this.apiRoot +'/grain/handover/expotStorageHandover',
       searchURL: '/liquid/role2/data/search',
       deleteURL: '/liquid/role2/data/delete',
       checkedId: [],
