@@ -58,7 +58,7 @@ export default {
     data() {
 	    return {
 	      	reportNum:this.$route.query.sampleNum,
-	      	sort:'小麦',
+	      	sort:this.$route.query.sort,
 //	      	unit:'中央储备粮洪洞直属库',
 	      	check:'监督检查',
 	    }

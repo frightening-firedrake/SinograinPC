@@ -10,8 +10,8 @@
 		    		<word-report-page4XM v-if="sort=='小麦'" :pagedata='pagedata4'></word-report-page4XM>
 		    	</div>
 		    	<div v-show="page==3" class="page" key="page3">
-		    		<word-report-page3YM v-if="sort=='玉米'" :pagedata='pagedata3'></word-report-page3YM>
-		    		<word-report-page3XM v-if="sort=='小麦'" :pagedata='pagedata3'></word-report-page3XM>
+		    		<word-report-page3YM v-if="sort=='玉米'" :isFuhe="isFuhe" :pagedata='pagedata3'></word-report-page3YM>
+		    		<word-report-page3XM v-if="sort=='小麦'" :isFuhe="isFuhe" :pagedata='pagedata3'></word-report-page3XM>
 		    	</div>
 		    	<div v-show="page==2" class="page" key="page2">
 		    		<word-report-page2 :pagedata='pagedata2'></word-report-page2>
@@ -156,7 +156,7 @@ export default {
 	},
 	props:["sort","pagedatas"],
 	created(){
-		console.log(this.$route.query)
+//		console.log(this.$route.query)
 	},
 	mounted(){
 //		this.listWidth=document.querySelector('#AdvancedSearch').offsetWidth+'px';
@@ -210,7 +210,7 @@ export default {
 				pagedata.jianyanyiju='GB 1353-2009《玉米》、GB/T 20570-2015《玉米储存品质判定规则》';			
 			}
 			pagedata.checkeds=this.findCheckeds(this.pagedatas.checkeds,this.pagedatas.sort);
-			pagedata.isFuhe=this.pagedatas.isFuhe?'经检验该仓'+this.$route.query.sort+'，'+this.pagedatas.isFuhe+'中央储备粮储存质量要求。':'经检验该仓'+this.$route.query.sort+'，你猜符合不符合中央储备粮储存质量要求。';
+//			pagedata.isFuhe=this.pagedatas.isFuhe?'经检验该仓'+this.$route.query.sort+'，'+this.pagedatas.isFuhe+'中央储备粮储存质量要求。':'经检验该仓'+this.$route.query.sort+'，你猜符合不符合中央储备粮储存质量要求。';
 			return pagedata
 		},
 		pagedata4(){
@@ -326,6 +326,58 @@ export default {
       		}
 			return pagedata
 		},
+		isFuhe(){
+			if(this.$route.query.sort=="小麦"){
+				var rongzhongdanxiangpingjia=this.findResult(this.pagedatas.testItems,1)=='--'?'--':this.findResult(this.pagedatas.testItems,1)>=750?'达标':'不达标';
+				var shuifendanxiangpingjia=this.findResult(this.pagedatas.testItems,2)=='--'?'--':this.findResult(this.pagedatas.testItems,2)<=12.5?'达标':'不达标';
+				var zazhizongliangdanxiangpingjia=this.findResult(this.pagedatas.testItems,3)=='--'?'--':this.findResult(this.pagedatas.testItems,3)<=1?'达标':'不达标';
+				var zazhikuangwuzhidanxiangpingjia=this.findResult(this.pagedatas.testItems,4)=='--'?'--':this.findResult(this.pagedatas.testItems,4)<=0.5?'达标':'不达标';
+				var buwanshanlidanxiangpingjia=this.findResult(this.pagedatas.testItems,5)=='--'?'--':this.findResult(this.pagedatas.testItems,5)<=8?'达标':'不达标';
+				var sezeqiweidanxiangpingjia=this.findResult(this.pagedatas.testItems,7)=='--'?'--':this.findResult(this.pagedatas.testItems,7);
+				var yingduzhishudanxiangpingjia=this.findResult(this.pagedatas.testItems,8)=='--'?'--':this.findResult(this.pagedatas.testItems,8)<=45?'软质小麦':this.findResult(this.pagedatas.testItems,8)>=60?'硬质小麦':'混合小麦';
+				var jieguopanding
+				if(this.findResult(this.pagedatas.testItems,11)<60||this.findResult(this.pagedatas.testItems,12)=='基本正常'){
+	      			jieguopanding='重度不宜存';      			
+	      		}else if(this.findResult(this.pagedatas.testItems,9)>=180&&this.findResult(this.pagedatas.testItems,11)>=70){
+	      			jieguopanding='宜存';      			
+	      		}else{
+	      			if(this.findResult(this.pagedatas.testItems,9)=='--'||this.findResult(this.pagedatas.testItems,11)=='--'||this.findResult(this.pagedatas.testItems,12)=='--'){
+	      				jieguopanding='--';      			      				
+	      			}else{      				
+	      				jieguopanding='轻度不宜存';      			
+	      			}
+	      		}	
+	      		if(rongzhongdanxiangpingjia=='不达标'||shuifendanxiangpingjia=='不达标'||zazhizongliangdanxiangpingjia=='不达标'||zazhikuangwuzhidanxiangpingjia=='不达标'||buwanshanlidanxiangpingjia=='不达标'||sezeqiweidanxiangpingjia!='正常'||jieguopanding=='基本正常'){
+	      			return '经检验该仓小麦，不符合中央储备粮储存质量要求。'
+	      		}else{
+	      			return '经检验该仓小麦，符合中央储备粮储存质量要求。'
+	      		}
+			}else if(this.$route.query.sort=="玉米"){
+				var rongzhongdanxiangpingjia=this.findResult(this.pagedatas.testItems,1)=='--'?'--':this.findResult(this.pagedatas.testItems,1)>=650?'达标':'不达标';
+				var shuifendanxiangpingjia=this.findResult(this.pagedatas.testItems,2)=='--'?'--':this.findResult(this.pagedatas.testItems,2)<=14?'达标':'不达标';
+				var zazhidanxiangpingjia=this.findResult(this.pagedatas.testItems,3)=='--'?'--':this.findResult(this.pagedatas.testItems,3)<=1?'达标':'不达标';
+				var buwanshanlizongliangdanxiangpingjia=this.findResult(this.pagedatas.testItems,5)=='--'?'--':this.findResult(this.pagedatas.testItems,5)<=8?'达标':'不达标';
+				var buwanshanlishengmeilidanxiangpingjia=this.findResult(this.pagedatas.testItems,6)=='--'?'--':this.findResult(this.pagedatas.testItems,6)<=2?'达标':'不达标';
+				var sezeqiweidanxiangpingjia=this.findResult(this.pagedatas.testItems,7)=='--'?'--':this.findResult(this.pagedatas.testItems,7);
+				var jieguopanding;
+				if(this.findResult(this.findResult(this.pagedatas.testItems,10)>78||this.pagedatas.testItems,11)<60||this.findResult(this.pagedatas.testItems,12)=='基本正常'){
+	      			jieguopanding='重度不宜存';      			
+	      		}else if(this.findResult(this.pagedatas.testItems,10)<=65&&this.findResult(this.pagedatas.testItems,11)>=70){
+	      			jieguopanding='宜存';      			
+	      		}else{
+	      			if(this.findResult(this.pagedatas.testItems,10)=='--'||this.findResult(this.pagedatas.testItems,11)=='--'||this.findResult(this.pagedatas.testItems,12)=='--'){
+	      				jieguopanding='--';      			      				
+	      			}else{      				
+	      				jieguopanding='轻度不宜存';      			
+	      			}
+	      		}
+	      		if(rongzhongdanxiangpingjia=='不达标'||shuifendanxiangpingjia=='不达标'||zazhidanxiangpingjia=='不达标'||buwanshanlizongliangdanxiangpingjia=='不达标'||buwanshanlishengmeilidanxiangpingjia=='不达标'||sezeqiweidanxiangpingjia!='正常'||jieguopanding=='基本正常'){
+	      			return '经检验该仓玉米，不符合中央储备粮储存质量要求。'
+	      		}else{
+	      			return '经检验该仓玉米，符合中央储备粮储存质量要求。'
+	      		}
+			}
+		}
     },
     methods:{
 		clickl(){
@@ -382,7 +434,7 @@ export default {
 			var testItem=testItems.filter((value)=>{
 				return value.testItem==num
 			})
-			console.log(testItem)
+//			console.log(testItem)
 			if(!testItem.length){
 				return '--'
 			}

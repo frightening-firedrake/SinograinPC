@@ -252,7 +252,7 @@
 								<div class="zw-cell-container" style="position: relative; padding-right: 7.2px; padding-left: 7.2px;">
 
 									<!--<p style="margin: 0px; line-height: 1; font-family: 仿宋_GB2312; color: rgb(0, 0, 0); font-size: 12pt; padding-bottom: 0px; padding-top: 0px; border-top: 0px; border-bottom: 0px;"><span style="font-family: 仿宋_GB2312; color: rgb(0, 0, 0); font-size: 12pt;"><input class="wordInput" readonly v-model="pagedata.isFuhe" type="text" /></span></p>-->
-									<p style="margin:10px 0 0 0px; line-height: 1; font-family: 仿宋_GB2312; color: rgb(0, 0, 0); font-size: 12pt; padding-bottom: 0px; padding-top: 0px; border-top: 0px; border-bottom: 0px;"><span style="font-family: 仿宋_GB2312; color: rgb(0, 0, 0); font-size: 12pt;"><textarea class="wordTextarea"  readonly v-model="pagedata.isFuhe" name="" rows="5" cols=""></textarea></span></p>
+									<p style="margin:10px 0 0 0px; line-height: 1; font-family: 仿宋_GB2312; color: rgb(0, 0, 0); font-size: 12pt; padding-bottom: 0px; padding-top: 0px; border-top: 0px; border-bottom: 0px;"><span style="font-family: 仿宋_GB2312; color: rgb(0, 0, 0); font-size: 12pt;"><textarea class="wordTextarea"  readonly v-model="isFuhe" name="" rows="5" cols=""></textarea></span></p>
 
 
 									<p style="margin: 0px; line-height: 1; text-indent: 2.833in; font-family: 仿宋_GB2312; color: rgb(0, 0, 0); font-size: 12pt; padding-bottom: 0px; padding-top: 0px; border-top: 0px; border-bottom: 0px;"><span style="font-family: 仿宋_GB2312; color: rgb(0, 0, 0); font-size: 12pt;">（检验报告专用章）</span></p>
@@ -316,7 +316,7 @@
 //import "@/assets/style/common/Option_title.css"
 import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 export default {
-	props:['pagedata'],
+	props:['pagedata','isFuhe'],
 	created(){
 
 	},

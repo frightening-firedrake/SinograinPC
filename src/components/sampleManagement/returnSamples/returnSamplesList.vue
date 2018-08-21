@@ -84,7 +84,7 @@
                 <span class="delbtn2" v-if="!isreturn">删除</span>
               </el-col>
             </el-col>
-            <el-col style="" :span="12" v-if="!formdatas.items.length%2" class='loopBorder' style="border-top:1px solid #dfdfdf;">
+            <el-col style="" :span="12" v-if="formdatas.items.length%2" class='loopBorder' style="border-top:1px solid #dfdfdf;">
               <el-col style="" :span="2">
                 <span>{{formdatas.items.length+1}}</span>
               </el-col>
@@ -442,6 +442,9 @@ export default {
 				        		type: 'success',
 				        		message: '删除成功!'
 				      	});
+				      	if(!this.formdatas.items.length){
+          					this.$router.push({path:'/index/sampleManagement/returnSamples'});
+				      	}
           	}         
         }.bind(this)).catch(function(error) {
           	console.log(error);
