@@ -58,11 +58,11 @@ export default {
 	},
 	computed: {
 		...mapState(["modal_id_number", "viewdata", "editdata", "aultdata", "messions", "mask"]),
-		...mapGetters(["modal_id"]),
+		...mapGetters(["modal_id",'Token']),
 		
 	},
 	created() {
-		console.log(this.$route.query)
+//		console.log(this.$route.query)
 		this.sort=this.$route.query.sort
 		//  获取列表数据（第一页）
 		this.getlistdata(1)//对接时使用，暂时不启用用的假数据
@@ -73,7 +73,7 @@ export default {
 		...mapActions(['addAction']),
 		//	列表头触发的事件
 		titleEvent(){
-			console.log('titleEvent')
+			this.exportExcel(this.$route.query.sampleNum)
 		},
 		//	录入样品检验按钮
 		addbtn() {
@@ -174,19 +174,24 @@ export default {
 		
 		
 		
-		exportExcel(id){
+		exportExcel(sampleNum){
 //			if(!this.$_ault_alert('register:export')){
 //				return
 //			}
 			var loadiframe=document.getElementById('fordownload');
-			loadiframe.src=this.exportExcelURL+'?sampleId='+id+'&sessionid='+this.Token;
+			if(this.$route.query.sort=='玉米'){				
+				loadiframe.src=this.exportExcelURLYM+'?sampleNum='+sampleNum+'&sessionid='+this.Token;
+			}else if(this.$route.query.sort=='小麦'){
+				loadiframe.src=this.exportExcelURLXM+'?sampleNum='+sampleNum+'&sessionid='+this.Token;
+			}
 		}
 	},
 	data() {
 		return {
 			datalistURL: this.apiRoot +'/grain/sample/findSampleReport',
 			searchURL: this.apiRoot +'/grain/register/data',
-	  		exportExcelURL: this.apiRoot + '/grain/testItem/expotHandover',
+	  		exportExcelURLYM: this.apiRoot + '/grain/export/exportWordYM',
+	  		exportExcelURLXM: this.apiRoot + '/grain/export/exportWordXM',
 			deleteURL: '/liquid/role2/data/delete',
       		sort:'小麦',
 			modalVisible:false,
