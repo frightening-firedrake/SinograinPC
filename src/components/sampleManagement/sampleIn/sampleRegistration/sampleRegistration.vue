@@ -8,7 +8,7 @@
       <list-header class="noborder" :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" @statusChange2="statusChange2" ></list-header>
       	
       <!--表单-->
-      <sample-registert-maker class="registertMaker" :tabledata="tabledatas" :items="items" :actions="actions" :loading="loading" :formdatas="formdatas" @exportExcel='exportExcel' @addRow='addRow' @delRow='delRow' @currentRow='currentRowFun'></sample-registert-maker> 
+      <sample-registert-maker class="registertMaker" :total="page.total" :tabledata="tabledatas" :items="items" :actions="actions" :loading="loading" :formdatas="formdatas" @exportExcel='exportExcel' @addRow='addRow' @delRow='delRow' @currentRow='currentRowFun'></sample-registert-maker> 
       <sinograin-pagination class="noborder" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
 	  
     </div>
@@ -97,6 +97,7 @@ export default {
   			params.ruSampleState=2;
   			params.fenSampleState=3;
 			params.chuliSampleState=4;
+			params.rank = 'sampleNum';
 //			params.storageTime=this.storageTimeIn;
 			params.storageTimeLike=this.storageTimeIn;
 //			params.sampleNoLike=this.searchText;
@@ -230,7 +231,7 @@ export default {
 			return
 		}
 		var loadiframe=document.getElementById('fordownload');
-		console.log(this.exportExcelURL+'?storageTime='+this.storageTimeIn+'&sessionid='+this.Token)
+//		console.log(this.exportExcelURL+'?storageTime='+this.storageTimeIn+'&sessionid='+this.Token)
 		loadiframe.src=this.exportExcelURL+'?storageTime='+this.storageTimeIn+'&sessionid='+this.Token;
     },
     currentRowFun(currentRow){
@@ -238,7 +239,7 @@ export default {
 	},
 	//	列表头触发的事件
 		dateChange(data) {
-			console.log(data);
+//			console.log(data);
 			this.storageTimeIn=data
 			this.getsampledata(1);
 		},
@@ -316,7 +317,7 @@ export default {
 	  },
 	  //    分页数据
       page: {
-        size: 6,
+        size: 10,
         total: 0,
         currentPage: 1,
         show:true,       

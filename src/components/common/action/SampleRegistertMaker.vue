@@ -3,6 +3,9 @@
     	<el-form ref="form" :inline-message="errorinline" class="sampling" :rules="rules" :model="formdatas" :label-width="labelWidth">
 	        <template>
 	            <p>中央事权粮油样品登记簿</p>
+	            <span class="total">已登记样品总数:
+	            	<b>{{total}}</b>
+	            </span>
 	        </template>      
 	        <!--<el-form-item label="表单名称：" prop="tableName">
 			    <el-input v-model="formdatas.tableName" placeholder="请输入表单名称"></el-input>
@@ -49,7 +52,8 @@
 				   		<el-table-column show-overflow-tooltip v-if="item.status" :width="item.width?item.width:'auto'" :resizable="resizable" align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
 							<template slot-scope="scope">
 								<template v-if="item.prop=='checkeds'">
-									{{findCheckeds(scope.row[item.prop])}}
+									<!--{{findCheckeds(scope.row[item.prop])}}-->
+									{{findCheckeds(scope.row[item.prop],scope.row['sort'])}}
 								</template>
 								<template v-if="item.prop=='sampleNum'">
 									监{{scope.row[item.prop]}}
@@ -101,7 +105,7 @@
 
 export default {
 //  components: { SinograinModal },
-    props: ["formdatas","tabledata","items","actions","loading"],
+    props: ["formdatas","tabledata","items","actions","loading","total"],
     mounted(){
   
     },
@@ -136,11 +140,11 @@ export default {
 		handleDele(index, row) {
 			this.$emit('remove',index,row.id,row)
 		},
-		findCheckeds(str){
+		findCheckeds(str,sort) {
 			if(!str){
 				return
 			}
-			var checkList=["容重","水分","杂质(矿物质)","不完善粒(生霉粒)","色泽气味(质量指标)","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮)","重金属(铅、镉、汞、砷)"];	
+			var checkList=["容重","水分","杂质","矿物质","不完善粒","生霉粒","色泽气味(质量指标)","硬度指数","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1)","真菌毒素(脱氧雪腐镰刀菌烯醇)","真菌毒素(玉米赤霉烯酮)","重金属(铅)","重金属(镉)","重金属(汞)","重金属(砷)"];	
 	  		var res=[];
 	  		var indexs=str.split(',');
 	  		indexs=indexs.sort((a,b)=>{
@@ -152,19 +156,24 @@ export default {
 		  		}	
 		  	})
 		  	var restr=res.join(',');
-	  		if(restr=="容重,水分,杂质(矿物质),不完善粒(生霉粒),色泽气味(质量指标),面筋吸水量,品尝评分值,色泽气味(储存品质指标),真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮),重金属(铅、镉、汞、砷)"){
+	  		if(restr=="容重,水分,杂质,矿物质,不完善粒,色泽气味(质量指标),硬度指数,面筋吸水量,品尝评分值,色泽气味(储存品质指标),真菌毒素(脱氧雪腐镰刀菌烯醇),重金属(铅),重金属(镉),重金属(汞),重金属(砷)"){
 	  			return '全项目指标';
-	  		}else if(restr=="容重,水分,杂质(矿物质),不完善粒(生霉粒),色泽气味(质量指标),脂肪酸值,品尝评分值,色泽气味(储存品质指标),真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮),重金属(铅、镉、汞、砷)"){
+	  		}else if(restr=="容重,水分,杂质,不完善粒,生霉粒,色泽气味(质量指标),脂肪酸值,品尝评分值,色泽气味(储存品质指标),真菌毒素(黄曲霉毒素B1),真菌毒素(脱氧雪腐镰刀菌烯醇),真菌毒素(玉米赤霉烯酮),重金属(铅),重金属(镉),重金属(汞),重金属(砷)"){
 	  			return '全项目指标';
 	  		}else{
 //	  			restr=restr.replace(/容重,水分,杂质\(矿物质\),不完善粒\(生霉粒\),色泽气味\(质量指标\)/, "质量指标全项目")
 //	  			restr=restr.replace(/面筋吸水量,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
 //	  			restr=restr.replace(/脂肪酸值,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
 //	  			restr=restr.replace(/真菌毒素\(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮\),重金属\(铅、镉、汞、砷\)/, "食品卫生指标全项目")
-				restr=restr.replace("容重,水分,杂质(矿物质),不完善粒(生霉粒),色泽气味(质量指标)", "质量指标全项目")
-	  			restr=restr.replace("面筋吸水量,品尝评分值,色泽气味(储存品质指标)", "储存品质指标全项目")
-	  			restr=restr.replace("脂肪酸值,品尝评分值,色泽气味(储存品质指标)", "储存品质指标全项目")
-	  			restr=restr.replace("真菌毒素(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮),重金属(铅、镉、汞、砷)", "食品卫生指标全项目")
+				if(sort=='小麦'){
+					restr=restr.replace("容重,水分,杂质,矿物质,不完善粒,色泽气味(质量指标),硬度指数", "质量指标全项目")					
+					restr=restr.replace("面筋吸水量,品尝评分值,色泽气味(储存品质指标)", "储存品质指标全项目")
+					restr=restr.replace("真菌毒素(脱氧雪腐镰刀菌烯醇),重金属(铅),重金属(镉),重金属(汞),重金属(砷)", "食品卫生指标全项目")
+				}else if(sort=='玉米'){
+					restr=restr.replace("容重,水分,杂质,不完善粒,生霉粒,色泽气味(质量指标)", "质量指标全项目")					
+					restr=restr.replace("脂肪酸值,品尝评分值,色泽气味(储存品质指标)", "储存品质指标全项目")
+					restr=restr.replace("真菌毒素(黄曲霉毒素B1),真菌毒素(脱氧雪腐镰刀菌烯醇),真菌毒素(玉米赤霉烯酮),重金属(铅),重金属(镉),重金属(汞),重金属(砷)", "食品卫生指标全项目")
+				}
 	  			return restr
 	  		}
 		},

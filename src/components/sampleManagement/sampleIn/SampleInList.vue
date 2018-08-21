@@ -235,11 +235,12 @@ export default {
   	searchingfor(searching,page){
   		page?page:1;
   		this.searchText=searching.indexOf('监')==0?searching.slice(1):searching;
-  		console.log(this.searchText);
+//		console.log(this.searchText);
   		var params = {};
 		params.sampleWordOrsampleNumLike = this.searchText;
 		params.ruKuSampleState = 2
 		params.fenxiaoyangSampleState = 3
+		params.rank = 'sampleNum'
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
@@ -305,7 +306,7 @@ export default {
 		params.sampleWordOrsampleNumLike = '';
 		params.ruKuSampleState = 2;
 		params.fenxiaoyangSampleState = 3;
-
+		params.rank = 'sampleNum';
 		if(this.selectLibraryId!=='全部'){
 			params[this.libtype]=this.selectLibraryId
 		}

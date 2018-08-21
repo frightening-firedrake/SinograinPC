@@ -8,6 +8,7 @@
 	border:1px solid #999;
 	border-radius:0.1rem 0.1rem 0 0;
 	border-color:#ccc;
+	/*background-color:rgba(242, 242, 242, 1);*/
 }
 .registertMaker .tbwrap{
 	border-left:1px solid #999;
@@ -17,6 +18,17 @@
 }
 .registertMaker form p{
 	border:none;
+	border-bottom:1px solid rgb(204,204,204);
+}
+.registertMaker form >span{
+	float:right;
+	font-size:0.16rem;
+	padding-right:0.5rem;
+	line-height:0.3rem;
+}
+.registertMaker form >span>b{
+	font-weight: normal;
+	color:#2380FF;
 }
 .registertMaker .el-table::before{
 	display: none;
@@ -197,7 +209,8 @@
     font-size:0.16rem;
 }
 .trmwrap .el-table__empty-block{
-	height:3rem;
+	/*height:3rem;*/
+	height:5rem;
 }
 .trmwrap .registertMaker .el-table__body-wrapper{
 	overflow-y:auto;
@@ -291,7 +304,8 @@
 	width:100%!important;
 	overflow-x:hidden;
 	/*padding:1px;*/
-	min-height:3rem;
+	/*min-height:3rem;*/
+	min-height:5rem;
 }
 .registertMaker .el-table__body tr{
 	width:100%!important;
