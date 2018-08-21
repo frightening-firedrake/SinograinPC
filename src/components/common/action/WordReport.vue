@@ -239,7 +239,7 @@ export default {
 
 	      	pagedata.sezeqiweibiaozhunyaoqiu='正常';
       		pagedata.sezeqiweijiancejieguo=this.findResult(this.pagedatas.testItems,7);
-			pagedata.sezeqiweidanxiangpingjia=this.findResult(this.pagedatas.testItems,7)=='--'?'--':this.findResult(this.pagedatas.testItems,7);
+			pagedata.sezeqiweidanxiangpingjia=this.findResult(this.pagedatas.testItems,7)=='--'?'--':this.findResult(this.pagedatas.testItems,7)=='正常'?'达标':'不达标';
 			
       		pagedata.mianjinxishui_yicun='≥180';
       		pagedata.mianjinxishui_qingdubuyicun='＜180';
@@ -295,7 +295,7 @@ export default {
 
 	      	pagedata.sezeqiweibiaozhunyaoqiu='正常';
       		pagedata.sezeqiweijiancejieguo=this.findResult(this.pagedatas.testItems,7);
-			pagedata.sezeqiweidanxiangpingjia=this.findResult(this.pagedatas.testItems,7)=='--'?'--':this.findResult(this.pagedatas.testItems,7);
+			pagedata.sezeqiweidanxiangpingjia=this.findResult(this.pagedatas.testItems,7)=='--'?'--':this.findResult(this.pagedatas.testItems,7)=='正常'?'达标':'不达标';
 
       		pagedata.zhifangsuanzhi_yicun='≥65';
       		pagedata.zhifangsuanzhi_qingdubuyicun='≤78';

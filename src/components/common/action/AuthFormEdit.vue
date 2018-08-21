@@ -136,7 +136,7 @@ export default {
             }
             // 电话
             var validatePhone = ( rule, value, callback ) => {
-                var str = /^1[3|4|5|8][0-9]\d{4,8}$/
+                var str = /^1[3|4|5|7|8][0-9]\d{4,8}$/
                 if(!value){
                     return callback(new Error("手机号码不能为空"))
                 }else if(!str.test(value)){
