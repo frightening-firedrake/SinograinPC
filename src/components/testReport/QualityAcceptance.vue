@@ -6,15 +6,15 @@
         <sinograin-option-title :title="subtitle"></sinograin-option-title>
         <!--按钮组-->
         <div class="buttons">
-            <el-radio-group @change="statusChange">
-                <el-radio-button label="质检验收统计表" :class="{'active':!show}"></el-radio-button>
-                <el-radio-button label="质检验收统计图" :class="{'active':show}"></el-radio-button>
+            <el-radio-group v-model="show">
+                <el-radio-button  label="1" :class="{'active':show==1}">质检验收统计表</el-radio-button>
+                <el-radio-button  label="2" :class="{'active':show==2}">质检验收统计图</el-radio-button>
             </el-radio-group>
         </div>
         <!--下拉框组件-->
         <CommonSelect @_select="_select"></CommonSelect>
         <!--表格-->
-        <template v-if="!show">
+        <template v-if="show==1">
             <!--正式内容-->
             <p class="tableName">
                 {{title}}
@@ -24,7 +24,7 @@
             <TfootButtons :tfbtns="tfbtns" @tfootEvent="tfootEvent" v-if="isenter"></TfootButtons>
         </template>
         <!--图表-->
-        <template v-if="show">
+        <template v-if="show==2">
             <QualityChart :charts="charts" :key="iskey"></QualityChart>
         </template>
     </div>
@@ -167,9 +167,6 @@ export default {
         //         console.log(error);
         //     }.bind(this));
         // },
-        statusChange() {
-            this.show = !this.show
-        },
         _select(ev) {
             this.isenter = true
             console.log(ev)
@@ -297,7 +294,7 @@ export default {
             // 按钮的显示隐藏
             isenter: false,
             // 持续显示按钮
-            show: false,
+            show: 1,
             // 玉米的标头
             Corn: [
                 {
