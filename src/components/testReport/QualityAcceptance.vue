@@ -12,14 +12,14 @@
             </el-radio-group>
         </div>
         <!--下拉框组件-->
-        <CommonSelect @_select="_select"></CommonSelect>
+        <CommonSelect @_select="_select" @close="close"></CommonSelect>
         <!--表格-->
         <template v-if="show==1">
             <!--正式内容-->
             <p class="tableName">
                 {{title}}
             </p>
-            <QualityTab :items="items" class="complex" :tabledata="tabledatas" :title="title" :loading="loading" :key="iskey"></QualityTab>
+            <QualityTab :items="items" class="complex" :tabledata="tabledatas" :showheader="showheader" :title="title" :loading="loading" :key="iskey"></QualityTab>
             <!--导出按钮-->
             <TfootButtons :tfbtns="tfbtns" @tfootEvent="tfootEvent" v-if="isenter"></TfootButtons>
         </template>
@@ -167,6 +167,10 @@ export default {
         //         console.log(error);
         //     }.bind(this));
         // },
+        //删除表格
+        close(){
+             this.showheader = false
+        },
         _select(ev) {
             this.isenter = true
             console.log(ev)
@@ -210,6 +214,7 @@ export default {
                     params: params
                 }
             }).then(function(res) {
+                this.showheader = true
                 this.loading = false;
                 this.items = []
                 if (ev.sample == "1") {
@@ -275,12 +280,15 @@ export default {
     },
     data() {
         return {
+            //控制标头显示
+            showheader:false,
             datalistURL: '/liquid/role_lyx/data',
             chartURL: '/liquid/chart/data',
             charts: [],
             items: [],
             tabledatas: [],
             iskey: "Wheat",
+            
             loading: false,
             title: "质量验收情况",
             breadcrumb: {
