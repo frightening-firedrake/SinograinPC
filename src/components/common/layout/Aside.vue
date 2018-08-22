@@ -100,6 +100,7 @@
 							<el-badge slot="title" v-if="item4.badge" :value="item4.badge" class="navbadge">						
 								<span>{{item4.title}}</span>
 							</el-badge>
+							<span class='positiontitle' v-else-if='item4.wrap' slot="title">{{item4.title}}</span>
 							<span v-else slot="title">{{item4.title}}</span>
 						</el-menu-item>
 					</template>
@@ -333,6 +334,15 @@ export default {
 					lid: 16
 				},
 				{
+					icon: 'icon-dangan',
+					title: '中央事权粮检查（验）档案',
+					linkto: '/index/TestReportManagement/Archive',
+					level: 2,
+					pid: 15,
+					lid: 31,
+					wrap:true,
+				},
+				{
 					icon: 'icon-baogao1',
 					title: '检测报告制作',
 					linkto: '/index/TestReportManagement/TestReportFindSample',
@@ -431,7 +441,7 @@ export default {
 					title: '添加柜子货架',
 					level: 2,
 					pid: 22,
-					lid: 31,
+					lid: 32,
 				},
 //				{
 //					icon: 'icon-iocn02001',

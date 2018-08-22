@@ -87,8 +87,8 @@ import SuperviseList from '@/components/testReport/supervise/SuperviseList.vue'
 import SuperviseShow from '@/components/testReport/supervise/SuperviseShow.vue'
 import QualityAcceptance from '@/components/testReport/QualityAcceptance.vue'
 import error403 from '@/components/error/error403.vue'
+import Archive from '@/components/testReport/Archive/Archive.vue'
 import devtest from '@/components/devtest/devtest.vue'
-
 
 
 Vue.use(Router)
@@ -523,6 +523,13 @@ const routes = [{
                 name: "检测报表管理/样品检测报表制作/样品检测报表详情",
                 component: TestReport,
             },
+            {
+                path: "TestReportManagement/Archive",
+                name: "检测报表管理/中央事权粮检查（验）档案",
+                component: Archive,
+//              meta: { needAuth: '检验报告制作' },
+            },
+            
             {
                 path: "TestReportManagement/TestReportFindSample",
                 name: "检测报表管理/检验报告制作",
