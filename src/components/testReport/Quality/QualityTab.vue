@@ -2,7 +2,7 @@
     <div>
         
 
-        <el-table     ref="TableHeader" tooltip-effect="dark" style="width: 100%" :data='tabledata'   :default-sort="{prop: 'slip', order: 'ascending'}" v-loading="loading" element-loading-customClass="table_loading" element-loading-text="loading..." element-loading-spinner="el-icon-loading" element-loading-background="rgba(255,255,255, 0.8)">
+        <el-table  :show-header="showheader"  ref="TableHeader" tooltip-effect="dark" style="width: 100%" :data='tabledata'   :default-sort="{prop: 'slip', order: 'ascending'}" v-loading="loading" element-loading-customClass="table_loading" element-loading-text="loading..." element-loading-spinner="el-icon-loading" element-loading-background="rgba(255,255,255, 0.8)">
             <!--循环数据-->
             <template v-for="item in items" v-if="item.pid==0">
                 <el-table-column show-overflow-tooltip :width="item.width?item.width:'auto'"  align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
@@ -40,7 +40,7 @@
 
 <script>
 export default {
-     props: ['items', 'tabledata','loading','title'],
+     props: ['items', 'tabledata','loading','title',"showheader"],
     data() {
         return {
             

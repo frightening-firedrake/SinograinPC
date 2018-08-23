@@ -9,7 +9,7 @@
         </label>
         <label>
             <span class="title_select">选择直属库:</span>
-            <el-select v-model="region" placeholder="请选择直属库">
+            <el-select v-model="region" placeholder="请选择直属库"  @change="close">
                 <!--<el-option value="全部"></el-option>-->
                 <el-option v-for="item in regionList" :key="item.id" :label="item.libraryName" :value="item.id">
                 </el-option>
@@ -98,7 +98,12 @@ export default {
         }
     },
     methods: {
+        //筛选的时候让表格消失
+        close(){
+            this.$emit("close")
+        },
         getList() {
+            this.$emit("close")
             this.region = null
             this.point = null
             

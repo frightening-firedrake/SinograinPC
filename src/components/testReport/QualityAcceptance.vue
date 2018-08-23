@@ -6,25 +6,25 @@
         <sinograin-option-title :title="subtitle"></sinograin-option-title>
         <!--按钮组-->
         <div class="buttons">
-            <el-radio-group @change="statusChange">
-                <el-radio-button label="质检验收统计表" :class="{'active':!show}"></el-radio-button>
-                <el-radio-button label="质检验收统计图" :class="{'active':show}"></el-radio-button>
+            <el-radio-group v-model="show">
+                <el-radio-button  label="1" :class="{'active':show==1}">质检验收统计表</el-radio-button>
+                <el-radio-button  label="2" :class="{'active':show==2}">质检验收统计图</el-radio-button>
             </el-radio-group>
         </div>
         <!--下拉框组件-->
-        <CommonSelect @_select="_select"></CommonSelect>
+        <CommonSelect @_select="_select" @close="close"></CommonSelect>
         <!--表格-->
-        <template v-if="!show">
+        <template v-if="show==1">
             <!--正式内容-->
             <p class="tableName">
                 {{title}}
             </p>
-            <QualityTab :items="items" class="complex" :tabledata="tabledatas" :title="title" :loading="loading" :key="iskey"></QualityTab>
+            <QualityTab :items="items" class="complex" :tabledata="tabledatas" :showheader="showheader" :title="title" :loading="loading" :key="iskey"></QualityTab>
             <!--导出按钮-->
             <TfootButtons :tfbtns="tfbtns" @tfootEvent="tfootEvent" v-if="isenter"></TfootButtons>
         </template>
         <!--图表-->
-        <template v-if="show">
+        <template v-if="show==2">
             <QualityChart :charts="charts" :key="iskey"></QualityChart>
         </template>
     </div>
@@ -167,8 +167,9 @@ export default {
         //         console.log(error);
         //     }.bind(this));
         // },
-        statusChange() {
-            this.show = !this.show
+        //删除表格
+        close(){
+             this.showheader = false
         },
         _select(ev) {
             this.isenter = true
@@ -213,6 +214,7 @@ export default {
                     params: params
                 }
             }).then(function(res) {
+                this.showheader = true
                 this.loading = false;
                 this.items = []
                 if (ev.sample == "1") {
@@ -278,12 +280,15 @@ export default {
     },
     data() {
         return {
+            //控制标头显示
+            showheader:false,
             datalistURL: '/liquid/role_lyx/data',
             chartURL: '/liquid/chart/data',
             charts: [],
             items: [],
             tabledatas: [],
             iskey: "Wheat",
+            
             loading: false,
             title: "质量验收情况",
             breadcrumb: {
@@ -297,7 +302,7 @@ export default {
             // 按钮的显示隐藏
             isenter: false,
             // 持续显示按钮
-            show: false,
+            show: 1,
             // 玉米的标头
             Corn: [
                 {
