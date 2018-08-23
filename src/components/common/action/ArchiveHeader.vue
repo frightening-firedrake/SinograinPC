@@ -6,7 +6,7 @@
 		</div>
 		<div class="selectwrap">
 			<div class="selectitemwrap">
-				<div class="label">
+				<div class="label bg">
 					单位名称
 				</div>
 				<div class="selectitem">
@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<div class="selectitemwrap">
-				<div class="label">
+				<div class="label bg">
 					储存库点
 				</div>
 				<div class="selectitem">
@@ -26,7 +26,7 @@
 				</div>
 			</div>
 			<div class="selectitemwrap">
-				<div class="label">
+				<div class="label bg">
 					入库时间
 				</div>
 				<div class="selectitem">
@@ -42,7 +42,7 @@
 				</div>
 			</div>
 			<div class="selectitemwrap">
-				<div class="label">
+				<div class="label bg">
 					仓号
 				</div>
 				<div class="selectitem">
@@ -178,24 +178,9 @@
 		border-radius:0;
 		text-align: center;
 	}
-	/*表单标题*/
-	/*div.listHeader div.tableName{
-		width:100%;
-		height:100%;
-		background:#eeeeee;
-		text-align: center;
-		color:#333333;
-		font-size:0.2rem;
+	div.ArchiveHeader .bg{
+		background-color: #fbfbfb;
 	}
-	div.listHeader div.tableName label{
-		color:#333333;
-		font-size:0.2rem;
-	}
-	div.listHeader div.tableName input{
-		font-size:0.2rem;
-		color:#333333;
-		outline: none;
-	}*/
 
 </style>
 <script>
