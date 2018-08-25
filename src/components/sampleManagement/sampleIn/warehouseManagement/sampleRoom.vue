@@ -588,14 +588,14 @@ export default {
         prop:'sampleNum',
         label: "检验编号",
         status:true,
-//      sort:true
+        sort:true
       },
       {
         id: 2,
         prop:'storage',
         label: "存放位置",
 //      status:true,
-//      sort:true
+        sort:true
       },
       {
         id: 3,

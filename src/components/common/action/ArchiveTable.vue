@@ -13,30 +13,30 @@
 				<span>基本信息</span>
 			</div>
 			<div class="row1 bg">单位名称</div>
-			<div class="row1 col3">中央储备粮大同直属库有限公司</div>
+			<div class="row1 col3">{{tabledatas.pLibraryName?'中央储备粮'+tabledatas.pLibraryName+'直属库有限公司':''}}</div>
 			<div class="row1 bg">仓号</div>
-			<div class="row1">3</div>
+			<div class="row1">{{tabledatas.position}}</div>
 			<div class="row1 bg">仓型</div>
-			<div class="row1">平仓房</div>
+			<div class="row1">{{tabledatas.barnType}}</div>
 			<div class="row1 bg">性质</div>
-			<div class="row1">ZC</div>
+			<div class="row1">{{tabledatas.quality}}</div>
 			<div class="row1 bg">收获年度</div>
-			<div class="row1">2017</div>
+			<div class="row1">{{tabledatas.gainTime}}</div>
 			<div class="row1 bg">主任</div>
 			<div class="row1">贺顺平</div>
 			<div class="row1 bg">科长</div>
 			<div class="row1 nbr">陈刚</div>
 			
 			<div class="row1 bg nbb">储存库点</div>
-			<div class="row1 nbb col3">本库</div>
+			<div class="row1 nbb col3">{{tabledatas.libraryName}}</div>
 			<div class="row1 bg nbb">品种</div>
-			<div class="row1 nbb">小麦</div>
+			<div class="row1 nbb">{{tabledatas.sort}}</div>
 			<div class="row1 bg nbb">仓容</div>
-			<div class="row1 nbb">6650</div>
+			<div class="row1 nbb">{{tabledatas.cangrong}}</div>
 			<div class="row1 bg nbb">数量</div>
-			<div class="row1 nbb">6624189</div>
+			<div class="row1 nbb">{{tabledatas.amount}}</div>
 			<div class="row1 bg nbb">入库时间</div>
-			<div class="row1 nbb">2017.07</div>
+			<div class="row1 nbb">{{tabledatas.barnTime|dateM}}</div>
 			<div class="row1 bg nbb">分管主任</div>
 			<div class="row1 nbb">姚理刚</div>
 			<div class="row1 bg nbb">
@@ -62,31 +62,31 @@
 					<span>数量情况</span>
 				</div>
 				<div class="row1 bg">粮堆形状</div>	
-				<div class="row1">规则长方体</div>	
+				<div class="row1">{{tabledatas.shape}}</div>	
 				<div class="row1 bg">容重</div>	
-				<div class="row1 nbr">789</div>	
+				<div class="row1 nbr">{{tabledatas.realCapacity}}</div>	
 				<div class="row1 bg">长度</div>	
-				<div class="row1">59.80</div>	
+				<div class="row1">{{tabledatas.length}}</div>	
 				<div class="row1 bg">修正系数</div>	
-				<div class="row1 nbr">1.01</div>	
+				<div class="row1 nbr">{{tabledatas.correctioFactor}}</div>	
 				<div class="row1 bg">宽度</div>	
-				<div class="row1">23.25</div>	
+				<div class="row1">{{tabledatas.wide}}</div>	
 				<div class="row1 bg">平均密度</div>	
-				<div class="row1 nbr">796.9</div>	
+				<div class="row1 nbr">{{tabledatas.aveDensity}}</div>	
 				<div class="row1 bg">平均高度</div>	
-				<div class="row1">5.98</div>	
+				<div class="row1">{{tabledatas.high}}</div>	
 				<div class="row1 bg">测量计算数</div>	
-				<div class="row1 nbr">6533703</div>	
+				<div class="row1 nbr">{{tabledatas.unQuality}}</div>	
 				<div class="row1 bg">测算体积</div>	
-				<div class="row1">8314.3</div>	
+				<div class="row1">{{tabledatas.measuredVolume}}</div>	
 				<div class="row1 bg">保管账面数</div>	
-				<div class="row1 nbr">6624289</div>	
+				<div class="row1 nbr">{{tabledatas.grainQuality}}</div>	
 				<div class="row1 bg">扣除体积</div>	
-				<div class="row1">115.4</div>	
+				<div class="row1">{{tabledatas.deductVolume}}</div>	
 				<div class="row1 bg">差率</div>	
-				<div class="row1 nbr">1.4</div>	
+				<div class="row1 nbr">{{tabledatas.slip}}</div>	
 				<div class="row1 bg nbb">测算净体积</div>	
-				<div class="row1 nbb">8198.9</div>	
+				<div class="row1 nbb">{{tabledatas.realVolume}}</div>	
 				<div class="row1 nbb"></div>	
 				<div class="row1 nbr nbb"></div>	
 			</div>
@@ -94,73 +94,73 @@
 				<div class="row7 bg nbb">
 					<span>质量情况</span>
 				</div>
-				<template v-if="sort=='小麦'">
+				<template v-if="this.tabledatas.sort=='小麦'">
 					<div class="row1 bg col2">等级</div>	
-					<div class="row1">—</div>	
+					<div class="row1">{{tabledatas.qualityGrade==1?"一等":tabledatas.qualityGrade==2?"二等":tabledatas.qualityGrade==3?"三等":""}}</div>	
 					<div class="row1 bg">硬度指数</div>	
-					<div class="row1 nbr">79</div>	
+					<div class="row1 nbr">{{tabledatas.yingduzhishu}}</div>	
 					<div class="row1 bg col2">容重</div>	
-					<div class="row1">792</div>	
+					<div class="row1">{{tabledatas.rongzhong}}</div>	
 					<div class="row1 bg">面筋吸水量</div>	
-					<div class="row1 nbr">211</div>	
+					<div class="row1 nbr">{{tabledatas.mianjinxishuiliang}}</div>	
 					<div class="row1 bg col2">水分</div>	
-					<div class="row1">11.6</div>	
+					<div class="row1">{{tabledatas.shuifen}}</div>	
 					<div class="row1 bg">品尝评分</div>	
-					<div class="row1 nbr">81</div>	
+					<div class="row1 nbr">{{tabledatas.pinchangpingfen}}</div>	
 					<div class="row2 bg col03">杂质</div>	
 					<div class="row1 bg col07">总量</div>	
-					<div class="row1">0.6</div>	
+					<div class="row1">{{tabledatas.zazhi}}</div>	
 					<div class="row1 bg">色泽气味</div>	
-					<div class="row1 nbr">正常</div>	
+					<div class="row1 nbr">{{tabledatas.sezeqiwei2}}</div>	
 					<div class="row1 bg col07">
 						<span>其中：矿物质</span>		
 					</div>	
-					<div class="row1">0.03</div>	
+					<div class="row1">{{tabledatas.kuangwuzhi}}</div>	
 					<div class="row1"></div>	
 					<div class="row1 nbr"></div>	
 					<div class="row1 bg col2">不完善粒</div>	
-					<div class="row1">5.9</div>	
+					<div class="row1">{{tabledatas.buwanshanli}}</div>	
 					<div class="row1"></div>	
 					<div class="row1 nbr"></div>	
 					<div class="row1 bg col2 nbb">色泽气味</div>	
-					<div class="row1 nbb">正常</div>	
+					<div class="row1 nbb">{{tabledatas.sezeqiwei1}}</div>	
 					<div class="row1 nbb"></div>	
 					<div class="row1 nbr nbb"></div>						
 				</template>
 				
-				<template v-if="sort=='玉米'">
+				<template v-if="this.tabledatas.sort=='玉米'">
 					<div class="row1 bg col2">等级</div>	
-					<div class="row1">—</div>	
+					<div class="row1">{{tabledatas.qualityGrade==1?"一等":tabledatas.qualityGrade==2?"二等":tabledatas.qualityGrade==3?"三等":""}}</div>	
 					<div class="row1 bg">脂肪酸值</div>	
-					<div class="row1 nbr">79</div>	
+					<div class="row1 nbr">{{tabledatas.zhifangsuanzhi}}</div>	
 					<div class="row1 bg col2">容重</div>	
-					<div class="row1">792</div>	
+					<div class="row1">{{tabledatas.rongzhong}}</div>	
 					<div class="row1 bg">品尝评分</div>	
-					<div class="row1 nbr">81</div>	
+					<div class="row1 nbr">{{tabledatas.pinchangpingfen}}</div>	
 					<div class="row1 bg col2">水分</div>	
-					<div class="row1">11.6</div>	
+					<div class="row1">{{tabledatas.shuifen}}</div>	
 					<div class="row1 bg">色泽气味</div>	
-					<div class="row1 nbr">正常</div>	
+					<div class="row1 nbr">{{tabledatas.sezeqiwei2}}</div>	
 					<div class="row1 bg col2">杂质</div>	
-					<div class="row1">5.9</div>	
+					<div class="row1">{{tabledatas.zazhi}}</div>	
 					<div class="row1"></div>	
 					<div class="row1 nbr"></div>	
 					<div class="row2 bg col03">					
 						<span>不完善粒</span>
 					</div>	
 					<div class="row1 bg col07">总量</div>	
-					<div class="row1">0.6</div>	
+					<div class="row1">{{tabledatas.buwanshanli}}</div>	
 					<div class="row1"></div>	
 					<div class="row1 nbr"></div>	
 					<div class="row1 bg col07">
 						<span>其中：生霉粒</span>		
 					</div>	
-					<div class="row1">0.03</div>	
+					<div class="row1">{{tabledatas.shengmeili}}</div>	
 					<div class="row1"></div>	
 					<div class="row1 nbr"></div>	
 					
 					<div class="row1 bg col2 nbb">色泽气味</div>	
-					<div class="row1 nbb">正常</div>	
+					<div class="row1 nbb">{{tabledatas.sezeqiwei1}}</div>	
 					<div class="row1 nbb"></div>	
 					<div class="row1 nbr nbb"></div>						
 				</template>
@@ -172,25 +172,24 @@
 				</div>
 				<div class="problem">
 					<p>监督检查报告中的问题：</p>
-					<p>问题1：房屋漏水</p>
-					<p>问题2：房屋漏水</p>
+					<p v-for="(item,index) in tabledatas.problem">问题{{index+1+':'+item}}</p>
 				</div>
 			</div>	
 			<div class="clear"></div>
 		</div>
 		<div class="checker">
 			<div class="row1 bg">检查人</div>
-			<div class="row1 col3">伊利真 敖东梅</div>
+			<div class="row1 col3">{{tabledatas.gzdgRummager}}</div>
 			<div class="row1 bg">时间</div>
-			<div class="row1" style='border-right:1px solid #333;'>2017.10.11</div>
+			<div class="row1" style='border-right:1px solid #333;'>{{tabledatas.gzdgTime|dateD}}</div>
 			<div class="row1 bg">检验员</div>
-			<div class="row1 col31">伊利真 敖东梅</div>
+			<div class="row1 col31">{{tabledatas.jianyanyuan}}</div>
 			<div class="row1 bg">时间</div>
-			<div class="row1" style='border-right:1px solid #333;'>2017.10.11</div>
+			<div class="row1" style='border-right:1px solid #333;'>{{tabledatas.jianceTime|dateD}}</div>
 			<div class="row1 bg">记录人</div>
-			<div class="row1 col32">伊利真 敖东梅</div>
+			<div class="row1 col32">{{tabledatas.rummager}}</div>
 			<div class="row1 bg">时间</div>
-			<div class="row1 nbr">2017.10.11</div>
+			<div class="row1 nbr">{{tabledatas.jianduTime|dateD}}</div>
 			<div class="clear"></div>
 		</div>
 		
@@ -466,9 +465,51 @@ export default {
     methods:{
 
     },
+    filters: {
+	   	dateY:function (input) {
+	   		if(!input){
+	   			return
+	   		}
+	       	var d = new Date(input);
+	       	var year = d.getFullYear();
+	     	var month = d.getMonth() + 1;
+	        var day = d.getDate() <10 ? '0' + d.getDate() : '' + d.getDate();
+	        var hour = d.getHours();
+	        var minutes = d.getMinutes();
+	        var seconds = d.getSeconds();
+	        return  year;
+	//      return  year+ '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
+	   	},
+	   	dateM:function (input) {
+	   		if(!input){
+	   			return
+	   		}
+	       	var d = new Date(input);
+	       	var year = d.getFullYear();
+	     	var month = d.getMonth() + 1;
+	        var day = d.getDate() <10 ? '0' + d.getDate() : '' + d.getDate();
+	        var hour = d.getHours();
+	        var minutes = d.getMinutes();
+	        var seconds = d.getSeconds();
+	        return  year+ '.' + month;
+	   	},
+	   	dateD:function (input) {
+	   		if(!input){
+	   			return
+	   		}
+	       	var d = new Date(input);
+	       	var year = d.getFullYear();
+	     	var month = d.getMonth() + 1;
+	        var day = d.getDate() <10 ? '0' + d.getDate() : '' + d.getDate();
+	        var hour = d.getHours();
+	        var minutes = d.getMinutes();
+	        var seconds = d.getSeconds();
+	        return  year+ '.' + month + '.' + day;
+	   	},
+   	},
     data() {
         return {
-        	sort:'小麦',
+       
         }
     },
 

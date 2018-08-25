@@ -9,7 +9,7 @@
         <!--筛选 -->
 	  	<archive-header :listHeader="listHeader" @getSearchParams="getSearchParams"></archive-header>
         <!--表格-->
-	  	<archive-table :tabledatas="tabledatas" :currentPage="currentPage" ></archive-table>
+	  	<archive-table :tabledatas="tabledatasFilter" :currentPage="currentPage" ></archive-table>
         <!--分页-->
         <sinograin-pagination :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
     </div>
@@ -42,13 +42,10 @@ export default {
 	...mapState(["modal_id_number","viewdata","editdata","aultdata","messions","mask"]),
 	...mapGetters(["modal_id","Token"]),
 	tabledatasFilter(){
-  		if(this.filterlib=="全部"){
-			return this.tabledatas;
-		}else{
-			return this.tabledatas.filter((value,index)=>{
-				return value.libraryName==this.filterlib
-			})
+		if(!this.datalist.length){
+			return this.tabledatas
 		}
+  		return this.datalist[this.currentPage-1];
   	},
   },
   created(){
@@ -88,17 +85,23 @@ export default {
 				return ret
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: SearchParams,
+			data: {
+//				libraryId:SearchParams.libraryId,
+//				barnTime:SearchParams.barnTime,
+//				position:SearchParams.position,
+				params:JSON.stringify(SearchParams),
+			},
 	    }).then(function (response) {
 
-	    	if(!response.data.rows){
+	    	if(!response.data.length){
 	    		this.$notify.error({
 		          	title: '查询失败',
 		          	message: '请核对相关信息！！！',
 		        });
+		        return      
 	    	}
-//		  	this.tabledatas=response.data.rows;
-//	  		this.page.total=response.data.total;		  		
+		  	this.datalist=response.data;
+	  		this.page.total=response.data.length;		  		
 //		  	this.loading=false;
 //	  		this.page.currentPage=page;
 		}.bind(this)).catch(function (error) {
@@ -221,10 +224,11 @@ export default {
   	},
 //	获取分页点击事件中及当前页码
     getCurrentPage(currentPage){
+    	this.currentPage=currentPage
 //		if(this.searchText){			
 //			this.searchingfor(this.searchText,currentPage)
 //		}else{			
-			this.getlistdata(currentPage)
+//			this.getlistdata(currentPage)
 //		}
 	},
 //	映射分页触发的事件
@@ -290,7 +294,7 @@ export default {
   },
   data() {
     return {
-        datalistURL: this.apiRoot + '/grain/',
+        datalistURL: this.apiRoot + '/grain/sample/findRecord',
         exportURL:this.apiRoot + '/grain/',
 	    librarylistURL: this.apiRoot + '/grain/library/getAll',
 //	    taskListURL:this.apiRoot + '/grain/task/data',
@@ -310,7 +314,7 @@ export default {
         loading:true,
 //    分页数据
 	    page: {
-	        size: 10,
+	        size: 1,
 	        total: 1,
 	        currentPage: 1,
 	        show:true,
@@ -343,7 +347,46 @@ export default {
 //	      	task:true,
 //	      	taskList:[],      	
       	},
-      	tabledatas:[],
+      	datalist:[],
+      	tabledatas:{
+      		quality:'',
+      		pLibraryName:'',	//直属库
+			libraryName:'', 	//库点
+			position:'',   //货位号（申请扦样）
+			sort:'',	//分类(品种)
+			barnType:'',    //仓型
+			cangrong:'',    //仓容
+			amount:'',    //数量
+			gainTime:'',  //收获年度
+			barnTime:'',   //入库时间（仓库的时间）
+			shape:'',     //形状
+			length:'',     //长度
+			wide:'',       //宽度
+			high:'',       //高度
+			measuredVolume:'',   //测算体积（测量体积）
+			deductVolume:'',   //扣除体积
+			realVolume:'',     //测算净体积（粮堆实际体积）
+			realCapacity:'',    //容重
+			correctioFactor:'',   //修正系数
+			aveDensity:'',   //平均密度
+			unQuality:'',   //测量计算数
+			grainQuality:'',  //保管账数量
+			slip:'',         //差率		
+			qualityGrade:'',    //等级
+			rongzhong:'',    //容重
+			shuifen:'',      //水分
+			zazhi:'',        //杂质
+			kuangwuzhi:'',    //矿物质
+			buwanshanli:'',   //不完善粒
+			shengmeili:'',    //生霉粒
+			sezeqiwei1:'',    //色泽气味（质量指标）
+			yingduzhishu:'',   //硬度指数
+			mianjinxishuiliang:'',  //面筋吸水量
+			zhifangsuanzhi:'',  //脂肪酸酯
+			pinchangpingfen:'',  //品尝评分
+			sezeqiwei2:'',      //色泽气味（储存品质指标）
+			sampleId:'',          //样品id
+      	},
       	currentPage:1,
     }
   }

@@ -437,4 +437,5 @@ ul.btns >.mission >ol >li:hover >.del{
 	display: inline-block;
     white-space: normal;
     line-height: 0.25rem;
+    width:7em;
 }

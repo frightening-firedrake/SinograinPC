@@ -36,8 +36,9 @@
 				      v-model="date_select"
 				      type="year"
 				      @change="dateChange2"
+				      value-format="yyyy"
 				      placeholder="选择年份">
-<!--				      value-format="yyyy"-->
+				      <!--value-format="timestamp"-->
 				    </el-date-picker>
 				</div>
 			</div>

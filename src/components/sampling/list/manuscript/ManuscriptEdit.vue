@@ -64,7 +64,7 @@ export default {
 //          realCheckedTime: this.formdatas.form.realCheckedTime,//实际查库日
             realCheckedTime: new Date(this.formdatas.form.realCheckedTime),//实际查库日
             storge: this.formdatas.form.storge,//存储形式
-            grainQuality: this.formdatas.form.grainQuality,//保管账数量
+            grainQuality: this.formdatas.form.amount*1000,//保管账数量
             qualityGrade: this.formdatas.form.qualityGrade,//质量等级
             putWay: this.formdatas.form.putWay,//入仓方式
             storageCapacity: this.formdatas.form.storageCapacity,//入库容重

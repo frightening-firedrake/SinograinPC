@@ -164,7 +164,10 @@ export default {
 				title:title,
 			}
 	    }).then(function (response) {
-		  	this.tabledatas=response.data;
+		  	this.tabledatas=response.data.map((value,index)=>{
+		  		value.qualityGrade=value.qualityGrade==1?'一等':value.qualityGrade==2?'二等':value.qualityGrade==3?'三等':'';
+		  		return value
+		  	});
 
 		  	
 //			setTimeout(()=>{			  		
@@ -427,7 +430,7 @@ export default {
 	      },
 	      {
 	        id: 12,
-	        prop:'sampleInSign',
+	        prop:'autograph',
 	        label:"扦样人",
 	        pid:200,
 	//      sort:true,
@@ -639,7 +642,7 @@ export default {
 	      },
 	      {
 	        id: 42,
-	        prop:'remark',
+	        prop:'remark2',
 	        label:"备注",
 	        pid:0,
 	//      sort:true,
@@ -771,7 +774,7 @@ export default {
 	      },
 	      {
 	        id: 12,
-	        prop:'sampleInSign',
+	        prop:'autograph',
 	        label:"扦样人",
 	        pid:200,
 	//      sort:true,
