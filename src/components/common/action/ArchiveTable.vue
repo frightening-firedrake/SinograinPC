@@ -23,9 +23,9 @@
 			<div class="row1 bg">收获年度</div>
 			<div class="row1">{{tabledatas.gainTime}}</div>
 			<div class="row1 bg">主任</div>
-			<div class="row1">贺顺平</div>
+			<div class="row1">{{tabledatas.libraryName?'贺顺平':''}}</div>
 			<div class="row1 bg">科长</div>
-			<div class="row1 nbr">陈刚</div>
+			<div class="row1 nbr">{{tabledatas.libraryName?'陈刚':''}}</div>
 			
 			<div class="row1 bg nbb">储存库点</div>
 			<div class="row1 nbb col3">{{tabledatas.libraryName}}</div>
@@ -38,7 +38,7 @@
 			<div class="row1 bg nbb">入库时间</div>
 			<div class="row1 nbb">{{tabledatas.barnTime|dateM}}</div>
 			<div class="row1 bg nbb">分管主任</div>
-			<div class="row1 nbb">姚理刚</div>
+			<div class="row1 nbb">{{tabledatas.libraryName?'姚理刚':''}}</div>
 			<div class="row1 bg nbb">
 				<span>保管员监管员</span>
 			</div>
@@ -54,7 +54,7 @@
 					</span>
 				</div>
 				<span class="num">
-					NO.1
+					NO.{{currentPage}}
 				</span>
 			</div>
 			<div class="row7 col5 nbb" style='border-right:1px solid #333;'>
@@ -179,15 +179,15 @@
 		</div>
 		<div class="checker">
 			<div class="row1 bg">检查人</div>
-			<div class="row1 col3">{{tabledatas.gzdgRummager}}</div>
+			<div class="row1 col3 ot" :title="tabledatas.gzdgRummager">{{tabledatas.gzdgRummager}}</div>
 			<div class="row1 bg">时间</div>
 			<div class="row1" style='border-right:1px solid #333;'>{{tabledatas.gzdgTime|dateD}}</div>
 			<div class="row1 bg">检验员</div>
-			<div class="row1 col31">{{tabledatas.jianyanyuan}}</div>
+			<div class="row1 col31 ot" :title="tabledatas.jianyanyuan">{{tabledatas.jianyanyuan}}</div>
 			<div class="row1 bg">时间</div>
 			<div class="row1" style='border-right:1px solid #333;'>{{tabledatas.jianceTime|dateD}}</div>
 			<div class="row1 bg">记录人</div>
-			<div class="row1 col32">{{tabledatas.rummager}}</div>
+			<div class="row1 col32 ot" :title="tabledatas.rummager">{{tabledatas.rummager}}</div>
 			<div class="row1 bg">时间</div>
 			<div class="row1 nbr">{{tabledatas.jianduTime|dateD}}</div>
 			<div class="clear"></div>
@@ -416,10 +416,11 @@
 		font-size: 0.16rem;
 		color: #333333;
 		text-align: left;
+		overflow: auto;
 		/*border-right: solid 1px #cccccc;*/
 		/*border-bottom: solid 1px #cccccc;*/
 		width:81%;
-		padding-left:0.32rem;
+		padding:0 0.3rem;
 	}
 	.ArchiveTable .checker{
 		margin-top:0.1rem;
@@ -446,6 +447,11 @@
 	}
 	.ArchiveTable .bg{
 		background-color: #fbfbfb;
+	}
+	.ArchiveTable .checker .ot{
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 </style>
 <script>
