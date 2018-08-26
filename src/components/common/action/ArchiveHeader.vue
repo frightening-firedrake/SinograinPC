@@ -34,9 +34,9 @@
 				      size='mini'
 				      :clearable='false'
 				      v-model="date_select"
-				      type="year"
+				      type="month"
 				      @change="dateChange2"
-				      value-format="yyyy"
+				      value-format="yyyy-MM"
 				      placeholder="选择年份">
 				      <!--value-format="timestamp"-->
 				    </el-date-picker>

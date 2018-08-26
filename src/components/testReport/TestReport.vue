@@ -165,6 +165,18 @@ export default {
 			}
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.map((value,index)=>{
+		  		value.realCapacity=value.realCapacity?value.realCapacity.toFixed(0):'';
+		  		value.length=value.length?value.length.toFixed(2):'';
+		  		value.correctioFactor=value.correctioFactor?value.correctioFactor.toFixed(2):'';
+		  		value.wide=value.wide?value.wide.toFixed(2):'';
+		  		value.aveDensity=value.aveDensity?value.aveDensity.toFixed(1):'';
+		  		value.high=value.high?value.high.toFixed(2):'';
+		  		value.unQuality=value.unQuality?value.unQuality.toFixed(0):'';
+		  		value.measuredVolume=value.measuredVolume?value.measuredVolume.toFixed(1):'';
+		  		value.grainQuality=value.grainQuality?value.grainQuality.toFixed(0):'';
+		  		value.deductVolume=value.deductVolume?value.deductVolume.toFixed(1):'';
+		  		value.slip=value.slip?value.slip.toFixed(1):'';
+		  		value.realVolume=value.realVolume?value.realVolume.toFixed(1):'';
 		  		value.qualityGrade=value.qualityGrade==1?'一等':value.qualityGrade==2?'二等':value.qualityGrade==3?'三等':'';
 		  		return value
 		  	});

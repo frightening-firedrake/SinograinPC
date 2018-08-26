@@ -73,6 +73,9 @@ export default {
   		this.getlistdata(page)
   	},
   	getSearchParams(SearchParams){
+  		this.libraryId=SearchParams.libraryId;
+		this.barnTime=SearchParams.barnTime;
+		this.position=SearchParams.position;
   		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
@@ -245,32 +248,32 @@ export default {
 //	导出事件
 	exportExcel(){
 //		做个拦截筛选结果为空时不执行
-		if(!this.$_ault_alert('safety:export')){
-			return
-		}
-		if(!this.tabledatas.length){
+//		if(!this.$_ault_alert('safety:export')){
+//			return
+//		}
+		if(!this.datalist.length){
 			this.$notify.error({
-	          	title: '导出失败',
-	          	message: '请重新选择筛选信息！！！',
+	          	title: '错误提示',
+	          	message: '未找到相关样品！！！',
 	        });
 	        return;
+		}
+		if(this.datalist[0].sort=='小麦'){
+			this.exportURL=this.apiRoot + '/grain/ExportJDJCDA/ExportJiandujianchaXM';
+		}else if(this.datalist[0].sort=='玉米'){			
+			this.exportURL=this.apiRoot + '/grain/ExportJDJCDA/ExportJiandujianchaYM';
 		}
 //		打开新窗口
 //		设置参数
 		var params = {};
-		if(this.selectLibraryId!=='全部'){
-			params[this.libtype]=this.selectLibraryId
-		}
-		if(this.searchText){
-			params.position=this.searchText
-		}
-		if(this.taskId!=='全部'){
-			params.taskId=this.taskId
-		}
+		params.libraryId=this.libraryId;
+		params.barnTime=this.barnTime;
+		params.position=this.position;
 		params = JSON.stringify(params);
 //		console.log(params,this.exportURL+'/'+params)
 		var loadiframe=document.getElementById('fordownload');
 		loadiframe.src=this.exportURL+'/'+params+'?sessionid='+this.Token;
+//		loadiframe.src=this.exportURL+'?libraryId='+this.libraryId+'&barnTime='+this.barnTime+'&position='+this.position+'&sessionid='+this.Token;
 //		window.open(this.exportURL+'/'+params+'?sessionid='+this.Token,"_blank");
 	},
 //	获取多选框选中数据的id(这是一个数组)
@@ -295,7 +298,8 @@ export default {
   data() {
     return {
         datalistURL: this.apiRoot + '/grain/sample/findRecord',
-        exportURL:this.apiRoot + '/grain/',
+//      exportURL:this.apiRoot + '/grain/ExportJDJCDA/ExportJiandujianchaXM',
+        exportURL:'',
 	    librarylistURL: this.apiRoot + '/grain/library/getAll',
 //	    taskListURL:this.apiRoot + '/grain/task/data',
 	    searchURL: this.apiRoot + '/grain/safetyReport/data',
@@ -306,6 +310,9 @@ export default {
         libtype:'pLibrary',
         selectLibraryId:'全部',
         filterlib:'全部',
+		libraryId:'',
+		barnTime:'',
+		position:'',
         breadcrumb:{
 	      	search:false,   
 	      	searching:'',
@@ -349,7 +356,7 @@ export default {
       	},
       	datalist:[],
       	tabledatas:{
-      		quality:'',
+      		quality:'',			//性质
       		pLibraryName:'',	//直属库
 			libraryName:'', 	//库点
 			position:'',   //货位号（申请扦样）
@@ -386,6 +393,13 @@ export default {
 			pinchangpingfen:'',  //品尝评分
 			sezeqiwei2:'',      //色泽气味（储存品质指标）
 			sampleId:'',          //样品id
+			problem:[],       //监督报告中的问题列表
+			rummager:'',    //监督检查报告的检查人
+			jianduTime:'',    //监督检查时间（监督检查创建时间）
+			gzdgRummager:'',  //工作底稿检查人
+			gzdgTime:'',   //工作底稿时间（工作底稿创建时间）
+			jianyanyuan:'',   //检验员
+			jianceTime:'',      //检测时间（取检测最后的时间）
       	},
       	currentPage:1,
     }
