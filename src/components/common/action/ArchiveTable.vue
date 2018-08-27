@@ -172,7 +172,7 @@
 				</div>
 				<div class="problem">
 					<p>监督检查报告中的问题：</p>
-					<p v-for="(item,index) in tabledatas.problem">问题{{index+1+':'+item}}</p>
+					<p v-if="tabledatas.problem[0]!=='null'" v-for="(item,index) in tabledatas.problem">问题{{index+1+':'+item}}</p>
 				</div>
 			</div>	
 			<div class="clear"></div>
@@ -187,7 +187,7 @@
 			<div class="row1 bg">时间</div>
 			<div class="row1" style='border-right:1px solid #333;'>{{tabledatas.jianceTime|dateD}}</div>
 			<div class="row1 bg">记录人</div>
-			<div class="row1 col32 ot" :title="tabledatas.rummager">{{tabledatas.rummager}}</div>
+			<div class="row1 col32 ot" :title="tabledatas.rummager=='null'?'':tabledatas.rummager">{{tabledatas.rummager=='null'?'':tabledatas.rummager}}</div>
 			<div class="row1 bg">时间</div>
 			<div class="row1 nbr">{{tabledatas.jianduTime|dateD}}</div>
 			<div class="clear"></div>

@@ -35,7 +35,7 @@
     /*padding: 0px 0.45rem;*/
     border: 1px solid #e6e7e7;
     border-color: #ccc;
-    max-height:8rem;
+    /*max-height:8rem;*/
     overflow: auto;
     min-height:5.5rem;
 }

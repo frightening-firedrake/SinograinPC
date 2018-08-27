@@ -277,6 +277,14 @@ export default {
 					lid: 8
 				},
 				{
+					icon: 'icon-subcontractor',
+					title: '任务列表',
+					linkto: '/index/sampleDetection/packingTaskList',
+					level: 2,
+					pid: 6,
+					lid: 10
+				},
+				{
 					icon: 'icon-fanhui2',
 					title: '样品归还',
 					linkto: '/index/sampleManagement/returnSamples',
@@ -293,14 +301,14 @@ export default {
 					lid: 9
 				},
 
-				{
-					icon: 'icon-subcontractor',
-					title: '任务列表',
-					linkto: '/index/sampleDetection/packingTaskList',
-					level: 2,
-					pid: 9,
-					lid: 10
-				},
+//				{
+//					icon: 'icon-subcontractor',
+//					title: '任务列表',
+//					linkto: '/index/sampleDetection/packingTaskList',
+//					level: 2,
+//					pid: 9,
+//					lid: 10
+//				},
 				{
 					icon: 'icon-jiance',
 					title: '样品确认单列表',

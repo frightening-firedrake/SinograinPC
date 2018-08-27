@@ -106,7 +106,8 @@ export default {
 		  	this.datalist=response.data;
 	  		this.page.total=response.data.length;		  		
 //		  	this.loading=false;
-//	  		this.page.currentPage=page;
+	  		this.page.currentPage=1;
+	  		this.currentPage=1;
 		}.bind(this)).catch(function (error) {
 		    this.$notify.error({
 	          	title: '查询失败',
