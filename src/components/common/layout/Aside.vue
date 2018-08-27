@@ -277,7 +277,7 @@ export default {
 					lid: 8
 				},
 				{
-					icon: 'icon-subcontractor',
+					icon: 'icon-taskList',
 					title: '任务列表',
 					linkto: '/index/sampleDetection/packingTaskList',
 					level: 2,
@@ -301,14 +301,14 @@ export default {
 					lid: 9
 				},
 
-//				{
-//					icon: 'icon-subcontractor',
-//					title: '任务列表',
-//					linkto: '/index/sampleDetection/packingTaskList',
-//					level: 2,
-//					pid: 9,
-//					lid: 10
-//				},
+				{
+					icon: 'icon-subcontractor',
+					title: '分装小样管理',
+					linkto: '/index/sampleDetection/packingBarcodeList',
+					level: 2,
+					pid: 9,
+					lid: 32
+				},
 				{
 					icon: 'icon-jiance',
 					title: '样品确认单列表',
@@ -449,7 +449,7 @@ export default {
 					title: '添加柜子货架',
 					level: 2,
 					pid: 22,
-					lid: 32,
+					lid: 33,
 				},
 //				{
 //					icon: 'icon-iocn02001',

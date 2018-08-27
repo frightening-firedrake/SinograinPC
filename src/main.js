@@ -15,9 +15,10 @@ Vue.use(ElementUI);
 //Vue.prototype.apiRoot = 'http://m.ityyedu.com'
 //Vue.prototype.apiRoot = 'http://192.168.1.233:8080'//deng
 //Vue.prototype.apiRoot = 'http://192.168.1.230:80'//xuan
-//Vue.prototype.apiRoot = 'http://192.168.1.232:8080'//bo
+//Vue.prototype.apiRoot = 'http://192.168.1.253:8080'//bo
+//Vue.prototype.apiRoot = 'http://192.168.1.248:8080'//bo旧
 //Vue.prototype.apiRoot = 'http://192.168.1.176:8082'
-Vue.prototype.apiRoot = 'http://192.168.1.231:8083'//kun
+Vue.prototype.apiRoot = 'http://192.168.1.252:8083'//kun
 //axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 //axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
 //axios.defaults.withCredentials=true;
