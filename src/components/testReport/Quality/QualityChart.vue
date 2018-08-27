@@ -96,13 +96,13 @@ export default {
         this.chartonly = this.charts
         this.rongzhong()
         this.shuifen()
-        this.zazhizongliang_1()
-        this.buwanshanlihanliang_pingjunzhi_1()
+        this.zazhizongliang()
+        this.buwanshanli()
         if (this.chartonly.iskey == "1") {
             this.zhifangsuanzhi()
         } else {
-            this.yingduzhishu_pingjunzhi()
-            this.pingjunzhiganmianjinzhiliang()
+            this.yingduzhishu()
+            this.mianjinxishuiliang()
         }
         // this.foronly(this.chartonly, "realCapacity", "容重", "rongzhong")
         // this.foronly( this.chartonly, "shuifen_pingjunzhi", "水分", "shuifen")
@@ -127,51 +127,50 @@ export default {
             this.chartonly = this.charts
             this.rongzhong()
             this.shuifen()
-            this.zazhizongliang_1()
-            this.buwanshanlihanliang_pingjunzhi_1()
+            this.zazhizongliang()
+            this.buwanshanli()
             if (this.chartonly.iskey == "1") {
                 this.zhifangsuanzhi()
             } else {
-                this.yingduzhishu_pingjunzhi()
-                this.pingjunzhiganmianjinzhiliang()
+                this.yingduzhishu()
+                this.mianjinxishuiliang()
             }
         }
     },
     methods: {
         zhifangsuanzhi() {
             if (this.issample) {
-                let option = this.foronly(this.chartonly, "pingjunzhi", "脂肪酸值")
+                let option = this.foronly(this.chartonly, "zhifangsuanzhi", "脂肪酸值")
                 this.drawChart(option, "zhifangsuanzhi")
             }
-
         },
         // 容重统计图
         rongzhong() {
-            let option = this.foronly(this.chartonly, "realCapacity", "容重")
+            let option = this.foronly(this.chartonly, "rongzhong", "容重")
             this.drawChart(option, "rongzhong")
         },
         shuifen() {
-            let option = this.foronly(this.chartonly, "shuifen_pingjunzhi", "水分")
+            let option = this.foronly(this.chartonly, "shuifen", "水分")
             this.drawChart(option, "shuifen")
         },
-        zazhizongliang_1() {
-            let option = this.foronly(this.chartonly, "zazhizongliang_1", "杂质")
+        zazhizongliang() {
+            let option = this.foronly(this.chartonly, "zazhi", "杂质")
             this.drawChart(option, "zazhi")
         },
-        buwanshanlihanliang_pingjunzhi_1() {
-            let option = this.foronly(this.chartonly, "buwanshanlihanliang_pingjunzhi_1", "不完善粒")
+        buwanshanli() {
+            let option = this.foronly(this.chartonly, "buwanshanlizongliang", "不完善粒")
             this.drawChart(option, "buwanshanli")
         },
-        yingduzhishu_pingjunzhi() {
+        yingduzhishu() {
             if (!this.issample) {
-                let option = this.foronly(this.chartonly, "yingduzhishu_pingjunzhi", "硬度")
+                let option = this.foronly(this.chartonly, "yingduzhishu", "硬度")
                 this.drawChart(option, "yingdu")
             }
 
         },
-        pingjunzhiganmianjinzhiliang() {
+        mianjinxishuiliang() {
             if (!this.issample) {
-                let option = this.foronly(this.chartonly, "pingjunzhiganmianjinzhiliang", "面筋吸水量")
+                let option = this.foronly(this.chartonly, "mianjinxishuiliang", "面筋吸水量")
                 this.drawChart(option, "mianjinxishuiliang")
             }
 
@@ -192,14 +191,14 @@ export default {
             let color = [this.ChartColor[this.index % this.ChartColor.length]]
             forchild.forEach((i, v) => {
                 xAxis.push(i["taskName"])
-                if (only == "zazhizongliang_1" && this.chartonly.iskey == "2") {
-                    data.push(i["buwanshanlihanliang_pingjunzhi_1"])
-                    datas.push(i["kuangwuzhihanliang_pingjunzhi"])
+                if (only == "zazhi" && this.chartonly.iskey == "2") {
+                    data.push(i["buwanshanlizongliang"])
+                    datas.push(i["zazhikuangwuzhi"])
                     legend = ["总量", "其中:矿物质"]
                     color.push(this.ChartColor[(this.index + 1) % this.ChartColor.length])
-                } else if (only == "buwanshanlihanliang_pingjunzhi_1" && this.chartonly.iskey == "1") {
-                    data.push(i["buwanshanlihanliang_pingjunzhi_1"])
-                    datas.push(i["shengmeilihanliang_pingjunzhi"])
+                } else if (only == "buwanshanlizongliang" && this.chartonly.iskey == "1") {
+                    data.push(i["buwanshanlizongliang"])
+                    datas.push(i["buwanshanlishengmeikeli"])
                     legend = ["总量", "其中:生霉粒"]
                     color.push(this.ChartColor[(this.index + 1) % this.ChartColor.length])
                 } else {
