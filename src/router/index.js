@@ -49,6 +49,7 @@ import returnSamplesListAdd from '@/components/sampleManagement/returnSamples/re
 import returnSamplesListAddSample from '@/components/sampleManagement/returnSamples/returnSamplesListAddSample.vue'
 import PackingTaskList from '@/components/sampleDetection/packing/PackingTaskList.vue'
 import PackingList from '@/components/sampleDetection/packing/PackingList.vue'
+import PackingBarcodeList from '@/components/sampleDetection/packing/PackingBarcodeList.vue'
 import PackingView from '@/components/sampleDetection/packing/PackingView.vue'
 import PackingPrint from '@/components/sampleDetection/packing/PackingPrint.vue'
 import PackingSelect from '@/components/sampleDetection/packing/PackingSelect.vue'
@@ -440,20 +441,29 @@ const routes = [{
                 name: "样品检测/任务列表/任务样品管理",
                 component: PackingList,
             },
-            {
-                path: "sampleDetection/packingTaskList/packingList/packingSelect",
+//          {
+//              path: "sampleDetection/packingTaskList/packingList/packingSelect",
+//              //          name:"样品检测/分装任务列表/分装小样管理",
+//              name: "样品检测/任务列表/任务样品管理/添加检验样品",
+//              component: PackingSelect,
+//          },
+//          {
+//              path: "sampleDetection/packingTaskList/packingList/packingView",
+//              name: "样品检测/分装任务列表/分装小样管理/查看小样",
+//              component: PackingView,
+//          },		
+			{
+                path: "sampleDetection/packingBarcodeList",
                 //          name:"样品检测/分装任务列表/分装小样管理",
-                name: "样品检测/任务列表/任务样品管理/添加检验样品",
-                component: PackingSelect,
+                name: "样品检测/分装小样管理",
+                component: PackingBarcodeList,
             },
+//              path: "sampleDetection/packingBarcodeList/packingPrint",
+            
             {
-                path: "sampleDetection/packingTaskList/packingList/packingView",
-                name: "样品检测/分装任务列表/分装小样管理/查看小样",
-                component: PackingView,
-            },
-            {
-                path: "sampleDetection/packingTaskList/packingList/packingPrint",
-                name: "样品检测/分装任务列表/分装小样管理/打印条码",
+                path: "sampleDetection/packingBarcodeList/packingPrint",
+//              name: "样品检测/分装任务列表/分装小样管理/打印条码",
+                name: "样品检测/分装小样管理/打印条码",
                 component: PackingPrint,
             },
 

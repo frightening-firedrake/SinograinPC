@@ -272,7 +272,8 @@ export default {
 //			console.log(response)
 			if(response.data.checkeds) {
 				var path=this.$route.name+'/打印条码'
-				this.$router.push({name: path,params: {code:response.data.sampleNum,sort:response.data.sort,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState,taskId:this.$route.query.id}})
+//				this.$router.push({name: path,params: {code:response.data.sampleNum,sort:response.data.sort,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState,taskId:this.$route.query.id}})
+				this.$router.push({name: path,params: {code:response.data.sampleNum,sort:response.data.sort,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState,taskId:response.data.taskId}})
 			}else{
 
 				this.$notify.error({
@@ -309,7 +310,8 @@ export default {
   data() {
     return {
       datalistURL: this.apiRoot +  '/grain/smallSample/data',
-      checkURL:this.apiRoot +'/grain/sample/getBySampleNum',
+//    checkURL:this.apiRoot +'/grain/sample/getBySampleNum',
+      checkURL:'/saomiaofenxiaoyang',
       searchURL:this.apiRoot +  '/grain/smallSample/data',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',

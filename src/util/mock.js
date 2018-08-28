@@ -441,6 +441,20 @@ var checklist=Mock.mock('checklist', {
 	],
 });
 
+//扫描检验编号分小样
+var packingScan=Mock.mock('/saomiaofenxiaoyang', {
+      sampleNum:'2018010002',
+      sort:'玉米',
+      checkeds:'1,2,3,4,5,6,7,8',
+      taskId:'12',
+      sampleState:'2',
+      id:'11'
+      	
+});
+//获取打印条码huoqudayintiaoma
+var packingScan=Mock.mock('/huoqudayintiaoma', 
+	'2018010002-01容,2018010002-02水,2018010002-03杂,2018010002-04矿,2018010002-05不,2018010002-06生,2018010002-07色,2018010002-08硬'
+);
 //分装小样列表数据
 var packingList=Mock.mock('/liquid/role12/data', {
       'rows|3-12':[

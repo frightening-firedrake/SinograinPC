@@ -47,12 +47,22 @@
 				<template v-for="(item,index) in checkList">
 					<div class="rowItem">
 						<div class="number">
-							0{{index+1}}					
+							{{index+1<10?0+(index+1):index+1}}					
 						</div>
 						<div class="content">
 							{{checkAllList[item-1]}}					
 						</div>							
 						<div v-if="listdatas.buttonText" class="button" @click="buttonClick(item)">{{listdatas.buttonText}}</div>
+					</div>					
+				</template>
+				<template v-if="checkList.length%2==1">
+					<div class="rowItem">
+						<div class="number">
+							&nbsp;				
+						</div>
+						<div class="content">
+							&nbsp;					
+						</div>							
 					</div>					
 				</template>
 				<div class="clear"></div>

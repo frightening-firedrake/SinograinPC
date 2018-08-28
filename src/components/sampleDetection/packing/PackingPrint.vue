@@ -60,13 +60,13 @@ export default {
 //  获取列表数据（第一页）
 //	this.getlistdata(1)
 	if(!this.$route.params.code){
-		this.$router.push({name:"样品检测/分装任务列表/分装小样管理"})		
-	}else{
-		if(this.$route.params.sort=='玉米'){
-			this.checkAllList=["不完善颗粒","杂质","生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生指标","加工品质"];
-		}else if(this.$route.params.sort=='小麦'){
-			this.checkAllList=["不完善颗粒","杂质","生霉粒","水分","硬度","面筋吸水量","品尝评分","卫生指标","加工品质"];
-		}
+		this.$router.push({name:"样品检测/分装小样管理"})		
+//	}else{
+//		if(this.$route.params.sort=='玉米'){
+//			this.checkAllList=["不完善颗粒","杂质","生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生指标","加工品质"];
+//		}else if(this.$route.params.sort=='小麦'){
+//			this.checkAllList=["不完善颗粒","杂质","生霉粒","水分","硬度","面筋吸水量","品尝评分","卫生指标","加工品质"];
+//		}
 	}
 
   },
@@ -215,12 +215,13 @@ export default {
   		var arr=str.split(',');
 		arr.sort()
      		LODOP = getLodop();
-     		arr.forEach((val)=>{  			
+     		arr.forEach((val)=>{  
+//   			val.endwidth
      			LODOP.PRINT_INIT("打印条码");
      			LODOP.SET_PRINTER_INDEX("Godex G530");  
      			LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
      			LODOP.ADD_PRINT_BARCODE(3,30,232,115,'128B',val);
-   //  			LODOP.PREVIEW(); 
+//     			LODOP.PREVIEW(); 
    			LODOP.PRINT(); 
      		})
   	},
@@ -260,7 +261,8 @@ export default {
     return {
       datalistURL:this.apiRoot +'/grain/sample/getBySampleNum',
       getPrintCodeURL:this.apiRoot +'/grain/sample/getBySampleNum',
-      getPrintCodeAllURL:this.apiRoot +'/grain/sample/split',
+//    getPrintCodeAllURL:this.apiRoot +'/grain/sample/split',
+      getPrintCodeAllURL:'/huoqudayintiaoma',
       searchURL:'/liquid/role2/data/search',
       imgsrc:'static/images/test/code.jpg',
       printBarOver:false,
@@ -286,7 +288,7 @@ export default {
 		buttonText:false,
 	},
 	checkeds:this.$route.params.checkeds,
-	checkAllList:["不完善颗粒","杂质","生霉粒","水分","硬度","脂肪酸值","品尝评分","卫生","加工品质"],
+	checkAllList:["容重","水分","杂质","矿物质","不完善粒","生霉粒","色泽气味(质量指标)","硬度指数","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1)","真菌毒素(脱氧雪腐镰刀菌烯醇)","真菌毒素(玉米赤霉烯酮)","重金属(铅)","重金属(镉)","重金属(汞)","重金属(砷)"],	
 	  messageShow:false,
 	  messages:{
 	  	type:'error',

@@ -609,15 +609,17 @@ export default {
 	  		}
 		},
 		findCheckPoint(obj) {
-			var checkList1 = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "脂肪酸值", "品尝评分", "卫生指标", "加工品质"]
-			var checkList2 = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "面筋吸水量", "品尝评分", "卫生指标", "加工品质"]
+			var checkList=["容重","水分","杂质","矿物质","不完善粒","生霉粒","色泽气味(质量指标)","硬度指数","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1)","真菌毒素(脱氧雪腐镰刀菌烯醇)","真菌毒素(玉米赤霉烯酮)","重金属(铅)","重金属(镉)","重金属(汞)","重金属(砷)"];	
+//			var checkList1 = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "脂肪酸值", "品尝评分", "卫生指标", "加工品质"]
+//			var checkList2 = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "面筋吸水量", "品尝评分", "卫生指标", "加工品质"]
 			var index = obj.checkPoint
 			var res;
-			if (obj.sort == '玉米') {
-				res = checkList1[index - 1];
-			} else if (obj.sort == '小麦') {//测定记录
-				res = checkList2[index - 1];
-			}
+//			if (obj.sort == '玉米') {
+//				res = checkList1[index - 1];
+//			} else if (obj.sort == '小麦') {//测定记录
+//				res = checkList2[index - 1];
+//			}
+			res = checkList[index - 1];
 			return res;
 		},
 		rowClick(row, event, column) {
