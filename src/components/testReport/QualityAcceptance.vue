@@ -182,17 +182,17 @@ export default {
                 case "1":
                     randomUrl = this.apiRoot + "/grain/task/findCornSampleIdBylibraryId"
                     if(ev.number){
-                        params = `{"libraryId":${ev.point},"position":${ev.number},"sort":"玉米"}`
+                        params = `{"libraryId":${ev.point},"position":${ev.number},"sort":"玉米","detectionState":2}`
                     }else{
-                        params = `{"libraryId":${ev.point},"sort":"玉米"}`
+                        params = `{"libraryId":${ev.point},"sort":"玉米","detectionState":2}`
                     }
 
                     break;
                 case "2":
                      if(ev.number){
-                       params = `{"libraryId":${ev.point},"position":${ev.number},"sort":"小麦"}`
+                       params = `{"libraryId":${ev.point},"position":${ev.number},"sort":"小麦","detectionState":2}`
                     }else{
-                        params = `{"libraryId":${ev.point},"sort":"小麦"}`
+                        params = `{"libraryId":${ev.point},"sort":"小麦","detectionState":2}`
                     }
                     randomUrl = this.apiRoot + "/grain/task/findWheatSampleIdBylibraryId"
                     break;
