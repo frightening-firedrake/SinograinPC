@@ -216,13 +216,13 @@ export default {
 		arr.sort()
      		LODOP = getLodop();
      		arr.forEach((val)=>{  
-//   			val.endwidth
+//   			val.str.slice(-2)
      			LODOP.PRINT_INIT("打印条码");
      			LODOP.SET_PRINTER_INDEX("Godex G530");  
      			LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
      			LODOP.ADD_PRINT_BARCODE(3,30,232,115,'128B',val);
 //     			LODOP.PREVIEW(); 
-   			LODOP.PRINT(); 
+   				LODOP.PRINT(); 
      		})
   	},
 	messageclick(type){

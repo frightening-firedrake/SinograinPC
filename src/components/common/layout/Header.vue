@@ -6,7 +6,7 @@
     <div class="manager">
     	  <div class="dropdown">
 				    <el-dropdown trigger="click" @command="command">
-					      <span class="el-dropdown-link" style="cursor:pointer;">
+					      <span class="el-dropdown-link" style="cursor:pointer;white-space: nowrap;">
 					        	{{userName?userName:"未登录"}}
 					        	<i class="el-icon-arrow-down el-icon--right"></i>
 					      </span>

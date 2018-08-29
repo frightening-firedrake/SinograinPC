@@ -298,7 +298,7 @@ export default {
 			this.uncomplate(msg)
 			return
   		}
-  		console.log(res)
+//		console.log(res)
   		this.tabledatas=[];
   		res.forEach((value,index)=>{
   			if(value.sort){
@@ -314,7 +314,7 @@ export default {
 			        sampleTime:value.sampleTime,//扦样时间
 			        
 			        sort: value.sort,//品种
-			        quality: value.quality,//性质
+			        quality: value.quality.toUpperCase(),//性质
 			        amount: value.amount,//代表数量
 			        position:value.position,
 			        originPlace: value.originPlace,//产地

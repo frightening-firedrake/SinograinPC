@@ -26,10 +26,10 @@
 		<!--循环数据-->
 		<template v-for="item in items">
 
-			<el-table-column show-overflow-tooltip v-if="!item.status" :width="item.width?item.width:'auto'" :resizable="resizable" align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
+			<el-table-column show-overflow-tooltip v-if="!item.status" :min-width="item.minWidth?item.minWidth:'80'"  :width="item.width?item.width:'auto'" :resizable="resizable" align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
 			</el-table-column>
 
-			<el-table-column show-overflow-tooltip v-if="item.status" :width="item.width?item.width:'auto'" :resizable="resizable" align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
+			<el-table-column show-overflow-tooltip v-if="item.status" :min-width="item.minWidth?item.minWidth:'80'" :width="item.width?item.width:'auto'" :resizable="resizable" align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
 				<template slot-scope="scope">
 					<template v-if="item.prop=='regState'">
 						<template v-if="scope.row[item.prop]==-1">

@@ -20,11 +20,20 @@
 			    >
 			    </el-autocomplete>
 			</el-form-item>
-			<el-form-item label="检验状态" class="full" style="border-top:none;">
+			<el-form-item label="检验状态" class="" style="border-top:none;">
 			    <el-select v-model="isChecked" placeholder="请选择检验状态" @change="changeIsChecked">
 			        <el-option label="未检测" :value="1"></el-option>
 			        <el-option label="已检测" :value="2"></el-option>
 			        <el-option label="全部" :value="0"></el-option>
+			    </el-select>
+			</el-form-item>
+			<el-form-item label="选择性质" class="" style="border-top:none;">
+			    <el-select v-model="quality" placeholder="请选择性质">
+			        <el-option label="ZC" value="ZC"></el-option>
+			        <el-option label="ZD" value="ZD"></el-option>
+			        <el-option label="LC" value="LC"></el-option>
+			        <el-option label="SP" value="SP"></el-option>
+			        <el-option label="TD" value="TD"></el-option>
 			    </el-select>
 			</el-form-item>
 	    	<!--<el-form-item label="选择时间" style="border-top:none;width:100%;">
@@ -140,7 +149,7 @@ export default {
 			return this.checkList.filter((item,index)=>{
 //				return (this.isChecked?item.sampleState==this.isChecked:true)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 //				return (item.otherState==-1)&&(item.sampleState!==4)&&(this.isChecked?item.detectionState==this.isChecked:true)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
-				return (item.sampleState!==4)&&(this.isChecked?item.detectionState==this.isChecked:true)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
+				return (item.quality==this.quality)&&(item.sampleState!==4)&&(this.isChecked?item.detectionState==this.isChecked:true)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 			})
     	},
 
@@ -244,6 +253,7 @@ export default {
 //      	全部选中按钮
         	checkAll:false,
         	isChecked:1,
+        	quality:'ZC',
 //      	筛选列表
 //	  	  	restaurants: [{"value": "春季抽查"},{"value": "秋季普查"},{"value": "2017年度轮换验收"},{"value": "2018年度轮换验收"},{"value": "收购巡查"}],
         	

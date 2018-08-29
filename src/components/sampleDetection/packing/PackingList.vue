@@ -16,6 +16,14 @@
       <!--<sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose" @getScanCode="getScanCode"></sinograin-message>-->
       <!--底部按钮们-->
       <tfoot-buttons :tfbtns="tfbtns" @tfootEvent="tfootEvent" ></tfoot-buttons>
+      <div class="fixbtnwrap" v-if="fixbtn.show">
+        <div class="fixbtn" :class="{btnloading:fixbtn.loading}" @click="fixbtnsubmit">
+<!--			<i v-if="fixbtn.loading" class="el-icon-loading"></i>-->
+			<span>
+				{{fixbtn.btnText}}
+			</span>					
+		</div>
+      </div>
     </div>
 </template>
 
@@ -28,6 +36,43 @@
 		overflow-y:auto;
 		overflow-x:hidden;
 	}*/
+	.fixbtnwrap{
+		position:fixed;
+		bottom:0;
+		right:0.6rem;
+		height:0.75rem;
+		left:3.1rem;
+		text-align: center;
+		background:white;
+		border-top:1px solid rgba(241, 241, 241, 1);
+	}
+	.fixbtnwrap div.fixbtn{
+		position:absolute;
+		top:0.125rem;
+		height:0.4rem;
+		line-height: 0.33rem;
+		/*margin:0 0 0 0.3rem;*/
+		font-size: 0.24rem;
+		cursor: pointer;
+		background-color: #58b481;
+		border-radius: 0.05rem;
+		box-sizing: border-box;
+		padding:0.04rem;
+		color:#ffffff;
+		z-index: 6;
+	}
+	.fixbtnwrap div.fixbtn span{
+		border:1px solid #FFFFFF;
+		border-radius:0.04rem;
+		padding:0 0.2rem;
+		font-weight: 500;
+	}
+	
+	.fixbtnwrap div.fixbtn{
+		display: inline-block;
+		margin-top:0.125rem;
+		position: static;
+	}
 </style>
 
 <script>
@@ -260,12 +305,15 @@ export default {
 				this.tabledatas = response.data;
 				this.listHeader.addbtn=false;
 				this.actions.nodele=true;
-				this.tfbtns.btnRight=false;
+//				this.tfbtns.btnRight=false;
+				this.fixbtn.show=false;
 			}else{
+//				this.listHeader.addbtn=true;
 				this.listHeader.addbtn='添加检验样品';
 				this.actions.nodele=false;
-				this.tfbtns.btnRight={};
-				this.tfbtns.btnRight.btnText='提交检验样品';
+				this.fixbtn.show=true;
+//				this.tfbtns.btnRight={};
+//				this.tfbtns.btnRight.btnText='提交检验样品';
 			}
 //			this.page.total = response.data.total;
 			this.loading = false;
@@ -391,6 +439,7 @@ export default {
 //			console.log(this.tabledatas[i].id);
 			ids.push(this.tabledatas[i].id);
 		}
+		this.fixbtn.loading=true;
 		this.$http({
 		    method: 'post',
 			url: this.submitURL,
@@ -408,6 +457,8 @@ export default {
 				taskId:this.taskId
 			}
 	    }).then(function (response) {
+			this.fixbtn.loading=false;
+	    	
 	    	if(response.data.success){
 	    		this.$router.push({name:'样品检测/任务列表'})
 	    	}
@@ -433,6 +484,10 @@ export default {
 		}else if(date=='btnOne'){
 
 		}
+	},
+	fixbtnsubmit(){
+//		console.log('tijiao')
+		this.submit();
 	},
 	//	领取方法
   	handover(){
@@ -585,13 +640,14 @@ export default {
 //      prop:'sampleNo',
         label: "检验编号",
 		status:true,
-		width:200,
+		minWidth:200,
       },
       {
         id: 2,
         prop:'colorCheckeds',
         label: "检验项目",
 		status:true,
+		minWidth:600,
       },
 //    {
 //      id: 3,
@@ -659,14 +715,19 @@ export default {
 //		btnLeft:{
 //			btnText:'导出Excel表格',
 //		},
-		btnRight:{
-			btnText:'提交检验样品',
-		},
+//		btnRight:{
+//			btnText:'提交检验样品',
+//		},
 //		btnOne:{
 //			btnText:'导出Excel表格',
 //		},   
 		borderTop:true,
       },
+      fixbtn:{
+      	show:false,
+      	btnText:'提交检验样品',
+//    	loading:true,
+      }
     }
   }
 }

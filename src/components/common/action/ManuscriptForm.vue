@@ -399,21 +399,15 @@ export default {
     },
     computed:{
 		ldcltj() {//粮堆测量体积
-			var shape = this.formdatas.form.shape;
-			
-			
+			var shape = this.formdatas.form.shape;			
 			var length = this.formdatas.form.length-0;
 			var high = this.formdatas.form.high-0;
-			var wide = this.formdatas.form.wide-0;
-			
+			var wide = this.formdatas.form.wide-0;			
         	var topS = this.formdatas.form.topS-0;
         	var bottomS = this.formdatas.form.bottomS-0;
         	var diameter = this.formdatas.form.diameter-0;
         	var length_2 = this.formdatas.form.length_2-0;
         	var high_2 = this.formdatas.form.high_2-0;
-        	
-        	
-
         	if(shape=='长方体'){
 				return this.jsdjg.measuredVolume = (length*high*wide).toFixed(1)     		
         	}else if(shape=='圆柱体'){
@@ -423,8 +417,6 @@ export default {
         	}else if(shape=='其他'){
         		return this.jsdjg.measuredVolume = (length*high*wide+(high+high_2)*length_2/2).toFixed(1)     		
         	}
-        	
-
 		},
 		ldsjtj() { //粮堆实际体积
 			var length = this.formdatas.form.length;

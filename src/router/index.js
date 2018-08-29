@@ -441,12 +441,12 @@ const routes = [{
                 name: "样品检测/任务列表/任务样品管理",
                 component: PackingList,
             },
-//          {
-//              path: "sampleDetection/packingTaskList/packingList/packingSelect",
-//              //          name:"样品检测/分装任务列表/分装小样管理",
-//              name: "样品检测/任务列表/任务样品管理/添加检验样品",
-//              component: PackingSelect,
-//          },
+            {
+                path: "sampleDetection/packingTaskList/packingList/packingSelect",
+                //          name:"样品检测/分装任务列表/分装小样管理",
+                name: "样品检测/任务列表/任务样品管理/添加检验样品",
+                component: PackingSelect,
+            },
 //          {
 //              path: "sampleDetection/packingTaskList/packingList/packingView",
 //              name: "样品检测/分装任务列表/分装小样管理/查看小样",
