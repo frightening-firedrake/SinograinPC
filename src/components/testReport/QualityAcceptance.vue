@@ -169,7 +169,8 @@ export default {
         // },
         //删除表格
         close(){
-             this.showheader = false
+            this.showheader = false
+            this.tabledatas= []
         },
         _select(ev) {
             this.isenter = true
@@ -259,12 +260,12 @@ export default {
                 this.tabledatas.forEach((i, v) => {
                     ids.push(i.sampleId)
                 })
-                switch (this.tabledatas.iskey) {
-                    case "1":
+                switch (this.iskey) {
+                    case "Corn":
                         // 玉米
                         btnUrl = this.apiRoot + "/grain/sample/ExportYMzhiliang"
                         break;
-                    case "2":
+                    case "Wheat":
                         // 小麦
                         btnUrl = this.apiRoot + "/grain/sample/ExportXMzhiliang"
                         break;

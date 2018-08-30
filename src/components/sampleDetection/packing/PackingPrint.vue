@@ -122,11 +122,11 @@ export default {
 		    console.log(error);
 		}.bind(this));
   	},
-  	print(checked){
+  	print(Suffix){
 //		console.log('打印'+checked+'检测条码')
   		this.messageShow=true;
   		this.messages.type="loading";
-  		this.getPrintCode(checked);		
+//		this.printBarSuffix(Suffix);		
   	},
   	printAll(){
 //		console.log('打印'+checked+'检测条码')
@@ -211,6 +211,18 @@ export default {
 			wind.close();			
 		};
   	},
+  	printBarSuffix(Suffix){
+		LODOP = getLodop();
+		Suffix.forEach((val)=>{  
+	
+			LODOP.PRINT_INIT("打印条码");
+			LODOP.SET_PRINTER_INDEX("Godex G530");  
+			LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
+			LODOP.ADD_PRINT_BARCODE(3,30,232,115,'128B',val);
+//  		LODOP.PREVIEW(); 
+			LODOP.PRINT(); 
+		})
+  	},
   	printBarAll(str){
   		var arr=str.split(',');
 		arr.sort()
@@ -285,7 +297,7 @@ export default {
 		titleLabel:'检验编号',
 		title:'监'+this.$route.params.code,
 		label:'检验项目',
-		buttonText:false,
+		buttonText:'打印',
 	},
 	checkeds:this.$route.params.checkeds,
 	checkAllList:["容重","水分","杂质","矿物质","不完善粒","生霉粒","色泽气味(质量指标)","硬度指数","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1)","真菌毒素(脱氧雪腐镰刀菌烯醇)","真菌毒素(玉米赤霉烯酮)","重金属(铅)","重金属(镉)","重金属(汞)","重金属(砷)"],	
@@ -320,7 +332,7 @@ export default {
 //			btnText:'打印检验项目条形码',
 //		},
 		btnRight:{
-			btnText:'打印检验项目条形码',
+			btnText:'打印全部条形码',
 		},
 //		btnOne:{
 //			btnText:'导出Excel表格',

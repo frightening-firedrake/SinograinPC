@@ -321,6 +321,12 @@ export default {
       },
       {
         id: 3,
+        prop:'describe',
+        label: "概述",
+//      sort:true
+      },
+      {
+        id: 4,
         prop:'warehouseState',
         label:"状态",
         status:true,

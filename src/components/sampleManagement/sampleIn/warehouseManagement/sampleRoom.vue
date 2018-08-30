@@ -591,28 +591,39 @@ export default {
         sort:true
       },
       {
-        id: 2,
+        id: 3,
         prop:'storage',
         label: "存放位置",
 //      status:true,
-        sort:true
+        sort:true,
+        smethod:(a,b)=>{
+//      	console.log(a.placeId)
+        	return a.placeId-b.placeId
+        },
       },
       {
-        id: 3,
+        id: 2,
+        prop:'quality',
+        label: "性质",
+//      status:true,
+//      sort:true
+      },
+      {
+        id: 4,
         prop:'autograph',
         label: "样品签收",
 //      status:true,
 //      sort:true
       },
       {
-        id: 4,
+        id: 5,
         prop:'storageTime',
         label: "储存时间",
 //      status:true,
 //      sort:true
       },
 	  {
-        id: 5,
+        id: 6,
         prop:'remark',
         label: "备注",
 //      status:true,
@@ -630,6 +641,7 @@ export default {
       	manuscript:false,
       	safetyReport:false,
 //    	printSampleIn:true,
+		sort:'storage',
       },
        tfbtns:{
       	btnCenter:{

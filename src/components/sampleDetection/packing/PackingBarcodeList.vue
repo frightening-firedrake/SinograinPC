@@ -182,7 +182,6 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-			    listName: this.list,
 			    page:page,
 			    rows:this.page.size,
 			    params:JSON.stringify(params),
