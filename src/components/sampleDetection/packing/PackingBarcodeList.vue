@@ -134,7 +134,7 @@ export default {
 //	获取搜索数据
   	searchingfor(searching,page){
   		page?page:1;
-  		this.searchText=searching;
+  		this.searchText=searching.indexOf('监')==0?searching.slice(1):searching;
   		var params = {};
 //		params.sampleNoOrSmallSampleNumLike = searching;
 		params.sampleNumLike = searching;
