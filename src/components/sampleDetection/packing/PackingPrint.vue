@@ -12,7 +12,7 @@
       <sinograin-message v-if="messageShow" :messages="messages" v-on:messageclick="messageclick" v-on:messageClose="messageClose"></sinograin-message>
 	  <!--底部按钮-->
       <tfoot-buttons :tfbtns="tfbtns" @tfootEvent="tfootEvent" ></tfoot-buttons>
-	  
+      <div style="display: none;">{{Suffix}}</div>
     </div>
 </template>
 
@@ -54,6 +54,53 @@ export default {
 			return indexs
 		}
 	},
+//	计算后缀名
+	Suffix(){
+		var Suffix=[];
+		var arr=[
+				{label:'' ,show:false,Suffix:['小1','小2']},
+				{label:'水分',show:false,Suffix:['水']},
+				{label:'硬度指数',show:false,Suffix:['硬']},
+				{label:'面筋吸水量',show:false,Suffix:['面']},
+				{label:'脂肪酸值',show:false,Suffix:['脂']},
+				{label:'品尝评分值',show:false,Suffix:['品']},
+				{label:'',show:false,Suffix:['卫'],class:'full'},
+			];
+			if(this.checkList){
+				this.checkList.forEach((value,index)=>{
+					if([1,3,4,5,6].includes(value-0)){
+						arr[0].show=true;
+						arr[0].label+=this.checkAllList[value-1]+'、';
+					}else if([2].includes(value-0)){
+						arr[1].show=true;
+					}else if([8].includes(value-0)){
+						arr[2].show=true;
+					}else if([9].includes(value-0)){
+						arr[3].show=true;
+					}else if([10].includes(value-0)){
+						arr[4].show=true;
+					}else if([11].includes(value-0)){
+						arr[5].show=true;
+					}else if([13,14,15,16,17,18,19].includes(value-0)){
+						arr[6].show=true;
+						arr[6].label+=this.checkAllList[value-1]+'、';
+					}
+				})
+				if(arr[0].label){
+					arr[0].label=arr[0].label.slice(0,-1)
+				}
+				if(arr[6].label){
+					arr[6].label=arr[6].label.slice(0,-1)
+				}
+				var res=arr.filter((value)=>{
+					return value.show
+				})	
+				res.forEach((value)=>{
+					Suffix=Suffix.concat(value.Suffix)
+				})
+				return Suffix
+			}
+	}
   },
   created(){
 //	console.log(this.$route.params.code)//这就是扫到的条码
@@ -126,13 +173,14 @@ export default {
 //		console.log('打印'+checked+'检测条码')
   		this.messageShow=true;
   		this.messages.type="loading";
-//		this.printBarSuffix(Suffix);		
+		this.printBarSuffix(Suffix);		
   	},
   	printAll(){
 //		console.log('打印'+checked+'检测条码')
   		this.messageShow=true;
   		this.messages.type="loading";
-  		this.getPrintCodeAll();	
+//		this.getPrintCodeAll();	
+		this.printBarSuffix(this.Suffix);		
   	},
   	getPrintCode(checked){
   		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no'); 		
@@ -214,11 +262,11 @@ export default {
   	printBarSuffix(Suffix){
 		LODOP = getLodop();
 		Suffix.forEach((val)=>{  
-	
+//			console.log(this.$route.params.code+val)
 			LODOP.PRINT_INIT("打印条码");
 			LODOP.SET_PRINTER_INDEX("Godex G530");  
 			LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
-			LODOP.ADD_PRINT_BARCODE(3,30,232,115,'128B',val);
+			LODOP.ADD_PRINT_BARCODE(3,30,232,115,'128B',this.$route.params.code+val);
 //  		LODOP.PREVIEW(); 
 			LODOP.PRINT(); 
 		})

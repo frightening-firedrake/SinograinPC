@@ -491,9 +491,9 @@ export default {
 			//	  	console.log(index,row);query:{id:row.id,libraryName:row.libraryName,position:row.position}}
 			//		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
 			if (row.sampleState) {
-				this.$root.eventHub.$emit('viewlistitem', row.id, row.sampleState)
+				this.$root.eventHub.$emit('viewlistitem', row.id, row.sampleState,row)
 			} else if (row.regState) {
-				this.$root.eventHub.$emit('viewlistitem', row.id, row.regState)
+				this.$root.eventHub.$emit('viewlistitem', row.id, row.regState,row)
 			} else if (row.isDeal) {
 				this.$root.eventHub.$emit('viewlistitem', row)
 			} else {

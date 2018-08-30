@@ -76,10 +76,11 @@ export default {
 //  	console.log(rowid,list);
     }.bind(this)); 	
 //	监听列表点击查看事件
-  	this.$root.eventHub.$on("viewlistitem",function(id){  
-//		console.log(id)
-		this.$router.push({path: '/index/sampleDetection/packingList/packingView',query:{libid:id}})
-		
+  	this.$root.eventHub.$on("viewlistitem",function(id,state,row){  
+
+//		this.$router.push({path: '/index/sampleDetection/packingList/packingView',query:{libid:id}})
+		var path=this.$route.name+'/打印条码'
+		this.$router.push({name: path,params: {code:row.sampleNum,sort:row.sort,checkeds:row.checkeds,id:row.id,sampleState:row.sampleState,taskId:row.taskId}})
   	}.bind(this));
 //	监听列表点击打印事件
   	this.$root.eventHub.$on("printlistitem",function(code){  
@@ -135,7 +136,9 @@ export default {
   		page?page:1;
   		this.searchText=searching;
   		var params = {};
-		params.sampleNoOrSmallSampleNumLike = searching;
+//		params.sampleNoOrSmallSampleNumLike = searching;
+		params.sampleNumLike = searching;
+		params.sampleState = 3;
 //		console.log(this.breadcrumb.searching);
   		// 获取列表数据（第？页）
 		this.$http({
@@ -158,6 +161,7 @@ export default {
 	    }).then(function (response) {
 		  	this.tabledatas=response.data.rows;
 			this.page.total = response.data.total;
+			this.page.currentPage = page;
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -167,7 +171,8 @@ export default {
   	getlistdata(page){
   		this.loading=false;
   		var params={};
-  		params.taskId=this.$route.query.id;
+//		params.taskId=this.$route.query.id;
+  		params.sampleState=3;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -252,6 +257,9 @@ export default {
   	},
 //	去验证条码有效否
 	checkcode(code){
+		var params={};
+		params.sampleState=3;
+		params.sampleNum=code;
 		this.$http({
 		    method: 'post',
 			url: this.checkURL,
@@ -265,14 +273,15 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: {
-				sampleNum:code,
+//				sampleNum:code,
+				params:JSON.stringify(params)
 			}
 	    }).then(function (response) {
 //			console.log(response)
-			if(response.data.checkeds) {
+			if(response.data.rows[0].checkeds) {
 				var path=this.$route.name+'/打印条码'
 //				this.$router.push({name: path,params: {code:response.data.sampleNum,sort:response.data.sort,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState,taskId:this.$route.query.id}})
-				this.$router.push({name: path,params: {code:response.data.sampleNum,sort:response.data.sort,checkeds:response.data.checkeds,id:response.data.id,sampleState:response.data.sampleState,taskId:response.data.taskId}})
+				this.$router.push({name: path,params: {code:response.data.rows[0].sampleNum,sort:response.data.rows[0].sort,checkeds:response.data.rows[0].checkeds,id:response.data.rows[0].id,sampleState:response.data.rows[0].sampleState,taskId:response.data.rows[0].taskId}})
 			}else{
 
 				this.$notify.error({
@@ -308,10 +317,12 @@ export default {
   },
   data() {
     return {
-      datalistURL: this.apiRoot +  '/grain/smallSample/data',
-//    checkURL:this.apiRoot +'/grain/sample/getBySampleNum',
-      checkURL:'/saomiaofenxiaoyang',
-      searchURL:this.apiRoot +  '/grain/smallSample/data',
+//    datalistURL: this.apiRoot +  '/grain/smallSample/data',
+      datalistURL: this.apiRoot +  '/grain/sample/data',
+      checkURL:this.apiRoot +'/grain/sample/data',
+//    checkURL:'/saomiaofenxiaoyang',
+//    searchURL:this.apiRoot +  '/grain/smallSample/data',
+      searchURL:this.apiRoot +  '/grain/sample/data',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
       checkedId:[],
@@ -372,18 +383,30 @@ export default {
         label: "检验编号",
 		status:true,
       },
-      {
-        id: 2,
-        prop:'smallSampleNum',
-        label: "小样编号",
-		status:true,
-      },
+//    {
+//      id: 2,
+//      prop:'smallSampleNum',
+//      label: "小样编号",
+//		status:true,
+//    },
       {
         id: 3,
-        prop:'checkPoint',
+        prop:'checkeds',
         label:"检验项目",
 		status:true,
       },
+      {
+      	id:4,
+      	prop:'detectionState',
+      	label:'检验状态',
+      	status:true,
+      }
+//    {
+//      id: 3,
+//      prop:'checkPoint',
+//      label:"检验项目",
+//		status:true,
+//    },
 //    {
 //      id: 4,
 //      prop:'printTimes',
@@ -398,14 +421,14 @@ export default {
 //    },
       ],
       actions:{
-      	noview:true,
+//    	noview:true,
       	selection:false,
       	number:false,
       	view:false,
       	edit:false,
       	dele:false,
-      	print:true,
-      	show:true,
+      	print:false,
+      	show:false,
       	manuscript:false,
       	safetyReport:false,
 //    	sort:'smallSampleNum',
