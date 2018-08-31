@@ -6,6 +6,14 @@
       <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
       <!--表格上的时间选框以及 创建-->
       <list-header-more :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" @remChange="remChange"  @selectlibChange="selectlibChange" @createSampleNum="createSampleNum"></list-header-more>
+      <!--列表入库样品总数-->
+      <div class="clear"></div>
+      <p class="totalsample">
+      	<span class="total">已入库样品总数:
+        	<b>{{page.total}}</b>
+        </span>
+      </p>
+      <div class="clear"></div>
       <!--表格-->
       <sinograin-list class="list le" :tabledata="tabledatas" :list="list" :items="items" :actions="actions" v-on:getchecked="getchecked" :loading="loading" v-on:emptyCreate="emptyCreate" > 
       </sinograin-list>
@@ -18,7 +26,21 @@
 </template>
 
 <style>
-	
+p.totalsample{
+	border:solid 1px #eaeaea;
+	border-bottom:none;
+	overflow: hidden;
+}
+p.totalsample >span{
+	float:right;
+	font-size:0.16rem;
+	padding-right:0.5rem;
+	line-height:0.3rem;
+}
+p.totalsample >span>b{
+	font-weight: normal;
+	color:#2380FF;
+}	
 </style>
 
 <script>

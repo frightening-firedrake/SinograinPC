@@ -432,7 +432,11 @@ export default {
 	},
 	submit() {
 		if(!this.tabledatas.length){
-			this.$alert('请先添加检验样品','提示信息',{type: 'warning'});
+//			this.$alert('请先添加检验样品','提示信息',{type: 'warning'});
+			this.$notify.error({
+	          	title: '提交失败',
+	          	message: '请先添加检验样品！！！',
+	        });
 		}
 		var ids = [];
 		for(var i=0; i<this.tabledatas.length;i++) {
@@ -724,7 +728,7 @@ export default {
 		borderTop:true,
       },
       fixbtn:{
-      	show:false,
+      	show:true,
       	btnText:'提交检验样品',
 //    	loading:true,
       }
