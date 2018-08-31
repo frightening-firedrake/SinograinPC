@@ -343,7 +343,7 @@ export default {
 	  	submitText:'确定',
 	  },
       breadcrumb:{
-      	search:true,   
+      	search:false,   
       	searching:'',
       },
       loading:true,
