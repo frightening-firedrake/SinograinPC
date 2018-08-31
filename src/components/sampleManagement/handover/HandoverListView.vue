@@ -70,7 +70,7 @@
                 <span>监{{item}}</span>
               </el-col>
             </el-col>
-            <el-col style="" :span="6" v-for="(item,index) in testItemListadd" class='loopBorder' :key="index+99" style="border-top:1px solid #dfdfdf;">
+            <el-col style="" :span="6" v-for="(item,index) in testItemListadd" class='loopBorder' :key="index+99999" style="border-top:1px solid #dfdfdf;">
               <el-col style="" :span="8">
                 <span>{{index+formdatas.testItemList.length+1}}</span>
               </el-col>

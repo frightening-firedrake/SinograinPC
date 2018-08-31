@@ -64,10 +64,19 @@ export default {
 		this.$root.eventHub.$off("returnPerson")
 		//	监听列表删除事件
 		this.$root.eventHub.$on('delelistitem', function(rowid, list) {
-			this.tabledatas = this.tabledatas.filter(function(item) {
-				return item.id !== rowid;
-			})
-			this.sendDeleteId(rowid);
+			this.$confirm('此操作将永久删除该交接单信息, 是否继续?', '提示', {
+		     	confirmButtonText: '确定',
+		      	cancelButtonText: '取消',
+		      	type: 'warning'
+		   }).then(() => {		    	
+				this.sendDeleteId(rowid);
+		    }).catch(() => {
+		      	this.$message({
+		        	type: 'info',
+		        	message: '已取消删除'
+		      	});          
+		    });
+
 			//  	console.log(rowid,list);
 		}.bind(this));
 		//	监听列表点击查看事件
@@ -225,17 +234,34 @@ export default {
 		//	发送删除id
 		sendDeleteId(id) {
 			this.$http({
-				method: 'post',
+			    method: 'post',
 				url: this.deleteURL,
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				transformRequest: [function (data) {
+					// Do whatever you want to transform the data
+					let ret = ''
+					for (let it in data) {
+					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					}
+					return ret
+				}],
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 				data: {
-					listName: this.list,
-					id: id,
-				}
-			}).then(function(response) {
-
-			}.bind(this)).catch(function(error) {
-				console.log(error);
+					id:id
+				},
+		    }).then(function (response) {
+		    	if(response.data.success){
+					this.tabledatas=this.tabledatas.filter(function(item){
+		    			return item.id!==id;
+		    		})		  
+		    		this.$message({
+			        	type: 'success',
+			        	message: '删除成功!'
+			      	});
+		    	}else{
+		    		this.$message.error('删除失败!');
+		    	}
+			}.bind(this)).catch(function (error) {
+			    console.log(error);
 			}.bind(this));
 		},
 		//	获取分页点击事件中及当前页码
@@ -269,7 +295,7 @@ export default {
 		return {
 			datalistURL: this.apiRoot +'/grain/handover/data',
 			searchURL: this.apiRoot +'/grain/handover/data',
-			deleteURL: '/liquid/role2/data/delete',
+			deleteURL: this.apiRoot +'/grain/handover/removeHandover',
       		searchText:'',
 			checkedId: [],
 			list: "samplinglist",
@@ -384,10 +410,10 @@ export default {
 				number: false,
 				view: false,
 				edit: false,
-				dele: false,
+				dele: true,
 				manuscript: false,
 				safetyReport: false,
-				show:false,
+				show:true,
 			}
 		}
 	}
