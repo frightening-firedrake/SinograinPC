@@ -256,7 +256,7 @@ export default {
 				sort:'玉米',
 			},
 			{
-				totalQuantity:7.205,
+				totalQuantity:888888,
 				sort:'食用油',
 			},
 		],
