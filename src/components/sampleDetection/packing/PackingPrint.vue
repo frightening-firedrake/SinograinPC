@@ -262,11 +262,14 @@ export default {
   	printBarSuffix(Suffix){
 		LODOP = getLodop();
 		Suffix.forEach((val)=>{  
+//			ADD_PRINT_BARCODE(Top,Left,Width,Height,BarCodeType,BarCodeValue);
 //			console.log(this.$route.params.code+val)
 			LODOP.PRINT_INIT("打印条码");
 			LODOP.SET_PRINTER_INDEX("Godex G530");  
 			LODOP.SET_PRINT_PAGESIZE(1, 700, 400, "USER");
 			LODOP.ADD_PRINT_BARCODE(3,30,232,115,'128B',this.$route.params.code+val);
+//			LODOP.SET_PRINT_PAGESIZE(1, 400, 200, "USER");
+//			LODOP.ADD_PRINT_BARCODE(1,25,232,115,'128B',this.$route.params.code+val);
 //  		LODOP.PREVIEW(); 
 			LODOP.PRINT(); 
 		})
