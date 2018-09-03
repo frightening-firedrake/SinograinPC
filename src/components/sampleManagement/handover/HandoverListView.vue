@@ -271,9 +271,9 @@ export default {
 
     },
     leading_out(){
-//  		if(!this.$_ault_alert('register:export')){
-//					return
-//				}
+    		if(!this.$_ault_alert('handover:expotHandover')){
+					return
+				}
 				var id=this.$route.query.id;
 				var loadiframe=document.getElementById('fordownload');
 				var loadiframe2=document.getElementById('fordownload2');

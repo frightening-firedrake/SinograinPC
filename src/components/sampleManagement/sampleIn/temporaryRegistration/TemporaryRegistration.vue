@@ -130,9 +130,9 @@ export default {
 		},
 		//	新建
 		addbtn() {
-//			if(!this.$_ault_alert('handover:save')){
-//				return
-//			}
+			if(!this.$_ault_alert('sample:saveAll')){
+				return
+			}
 			this.$router.push({ path: '/index/sampleManagement/temporaryRegistration/temporaryRegistrationCreate' })
 		},
 		//	填入新建数据

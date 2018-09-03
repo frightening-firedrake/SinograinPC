@@ -490,6 +490,9 @@ export default {
 		}
 	},
 	fixbtnsubmit(){
+		if(!this.$_ault_alert('sample:putIntoTask')){
+			return
+		}
 //		console.log('tijiao')
 		this.submit();
 	},

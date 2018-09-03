@@ -259,9 +259,9 @@ export default {
 
     },
     leading_out(){
-//  		if(!this.$_ault_alert('register:export')){
-//					return
-//				}
+    		if(!this.$_ault_alert('export:exportWordTestItem')){
+				return
+			}
 				var id=this.$route.query.id;
 //				var id=this.sampleId;
 				var loadiframe=document.getElementById('fordownload');

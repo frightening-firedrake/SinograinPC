@@ -77,7 +77,9 @@ export default {
     }.bind(this)); 	
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id,state,row){  
-
+		if(!this.$_ault_alert('cedingjilu:getBySmallSampleId')){
+			return
+		}
 //		this.$router.push({path: '/index/sampleDetection/packingList/packingView',query:{libid:id}})
 		var path=this.$route.name+'/打印条码'
 		this.$router.push({name: path,params: {code:row.sampleNum,sort:row.sort,checkeds:row.checkeds,id:row.id,sampleState:row.sampleState,taskId:row.taskId}})
@@ -248,6 +250,10 @@ export default {
   		this.messageShow=false;
   	},
   	getScanCode(code){
+//		if(!this.$_ault_alert('sample:getBySmallSampleNum')){
+//			return
+//		}
+  		
   		if(!code){
   			this.messageShow=false;
   		}else{  			

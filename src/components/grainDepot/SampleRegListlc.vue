@@ -78,6 +78,9 @@ export default {
   	}.bind(this));
 //	监听重复申请事件
   	this.$root.eventHub.$on("repeat",function(id,state){  
+  		if(!this.$_ault_alert('sample:saveAll')){
+			return
+		}
 //		console.log(id)
 //		if(state==3){			
 //			this.$router.push({path: '/index/grainDepot/sampleRegListlc/sampleDraft',query:{pId:id,state:state}})
@@ -116,7 +119,11 @@ export default {
 //		console.log('createSampling');
 		this.$router.push({path: '/index/sampling/libraryList/samplingList/samplingListCreate'})
 	},
+	//新建扦样登记表按钮
 	addbtn(){
+		if(!this.$_ault_alert('sample:saveAll')){
+			return
+		}
 		this.$router.push({path: '/index/grainDepot/sampleRegListlc/createSampleReglc'})
 	},
 	emptyCreate(){

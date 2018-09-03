@@ -242,7 +242,10 @@ export default {
 			
 		},
 		//	填入新建数据
-		createlibitem(data,title) {
+		createlibitem(data,title) {		
+			if(!this.$_ault_alert('warehouseCounter:save')){
+				return
+			}
 			var type='';
 			if(title=='新建柜子'){
 				type=1

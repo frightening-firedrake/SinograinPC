@@ -411,6 +411,9 @@ export default {
     	
     },
     addSample(){
+    	if(!this.$_ault_alert('returnSingle:save')){
+				return
+			}
     	var path=this.$route.name+'/添加检验编号'
 			this.$router.push({name: path,params: {formdatas:this.formdatas}})
     },
@@ -429,6 +432,9 @@ export default {
 //	  },
 	  //	填入新建数据
 		createlibitem(form) {
+			if(!this.$_ault_alert('returnSingle:save')){
+				return
+			}
 //			console.log(form);
    		this.guihuanadd(form);
       // this.$router.push({path:'/index/sampleManagement/returnSamples'});

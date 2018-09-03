@@ -74,7 +74,7 @@ export default {
     }.bind(this)); 	
 //	监听列表点击查看事件
   	this.$root.eventHub.$on("viewlistitem",function(id){  
-  		if(!this.$_ault_alert('smallSample:list')){
+  		if(!this.$_ault_alert('sample:putIntoTask')){
 			return
 		}
 //		console.log(id)

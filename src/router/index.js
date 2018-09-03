@@ -137,7 +137,8 @@ const routes = [{
                 path: "grainDepot/sampleRegListlc/createSampleReglc",
                 name: "粮库管理/扦样登记列表/新建扦样登记表",
                 component: CreateSampleReglc,
-                meta: { needAuth: '新建扦样登记表' },
+//              meta: { needAuth: '新建扦样登记表' },
+                meta: { needAuth: '扦样登记列表' },
             },
             //        {
             //          path:"grainDepot/createSampleReglc/sampleReglc",
@@ -154,11 +155,13 @@ const routes = [{
                 path: "grainDepot/sampleRegListlc/sampleReglc",
                 name: "粮库管理/扦样登记列表/扦样登记表",
                 component: SampleReglc,
+                meta: { needAuth: '扦样登记列表' },
             },
             {
                 path: "grainDepot/sampleRegListlc/sampleDraft",
                 name: "粮库管理/扦样登记列表/扦样登记草稿",
                 component: CreateSampleReglc,
+                meta: { needAuth: '扦样登记列表' },
             },
             //        扦样流程
             {
@@ -182,12 +185,14 @@ const routes = [{
                 path: "sampling/examinationLibraryList/sampleRegList",
                 name: "扦样流程/审批扦样库点列表/扦样登记列表",
                 component: SampleRegList,
+                meta: { needAuth: '审批扦样列表' },
             },
 
             {
                 path: "sampling/examinationLibraryList/sampleRegList/sampleReg",
                 name: "扦样流程/审批扦样库点列表/扦样登记列表/扦样登记表",
                 component: SampleReg,
+                meta: { needAuth: '审批扦样列表' },
             },
             {
                 path: "sampling/sampleLibraryList",
@@ -204,42 +209,50 @@ const routes = [{
                 path: "sampling/libraryList/samplingList",
                 name: "扦样流程/扦样库点列表/扦样登记列表",
                 component: SamplingList,
+                meta: { needAuth: '扦样库点列表' },
             },
 
             {
                 path: "sampling/libraryList/samplingList/sampleShowList",
                 name: "扦样流程/扦样库点列表/扦样登记列表/被查库点列表",
                 component: SampleShowList,
+                meta: { needAuth: '扦样库点列表' },
             },
             {
                 path: "sampling/libraryList/samplingList/sampleShowList/samplingListCreate",
                 name: "扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建扦样",
                 component: SamplingListCreate,
+                meta: { needAuth: '扦样库点列表' },
             },
             {
                 path: "sampling/libraryList/samplingList/sampleShowList/samplingListEdit",
                 name: "扦样流程/扦样库点列表/扦样登记列表/被查库点列表/查看扦样",
                 component: SamplingListEdit,
+                meta: { needAuth: '扦样库点列表' },
             },
             {
                 path: "sampling/libraryList/samplingList/sampleShowList/manuscriptCreate",
                 name: "扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建工作底稿",
                 component: ManuscriptCreate,
+                meta: { needAuth: '扦样库点列表' },
             },
             {
                 path: "sampling/libraryList/samplingList/sampleShowList/manuscriptEdit",
                 name: "扦样流程/扦样库点列表/扦样登记列表/被查库点列表/查看工作底稿",
                 component: ManuscriptEdit,
+                meta: { needAuth: '扦样库点列表' },
             },
             {
                 path: "sampling/libraryList/samplingList/sampleShowList/safetyReportCreate",
                 name: "扦样流程/扦样库点列表/扦样登记列表/被查库点列表/新建监督检查报告",
                 component: SafetyReportCreate,
+                meta: { needAuth: '扦样库点列表' },
             },
             {
                 path: "sampling/libraryList/samplingList/sampleShowList/safetyReportEdit",
                 name: "扦样流程/扦样库点列表/扦样登记列表/被查库点列表/查看监督检查报告",
                 component: SafetyReportEdit,
+                meta: { needAuth: '扦样库点列表' },
             },
             {
                 path: "sampling/PLibraryList",
@@ -280,36 +293,38 @@ const routes = [{
                 path: "sampleManagement/sampleIn/createSampleInNum",
                 name: "样品管理/样品储存列表/创建检验编号",
                 component: CreateSampleInNum,
+                meta: { needAuth: '样品储存列表' },
             },
             {
                 path: "sampleManagement/sampleIn/sampleInEdit",
                 name: "样品管理/样品储存列表/查看样品",
                 component: SampleInEdit,
+                meta: { needAuth: '样品储存列表' },
             },
 
             {
                 path: "sampleManagement/temporaryRegistration",
                 name: "样品管理/送样检验登记表",
                 component: TemporaryRegistration,
-                //          meta: { needAuth: '送样检验登记表' },
+                meta: { needAuth: '送样检验登记表' },
             },
             {
                 path: "sampleManagement/temporaryRegistration/temporaryRegistrationCreate",
                 name: "样品管理/送样检验登记表/新建送样检验登记表",
                 component: TemporaryRegistrationCreate,
-                //          meta: { needAuth: '送样检验登记表' },
+                meta: { needAuth: '送样检验登记表' },
             },
             {
                 path: "sampleManagement/temporaryRegistration/temporaryRegistrationCreate/temporarySampleSelect",
                 name: "样品管理/送样检验登记表/新建送样检验登记表/添加送样样品信息",
                 component: TemporarySampleSelect,
-                //          meta: { needAuth: '送样检验登记表' },
+                meta: { needAuth: '送样检验登记表' },
             },
             {
                 path: "sampleManagement/temporaryRegistration/temporaryRegistrationView",
                 name: "样品管理/送样检验登记表/查看送样检验登记表",
                 component: TemporaryRegistrationView,
-                //          meta: { needAuth: '送样检验登记表' },
+                meta: { needAuth: '送样检验登记表' },
             },
             //        {
             //          path:"sampleManagement/sampleIn/sampleInCreate",
@@ -338,14 +353,14 @@ const routes = [{
                 path: "sampleManagement/sampleRegistration",
                 name: "样品管理/样品登记薄",
                 component: sampleRegistration,
-                //          meta: { needAuth: '样品登记薄' },
+                meta: { needAuth: '样品登记薄' },
             },
             {
                 path: "sampleManagement/sampleRegistration/registrationSelect",
                 name: "样品管理/样品登记薄制作/检验样品",
                 component: registrationSelect,
                 //          meta: { needAuth: '样品储存列表' },
-            },
+            },//没用
 
             {
                 path: "sampleManagement/handover",
@@ -357,36 +372,43 @@ const routes = [{
                 path: "sampleManagement/handover/handoverListCreate",
                 name: "样品管理/样品领取交接单/新建样品领取交接单",
                 component: HandoverListCreate,
+                meta: { needAuth: '样品领取交接单' },
             },
             {
                 path: "sampleManagement/handover/handoverListCreate/handoverListCreateSelect",
                 name: "样品管理/样品领取交接单/新建样品领取交接单/选择样品编号",
                 component: HandoverListCreateSelect,
+                meta: { needAuth: '样品领取交接单' },
             },
             {
                 path: "sampleManagement/handover/handoverListCreate/handoverListPrint",
                 name: "样品管理/样品领取交接单/新建样品领取交接单/打印样品领取交接单",
                 component: HandoverListView,
+                meta: { needAuth: '样品领取交接单' },
             },
             {
                 path: "sampleManagement/handover/handoverListView",
                 name: "样品管理/样品领取交接单/查看样品领取交接单",
                 component: HandoverListView,
+                meta: { needAuth: '样品领取交接单' },
             },
             {
                 path: "sampleManagement/handover/handoverListEdit/handoverListPrint",
                 name: "样品管理/样品领取交接单/编辑样品领取交接单/打印样品领取交接单",
                 component: HandoverListView,
+                meta: { needAuth: '样品领取交接单' },
             },
             {
                 path: "sampleManagement/handover/handoverListEdit",
                 name: "样品管理/样品领取交接单/编辑样品领取交接单",
                 component: HandoverListEdit,
+                meta: { needAuth: '样品领取交接单' },
             },
             {
                 path: "sampleManagement/handover/handoverListEdit/handoverListEditSelect",
                 name: "样品管理/样品领取交接单/编辑样品领取交接单/选择样品编号",
                 component: HandoverListEditSelect,
+                meta: { needAuth: '样品领取交接单' },
             },
 //          {
 ////              path: "sampleManagement/handoverReturn",
@@ -404,22 +426,25 @@ const routes = [{
                 path: "sampleManagement/returnSamples",
                 name: "样品管理/样品归还",
                 component: returnSamples,
-//              meta: { needAuth: '样品归还' },
+                meta: { needAuth: '样品归还' },
             },
             {
                 path: "sampleManagement/returnSamples/returnSamplesList",
                 name: "样品管理/样品归还/样品归还单",
                 component: returnSamplesList,
+                meta: { needAuth: '样品归还' },
             },
             {
                 path: "sampleManagement/returnSamples/returnSamplesListAdd",
                 name: "样品管理/样品归还/新建归还单",
                 component: returnSamplesListAdd,
+                meta: { needAuth: '样品归还' },
             },
             {
                 path: "sampleManagement/returnSamples/returnSamplesListAdd/returnSamplesListAddSample",
                 name: "样品管理/样品归还/新建归还单/添加检验编号",
                 component: returnSamplesListAddSample,
+                meta: { needAuth: '样品归还' },
             },
             //         样品检测
             {
@@ -431,21 +456,26 @@ const routes = [{
             {
                 path: "sampleDetection/packingTaskList",
                 //          name:"样品检测/分装任务列表",
-                name: "样品检测/任务列表",
+//              name: "样品检测/任务列表",
+                name: "样品管理/任务列表",
                 component: PackingTaskList,
-                meta: { needAuth: '分装任务列表' },
+                meta: { needAuth: '任务列表' },
             },
             {
                 path: "sampleDetection/packingTaskList/packingList",
                 //          name:"样品检测/分装任务列表/分装小样管理",
-                name: "样品检测/任务列表/任务样品管理",
+//              name: "样品检测/任务列表/任务样品管理",
+                name: "样品管理/任务列表/任务样品管理",
                 component: PackingList,
+                meta: { needAuth: '任务列表' },
             },
             {
                 path: "sampleDetection/packingTaskList/packingList/packingSelect",
                 //          name:"样品检测/分装任务列表/分装小样管理",
-                name: "样品检测/任务列表/任务样品管理/添加检验样品",
+//              name: "样品检测/任务列表/任务样品管理/添加检验样品",
+                name: "样品管理/任务列表/任务样品管理/添加检验样品",
                 component: PackingSelect,
+                meta: { needAuth: '任务列表' },
             },
 //          {
 //              path: "sampleDetection/packingTaskList/packingList/packingView",
@@ -457,6 +487,7 @@ const routes = [{
                 //          name:"样品检测/分装任务列表/分装小样管理",
                 name: "样品检测/分装小样管理",
                 component: PackingBarcodeList,
+                meta: { needAuth: '分装小样管理' },
             },
 //              path: "sampleDetection/packingBarcodeList/packingPrint",
             
@@ -464,6 +495,7 @@ const routes = [{
                 path: "sampleDetection/packingBarcodeList/packingPrint",
 //              name: "样品检测/分装任务列表/分装小样管理/打印条码",
                 name: "样品检测/分装小样管理/打印条码",
+                meta: { needAuth: '分装小样管理' },
                 component: PackingPrint,
             },
 
@@ -471,23 +503,25 @@ const routes = [{
                 path: "sampleDetection/confirmationList",
                 name: "样品检测/样品确认单列表",
                 component: confirmationList,
-                //          meta: { needAuth: '样品确认单列表' },
+                meta: { needAuth: '样品确认单列表' },
             },
             {
                 path: "sampleDetection/confirmationList/confirmationdetails",
                 name: "样品检测/样品确认单列表/样品确认单详情页",
                 component: confirmationsdetails,
-                // meta:{needAuth:'样品确认单详情页'}
+                meta: { needAuth: '样品确认单列表' },
             },
             {
                 path: "sampleDetection/confirmationList/comfirmationentry",
                 name: "样品检测/样品确认单列表/录入样品检测数据",
                 component: comfirmationentry,
+                meta: { needAuth: '样品确认单列表' },
             },
             {
                 path: "sampleDetection/confirmationList/comfirmationentry/addsample",
                 name: "样品检测/样品确认单列表/录入样品检测数据/添加检验编号",
                 component: addsample,
+                meta: { needAuth: '样品确认单列表' },
             },
             {
                 path: "sampleDetection/checkList",
@@ -499,16 +533,19 @@ const routes = [{
                 path: "sampleDetection/checkList/checkEdit",
                 name: "样品检测/样品检验单/编辑样品检验单",
                 component: CheckEdit,
+                meta: { needAuth: '样品检测单' },
             },
             {
                 path: "sampleDetection/checkList/checkView",
                 name: "样品检测/样品检验单/查看样品检验单",
                 component: CheckView,
+                meta: { needAuth: '样品检测单' },
             },
             {
                 path: "sampleDetection/checkList/checkCreate",
                 name: "样品检测/样品检验单/新建样品检验单",
                 component: CheckCreate,
+                meta: { needAuth: '样品检测单' },
             },
             //        样品检验报告TestReportManagement
             {
@@ -527,29 +564,32 @@ const routes = [{
                 path: "TestReportManagement/TestReportMaker/SampleSelect",
                 name: "检测报表管理/样品检测报表制作/选取样品",
                 component: SampleSelect,
+                meta: { needAuth: '样品检测报表制作' },
             },
             {
                 path: "TestReportManagement/TestReportMaker/TestReport",
                 name: "检测报表管理/样品检测报表制作/样品检测报表详情",
                 component: TestReport,
+                meta: { needAuth: '样品检测报表制作' },
             },
             {
                 path: "TestReportManagement/Archive",
                 name: "检测报表管理/中央事权粮检查（验）档案",
                 component: Archive,
-//              meta: { needAuth: '检验报告制作' },
+                meta: { needAuth: '中央事权粮检查档案' },
             },
             
             {
                 path: "TestReportManagement/TestReportFindSample",
                 name: "检测报表管理/检验报告制作",
                 component: TestReportFindSample,
-//              meta: { needAuth: '检验报告制作' },
+                meta: { needAuth: '检验报告制作' },
             },
             {
                 path: "TestReportManagement/TestReportFindSample/GenerateReport",
                 name: "检测报表管理/检验报告制作/生成检验报告",
                 component: GenerateReport,
+                meta: { needAuth: '检验报告制作' },
             },
             
             {
@@ -562,6 +602,7 @@ const routes = [{
                 path: "TestReportManagement/SuperviseList/SuperviseShow",
                 name: "检测报表管理/监督检查报告/监督检查详情",
                 component: SuperviseShow,
+                meta: { needAuth: '监督检查报告' },
             },
             {
                 path: "TestReportManagement/QualityAcceptance",
@@ -587,16 +628,19 @@ const routes = [{
                 path: "AuthorityManagement/RoleList/RoleEdit",
                 name: "权限管理/角色管理/编辑角色",
                 component: RoleEdit,
+                meta: { needAuth: '角色管理' },
             },
             {
                 path: "AuthorityManagement/RoleList/RoleAdd",
                 name: "权限管理/角色管理/新建角色",
                 component: RoleAdd,
+                meta: { needAuth: '角色管理' },
             },
             {
                 path: "AuthorityManagement/RoleList/RoleAut",
                 name: "权限管理/角色管理/角色授权",
                 component: RoleAut,
+                meta: { needAuth: '角色管理' },
             },
             {
                 path: "AuthorityManagement/UserList",
@@ -608,16 +652,19 @@ const routes = [{
                 path: "AuthorityManagement/UserList/UserEdit",
                 name: "权限管理/用户管理/编辑用户",
                 component: UserEdit,
+                meta: { needAuth: '用户管理' },
             },
             {
                 path: "AuthorityManagement/UserList/UserAdd",
                 name: "权限管理/用户管理/新建用户",
                 component: UserAdd,
+                meta: { needAuth: '用户管理' },
             },
             {
                 path: "AuthorityManagement/UserList/UserAut",
                 name: "权限管理/用户管理/用户授权",
                 component: UserAut,
+                meta: { needAuth: '用户管理' },
             },
             {
                 path: "AuthorityManagement/ResourcesList",
@@ -629,11 +676,13 @@ const routes = [{
                 path: "AuthorityManagement/ResourcesList/ResourcesEdit",
                 name: "权限管理/资源管理/编辑资源",
                 component: ResourcesEdit,
+                meta: { needAuth: '资源管理' },
             },
             {
                 path: "AuthorityManagement/ResourcesList/ResourcesAdd",
                 name: "权限管理/资源管理/新建资源",
                 component: ResourcesAdd,
+                meta: { needAuth: '资源管理' },
             },
             //     		信息管理InformationManagement
             {
@@ -664,12 +713,12 @@ const routes = [{
                 path: "InformationManagement/SampleRoomAdd",
                 name: "信息管理/添加样品室",
                 component: SampleRoomAdd,
-                //          meta: { needAuth: '添加样品室' },
+                meta: { needAuth: '添加样品室' },
             },
             {
                 path: "InformationManagement/ContainerAdd",
                 name: "信息管理/添加柜子货架",
-                //          meta: { needAuth: '添加柜子货架' },
+                meta: { needAuth: '添加柜子货架' },
                 component: ContainerAdd,
             },
             //        {

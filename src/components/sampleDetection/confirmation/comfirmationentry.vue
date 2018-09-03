@@ -846,6 +846,9 @@ export default {
     		}
     	},
     	submit(){
+    		if(!this.$_ault_alert('testItem:save')){
+				return
+			}
     		if(!this.tabledatas.length){
 				this.$alert('请添加检验编号','提示信息',{type: 'warning'});
 				return
@@ -906,7 +909,9 @@ export default {
     	},
 //  	读取导入数据的方法，字段乱七八糟的好恶心，我先去吐会儿。。。
     	readdata(response,file,fileList){
-
+			if(!this.$_ault_alert('import:importExcelSF')){
+				return
+			}
     		if(!this.datamap1){
     			return
     		}
@@ -930,6 +935,9 @@ export default {
     		this.tabledatas2=data
     	},
     	submitimport(){
+    		if(!this.$_ault_alert('testItem:save')){
+				return
+			}
     		if(!this.tabledatas2.length){
 				this.$alert('请先导入模板数据','提示信息',{type: 'warning'});
 				return

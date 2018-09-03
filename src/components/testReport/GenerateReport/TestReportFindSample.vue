@@ -110,6 +110,9 @@ export default {
 		},
 		//	获取搜索数据
 		searchingfor(searching){
+			if(!this.$_ault_alert('sample:findSampleReport')){
+				return
+			}			
 //			console.log(searching)
 			
 			searching=searching.startsWith('监')?searching.slice(1):searching;

@@ -514,6 +514,9 @@ export default {
 			this.modalVisible = false;
 		},
 		hoverReturn(){
+			if(!this.$_ault_alert('returnSingle:guihuan')){
+				return
+			}
       this.guihuanadd();
 //			if(!this.formdatas.items.length){
 //				this.$alert('请添加检验编号','提示信息',{type: 'warning'});

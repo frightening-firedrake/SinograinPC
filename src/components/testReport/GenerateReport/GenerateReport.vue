@@ -171,13 +171,10 @@ export default {
 				console.log(error);
 			}.bind(this));
 		},
-		
-		
-		
 		exportExcel(sampleNum){
-//			if(!this.$_ault_alert('register:export')){
-//				return
-//			}
+			if(!this.$_ault_alert('export:exportWordXM')){
+				return
+			}
 			var loadiframe=document.getElementById('fordownload');
 			if(this.$route.query.sort=='玉米'){				
 				loadiframe.src=this.exportExcelURLYM+'?sampleNum='+sampleNum+'&sessionid='+this.Token;

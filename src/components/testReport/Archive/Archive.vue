@@ -249,9 +249,9 @@ export default {
 //	导出事件
 	exportExcel(){
 //		做个拦截筛选结果为空时不执行
-//		if(!this.$_ault_alert('safety:export')){
-//			return
-//		}
+		if(!this.$_ault_alert('ExportJDJCDA:ExportjiandujianchaXM')){
+			return
+		}
 		if(!this.datalist.length){
 			this.$notify.error({
 	          	title: '错误提示',

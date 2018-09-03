@@ -134,9 +134,9 @@ export default {
 		},
 		//	录入样品检验按钮
 		addbtn() {
-//			if(!this.$_ault_alert('handover:save')){
-//				return
-//			}
+			if(!this.$_ault_alert('testItem:save')){
+				return
+			}
 //			this.createlibitem(1);//没后台时用的
 			
 			this.modalVisible=true;

@@ -133,9 +133,9 @@ export default {
 		},
 		//	新建样品归还单
 		addbtn() {
-//			if(!this.$_ault_alert('handover:save')){
-//				return
-//			}
+			if(!this.$_ault_alert('returnSingle:save')){
+				return
+			}
 			this.$router.push({ path: '/index/sampleManagement/returnSamples/returnSamplesListAdd' })
 		},
 		//	填入新建数据

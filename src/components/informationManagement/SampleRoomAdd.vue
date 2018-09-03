@@ -137,7 +137,9 @@ export default {
 		},
 		//	填入新建数据
 		createlibitem(data) {
-
+			if(!this.$_ault_alert('warehouse:save')){
+				return
+			}
 //			var params = {
 //				id: this.informations.length,
 //				libraryName: data.unit

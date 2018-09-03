@@ -64,6 +64,9 @@ export default {
 		this.$root.eventHub.$off("returnPerson")
 		//	监听列表删除事件
 		this.$root.eventHub.$on('delelistitem', function(rowid, list) {
+			if(!this.$_ault_alert('handover:remove')){
+				return
+			}
 			this.$confirm('此操作将永久删除该交接单信息, 是否继续?', '提示', {
 		     	confirmButtonText: '确定',
 		      	cancelButtonText: '取消',
