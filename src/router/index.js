@@ -137,7 +137,8 @@ const routes = [{
                 path: "grainDepot/sampleRegListlc/createSampleReglc",
                 name: "粮库管理/扦样登记列表/新建扦样登记表",
                 component: CreateSampleReglc,
-                meta: { needAuth: '新建扦样登记表' },
+//              meta: { needAuth: '新建扦样登记表' },
+                meta: { needAuth: '扦样登记列表' },
             },
             //        {
             //          path:"grainDepot/createSampleReglc/sampleReglc",
