@@ -488,7 +488,7 @@ export default {
 		}.bind(this));
   	},
   	savedataS(){
-		if(!this.$_ault_alert('sample:saveAll')){
+		if(!this.$_ault_alert('sample:temporarySaveAll')){
 			return
 		}
 		if(!this.listHeader.tableName) {
