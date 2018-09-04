@@ -1,5 +1,5 @@
 <template>
-	<el-container id="father" class="Sinograinrelative" style="min-height: 100%;">
+	<el-container id="father" class="Sinograinrelative" style="min-height: 100%;" :class="{ overflow: overflow }">
 		<el-header>
 			<Sinograin-header></Sinograin-header>
 		</el-header>
@@ -44,6 +44,21 @@
 		computed:{
 
 		},
+		//防止首页变形
+		beforeRouteUpdate (to, from, next) {
+	    	console.log(to.name)
+	    	if(to.name=='首页'){
+	    		this.overflow=true
+	    	}else{
+	    		this.overflow=false
+	    	}
+		    next()
+		},
+		data(){
+			return {
+				overflow:false,
+			}
+		}
 	}
 </script>
 
@@ -51,6 +66,10 @@
 
 .Sinograinrelative{
 	position:relative;
+}
+.Sinograinrelative.overflow{
+	max-height:100%;
+	overflow: hidden;
 }
 .router-transition-enter-active {
   	/*transition: all 1.5s ease;*/
