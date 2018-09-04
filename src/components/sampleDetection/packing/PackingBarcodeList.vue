@@ -3,7 +3,7 @@
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
       <!--alert-->
-      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
+      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--表格上的时间选框以及 创建-->
       <list-header :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" v-on:createSampling="createSampling" v-on:createlib="createlib" v-on:scanCode="scanCode" ></list-header>
       <!--表格-->
@@ -364,7 +364,7 @@ export default {
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：此页面只展示本库信息!',
+        title: '温馨提示：扫描检验编号可查看该样品检验项目并进行打印小样条码操作!',
         type: 'info'
       }],
 //    表格数据

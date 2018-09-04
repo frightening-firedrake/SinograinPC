@@ -494,7 +494,7 @@ const routes = [{
                 path: "sampleDetection/checkList",
                 name: "样品检测/样品检验单",
                 component: CheckList,
-                meta: { needAuth: '样品检测单' },
+//              meta: { needAuth: '样品检测单' },
             },
             {
                 path: "sampleDetection/checkList/checkEdit",

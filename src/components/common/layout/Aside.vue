@@ -309,22 +309,22 @@ export default {
 					pid: 9,
 					lid: 32
 				},
-				{
-					icon: 'icon-jiance',
-					title: '样品确认单列表',
-					linkto: '/index/sampleDetection/confirmationList',
-					level: 2,
-					pid: 9,
-					lid: 29
-				},	
 //				{
-//					icon: 'icon-jianyandan',
-//					title: '样品检验单',
-//					linkto: '/index/sampleDetection/checkList',
+//					icon: 'icon-jiance',
+//					title: '样品确认单列表',
+//					linkto: '/index/sampleDetection/confirmationList',
 //					level: 2,
 //					pid: 9,
-//					lid: 11
-//				},				
+//					lid: 29
+//				},	
+				{
+					icon: 'icon-jianyandan',
+					title: '样品检验单',
+					linkto: '/index/sampleDetection/checkList',
+					level: 2,
+					pid: 9,
+					lid: 11
+				},				
 				{
 					icon: 'icon-baobiaoguanli',
 					title: '检测报表管理',
@@ -352,7 +352,7 @@ export default {
 				},
 				{
 					icon: 'icon-baogao1',
-					title: '检测报告制作',
+					title: '检验报告制作',
 					linkto: '/index/TestReportManagement/TestReportFindSample',
 					level: 2,
 					pid: 15,
