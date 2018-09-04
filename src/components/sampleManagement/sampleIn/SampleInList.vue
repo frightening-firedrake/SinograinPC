@@ -10,7 +10,7 @@
       <div class="clear"></div>
       <p class="totalsample">
       	<span class="total">已入库样品总数:
-        	<b>{{page.total}}</b>
+        	<b>{{sampleInTotal}}</b>
         </span>
       </p>
       <div class="clear"></div>
@@ -367,6 +367,9 @@ export default {
 		  	this.tabledatas=response.data.rows;
 	  		this.page.total=response.data.total;
 	  		this.page.currentPage=page;
+	  		if(!this.sampleInTotal){
+	  			this.sampleInTotal=response.data.total
+	  		}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -615,6 +618,7 @@ export default {
 	  searchURL:this.apiRoot + '/grain/sample/data',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
+      sampleInTotal:0,
       checkedId:[],
 	  dataBySampleNo: {},
 	  depotList:[],

@@ -8,7 +8,7 @@
       <list-header class="noborder" :listHeader="listHeader" v-on:dateChange="dateChange" v-on:statusChange="statusChange" @statusChange2="statusChange2" ></list-header>
       	
       <!--表单-->
-      <sample-registert-maker class="registertMaker" :total="page.total" :tabledata="tabledatas" :items="items" :actions="actions" :loading="loading" :formdatas="formdatas" @exportExcel='exportExcel' @addRow='addRow' @delRow='delRow' @currentRow='currentRowFun'></sample-registert-maker> 
+      <sample-registert-maker class="registertMaker" :total="sampleInTotal" :tabledata="tabledatas" :items="items" :actions="actions" :loading="loading" :formdatas="formdatas" @exportExcel='exportExcel' @addRow='addRow' @delRow='delRow' @currentRow='currentRowFun'></sample-registert-maker> 
       <sinograin-pagination class="noborder" :page="page" v-on:paginationEvent="paginationEvent" v-on:getCurrentPage="getCurrentPage"></sinograin-pagination>
 	  
     </div>
@@ -130,6 +130,9 @@ export default {
 //		  	this.checkedList=response.data.rows;
 	  		this.page.currentPage=page;
 	  		this.page.total=response.data.total;
+	  		if(!this.sampleInTotal){
+	  			this.sampleInTotal=response.data.total
+	  		}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
@@ -276,6 +279,7 @@ export default {
       datalistURL:'/liquid/role19/data',
       searchURL:'/liquid/role2/data/search',
       deleteURL:'/liquid/role2/data/delete',
+      sampleInTotal:0,
       storageTimeIn:'',
       checkedId:[],
 	  createlibVisible:false,

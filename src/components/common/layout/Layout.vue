@@ -46,7 +46,7 @@
 		},
 		//防止首页变形
 		beforeRouteUpdate (to, from, next) {
-	    	console.log(to.name)
+//	    	console.log(to.name)
 	    	if(to.name=='首页'){
 	    		this.overflow=true
 	    	}else{
