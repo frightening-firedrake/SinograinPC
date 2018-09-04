@@ -29,6 +29,7 @@
 			</el-form-item>
 			<el-form-item label="选择性质" class="" style="border-top:none;">
 			    <el-select v-model="quality" placeholder="请选择性质">
+			        <el-option label="全部" :value="0"></el-option>
 			        <el-option label="ZC" value="ZC"></el-option>
 			        <el-option label="ZD" value="ZD"></el-option>
 			        <el-option label="LC" value="LC"></el-option>
@@ -147,9 +148,10 @@ export default {
     	checkedListFilter(){
 
 			return this.checkList.filter((item,index)=>{
+				console.log(this.quality)
 //				return (this.isChecked?item.sampleState==this.isChecked:true)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 //				return (item.otherState==-1)&&(item.sampleState!==4)&&(this.isChecked?item.detectionState==this.isChecked:true)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
-				return (item.quality==this.quality)&&(item.sampleState!==4)&&(this.isChecked?item.detectionState==this.isChecked:true)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
+				return (item.sampleState!==4)&&(this.quality?item.quality==this.quality:true)&&(this.isChecked?item.detectionState==this.isChecked:true)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 			})
     	},
 
