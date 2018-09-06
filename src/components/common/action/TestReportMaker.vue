@@ -15,7 +15,7 @@
 
 		<div class="tbwrap">
 			<el-table 
-				class="list"
+				class="list TestReportMaker"
 			  	ref="multipleTable" 
 			  	tooltip-effect="dark" 
 			  	style="width: 100%" 

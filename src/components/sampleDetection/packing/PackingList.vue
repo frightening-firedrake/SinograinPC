@@ -464,7 +464,8 @@ export default {
 			this.fixbtn.loading=false;
 	    	
 	    	if(response.data.success){
-	    		this.$router.push({name:'样品检测/任务列表'})
+//	    		this.$router.push({name:'样品检测/任务列表'})
+	    		this.$router.push({name:'样品管理/任务列表'})
 	    	}
 			
 		}.bind(this)).catch(function (error) {

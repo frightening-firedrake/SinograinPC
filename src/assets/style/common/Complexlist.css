@@ -24,6 +24,10 @@
 	width:100%!important;
 	height:3rem;
 }
+.quality .complex .el-table__empty-block{
+	width:100%!important;
+	height:5rem;
+}
 .el-main{
     /*padding: 0px 0.45rem;*/
     /*background-color:white;*/

@@ -249,7 +249,7 @@ export default {
 //	导出事件
 	exportExcel(){
 //		做个拦截筛选结果为空时不执行
-		if(!this.$_ault_alert('ExportJDJCDA:ExportjiandujianchaXM')){
+		if(!this.$_ault_alert('ExportJDJCDA:ExportJiandujianchaXM')){
 			return
 		}
 		if(!this.datalist.length){
