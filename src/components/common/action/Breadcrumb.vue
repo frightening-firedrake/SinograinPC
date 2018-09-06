@@ -196,6 +196,12 @@ import { mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 		position:relative;
 		overflow: hidden;
 	}
+	.breadcrumbwrap .el-breadcrumb__inner a, .breadcrumbwrap .el-breadcrumb__inner.is-link{
+		font-weight:500;
+	}
+	.breadcrumbwrap .el-breadcrumb__inner a:hover, .breadcrumbwrap .el-breadcrumb__inner.is-link:hover{
+		color:rgb(51,51,51);
+	}
 	.breadcrumbwrap .el-breadcrumb{
 		height:0.77rem;
 		line-height: 0.77rem;

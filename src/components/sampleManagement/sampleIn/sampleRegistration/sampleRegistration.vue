@@ -24,6 +24,9 @@
 	.nomargin{
 		margin:0!important;
 	}
+	/*.registertMaker .storage{
+		width:16em!important;
+	}*/
 </style>
 <script>
 
@@ -338,14 +341,14 @@ export default {
 	        label: "检验编号",
 	        prop:'sampleNum',
 	        status:true,
-	        width:100,
+//	        minWidth:100,
 	        pid:0,
 	      },
 	      {
 	        id: 2,
 	        label: "扦样编号",
 	        prop:'sampleWord',
-	        width:100,
+//	        minWidth:100,
 	        pid:0,
 	      },
 	      {
@@ -365,7 +368,8 @@ export default {
 	        id: 5,
 	        prop:'autograph',
 	        label: "扦样人员",
-	        width:80,
+//	        minWidth:80,
+//			width:100,
 	        pid:4,
 	//      sort:true
 	      },
@@ -374,7 +378,8 @@ export default {
 	        prop:'sampleTime',
 	        label:"扦样时间",
 	        status:true,
-	        width:80,
+//	        minWidth:80,
+//			width:100,
 	        pid:4,
 	//      sort:true,
 	      },
@@ -388,7 +393,8 @@ export default {
 	        id: 8,
 	        prop:'null',
 	        label:"工作人员",
-	        width:80,
+//	        minWidth:80,
+//			width:100,
 	        pid:7,
 	//      sort:true,
 	      },
@@ -396,7 +402,8 @@ export default {
 	        id: 9,
 	        prop:'null',
 	        label:"时间",
-	        width:80,
+//			width:100,
+//	        minWidth:80,
 	        pid:7,
 	//      sort:true,
 	      },
@@ -406,6 +413,8 @@ export default {
 	        label:"存放位置",
 	        pid:0,
 	        minWidth:120,
+	        class:'storage',
+//	        width:140,
 	//      sort:true,
 	      },
 	      {
@@ -413,7 +422,7 @@ export default {
 	        prop:'remark',
 	        label:"备注",
 	        pid:0,
-	        width:80,
+	        minWidth:90,
 	        class:'last',
 	//      sort:true,
 	      },

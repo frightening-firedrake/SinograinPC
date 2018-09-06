@@ -86,9 +86,11 @@
   	width:0.45rem;
   	margin-right:0.1rem;
   	font-size: 0.2rem;
+  	font-size:0.18rem;
   }
   i.firstlevel+span,i.firstlevel+.navbadge>span{
   	font-size: 0.2rem;
+  	font-size:0.18rem;
     /*color: rgb(102,102,102)*/
   }
   i.firstlevel+.navbadge>.el-badge__content.is-fixed{
@@ -109,6 +111,7 @@
   }
   i.firstlevel+span+i,i.firstlevel+.navbadge+i{
   	font-size:0.2rem;
+  	font-size:0.18rem;
   }
   i.secondlevel+span+i,i.secondlevel+.navbadge+i{
   	font-size:0.16rem;

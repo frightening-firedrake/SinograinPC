@@ -45,7 +45,13 @@
 
 		},
 		//防止首页变形
+		beforeRouteEnter(to, from, next) {
+		    next(vm => {
+	    		vm.overflow=true
+	    	})
+		}, 
 		beforeRouteUpdate (to, from, next) {
+//	    	console.log('n')
 //	    	console.log(to.name)
 	    	if(to.name=='首页'){
 	    		this.overflow=true

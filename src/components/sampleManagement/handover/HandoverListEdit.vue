@@ -5,7 +5,7 @@
   	  <!--标题-->
   	  <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>		
       <!--表单-->
-      <handover-list-connect :formdatas="formdatas" @createlib="createlib" @new_sample="new_sample" @sampleIdsDel="sampleIdsDel"></handover-list-connect> 
+      <handover-list-connect :formdatas="formdatas" @createlib="createlib" @new_sample="new_sample"></handover-list-connect> 
 	  <!--新建库典弹框-->
       <sinograin-modal :modal="modal" v-if="modalVisible" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
     </div>
@@ -40,14 +40,17 @@ export default {
   created(){
 //	console.log(this.$route.query)
 //	console.log(this.userName,this.userId)
-//	this.formdatas.form.manager=this.userName;
+	this.formdatas.form.manager=this.userName;
 //  获取列表数据（第一页）
-	if(this.$route.query.id){
-		this.getlistdata(1)
-	}else if(this.$route.params.formdatas){
+	// this.getlistdata(1)
+//	console.log(this.$route.params)
+	
+//	console.log(this.$route.params.formdatas)
+	if(this.$route.params.formdatas){
 		this.formdatas=this.$route.params.formdatas
 	}else{
-		this.$router.push({name:"样品管理/样品领取交接单"})
+
+		this.$router.push({ path: '/index/sampleManagement/handover'})
 	}
   },
   destroy(){
@@ -63,72 +66,46 @@ export default {
 		this.$http({
 		    method: 'post',
 			url: this.datalistURL,
-			transformRequest: [function (data) {
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-  				id:this.$route.query.id
-			}
+//			data: {
+//
+//			}
 	    }).then(function (response) {
-	    	this.formdatas.checkList=response.data.checkeds.split(',').sort();//检测项
-			this.formdatas.form.name=response.data.name;//交接单名字
-			this.formdatas.form.manager=response.data.sampleAdmin;//管理员
-			this.formdatas.form.remarks=response.data.remark;//备注
-			this.formdatas.items=response.data.sampleNums.split(',');//待检测样品
-			this.formdatas.handoverId=response.data.id//保存交接单ID
-			this.sampleIds=response.data.sampleIds//样品id集
-			this.formdatas.sampleIds2=response.data.sampleIds//样品id集2
-//			this.formdatas.form.items=this.checkList.filter((item)=>{
-//				return checkNums.includes(item.sampleNum)
-//			})
-		  	this.loading=false;
+		  	this.formdatas=response.data.formdatas;		  
+//		  	this.tabledatas=response.data.rows;
+//	  		this.page.total=response.data.total;
+		  	
+	  		setTimeout(()=>{			  		
+		  		this.loading=false;
+		  	},1000)
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
 		}.bind(this));
   	},
 //	领取方法
   	handover(){
+  		if(!this.$_ault_alert('handover:save')){
+			return
+		}
 		var params = {};
-		params.checkeds = this.formdatas.checkList.sort().join(',');
+//		params.checkeds = this.formdatas.checkList.sort().join(',');
+		params.checkeds = this.formdatas.checkList.join(',');
 		params.name = this.formdatas.form.name;
+		params.id = this.formdatas.id;
 		params.remark = this.formdatas.form.remarks;
 		params.receiptor =this.receiptor;
-		params.id =this.formdatas.handoverId;
-
+		params.userId = this.userId;
+		params.sampleAdmin = this.formdatas.form.manager;
 		params.sampleNums = []
 		params.sampleIds = [];
-//		通过是否存在id判断数组结构
-		if(this.formdatas.items[0].id){
-			this.formdatas.items.forEach((val)=>{
-				params.sampleNums.push(val.sampleNum)		
-				params.sampleIds.push(val.id.toString())//为了后期数组比较将数字转为字符串
-			})	
-			params.sampleIds.join(',')
-		}else{
-			this.formdatas.items.forEach((val)=>{
-				params.sampleNums.push(val)			
-			})
-			params.sampleIds=this.sampleIds.split(',')
-		}
-		//旧的id集合
-		var oldsampleIds=this.formdatas.sampleIds2.split(',');
-		//新的id集合
-		var newsampleIds=params.sampleIds;
-//		排除比对删除掉的id集合
-		var deleteIds=oldsampleIds.filter((val)=>{
-			return !newsampleIds.includes(val)
+		this.formdatas.items.forEach((val)=>{
+//			params.sampleNums.push(val.sampleNo)
+			params.sampleNums.push(val.sampleNum)
+			params.sampleIds.push(val.id)
 		})
-//		if(deleteIds.length){
-			params.deleteIds=deleteIds
-//		}
-//		params.sampleNums=params.sampleNums.join(',');
-
+		
   		this.loading=false;
+  		this.formdatas.loading=true;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',
@@ -142,10 +119,10 @@ export default {
 				return ret
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data:params,
+			data: params,
 	    }).then(function (response) {
 	    	if(response.data.success){	    		
-	    		this.$router.push({ path: this.viewPath,query:{id:this.formdatas.handoverId} })
+	    		this.$router.push({ path: this.viewPath,query:{id:params.id} })
 	    	}
 		}.bind(this)).catch(function (error) {
 		    console.log(error);
@@ -200,45 +177,14 @@ export default {
     	var path=this.$route.name+'/选择样品编号'
 		this.$router.push({name: path,params: {formdatas:this.formdatas}})
     },
-    //  直接删除检查编号时获取样品id
-    sampleIdsDel(sampleNum){
-    	console.log(sampleNum)
-    	
-    	this.$http({
-		    method: 'post',
-			url: this.getIdURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data:{
-    			sampleNum:sampleNum,				
-			},
-	   }).then(function (response) {	    	
-	    	if(response.data.id){	    		
-				this.sampleIds=this.sampleIds.split(',');
-				this.sampleIds=this.sampleIds.filter((val)=>{
-					return (val-0)!==response.data.id
-				})
-				this.sampleIds=this.sampleIds.join(',')
-	    	}
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));	
-    },
-    
   },
   data() {
     return {
-      handoverURL:this.apiRoot +'/grain/handover/edit',
-      datalistURL:this.apiRoot +'/grain/handover/get',
-      getIdURL:this.apiRoot +'/grain/sample/getBySampleNum',
+//    handoverURL:this.apiRoot +'/grain/handover/save',
+      handoverURL:this.apiRoot +'/grain/handover/editHandover',
+      datalistURL:'/liquid/role11/data',
       searchURL:'/liquid/role2/data/search',
+      deleteURL:'/liquid/role2/data/delete',
       checkedId:[],
 	  createlibVisible:false,
 	  modalVisible: false,
@@ -259,20 +205,20 @@ export default {
 	              label: "领取人",
 	              model: "receiptor",
 	              value:'',
+	              type:'input',
 	          },
 	      ],
 	      submitText: '提交',
 	  },
 	  receiptor:'',
-	  sampleIds:'',//编辑时保存获取到的样品id集合
       formdatas: {
-      	sampleIds2:'',//编辑时保存获取到的样品id集合2
-      	handoverId:'',//编辑时保存获取到的id
   		title:'样品领取交接单',//标题
+  		loading:false,
         form:{            	
         	name:'',//交接单名称
         	manager:this.userName,//管理员名
         	remarks:'',//备注信息
+        	sort:'小麦',//品种
         },
         checkList:[],//检验项目数组
 //      检验样品数组

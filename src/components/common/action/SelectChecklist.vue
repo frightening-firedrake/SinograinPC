@@ -27,7 +27,7 @@
 			        <el-option label="全部" :value="0"></el-option>
 			    </el-select>
 			</el-form-item>
-			<el-form-item label="选择性质" class="" style="border-top:none;">
+			<el-form-item label="选择性质" class="" style="border-top:none;border-left:none;">
 			    <el-select v-model="quality" placeholder="请选择性质">
 			        <el-option label="全部" :value="0"></el-option>
 			        <el-option label="ZC" value="ZC"></el-option>
@@ -118,7 +118,7 @@ export default {
 
 //		       	this.checkedList=this.$route.params.formdatas.items;
 
-
+		
 
     },
     mounted: function() {
@@ -129,10 +129,13 @@ export default {
     	listready(){
     		if(this.checkList.length&&this.$route.params.formdatas){
     			var checkNums=this.$route.params.formdatas.items.map((val)=>{
-    				return val.sampleNo?val.sampleNo:val;
+//  				return val.sampleNo?val.sampleNo:val;
+    				return val.sampleNum?val.sampleNum:val;
     			})
+//  			console.log(checkNums,this.checkList)
     			this.checkedList=this.checkList.filter((item)=>{
-    				return checkNums.includes(item.sampleNo)
+//  				return checkNums.includes(item.sampleNo)
+    				return checkNums.includes(item.sampleNum)
     			})
     		}else{
     			
@@ -148,7 +151,7 @@ export default {
     	checkedListFilter(){
 
 			return this.checkList.filter((item,index)=>{
-				console.log(this.quality)
+//				console.log(this.quality)
 //				return (this.isChecked?item.sampleState==this.isChecked:true)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum.slice(1)-0)&&((item.sampleNum.slice(1)-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 //				return (item.otherState==-1)&&(item.sampleState!==4)&&(this.isChecked?item.detectionState==this.isChecked:true)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
 				return (item.sampleState!==4)&&(this.quality?item.quality==this.quality:true)&&(this.isChecked?item.detectionState==this.isChecked:true)&&(this.remSelect?item.remark.indexOf(this.remSelect)>-1:true)&&((this.sampleNumRange[0]?this.sampleNumRange[0]-0:0)<(item.sampleNum-0)&&((item.sampleNum-0)<(this.sampleNumRange[1]?(this.sampleNumRange[1]-0):100000000000000000)))
@@ -158,7 +161,7 @@ export default {
     },
     methods: {  
 		checkedListChange(val){
-			console.log(val)
+//			console.log(val)
 		},
 		changeIsChecked(val){
 //			console.log(val,this.isChecked)
@@ -255,7 +258,8 @@ export default {
 //      	全部选中按钮
         	checkAll:false,
         	isChecked:1,
-        	quality:'ZC',
+//      	quality:'ZC',
+        	quality:0,
 //      	筛选列表
 //	  	  	restaurants: [{"value": "春季抽查"},{"value": "秋季普查"},{"value": "2017年度轮换验收"},{"value": "2018年度轮换验收"},{"value": "收购巡查"}],
         	

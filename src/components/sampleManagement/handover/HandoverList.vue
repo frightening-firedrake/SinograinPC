@@ -92,9 +92,25 @@ export default {
 
 		}.bind(this));
 		//监听列表点击编辑事件
-		this.$root.eventHub.$on('editlistitem',function(id){
-//			console.log(id)
-			this.$router.push({ path: '/index/sampleManagement/handover/handoverListEdit', query: { id: id } })
+		this.$root.eventHub.$on('editlistitem',function(id,row){
+//			if(!this.$_ault_alert('handover:save')){
+//				return
+//			}
+			var formdatas={};
+				formdatas.id=row.id;
+				formdatas.title='样品领取交接单';
+		  		formdatas.loading=false,
+		        formdatas.form={            	
+		        	name:row.name,//交接单名称
+		        	manager:row.sampleAdmin,//管理员名
+		        	remarks:row.remark,//备注信息
+		        	sort:row.sort,//品种
+		        };
+		        formdatas.checkList=row.checkeds.split(',');//检验项目数组
+		        formdatas.items=row.sampleNums.split(',');//      检验样品数组
+			var path=this.$route.name+'/编辑样品领取交接单'
+			this.$router.push({name: path,params: {formdatas:formdatas}})
+//			this.$router.push({ path: '/index/sampleManagement/handover/handoverListEdit', query: { id: id } })
 		}.bind(this));
 		//	监听列表点击归还事件
 		this.$root.eventHub.$on("returnPerson", function(id) {
@@ -412,8 +428,8 @@ export default {
 				selection: false,
 				number: false,
 				view: false,
-				edit: false,
-				dele: true,
+				edit: true,
+				dele: false,
 				manuscript: false,
 				safetyReport: false,
 				show:true,

@@ -39,7 +39,7 @@
 			      <!--<el-table-column type="index" :index="indexMethod" v-if="actions.number"></el-table-column>-->
 			      <!--循环数据-->
 			   		<template v-for="item in items" v-if="item.pid==0">    
-			    		<el-table-column v-if="!item.status" show-overflow-tooltip :width="item.width?item.width:'auto'" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
+			    		<el-table-column v-if="!item.status" show-overflow-tooltip :width="item.width?item.width:'auto'" :min-width="item.minWidth?item.minWidth:80" :resizable="resizable"	 align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
 				    		
 				    		<template v-for="item1 in items" v-if="item1.pid==item.id">    
 					    		<el-table-column show-overflow-tooltip :width="item1.width?item1.width:'auto'" :min-width="item1.minWidth?item1.minWidth:80" :resizable="resizable"	 align="center" :key="item1.id" :label="item1.label" :sortable="item1.sort" :prop="item1.prop" :class-name="item1.class">

@@ -7,7 +7,7 @@
     <div id="print" >
       <div class="handover_view" style="width:100%;">
         <!--<div class="hand_view_title" style="width:100%;height:0.45rem;text-align:center;line-height:0.45rem;font-size:0.24rem;color:#333333;">
-          <span>山西中储粮粮食质检中心</span>
+          <span>山西中储粮粮油质监中心</span>
         </div>-->
         <div class="hand_view_tab" style="">
           <div class="hand_view_tab_title" style="">
