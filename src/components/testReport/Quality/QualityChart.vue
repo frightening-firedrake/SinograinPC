@@ -37,7 +37,7 @@
             <p>面筋吸水量统计图</p>
             <div id="mianjinxishuiliang" class='chartonly'></div>
         </div>
-        <div class='rongzhong chart' v-show="issample">
+        <div class='rongzhong chart' style="float:left;" v-show="issample">
             <p>脂肪酸值</p>
             <div id="zhifangsuanzhi" class='chartonly'></div>
         </div>
@@ -97,10 +97,11 @@ export default {
         this.rongzhong()
         this.shuifen()
         this.zazhizongliang()
-        this.buwanshanli()
         if (this.chartonly.iskey == "1") {
             this.zhifangsuanzhi()
+            this.buwanshanlizongliang()
         } else {
+        	this.buwanshanli()
             this.yingduzhishu()
             this.mianjinxishuiliang()
         }
@@ -158,7 +159,11 @@ export default {
             this.drawChart(option, "zazhi")
         },
         buwanshanli() {
-            let option = this.foronly(this.chartonly, "buwanshanlizongliang", "不完善粒")
+            let option = this.foronly(this.chartonly, "buwanshanli", "不完善粒")
+            this.drawChart(option, "buwanshanli")
+        },
+        buwanshanlizongliang(){
+        	let option = this.foronly(this.chartonly, "buwanshanlizongliang", "不完善粒")
             this.drawChart(option, "buwanshanli")
         },
         yingduzhishu() {
@@ -192,7 +197,7 @@ export default {
             forchild.forEach((i, v) => {
                 xAxis.push(i["taskName"])
                 if (only == "zazhi" && this.chartonly.iskey == "2") {
-                    data.push(i["buwanshanlizongliang"])
+                    data.push(i["zazhizongliang"])
                     datas.push(i["zazhikuangwuzhi"])
                     legend = ["总量", "其中:矿物质"]
                     color.push(this.ChartColor[(this.index + 1) % this.ChartColor.length])
@@ -203,10 +208,12 @@ export default {
                     color.push(this.ChartColor[(this.index + 1) % this.ChartColor.length])
                 } else {
                     data.push(i[only])
-                    legend.push(tableName)
+//                  legend.push(tableName)
+                    legend = [tableName]
                 }
 
             })
+            console.log(legend)
             if (data.length && datas.length) {
                 optiondata = [{
                     name: legend[0],

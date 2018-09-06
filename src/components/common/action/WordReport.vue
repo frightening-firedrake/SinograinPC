@@ -313,7 +313,7 @@ export default {
 
       		pagedata.sezeqiwei_jianyanjieguo=this.findResult(this.pagedatas.testItems,12);
       		
-      		if(this.findResult(this.findResult(this.pagedatas.testItems,10)>78||this.pagedatas.testItems,11)<60||this.findResult(this.pagedatas.testItems,12)=='基本正常'){
+      		if(this.findResult(this.pagedatas.testItems,10)>78||this.findResult(this.pagedatas.testItems,11)<60||this.findResult(this.pagedatas.testItems,12)=='基本正常'){
       			pagedata.jieguopanding='重度不宜存';      			
       		}else if(this.findResult(this.pagedatas.testItems,10)<=65&&this.findResult(this.pagedatas.testItems,11)>=70){
       			pagedata.jieguopanding='宜存';      			
@@ -360,7 +360,7 @@ export default {
 				var buwanshanlishengmeilidanxiangpingjia=this.findResult(this.pagedatas.testItems,6)=='--'?'--':this.findResult(this.pagedatas.testItems,6)<=2?'达标':'不达标';
 				var sezeqiweidanxiangpingjia=this.findResult(this.pagedatas.testItems,7)=='--'?'--':this.findResult(this.pagedatas.testItems,7);
 				var jieguopanding;
-				if(this.findResult(this.findResult(this.pagedatas.testItems,10)>78||this.pagedatas.testItems,11)<60||this.findResult(this.pagedatas.testItems,12)=='基本正常'){
+				if(this.findResult(this.pagedatas.testItems,10)>78||this.findResult(this.pagedatas.testItems,11)<60||this.findResult(this.pagedatas.testItems,12)=='基本正常'){
 	      			jieguopanding='重度不宜存';      			
 	      		}else if(this.findResult(this.pagedatas.testItems,10)<=65&&this.findResult(this.pagedatas.testItems,11)>=70){
 	      			jieguopanding='宜存';      			

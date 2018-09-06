@@ -42,9 +42,11 @@
         }
     }
     .tableName {
-        /*border-radius: 0.1rem 0.1rem 0 0;*/
+    	margin-top:0.1rem;
+        border-radius: 0.1rem 0.1rem 0 0;
         border-right: solid 1px #ccc;
         border-left: solid 1px #ccc;
+        border-top: solid 1px #ccc;
         height: 0.6rem;
         line-height: 0.6rem;
         color: rgb(0, 0, 0);
@@ -110,7 +112,8 @@
 <script>
 import SinograinBreadcrumb from '@/components/common/action/Breadcrumb.vue';
 import SinograinOptionTitle from "@/components/common/action/OptionTitle";
-import CommonSelect from "@/components/common/action/Select";
+//import CommonSelect from "@/components/common/action/Select";
+import CommonSelect from "@/components/common/action/SelectNew";
 import QualityTab from "@/components/testReport/Quality/QualityTab"
 import TfootButtons from "@/components/common/action/TfootButtons"
 import QualityChart from "@/components/testReport/Quality/QualityChart"
