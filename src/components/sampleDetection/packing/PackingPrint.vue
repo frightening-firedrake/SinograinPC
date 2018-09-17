@@ -114,6 +114,11 @@ export default {
 //		}else if(this.$route.params.sort=='小麦'){
 //			this.checkAllList=["不完善颗粒","杂质","生霉粒","水分","硬度","面筋吸水量","品尝评分","卫生指标","加工品质"];
 //		}
+	}else{
+		if(this.$route.params.sampleState!==5){
+			this.listdatas.buttonText=false
+		}
+		
 	}
 
   },
@@ -179,8 +184,8 @@ export default {
 //		console.log('打印'+checked+'检测条码')
   		this.messageShow=true;
   		this.messages.type="loading";
-//		this.getPrintCodeAll();	
-		this.printBarSuffix(this.Suffix);		
+		this.getPrintCodeAll();	//后台获取条码信息打印用
+//		this.printBarSuffix(this.Suffix);	//前台自主打印用	
   	},
   	getPrintCode(checked){
   		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no'); 		
@@ -229,21 +234,22 @@ export default {
 			}],
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data:{
-//  			checked:checked,				
-    			// sampleNum:this.$route.params.code,
-				id:this.$route.params.id,
-				taskId:this.$route.params.taskId,
-				isPrint:this.isPrint,
-				params:JSON.stringify(params)				
+//  			checked:checked,		
+				checkPoint:0,
+      			sampleNum:this.$route.params.code,
+//				id:this.$route.params.id,
+//				taskId:this.$route.params.taskId,
+//				isPrint:this.isPrint,
+//				params:JSON.stringify(params)				
 			},
 	   }).then(function (response) {
 			if(response.success) {
-				this.isPrint=3;				
+//				this.isPrint=3;				
 			}
 //		   console.log("111111111111111111")
 //		   	console.log(response,this.isPrint)
-//			console.log(response.data)
-			this.printBarAll(response.data);
+			console.log(response.data)
+//			this.printBarAll(response.data);
 //	    	返回打印需要的条码格式待定
 //			假设是图片吧临时的
 //			this.imgsrc=response.data
@@ -324,8 +330,8 @@ export default {
     return {
       datalistURL:this.apiRoot +'/grain/sample/getBySampleNum',
       getPrintCodeURL:this.apiRoot +'/grain/sample/getBySampleNum',
-//    getPrintCodeAllURL:this.apiRoot +'/grain/sample/split',
-      getPrintCodeAllURL:'/huoqudayintiaoma',
+      getPrintCodeAllURL:this.apiRoot +'/grain/sample/split',
+//    getPrintCodeAllURL:'/huoqudayintiaoma',
       searchURL:'/liquid/role2/data/search',
       imgsrc:'static/images/test/code.jpg',
       printBarOver:false,

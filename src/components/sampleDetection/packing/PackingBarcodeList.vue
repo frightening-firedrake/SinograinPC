@@ -174,7 +174,8 @@ export default {
   		this.loading=false;
   		var params={};
 //		params.taskId=this.$route.query.id;
-  		params.sampleState=3;
+//		params.sampleState=3;
+  		params.sampleState=5;
   		// 获取列表数据（第？页）
 		this.$http({
 		    method: 'post',

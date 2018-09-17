@@ -133,6 +133,8 @@ export default {
 		}
 		var loadiframe=document.getElementById('fordownload');
 		loadiframe.src=this.exportExcelURL+'?pId='+pId+'&sessionid='+this.Token;
+//		var url=this.exportExcelURL+'?pId='+pId+'&sessionid='+this.Token;
+//		window.location.assign(url);
 //		window.open(this.exportExcelURL+'?pId='+pId+'&sessionid='+this.Token,"_blank");
 		
 //		console.log(pId)

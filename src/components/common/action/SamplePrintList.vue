@@ -150,7 +150,7 @@ export default {
 		}
 	},
 	created() {
-//		console.log(this.$route.params.code,this.$route.params.checkeds)
+//		console.log(this.$route.params.sampleState)
 	},
 	data(){
 		return {

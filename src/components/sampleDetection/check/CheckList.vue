@@ -242,8 +242,8 @@ export default {
 	},
 //	映射分页触发的事件
   	paginationEvent(actiontype){
-  		if(actiontype=='leading_out'){
-  			console.log('leading_out')
+  		if(actiontype=='btnfree'){
+  			console.log('btnfree')
   		}else if(actiontype=='refresh'){
   			// 获取列表数据（第一页）
 			this.getlistdata(1)			
@@ -367,23 +367,31 @@ export default {
         currentPage: 1,
         show:true,       
         tfootbtns:{
-        	btns:false,//是否添加按钮组
+        	btns:true,//是否添加按钮组
         	leading_out:false,//导出按钮
         	refresh:false,//刷新按钮
-        	delete:false, //删除按钮            	
+        	delete:false, //删除按钮 
+        	btnfree:'导出检验单',//自助系列
         }
       },
 //    弹窗数据
       alerts: [{
-        title: '温馨提示：此页面扫码只能扫码小样条码!',
+        title: '温馨提示：此页面扫码只能扫描小样条码!',
         type: 'info'
       }],
 //    表格数据
       listHeader:{
       	createlib:false,
       	createSampling:false,
-      	status:false,
-      	date:true,
+      	status:true,
+      	date1:true,
+      	statusTitle:'检验单状态:',
+      	date1Title:'检验时间:',
+      	statusitems:[
+      		{label:'全部',text:'全部'},
+      		{label:-1,text:'未通过'},
+      		{label:1,text:'已通过'},
+      	],
       	scanCode:true,
       },
       tabledatas:[],
@@ -405,25 +413,54 @@ export default {
         label:"检验项目",
 		status:true,
       },
-//    {
-//      id: 4,
-//      prop:'printTimes',
-//      label: "打印条码数",
-//
-//    },
-//    {
-//      id: 5,
-//      prop:'printDate',
-//      label:"打印时间",
+      {
+        id: 4,
+        prop:'sort',
+        label: "品种",
+
+      },
+      {
+        id: 5,
+        prop:'printDate',
+        label:"检验单状态",
 //      sort:true,
-//    },
+		status:true,
+      },
+      {
+        id: 6,
+        prop:'printDate',
+        label:"审批结果备注",
+//      sort:true,
+//		status:true,
+      },
+      {
+        id: 7,
+        prop:'printDate',
+        label:"校核员",
+//      sort:true,
+//		status:true,
+      },
+      {
+        id: 8,
+        prop:'printDate',
+        label:"检验员",
+//      sort:true,
+//		status:true,
+      },
+      {
+        id: 8,
+        prop:'printDate',
+        label:"创建时间",
+//      sort:true,
+//		status:true,
+      },
       ],
       actions:{
-      	selection:false,
+      	selection:true,
       	number:false,
       	view:false,
-      	edit:true,
-//    	dele:false,
+//    	edit:true,
+      	dele:true,
 //    	noview:true,
 //    	print:true,
       	show:true,

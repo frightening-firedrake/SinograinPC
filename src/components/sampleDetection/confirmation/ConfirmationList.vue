@@ -354,7 +354,10 @@ export default {
 //				return
 //			}
 			var loadiframe=document.getElementById('fordownload');
+//			var url=this.exportExcelURL+'?sampleId='+id+'&sessionid='+this.Token;
+//			window.location.assign(url);
 			loadiframe.src=this.exportExcelURL+'?sampleId='+id+'&sessionid='+this.Token;
+
 		}
 	},
 	data() {

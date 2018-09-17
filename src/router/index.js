@@ -525,27 +525,27 @@ const routes = [{
             },
             {
                 path: "sampleDetection/checkList",
-                name: "样品检测/样品检验单",
+                name: "样品检测/样品原始检验单",
                 component: CheckList,
-                meta: { needAuth: '样品检测单' },
+//              meta: { needAuth: '样品原始检验单' },
             },
             {
                 path: "sampleDetection/checkList/checkEdit",
-                name: "样品检测/样品检验单/编辑样品检验单",
+                name: "样品检测/样品原始检验单/编辑样品检验单",
                 component: CheckEdit,
-                meta: { needAuth: '样品检测单' },
+//              meta: { needAuth: '样品原始检验单' },
             },
             {
                 path: "sampleDetection/checkList/checkView",
-                name: "样品检测/样品检验单/查看样品检验单",
+                name: "样品检测/样品原始检验单/查看样品检验单",
                 component: CheckView,
-                meta: { needAuth: '样品检测单' },
+//              meta: { needAuth: '样品原始检验单' },
             },
             {
                 path: "sampleDetection/checkList/checkCreate",
-                name: "样品检测/样品检验单/新建样品检验单",
+                name: "样品检测/样品原始检验单/新建样品检验单",
                 component: CheckCreate,
-                meta: { needAuth: '样品检测单' },
+//              meta: { needAuth: '样品原始检验单' },
             },
             //        样品检验报告TestReportManagement
             {
