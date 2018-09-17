@@ -448,7 +448,7 @@ export default {
 //		status:true,
       },
       {
-        id: 8,
+        id: 9,
         prop:'printDate',
         label:"创建时间",
 //      sort:true,
