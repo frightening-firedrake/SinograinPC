@@ -16,11 +16,12 @@ export default {
   data() {
     return {
       breadcrumb: {
-        search: false,
+        search: true,
         searching: ""
       },
       //    表格数据
       listHeader: {
+        addbtn: "导出检验单",
         createlib: false,
         createSampling: false,
         status: false,
