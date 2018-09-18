@@ -61,6 +61,9 @@ import addsample from "@/components/sampleDetection/confirmation/addSample.vue"
 import CheckView from '@/components/sampleDetection/check/CheckListView.vue'
 import CheckEdit from '@/components/sampleDetection/check/CheckListEdit.vue'
 import CheckCreate from '@/components/sampleDetection/check/CheckListCreate.vue'
+import ExamineList from '@/components/sampleDetection/examine/examineList.vue'
+import sampleExamineList from '@/components/sampleDetection/examine/sampleExamineList.vue'
+import examineLisrdetail from '@/components/sampleDetection/examine/examineListdetail.vue'
 import TestReportMaker from '@/components/TestReport/TestReportMaker.vue'
 import SampleSelect from '@/components/TestReport/SampleSelect.vue'
 import TestReport from '@/components/TestReport/TestReport.vue'
@@ -545,6 +548,24 @@ const routes = [{
                 path: "sampleDetection/checkList/checkCreate",
                 name: "样品检测/样品原始检验单/新建样品检验单",
                 component: CheckCreate,
+//              meta: { needAuth: '样品原始检验单' },
+            },
+            {
+                path: "sampleDetection/examineList",
+                name: "样品检测/审批检验单列表",
+                component: ExamineList,
+//              meta: { needAuth: '样品原始检验单' },
+            },
+            {
+                path: "sampleDetection/examineList/sampleexamineList",
+                name: "样品检测/审批检验单列表/样品记录表",
+                component: sampleExamineList,
+//              meta: { needAuth: '样品原始检验单' },
+            },
+            {
+                path: "sampleDetection/examineList/sampleexamineList/examineLisrdetail",
+                name: "样品检测/审批检验单列表/样品记录表/样品记录表详情",
+                component: examineLisrdetail,
 //              meta: { needAuth: '样品原始检验单' },
             },
             //        样品检验报告TestReportManagement
