@@ -265,7 +265,7 @@ export default {
 //	去验证条码有效否
 	checkcode(code){
 		var params={};
-		params.sampleState=3;
+//		params.sampleState=3;
 		params.sampleNum=code;
 		this.$http({
 		    method: 'post',
@@ -326,6 +326,7 @@ export default {
     return {
 //    datalistURL: this.apiRoot +  '/grain/smallSample/data',
       datalistURL: this.apiRoot +  '/grain/sample/data',
+//    checkURL:this.apiRoot +'/grain/sample/data',
       checkURL:this.apiRoot +'/grain/sample/data',
 //    checkURL:'/saomiaofenxiaoyang',
 //    searchURL:this.apiRoot +  '/grain/smallSample/data',

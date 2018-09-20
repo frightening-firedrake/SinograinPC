@@ -58,13 +58,20 @@ export default {
 	Suffix(){
 		var Suffix=[];
 		var arr=[
-				{label:'' ,show:false,Suffix:['小1','小2']},
-				{label:'水分',show:false,Suffix:['水']},
-				{label:'硬度指数',show:false,Suffix:['硬']},
-				{label:'面筋吸水量',show:false,Suffix:['面']},
-				{label:'脂肪酸值',show:false,Suffix:['脂']},
-				{label:'品尝评分值',show:false,Suffix:['品']},
-				{label:'',show:false,Suffix:['卫'],class:'full'},
+//				{label:'' ,show:false,Suffix:['小1','小2']},
+//				{label:'水分',show:false,Suffix:['水']},
+//				{label:'硬度指数',show:false,Suffix:['硬']},
+//				{label:'面筋吸水量',show:false,Suffix:['面']},
+//				{label:'脂肪酸值',show:false,Suffix:['脂']},
+//				{label:'品尝评分值',show:false,Suffix:['品']},
+//				{label:'',show:false,Suffix:['卫'],class:'full'},
+				{label:'' ,show:false,Suffix:['-01小1','-02小2']},
+				{label:'水分',show:false,Suffix:['-03水']},
+				{label:'硬度指数',show:false,Suffix:['-04硬']},
+				{label:'面筋吸水量',show:false,Suffix:['-05面']},
+				{label:'脂肪酸值',show:false,Suffix:['-08脂']},
+				{label:'品尝评分值',show:false,Suffix:['-06品']},
+				{label:'',show:false,Suffix:['-07卫'],class:'full'},
 			];
 			if(this.checkList){
 				this.checkList.forEach((value,index)=>{
@@ -184,8 +191,11 @@ export default {
 //		console.log('打印'+checked+'检测条码')
   		this.messageShow=true;
   		this.messages.type="loading";
-		this.getPrintCodeAll();	//后台获取条码信息打印用
-//		this.printBarSuffix(this.Suffix);	//前台自主打印用	
+  		if(this.$route.params.sampleState!==5){
+			this.getPrintCodeAll();	//后台获取条码信息打印用
+		}else{			
+			this.printBarSuffix(this.Suffix);	//前台自主打印用	
+		}
   	},
   	getPrintCode(checked){
   		var wind = window.open("",'newwindow', 'height=300, width=700, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no'); 		
@@ -243,12 +253,21 @@ export default {
 //				params:JSON.stringify(params)				
 			},
 	   }).then(function (response) {
-			if(response.success) {
-//				this.isPrint=3;				
+	   		if(response.data.length) {
+	   			this.printBarSuffix(this.Suffix);	//前台自主打印用	
+			}else{
+				console.log('分小样失败了哦！！T_T')
 			}
-//		   console.log("111111111111111111")
+	   	
+//			if(response.success) {
+//				this.isPrint=3;				
+//			}
+//			var barcodeAll=response.data.map((value)=>{
+//				return value.smallSampleWord
+//			})
+//		   	console.log("111111111111111111")
 //		   	console.log(response,this.isPrint)
-			console.log(response.data)
+//			console.log(barcodeAll)
 //			this.printBarAll(response.data);
 //	    	返回打印需要的条码格式待定
 //			假设是图片吧临时的
@@ -266,6 +285,7 @@ export default {
 		};
   	},
   	printBarSuffix(Suffix){
+//		console.log(Suffix)
 		LODOP = getLodop();
 		Suffix.forEach((val)=>{  
 //			ADD_PRINT_BARCODE(Top,Left,Width,Height,BarCodeType,BarCodeValue);

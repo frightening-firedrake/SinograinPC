@@ -125,6 +125,34 @@
 							<span style="color:blue;">未提交审核</span>
 						</template>
 					</template>
+					<template v-if="item.prop=='inspectState'">
+						<template v-if="scope.row[item.prop]==-1">
+							<span style="color:#fc6500;">待审核</span>
+						</template>
+						<template v-if="scope.row[item.prop]==1">
+							<span style="color:#999999;">未通过</span>
+						</template>
+						<template v-if="scope.row[item.prop]==2">
+							<span style="color:#666666;">已通过</span>
+						</template>
+						<template v-if="scope.row[item.prop]==3">
+							<span style="color:blue;">草稿</span>
+						</template>
+					</template>
+					<template v-if="item.prop=='approveRemark'">
+						<template v-if="scope.row.inspectState==-1">
+							<span style="color:#fc6500;">等待审核中</span>
+						</template>
+						<template v-if="scope.row.inspectState==1">
+							<span style="color:#f56c6c;">{{scope.row[item.prop]}}</span>
+						</template>
+						<template v-if="scope.row.inspectState==2">
+							<span style="color:#58b481;">已通过审核</span>
+						</template>
+						<template v-if="scope.row.inspectState==3">
+							<span style="color:blue;">未提交审核</span>
+						</template>
+					</template>
 					<template v-if="item.prop=='pLibraryId'">
 						{{findPLibraryName(scope.row[item.prop])}}
 					</template>
@@ -141,10 +169,36 @@
 						监{{scope.row[item.prop]}}
 					</template>
 					<template v-if="item.prop=='smallSampleNum'">
-						监{{scope.row[item.prop]}}
+						<template v-if="scope.row[item.prop].substr(-1,1)==1">
+							监{{scope.row[item.prop]}}小1
+						</template>
+						<template v-if="scope.row[item.prop].substr(-1,1)==2">
+							监{{scope.row[item.prop]}}小2
+						</template>
+						<template v-if="scope.row[item.prop].substr(-1,1)==3">
+							监{{scope.row[item.prop]}}水
+						</template>
+						<template v-if="scope.row[item.prop].substr(-1,1)==4">
+							监{{scope.row[item.prop]}}硬
+						</template>
+						<template v-if="scope.row[item.prop].substr(-1,1)==5">
+							监{{scope.row[item.prop]}}面
+						</template>
+						<template v-if="scope.row[item.prop].substr(-1,1)==6">
+							监{{scope.row[item.prop]}}品
+						</template>
+						<template v-if="scope.row[item.prop].substr(-1,1)==7">
+							监{{scope.row[item.prop]}}卫
+						</template>
+						<template v-if="scope.row[item.prop].substr(-1,1)==8">
+							监{{scope.row[item.prop]}}脂
+						</template>
 					</template>
 					<template v-if="item.prop=='checkPoint'">
 						{{findCheckPoint(scope.row)}}
+					</template>
+					<template v-if="item.prop=='smallCheckPoint'">
+						{{findCheckeds(scope.row['checkPoint'],scope.row['sort'])}}
 					</template>
 					<template v-if="item.prop=='libraryFullName'">
 						{{scope.row.pLibraryName}}—{{scope.row.libraryName}}
@@ -257,11 +311,6 @@
 						<template v-if="check(scope.row.checkeds,19)">
 							<span class="colorcheck11">重金属(砷)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=19?',':''}}
 						</template>	
-						
-						
-						
-
-						
 					</p>
 				</template>
 			</el-table-column>
@@ -341,6 +390,11 @@
 				<!--删除操作-->
 				<template v-if="actions.deleCaogao">
 					<button v-if="scope.row.regState==3" class="dele" @click.stop="handleDele(scope.$index, scope.row)">删除</button>
+					<button v-else class="undele" @click.stop="notAllowed()">删除</button>
+				</template>
+				<!--删除检验单-->
+				<template v-if="actions.delecheck">
+					<button v-if="scope.row.inspectState ==3" class="dele" @click.stop="handleDele(scope.$index, scope.row)">删除</button>
 					<button v-else class="undele" @click.stop="notAllowed()">删除</button>
 				</template>
 				<!--是否包含重新申请操作-->
