@@ -10,8 +10,8 @@
         <p>选择品种:</p>
         <div>
           <el-select class="lib1" v-model="selectlib" placeholder="请选择品种" @change="_selectlib">
-            <el-option label="小麦" value="1"></el-option>
-            <el-option label="玉米" value="2"></el-option>
+            <el-option label="小麦" value="小麦"></el-option>
+            <el-option label="玉米" value="玉米"></el-option>
           </el-select>
         </div>
       </div>
@@ -29,7 +29,7 @@ export default {
   components: {
     SinograinList,
     SinograinBreadcrumb,
-    SinograinPagination,
+    SinograinPagination
   },
   created() {
     //  获取列表数据（第一页）
@@ -55,7 +55,7 @@ export default {
         //		console.log(row)
         this.$router.push({
           path: "/index/sampleDetection/examineList/sampleexamineList",
-          query: { title:row }
+          query: { title: row }
         });
       }.bind(this)
     );
@@ -65,7 +65,7 @@ export default {
   },
   data() {
     return {
-      dataUrl: "/grain/summaryCheck/findCheckSum",
+      dataUrl: this.apiRoot + "/grain/summaryCheck/findCheckSum",
       loading: false,
       selectlib: "",
       breadcrumb: {
@@ -109,11 +109,28 @@ export default {
     searchingfor() {},
     getchecked() {},
     emptyCreate() {},
-    _selectlib() {},
-    init() {
+    _selectlib() {
+      this.init(this.selectlib);
+    },
+    init(page) {
       this.$http({
         method: "post",
-        url:this.apiRoot+this.dataUrl,
+        url: this.dataUrl,
+        transformRequest: [
+          function(data) {
+            // 				// Do whatever you want to transform the data
+            let ret = "";
+            for (let it in data) {
+              ret +=
+                encodeURIComponent(it) +
+                "=" +
+                encodeURIComponent(data[it]) +
+                "&";
+            }
+            return ret;
+          }
+        ],
+        data: { sort: page ? page : "" },
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
       })
         .then(
