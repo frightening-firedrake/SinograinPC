@@ -86,7 +86,7 @@ export default {
         {
           id: 1,
           prop: "tablename",
-          label: "表格名称"
+          label: "检验单名称"
           //   status: true
           //      sort:true,
         },
