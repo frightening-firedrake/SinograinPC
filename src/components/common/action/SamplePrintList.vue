@@ -109,13 +109,20 @@ export default {
 		},
 		barcodelist(){
 			var arr=[
-				{label:'' ,show:false,Suffix:['小1','小2']},
-				{label:'水分',show:false,Suffix:['水']},
-				{label:'硬度指数',show:false,Suffix:['硬']},
-				{label:'面筋吸水量',show:false,Suffix:['面']},
-				{label:'脂肪酸值',show:false,Suffix:['脂']},
-				{label:'品尝评分值',show:false,Suffix:['品']},
-				{label:'',show:false,Suffix:['卫'],class:'full'},
+//				{label:'' ,show:false,Suffix:['小1','小2']},
+//				{label:'水分',show:false,Suffix:['水']},
+//				{label:'硬度指数',show:false,Suffix:['硬']},
+//				{label:'面筋吸水量',show:false,Suffix:['面']},
+//				{label:'脂肪酸值',show:false,Suffix:['脂']},
+//				{label:'品尝评分值',show:false,Suffix:['品']},
+//				{label:'',show:false,Suffix:['卫'],class:'full'},
+				{label:'' ,show:false,Suffix:['-01小1','-02小2']},
+				{label:'水分',show:false,Suffix:['-03水']},
+				{label:'硬度指数',show:false,Suffix:['-04硬']},
+				{label:'面筋吸水量',show:false,Suffix:['-05面']},
+				{label:'脂肪酸值',show:false,Suffix:['-08脂']},
+				{label:'品尝评分值',show:false,Suffix:['-06品']},
+				{label:'',show:false,Suffix:['-07卫'],class:'full'},
 			];
 			if(this.checkList){
 				this.checkList.forEach((value,index)=>{

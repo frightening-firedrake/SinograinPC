@@ -114,11 +114,15 @@ export default {
   	...mapActions(['addAction']),
 //	列表头触发的事件
 	dateChange(data){
-		console.log(data);
+//		console.log(data);
+		this.dateStart=date[0];
+		this.dateEnd=date[1];
+		this.getlistdata(1)
 	},
 	statusChange(data){
 //		console.log(data)
 		this.filterStatus=data
+		this.getlistdata(1)
 	},
 	createSampling(){
 //		console.log('createSampling');
@@ -151,42 +155,53 @@ export default {
 //	获取搜索数据
   	searchingfor(searching,page){
   		page?page:1;
-  		this.searchText=searching;
-  		var params = {};
-		params.state=2;
-		params.smallSampleNumLike = searching;
-//		console.log(this.breadcrumb.searching);
-  		// 获取列表数据（第？页）
-		this.$http({
-		    method: 'post',
-			url: this.searchURL,
-			transformRequest: [function (data) {
-				// Do whatever you want to transform the data
-				let ret = ''
-				for (let it in data) {
-				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret
-			}],
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: {
-				page:page,
-				rows:this.page.size,
-			   params:JSON.stringify(params)
-			}
-	    }).then(function (response) {
-		  	this.tabledatas = response.data.rows;
-			this.page.total = response.data.total;
-
-		}.bind(this)).catch(function (error) {
-		    console.log(error);
-		}.bind(this));
+  		this.searchText=searching.indexOf('监')==0?searching.slice(1):searching;
+		this.getlistdata(page)
+//		var params = {};
+//		params.state=2;
+//		params.smallSampleNumLike = searching;
+////		console.log(this.breadcrumb.searching);
+//		// 获取列表数据（第？页）
+//		this.$http({
+//		    method: 'post',
+//			url: this.searchURL,
+//			transformRequest: [function (data) {
+//				// Do whatever you want to transform the data
+//				let ret = ''
+//				for (let it in data) {
+//				ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+//				}
+//				return ret
+//			}],
+//			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+//			data: {
+//				page:page,
+//				rows:this.page.size,
+//			   params:JSON.stringify(params)
+//			}
+//	    }).then(function (response) {
+//		  	this.tabledatas = response.data.rows;
+//			this.page.total = response.data.total;
+//
+//		}.bind(this)).catch(function (error) {
+//		    console.log(error);
+//		}.bind(this));
   	},
 	
 //	获取列表数据方法
   	getlistdata(page){
   		var params={};
-  		params.state=2;
+//		params.state=2;
+		if(this.dateStart){
+			params.dateStart=this.dateStart
+			params.dateEnd=this.dateEnd
+		}
+		if(this.searchText){
+			params.smallSampleNumLike=this.searchText
+		}
+		if(this.filterStatus!=='全部'){
+			params.inspectState=this.filterStatus
+		}
   		this.loading=false;
   		// 获取列表数据（第？页）
 		this.$http({
@@ -267,6 +282,8 @@ export default {
   		if(!code){
   			this.messageShow=false;
   		}else{  			
+			code=code.trim()
+			code=code.substr(0,13)
 			this.messageShow=false;
 			this.checkcode(code);			
 		}
@@ -333,7 +350,9 @@ export default {
   data() {
     return {
       datalistURL: this.apiRoot +  '/grain/smallSample/data',
-      checkURL:this.apiRoot +'/grain/smallSample/getBySmallSampleNum',
+//    checkURL:this.apiRoot +'/grain/smallSample/getBySmallSampleNum',
+      checkURL:this.apiRoot +'/grain/smallSample/findBySmallSampleNum',
+//    checkURL:this.apiRoot +'/grain/smallSample/data',
       searchURL:this.apiRoot +  '/grain/smallSample/data',
       deleteURL:'/liquid/role2/data/delete',
       searchText:'',
@@ -360,6 +379,8 @@ export default {
       },
       loading:true,
       filterStatus:'全部',
+      dateStart:0,//开始时间
+      dateEnd:9999999999999999999999999,//结束时间
 //    分页数据
       page: {
         size: 10,
@@ -384,13 +405,15 @@ export default {
       	createlib:false,
       	createSampling:false,
       	status:true,
-      	date1:true,
+//    	date1:true,
       	statusTitle:'检验单状态:',
-      	date1Title:'检验时间:',
+      	date1Title:'创建时间:',
       	statusitems:[
       		{label:'全部',text:'全部'},
-      		{label:-1,text:'未通过'},
-      		{label:1,text:'已通过'},
+      		{label:-1,text:'待审核'},
+      		{label:1,text:'未通过'},
+      		{label:2,text:'已通过'},
+      		{label:3,text:'草稿'},
       	],
       	scanCode:true,
       },
@@ -406,12 +429,14 @@ export default {
         prop:'smallSampleNum',
         label: "小样编号",
 		status:true,
+        minWidth:90,
       },
       {
         id: 3,
-        prop:'checkPoint',
+        prop:'smallCheckPoint',
         label:"检验项目",
 		status:true,
+        minWidth:90,
       },
       {
         id: 4,
@@ -421,46 +446,47 @@ export default {
       },
       {
         id: 5,
-        prop:'printDate',
+        prop:'inspectState',
         label:"检验单状态",
 //      sort:true,
 		status:true,
       },
       {
         id: 6,
-        prop:'printDate',
+        prop:'approveRemark',
         label:"审批结果备注",
 //      sort:true,
-//		status:true,
+		status:true,
       },
       {
         id: 7,
-        prop:'printDate',
+        prop:'checkMember',
         label:"校核员",
 //      sort:true,
 //		status:true,
       },
       {
         id: 8,
-        prop:'printDate',
+        prop:'inspector',
         label:"检验员",
 //      sort:true,
 //		status:true,
       },
-      {
-        id: 9,
-        prop:'printDate',
-        label:"创建时间",
-//      sort:true,
-//		status:true,
-      },
+//    {
+//      id: 9,
+//      prop:'printDate',
+//      label:"创建时间",
+////      sort:true,
+////		status:true,
+//    },
       ],
       actions:{
       	selection:true,
       	number:false,
       	view:false,
 //    	edit:true,
-      	dele:true,
+      	dele:false,
+      	delecheck:true,
 //    	noview:true,
 //    	print:true,
       	show:true,
