@@ -65,7 +65,7 @@ export default {
   },
   data() {
     return {
-      dataUrl: "/liquid/examine/data",
+      dataUrl: "/grain/summaryCheck/findCheckSum",
       loading: false,
       selectlib: "",
       breadcrumb: {
@@ -85,20 +85,20 @@ export default {
       items: [
         {
           id: 1,
-          prop: "tablename",
+          prop: "checkName",
           label: "检验单名称"
           //   status: true
           //      sort:true,
         },
         {
           id: 2,
-          prop: "sample",
+          prop: "sort",
           label: "品种",
           sort: false
         },
         {
           id: 3,
-          prop: "message",
+          prop: "sum",
           label: "新消息通知",
           sort: false
         }
@@ -113,15 +113,12 @@ export default {
     init() {
       this.$http({
         method: "post",
-        url: this.dataUrl,
+        url:this.apiRoot+this.dataUrl,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
       })
         .then(
           function(response) {
-            response.data.rows.forEach(element => {
-              element.sample = element.sample == 1 ? "小麦" : "玉米";
-            });
-            this.tabledatas = response.data.rows;
+            this.tabledatas = response.data;
             this.loading = false;
           }.bind(this)
         )
