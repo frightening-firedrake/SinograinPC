@@ -41,7 +41,7 @@ export default {
           delete: false //删除按钮
         }
       },
-      dataUrl: "/liquid/sampleexamine/data",
+      dataUrl: this.apiRoot + "/grain/summaryCheck/findCheckAndSample",
       loading: false,
       breadcrumb: {
         search: false,
@@ -69,26 +69,26 @@ export default {
       items: [
         {
           id: 1,
-          prop: "sampleNum",
+          prop: "smallSampleNum",
           label: "样品编号"
           //   status: true
           //      sort:true,
         },
         {
           id: 2,
-          prop: "sample",
+          prop: "sort",
           label: "品种",
           sort: false
         },
         {
           id: 3,
-          prop: "people",
+          prop: "inspector",
           label: "检测人员",
           sort: false
         },
         {
           id: 4,
-          prop: "state",
+          prop: "checkOrderApprovalStatus", //-1待审核1已通过2未通过
           label: "状态",
           sort: false
         },
@@ -102,6 +102,7 @@ export default {
     };
   },
   mounted() {
+    console.log(this.$route.query);
     this.init();
   },
   created() {
@@ -124,24 +125,51 @@ export default {
     );
   },
   methods: {
-    paginationEvent(){},
-    getCurrentPage(){},
+    paginationEvent() {},
+    getCurrentPage() {},
     getchecked() {},
     emptyCreate() {},
     init() {
       this.$http({
         method: "post",
         url: this.dataUrl,
+        transformRequest: [
+          function(data) {
+            // 				// Do whatever you want to transform the data
+            let ret = "";
+            for (let it in data) {
+              ret +=
+                encodeURIComponent(it) +
+                "=" +
+                encodeURIComponent(data[it]) +
+                "&";
+            }
+            return ret;
+          }
+        ],
+        data: {
+          checkName: this.$route.query.title.checkName,
+          sort: this.$route.query.title.sort
+        },
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
       })
         .then(
           function(response) {
-            response.data.rows.forEach(element => {
-              element.sample = element.sample == 1 ? "小麦" : "玉米";
-              element.state = element.state == 1 ? "未完成" : "完成";
+            response.data.forEach((v, i) => {
+              switch (v.checkOrderApprovalStatus) {
+                case "-1":
+                  v.checkOrderApprovalStatus = "待审核";
+                  break;
+                case "1":
+                  v.checkOrderApprovalStatus = "已通过";
+                  break;
+                case "2":
+                  v.checkOrderApprovalStatus = "未通过";
+                  break;
+              }
             });
-
-            this.tabledatas = response.data.rows;
+            console.log(this.tabledatas)
+            this.tabledatas = response.data;
             this.loading = false;
           }.bind(this)
         )
