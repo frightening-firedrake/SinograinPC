@@ -1,5 +1,5 @@
 <template>
-    <form class="ui-body-bg">
+	<form class="ui-body-bg">
 		<img class="code" :src="codeUrl" alt="" />
 		<div class="zw-page" style="margin-left: 113.4px; margin-right: 113.4px; column-count: 1; column-gap: 0px;">
 			<div class="zw-header">
@@ -29,7 +29,7 @@
 							</td>
 							<td class="zw-td" style="border-width: 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{formdatas.riqi|data}}</p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{formdatas.zf_riqi|data}}</p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -39,7 +39,7 @@
 							</td>
 							<td class="zw-td" style="border-width: 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" v-model="formdatas.shiwen" type="text"  v-if='!readonly'/>{{readonly?formdatas.shiwen:''}}</p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" v-model="formdatas.zf_shiwen" type="text"  v-if='!readonly'/>{{readonly?formdatas.zf_shiwen:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -50,7 +50,7 @@
 							</td>
 							<td class="zw-td" style="border-width: 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check"  v-model="formdatas.xiangduishidu" type="text"  v-if='!readonly'/>{{readonly?formdatas.xiangduishidu:''}}</p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check"  v-model="formdatas.zf_xiangduishidu" type="text"  v-if='!readonly'/>{{readonly?formdatas.zf_xiangduishidu:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -119,7 +119,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="6" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 41.6px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: left; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">&nbsp;<input type="radio" class="check_checkbox" :disabled='readonly'  value="GB/T20569-2006附录A" v-model="formdatas.jiancefangfa" />GB/T20569-2006附录A &nbsp;&nbsp;<input type="radio" value="GB/T15684-" class="check_checkbox" :disabled='readonly'  v-model="formdatas.jiancefangfa" />GB/T15684- &nbsp;&nbsp;<input type="radio" class="check_checkbox" :disabled='readonly'  value="GB/T5510-" v-model="formdatas.jiancefangfa" />GB/T5510-</span></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: left; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">&nbsp;<input type="radio" class="check_checkbox" :disabled='readonly'  value="GB/T20569-2006附录A" v-model="formdatas.zf_jiancefangfa" />GB/T20569-2006附录A &nbsp;&nbsp;<input type="radio" value="GB/T15684-" class="check_checkbox" :disabled='readonly'  v-model="formdatas.zf_jiancefangfa" />GB/T15684- &nbsp;&nbsp;<input type="radio" class="check_checkbox" :disabled='readonly'  value="GB/T5510-" v-model="formdatas.zf_jiancefangfa" />GB/T5510-</span></p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -161,12 +161,12 @@
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input type="checkbox" class="check_checkbox" :disabled='readonly'  v-model="formdatas.yiqishebei_mingcheng_1"  true-value="2" false-value="1" name="yqsb"/>分析天平</span></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input type="checkbox" class="check_checkbox" :disabled='readonly'  v-model="formdatas.zf_yiqishebei_mingcheng_1"  true-value="2" false-value="1" name="yqsb"/>分析天平</span></p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input type="checkbox" class="check_checkbox" :disabled='readonly'  v-model="formdatas.yiqishebei_mingcheng_2"  true-value="2" false-value="1" name="yqsb"/>滴定管</span></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input type="checkbox" class="check_checkbox" :disabled='readonly'  v-model="formdatas.zf_yiqishebei_mingcheng_2"  true-value="2" false-value="1" name="yqsb"/>滴定管</span></p>
 								</div>
 							</td>
 							<td class="zw-td" rowspan="1" colspan="2" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -203,12 +203,12 @@
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="text-align:center; margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" v-model="formdatas.yiqishebei_bianhao_1" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_1:''}}</p>
+									<p style="text-align:center; margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" v-model="formdatas.zf_yiqishebei_bianhao_1" type="text"  v-if='!readonly'/>{{readonly?formdatas.zf_yiqishebei_bianhao_1:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="text-align:center; margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check"  v-model="formdatas.yiqishebei_bianhao_2" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_2:''}}</p>
+									<p style="text-align:center; margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check"  v-model="formdatas.zf_yiqishebei_bianhao_2" type="text"  v-if='!readonly'/>{{readonly?formdatas.zf_yiqishebei_bianhao_2:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" rowspan="1" colspan="2" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 40.6667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -751,7 +751,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="6" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 41.6px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input class="check" v-model="formdatas.beizhu" type="text" />{{readonly?formdatas.beizhu:''}}</span></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input class="check" v-model="formdatas.beizhu" v-if='!readonly' type="text" />{{readonly?formdatas.beizhu:''}}</span></p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -785,8 +785,8 @@
 			</div>
 			<div class="zw-footer">
 				<p style=" width:48%; display: inline-block; margin: 0px; line-height: 1.2; font-family: &quot;Times New Roman&quot;; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">检 &nbsp;测</span><input v-model="formdatas.jiance" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.jiance:''}}</p>
-				<p style=" width:48%; display: inline-block; margin: 0px; line-height: 1.2; font-family: &quot;Times New Roman&quot;; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">校 &nbsp;核</span><input v-model="formdatas.jiaohe" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.jiaohe:''}}</p>
-				<p style="margin: 0px; line-height: 1.2; font-family: Calibri; font-size: 11pt;"></p>
+					<p style=" width:48%; display: inline-block; margin: 0px; line-height: 1.2; font-family: &quot;Times New Roman&quot;; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">校 &nbsp;核</span><input v-model="formdatas.jiaohe" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.jiaohe:''}}</p>
+						<p style="margin: 0px; line-height: 1.2; font-family: Calibri; font-size: 11pt;"></p>
 			</div>
 			<div></div>
 			<div></div>
@@ -795,137 +795,166 @@
 </template>
 
 <style>
-
 </style>
 <script>
-
 //import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 
 export default {
-  props: ['formdatas','readonly'],
-  computed:{
-	
-	zhifangsuanzhi_1(){
-		var zhifangsuanzhi_1 = (this.formdatas.koh_rongyeyongliang_1-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_1*(100-this.formdatas.shiyangshuifen))*100;
-		if(!isNaN(zhifangsuanzhi_1)){
-			return this.jsdjg.zhifangsuanzhi_1 = this.round(zhifangsuanzhi_1,1);		
-		}
-		return this.jsdjg.zhifangsuanzhi_1='';
-	},
-	zhifangsuanzhi_2(){
-		var zhifangsuanzhi_2 = (this.formdatas.koh_rongyeyongliang_2-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_2*(100-this.formdatas.shiyangshuifen))*100;
-		if(!isNaN(zhifangsuanzhi_2)){
-			return this.jsdjg.zhifangsuanzhi_2 = this.round(zhifangsuanzhi_2,1);		
-		}
-		return this.jsdjg.zhifangsuanzhi_2='';
-	},
-	pingjunzhi() { 
-//		var zhifangsuanzhi_1 = (this.formdatas.koh_rongyeyongliang_1-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_1*(100-this.formdatas.shiyangshuifen))*100;
-		var zhifangsuanzhi_1 = this.zhifangsuanzhi_1*1;
-//		var zhifangsuanzhi_2 = (this.formdatas.koh_rongyeyongliang_2-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_2*(100-this.formdatas.shiyangshuifen))*100;
-		var zhifangsuanzhi_2 = this.zhifangsuanzhi_2*1;
-		var pingjunzhi=(zhifangsuanzhi_1+zhifangsuanzhi_2)/2;
-		if(!isNaN(pingjunzhi)){
-			return this.jsdjg.pingjunzhi = this.round(pingjunzhi,1);		
-		}
-		return this.jsdjg.pingjunzhi='';
-	},
-    codeUrl(){
-    	return this.apiRoot +'/grain/upload/smaBarcode/'+this.formdatas.smallSamplePic
+  props: ["formdatas", "readonly"],
+  computed: {
+    zhifangsuanzhi_1() {
+      var zhifangsuanzhi_1 =
+        (((((this.formdatas.koh_rongyeyongliang_1 -
+          this.formdatas.kongbaishiyan_koh_yongliang) *
+          this.formdatas.koh_rongyenongdu *
+          56.1 *
+          50) /
+          25) *
+          100) /
+          (this.formdatas.shiyangzhiliang_1 *
+            (100 - this.formdatas.shiyangshuifen))) *
+        100;
+      if (!isNaN(zhifangsuanzhi_1)) {
+        return (this.formdatas.zhifangsuanzhi_1 = this.round(
+          zhifangsuanzhi_1,
+          1
+        ));
+      }
+      return (this.formdatas.zhifangsuanzhi_1 = "");
     },
+    zhifangsuanzhi_2() {
+      var zhifangsuanzhi_2 =
+        (((((this.formdatas.koh_rongyeyongliang_2 -
+          this.formdatas.kongbaishiyan_koh_yongliang) *
+          this.formdatas.koh_rongyenongdu *
+          56.1 *
+          50) /
+          25) *
+          100) /
+          (this.formdatas.shiyangzhiliang_2 *
+            (100 - this.formdatas.shiyangshuifen))) *
+        100;
+      if (!isNaN(zhifangsuanzhi_2)) {
+        return (this.formdatas.zhifangsuanzhi_2 = this.round(
+          zhifangsuanzhi_2,
+          1
+        ));
+      }
+      return (this.formdatas.zhifangsuanzhi_2 = "");
+    },
+    pingjunzhi() {
+      //		var zhifangsuanzhi_1 = (this.formdatas.koh_rongyeyongliang_1-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_1*(100-this.formdatas.shiyangshuifen))*100;
+      var zhifangsuanzhi_1 = this.zhifangsuanzhi_1 * 1;
+      //		var zhifangsuanzhi_2 = (this.formdatas.koh_rongyeyongliang_2-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_2*(100-this.formdatas.shiyangshuifen))*100;
+      var zhifangsuanzhi_2 = this.zhifangsuanzhi_2 * 1;
+      var pingjunzhi = (zhifangsuanzhi_1 + zhifangsuanzhi_2) / 2;
+      if (!isNaN(pingjunzhi)) {
+        return (this.formdatas.pingjunzhi = this.round(pingjunzhi, 1));
+      }
+      return (this.formdatas.pingjunzhi = "");
+    },
+    codeUrl() {
+      return (
+        this.apiRoot +
+        "/grain/upload/smaBarcode/" +
+        this.formdatas.smallSamplePic
+      );
+    }
   },
-  created(){
-//	移除监听事件
-    this.$root.eventHub.$off('printChecklist')
-//	监听打印事件
-  	this.$root.eventHub.$on("printChecklist",function(){  
-		this.submit();
-
-  	}.bind(this));
+  created() {
+    //	移除监听事件
+    this.$root.eventHub.$off("printChecklist");
+    //	监听打印事件
+    this.$root.eventHub.$on(
+      "printChecklist",
+      function() {
+        this.submit();
+      }.bind(this)
+    );
   },
-  destroy(){
-  	this.$root.eventHub.$off('printChecklist')
+  destroy() {
+    this.$root.eventHub.$off("printChecklist");
   },
   methods: {
-	submit(){	
-//		for(var key in this.formdatas){
-//			if(!this.formdatas[key]){
-//				this.isEmpty=true;
-//				break
-//			}else{
-//				this.isEmpty=false;
-//			}
-//		}
-		if(this.isEmpty){			
-			this.$alert('请完善表内信息','提示信息',{});
-		}else{			
-			this.$emit('submit',this.jsdjg)
-		}
-	},
-	round(num, digit){
-	    var ratio = Math.pow(10, digit),
-	        _num = num * ratio,//倍数
-	        mod = _num % 1,//指定位置后小数
-	        integer = Math.floor(_num);//指定位向下取整
-//	        console.log(mod,integer)
-	    if(num===''){
-	        return ''
-	    }else if(Math.floor(num)== num){
-	    	var str;
-	    	if(digit==0){
-	    		str=num;
-	    	}else{
-		    	str=num+'.';
-		        for (var i=0;i<digit;i++){
-					str+='0'
-				}
-	    	}
-	        return str
-	    }else if(mod > 0.5){
-	        return ((integer + 1) / ratio).toFixed(digit);
-	    }else if(mod < 0.5){
-	    	if(integer / ratio==0){
-	        	var str='0.';
-		        for (var i=0;i<digit;i++){
-					str+='0'
-				}
-		        return str
-	    	}else{
-	        	return (integer / ratio).toFixed(digit);
-	    	}
-	    }else{
-	        return ((integer % 2 === 0 ? integer : integer + 1) / ratio).toFixed(digit);
-	    }
-	},
-
-  },
-  data() {
-    return {
-      isEmpty:false,
-
-      gs1Url:'static/images/sys/gs1.jpg',
-      yangpinbianhao:'9527',
-      yangpinmingcheng:'666',
-      jianyanbianhao_1:'1',
-      jianyanbianhao_2:'2',
-      jsdjg:{
-
+    submit() {
+      for (var key in this.formdatas) {
+        if (!this.formdatas[key]) {
+          console.log(key, this.formdatas[key]);
+          this.isEmpty = true;
+          break;
+        } else {
+          this.isEmpty = false;
+        }
+      }
+      if (this.isEmpty) {
+        this.$alert("请完善表内信息", "提示信息", {});
+      } else {
+        this.$emit("submit", this.formdatas);
+      }
+    },
+    round(num, digit) {
+      var ratio = Math.pow(10, digit),
+        _num = num * ratio, //倍数
+        mod = _num % 1, //指定位置后小数
+        integer = Math.floor(_num); //指定位向下取整
+      //	        console.log(mod,integer)
+      if (num === "") {
+        return "";
+      } else if (Math.floor(num) == num) {
+        var str;
+        if (digit == 0) {
+          str = num;
+        } else {
+          str = num + ".";
+          for (var i = 0; i < digit; i++) {
+            str += "0";
+          }
+        }
+        return str;
+      } else if (mod > 0.5) {
+        return ((integer + 1) / ratio).toFixed(digit);
+      } else if (mod < 0.5) {
+        if (integer / ratio == 0) {
+          var str = "0.";
+          for (var i = 0; i < digit; i++) {
+            str += "0";
+          }
+          return str;
+        } else {
+          return (integer / ratio).toFixed(digit);
+        }
+      } else {
+        return ((integer % 2 === 0 ? integer : integer + 1) / ratio).toFixed(
+          digit
+        );
       }
     }
   },
+  data() {
+    return {
+      isEmpty: false,
+
+      gs1Url: "static/images/sys/gs1.jpg",
+      yangpinbianhao: "9527",
+      yangpinmingcheng: "666",
+      jianyanbianhao_1: "1",
+      jianyanbianhao_2: "2",
+      jsdjg: {}
+    };
+  },
   filters: {
-   data:function (input) {
-       var d = new Date(input);
-       var year = d.getFullYear();
-       var month = d.getMonth() + 1;
-       var day = d.getDate() <10 ? '0' + d.getDate() : '' + d.getDate();
-       var hour = d.getHours();
-       var minutes = d.getMinutes();
-       var seconds = d.getSeconds();
-       return  year+ '-' + month + '-' + day;
-//     return  year+ '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
-   }
+    data: function(input) {
+      var d = new Date(input);
+      var year = d.getFullYear();
+      var month = d.getMonth() + 1;
+      var day = d.getDate() < 10 ? "0" + d.getDate() : "" + d.getDate();
+      var hour = d.getHours();
+      var minutes = d.getMinutes();
+      var seconds = d.getSeconds();
+      return year + "-" + month + "-" + day;
+      //     return  year+ '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
+    }
   }
-}
+};
 </script>
-<!--<input type="checkbox" class="check_checkbox" :disabled='readonly'  v-model="formdatas.yiqishebei_mingcheng_2"  true-value="2" false-value="1" name="yqsb"/>-->
+<!--<input type="checkbox" class="check_checkbox" :disabled='readonly'  v-model="formdatas.zf_yiqishebei_mingcheng_2"  true-value="2" false-value="1" name="yqsb"/>-->

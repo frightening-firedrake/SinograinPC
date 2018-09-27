@@ -1,5 +1,5 @@
 <template>
-    <form class="ui-body-bg">
+	<form class="ui-body-bg">
 		<img class="code" :src="codeUrl" alt="" />
 		<div class="zw-page" style="margin-left: 113.4px; margin-right: 113.4px; column-count: 1; column-gap: 0px;">
 			<div class="zw-header">
@@ -29,7 +29,7 @@
 							</td>
 							<td class="zw-td" style="border-width: 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 22px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.08333; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{formdatas.riqi|data}}</p>
+									<p style="margin: 0px; line-height: 1.08333; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{formdatas.b_riqi|data}}</p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 22px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -39,7 +39,7 @@
 							</td>
 							<td class="zw-td" style="border-width: 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 22px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.08333; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.shiwen" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.shiwen:''}}</p>
+									<p style="margin: 0px; line-height: 1.08333; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.b_shiwen" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.b_shiwen:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 22px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -50,7 +50,7 @@
 							</td>
 							<td class="zw-td" style="border-width: 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 22px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.08333; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.xiangduishidu" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.xiangduishidu:''}}</p>
+									<p style="margin: 0px; line-height: 1.08333; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.b_xiangduishidu" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.b_xiangduishidu:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 22px;;border-top:1.32813px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -120,7 +120,7 @@
 							</td>
 							<td class="zw-td" rowspan="1" colspan="6" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.8px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2;  font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">&nbsp;<input  v-model="formdatas.jiancefangfa" type="radio" :disabled="readonly" class="check_checkbox" name="jcff" value="GB/T5494—2008" />GB/T5494—2008</span></p>
+									<p style="margin: 0px; line-height: 1.2;  font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">&nbsp;<input  v-model="formdatas.b_jiancefangfa" type="radio" :disabled="readonly" class="check_checkbox" name="jcff" value="GB/T5494—2008" />GB/T5494—2008</span></p>
 								</div>
 							</td>
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -162,17 +162,17 @@
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.yiqishebei_mingcheng_1" type="checkbox" :disabled="readonly" class="check_checkbox" name="yqsb" true-value="2" false-value="1" />分析天平</span></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.b_yiqishebei_mingcheng_1" type="checkbox" :disabled="readonly" class="check_checkbox" name="yqsb" true-value="2" false-value="1" />分析天平</span></p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.yiqishebei_mingcheng_2" type="checkbox" :disabled="readonly" class="check_checkbox" name="yqsb" true-value="2" false-value="1" />天平</span></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.b_yiqishebei_mingcheng_2" type="checkbox" :disabled="readonly" class="check_checkbox" name="yqsb" true-value="2" false-value="1" />天平</span></p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.yiqishebei_mingcheng_3" type="checkbox" :disabled="readonly" class="check_checkbox" name="yqsb" true-value="2" false-value="1" />筛选器</span></p>
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;"><input v-model="formdatas.b_yiqishebei_mingcheng_3" type="checkbox" :disabled="readonly" class="check_checkbox" name="yqsb" true-value="2" false-value="1" />筛选器</span></p>
 								</div>
 							</td>
 							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -204,17 +204,17 @@
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="text-align:center; margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.yiqishebei_bianhao_1" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_1:''}}</p>
+									<p style="text-align:center; margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.b_yiqishebei_bianhao_1" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.b_yiqishebei_bianhao_1:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="text-align:center; margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.yiqishebei_bianhao_2" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_2:''}}</p>
+									<p style="text-align:center; margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.b_yiqishebei_bianhao_2" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.b_yiqishebei_bianhao_2:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" style="border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
-									<p style="text-align:center; margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.yiqishebei_bianhao_3" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.yiqishebei_bianhao_3:''}}</p>
+									<p style="text-align:center; margin: 0px; line-height: 1.2; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input v-model="formdatas.b_yiqishebei_bianhao_3" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.b_yiqishebei_bianhao_3:''}}</p>
 								</div>
 							</td>
 							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 24.4667px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
@@ -1074,307 +1074,399 @@
 			</div>
 			<div class="zw-footer">
 				<p style=" width:30%; display: inline-block; margin: 0px; line-height: 1.2; font-family: &quot;Times New Roman&quot;; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">检 &nbsp;测</span><input v-model="formdatas.fenyangjiance" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.fenyangjiance:''}}</p>
-				<p style=" width:40%; display: inline-block; margin: 0px; line-height: 1.2; font-family: &quot;Times New Roman&quot;; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">不完善粒、杂质检测</span><input v-model="formdatas.buwanshanli_zazhi_jiance" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.buwanshanli_zazhi_jiance:''}}</p>
-				<p style=" width:25%; display: inline-block; margin: 0px; line-height: 1.2; font-family: &quot;Times New Roman&quot;; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">校 &nbsp;核</span><input v-model="formdatas.jiaohe" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.jiaohe:''}}</p>
+					<p style=" width:40%; display: inline-block; margin: 0px; line-height: 1.2; font-family: &quot;Times New Roman&quot;; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">不完善粒、杂质检测</span><input v-model="formdatas.buwanshanli_zazhi_jiance" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.buwanshanli_zazhi_jiance:''}}</p>
+						<p style=" width:25%; display: inline-block; margin: 0px; line-height: 1.2; font-family: &quot;Times New Roman&quot;; font-size: 10.5pt; color: rgb(0, 0, 0);"><span style="font-family: 仿宋_GB2312; font-size: 10.5pt;">校 &nbsp;核</span><input v-model="formdatas.jiaohe" class="check" type="text"  v-if='!readonly'/>{{readonly?formdatas.jiaohe:''}}</p>
 			</div>
 		</div>
 	</form>
 </template>
 
 <style>
-
 </style>
 
 <script>
-
 //import SinograinPrompt from '@/components/common/prompt/Prompt.vue';
 export default {
-  props: ['formdatas','readonly'],
-  computed:{
-	pingjunzhi() { 
-//		var pingjunzhi = (this.formdatas.koh_rongyeyongliang_1-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_1*(100-this.formdatas.shiyangzhiliang_1))*100;
-//		return this.jsdjg.pingjunzhi = pingjunzhi.toFixed(1);
-	},
-	dayangzazhihanliang_1(){
-		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
-		if(!isNaN(dayangzazhihanliang_1)){
-//			return this.jsdjg.dayangzazhihanliang_1 = dayangzazhihanliang_1.toFixed(1);	
-			return this.jsdjg.dayangzazhihanliang_1 = this.round(dayangzazhihanliang_1,1);		
-		}
-		return this.jsdjg.dayangzazhihanliang_1='';
-	},
-	dayangzazhihanliang_2(){
-		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
-		if(!isNaN(dayangzazhihanliang_2)){
-//			return this.jsdjg.dayangzazhihanliang_2 = dayangzazhihanliang_2.toFixed(1);		
-			return this.jsdjg.dayangzazhihanliang_2 = this.round(dayangzazhihanliang_2,1);		
-		}
-		return this.jsdjg.dayangzazhihanliang_2='';
-	},
-	dayangzazhihanliang_pingjunzhi(){
-//		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
-		var dayangzazhihanliang_1=this.dayangzazhihanliang_1-0;
-//		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
-		var dayangzazhihanliang_2=this.dayangzazhihanliang_2-0;
-		var dayangzazhihanliang_pingjunzhi=(dayangzazhihanliang_1+dayangzazhihanliang_2)/2
-		if(!isNaN(dayangzazhihanliang_pingjunzhi)){
-//			return this.jsdjg.dayangzazhihanliang_pingjunzhi = dayangzazhihanliang_pingjunzhi.toFixed(1);		
-			return this.jsdjg.dayangzazhihanliang_pingjunzhi = this.round(dayangzazhihanliang_pingjunzhi,1);		
-		}
-		return this.jsdjg.dayangzazhihanliang_pingjunzhi='';
-	},
-	xiaoyangzazhihanliang_1(){
-//		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
-		var dayangzazhihanliang_1=this.dayangzazhihanliang_1-0;
-		var xiaoyangzazhihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.xiaoyangzazhizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
-		if(!isNaN(xiaoyangzazhihanliang_1)){
-			return this.jsdjg.xiaoyangzazhihanliang_1 = this.round(xiaoyangzazhihanliang_1,1);		
-		}
-		return this.jsdjg.xiaoyangzazhihanliang_1='';
-	},
-	xiaoyangzazhihanliang_2(){
-//		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
-		var dayangzazhihanliang_2=this.dayangzazhihanliang_2-0;
-		var xiaoyangzazhihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.xiaoyangzazhizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
-		if(!isNaN(xiaoyangzazhihanliang_2)){
-			return this.jsdjg.xiaoyangzazhihanliang_2 = this.round(xiaoyangzazhihanliang_2,1);		
-		}
-		return this.jsdjg.xiaoyangzazhihanliang_2='';
-	},
-	xiaoyangzazhihanliang_pingjunzhi(){
-//		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
-//		var xiaoyangzazhihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.xiaoyangzazhizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
-		var xiaoyangzazhihanliang_1=this.xiaoyangzazhihanliang_1-0;
-//		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
-//		var xiaoyangzazhihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.xiaoyangzazhizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
-		var xiaoyangzazhihanliang_2=this.xiaoyangzazhihanliang_2-0;
-		var xiaoyangzazhihanliang_pingjunzhi=(xiaoyangzazhihanliang_1+xiaoyangzazhihanliang_2)/2
-		if(!isNaN(xiaoyangzazhihanliang_pingjunzhi)){
-			return this.jsdjg.xiaoyangzazhihanliang_pingjunzhi = this.round(xiaoyangzazhihanliang_pingjunzhi,1);		
-		}
-		return this.jsdjg.xiaoyangzazhihanliang_pingjunzhi='';
-	},
-	kuangwuzhihanliang_1(){
-//		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
-		var dayangzazhihanliang_1=this.dayangzazhihanliang_1-0;
-		var kuangwuzhihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.kuangwuzhizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
-		if(!isNaN(kuangwuzhihanliang_1)){
-			return this.jsdjg.kuangwuzhihanliang_1 = this.round(kuangwuzhihanliang_1,2);		
-		}
-		return this.jsdjg.kuangwuzhihanliang_1='';
-	},
-	kuangwuzhihanliang_2(){
-//		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
-		var dayangzazhihanliang_2=this.dayangzazhihanliang_2-0;
-		var kuangwuzhihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.kuangwuzhizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
-		if(!isNaN(kuangwuzhihanliang_2)){
-			return this.jsdjg.kuangwuzhihanliang_2 = this.round(kuangwuzhihanliang_2,2);		
-		}
-		return this.jsdjg.kuangwuzhihanliang_2='';
-	},
-	kuangwuzhihanliang_pingjunzhi(){
-//		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
-//		var kuangwuzhihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.kuangwuzhizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
-		var kuangwuzhihanliang_1=this.kuangwuzhihanliang_1-0;
-//		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
-//		var kuangwuzhihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.kuangwuzhizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
-		var kuangwuzhihanliang_2=this.kuangwuzhihanliang_2-0;
-		var kuangwuzhihanliang_pingjunzhi=(kuangwuzhihanliang_1+kuangwuzhihanliang_2)/2
-		if(!isNaN(kuangwuzhihanliang_pingjunzhi)){
-			return this.jsdjg.kuangwuzhihanliang_pingjunzhi = this.round(kuangwuzhihanliang_pingjunzhi,2);		
-		}
-		return this.jsdjg.kuangwuzhihanliang_pingjunzhi='';
-	},
-	zazhizongliang_1(){
-//		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
-		var dayangzazhihanliang_1=this.dayangzazhihanliang_1-0;
-//		var xiaoyangzazhihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.xiaoyangzazhizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
-		var xiaoyangzazhihanliang_1=this.xiaoyangzazhihanliang_1-0;
-		var zazhizongliang_1=dayangzazhihanliang_1+xiaoyangzazhihanliang_1
-		if(!isNaN(zazhizongliang_1)){
-			return this.jsdjg.zazhizongliang_1 = this.round(zazhizongliang_1,1);		
-		}
-		return this.jsdjg.zazhizongliang_1='';
-	},
-	buwanshanlihanliang_1(){
-//		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
-		var dayangzazhihanliang_1=this.dayangzazhihanliang_1-0;
-		var buwanshanlihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.buwanshanlizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
-		if(!isNaN(buwanshanlihanliang_1)){
-			return this.jsdjg.buwanshanlihanliang_1 = this.round(buwanshanlihanliang_1,1);		
-		}
-		return this.jsdjg.buwanshanlihanliang_1='';
-	},
-	buwanshanlihanliang_2(){
-//		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
-		var dayangzazhihanliang_2=this.dayangzazhihanliang_2-0;
-		var buwanshanlihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.buwanshanlizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
-		if(!isNaN(buwanshanlihanliang_2)){
-			return this.jsdjg.buwanshanlihanliang_2 = this.round(buwanshanlihanliang_2,1);		
-		}
-		return this.jsdjg.buwanshanlihanliang_2='';
-	},
-	buwanshanlihanliang_pingjunzhi_1(){
-//		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
-//		var buwanshanlihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.buwanshanlizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
-		var buwanshanlihanliang_1=this.buwanshanlihanliang_1-0;
-//		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
-//		var buwanshanlihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.buwanshanlizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
-		var buwanshanlihanliang_2=this.buwanshanlihanliang_2-0;
-		var buwanshanlihanliang_pingjunzhi_1=(buwanshanlihanliang_1+buwanshanlihanliang_2)/2;
-		if(!isNaN(buwanshanlihanliang_pingjunzhi_1)){
-			return this.jsdjg.buwanshanlihanliang_pingjunzhi_1 = this.round(buwanshanlihanliang_pingjunzhi_1,1);		
-		}
-		return this.jsdjg.buwanshanlihanliang_pingjunzhi_1='';
-	},
-	buwanshanlihanliang_pingjunzhi_2(){
-		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
-		var buwanshanlihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.buwanshanlizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
-		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
-		var buwanshanlihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.buwanshanlizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
-		var buwanshanlihanliang_pingjunzhi_2=(buwanshanlihanliang_1+buwanshanlihanliang_2)/2;
-		if(!isNaN(buwanshanlihanliang_pingjunzhi_2)){
-			return this.jsdjg.buwanshanlihanliang_pingjunzhi_2 = buwanshanlihanliang_pingjunzhi_2.toFixed(1);		
-		}
-		return this.jsdjg.buwanshanlihanliang_pingjunzhi_2='';
-	},
-	shengmeilihanliang_1(){
-//		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
-		var dayangzazhihanliang_1=this.dayangzazhihanliang_1-0;
-		var shengmeilihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.shengmeilizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
-		if(!isNaN(shengmeilihanliang_1)){
-			return this.jsdjg.shengmeilihanliang_1 = this.round(shengmeilihanliang_1,1);		
-		}
-		return this.jsdjg.shengmeilihanliang_1='';
-	},
-	shengmeilihanliang_2(){
-//		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
-		var dayangzazhihanliang_2=this.dayangzazhihanliang_2-0;
-		var shengmeilihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.shengmeilizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
-		if(!isNaN(shengmeilihanliang_2)){
-			return this.jsdjg.shengmeilihanliang_2 = this.round(shengmeilihanliang_2,1);		
-		}
-		return this.jsdjg.shengmeilihanliang_2='';
-	},
-	shengmeilihanliang_pingjunzhi(){
-//		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
-//		var shengmeilihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.shengmeilizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
-		var shengmeilihanliang_1=this.shengmeilihanliang_1-0;
-//		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
-//		var shengmeilihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.shengmeilizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
-		var shengmeilihanliang_2=this.shengmeilihanliang_2-0;
-		var shengmeilihanliang_pingjunzhi=(shengmeilihanliang_1+shengmeilihanliang_2)/2;
-		if(!isNaN(shengmeilihanliang_pingjunzhi)){
-			return this.jsdjg.shengmeilihanliang_pingjunzhi = shengmeilihanliang_pingjunzhi.toFixed(1);		
-		}
-		return this.jsdjg.shengmeilihanliang_pingjunzhi='';
-	},
-	
-    codeUrl(){
-    	return this.apiRoot +'/grain/upload/smaBarcode/'+this.formdatas.smallSamplePic
+  props: ["formdatas", "readonly"],
+  computed: {
+    pingjunzhi() {
+      //		var pingjunzhi = (this.formdatas.koh_rongyeyongliang_1-this.formdatas.kongbaishiyan_koh_yongliang)*this.formdatas.koh_rongyenongdu*56.1*50/25*100/(this.formdatas.shiyangzhiliang_1*(100-this.formdatas.shiyangzhiliang_1))*100;
+      //		return this.jsdjg.pingjunzhi = pingjunzhi.toFixed(1);
+    },
+    dayangzazhihanliang_1() {
+      var dayangzazhihanliang_1 =
+        (this.formdatas.dayangzazhizhiliang_1 /
+          this.formdatas.dayangzhiliang_1) *
+        100;
+      if (!isNaN(dayangzazhihanliang_1)) {
+        //			return this.jsdjg.dayangzazhihanliang_1 = dayangzazhihanliang_1.toFixed(1);
+        return (this.jsdjg.dayangzazhihanliang_1 = this.round(
+          dayangzazhihanliang_1,
+          1
+        ));
+      }
+      return (this.jsdjg.dayangzazhihanliang_1 = "");
+    },
+    dayangzazhihanliang_2() {
+      var dayangzazhihanliang_2 =
+        (this.formdatas.dayangzazhizhiliang_2 /
+          this.formdatas.dayangzhiliang_2) *
+        100;
+      if (!isNaN(dayangzazhihanliang_2)) {
+        //			return this.jsdjg.dayangzazhihanliang_2 = dayangzazhihanliang_2.toFixed(1);
+        return (this.jsdjg.dayangzazhihanliang_2 = this.round(
+          dayangzazhihanliang_2,
+          1
+        ));
+      }
+      return (this.jsdjg.dayangzazhihanliang_2 = "");
+    },
+    dayangzazhihanliang_pingjunzhi() {
+      //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+      var dayangzazhihanliang_1 = this.dayangzazhihanliang_1 - 0;
+      //		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+      var dayangzazhihanliang_2 = this.dayangzazhihanliang_2 - 0;
+      var dayangzazhihanliang_pingjunzhi =
+        (dayangzazhihanliang_1 + dayangzazhihanliang_2) / 2;
+      if (!isNaN(dayangzazhihanliang_pingjunzhi)) {
+        //			return this.jsdjg.dayangzazhihanliang_pingjunzhi = dayangzazhihanliang_pingjunzhi.toFixed(1);
+        return (this.jsdjg.dayangzazhihanliang_pingjunzhi = this.round(
+          dayangzazhihanliang_pingjunzhi,
+          1
+        ));
+      }
+      return (this.jsdjg.dayangzazhihanliang_pingjunzhi = "");
+    },
+    xiaoyangzazhihanliang_1() {
+      //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+      var dayangzazhihanliang_1 = this.dayangzazhihanliang_1 - 0;
+      var xiaoyangzazhihanliang_1 =
+        ((100 - dayangzazhihanliang_1) *
+          this.formdatas.xiaoyangzazhizhiliang_1) /
+        this.formdatas.xiaoyangzhiliang_1;
+      if (!isNaN(xiaoyangzazhihanliang_1)) {
+        return (this.jsdjg.xiaoyangzazhihanliang_1 = this.round(
+          xiaoyangzazhihanliang_1,
+          1
+        ));
+      }
+      return (this.jsdjg.xiaoyangzazhihanliang_1 = "");
+    },
+    xiaoyangzazhihanliang_2() {
+      //		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+      var dayangzazhihanliang_2 = this.dayangzazhihanliang_2 - 0;
+      var xiaoyangzazhihanliang_2 =
+        ((100 - dayangzazhihanliang_2) *
+          this.formdatas.xiaoyangzazhizhiliang_2) /
+        this.formdatas.xiaoyangzhiliang_2;
+      if (!isNaN(xiaoyangzazhihanliang_2)) {
+        return (this.jsdjg.xiaoyangzazhihanliang_2 = this.round(
+          xiaoyangzazhihanliang_2,
+          1
+        ));
+      }
+      return (this.jsdjg.xiaoyangzazhihanliang_2 = "");
+    },
+    xiaoyangzazhihanliang_pingjunzhi() {
+      //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+      //		var xiaoyangzazhihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.xiaoyangzazhizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+      var xiaoyangzazhihanliang_1 = this.xiaoyangzazhihanliang_1 - 0;
+      //		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+      //		var xiaoyangzazhihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.xiaoyangzazhizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
+      var xiaoyangzazhihanliang_2 = this.xiaoyangzazhihanliang_2 - 0;
+      var xiaoyangzazhihanliang_pingjunzhi =
+        (xiaoyangzazhihanliang_1 + xiaoyangzazhihanliang_2) / 2;
+      if (!isNaN(xiaoyangzazhihanliang_pingjunzhi)) {
+        return (this.jsdjg.xiaoyangzazhihanliang_pingjunzhi = this.round(
+          xiaoyangzazhihanliang_pingjunzhi,
+          1
+        ));
+      }
+      return (this.jsdjg.xiaoyangzazhihanliang_pingjunzhi = "");
+    },
+    kuangwuzhihanliang_1() {
+      //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+      var dayangzazhihanliang_1 = this.dayangzazhihanliang_1 - 0;
+      var kuangwuzhihanliang_1 =
+        ((100 - dayangzazhihanliang_1) * this.formdatas.kuangwuzhizhiliang_1) /
+        this.formdatas.xiaoyangzhiliang_1;
+      if (!isNaN(kuangwuzhihanliang_1)) {
+        return (this.jsdjg.kuangwuzhihanliang_1 = this.round(
+          kuangwuzhihanliang_1,
+          2
+        ));
+      }
+      return (this.jsdjg.kuangwuzhihanliang_1 = "");
+    },
+    kuangwuzhihanliang_2() {
+      //		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+      var dayangzazhihanliang_2 = this.dayangzazhihanliang_2 - 0;
+      var kuangwuzhihanliang_2 =
+        ((100 - dayangzazhihanliang_2) * this.formdatas.kuangwuzhizhiliang_2) /
+        this.formdatas.xiaoyangzhiliang_2;
+      if (!isNaN(kuangwuzhihanliang_2)) {
+        return (this.jsdjg.kuangwuzhihanliang_2 = this.round(
+          kuangwuzhihanliang_2,
+          2
+        ));
+      }
+      return (this.jsdjg.kuangwuzhihanliang_2 = "");
+    },
+    kuangwuzhihanliang_pingjunzhi() {
+      //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+      //		var kuangwuzhihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.kuangwuzhizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+      var kuangwuzhihanliang_1 = this.kuangwuzhihanliang_1 - 0;
+      //		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+      //		var kuangwuzhihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.kuangwuzhizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
+      var kuangwuzhihanliang_2 = this.kuangwuzhihanliang_2 - 0;
+      var kuangwuzhihanliang_pingjunzhi =
+        (kuangwuzhihanliang_1 + kuangwuzhihanliang_2) / 2;
+      if (!isNaN(kuangwuzhihanliang_pingjunzhi)) {
+        return (this.jsdjg.kuangwuzhihanliang_pingjunzhi = this.round(
+          kuangwuzhihanliang_pingjunzhi,
+          2
+        ));
+      }
+      return (this.jsdjg.kuangwuzhihanliang_pingjunzhi = "");
+    },
+    zazhizongliang_1() {
+      //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+      var dayangzazhihanliang_1 = this.dayangzazhihanliang_1 - 0;
+      //		var xiaoyangzazhihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.xiaoyangzazhizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+      var xiaoyangzazhihanliang_1 = this.xiaoyangzazhihanliang_1 - 0;
+      var zazhizongliang_1 = dayangzazhihanliang_1 + xiaoyangzazhihanliang_1;
+      if (!isNaN(zazhizongliang_1)) {
+        return (this.jsdjg.zazhizongliang_1 = this.round(zazhizongliang_1, 1));
+      }
+      return (this.jsdjg.zazhizongliang_1 = "");
+    },
+    buwanshanlihanliang_1() {
+      //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+      var dayangzazhihanliang_1 = this.dayangzazhihanliang_1 - 0;
+      var buwanshanlihanliang_1 =
+        ((100 - dayangzazhihanliang_1) * this.formdatas.buwanshanlizhiliang_1) /
+        this.formdatas.xiaoyangzhiliang_1;
+      if (!isNaN(buwanshanlihanliang_1)) {
+        return (this.jsdjg.buwanshanlihanliang_1 = this.round(
+          buwanshanlihanliang_1,
+          1
+        ));
+      }
+      return (this.jsdjg.buwanshanlihanliang_1 = "");
+    },
+    buwanshanlihanliang_2() {
+      //		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+      var dayangzazhihanliang_2 = this.dayangzazhihanliang_2 - 0;
+      var buwanshanlihanliang_2 =
+        ((100 - dayangzazhihanliang_2) * this.formdatas.buwanshanlizhiliang_2) /
+        this.formdatas.xiaoyangzhiliang_2;
+      if (!isNaN(buwanshanlihanliang_2)) {
+        return (this.jsdjg.buwanshanlihanliang_2 = this.round(
+          buwanshanlihanliang_2,
+          1
+        ));
+      }
+      return (this.jsdjg.buwanshanlihanliang_2 = "");
+    },
+    buwanshanlihanliang_pingjunzhi_1() {
+      //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+      //		var buwanshanlihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.buwanshanlizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+      var buwanshanlihanliang_1 = this.buwanshanlihanliang_1 - 0;
+      //		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+      //		var buwanshanlihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.buwanshanlizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
+      var buwanshanlihanliang_2 = this.buwanshanlihanliang_2 - 0;
+      var buwanshanlihanliang_pingjunzhi_1 =
+        (buwanshanlihanliang_1 + buwanshanlihanliang_2) / 2;
+      if (!isNaN(buwanshanlihanliang_pingjunzhi_1)) {
+        return (this.jsdjg.buwanshanlihanliang_pingjunzhi_1 = this.round(
+          buwanshanlihanliang_pingjunzhi_1,
+          1
+        ));
+      }
+      return (this.jsdjg.buwanshanlihanliang_pingjunzhi_1 = "");
+    },
+    buwanshanlihanliang_pingjunzhi_2() {
+      var dayangzazhihanliang_1 =
+        (this.formdatas.dayangzazhizhiliang_1 /
+          this.formdatas.dayangzhiliang_1) *
+        100;
+      var buwanshanlihanliang_1 =
+        ((100 - dayangzazhihanliang_1) * this.formdatas.buwanshanlizhiliang_1) /
+        this.formdatas.xiaoyangzhiliang_1;
+      var dayangzazhihanliang_2 =
+        (this.formdatas.dayangzazhizhiliang_2 /
+          this.formdatas.dayangzhiliang_2) *
+        100;
+      var buwanshanlihanliang_2 =
+        ((100 - dayangzazhihanliang_2) * this.formdatas.buwanshanlizhiliang_2) /
+        this.formdatas.xiaoyangzhiliang_2;
+      var buwanshanlihanliang_pingjunzhi_2 =
+        (buwanshanlihanliang_1 + buwanshanlihanliang_2) / 2;
+      if (!isNaN(buwanshanlihanliang_pingjunzhi_2)) {
+        return (this.jsdjg.buwanshanlihanliang_pingjunzhi_2 = buwanshanlihanliang_pingjunzhi_2.toFixed(
+          1
+        ));
+      }
+      return (this.jsdjg.buwanshanlihanliang_pingjunzhi_2 = "");
+    },
+    shengmeilihanliang_1() {
+      //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+      var dayangzazhihanliang_1 = this.dayangzazhihanliang_1 - 0;
+      var shengmeilihanliang_1 =
+        ((100 - dayangzazhihanliang_1) * this.formdatas.shengmeilizhiliang_1) /
+        this.formdatas.xiaoyangzhiliang_1;
+      if (!isNaN(shengmeilihanliang_1)) {
+        return (this.jsdjg.shengmeilihanliang_1 = this.round(
+          shengmeilihanliang_1,
+          1
+        ));
+      }
+      return (this.jsdjg.shengmeilihanliang_1 = "");
+    },
+    shengmeilihanliang_2() {
+      //		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+      var dayangzazhihanliang_2 = this.dayangzazhihanliang_2 - 0;
+      var shengmeilihanliang_2 =
+        ((100 - dayangzazhihanliang_2) * this.formdatas.shengmeilizhiliang_2) /
+        this.formdatas.xiaoyangzhiliang_2;
+      if (!isNaN(shengmeilihanliang_2)) {
+        return (this.jsdjg.shengmeilihanliang_2 = this.round(
+          shengmeilihanliang_2,
+          1
+        ));
+      }
+      return (this.jsdjg.shengmeilihanliang_2 = "");
+    },
+    shengmeilihanliang_pingjunzhi() {
+      //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
+      //		var shengmeilihanliang_1=(100-dayangzazhihanliang_1)*this.formdatas.shengmeilizhiliang_1/this.formdatas.xiaoyangzhiliang_1;
+      var shengmeilihanliang_1 = this.shengmeilihanliang_1 - 0;
+      //		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
+      //		var shengmeilihanliang_2=(100-dayangzazhihanliang_2)*this.formdatas.shengmeilizhiliang_2/this.formdatas.xiaoyangzhiliang_2;
+      var shengmeilihanliang_2 = this.shengmeilihanliang_2 - 0;
+      var shengmeilihanliang_pingjunzhi =
+        (shengmeilihanliang_1 + shengmeilihanliang_2) / 2;
+      if (!isNaN(shengmeilihanliang_pingjunzhi)) {
+        return (this.jsdjg.shengmeilihanliang_pingjunzhi = shengmeilihanliang_pingjunzhi.toFixed(
+          1
+        ));
+      }
+      return (this.jsdjg.shengmeilihanliang_pingjunzhi = "");
+    },
+
+    codeUrl() {
+      return (
+        this.apiRoot +
+        "/grain/upload/smaBarcode/" +
+        this.formdatas.smallSamplePic
+      );
     }
   },
-  created(){
-//	移除监听事件
-    this.$root.eventHub.$off('printChecklist')
-//	监听打印事件
-  	this.$root.eventHub.$on("printChecklist",function(){  
-		this.submit();
-
-  	}.bind(this));
+  created() {
+    //	移除监听事件
+    this.$root.eventHub.$off("printChecklist");
+    //	监听打印事件
+    this.$root.eventHub.$on(
+      "printChecklist",
+      function() {
+        this.submit();
+      }.bind(this)
+    );
   },
-  destroy(){
-  	this.$root.eventHub.$off('printChecklist')
+  destroy() {
+    this.$root.eventHub.$off("printChecklist");
   },
   methods: {
-	submit(){	
-//		for(var key in this.formdatas){
-//			if(!this.formdatas[key]){
-//				if(this.formdatas[key]!==0){
-//					this.isEmpty=true;
-//					break					
-//				}else{
-//					this.isEmpty=false;
-//				}
-//			}else{
-//				this.isEmpty=false;
-//			}
-//		}
-//		if(this.isEmpty){			
-//			this.$alert('请完善表内信息','提示信息',{});
-//		}else{			
-			this.$emit('submit',this.jsdjg)
-//		}
-	},
-	round(num, digit){
-	    var ratio = Math.pow(10, digit),
-	        _num = num * ratio,//倍数
-	        mod = _num % 1,//指定位置后小数
-	        integer = Math.floor(_num);//指定位向下取整
-//	        console.log(mod,integer)
-	    if(num===''){
-	        return ''
-	    }else if(Math.floor(num)== num){
-	    	var str;
-	    	if(digit==0){
-	    		str=num;
-	    	}else{
-		    	str=num+'.';
-		        for (var i=0;i<digit;i++){
-					str+='0'
-				}
-	    	}
-	        return str
-	    }else if(mod > 0.5){
-	        return ((integer + 1) / ratio).toFixed(digit);
-	    }else if(mod < 0.5){
-	    	if(integer / ratio==0){
-	        	var str='0.';
-		        for (var i=0;i<digit;i++){
-					str+='0'
-				}
-		        return str
-	    	}else{
-	        	return (integer / ratio).toFixed(digit);
-	    	}
-	    }else{
-	        return ((integer % 2 === 0 ? integer : integer + 1) / ratio).toFixed(digit);
-	    }
-	},
-  },
-  data() {
-    return {
-      isEmpty:false,
-
-      gs1Url:'static/images/sys/gs1.jpg',
-      gs2Url:'static/images/sys/gs2.jpg',
-      mjxsf1Url:'static/images/sys/mjxsf1.png',
-	  bwsf1Url:'static/images/sys/bwsf1.png',
-      bwsf2Url:'static/images/sys/bwsf2.png',
-      bwsf3Url:'static/images/sys/bwsf3.png',
-      bwsf4Url:'static/images/sys/bwsf4.png',
-      bwsf5Url:'static/images/sys/bwsf5.png',
-      jianyanbianhao_1:'1',
-      jianyanbianhao_2:'2',
-      jsdjg:{
-//		yiqishebei_bianhao_1:'',
-//    	yiqishebei_bianhao_2:'',
-//    	yiqishebei_bianhao_3:'',
+    submit() {
+      for (var key in this.formdatas) {
+        if (!this.formdatas[key]) {
+          if (this.formdatas[key] !== 0) {
+            this.isEmpty = true;
+            break;
+          } else {
+            this.isEmpty = false;
+          }
+        } else {
+          this.isEmpty = false;
+        }
+      }
+      if (this.isEmpty) {
+        this.$alert("请完善表内信息", "提示信息", {});
+      } else {
+        this.$emit("submit", this.jsdjg);
+      }
+    },
+    round(num, digit) {
+      var ratio = Math.pow(10, digit),
+        _num = num * ratio, //倍数
+        mod = _num % 1, //指定位置后小数
+        integer = Math.floor(_num); //指定位向下取整
+      //	        console.log(mod,integer)
+      if (num === "") {
+        return "";
+      } else if (Math.floor(num) == num) {
+        var str;
+        if (digit == 0) {
+          str = num;
+        } else {
+          str = num + ".";
+          for (var i = 0; i < digit; i++) {
+            str += "0";
+          }
+        }
+        return str;
+      } else if (mod > 0.5) {
+        return ((integer + 1) / ratio).toFixed(digit);
+      } else if (mod < 0.5) {
+        if (integer / ratio == 0) {
+          var str = "0.";
+          for (var i = 0; i < digit; i++) {
+            str += "0";
+          }
+          return str;
+        } else {
+          return (integer / ratio).toFixed(digit);
+        }
+      } else {
+        return ((integer % 2 === 0 ? integer : integer + 1) / ratio).toFixed(
+          digit
+        );
       }
     }
   },
+  data() {
+    return {
+      isEmpty: false,
+
+      gs1Url: "static/images/sys/gs1.jpg",
+      gs2Url: "static/images/sys/gs2.jpg",
+      mjxsf1Url: "static/images/sys/mjxsf1.png",
+      bwsf1Url: "static/images/sys/bwsf1.png",
+      bwsf2Url: "static/images/sys/bwsf2.png",
+      bwsf3Url: "static/images/sys/bwsf3.png",
+      bwsf4Url: "static/images/sys/bwsf4.png",
+      bwsf5Url: "static/images/sys/bwsf5.png",
+      jianyanbianhao_1: "1",
+      jianyanbianhao_2: "2",
+      jsdjg: {
+        //		b_yiqishebei_bianhao_1:'',
+        //    	b_yiqishebei_bianhao_2:'',
+        //    	b_yiqishebei_bianhao_3:'',
+      }
+    };
+  },
   filters: {
-   data:function (input) {
-       var d = new Date(input);
-       var year = d.getFullYear();
-       var month = d.getMonth() + 1;
-       var day = d.getDate() <10 ? '0' + d.getDate() : '' + d.getDate();
-       var hour = d.getHours();
-       var minutes = d.getMinutes();
-       var seconds = d.getSeconds();
-       return  year+ '-' + month + '-' + day;
-//     return  year+ '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
-   }
+    data: function(input) {
+      var d = new Date(input);
+      var year = d.getFullYear();
+      var month = d.getMonth() + 1;
+      var day = d.getDate() < 10 ? "0" + d.getDate() : "" + d.getDate();
+      var hour = d.getHours();
+      var minutes = d.getMinutes();
+      var seconds = d.getSeconds();
+      return year + "-" + month + "-" + day;
+      //     return  year+ '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
+    }
   }
-}
+};
 </script>
