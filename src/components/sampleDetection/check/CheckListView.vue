@@ -1,44 +1,44 @@
 <template>
-	<div class='listpagewrap' id='listpagewrap'>
-		<!--面包屑-->
-		<sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
-		<!--标题-->
-		<sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>
-		<!--提示-->
-		<!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
-		<div class="fromwrap" id="print" style="background:rgba(241, 241, 241, 1);">
-			<!--表单-->
-			<!--<hr>-->
-			<bwsl-check-from v-if="checktype=='bwsl'" :formdatas="formdatas.bwsl" @submit="submit" :readonly="readonly"></bwsl-check-from>
+  <div class='listpagewrap' id='listpagewrap'>
+    <!--面包屑-->
+    <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
+    <!--标题-->
+    <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>
+    <!--提示-->
+    <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
+    <div class="fromwrap" id="print" style="background:rgba(241, 241, 241, 1);">
+      <!--表单-->
+      <!--<hr>-->
+      <bwsl-check-from v-if="checktype=='bwsl'||checktype=='cdjl'" :formdatas="formdatas.bwsl" @submit="submit" :readonly="readonly"></bwsl-check-from>
 
-			<!--<hr>-->
-			<sfcd-check-from v-if="checktype=='sfcd'" :formdatas="formdatas.sfcd" @submit="submit" :readonly="readonly"></sfcd-check-from>
+      <!--<hr>-->
+      <sfcd-check-from v-if="checktype=='sfcd'" :formdatas="formdatas.sfcd" @submit="submit" :readonly="readonly"></sfcd-check-from>
 
-			<!--<hr>-->
-			<mjxsl-check-from v-if="checktype=='mjxs'" :formdatas="formdatas.mjxs" @submit="submit" :readonly="readonly"></mjxsl-check-from>
-			<!--<hr>-->
-			<zfsz-check-from v-if="checktype=='zfsz'" :formdatas="formdatas.zfsz" @submit="submit" :readonly="readonly"></zfsz-check-from>
-			<!--<hr>-->
-			<ympcpf-check-from v-if="checktype=='ympc'" :formdatas="formdatas.ympc" @submit="submit" :readonly="readonly"></ympcpf-check-from>
-			<!--<hr>-->
-			<mtpc-check-from v-if="checktype=='mtpc'" :formdatas="formdatas.mtpc" @submit="submit" :readonly="readonly"></mtpc-check-from>
-			<!--<hr>-->
-			<dscd-check-from v-if="checktype=='dscd'" :formdatas="formdatas.dscd" @submit="submit" :readonly="readonly"></dscd-check-from>
+      <!--<hr>-->
+      <mjxsl-check-from v-if="checktype=='mjxs'" :formdatas="formdatas.mjxs" @submit="submit" :readonly="readonly"></mjxsl-check-from>
+      <!--<hr>-->
+      <zfsz-check-from v-if="checktype=='zfsz'" :formdatas="formdatas.zfsz" @submit="submit" :readonly="readonly"></zfsz-check-from>
+      <!--<hr>-->
+      <ympcpf-check-from v-if="checktype=='ympc'" :formdatas="formdatas.ympc" @submit="submit" :readonly="readonly"></ympcpf-check-from>
+      <!--<hr>-->
+      <mtpc-check-from v-if="checktype=='mtpc'" :formdatas="formdatas.mtpc" @submit="submit" :readonly="readonly"></mtpc-check-from>
+      <!--<hr>-->
+      <dscd-check-from v-if="checktype=='dscd'" :formdatas="formdatas.dscd" @submit="submit" :readonly="readonly"></dscd-check-from>
 
-			<!--<hr>-->
-			<pcpf-check-from v-if="checktype=='pcpf'" :formdatas="formdatas.pcpf" @submit="submit" :readonly="readonly"></pcpf-check-from>
-			<!--<hr>-->
-			<cdjl-check-from v-if="checktype=='cdjl'" :formdatas="formdatas.cdjl" @submit="submit" :readonly="readonly"></cdjl-check-from>
-			<!--<hr>-->
-			<mtbr-check-from v-if="checktype=='mtbr'" :formdatas="formdatas.mtbr" @submit="submit" :readonly="readonly"></mtbr-check-from>
-			<!--<hr>-->
-		</div>
-		<!--<div class="checklistsavebtn">
+      <!--<hr>-->
+      <pcpf-check-from v-if="checktype=='pcpf'" :formdatas="formdatas.pcpf" @submit="submit" :readonly="readonly"></pcpf-check-from>
+      <!--<hr>-->
+      <cdjl-check-from v-if="checktype=='cdjl'||checktype=='bwsl'" :formdatas="formdatas.cdjl" @submit="submit" :readonly="readonly"></cdjl-check-from>
+      <!--<hr>-->
+      <mtbr-check-from v-if="checktype=='mtbr'" :formdatas="formdatas.mtbr" @submit="submit" :readonly="readonly"></mtbr-check-from>
+      <!--<hr>-->
+    </div>
+    <!--<div class="checklistsavebtn">
 	  	<div @click="footsave">
 	  		<span>保存</span>
 	  	</div>
 	  </div>-->
-	</div>
+  </div>
 </template>
 
 <style>
@@ -203,7 +203,7 @@ export default {
     ]),
     ...mapActions(["addAction"]),
     //	获取列表数据方法
-    getlistdata() {
+    getlistdata(data) {
       this.loading = true;
       // 获取列表数据（第？页）
       this.$http({
@@ -229,8 +229,21 @@ export default {
       })
         .then(
           function(response) {
+            if (data == "bwsl") {
+              this.formdatas[data] = response.data;
+              if (this.$route.query.smallSampleNum) {
+                this.formdatas[data][
+                  "smallSampleNum"
+                ] = this.$route.query.smallSampleNum;
+                this.formdatas[data][
+                  "smallSamplePic"
+                ] = this.$route.query.smallSamplePic;
+                this.formdatas[data]["sort"] = this.$route.query.sort;
+              }
+            } else {
+              this.formdatas[this.checktype] = response.data;
+            }
             //				this.setform(response.data)
-            this.formdatas[this.checktype] = response.data;
             if (this.$route.query.smallSampleNum) {
               this.formdatas[this.checktype][
                 "smallSampleNum"
@@ -283,51 +296,80 @@ export default {
     },
     //	设置表单
     setform(data) {
-      if (data.sort == "小麦") {
-        if (
-          this.$route.query.checkPoint == 1 ||
-          this.$route.query.checkPoint == 4 ||
-          this.$route.query.checkPoint == 3 ||
-          this.$route.query.checkPoint == 5
-        ) {
-          this.checktype = "bwsl";
-        } else if (this.$route.query.checkPoint == 2) {
-          this.checktype = "sfcd";
-        } else if (this.$route.query.checkPoint == 9) {
-          this.checktype = "mjxs";
-        } else if (this.$route.query.checkPoint == 11) {
-          this.checktype = "mtpc";
-        } else if (this.$route.query.checkPoint == 14) {
-          this.checktype = "dscd";
-        } else {
-          this.checktype = "cdjl";
-        }
-      } else if (this.$route.query.sort == "玉米") {
-        if (
-          this.$route.query.checkPoint == 1 ||
-          this.$route.query.checkPoint == 3
-        ) {
-          this.checktype = "bwsl";
-        } else if (this.$route.query.checkPoint == 2) {
-          this.checktype = "sfcd";
-        } else if (this.$route.query.checkPoint == 5) {
-          this.checktype = "cdjl";
-        } else if (this.$route.query.checkPoint == 10) {
-          this.checktype = "zfsz";
-        } else if (this.$route.query.checkPoint == 11) {
-          this.checktype = "ympc";
-        } else if (this.$route.query.checkPoint == 8) {
-          this.checktype = "dscd";
-        } else {
-          this.checktype = "cdjl";
+      var check = this.$route.query.checkPoint.split(",");
+      for (var i = 0; i < check.length; i++) {
+        var checkId = check[i];
+        if (data.sort == "小麦") {
+          if (
+            checkId == 1 ||
+            checkId == 4 ||
+            checkId == 3 ||
+            checkId == 5 ||
+            checkId == 8
+          ) {
+            this.checktype = "bwsl";
+            if (this.$route.query.smallSampleNum) {
+              this.formdatas[this.checktype][
+                "smallSampleNum"
+              ] = this.$route.query.smallSampleNum;
+              this.formdatas[this.checktype][
+                "smallSamplePic"
+              ] = this.$route.query.smallSamplePic;
+              this.formdatas[this.checktype]["sort"] = this.$route.query.sort;
+            }
+            this.checktype = "cdjl";
+          } else if (checkId == 2) {
+            this.checktype = "sfcd";
+          } else if (checkId == 9) {
+            this.checktype = "mjxs";
+          } else if (checkId == 11) {
+            this.checktype = "mtpc";
+          } else if (
+            checkId == 14 ||
+            checkId == 16 ||
+            checkId == 17 ||
+            checkId == 18 ||
+            checkId == 19
+          ) {
+            // "14,16,17,18,19"
+            this.checktype = "dscd";
+          } else {
+            // this.checktype = "cdjl";
+          }
+        } else if (data.sort == "玉米") {
+          if (checkId == 1 || checkId == 3 || checkId == 5 || checkId == 6) {
+            this.checktype = "bwsl";
+            if (this.$route.query.smallSampleNum) {
+              this.formdatas[this.checktype][
+                "smallSampleNum"
+              ] = this.$route.query.smallSampleNum;
+              this.formdatas[this.checktype][
+                "smallSamplePic"
+              ] = this.$route.query.smallSamplePic;
+              this.formdatas[this.checktype]["sort"] = this.$route.query.sort;
+              this.checktype = "cdjl";
+            }
+          } else if (checkId == 2) {
+            this.checktype = "sfcd";
+          } else if (checkId == 10) {
+            this.checktype = "zfsz";
+          } else if (checkId == 11) {
+            this.checktype = "ympc";
+          } else if (
+            checkId == 13 ||
+            checkId == 14 ||
+            checkId == 15 ||
+            checkId == 16 ||
+            checkId == 17 ||
+            checkId == 18 ||
+            checkId == 19
+          ) {
+            this.checktype = "dscd";
+          } else {
+          }
         }
       }
       this.Urlcomputed();
-      console.log(
-        this.formdatas[this.checktype],
-        this.checktype,
-        this.formdatas[this.checktype]["smallSampleNum"]
-      );
       if (this.$route.query.smallSampleNum) {
         this.formdatas[
           this.checktype
@@ -346,6 +388,9 @@ export default {
         this.editUrlend = "/grain/shuifen/edit";
         this.datalistUrlend = "/grain/shuifen/getBySmallSampleId";
       } else if (this.checktype == "cdjl") {
+        this.datalistURL =
+          this.apiRoot + "/grain/buwanshanli/getBySmallSampleId";
+        this.getlistdata("bwsl");
         this.editUrlend = "/grain/cedingjilu/edit";
         this.datalistUrlend = "/grain/cedingjilu/getBySmallSampleId";
       } else if (this.checktype == "zfsz") {
@@ -463,49 +508,49 @@ export default {
       formdatas: {
         //    	不完善粒
         bwsl: {
-          table_version: "SXZCZJ/JL002-2015",
-          riqi: new Date(),
-          shiwen: "",
-          xiangduishidu: "",
-          jiancefangfa: "",
-          yiqishebei_mingcheng_1: "1",
-          yiqishebei_mingcheng_2: "1",
-          yiqishebei_mingcheng_3: "1",
-          yiqishebei_bianhao_1: "",
-          yiqishebei_bianhao_2: "",
-          yiqishebei_bianhao_3: "",
+          b_table_version: "SXZCZJ/JL002-2015",
+          b_riqi: new Date(),
+          b_shiwen: "",
+          b_xiangduishidu: "",
+          b_jiancefangfa: "",
+          b_yiqishebei_mingcheng_1: "1",
+          b_yiqishebei_mingcheng_2: "1",
+          b_yiqishebei_mingcheng_3: "1",
+          b_yiqishebei_bianhao_1: "",
+          b_yiqishebei_bianhao_2: "",
+          b_yiqishebei_bianhao_3: "",
           dayangzhiliang_1: "",
           dayangzhiliang_2: "",
           dayangzazhizhiliang_1: "",
           dayangzazhizhiliang_2: "",
-          //    		dayangzazhihanliang_1:'',
-          //    		dayangzazhihanliang_2:'',
-          //    		dayangzazhihanliang_pingjunzhi:'',
+          dayangzazhihanliang_1: "",
+          dayangzazhihanliang_2: "",
+          dayangzazhihanliang_pingjunzhi: "",
           xiaoyangzhiliang_1: "",
           xiaoyangzhiliang_2: "",
           xiaoyangzazhizhiliang_1: "",
           xiaoyangzazhizhiliang_2: "",
-          //    		xiaoyangzazhihanliang_1:'',
-          //    		xiaoyangzazhihanliang_2:'',
-          //			xiaoyangzazhihanliang_pingjunzhi:'',
+          xiaoyangzazhihanliang_1: "",
+          xiaoyangzazhihanliang_2: "",
+          xiaoyangzazhihanliang_pingjunzhi: "",
           kuangwuzhizhiliang_1: "",
           kuangwuzhizhiliang_2: "",
-          //			kuangwuzhihanliang_1:'',
-          //			kuangwuzhihanliang_2:'',
-          //			kuangwuzhihanliang_pingjunzhi:'',
+          kuangwuzhihanliang_1: "",
+          kuangwuzhihanliang_2: "",
+          kuangwuzhihanliang_pingjunzhi: "",
           zazhizongliang_1: "",
           buwanshanlizhiliang_1: "",
           buwanshanlizhiliang_2: "",
-          //			buwanshanlihanliang_1:'',
-          //			buwanshanlihanliang_2:'',
+          buwanshanlihanliang_1: "",
+          buwanshanlihanliang_2: "",
           //			buwanshanlihanliang_pingjunzhi:'',
-          //			buwanshanlihanliang_pingjunzhi_1:'',
-          //			buwanshanlihanliang_pingjunzhi_2:'',
+          buwanshanlihanliang_pingjunzhi_1: "",
+          buwanshanlihanliang_pingjunzhi_2: "",
           shengmeilizhiliang_1: "",
           shengmeilizhiliang_2: "",
-          //			shengmeilihanliang_1:'',
-          //			shengmeilihanliang_2:'',
-          //			shengmeilihanliang_pingjunzhi:'',
+          shengmeilihanliang_1: "",
+          shengmeilihanliang_2: "",
+          shengmeilihanliang_pingjunzhi: "",
           //			beizhu:'双试验结果M≤0.3    N≤0.3    A≤0.1    C≤1.0或C≤0.5',
           beizhu: "",
           fenyangjiance: "",
@@ -554,7 +599,7 @@ export default {
           smallSamplePic: ""
         },
         //    	面筋吸水
-         mjxs: {
+        mjxs: {
           m_table_version: "SXZCZJ/JL004-2015",
           m_riqi: new Date(),
           m_shiwen: "",
@@ -723,67 +768,71 @@ export default {
         },
         //    	测定记录
         cdjl: {
-          table_version: "SXZCZJ/JL001-2015",
-          riqi: new Date(),
-          shiwen: "",
-          xiangduishidu: "",
-          jiancefangfa: "",
-          yiqishebei_mingcheng_1: "1",
-          yiqishebei_mingcheng_2: "1",
-          yiqishebei_mingcheng_3: "1",
-          yiqishebei_mingcheng_4: "1",
-          yiqishebei_bianhao_1: "",
-          yiqishebei_bianhao_2: "",
-          yiqishebei_bianhao_3: "",
-          yiqishebei_bianhao_4: "",
+          c_table_version: "SXZCZJ/JL001-2015",
+          c_riqi: new Date(),
+          c_shiwen: "",
+          c_xiangduishidu: "",
+          c_jiancefangfa: "",
+          c_yiqishebei_mingcheng_1: "1",
+          c_yiqishebei_mingcheng_2: "1",
+          c_yiqishebei_mingcheng_3: "1",
+          c_yiqishebei_mingcheng_4: "1",
+          c_yiqishebei_bianhao_1: "",
+          c_yiqishebei_bianhao_2: "",
+          c_yiqishebei_bianhao_3: "",
+          c_yiqishebei_bianhao_4: "",
           rongzhong_1: "",
           rongzhong_2: "",
-          //    		rongzhong_pingjunzhi:'',
+          rongzhong_pingjunzhi: "",
           sezeqiwei_1: "",
           sezeqiwei_2: "",
-          //    		sezeqiwei_pingjunzhi:'',
+          sezeqiwei_pingjunzhi: "",
           yingduzhishu_1: "",
           yingduzhishu_2: "",
-          //    		yingduzhishu_pingjunzhi:'',
+          yingduzhishu_pingjunzhi: "",
           pise_1: "",
           pise_2: "",
-          //    		pise_pingjunzhi:'',
+          pise_pingjunzhi: "",
           shuifen_1: "",
           shuifen_2: "",
-          //    		shuifen_pingjunzhi:'',
+          shuifen_pingjunzhi: "",
           dainfen_1: "",
           dainfen_2: "",
-          //    		dainfen_pingjunzhi:'',
+          dainfen_pingjunzhi: "",
           zhifang_1: "",
           zhifang_2: "",
-          //    		zhifang_pingjunzhi:'',
+          zhifang_pingjunzhi: "",
           danbai_1: "",
           danbai_2: "",
-          //    		danbai_pingjunzhi:'',
+          danbai_pingjunzhi: "",
           shimianjin_1: "",
           shimianjin_2: "",
-          //    		shimianjin_pingjunzhi:'',
+          shimianjin_pingjunzhi: "",
           chenjiangzhi_1: "",
           chenjiangzhi_2: "",
-          //    		chenjiangzhi_pingjunzhi:'',
+          chenjiangzhi_pingjunzhi: "",
           lashenchangdu_1: "",
           lashenchangdu_2: "",
-          //    		lashenchangdu_pingjunzhi:'',
+          lashenchangdu_pingjunzhi: "",
           wendingshijian_1: "",
           wendingshijian_2: "",
-          //    		wendingshijian_pingjunzhi:'',
+          wendingshijian_pingjunzhi: "",
           xishuilv_1: "",
           xishuilv_2: "",
-          //    		xishuilv_pingjunzhi:'',
+          xishuilv_pingjunzhi: "",
           xingchengshijian_1: "",
           xingchengshijian_2: "",
-          //    		xingchengshijian_pingjunzhi:'',
+          xingchengshijian_pingjunzhi: "",
           beizhu: "",
           jiance: "",
           jiaohe: "",
           sort: "",
           smallSampleNum: "",
-          smallSamplePic: ""
+          smallSamplePic: "",
+          jiareshiyan_1: "", //加热实验1
+          jiareshiyan_2: "", //加热实验2
+          jiagongjingdu_1: "", //加工精度1
+          jiagongjingdu_2: "" //加工精度2
         }
       }
     };

@@ -61,7 +61,7 @@ export default {
     );
   },
   mounted() {
-    this.init();
+    this.init(this.selectlib);
   },
   data() {
     return {
@@ -75,7 +75,7 @@ export default {
       actions: {
         selection: false,
         number: false,
-        message: false,
+        message: true,
         view: false,
         edit: false,
         dele: false
@@ -96,12 +96,7 @@ export default {
           label: "品种",
           sort: false
         },
-        {
-          id: 3,
-          prop: "sum",
-          label: "新消息通知",
-          sort: false
-        }
+        
       ]
     };
   },

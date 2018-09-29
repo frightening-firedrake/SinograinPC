@@ -866,7 +866,7 @@
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-if='!readonly'/></p>
 								</div>
 							</td>
-							<td class="zw-td" rowspan="1" colspan="3" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 27.2px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+							<td class="zw-td" rowspan="1" colspan="2" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 27.2px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{buwanshanlihanliang_pingjunzhi_1}}</p>
 								</div>
@@ -876,11 +876,17 @@
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-if='!readonly'/></p>
 								</div>
 							</td>
-							<!--<td class="zw-td" rowspan="1" colspan="1" style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 27.2px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+							<td class="zw-td"  style="border-width: 1px 1.33333px 1px 1px; border-style: solid; border-color: rgb(0, 0, 0); vertical-align: middle; height: 27.2px;;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1.32813px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);">{{buwanshanlihanliang_pingjunzhi_2}}</p>
 								</div>
-							</td>-->
+							</td>
+							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
+								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
+									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-if='!readonly'/></p>
+								</div>
+							</td>
+
 							<td class="zw-td" merge="hmp" style="border-width: 0.666667px; border-style: solid; border-color: rgb(0, 0, 0); display: none;;border:1px solid rgb(0, 0, 0);border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);background-color:rgba(0, 0, 0, 0);color:rgb(0, 0, 0)">
 								<div class="zw-cell-container" style="position: relative; padding-right: 0px;">
 									<p style="margin: 0px; line-height: 1.2; text-align: center; font-family: 仿宋_GB2312; font-size: 10.5pt; color: rgb(0, 0, 0);"><input class="check" type="text"  v-if='!readonly' /></p>
@@ -1100,12 +1106,12 @@ export default {
         100;
       if (!isNaN(dayangzazhihanliang_1)) {
         //			return this.jsdjg.dayangzazhihanliang_1 = dayangzazhihanliang_1.toFixed(1);
-        return (this.jsdjg.dayangzazhihanliang_1 = this.round(
+        return (this.formdatas.dayangzazhihanliang_1 = this.round(
           dayangzazhihanliang_1,
           1
         ));
       }
-      return (this.jsdjg.dayangzazhihanliang_1 = "");
+      return (this.formdatas.dayangzazhihanliang_1 = "");
     },
     dayangzazhihanliang_2() {
       var dayangzazhihanliang_2 =
@@ -1114,12 +1120,12 @@ export default {
         100;
       if (!isNaN(dayangzazhihanliang_2)) {
         //			return this.jsdjg.dayangzazhihanliang_2 = dayangzazhihanliang_2.toFixed(1);
-        return (this.jsdjg.dayangzazhihanliang_2 = this.round(
+        return (this.formdatas.dayangzazhihanliang_2 = this.round(
           dayangzazhihanliang_2,
           1
         ));
       }
-      return (this.jsdjg.dayangzazhihanliang_2 = "");
+      return (this.formdatas.dayangzazhihanliang_2 = "");
     },
     dayangzazhihanliang_pingjunzhi() {
       //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
@@ -1130,12 +1136,12 @@ export default {
         (dayangzazhihanliang_1 + dayangzazhihanliang_2) / 2;
       if (!isNaN(dayangzazhihanliang_pingjunzhi)) {
         //			return this.jsdjg.dayangzazhihanliang_pingjunzhi = dayangzazhihanliang_pingjunzhi.toFixed(1);
-        return (this.jsdjg.dayangzazhihanliang_pingjunzhi = this.round(
+        return (this.formdatas.dayangzazhihanliang_pingjunzhi = this.round(
           dayangzazhihanliang_pingjunzhi,
           1
         ));
       }
-      return (this.jsdjg.dayangzazhihanliang_pingjunzhi = "");
+      return (this.formdatas.dayangzazhihanliang_pingjunzhi = "");
     },
     xiaoyangzazhihanliang_1() {
       //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
@@ -1145,12 +1151,12 @@ export default {
           this.formdatas.xiaoyangzazhizhiliang_1) /
         this.formdatas.xiaoyangzhiliang_1;
       if (!isNaN(xiaoyangzazhihanliang_1)) {
-        return (this.jsdjg.xiaoyangzazhihanliang_1 = this.round(
+        return (this.formdatas.xiaoyangzazhihanliang_1 = this.round(
           xiaoyangzazhihanliang_1,
           1
         ));
       }
-      return (this.jsdjg.xiaoyangzazhihanliang_1 = "");
+      return (this.formdatas.xiaoyangzazhihanliang_1 = "");
     },
     xiaoyangzazhihanliang_2() {
       //		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
@@ -1160,12 +1166,12 @@ export default {
           this.formdatas.xiaoyangzazhizhiliang_2) /
         this.formdatas.xiaoyangzhiliang_2;
       if (!isNaN(xiaoyangzazhihanliang_2)) {
-        return (this.jsdjg.xiaoyangzazhihanliang_2 = this.round(
+        return (this.formdatas.xiaoyangzazhihanliang_2 = this.round(
           xiaoyangzazhihanliang_2,
           1
         ));
       }
-      return (this.jsdjg.xiaoyangzazhihanliang_2 = "");
+      return (this.formdatas.xiaoyangzazhihanliang_2 = "");
     },
     xiaoyangzazhihanliang_pingjunzhi() {
       //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
@@ -1177,12 +1183,12 @@ export default {
       var xiaoyangzazhihanliang_pingjunzhi =
         (xiaoyangzazhihanliang_1 + xiaoyangzazhihanliang_2) / 2;
       if (!isNaN(xiaoyangzazhihanliang_pingjunzhi)) {
-        return (this.jsdjg.xiaoyangzazhihanliang_pingjunzhi = this.round(
+        return (this.formdatas.xiaoyangzazhihanliang_pingjunzhi = this.round(
           xiaoyangzazhihanliang_pingjunzhi,
           1
         ));
       }
-      return (this.jsdjg.xiaoyangzazhihanliang_pingjunzhi = "");
+      return (this.formdatas.xiaoyangzazhihanliang_pingjunzhi = "");
     },
     kuangwuzhihanliang_1() {
       //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
@@ -1191,12 +1197,12 @@ export default {
         ((100 - dayangzazhihanliang_1) * this.formdatas.kuangwuzhizhiliang_1) /
         this.formdatas.xiaoyangzhiliang_1;
       if (!isNaN(kuangwuzhihanliang_1)) {
-        return (this.jsdjg.kuangwuzhihanliang_1 = this.round(
+        return (this.formdatas.kuangwuzhihanliang_1 = this.round(
           kuangwuzhihanliang_1,
           2
         ));
       }
-      return (this.jsdjg.kuangwuzhihanliang_1 = "");
+      return (this.formdatas.kuangwuzhihanliang_1 = "");
     },
     kuangwuzhihanliang_2() {
       //		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
@@ -1205,12 +1211,12 @@ export default {
         ((100 - dayangzazhihanliang_2) * this.formdatas.kuangwuzhizhiliang_2) /
         this.formdatas.xiaoyangzhiliang_2;
       if (!isNaN(kuangwuzhihanliang_2)) {
-        return (this.jsdjg.kuangwuzhihanliang_2 = this.round(
+        return (this.formdatas.kuangwuzhihanliang_2 = this.round(
           kuangwuzhihanliang_2,
           2
         ));
       }
-      return (this.jsdjg.kuangwuzhihanliang_2 = "");
+      return (this.formdatas.kuangwuzhihanliang_2 = "");
     },
     kuangwuzhihanliang_pingjunzhi() {
       //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
@@ -1222,12 +1228,12 @@ export default {
       var kuangwuzhihanliang_pingjunzhi =
         (kuangwuzhihanliang_1 + kuangwuzhihanliang_2) / 2;
       if (!isNaN(kuangwuzhihanliang_pingjunzhi)) {
-        return (this.jsdjg.kuangwuzhihanliang_pingjunzhi = this.round(
+        return (this.formdatas.kuangwuzhihanliang_pingjunzhi = this.round(
           kuangwuzhihanliang_pingjunzhi,
           2
         ));
       }
-      return (this.jsdjg.kuangwuzhihanliang_pingjunzhi = "");
+      return (this.formdatas.kuangwuzhihanliang_pingjunzhi = "");
     },
     zazhizongliang_1() {
       //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
@@ -1236,9 +1242,12 @@ export default {
       var xiaoyangzazhihanliang_1 = this.xiaoyangzazhihanliang_1 - 0;
       var zazhizongliang_1 = dayangzazhihanliang_1 + xiaoyangzazhihanliang_1;
       if (!isNaN(zazhizongliang_1)) {
-        return (this.jsdjg.zazhizongliang_1 = this.round(zazhizongliang_1, 1));
+        return (this.formdatas.zazhizongliang_1 = this.round(
+          zazhizongliang_1,
+          1
+        ));
       }
-      return (this.jsdjg.zazhizongliang_1 = "");
+      return (this.formdatas.zazhizongliang_1 = "");
     },
     buwanshanlihanliang_1() {
       //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
@@ -1247,12 +1256,12 @@ export default {
         ((100 - dayangzazhihanliang_1) * this.formdatas.buwanshanlizhiliang_1) /
         this.formdatas.xiaoyangzhiliang_1;
       if (!isNaN(buwanshanlihanliang_1)) {
-        return (this.jsdjg.buwanshanlihanliang_1 = this.round(
+        return (this.formdatas.buwanshanlihanliang_1 = this.round(
           buwanshanlihanliang_1,
           1
         ));
       }
-      return (this.jsdjg.buwanshanlihanliang_1 = "");
+      return (this.formdatas.buwanshanlihanliang_1 = "");
     },
     buwanshanlihanliang_2() {
       //		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
@@ -1261,12 +1270,12 @@ export default {
         ((100 - dayangzazhihanliang_2) * this.formdatas.buwanshanlizhiliang_2) /
         this.formdatas.xiaoyangzhiliang_2;
       if (!isNaN(buwanshanlihanliang_2)) {
-        return (this.jsdjg.buwanshanlihanliang_2 = this.round(
+        return (this.formdatas.buwanshanlihanliang_2 = this.round(
           buwanshanlihanliang_2,
           1
         ));
       }
-      return (this.jsdjg.buwanshanlihanliang_2 = "");
+      return (this.formdatas.buwanshanlihanliang_2 = "");
     },
     buwanshanlihanliang_pingjunzhi_1() {
       //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
@@ -1278,12 +1287,12 @@ export default {
       var buwanshanlihanliang_pingjunzhi_1 =
         (buwanshanlihanliang_1 + buwanshanlihanliang_2) / 2;
       if (!isNaN(buwanshanlihanliang_pingjunzhi_1)) {
-        return (this.jsdjg.buwanshanlihanliang_pingjunzhi_1 = this.round(
+        return (this.formdatas.buwanshanlihanliang_pingjunzhi_1 = this.round(
           buwanshanlihanliang_pingjunzhi_1,
           1
         ));
       }
-      return (this.jsdjg.buwanshanlihanliang_pingjunzhi_1 = "");
+      return (this.formdatas.buwanshanlihanliang_pingjunzhi_1 = "");
     },
     buwanshanlihanliang_pingjunzhi_2() {
       var dayangzazhihanliang_1 =
@@ -1303,11 +1312,11 @@ export default {
       var buwanshanlihanliang_pingjunzhi_2 =
         (buwanshanlihanliang_1 + buwanshanlihanliang_2) / 2;
       if (!isNaN(buwanshanlihanliang_pingjunzhi_2)) {
-        return (this.jsdjg.buwanshanlihanliang_pingjunzhi_2 = buwanshanlihanliang_pingjunzhi_2.toFixed(
+        return (this.formdatas.buwanshanlihanliang_pingjunzhi_2 = buwanshanlihanliang_pingjunzhi_2.toFixed(
           1
         ));
       }
-      return (this.jsdjg.buwanshanlihanliang_pingjunzhi_2 = "");
+      return (this.formdatas.buwanshanlihanliang_pingjunzhi_2 = "");
     },
     shengmeilihanliang_1() {
       //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
@@ -1316,12 +1325,12 @@ export default {
         ((100 - dayangzazhihanliang_1) * this.formdatas.shengmeilizhiliang_1) /
         this.formdatas.xiaoyangzhiliang_1;
       if (!isNaN(shengmeilihanliang_1)) {
-        return (this.jsdjg.shengmeilihanliang_1 = this.round(
+        return (this.formdatas.shengmeilihanliang_1 = this.round(
           shengmeilihanliang_1,
           1
         ));
       }
-      return (this.jsdjg.shengmeilihanliang_1 = "");
+      return (this.formdatas.shengmeilihanliang_1 = "");
     },
     shengmeilihanliang_2() {
       //		var dayangzazhihanliang_2=this.formdatas.dayangzazhizhiliang_2/this.formdatas.dayangzhiliang_2*100;
@@ -1330,12 +1339,12 @@ export default {
         ((100 - dayangzazhihanliang_2) * this.formdatas.shengmeilizhiliang_2) /
         this.formdatas.xiaoyangzhiliang_2;
       if (!isNaN(shengmeilihanliang_2)) {
-        return (this.jsdjg.shengmeilihanliang_2 = this.round(
+        return (this.formdatas.shengmeilihanliang_2 = this.round(
           shengmeilihanliang_2,
           1
         ));
       }
-      return (this.jsdjg.shengmeilihanliang_2 = "");
+      return (this.formdatas.shengmeilihanliang_2 = "");
     },
     shengmeilihanliang_pingjunzhi() {
       //		var dayangzazhihanliang_1=this.formdatas.dayangzazhizhiliang_1/this.formdatas.dayangzhiliang_1*100;
@@ -1347,11 +1356,11 @@ export default {
       var shengmeilihanliang_pingjunzhi =
         (shengmeilihanliang_1 + shengmeilihanliang_2) / 2;
       if (!isNaN(shengmeilihanliang_pingjunzhi)) {
-        return (this.jsdjg.shengmeilihanliang_pingjunzhi = shengmeilihanliang_pingjunzhi.toFixed(
+        return (this.formdatas.shengmeilihanliang_pingjunzhi = shengmeilihanliang_pingjunzhi.toFixed(
           1
         ));
       }
-      return (this.jsdjg.shengmeilihanliang_pingjunzhi = "");
+      return (this.formdatas.shengmeilihanliang_pingjunzhi = "");
     },
 
     codeUrl() {
@@ -1378,18 +1387,18 @@ export default {
   },
   methods: {
     submit() {
-      for (var key in this.formdatas) {
-        if (!this.formdatas[key]) {
-          if (this.formdatas[key] !== 0) {
-            this.isEmpty = true;
-            break;
-          } else {
-            this.isEmpty = false;
-          }
-        } else {
-          this.isEmpty = false;
-        }
-      }
+      // for (var key in this.formdatas) {
+      //   if (!this.formdatas[key]) {
+      //     if (this.formdatas[key] !== 0) {
+      //       this.isEmpty = true;
+      //       break;
+      //     } else {
+      //       this.isEmpty = false;
+      //     }
+      //   } else {
+      //     this.isEmpty = false;
+      //   }
+      // }
       if (this.isEmpty) {
         this.$alert("请完善表内信息", "提示信息", {});
       } else {

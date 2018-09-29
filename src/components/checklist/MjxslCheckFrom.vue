@@ -604,7 +604,7 @@ export default {
           0
         ));
       }
-      return (this.jsdjg.mianjinxishuiliang_1 = "");
+      return (this.formdatas.mianjinxishuiliang_1 = "");
     },
     mianjinxishuiliang_2() {
       var mianjinxishuiliang_2 =
@@ -619,7 +619,7 @@ export default {
           0
         ));
       }
-      return (this.jsdjg.mianjinxishuiliang_2 = "");
+      return (this.formdatas.mianjinxishuiliang_2 = "");
     },
     pingjunzhiganmianjinzhiliang() {
       //		var pingjunzhiganmianjinzhiliang = (((this.formdatas.shimianjinzhiliang_1 - this.formdatas.ganmianjinzhiliang_1)/this.formdatas.ganmianjinzhiliang_1)*100 + ((this.formdatas.shimianjinzhiliang_2 - this.formdatas.ganmianjinzhiliang_2)/this.formdatas.ganmianjinzhiliang_2)*100)/2
@@ -665,14 +665,15 @@ export default {
   },
   methods: {
     submit() {
-      for (var key in this.formdatas) {
-        if (!this.formdatas[key]) {
-          this.isEmpty = true;
-          break;
-        } else {
-          this.isEmpty = false;
-        }
-      }
+      // for (var key in this.formdatas) {
+      //   if (!this.formdatas[key]) {
+			// 		console.log(key)
+      //     this.isEmpty = true;
+      //     break;
+      //   } else {
+      //     this.isEmpty = false;
+      //   }
+      // }
       if (this.isEmpty) {
         this.$alert("请完善表内信息", "提示信息", {});
       } else {

@@ -94,7 +94,7 @@ export default {
         },
         {
           id: 5,
-          prop: "applyTime",
+          prop: "createTime",
           label: "申请日期",
           sort: false
         }
@@ -115,11 +115,12 @@ export default {
     this.$root.eventHub.$on(
       "viewlistitem",
       function(id, row) {
-        //		console.log(row)
+        console.log(row);
+        row.tablename = this.$route.query.title.checkName
         this.$router.push({
           path:
             "/index/sampleDetection/examineList/sampleexamineList/examineLisrdetail",
-          query: { title: this.$route.query.title }
+          query: row
         });
       }.bind(this)
     );
@@ -157,18 +158,18 @@ export default {
           function(response) {
             response.data.forEach((v, i) => {
               switch (v.checkOrderApprovalStatus) {
-                case "-1":
+                case -1:
                   v.checkOrderApprovalStatus = "待审核";
                   break;
-                case "1":
+                case 1:
                   v.checkOrderApprovalStatus = "已通过";
                   break;
-                case "2":
+                case 2:
                   v.checkOrderApprovalStatus = "未通过";
                   break;
               }
             });
-            console.log(this.tabledatas)
+            console.log(this.tabledatas);
             this.tabledatas = response.data;
             this.loading = false;
           }.bind(this)

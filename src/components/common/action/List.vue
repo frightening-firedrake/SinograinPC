@@ -1,20 +1,8 @@
 <template>
-	<el-table ref="multipleTable" 
-		tooltip-effect="light" 
-		style="width: 100%"  
-		:data="tabledata" 
-		@selection-change="handleSelectionChange" 
-		:default-sort="{prop: actions.sort, order: 'ascending'}" 
-		v-loading="loading" 
-		:row-class-name="row_class_name" 
-		element-loading-customClass="table_loading" 
-		element-loading-text="loading..." 
-		element-loading-spinner="el-icon-loading" 
-		element-loading-background="rgba(255,255,255, 0.8)" 
-		@row-click="rowClick">
-<!--		:height="actions.height?actions.height:'auto'"-->
-<!--		height='scrollHeight'-->
-<!--		max-height='3rem'-->
+	<el-table ref="multipleTable" tooltip-effect="light" style="width: 100%" :data="tabledata" @selection-change="handleSelectionChange" :default-sort="{prop: actions.sort, order: 'ascending'}" v-loading="loading" :row-class-name="row_class_name" element-loading-customClass="table_loading" element-loading-text="loading..." element-loading-spinner="el-icon-loading" element-loading-background="rgba(255,255,255, 0.8)" @row-click="rowClick">
+		<!--		:height="actions.height?actions.height:'auto'"-->
+		<!--		height='scrollHeight'-->
+		<!--		max-height='3rem'-->
 		<!--是否包含多选框-->
 		<template v-if="actions.selection">
 			<el-table-column :resizable="resizable" align="center" type="selection" class-name="tableAction">
@@ -26,7 +14,7 @@
 		<!--循环数据-->
 		<template v-for="item in items">
 
-			<el-table-column show-overflow-tooltip v-if="!item.status" :min-width="item.minWidth?item.minWidth:'80'"  :width="item.width?item.width:'auto'" :resizable="resizable" align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class" :sort-method="item.smethod">
+			<el-table-column show-overflow-tooltip v-if="!item.status" :min-width="item.minWidth?item.minWidth:'80'" :width="item.width?item.width:'auto'" :resizable="resizable" align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class" :sort-method="item.smethod">
 			</el-table-column>
 
 			<el-table-column show-overflow-tooltip v-if="item.status" :min-width="item.minWidth?item.minWidth:'80'" :width="item.width?item.width:'auto'" :resizable="resizable" align="center" :key="item.id" :label="item.label" :sortable="item.sort" :prop="item.prop" :class-name="item.class">
@@ -207,10 +195,10 @@
 						<template v-if="(scope.row.warehouseUseNumber/scope.row.warehouseTotal>=0)&&(scope.row.warehouseUseNumber/scope.row.warehouseTotal<=0.4)">
 							<span class="warehouseState" style="color:#38b63a;"><i style="background-color:#38b63a;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehouseTotal}}</span>空闲
 						</template>
-						<template v-if="(scope.row.warehouseUseNumber/scope.row.warehouseTotal)>=0.4&&(scope.row.warehouseUseNumber/scope.row.warehouseTotal<1)" >
+						<template v-if="(scope.row.warehouseUseNumber/scope.row.warehouseTotal)>=0.4&&(scope.row.warehouseUseNumber/scope.row.warehouseTotal<1)">
 							<span class="warehouseState" style="color:#e2b028;"><i style="background-color:#e2b028;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehouseTotal}}</span>未满
 						</template>
-						<template v-if="scope.row.warehouseUseNumber/scope.row.warehouseTotal==1" >
+						<template v-if="scope.row.warehouseUseNumber/scope.row.warehouseTotal==1">
 							<span class="warehouseState" style="color:#c81212;"><i style="background-color:#c81212;"></i>{{scope.row.warehouseUseNumber}}/{{scope.row.warehouseTotal}}</span>已满
 						</template>
 					</template>
@@ -246,15 +234,14 @@
 			</el-table-column>
 		</template>
 
-
 		<!--是否包含变色检验项-->
 		<template v-if="actions.colorcheck">
 			<!--<el-table-column :resizable="resizable" align="center" label="检验项目" class-name="tableAction" width="650">-->
 			<el-table-column :resizable="resizable" align="center" label="检验项目" class-name="tableAction">
 				<template slot-scope="scope">
-					<p :class="actions.colorcheckclass">	
+					<p :class="actions.colorcheckclass">
 						<!--<span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)}}</span>-->
-						<template v-if="check(scope.row.checkeds,1)">							
+						<template v-if="check(scope.row.checkeds,1)">
 							<span class="colorcheck1">容重</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=1?',':''}}
 						</template>
 						<template v-if="check(scope.row.checkeds,2)">
@@ -289,28 +276,28 @@
 						</template>
 						<template v-if="check(scope.row.checkeds,12)">
 							<span class="colorcheck9">色泽气味(储存品质指标)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=12?',':''}}
-						</template>	
+						</template>
 						<template v-if="check(scope.row.checkeds,13)">
 							<span class="colorcheck10">真菌毒素(黄曲霉毒素B1)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=13?',':''}}
-						</template>	
+						</template>
 						<template v-if="check(scope.row.checkeds,14)">
 							<span class="colorcheck10">真菌毒素(脱氧雪腐镰刀菌烯醇)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=14?',':''}}
-						</template>	
+						</template>
 						<template v-if="check(scope.row.checkeds,15)">
 							<span class="colorcheck10">真菌毒素(玉米赤霉烯酮)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=15?',':''}}
-						</template>	
+						</template>
 						<template v-if="check(scope.row.checkeds,16)">
 							<span class="colorcheck11">重金属(铅)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=16?',':''}}
-						</template>	
+						</template>
 						<template v-if="check(scope.row.checkeds,17)">
 							<span class="colorcheck11">重金属(镉)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=17?',':''}}
-						</template>	
+						</template>
 						<template v-if="check(scope.row.checkeds,18)">
 							<span class="colorcheck11">重金属(汞)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=18?',':''}}
-						</template>	
+						</template>
 						<template v-if="check(scope.row.checkeds,19)">
 							<span class="colorcheck11">重金属(砷)</span>{{scope.row.checkeds.charAt(scope.row.checkeds.length - 1)!=19?',':''}}
-						</template>	
+						</template>
 					</p>
 				</template>
 			</el-table-column>
@@ -321,9 +308,9 @@
 			<el-table-column :resizable="resizable" align="center" label="新消息通知" class-name="tableAction">
 				<template slot-scope="scope">
 					<!--有新通知-->
-					<template v-if="scope.row.count">
+					<template v-if="scope.row.count||scope.row.sum">
 						您有
-						<span style="color:#f22054;">{{scope.row.count}}</span>条新申请通知
+						<span style="color:#f22054;">{{scope.row.count||scope.row.sum}}</span>条新申请通知
 					</template>
 					<!--没有新通知-->
 					<template v-else>
@@ -363,8 +350,6 @@
 				</template>
 			</el-table-column>
 		</template>
-		
-		
 
 		<el-table-column v-if="actions.show" :resizable="resizable" align="center" label="操作" class-name="tableAction" :width="actions.actionWidth?actions.actionWidth:'auto'">
 			<template slot-scope="scope">
@@ -431,285 +416,409 @@
 	</el-table>
 </template>
 <style>
-.el-table .cell.el-tooltip span.warehouseState{
-	margin-right:2em;
-	font-size:inherit;
-	position:relative;
-	padding-left:1.5em;
-	color:#38b63a;
-}	
-.el-table .cell.el-tooltip span.warehouseState i{
-	position:absolute;
-	top:50%;
-	margin-top:-0.07rem;
-	width:0.14rem;
-	height:0.14rem;
-	border-radius: 50%;
-	background-color:#38b63a;
-	font-size:inherit;
-	left:0;
+.el-table .cell.el-tooltip span.warehouseState {
+  margin-right: 2em;
+  font-size: inherit;
+  position: relative;
+  padding-left: 1.5em;
+  color: #38b63a;
 }
-.colorcheck1 >.colorcheck1,.colorcheck2 >.colorcheck2,.colorcheck3 >.colorcheck3,.colorcheck4 >.colorcheck4,.colorcheck5 >.colorcheck5,.colorcheck6 >.colorcheck6,.colorcheck7 >.colorcheck7,.colorcheck8 >.colorcheck8,.colorcheck9 >.colorcheck9{
-	color:#2973b7;
+.el-table .cell.el-tooltip span.warehouseState i {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.07rem;
+  width: 0.14rem;
+  height: 0.14rem;
+  border-radius: 50%;
+  background-color: #38b63a;
+  font-size: inherit;
+  left: 0;
+}
+.colorcheck1 > .colorcheck1,
+.colorcheck2 > .colorcheck2,
+.colorcheck3 > .colorcheck3,
+.colorcheck4 > .colorcheck4,
+.colorcheck5 > .colorcheck5,
+.colorcheck6 > .colorcheck6,
+.colorcheck7 > .colorcheck7,
+.colorcheck8 > .colorcheck8,
+.colorcheck9 > .colorcheck9 {
+  color: #2973b7;
 }
 </style>
 <script>
 export default {
-	props: ['items', 'tabledata', 'actions', 'list', 'loading', 'librarylist', 'rowType'],
-	data() {
-		return {
-			//  	importLoading: false,
-			multipleSelection: [],
-			resizable: false,
-		}
-	},
-	mounted: function() {
+  props: [
+    "items",
+    "tabledata",
+    "actions",
+    "list",
+    "loading",
+    "librarylist",
+    "rowType"
+  ],
+  data() {
+    return {
+      //  	importLoading: false,
+      multipleSelection: [],
+      resizable: false
+    };
+  },
+  mounted: function() {
+    //		this.openloading()
+    //			console.log(this.loading)
+  },
+  computed: {
+    checkPointEdit() {
+      return this.$_ault_alert("all:edit");
+    },
+    scrollHeight() {
+      if (!this.actions.height) {
+        return "auto";
+      } else {
+        return this.actions.height;
+      }
+    }
+  },
+  methods: {
+    //	formatter(row, column, cellValue){
+    //		if(column.className=='status'){
+    //			if(cellValue==0){
+    //				return '待审核';
+    //			}else if(cellValue==1){
+    //				return '未同意';
+    //			}else if(cellValue==2){
+    //				return '已同意';
+    //			}
+    //		}else{
+    //			return cellValue;
+    //		}
+    //	},
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+      var checkedId = val.map(function(item) {
+        return item.id;
+			});
+      this.$emit("getchecked", checkedId, val);
+    },
+    //  设置行类名
+    row_class_name(scope) {
+      return scope.row.row_class_name;
+    },
+    //  工作底稿
+    handleViewManuscript(index, row) {
+      if (!this.$_ault_alert("manuscript:saveMan")) {
+        return;
+      }
+      this.$router.push({
+        path:
+          "/index/sampling/libraryList/samplingList/sampleShowList/manuscriptEdit",
+        query: { id: row.id, libraryName: row.libraryName }
+      });
+    },
+    handleCreateManuscript(index, row) {
+      if (!this.$_ault_alert("manuscript:saveMan")) {
+        return;
+      }
+      this.$router.push({
+        path:
+          "/index/sampling/libraryList/samplingList/sampleShowList/manuscriptCreate",
+        query: { id: row.id, libraryName: row.libraryName }
+      });
+    },
+    //  安全报告
+    handleViewSafetyReport(index, row) {
+      if (!this.$_ault_alert("safety:save")) {
+        return;
+      }
+      this.$router.push({
+        path:
+          "/index/sampling/libraryList/samplingList/sampleShowList/safetyReportEdit",
+        query: {
+          id: row.id,
+          libraryName: row.libraryName,
+          position: row.position
+        }
+      });
+    },
+    handleCreateSafetyReport(index, row) {
+      if (!this.$_ault_alert("safety:save")) {
+        return;
+      }
+      this.$router.push({
+        path:
+          "/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate",
+        query: {
+          id: row.id,
+          libraryName: row.libraryName,
+          position: row.position
+        }
+      });
+    },
+    handleInput(index, row, scope) {
+      //	  	console.log(index,row);
+      //		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
+      this.$root.eventHub.$emit("inputlistitem", row.id);
+    },
+    handleExportExcel(index, row, scope) {
+      //	  	console.log(index,row);
+      //		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
+      this.$root.eventHub.$emit("exportExcel", row.id, row);
+    },
+    handleView(index, row, scope) {
+      //	  	console.log(index,row);query:{id:row.id,libraryName:row.libraryName,position:row.position}}
+      //		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
+      if (row.sampleState) {
+        this.$root.eventHub.$emit("viewlistitem", row.id, row.sampleState, row);
+      } else if (row.regState) {
+        this.$root.eventHub.$emit("viewlistitem", row.id, row.regState, row);
+      } else if (row.isDeal) {
+        this.$root.eventHub.$emit("viewlistitem", row);
+      } else {
+        this.$root.eventHub.$emit("viewlistitem", row.id, row);
+      }
+    },
+    repeat(index, row, scope) {
+      //			if (row.sampleState) {
+      //				this.$root.eventHub.$emit('viewlistitem', row.id, row.sampleState)
+      //			} else if (row.regState) {
+      //				this.$root.eventHub.$emit('viewlistitem', row.id, row.regState)
+      //			} else if (row.isDeal) {
+      //				this.$root.eventHub.$emit('viewlistitem', row)
+      //			} else {
+      //				this.$root.eventHub.$emit('viewlistitem', row.id)
+      //			}
+      this.$root.eventHub.$emit("repeat", row.id, row.regState);
+    },
+    handleEdit(index, row) {
+      //	  	console.log(index,row,this.list);
+      this.$root.eventHub.$emit("editlistitem", row.id, row);
+    },
 
-		//		this.openloading()
-		//			console.log(this.loading)
-	},
-	computed:{
-		checkPointEdit(){
-			return this.$_ault_alert('all:edit')
-		},
-		scrollHeight(){
-			if(!this.actions.height){
-				return "auto";
-			}else{
-				return this.actions.height;
-			}
-		}
-	},
-	methods: {
-		//	formatter(row, column, cellValue){
-		//		if(column.className=='status'){
-		//			if(cellValue==0){
-		//				return '待审核';
-		//			}else if(cellValue==1){
-		//				return '未同意'; 				
-		//			}else if(cellValue==2){
-		//				return '已同意'; 				
-		//			}
-		//		}else{
-		//			return cellValue;
-		//		}
-		//	},
-		handleSelectionChange(val) {
-			this.multipleSelection = val;
-			var checkedId = val.map(function(item) {
-				return item.id;
-			})
-			this.$emit('getchecked', checkedId,val)
-		},
-		//  设置行类名
-		row_class_name(scope) {
-			return scope.row.row_class_name
-		},
-		//  工作底稿
-		handleViewManuscript(index, row) {
-			if(!this.$_ault_alert('manuscript:saveMan')){
-				return
-			}
-			this.$router.push({ path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptEdit', query: { id: row.id, libraryName: row.libraryName } })
-		},
-		handleCreateManuscript(index, row) {
-			if(!this.$_ault_alert('manuscript:saveMan')){
-				return
-			}
-			this.$router.push({ path: '/index/sampling/libraryList/samplingList/sampleShowList/manuscriptCreate', query: { id: row.id, libraryName: row.libraryName } })
-		},
-		//  安全报告
-		handleViewSafetyReport(index, row) {
-			if(!this.$_ault_alert('safety:save')){
-				return
-			}
-			this.$router.push({ path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportEdit', query: { id: row.id, libraryName: row.libraryName, position: row.position } })
-		},
-		handleCreateSafetyReport(index, row) {
-			if(!this.$_ault_alert('safety:save')){
-				return
-			}
-			this.$router.push({ path: '/index/sampling/libraryList/samplingList/sampleShowList/safetyReportCreate', query: { id: row.id, libraryName: row.libraryName, position: row.position } })
-		},
-		handleInput(index, row, scope) {
-			//	  	console.log(index,row);
-			//		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
-			this.$root.eventHub.$emit('inputlistitem', row.id)
-		},
-		handleExportExcel(index, row, scope) {
-			//	  	console.log(index,row);
-			//		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
-			this.$root.eventHub.$emit('exportExcel', row.id,row)
-		},
-		handleView(index, row, scope) {
-			//	  	console.log(index,row);query:{id:row.id,libraryName:row.libraryName,position:row.position}}
-			//		    this.$root.eventHub.$emit('openmodal',row.id,'view',this.list)
-			if (row.sampleState) {
-				this.$root.eventHub.$emit('viewlistitem', row.id, row.sampleState,row)
-			} else if (row.regState) {
-				this.$root.eventHub.$emit('viewlistitem', row.id, row.regState,row)
-			} else if (row.isDeal) {
-				this.$root.eventHub.$emit('viewlistitem', row)
-			} else {
-				this.$root.eventHub.$emit('viewlistitem', row.id,row)
-			}
-		},
-		repeat(index, row, scope) {
-//			if (row.sampleState) {
-//				this.$root.eventHub.$emit('viewlistitem', row.id, row.sampleState)
-//			} else if (row.regState) {
-//				this.$root.eventHub.$emit('viewlistitem', row.id, row.regState)
-//			} else if (row.isDeal) {
-//				this.$root.eventHub.$emit('viewlistitem', row)
-//			} else {
-//				this.$root.eventHub.$emit('viewlistitem', row.id)
-//			}
-			this.$root.eventHub.$emit('repeat', row.id, row.regState)
-		},
-		handleEdit(index, row) {
-			//	  	console.log(index,row,this.list);
-			this.$root.eventHub.$emit('editlistitem', row.id, row)
-		},
-
-		handleDele(index, row) {
-//			this.$confirm('此操作将永久删除该' + this.rowType + ', 是否继续?', '提示', {
-//				confirmButtonText: '确定',
-//				cancelButtonText: '取消',
-//				type: 'warning'
-//			}).then(() => {
-				this.$root.eventHub.$emit('delelistitem', row.id);
-				//	      this.$message({
-				//	        type: 'success',
-				//	        message: '删除成功!'
-				//	      });
-//			}).catch(() => {
-//				this.$message({
-//					type: 'info',
-//					message: '已取消删除'
-//				});
-//			});
-		},
-		handleAuth(index, row) {
-			//	  	console.log(index,row,this.list);
-			this.$root.eventHub.$emit('authlistitem', row)
-		},
-		handlePrint(index, row, scope) {
-			this.$root.eventHub.$emit('printlistitem', row.smallSampleNum)
-		},
-		handlePrintSampleIn(index, row, scope) {
-			this.$root.eventHub.$emit('printlistitem', row.sampleNum)
-		},
-		emptyCreate() {
-			this.$emit('emptyCreate');
-		},
-		findPLibraryName(pid) {
-			var pitem = this.librarylist.filter((item) => {
-				return item.id == pid
-			})
-			if (pitem.length) {
-				return pitem[0].libraryName;
-			}
-		},	
-		colorCheckeds(str,sort) {
-//			console.log(this.actions.searchText,str,sort)
-			var checkList=["容重","水分","杂质","矿物质","不完善粒","生霉粒","色泽气味(质量指标)","硬度指数","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1)","真菌毒素(脱氧雪腐镰刀菌烯醇)","真菌毒素(玉米赤霉烯酮)","重金属(铅)","重金属(镉)","重金属(汞)","重金属(砷)"];	
-	  		var res=[];
-	  		var indexs=str.split(',');
-	  		indexs=indexs.sort((a,b)=>{
-	  			return a-b
-	  		})
-		  	indexs.forEach((item)=>{
-		  		if(item){
-		  			res.push(checkList[item-1])
-		  		}	
-		  	})
-		  	var restr=res.join(',');
-			restr=restr.replace(this.actions.searchText, "<span style='color:#e7023a;'>"+this.actions.searchText+"</span>")					
-			return restr;
-					
-		},
-		findCheckeds(str,sort) {
-			var checkList=["容重","水分","杂质","矿物质","不完善粒","生霉粒","色泽气味(质量指标)","硬度指数","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1)","真菌毒素(脱氧雪腐镰刀菌烯醇)","真菌毒素(玉米赤霉烯酮)","重金属(铅)","重金属(镉)","重金属(汞)","重金属(砷)"];	
-	  		var res=[];
-	  		var indexs=str.split(',');
-	  		indexs=indexs.sort((a,b)=>{
-	  			return a-b
-	  		})
-		  	indexs.forEach((item)=>{
-		  		if(item){
-		  			res.push(checkList[item-1])
-		  		}	
-		  	})
-		  	var restr=res.join(',');
-	  		if(restr=="容重,水分,杂质,矿物质,不完善粒,色泽气味(质量指标),硬度指数,面筋吸水量,品尝评分值,色泽气味(储存品质指标),真菌毒素(脱氧雪腐镰刀菌烯醇),重金属(铅),重金属(镉),重金属(汞),重金属(砷)"){
-	  			return '全项目指标';
-	  		}else if(restr=="容重,水分,杂质,不完善粒,生霉粒,色泽气味(质量指标),脂肪酸值,品尝评分值,色泽气味(储存品质指标),真菌毒素(黄曲霉毒素B1),真菌毒素(脱氧雪腐镰刀菌烯醇),真菌毒素(玉米赤霉烯酮),重金属(铅),重金属(镉),重金属(汞),重金属(砷)"){
-	  			return '全项目指标';
-	  		}else{
-//	  			restr=restr.replace(/容重,水分,杂质\(矿物质\),不完善粒\(生霉粒\),色泽气味\(质量指标\)/, "质量指标全项目")
-//	  			restr=restr.replace(/面筋吸水量,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
-//	  			restr=restr.replace(/脂肪酸值,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
-//	  			restr=restr.replace(/真菌毒素\(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮\),重金属\(铅、镉、汞、砷\)/, "食品卫生指标全项目")
-				if(sort=='小麦'){
-					restr=restr.replace("容重,水分,杂质,矿物质,不完善粒,色泽气味(质量指标),硬度指数", "质量指标全项目")					
-					restr=restr.replace("面筋吸水量,品尝评分值,色泽气味(储存品质指标)", "储存品质指标全项目")
-					restr=restr.replace("真菌毒素(脱氧雪腐镰刀菌烯醇),重金属(铅),重金属(镉),重金属(汞),重金属(砷)", "食品卫生指标全项目")
-				}else if(sort=='玉米'){
-					restr=restr.replace("容重,水分,杂质,不完善粒,生霉粒,色泽气味(质量指标)", "质量指标全项目")					
-					restr=restr.replace("脂肪酸值,品尝评分值,色泽气味(储存品质指标)", "储存品质指标全项目")
-					restr=restr.replace("真菌毒素(黄曲霉毒素B1),真菌毒素(脱氧雪腐镰刀菌烯醇),真菌毒素(玉米赤霉烯酮),重金属(铅),重金属(镉),重金属(汞),重金属(砷)", "食品卫生指标全项目")
-				}
-	  			return restr
-	  		}
-		},
-		findCheckPoint(obj) {
-			var checkList=["容重","水分","杂质","矿物质","不完善粒","生霉粒","色泽气味(质量指标)","硬度指数","面筋吸水量","脂肪酸值","品尝评分值","色泽气味(储存品质指标)","真菌毒素(黄曲霉毒素B1)","真菌毒素(脱氧雪腐镰刀菌烯醇)","真菌毒素(玉米赤霉烯酮)","重金属(铅)","重金属(镉)","重金属(汞)","重金属(砷)"];	
-//			var checkList1 = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "脂肪酸值", "品尝评分", "卫生指标", "加工品质"]
-//			var checkList2 = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "面筋吸水量", "品尝评分", "卫生指标", "加工品质"]
-			var index = obj.checkPoint
-			var res;
-//			if (obj.sort == '玉米') {
-//				res = checkList1[index - 1];
-//			} else if (obj.sort == '小麦') {//测定记录
-//				res = checkList2[index - 1];
-//			}
-			res = checkList[index - 1];
-			return res;
-		},
-		rowClick(row, event, column) {
-			if (this.actions.noview) {
-				return
-			}
-			if (row.sampleState) {
-				this.$root.eventHub.$emit('viewlistitem', row.id, row.sampleState,row)
-			} else if (row.regState) {
-				this.$root.eventHub.$emit('viewlistitem', row.id, row.regState)
-			} else if (row.isDeal) {
-				this.$root.eventHub.$emit('viewlistitem', row)
-			} else {
-				this.$root.eventHub.$emit('viewlistitem', row.id, row)
-			}
-		},
-		notAllowed() {
-			return false;
-		},
-		returnPerson(index, row, scope) {
-//			console.log(index, row, scope)
-			if(row.returnState==1){
-				return
-			}else{				
-				this.$root.eventHub.$emit('returnPerson', row.id)
-			}
-		},
-		check(checkstr,num){
-			if(!checkstr){
-				return false
-			}
-			var checklist=checkstr.split(',');
-			num=String(num);
-			return checklist.includes(num)
-		}
-	}
-}
-
+    handleDele(index, row) {
+      //			this.$confirm('此操作将永久删除该' + this.rowType + ', 是否继续?', '提示', {
+      //				confirmButtonText: '确定',
+      //				cancelButtonText: '取消',
+      //				type: 'warning'
+      //			}).then(() => {
+      this.$root.eventHub.$emit("delelistitem", row.id);
+      //	      this.$message({
+      //	        type: 'success',
+      //	        message: '删除成功!'
+      //	      });
+      //			}).catch(() => {
+      //				this.$message({
+      //					type: 'info',
+      //					message: '已取消删除'
+      //				});
+      //			});
+    },
+    handleAuth(index, row) {
+      //	  	console.log(index,row,this.list);
+      this.$root.eventHub.$emit("authlistitem", row);
+    },
+    handlePrint(index, row, scope) {
+      this.$root.eventHub.$emit("printlistitem", row.smallSampleNum);
+    },
+    handlePrintSampleIn(index, row, scope) {
+      this.$root.eventHub.$emit("printlistitem", row.sampleNum);
+    },
+    emptyCreate() {
+      this.$emit("emptyCreate");
+    },
+    findPLibraryName(pid) {
+      var pitem = this.librarylist.filter(item => {
+        return item.id == pid;
+      });
+      if (pitem.length) {
+        return pitem[0].libraryName;
+      }
+    },
+    colorCheckeds(str, sort) {
+      //			console.log(this.actions.searchText,str,sort)
+      var checkList = [
+        "容重",
+        "水分",
+        "杂质",
+        "矿物质",
+        "不完善粒",
+        "生霉粒",
+        "色泽气味(质量指标)",
+        "硬度指数",
+        "面筋吸水量",
+        "脂肪酸值",
+        "品尝评分值",
+        "色泽气味(储存品质指标)",
+        "真菌毒素(黄曲霉毒素B1)",
+        "真菌毒素(脱氧雪腐镰刀菌烯醇)",
+        "真菌毒素(玉米赤霉烯酮)",
+        "重金属(铅)",
+        "重金属(镉)",
+        "重金属(汞)",
+        "重金属(砷)"
+      ];
+      var res = [];
+      var indexs = str.split(",");
+      indexs = indexs.sort((a, b) => {
+        return a - b;
+      });
+      indexs.forEach(item => {
+        if (item) {
+          res.push(checkList[item - 1]);
+        }
+      });
+      var restr = res.join(",");
+      restr = restr.replace(
+        this.actions.searchText,
+        "<span style='color:#e7023a;'>" + this.actions.searchText + "</span>"
+      );
+      return restr;
+    },
+    findCheckeds(str, sort) {
+      var checkList = [
+        "容重",
+        "水分",
+        "杂质",
+        "矿物质",
+        "不完善粒",
+        "生霉粒",
+        "色泽气味(质量指标)",
+        "硬度指数",
+        "面筋吸水量",
+        "脂肪酸值",
+        "品尝评分值",
+        "色泽气味(储存品质指标)",
+        "真菌毒素(黄曲霉毒素B1)",
+        "真菌毒素(脱氧雪腐镰刀菌烯醇)",
+        "真菌毒素(玉米赤霉烯酮)",
+        "重金属(铅)",
+        "重金属(镉)",
+        "重金属(汞)",
+        "重金属(砷)"
+      ];
+      var res = [];
+      var indexs = str.split(",");
+      indexs = indexs.sort((a, b) => {
+        return a - b;
+      });
+      indexs.forEach(item => {
+        if (item) {
+          res.push(checkList[item - 1]);
+        }
+      });
+      var restr = res.join(",");
+      if (
+        restr ==
+        "容重,水分,杂质,矿物质,不完善粒,色泽气味(质量指标),硬度指数,面筋吸水量,品尝评分值,色泽气味(储存品质指标),真菌毒素(脱氧雪腐镰刀菌烯醇),重金属(铅),重金属(镉),重金属(汞),重金属(砷)"
+      ) {
+        return "全项目指标";
+      } else if (
+        restr ==
+        "容重,水分,杂质,不完善粒,生霉粒,色泽气味(质量指标),脂肪酸值,品尝评分值,色泽气味(储存品质指标),真菌毒素(黄曲霉毒素B1),真菌毒素(脱氧雪腐镰刀菌烯醇),真菌毒素(玉米赤霉烯酮),重金属(铅),重金属(镉),重金属(汞),重金属(砷)"
+      ) {
+        return "全项目指标";
+      } else {
+        //	  			restr=restr.replace(/容重,水分,杂质\(矿物质\),不完善粒\(生霉粒\),色泽气味\(质量指标\)/, "质量指标全项目")
+        //	  			restr=restr.replace(/面筋吸水量,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
+        //	  			restr=restr.replace(/脂肪酸值,品尝评分值,色泽气味\(储存品质指标\)/, "储存品质指标全项目")
+        //	  			restr=restr.replace(/真菌毒素\(黄曲霉毒素B1、脱氧雪腐、镰刀菌烯醇、玉米赤霉烯酮\),重金属\(铅、镉、汞、砷\)/, "食品卫生指标全项目")
+        if (sort == "小麦") {
+          restr = restr.replace(
+            "容重,水分,杂质,矿物质,不完善粒,色泽气味(质量指标),硬度指数",
+            "质量指标全项目"
+          );
+          restr = restr.replace(
+            "面筋吸水量,品尝评分值,色泽气味(储存品质指标)",
+            "储存品质指标全项目"
+          );
+          restr = restr.replace(
+            "真菌毒素(脱氧雪腐镰刀菌烯醇),重金属(铅),重金属(镉),重金属(汞),重金属(砷)",
+            "食品卫生指标全项目"
+          );
+        } else if (sort == "玉米") {
+          restr = restr.replace(
+            "容重,水分,杂质,不完善粒,生霉粒,色泽气味(质量指标)",
+            "质量指标全项目"
+          );
+          restr = restr.replace(
+            "脂肪酸值,品尝评分值,色泽气味(储存品质指标)",
+            "储存品质指标全项目"
+          );
+          restr = restr.replace(
+            "真菌毒素(黄曲霉毒素B1),真菌毒素(脱氧雪腐镰刀菌烯醇),真菌毒素(玉米赤霉烯酮),重金属(铅),重金属(镉),重金属(汞),重金属(砷)",
+            "食品卫生指标全项目"
+          );
+        }
+        return restr;
+      }
+    },
+    findCheckPoint(obj) {
+      var checkList = [
+        "容重",
+        "水分",
+        "杂质",
+        "矿物质",
+        "不完善粒",
+        "生霉粒",
+        "色泽气味(质量指标)",
+        "硬度指数",
+        "面筋吸水量",
+        "脂肪酸值",
+        "品尝评分值",
+        "色泽气味(储存品质指标)",
+        "真菌毒素(黄曲霉毒素B1)",
+        "真菌毒素(脱氧雪腐镰刀菌烯醇)",
+        "真菌毒素(玉米赤霉烯酮)",
+        "重金属(铅)",
+        "重金属(镉)",
+        "重金属(汞)",
+        "重金属(砷)"
+      ];
+      //			var checkList1 = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "脂肪酸值", "品尝评分", "卫生指标", "加工品质"]
+      //			var checkList2 = ["不完善颗粒", "杂质", "生霉粒", "水分", "硬度", "面筋吸水量", "品尝评分", "卫生指标", "加工品质"]
+      var index = obj.checkPoint;
+      var res;
+      //			if (obj.sort == '玉米') {
+      //				res = checkList1[index - 1];
+      //			} else if (obj.sort == '小麦') {//测定记录
+      //				res = checkList2[index - 1];
+      //			}
+      res = checkList[index - 1];
+      return res;
+    },
+    rowClick(row, event, column) {
+      if (this.actions.noview) {
+        return;
+      }
+      if (row.sampleState) {
+        this.$root.eventHub.$emit("viewlistitem", row.id, row.sampleState, row);
+      } else if (row.regState) {
+        this.$root.eventHub.$emit("viewlistitem", row.id, row.regState);
+      } else if (row.isDeal) {
+        this.$root.eventHub.$emit("viewlistitem", row);
+      } else {
+        this.$root.eventHub.$emit("viewlistitem", row.id, row);
+      }
+    },
+    notAllowed() {
+      return false;
+    },
+    returnPerson(index, row, scope) {
+      //			console.log(index, row, scope)
+      if (row.returnState == 1) {
+        return;
+      } else {
+        this.$root.eventHub.$emit("returnPerson", row.id);
+      }
+    },
+    check(checkstr, num) {
+      if (!checkstr) {
+        return false;
+      }
+      var checklist = checkstr.split(",");
+      num = String(num);
+      return checklist.includes(num);
+    }
+  }
+};
 </script>
