@@ -385,6 +385,7 @@ export default {
       // for (var key in jsdjg) {
       //   this.formdatas[this.checktype][key] = jsdjg[key];
       // }
+      // console.log(this.formdatas)
       if (this.checktype == "bwsl" || this.checktype == "cdjl") {
         this.save2();
       } else {
@@ -572,8 +573,8 @@ export default {
           s_shiwen: "",
           s_xiangduishidu: "",
           s_jiancefangfa: "",
-          s_yiqishebei_mingcheng_1: "1",
-          s_yiqishebei_mingcheng_2: "1",
+          s_yiqishebei_mingcheng_1: "",
+          s_yiqishebei_mingcheng_2: "",
           s_yiqishebei_bianhao_1: "",
           s_yiqishebei_bianhao_2: "",
           qimin_bianhao_1: "1",

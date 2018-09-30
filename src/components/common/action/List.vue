@@ -127,18 +127,26 @@
 							<span style="color:blue;">草稿</span>
 						</template>
 					</template>
+					<template v-if="item.prop=='checkOrderApprovalStatus'">
+						<template v-if="scope.row[item.prop]==-1">
+							<span style="color:#fc6500;">待审核</span>
+						</template>
+						<template v-if="scope.row[item.prop]==2">
+							<span style="color:#999999;">未通过</span>
+						</template>
+						<template v-if="scope.row[item.prop]==1">
+							<span style="color:##58b481;">已通过</span>
+						</template>
+					</template>
 					<template v-if="item.prop=='approveRemark'">
-						<template v-if="scope.row.inspectState==-1">
+						<template v-if="scope.row.checkOrderApprovalStatus==-1">
 							<span style="color:#fc6500;">等待审核中</span>
 						</template>
-						<template v-if="scope.row.inspectState==1">
-							<span style="color:#f56c6c;">{{scope.row[item.prop]}}</span>
+						<template v-if="scope.row.checkOrderApprovalStatus==2">
+							<span style="color:#999999;">{{scope.row[item.prop]}}</span>
 						</template>
-						<template v-if="scope.row.inspectState==2">
+						<template v-if="scope.row.checkOrderApprovalStatus==1">
 							<span style="color:#58b481;">已通过审核</span>
-						</template>
-						<template v-if="scope.row.inspectState==3">
-							<span style="color:blue;">未提交审核</span>
 						</template>
 					</template>
 					<template v-if="item.prop=='pLibraryId'">
@@ -498,7 +506,7 @@ export default {
       this.multipleSelection = val;
       var checkedId = val.map(function(item) {
         return item.id;
-			});
+      });
       this.$emit("getchecked", checkedId, val);
     },
     //  设置行类名

@@ -33,6 +33,10 @@
       <mtbr-check-from v-if="checktype=='mtbr'" :formdatas="formdatas.mtbr" @submit="submit" :readonly="readonly"></mtbr-check-from>
       <!--<hr>-->
     </div>
+    <!--弹框-->
+    <sinograin-modal v-if="modalVisible" :modal="modal" v-on:createlibitem="createlibitem" v-on:dialogClose="dialogClose"></sinograin-modal>
+    <!--底部按钮们-->
+    <tfoot-buttons :tfbtns="tfbtns" @tfootEvent="tfootEvent"></tfoot-buttons>
   </div>
 </template>
 <style>
@@ -43,7 +47,7 @@
   position: fixed;
   left: 50%;
   bottom: 10px;
-  margin-left: 400px;
+  /* margin-left: 400px; */
   z-index: 6;
   text-align: center;
 }
@@ -53,7 +57,7 @@
   margin: 0.07rem auto 0;
   height: 0.4rem;
   line-height: 0.33rem;
-  /*margin:0 0 0 0.3rem;*/
+  margin: 0 0 0 0.3rem;
   font-size: 0.24rem;
   cursor: pointer;
   background-color: #58b481;
@@ -61,6 +65,9 @@
   box-sizing: border-box;
   padding: 0.04rem;
   color: #ffffff;
+}
+.checklistsavebtn > div.Disagree {
+  background-color: #ff4b7a;
 }
 .checklistsavebtn > div > span {
   border: 1px solid #ffffff;
@@ -148,14 +155,18 @@ import MtpcCheckFrom from "@/components/checklist/MtpcCheckFrom";
 import CdjlCheckFrom from "@/components/checklist/CdjlCheckFrom";
 import BwslCheckFrom from "@/components/checklist/BwslCheckFrom";
 import MjxslCheckFrom from "@/components/checklist/MjxslCheckFrom";
+import TfootButtons from "@/components/common/action/TfootButtons.vue";
+import SinograinModal from "@/components/common/action/Modal.vue";
 
 import "@/assets/style/common/list.css";
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
 export default {
   components: {
+    SinograinModal,
     SinograinBreadcrumb,
     DscdCheckFrom,
     ListHeader,
+    TfootButtons,
     YmpcpfCheckFrom,
     MjxslCheckFrom,
     BwslCheckFrom,
@@ -175,7 +186,7 @@ export default {
       "messions",
       "mask"
     ]),
-    ...mapGetters(["modal_id"])
+    ...mapGetters(["modal_id", "userName"])
   },
   created() {
     console.log(this.$route.query);
@@ -185,6 +196,108 @@ export default {
   },
   destroy() {},
   methods: {
+    dialogClose() {
+      this.modalVisible = false;
+    },
+    createlibitem(form) {
+      this.$http({
+        method: "post",
+        url: this.disagreeURL,
+        transformRequest: [
+          function(data) {
+            // Do whatever you want to transform the data
+            let ret = "";
+            for (let it in data) {
+              ret +=
+                encodeURIComponent(it) +
+                "=" +
+                encodeURIComponent(data[it]) +
+                "&";
+            }
+            return ret;
+          }
+        ],
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        data: {
+          smallSampleNum: this.$route.query.smallSampleNum,
+          checkMember: this.userName,
+          approveRemark: form.reason
+        }
+      })
+        .then(
+          function(response) {
+            // console.log(response);
+            this.$router.go(-1);
+          }.bind(this)
+        )
+        .catch(
+          function(error) {
+            console.log(error);
+          }.bind(this)
+        );
+    },
+    disagree() {
+      // if (!this.$_ault_alert("register:edit")) {
+      //   return;
+      // }
+      this.modalVisible = true;
+    },
+    agree() {
+      // if (!this.$_ault_alert("register:edit")) {
+      //   return;
+      // }
+      this.$http({
+        method: "post",
+        url: this.agreeURL,
+        transformRequest: [
+          function(data) {
+            // Do whatever you want to transform the data
+            let ret = "";
+            for (let it in data) {
+              ret +=
+                encodeURIComponent(it) +
+                "=" +
+                encodeURIComponent(data[it]) +
+                "&";
+            }
+            return ret;
+          }
+        ],
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        data: {
+          smallSampleNum: this.$route.query.smallSampleNum,
+          checkMember: this.userName
+        }
+      })
+        .then(
+          function(response) {
+            // console.log(response);
+            this.$router.go(-1);
+          }.bind(this)
+        )
+        .catch(
+          function(error) {
+            console.log(error);
+          }.bind(this)
+        );
+    },
+    //底部按钮
+    tfootEvent(date) {
+      if (date == "btnCenterL") {
+        //不同意
+        this.disagree();
+        //			this.$router.go(-1)
+      } else if (date == "btnCenterR") {
+        //同意
+        this.agree();
+        //			this.$router.go(-1)
+        //			window.history.go(-1)
+      } else if (date == "btnLeft") {
+      } else if (date == "btnRight") {
+        // this.exportExcel(this.$route.query.pId);
+      } else if (date == "btnOne") {
+      }
+    },
     ...mapMutations([
       "create_modal_id",
       "is_mask",
@@ -466,6 +579,67 @@ export default {
   },
   data() {
     return {
+      agreeURL: this.apiRoot + "/grain/summaryCheck/agree",
+      disagreeURL: this.apiRoot + "/grain/summaryCheck/disagree",
+      modal: {
+        title: "填写原因",
+        formdatas: [
+          {
+            label: "请您填写不同意的原因",
+            type: "textarea",
+            rows: 3,
+            model: "reason",
+            textareaall: true
+          }
+          //	  		{
+          //	  			label:"扦样编号:",
+          //	  			model:"sampleNo",
+          //	  			disabled:true,
+          //	  			value:'',
+          //	  			type:'password'
+          //	  		},
+          // {
+          // 	label:"检验编号",
+          // 	model:"sampleNum",
+          // 	disabled:true,
+          // 	value:'',
+          // },
+          //	  		{
+          //	  			label:"样品入库时间:",
+          //	  			model:"storageTime",
+          //	  			disabled:true,
+          //	  			value:this.getDateNow(),
+          //	  		},
+          //	  		{
+          //	  			label:"存放位置:",
+          //	  			position:true,
+          //				model: "positions",
+          //				value:'',
+          ////	  			model:"position",
+          //	  			modelselect:"depot",
+          //	  			modelinput:"counter",
+          ////	  			value:'朔水-9号仓-1号柜',
+          //	  		},
+          //	  		{
+          //	  			label:"入库签名:",
+          //	  			model:"autograph",
+          //				value: "",
+          //	  			disabled:true,
+          //	  		},
+        ],
+        submitText: "确定"
+      },
+      modalVisible: false,
+      tfbtns: {
+        btnCenter: {
+          btnTextL: "不同意",
+          btnTextR: "同意",
+          doubleColor: true
+        }
+        // btnRight: {
+        //   btnText: "导出Excel表格"
+        // }
+      },
       editUrl: "",
       datalistURL: "",
       searchURL: "/liquid/role2/data/search",
@@ -482,7 +656,7 @@ export default {
       },
       //    表格数据
       listHeader: {
-        addbtn: "导出检验单",
+        addbtn: "",
         createlib: false,
         createSampling: false,
         status: false,

@@ -314,7 +314,12 @@ export default {
     },
     //	映射分页触发的事件
     paginationEvent(actiontype) {
-      if (actiontype == "btnfree") {
+      if (this.checkedId.length > 1) {
+        this.$notify.error({
+          message: "一次只可以导出一个检验单",
+          title: "请重新选择！！！"
+        });
+      } else if (actiontype == "btnfree") {
         this.checkedId.forEach((v, i) => {
           let eventUrl = "";
           if (v.sort == "小麦") {
@@ -353,17 +358,53 @@ export default {
                 eventUrl = "exportZFSZCedingjilu";
                 break;
               case "11": //玉米品尝评分
-                eventUrl = "exportMTPCjilu";
+                eventUrl = "exportYMPCjilu";
                 break;
             }
           }
+          var sampleNum = v.sampleNum * 1;
+          var id = v.id * 1;
+          // var params = {
+          //   id: v.id,
+          //   sampleNum: sampleNum,
+          //   sort: v.sort == "小麦" ? 1 : 2
+          // };
+          // this.$http({
+          //   method: "post",
+          //   url: this.pringURL + eventUrl,
+          //   transformRequest: [
+          //     function(data) {
+          //       // Do whatever you want to transform the data
+          //       let ret = "";
+          //       for (let it in data) {
+          //         ret +=
+          //           encodeURIComponent(it) +
+          //           "=" +
+          //           encodeURIComponent(data[it]) +
+          //           "&";
+          //       }
+          //       return ret;
+          //     }
+          //   ],
+          //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          //   data: {
+          //     SmallSample: JSON.stringify(params)
+          //   }
+          // })
+          //   .then(function(response) {}.bind(this))
+          //   .catch(
+          //     function(error) {
+          //       //		    console.log(error)
+          //     }.bind(this)
+          //   );
           var url = this.apiRoot + "/grain/exportCedingjilu/" + eventUrl;
           var loadiframe = document.getElementById("fordownload");
+
           //			var url=this.exportExcelURL+'?sampleId='+id+'&sessionid='+this.Token;
           //			window.location.assign(url);
-          loadiframe.src = `${url}?id=${v.id}&sessionid=${
-            this.Token
-          }&sampleNum=${v.sampleNum}&sort=${v.sort}`;
+          loadiframe.src = `${url}?smallSampleNum=${
+            v.smallSampleNum
+          }&sessionid=${this.Token}&sampleNum=${sampleNum}&sort=${v.sort}`;
         });
       } else if (actiontype == "refresh") {
         // 获取列表数据（第一页）
@@ -490,6 +531,7 @@ export default {
       checkURL: this.apiRoot + "/grain/smallSample/findBySmallSampleNum",
       //    checkURL:this.apiRoot +'/grain/smallSample/data',
       searchURL: this.apiRoot + "/grain/smallSample/data",
+      pringURL: this.apiRoot + "/grain/exportCedingjilu/",
       deleteURL: "/liquid/role2/data/delete",
       searchText: "",
       checkedId: [],
@@ -583,7 +625,7 @@ export default {
         },
         {
           id: 5,
-          prop: "inspectState",
+          prop: "checkOrderApprovalStatus",
           label: "检验单状态",
           //      sort:true,
           status: true
@@ -623,10 +665,10 @@ export default {
         view: false,
         //    	edit:true,
         dele: false,
-        delecheck: true,
+        delecheck: false,
         //    	noview:true,
         //    	print:true,
-        show: true,
+        show: false,
         manuscript: false,
         safetyReport: false
       },
