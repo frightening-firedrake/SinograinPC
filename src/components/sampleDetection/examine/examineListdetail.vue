@@ -117,8 +117,8 @@
   position: absolute;
   /*top:100px;
 	left:116px;*/
-  top: 0;
-  right: 0;
+  top: 88px;
+  right: 88px;
 }
 .zw-header p {
   display: inline-block;

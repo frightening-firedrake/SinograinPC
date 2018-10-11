@@ -317,7 +317,7 @@ export default {
           lid: 11
         },
         {
-          icon: "icon-jianyandan",
+          icon: "icon-shenpi",
           title: "审批检验单列表",
           linkto: "/index/sampleDetection/examineList",
           level: 2,

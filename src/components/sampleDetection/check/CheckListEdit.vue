@@ -1,44 +1,44 @@
 <template>
-	<div class='listpagewrap' id='listpagewrap'>
-		<!--面包屑-->
-		<sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
-		<!--标题-->
-		<sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>
-		<!--提示-->
-		<!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
-		<div class="fromwrap" id="print" style="background:rgba(241, 241, 241, 1);">
-			<!--表单-->
-			<!--<hr>-->
-			<bwsl-check-from v-if="checktype=='bwsl'" :formdatas="formdatas.bwsl" @submit="submit"></bwsl-check-from>
+  <div class='listpagewrap' id='listpagewrap'>
+    <!--面包屑-->
+    <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
+    <!--标题-->
+    <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>
+    <!--提示-->
+    <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
+    <div class="fromwrap" id="print" style="background:rgba(241, 241, 241, 1);">
+      <!--表单-->
+      <!--<hr>-->
+      <bwsl-check-from v-if="checktype=='bwsl'" :formdatas="formdatas.bwsl" @submit="submit"></bwsl-check-from>
 
-			<!--<hr>-->
-			<sfcd-check-from v-if="checktype=='sfcd'" :formdatas="formdatas.sfcd" @submit="submit"></sfcd-check-from>
+      <!--<hr>-->
+      <sfcd-check-from v-if="checktype=='sfcd'" :formdatas="formdatas.sfcd" @submit="submit"></sfcd-check-from>
 
-			<!--<hr>-->
-			<mjxsl-check-from v-if="checktype=='mjxs'" :formdatas="formdatas.mjxs" @submit="submit"></mjxsl-check-from>
-			<!--<hr>-->
-			<zfsz-check-from v-if="checktype=='zfsz'" :formdatas="formdatas.zfsz" @submit="submit"></zfsz-check-from>
-			<!--<hr>-->
-			<ympcpf-check-from v-if="checktype=='ympc'" :formdatas="formdatas.ympc" @submit="submit"></ympcpf-check-from>
-			<!--<hr>-->
-			<mtpc-check-from v-if="checktype=='mtpc'" :formdatas="formdatas.mtpc" @submit="submit"></mtpc-check-from>
-			<!--<hr>-->
-			<dscd-check-from v-if="checktype=='dscd'" :formdatas="formdatas.dscd" @submit="submit"></dscd-check-from>
+      <!--<hr>-->
+      <mjxsl-check-from v-if="checktype=='mjxs'" :formdatas="formdatas.mjxs" @submit="submit"></mjxsl-check-from>
+      <!--<hr>-->
+      <zfsz-check-from v-if="checktype=='zfsz'" :formdatas="formdatas.zfsz" @submit="submit"></zfsz-check-from>
+      <!--<hr>-->
+      <ympcpf-check-from v-if="checktype=='ympc'" :formdatas="formdatas.ympc" @submit="submit"></ympcpf-check-from>
+      <!--<hr>-->
+      <mtpc-check-from v-if="checktype=='mtpc'" :formdatas="formdatas.mtpc" @submit="submit"></mtpc-check-from>
+      <!--<hr>-->
+      <dscd-check-from v-if="checktype=='dscd'" :formdatas="formdatas.dscd" @submit="submit"></dscd-check-from>
 
-			<!--<hr>-->
-			<pcpf-check-from v-if="checktype=='pcpf'" :formdatas="formdatas.pcpf" @submit="submit"></pcpf-check-from>
-			<!--<hr>-->
-			<cdjl-check-from v-if="checktype=='cdjl'" :formdatas="formdatas.cdjl" @submit="submit"></cdjl-check-from>
-			<!--<hr>-->
-			<mtbr-check-from v-if="checktype=='mtbr'" :formdatas="formdatas.mtbr" @submit="submit"></mtbr-check-from>
-			<!--<hr>-->
-		</div>
-		<div class="checklistsavebtn">
-			<div @click="footsave">
-				<span>保存</span>
-			</div>
-		</div>
-	</div>
+      <!--<hr>-->
+      <pcpf-check-from v-if="checktype=='pcpf'" :formdatas="formdatas.pcpf" @submit="submit"></pcpf-check-from>
+      <!--<hr>-->
+      <cdjl-check-from v-if="checktype=='cdjl'" :formdatas="formdatas.cdjl" @submit="submit"></cdjl-check-from>
+      <!--<hr>-->
+      <mtbr-check-from v-if="checktype=='mtbr'" :formdatas="formdatas.mtbr" @submit="submit"></mtbr-check-from>
+      <!--<hr>-->
+    </div>
+    <div class="checklistsavebtn">
+      <div @click="footsave">
+        <span>保存</span>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style>
@@ -116,8 +116,8 @@
   position: absolute;
   /*top:100px;
 	left:116px;*/
-  top: 0;
-  right: 0;
+  top: 88px;
+  right: 88px;
 }
 .zw-header p {
   display: inline-block;
