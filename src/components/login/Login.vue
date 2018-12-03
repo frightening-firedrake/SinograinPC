@@ -1,5 +1,5 @@
 <template>
-    <div class="login" style="background-image:url(static/images/login/login_big.png)">
+    <div class="login" style="background-image:url(static/images/login/login_big.jpg)">
         <div class="login_box">
             <el-form ref="form"  class="login_form" :model="loginForm">
             	<p v-if="loginError" class="loginError"><span class="el-icon-warning"></span>{{errorMessage}}</p>

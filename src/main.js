@@ -12,10 +12,10 @@ import router from './router/index'
 //import 'vue2-animate/dist/vue2-animate.min.css';
 
 Vue.use(ElementUI);
-//Vue.prototype.apiRoot = 'http://m.ityyedu.com'
+Vue.prototype.apiRoot = 'http://m.ityyedu.com'
 //Vue.prototype.apiRoot = 'http://192.168.1.233:8080'//deng
 //Vue.prototype.apiRoot = 'http://192.168.1.230:80'//xuan
-Vue.prototype.apiRoot = 'http://192.168.1.253:8080'//bo
+//Vue.prototype.apiRoot = 'http://192.168.1.253:8080'//bo
 //Vue.prototype.apiRoot = 'http://192.168.1.248:8080'//bo旧
 //Vue.prototype.apiRoot = 'http://192.168.1.176:8082'
 //Vue.prototype.apiRoot = 'http://192.168.1.252:8083'//kun
