@@ -5,7 +5,7 @@
       <!--面包屑-->
       <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
       <!--alert-->
-      <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
+      <sinograin-prompt :alerts="alerts"></sinograin-prompt>
       <!--标题-->
       <sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent" @readdata="readdata"></sinograin-option-title>		
       <!--表格上的时间选框以及 创建-->
@@ -704,10 +704,10 @@ export default {
         }
       },
 //    弹窗数据
-//    alerts: [{
-//      title: '温馨提示：此页面只展示本库信息!',
-//      type: 'info'
-//    }],
+      alerts: [{
+        title: '温馨提示：直接扦样需导入扦样编号，用于已扦样样品信息的录入！正常信息录入请使用申请扦样!',
+        type: 'info'
+      }],
 //    表格数据
       listHeader:{
       	createlib:false,

@@ -3,7 +3,7 @@
         <!--面包屑-->
         <sinograin-breadcrumb :breadcrumb="breadcrumb" v-on:searchingfor="searchingfor"></sinograin-breadcrumb>
         <!--alert-->
-        <!--<sinograin-prompt :alerts="alerts"></sinograin-prompt>-->
+        <sinograin-prompt :alerts="alerts"></sinograin-prompt>
     	<!--标题-->
     	<sinograin-option-title :title="subtitle" v-on:titleEvent="titleEvent"></sinograin-option-title>
         <!--筛选 -->
@@ -341,7 +341,7 @@ export default {
 	    },
 //    弹窗数据
       	alerts: [{
-        	title: '温馨提示：此页面只展示本库信息!',
+        	title: '温馨提示：根据筛选条件可查出已检验样品的检验信息，未检验样品样品无法查询!',
         	type: 'info'
       	}],
 //    表格数据
