@@ -27,6 +27,7 @@
                 	<el-input
 					    placeholder="请输入验证码"
 					    @blur="checkcode"
+					    @keyup.enter.native="submitForm()"
 					    v-model="loginForm.number">
 					    <i slot="prefix" class="iconfont icon-yanzhengma"></i>
 					</el-input>
@@ -49,6 +50,7 @@ export default {
   	},
     created() {
         this.change()
+        this.updataRemarks()
     },
     methods: {
     	...mapMutations(['setUserInfo']),
@@ -118,6 +120,7 @@ export default {
                		payload.Token=response.data.user.token;
                		payload.permissions=response.data.user.permissions;
                		payload.roleName=response.data.user.roleName;
+               		payload.remarkses=this.remarkses;
 //             		payload.Token='akjshjakjclacahdawhdlahwdiua';
 //             		payload.userRole=response.data.user.userRole;
 //             		payload.userAuth='InformationManagement,AuthorityManagement';//grainDepot
@@ -157,6 +160,16 @@ export default {
         blur(){
         	this.isfocus=false   
         },
+        updataRemarks(){
+        	var myDate = new Date();
+			var yearNew=myDate.getFullYear(); 
+
+			for(var i=2017;i<=yearNew;i++){
+				var obj={};
+				obj.value=i+"年度轮换验收"
+				this.remarkses.push(obj)
+			}
+        }
     },
     data() {
         return {
@@ -170,7 +183,15 @@ export default {
                 number:"",
             },
             errorMessage:"",
+            remarkses:[
+            	{"value": "春季抽查"},
+            	{"value": "秋季普查"},
+            	{"value": "收购巡查"},
+            	{"value": "出库巡查"},
+//          	{"value": "2017年度轮换验收"},
+            ],//备注组这个单词拼错了但是年久失修记不清其他模块了就不改了
         }
     }
+    
 }
 </script>
